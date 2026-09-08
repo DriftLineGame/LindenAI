@@ -44,18 +44,18 @@
   body { display: flex; flex-direction: column; }
   button { font-family: var(--font); }
 
-  /* ---------- Header ---------- */
-  header { padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  header { padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
   .brand { display: flex; align-items: center; gap: 11px; }
   .brand-mark {
-    width: 34px; height: 34px; border-radius: 10px;
+    width: 32px; height: 32px; border-radius: 10px;
     background: linear-gradient(145deg, var(--accent), var(--accent-2));
     display: flex; align-items: center; justify-content: center;
-    font-weight: 800; color: #0b120e; font-size: 16px;
+    font-weight: 800; color: #0b120e; font-size: 15px;
+    box-shadow: 0 2px 10px -3px var(--accent-glow);
   }
-  .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
-  .header-right { display: flex; align-items: center; gap: 14px; }
-  .status-pill { font-size: 12px; color: var(--text-faint); display: flex; align-items: center; gap: 6px; }
+  .brand-name { font-weight: 700; font-size: 16.5px; letter-spacing: -0.01em; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .status-pill { font-size: 12px; color: var(--text-faint); display: flex; align-items: center; gap: 6px; margin-right: 4px; }
   .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-faint); }
   .status-dot.ok { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
   .status-dot.err { background: var(--danger); }
@@ -65,50 +65,82 @@
   }
   .icon-btn:hover { color: var(--text); border-color: var(--accent); }
 
-  /* ---------- Layout ---------- */
   main { flex: 1; display: flex; flex-direction: column; max-width: 760px; width: 100%; margin: 0 auto; padding: 0 20px; overflow: hidden; }
 
-  .intro { padding: 30px 0 16px; text-align: center; }
+  .intro { padding: 28px 0 16px; text-align: center; }
   .intro h1 { font-size: 25px; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .intro p { color: var(--text-muted); font-size: 14px; margin: 0; max-width: 480px; margin: 0 auto; line-height: 1.5; }
+  .intro p { color: var(--text-muted); font-size: 14px; margin: 0 auto; max-width: 480px; line-height: 1.5; }
 
-  /* ---------- Tier cards ---------- */
-  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 18px 0 8px; }
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px 0 8px; }
   .tier-card {
     background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 15px 14px; cursor: pointer; transition: border-color 0.15s;
+    padding: 15px 14px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
   }
   .tier-card:hover { border-color: var(--accent); }
-  .tier-card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 20px -6px var(--accent-glow); }
+  .tier-card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 8px 22px -8px var(--accent-glow); }
   .tier-name { font-weight: 750; font-size: 15px; margin-bottom: 3px; }
   .tier-tag { font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; min-height: 32px; }
   .tier-quota { font-size: 11px; color: var(--text-faint); font-family: var(--mono); display: flex; align-items: center; justify-content: space-between; }
   .tier-quota .remaining { color: var(--accent); font-weight: 600; }
 
-  /* ---------- Messages ---------- */
-  #messages { flex: 1; overflow-y: auto; padding: 10px 0 16px; }
+  #messages { flex: 1; overflow-y: auto; padding: 12px 0 16px; }
   .empty-hint { color: var(--text-faint); text-align: center; font-size: 13px; padding-top: 30px; }
 
-  .msg-row { display: flex; margin-bottom: 16px; flex-direction: column; animation: fadeIn 0.15s ease-out; }
+  .msg-row { display: flex; margin-bottom: 18px; flex-direction: column; animation: fadeIn 0.15s ease-out; overflow: visible; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
   .msg-row.user { align-items: flex-end; }
   .msg-row.assistant { align-items: flex-start; }
-  .bubble { line-height: 1.55; width: fit-content; max-width: 85%; padding: 9px 14px; border-radius: 14px; font-size: 14.5px; }
-  .msg-row.user .bubble { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px 14px 3px 14px; }
-  .msg-row.assistant .bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px 14px 14px 14px; }
+  .bubble { line-height: 1.55; width: fit-content; max-width: 85%; padding: 10px 15px; border-radius: 14px; font-size: 14.5px; }
+  .msg-row.user .bubble { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px 14px 3px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+  .msg-row.assistant .bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px 14px 14px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+  .bubble p { margin: 0 0 8px; }
+  .bubble p:last-child { margin-bottom: 0; }
+  .bubble ul, .bubble ol { margin: 6px 0 8px; padding-left: 20px; }
+  .bubble li { margin-bottom: 3px; }
+  .bubble code { background: var(--bg); border: 1px solid var(--border); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: 0.88em; }
+  .bubble pre { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 8px 0; }
+  .bubble pre code { background: none; border: none; padding: 0; }
+  .bubble strong { color: var(--text); font-weight: 650; }
+  .cursor-blink::after { content: "▍"; color: var(--accent); animation: blink 1s step-start infinite; margin-left: 1px; }
+  @keyframes blink { 50% { opacity: 0; } }
 
-  .msg-meta { font-size: 10.5px; color: var(--text-faint); margin-top: 4px; font-family: var(--mono); }
+  .think-toggle {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-faint);
+    background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px;
+    cursor: pointer; margin-bottom: 6px;
+  }
+  .think-toggle:hover { color: var(--text-muted); border-color: var(--accent); }
+  .think-toggle .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: dotpulse 1.1s ease-in-out infinite; }
+  @keyframes dotpulse { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+  .think-panel {
+    display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 13px; margin-bottom: 7px; font-size: 12px; line-height: 1.5; color: var(--text-faint);
+    font-family: var(--mono); white-space: pre-wrap; max-width: 85%; max-height: 240px; overflow-y: auto;
+  }
+  .think-panel.open { display: block; }
+
+  .loader-row { display: flex; align-items: center; gap: 12px; padding: 6px 6px 10px 2px; overflow: visible; }
+  .loader-mark-wrap { position: relative; width: 34px; height: 34px; margin: 3px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: visible; }
+  .loader-mark-wrap::before {
+    content: ""; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 13px;
+    border: 2px solid transparent; border-top-color: var(--accent); border-right-color: var(--accent-2);
+    animation: spin 0.9s linear infinite; opacity: 0.8; box-sizing: border-box;
+  }
+  .loader-mark { width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(145deg, var(--accent), var(--accent-2)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0b120e; font-size: 13px; animation: markPulse 1.5s ease-in-out infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes markPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+  .loader-label { font-size: 13px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
 
   .limit-note {
     background: var(--danger-bg); border: 1px solid var(--danger-border); border-radius: 12px;
     padding: 10px 14px; font-size: 12.5px; color: var(--danger); text-align: center; margin: 10px 0;
   }
 
-  /* ---------- Input ---------- */
   #input-area { padding: 12px 0 22px; }
   #input-inner {
     display: flex; align-items: flex-end; gap: 8px;
     background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 8px 8px 8px 16px;
+    transition: border-color 0.15s;
   }
   #input-inner:focus-within { border-color: var(--accent); }
   #prompt-input { flex: 1; background: none; border: none; color: var(--text); font-family: var(--font); font-size: 14.5px; resize: none; max-height: 160px; padding: 8px 0; }
@@ -124,12 +156,11 @@
   #messages::-webkit-scrollbar { width: 8px; }
   #messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
-  /* ---------- Settings modal ---------- */
   #settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
   #settings-overlay.show { display: flex; }
   #settings-modal { width: 520px; max-width: 100%; max-height: 82vh; overflow-y: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px 24px; }
   .settings-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-  #settings-modal h2 { font-size: 16px; margin: 0; }
+  #settings-modal h2 { font-size: 16px; margin: 0; display: flex; align-items: center; gap: 9px; }
   .settings-sub { font-size: 12.5px; color: var(--text-faint); margin-bottom: 16px; }
   .settings-close { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; }
   .settings-close:hover { color: var(--text); }
@@ -137,37 +168,46 @@
   .model-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
   .model-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
   .model-card-name { font-weight: 650; font-size: 13.5px; }
+  .model-card-live { font-size: 10.5px; color: var(--accent); background: rgba(95,209,160,0.12); border: 1px solid rgba(95,209,160,0.3); padding: 2px 8px; border-radius: 20px; }
   .model-card-tag { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
   .model-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 14px; font-size: 12px; color: var(--text-muted); }
   .model-card-grid span.k { color: var(--text-faint); }
   .health-empty { font-size: 12.5px; color: var(--text-faint); background: var(--bg-card); border: 1px dashed var(--border); border-radius: 10px; padding: 12px 14px; }
 
 
-  .bubble p { margin: 0 0 8px; }
-  .bubble p:last-child { margin-bottom: 0; }
-  .bubble ul, .bubble ol { margin: 6px 0 8px; padding-left: 20px; }
-  .bubble li { margin-bottom: 3px; }
-  .bubble code { background: var(--bg); border: 1px solid var(--border); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: 0.88em; }
-  .bubble pre { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 8px 0; }
-  .bubble pre code { background: none; border: none; padding: 0; }
-  .bubble strong { color: var(--text); font-weight: 650; }
+  /* ---------- History sidebar ---------- */
+  #body-wrap { flex: 1; display: flex; overflow: hidden; }
+  #sidebar {
+    width: 240px; flex-shrink: 0; background: var(--bg-card); border-right: 1px solid var(--border);
+    display: none; flex-direction: column; padding: 14px 10px;
+  }
+  #sidebar.show { display: flex; }
+  #new-chat-btn {
+    width: 100%; padding: 9px 12px; margin-bottom: 10px;
+    background: linear-gradient(145deg, var(--accent), var(--accent-2));
+    color: #0b120e; border: none; border-radius: 10px; font-size: 13px; font-weight: 650; cursor: pointer;
+  }
+  #chat-list { flex: 1; overflow-y: auto; }
+  .chat-item {
+    display: flex; align-items: center; gap: 8px; padding: 8px 9px; border-radius: 8px; cursor: pointer;
+    color: var(--text-muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;
+  }
+  .chat-item:hover { background: var(--bg-elevated); color: var(--text); }
+  .chat-item.active { background: var(--bg-elevated); color: var(--text); box-shadow: inset 0 0 0 1px var(--border); }
+  .chat-item .title { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+  .chat-item .del { opacity: 0; font-size: 11px; color: var(--text-faint); padding: 2px 5px; }
+  .chat-item:hover .del { opacity: 1; }
+  .chat-item .del:hover { color: var(--danger); }
 
-  .think-toggle {
-    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-faint);
-    background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px;
-    cursor: pointer; margin-bottom: 6px;
-  }
-  .think-toggle:hover { color: var(--text-muted); border-color: var(--accent); }
-  .think-panel {
-    display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
-    padding: 10px 13px; margin-bottom: 7px; font-size: 12px; line-height: 1.5; color: var(--text-faint);
-    font-family: var(--mono); white-space: pre-wrap; max-width: 85%; max-height: 240px; overflow-y: auto;
-  }
-  .think-panel.open { display: block; }
+  /* ---------- Toggle switch ---------- */
+  .switch-row { display: flex; align-items: center; gap: 7px; }
+  .switch-label { font-size: 11.5px; color: var(--text-faint); white-space: nowrap; }
+  .switch { width: 34px; height: 20px; border-radius: 20px; background: var(--border); border: none; cursor: pointer; position: relative; flex-shrink: 0; transition: background 0.15s; }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--text-muted); transition: transform 0.15s, background 0.15s; }
+  .switch.on { background: var(--accent); }
+  .switch.on::after { transform: translateX(14px); background: #0b120e; }
 
-  @media (max-width: 560px) {
-    .tiers { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 560px) { .tiers { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -178,33 +218,43 @@
       <div class="brand-name">Linden AI</div>
     </div>
     <div class="header-right">
+      <div class="switch-row" title="Save chat history on this device">
+        <span class="switch-label">Save chats</span>
+        <button class="switch" id="history-switch"></button>
+      </div>
       <div class="status-pill"><span class="status-dot" id="status-dot"></span><span id="status-text">Connecting…</span></div>
       <button class="icon-btn" id="settings-btn" title="Model details">⚙</button>
       <button class="icon-btn" id="theme-toggle" title="Toggle theme">🌙</button>
     </div>
   </header>
 
+  <div id="body-wrap">
+  <div id="sidebar">
+    <button id="new-chat-btn">+ New chat</button>
+    <div id="chat-list"></div>
+  </div>
+
   <main>
     <div class="intro">
       <h1>Chat with Linden</h1>
-      <p>A privately hosted AI, running on real hardware rather than a data center. Pick a tier below — each has its own free message budget that resets every 2 hours.</p>
+      <p>A privately hosted AI, running on real hardware rather than a data center. Pick a tier below — each has its own free budget that resets every 2 hours.</p>
     </div>
 
     <div class="tiers" id="tiers">
       <div class="tier-card" data-tier="l3">
         <div class="tier-name">Linden L3</div>
         <div class="tier-tag">Our most powerful model — the deepest reasoning Linden offers.</div>
-        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l3">— / 5</span></div>
+        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l3">— / 25</span></div>
       </div>
       <div class="tier-card" data-tier="l2">
         <div class="tier-name">Linden L2</div>
         <div class="tier-tag">A balanced middle ground — sharper reasoning with more room to talk.</div>
-        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l2">— / 75</span></div>
+        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l2">— / 100</span></div>
       </div>
       <div class="tier-card selected" data-tier="l1">
         <div class="tier-name">Linden L1</div>
         <div class="tier-tag">Our fastest model — quick, lightweight answers for everyday questions.</div>
-        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l1">— / 1000</span></div>
+        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l1">— / 2000</span></div>
       </div>
     </div>
 
@@ -217,14 +267,15 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      <div class="hint">Enter to send · Each message uses 1 from that tier's budget · Resets every 2 hours</div>
+      <div class="hint">Enter to send · Each message uses 1 from that tier's budget — full budget renews every 4 hours · Resets every 2 hours</div>
     </div>
   </main>
+  </div>
 
   <div id="settings-overlay">
     <div id="settings-modal">
       <div class="settings-header">
-        <h2>Model details</h2>
+        <h2><span class="brand-mark" style="width:22px;height:22px;font-size:11px;border-radius:7px;">L</span>Model details</h2>
         <button class="settings-close" id="settings-close">✕</button>
       </div>
       <div class="settings-sub">Read live from the server currently hosting Linden.</div>
@@ -237,7 +288,7 @@
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
   const PROXY_URL = "https://theorem-diabetes-degree-targets.trycloudflare.com";
 
-  const TIER_LIMITS = { l1: 1000, l2: 75, l3: 5 };
+  let tierLimits = { l1: 2000, l2: 100, l3: 25 };
   let selectedTier = "l1";
   let messages = [];
   let sending = false;
@@ -255,6 +306,10 @@
     settingsOverlay: document.getElementById("settings-overlay"),
     settingsClose: document.getElementById("settings-close"),
     modelsSection: document.getElementById("models-section"),
+    historySwitch: document.getElementById("history-switch"),
+    sidebar: document.getElementById("sidebar"),
+    chatList: document.getElementById("chat-list"),
+    newChatBtn: document.getElementById("new-chat-btn"),
   };
 
   function applyTheme() {
@@ -268,12 +323,144 @@
   });
 
 
-  // ---------- Markdown rendering ----------
+  // ---------- Chat history (opt-in, local only) ----------
+  const HISTORY_KEY = "linden_history_enabled";
+  const CHATS_KEY = "linden_chats";
+  let historyEnabled = localStorage.getItem(HISTORY_KEY) === "true";
+  let chats = [];
+  let currentChatId = null;
+
+  function loadChats() {
+    try { chats = JSON.parse(localStorage.getItem(CHATS_KEY) || "[]"); } catch (e) { chats = []; }
+  }
+  function saveChats() {
+    localStorage.setItem(CHATS_KEY, JSON.stringify(chats));
+  }
+  function getCurrentChat() {
+    return chats.find(c => c.id === currentChatId) || null;
+  }
+  function newChat() {
+    const id = "c" + Date.now();
+    chats.unshift({ id, title: "New chat", messages: [] });
+    currentChatId = id;
+    saveChats();
+    renderChatList();
+    messages = getCurrentChat().messages;
+    renderMessages();
+  }
+  function switchChat(id) {
+    if (sending) return;
+    currentChatId = id;
+    saveChats();
+    renderChatList();
+    messages = getCurrentChat().messages;
+    renderMessages();
+  }
+  function deleteChat(id, evt) {
+    evt.stopPropagation();
+    chats = chats.filter(c => c.id !== id);
+    if (currentChatId === id) {
+      currentChatId = chats.length ? chats[0].id : null;
+    }
+    saveChats();
+    renderChatList();
+    if (currentChatId) {
+      messages = getCurrentChat().messages;
+    } else if (historyEnabled) {
+      newChat();
+      return;
+    }
+    renderMessages();
+  }
+  function renderChatList() {
+    el.chatList.innerHTML = "";
+    chats.forEach(chat => {
+      const row = document.createElement("div");
+      row.className = "chat-item" + (chat.id === currentChatId ? " active" : "");
+      row.onclick = () => switchChat(chat.id);
+      const title = document.createElement("span");
+      title.className = "title";
+      title.textContent = chat.title;
+      const del = document.createElement("span");
+      del.className = "del";
+      del.textContent = "✕";
+      del.onclick = (e) => deleteChat(chat.id, e);
+      row.appendChild(title);
+      row.appendChild(del);
+      el.chatList.appendChild(row);
+    });
+  }
+
+  function applyHistoryMode() {
+    el.historySwitch.classList.toggle("on", historyEnabled);
+    el.sidebar.classList.toggle("show", historyEnabled);
+    if (historyEnabled) {
+      loadChats();
+      if (chats.length === 0) {
+        newChat();
+      } else {
+        if (!getCurrentChat()) currentChatId = chats[0].id;
+        renderChatList();
+        messages = getCurrentChat().messages;
+        renderMessages();
+      }
+    } else {
+      messages = [];
+      renderMessages();
+    }
+  }
+
+  el.historySwitch.addEventListener("click", () => {
+    historyEnabled = !historyEnabled;
+    localStorage.setItem(HISTORY_KEY, historyEnabled ? "true" : "false");
+    if (!historyEnabled) {
+      // Turning off means "exactly as it was" — don't keep saved chats around silently.
+      localStorage.removeItem(CHATS_KEY);
+      chats = [];
+      currentChatId = null;
+    }
+    applyHistoryMode();
+  });
+
+  el.newChatBtn.addEventListener("click", newChat);
+
+  el.settingsBtn.addEventListener("click", () => { el.settingsOverlay.classList.add("show"); loadModels(); });
+  el.settingsClose.addEventListener("click", () => el.settingsOverlay.classList.remove("show"));
+  el.settingsOverlay.addEventListener("click", (e) => { if (e.target === el.settingsOverlay) el.settingsOverlay.classList.remove("show"); });
+
+  async function loadModels() {
+    el.modelsSection.innerHTML = '<div class="health-empty">Loading…</div>';
+    try {
+      const res = await fetch(PROXY_URL + "/models");
+      if (!res.ok) throw new Error("bad status");
+      const data = await res.json();
+      const models = data.models || [];
+      if (models.length === 0) throw new Error("empty");
+      el.modelsSection.innerHTML = models.map(m => `
+        <div class="model-card">
+          <div class="model-card-top">
+            <span class="model-card-name">Linden ${m.tier.toUpperCase()}</span>
+            <span class="model-card-live">${m.installed ? "● online" : "unavailable"}</span>
+          </div>
+          <div class="model-card-tag">${m.tagline}</div>
+          <div class="model-card-grid">
+            <div><span class="k">Parameters</span> ${m.parameter_size}</div>
+            <div><span class="k">Quantization</span> ${m.quantization}</div>
+            <div><span class="k">Messages / 4h</span> ${m.messages_per_4h}</div>
+            <div><span class="k">Family</span> ${m.family}</div>
+          </div>
+        </div>`).join("");
+    } catch (e) {
+      el.modelsSection.innerHTML = '<div class="health-empty">Could not reach the server right now.</div>';
+    }
+  }
+
+  // ---------- Markdown ----------
   function escapeHtml(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function renderMarkdown(text) {
     let src = escapeHtml(text);
     const codeBlocks = [];
-    src = src.replace(/```([\s\S]*?)```/g, (m, code) => { codeBlocks.push(code.replace(/^[a-zA-Z0-9_+-]*\n/, "")); return `\u0000CODEBLOCK${codeBlocks.length - 1}\u0000`; });
+    src = src.replace(/```([\s\S]*?)```/g, (m, code) => { codeBlocks.push(code.replace(/^[a-zA-Z0-9_+-]*\n/, "")); return `\u0000CB${codeBlocks.length - 1}\u0000`; });
     src = src.replace(/`([^`\n]+)`/g, "<code>$1</code>");
     src = src.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     src = src.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
@@ -290,45 +477,16 @@
       else { closeList(); paraBuf.push(line); }
     });
     closeList(); flushPara();
-    out = out.replace(/\u0000CODEBLOCK(\d+)\u0000/g, (m, i) => `<pre><code>${codeBlocks[+i]}</code></pre>`);
+    out = out.replace(/\u0000CB(\d+)\u0000/g, (m, i) => `<pre><code>${codeBlocks[+i]}</code></pre>`);
     return out || "<p></p>";
   }
 
-  function splitThinking(raw) {
-    let thinking = "", visible = "";
-    const re = /<think>([\s\S]*?)<\/think>/g;
-    let lastIndex = 0, m;
-    while ((m = re.exec(raw)) !== null) { visible += raw.slice(lastIndex, m.index); thinking += m[1]; lastIndex = re.lastIndex; }
-    visible += raw.slice(lastIndex);
-    return { visible, thinking };
-  }
+  // ---------- Tiers ----------
 
-  el.settingsBtn.addEventListener("click", () => { el.settingsOverlay.classList.add("show"); loadModels(); });
-  el.settingsClose.addEventListener("click", () => el.settingsOverlay.classList.remove("show"));
-  el.settingsOverlay.addEventListener("click", (e) => { if (e.target === el.settingsOverlay) el.settingsOverlay.classList.remove("show"); });
-
-  async function loadModels() {
-    el.modelsSection.innerHTML = '<div class="health-empty">Loading…</div>';
-    try {
-      const res = await fetch(PROXY_URL + "/models");
-      const data = await res.json();
-      const models = data.models || [];
-      el.modelsSection.innerHTML = models.map(m => `
-        <div class="model-card">
-          <div class="model-card-top">
-            <span class="model-card-name">Linden ${m.tier.toUpperCase()}</span>
-          </div>
-          <div class="model-card-tag">${m.tagline}</div>
-          <div class="model-card-grid">
-            <div><span class="k">Parameters</span> ${m.parameter_size}</div>
-            <div><span class="k">Quantization</span> ${m.quantization}</div>
-            <div><span class="k">Messages / 2h</span> ${m.messages_per_2h}</div>
-            <div><span class="k">Status</span> ${m.installed ? "Online" : "Unavailable"}</div>
-          </div>
-        </div>`).join("");
-    } catch (e) {
-      el.modelsSection.innerHTML = '<div class="health-empty">Could not reach the server.</div>';
-    }
+  function formatRenewTime(epochSeconds) {
+    if (!epochSeconds) return "soon";
+    const d = new Date(epochSeconds * 1000);
+    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
   }
 
   el.tiers.addEventListener("click", (e) => {
@@ -337,7 +495,12 @@
     document.querySelectorAll(".tier-card").forEach(c => c.classList.remove("selected"));
     card.classList.add("selected");
     selectedTier = card.dataset.tier;
-    messages = [];
+    if (historyEnabled) {
+      const chat = getCurrentChat();
+      if (chat) { chat.messages.length = 0; messages = chat.messages; saveChats(); }
+    } else {
+      messages = [];
+    }
     renderMessages();
   });
 
@@ -347,42 +510,52 @@
       el.messages.innerHTML = `<div class="empty-hint">Chatting with Linden ${selectedTier.toUpperCase()}. Say hello.</div>`;
       return;
     }
-    messages.forEach(m => el.messages.appendChild(buildMessageRow(m)));
+    messages.forEach(m => el.messages.appendChild(buildMessageRow(m.role, m.content, m.thinking || "")));
     el.messages.scrollTop = el.messages.scrollHeight;
   }
 
-  function buildMessageRow(m) {
+  function buildMessageRow(role, content, thinking) {
     const row = document.createElement("div");
-    row.className = "msg-row " + m.role;
-
-    if (m.role === "assistant") {
-      const sp = splitThinking(m.content || "");
-      const thinking = ((m.thinking || "") + sp.thinking).trim();
-      if (thinking) {
-        const toggle = document.createElement("button");
-        toggle.className = "think-toggle";
-        toggle.type = "button";
-        toggle.innerHTML = "<span>Show thinking</span>";
-        const panel = document.createElement("div");
-        panel.className = "think-panel";
-        panel.textContent = thinking;
-        toggle.addEventListener("click", () => {
-          panel.classList.toggle("open");
-          toggle.querySelector("span").textContent = panel.classList.contains("open") ? "Hide thinking" : "Show thinking";
-        });
-        row.appendChild(toggle);
-        row.appendChild(panel);
-      }
-      const bubble = document.createElement("div");
-      bubble.className = "bubble";
-      bubble.innerHTML = renderMarkdown(sp.visible);
-      row.appendChild(bubble);
-    } else {
-      const bubble = document.createElement("div");
-      bubble.className = "bubble";
-      bubble.textContent = m.content;
-      row.appendChild(bubble);
+    row.className = "msg-row " + role;
+    if (role === "assistant" && thinking && thinking.trim()) {
+      const toggle = document.createElement("button");
+      toggle.className = "think-toggle";
+      toggle.type = "button";
+      toggle.innerHTML = "<span>Show thinking</span>";
+      const panel = document.createElement("div");
+      panel.className = "think-panel";
+      panel.textContent = thinking.trim();
+      toggle.addEventListener("click", () => {
+        panel.classList.toggle("open");
+        toggle.querySelector("span").textContent = panel.classList.contains("open") ? "Hide thinking" : "Show thinking";
+      });
+      row.appendChild(toggle);
+      row.appendChild(panel);
     }
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    if (role === "assistant") bubble.innerHTML = renderMarkdown(content);
+    else bubble.textContent = content;
+    row.appendChild(bubble);
+    return row;
+  }
+
+  function buildLoaderRow() {
+    const row = document.createElement("div");
+    row.className = "msg-row assistant";
+    row.innerHTML = `
+      <div class="loader-row">
+        <div class="loader-mark-wrap"><div class="loader-mark">L</div></div>
+        <span class="loader-label" id="loader-label">Thinking</span>
+      </div>`;
+    const phrases = ["Thinking", "Reasoning", "Composing", "Almost there"];
+    let i = 0;
+    const iv = setInterval(() => {
+      i = (i + 1) % phrases.length;
+      const lbl = row.querySelector("#loader-label");
+      if (lbl) lbl.textContent = phrases[i];
+    }, 850);
+    row._clear = () => clearInterval(iv);
     return row;
   }
 
@@ -397,6 +570,8 @@
   el.input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
   el.sendBtn.addEventListener("click", send);
 
+  let tierResetAt = {};
+
   async function checkStatus() {
     try {
       const res = await fetch(PROXY_URL + "/status");
@@ -404,10 +579,18 @@
       const data = await res.json();
       el.statusDot.className = "status-dot ok";
       el.statusText.textContent = "Online";
+      if (data.limits) tierLimits = data.limits;
+      if (data.reset_at) tierResetAt = data.reset_at;
       if (data.remaining) {
         for (const tier of ["l1", "l2", "l3"]) {
           const r = document.getElementById("rem-" + tier);
-          if (r && data.remaining[tier] !== undefined) r.textContent = data.remaining[tier] + " / " + TIER_LIMITS[tier];
+          if (!r || data.remaining[tier] === undefined) continue;
+          const remaining = data.remaining[tier];
+          if (remaining <= 0 && data.reset_at && data.reset_at[tier]) {
+            r.textContent = "renews " + formatRenewTime(data.reset_at[tier]);
+          } else {
+            r.textContent = remaining + " / " + tierLimits[tier];
+          }
         }
       }
     } catch (e) {
@@ -433,12 +616,20 @@
     updateSendState();
 
     messages.push({ role: "user", content: text });
+    if (historyEnabled) {
+      const chat = getCurrentChat();
+      if (chat && chat.title === "New chat") chat.title = text.length > 38 ? text.slice(0, 38) + "…" : text;
+      saveChats();
+      renderChatList();
+    }
     renderMessages();
 
-    // Client-side timeout — if nothing comes back within 100s, assume the
-    // server is unreachable or badly overloaded rather than hanging forever.
     const controller = new AbortController();
-    const clientTimeout = setTimeout(() => controller.abort(), 100000);
+    const clientTimeout = setTimeout(() => controller.abort(), 110000);
+
+    const loaderRow = buildLoaderRow();
+    el.messages.appendChild(loaderRow);
+    el.messages.scrollTop = el.messages.scrollHeight;
 
     try {
       const res = await fetch(PROXY_URL + "/chat", {
@@ -448,26 +639,116 @@
         signal: controller.signal,
       });
       clearTimeout(clientTimeout);
-      const data = await res.json().catch(() => ({}));
 
-      if (res.status === 429) {
-        showNote(`Linden ${selectedTier.toUpperCase()} is out of budget for the next ${Math.ceil((data.reset_in_seconds || 0) / 60)} min. Try a lighter tier or wait for it to reset.`);
-      } else if (res.status === 503) {
-        showNote(data.message || "Linden is experiencing high demand right now. Please try again shortly.");
-      } else if (res.status === 504) {
-        showNote(data.message || "That request took too long and was stopped. Please try again.");
-      } else if (res.status === 502) {
-        showNote(data.message || "Linden's server appears to be offline right now. Please try again later.");
-      } else if (res.ok) {
-        messages.push({ role: "assistant", content: data.content, thinking: data.thinking || "" });
-        renderMessages();
-        const r = document.getElementById("rem-" + selectedTier);
-        if (r) r.textContent = data.remaining + " / " + TIER_LIMITS[selectedTier];
-      } else {
-        showNote(data.message || "Something went wrong. Please try again.");
+      const ct = res.headers.get("content-type") || "";
+
+      if (!res.ok || ct.includes("application/json")) {
+        const data = await res.json().catch(() => ({}));
+        if (loaderRow._clear) loaderRow._clear();
+        loaderRow.remove();
+        if (res.status === 429) {
+          const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
+          showNote(`Linden ${selectedTier.toUpperCase()} is out of messages (${data.limit || tierLimits[selectedTier]} used). Renews at ${renewTime}. Try a lighter tier in the meantime.`);
+          checkStatus();
+        } else if (res.status === 503) {
+          showNote(data.message || "Linden is handling another request right now — please try again in a few seconds.");
+        } else if (res.status === 504) {
+          showNote(data.message || "That request took too long and was stopped. Please try again.");
+        } else if (res.status === 502) {
+          showNote(data.message || "Linden's server appears to be offline right now. Please try again later.");
+        } else {
+          showNote(data.message || `Something went wrong (error ${res.status}). Please try again.`);
+        }
+        sending = false;
+        updateSendState();
+        return;
       }
+
+      // Streaming NDJSON response — same format Ollama itself uses.
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = "";
+      let rawContent = "";
+      let thinkingBuf = "";
+      let revealed = false;
+      let liveRow = null, liveBubble = null, liveToggle = null, livePanel = null, liveToggleSpan = null;
+
+      function reveal() {
+        if (revealed) return;
+        revealed = true;
+        if (loaderRow._clear) loaderRow._clear();
+        loaderRow.remove();
+        liveRow = document.createElement("div");
+        liveRow.className = "msg-row assistant";
+        liveBubble = document.createElement("div");
+        liveBubble.className = "bubble cursor-blink";
+        liveRow.appendChild(liveBubble);
+        el.messages.appendChild(liveRow);
+        el.messages.scrollTop = el.messages.scrollHeight;
+      }
+
+      function ensureThinkUI() {
+        if (liveToggle) return;
+        liveToggle = document.createElement("button");
+        liveToggle.className = "think-toggle";
+        liveToggle.type = "button";
+        const dot = document.createElement("span");
+        dot.className = "pulse-dot";
+        liveToggleSpan = document.createElement("span");
+        liveToggleSpan.textContent = "Thinking…";
+        liveToggle.appendChild(dot);
+        liveToggle.appendChild(liveToggleSpan);
+        livePanel = document.createElement("div");
+        livePanel.className = "think-panel";
+        liveToggle.addEventListener("click", () => {
+          livePanel.classList.toggle("open");
+          liveToggleSpan.textContent = livePanel.classList.contains("open") ? "Hide thinking" : "Show thinking";
+        });
+        liveRow.insertBefore(livePanel, liveBubble);
+        liveRow.insertBefore(liveToggle, livePanel);
+      }
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop();
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          let chunk;
+          try { chunk = JSON.parse(line); } catch (e) { continue; }
+          const msg = chunk.message || {};
+          if (msg.thinking) {
+            thinkingBuf += msg.thinking;
+            if (!revealed) reveal();
+            ensureThinkUI();
+            livePanel.textContent = thinkingBuf;
+            if (!livePanel.classList.contains("open")) liveToggleSpan.textContent = "Thinking…";
+          }
+          if (msg.content) {
+            rawContent += msg.content;
+            if (!revealed) reveal();
+            liveBubble.innerHTML = renderMarkdown(rawContent);
+            el.messages.scrollTop = el.messages.scrollHeight;
+          }
+        }
+      }
+
+      if (!revealed) reveal();
+      if (liveBubble) liveBubble.classList.remove("cursor-blink");
+      if (liveToggleSpan) liveToggleSpan.textContent = "Show thinking";
+      if (!rawContent.trim() && !thinkingBuf.trim() && liveBubble) {
+        liveBubble.innerHTML = renderMarkdown("(No reply generated — try again.)");
+      }
+
+      messages.push({ role: "assistant", content: rawContent, thinking: thinkingBuf });
+      if (historyEnabled) saveChats();
+      checkStatus();
     } catch (e) {
       clearTimeout(clientTimeout);
+      if (loaderRow._clear) loaderRow._clear();
+      loaderRow.remove();
       if (e.name === "AbortError") {
         showNote("This is taking longer than expected — Linden may be experiencing high demand. Please try again.");
       } else {
@@ -480,6 +761,7 @@
   }
 
   applyTheme();
+  applyHistoryMode();
   checkStatus();
   setInterval(checkStatus, 20000);
 })();
