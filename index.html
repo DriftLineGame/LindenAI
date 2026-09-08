@@ -17,15 +17,35 @@
     --accent-2: #8fe3c0;
     --accent-glow: rgba(95, 209, 160, 0.45);
     --danger: #e6797a;
+    --danger-bg: #2a1a1c;
+    --danger-border: #452127;
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+    color-scheme: dark;
+  }
+  body.light {
+    --bg: #f8faf8;
+    --bg-elevated: #ffffff;
+    --bg-card: #f1f4f1;
+    --border: #dfe6e1;
+    --text: #182019;
+    --text-muted: #5b6d61;
+    --text-faint: #93a297;
+    --accent: #279e6c;
+    --accent-2: #4fc48f;
+    --accent-glow: rgba(39, 158, 108, 0.28);
+    --danger: #c9494a;
+    --danger-bg: #fbeaea;
+    --danger-border: #f0caca;
+    color-scheme: light;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); transition: background 0.2s ease, color 0.2s ease; }
   body { display: flex; flex-direction: column; }
+  button { font-family: var(--font); }
 
   /* ---------- Header ---------- */
-  header { padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  header { padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
   .brand { display: flex; align-items: center; gap: 11px; }
   .brand-mark {
     width: 34px; height: 34px; border-radius: 10px;
@@ -34,23 +54,29 @@
     font-weight: 800; color: #0b120e; font-size: 16px;
   }
   .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .header-right { display: flex; align-items: center; gap: 14px; }
   .status-pill { font-size: 12px; color: var(--text-faint); display: flex; align-items: center; gap: 6px; }
   .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-faint); }
   .status-dot.ok { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
   .status-dot.err { background: var(--danger); }
+  .icon-btn {
+    width: 32px; height: 32px; border-radius: 9px; background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .icon-btn:hover { color: var(--text); border-color: var(--accent); }
 
   /* ---------- Layout ---------- */
   main { flex: 1; display: flex; flex-direction: column; max-width: 760px; width: 100%; margin: 0 auto; padding: 0 20px; overflow: hidden; }
 
-  .intro { padding: 34px 0 18px; text-align: center; }
-  .intro h1 { font-size: 26px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .intro { padding: 30px 0 16px; text-align: center; }
+  .intro h1 { font-size: 25px; margin: 0 0 8px; letter-spacing: -0.01em; }
   .intro p { color: var(--text-muted); font-size: 14px; margin: 0; max-width: 480px; margin: 0 auto; line-height: 1.5; }
 
   /* ---------- Tier cards ---------- */
-  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px 0 8px; }
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 18px 0 8px; }
   .tier-card {
     background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 15px 14px; cursor: pointer; transition: border-color 0.15s, transform 0.1s;
+    padding: 15px 14px; cursor: pointer; transition: border-color 0.15s;
   }
   .tier-card:hover { border-color: var(--accent); }
   .tier-card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 20px -6px var(--accent-glow); }
@@ -68,18 +94,15 @@
   .msg-row.user { align-items: flex-end; }
   .msg-row.assistant { align-items: flex-start; }
   .bubble { line-height: 1.55; width: fit-content; max-width: 85%; padding: 9px 14px; border-radius: 14px; font-size: 14.5px; }
-  .msg-row.user .bubble { background: #1c2a22; border-radius: 14px 14px 3px 14px; }
+  .msg-row.user .bubble { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px 14px 3px 14px; }
   .msg-row.assistant .bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px 14px 14px 14px; }
-  .msg-row.assistant .bubble p { margin: 0 0 8px; }
-  .msg-row.assistant .bubble p:last-child { margin-bottom: 0; }
 
   .msg-meta { font-size: 10.5px; color: var(--text-faint); margin-top: 4px; font-family: var(--mono); }
 
   .limit-note {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 10px 14px; font-size: 12.5px; color: var(--text-muted); text-align: center; margin: 10px 0;
+    background: var(--danger-bg); border: 1px solid var(--danger-border); border-radius: 12px;
+    padding: 10px 14px; font-size: 12.5px; color: var(--danger); text-align: center; margin: 10px 0;
   }
-  .limit-note.blocked { border-color: var(--danger); color: var(--danger); }
 
   /* ---------- Input ---------- */
   #input-area { padding: 12px 0 22px; }
@@ -101,6 +124,47 @@
   #messages::-webkit-scrollbar { width: 8px; }
   #messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
+  /* ---------- Settings modal ---------- */
+  #settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+  #settings-overlay.show { display: flex; }
+  #settings-modal { width: 520px; max-width: 100%; max-height: 82vh; overflow-y: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px 24px; }
+  .settings-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  #settings-modal h2 { font-size: 16px; margin: 0; }
+  .settings-sub { font-size: 12.5px; color: var(--text-faint); margin-bottom: 16px; }
+  .settings-close { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; }
+  .settings-close:hover { color: var(--text); }
+
+  .model-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
+  .model-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
+  .model-card-name { font-weight: 650; font-size: 13.5px; }
+  .model-card-tag { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
+  .model-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 14px; font-size: 12px; color: var(--text-muted); }
+  .model-card-grid span.k { color: var(--text-faint); }
+  .health-empty { font-size: 12.5px; color: var(--text-faint); background: var(--bg-card); border: 1px dashed var(--border); border-radius: 10px; padding: 12px 14px; }
+
+
+  .bubble p { margin: 0 0 8px; }
+  .bubble p:last-child { margin-bottom: 0; }
+  .bubble ul, .bubble ol { margin: 6px 0 8px; padding-left: 20px; }
+  .bubble li { margin-bottom: 3px; }
+  .bubble code { background: var(--bg); border: 1px solid var(--border); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: 0.88em; }
+  .bubble pre { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 8px 0; }
+  .bubble pre code { background: none; border: none; padding: 0; }
+  .bubble strong { color: var(--text); font-weight: 650; }
+
+  .think-toggle {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-faint);
+    background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px;
+    cursor: pointer; margin-bottom: 6px;
+  }
+  .think-toggle:hover { color: var(--text-muted); border-color: var(--accent); }
+  .think-panel {
+    display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 13px; margin-bottom: 7px; font-size: 12px; line-height: 1.5; color: var(--text-faint);
+    font-family: var(--mono); white-space: pre-wrap; max-width: 85%; max-height: 240px; overflow-y: auto;
+  }
+  .think-panel.open { display: block; }
+
   @media (max-width: 560px) {
     .tiers { grid-template-columns: 1fr; }
   }
@@ -113,30 +177,34 @@
       <div class="brand-mark">L</div>
       <div class="brand-name">Linden AI</div>
     </div>
-    <div class="status-pill"><span class="status-dot" id="status-dot"></span><span id="status-text">Connecting…</span></div>
+    <div class="header-right">
+      <div class="status-pill"><span class="status-dot" id="status-dot"></span><span id="status-text">Connecting…</span></div>
+      <button class="icon-btn" id="settings-btn" title="Model details">⚙</button>
+      <button class="icon-btn" id="theme-toggle" title="Toggle theme">🌙</button>
+    </div>
   </header>
 
   <main>
     <div class="intro">
       <h1>Chat with Linden</h1>
-      <p>A privately hosted AI, running on real hardware rather than a data center. Pick a tier below — each has its own free usage budget that resets every 2 hours.</p>
+      <p>A privately hosted AI, running on real hardware rather than a data center. Pick a tier below — each has its own free message budget that resets every 2 hours.</p>
     </div>
 
     <div class="tiers" id="tiers">
       <div class="tier-card" data-tier="l3">
         <div class="tier-name">Linden L3</div>
         <div class="tier-tag">Our most powerful model — the deepest reasoning Linden offers.</div>
-        <div class="tier-quota"><span>Budget</span><span class="remaining" id="rem-l3">— / 5</span></div>
+        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l3">— / 5</span></div>
       </div>
       <div class="tier-card" data-tier="l2">
         <div class="tier-name">Linden L2</div>
         <div class="tier-tag">A balanced middle ground — sharper reasoning with more room to talk.</div>
-        <div class="tier-quota"><span>Budget</span><span class="remaining" id="rem-l2">— / 75</span></div>
+        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l2">— / 75</span></div>
       </div>
       <div class="tier-card selected" data-tier="l1">
         <div class="tier-name">Linden L1</div>
         <div class="tier-tag">Our fastest model — quick, lightweight answers for everyday questions.</div>
-        <div class="tier-quota"><span>Budget</span><span class="remaining" id="rem-l1">— / 1000</span></div>
+        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l1">— / 1000</span></div>
       </div>
     </div>
 
@@ -149,9 +217,20 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      <div class="hint">Enter to send · Each tier's budget is measured in tokens generated, and resets every 2 hours</div>
+      <div class="hint">Enter to send · Each message uses 1 from that tier's budget · Resets every 2 hours</div>
     </div>
   </main>
+
+  <div id="settings-overlay">
+    <div id="settings-modal">
+      <div class="settings-header">
+        <h2>Model details</h2>
+        <button class="settings-close" id="settings-close">✕</button>
+      </div>
+      <div class="settings-sub">Read live from the server currently hosting Linden.</div>
+      <div id="models-section"><div class="health-empty">Loading…</div></div>
+    </div>
+  </div>
 
 <script>
 (function () {
@@ -162,6 +241,7 @@
   let selectedTier = "l1";
   let messages = [];
   let sending = false;
+  let theme = localStorage.getItem("linden_theme") || "dark";
 
   const el = {
     tiers: document.getElementById("tiers"),
@@ -170,7 +250,86 @@
     sendBtn: document.getElementById("send-btn"),
     statusDot: document.getElementById("status-dot"),
     statusText: document.getElementById("status-text"),
+    themeToggle: document.getElementById("theme-toggle"),
+    settingsBtn: document.getElementById("settings-btn"),
+    settingsOverlay: document.getElementById("settings-overlay"),
+    settingsClose: document.getElementById("settings-close"),
+    modelsSection: document.getElementById("models-section"),
   };
+
+  function applyTheme() {
+    document.body.classList.toggle("light", theme === "light");
+    el.themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
+  }
+  el.themeToggle.addEventListener("click", () => {
+    theme = theme === "light" ? "dark" : "light";
+    localStorage.setItem("linden_theme", theme);
+    applyTheme();
+  });
+
+
+  // ---------- Markdown rendering ----------
+  function escapeHtml(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function renderMarkdown(text) {
+    let src = escapeHtml(text);
+    const codeBlocks = [];
+    src = src.replace(/```([\s\S]*?)```/g, (m, code) => { codeBlocks.push(code.replace(/^[a-zA-Z0-9_+-]*\n/, "")); return `\u0000CODEBLOCK${codeBlocks.length - 1}\u0000`; });
+    src = src.replace(/`([^`\n]+)`/g, "<code>$1</code>");
+    src = src.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    src = src.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+    const lines = src.split("\n");
+    let out = "", inList = false, listType = null, paraBuf = [];
+    function flushPara() { if (paraBuf.length) { out += "<p>" + paraBuf.join("<br>") + "</p>"; paraBuf = []; } }
+    function closeList() { if (inList) { out += listType === "ul" ? "</ul>" : "</ol>"; inList = false; listType = null; } }
+    lines.forEach(line => {
+      const bulletMatch = line.match(/^\s*[-*]\s+(.*)/);
+      const numMatch = line.match(/^\s*\d+\.\s+(.*)/);
+      if (bulletMatch) { flushPara(); if (!inList || listType !== "ul") { closeList(); out += "<ul>"; inList = true; listType = "ul"; } out += `<li>${bulletMatch[1]}</li>`; }
+      else if (numMatch) { flushPara(); if (!inList || listType !== "ol") { closeList(); out += "<ol>"; inList = true; listType = "ol"; } out += `<li>${numMatch[1]}</li>`; }
+      else if (line.trim() === "") { closeList(); flushPara(); }
+      else { closeList(); paraBuf.push(line); }
+    });
+    closeList(); flushPara();
+    out = out.replace(/\u0000CODEBLOCK(\d+)\u0000/g, (m, i) => `<pre><code>${codeBlocks[+i]}</code></pre>`);
+    return out || "<p></p>";
+  }
+
+  function splitThinking(raw) {
+    let thinking = "", visible = "";
+    const re = /<think>([\s\S]*?)<\/think>/g;
+    let lastIndex = 0, m;
+    while ((m = re.exec(raw)) !== null) { visible += raw.slice(lastIndex, m.index); thinking += m[1]; lastIndex = re.lastIndex; }
+    visible += raw.slice(lastIndex);
+    return { visible, thinking };
+  }
+
+  el.settingsBtn.addEventListener("click", () => { el.settingsOverlay.classList.add("show"); loadModels(); });
+  el.settingsClose.addEventListener("click", () => el.settingsOverlay.classList.remove("show"));
+  el.settingsOverlay.addEventListener("click", (e) => { if (e.target === el.settingsOverlay) el.settingsOverlay.classList.remove("show"); });
+
+  async function loadModels() {
+    el.modelsSection.innerHTML = '<div class="health-empty">Loading…</div>';
+    try {
+      const res = await fetch(PROXY_URL + "/models");
+      const data = await res.json();
+      const models = data.models || [];
+      el.modelsSection.innerHTML = models.map(m => `
+        <div class="model-card">
+          <div class="model-card-top">
+            <span class="model-card-name">Linden ${m.tier.toUpperCase()}</span>
+          </div>
+          <div class="model-card-tag">${m.tagline}</div>
+          <div class="model-card-grid">
+            <div><span class="k">Parameters</span> ${m.parameter_size}</div>
+            <div><span class="k">Quantization</span> ${m.quantization}</div>
+            <div><span class="k">Messages / 2h</span> ${m.messages_per_2h}</div>
+            <div><span class="k">Status</span> ${m.installed ? "Online" : "Unavailable"}</div>
+          </div>
+        </div>`).join("");
+    } catch (e) {
+      el.modelsSection.innerHTML = '<div class="health-empty">Could not reach the server.</div>';
+    }
+  }
 
   el.tiers.addEventListener("click", (e) => {
     const card = e.target.closest(".tier-card");
@@ -188,22 +347,43 @@
       el.messages.innerHTML = `<div class="empty-hint">Chatting with Linden ${selectedTier.toUpperCase()}. Say hello.</div>`;
       return;
     }
-    messages.forEach(m => {
-      const row = document.createElement("div");
-      row.className = "msg-row " + m.role;
+    messages.forEach(m => el.messages.appendChild(buildMessageRow(m)));
+    el.messages.scrollTop = el.messages.scrollHeight;
+  }
+
+  function buildMessageRow(m) {
+    const row = document.createElement("div");
+    row.className = "msg-row " + m.role;
+
+    if (m.role === "assistant") {
+      const sp = splitThinking(m.content || "");
+      const thinking = ((m.thinking || "") + sp.thinking).trim();
+      if (thinking) {
+        const toggle = document.createElement("button");
+        toggle.className = "think-toggle";
+        toggle.type = "button";
+        toggle.innerHTML = "<span>Show thinking</span>";
+        const panel = document.createElement("div");
+        panel.className = "think-panel";
+        panel.textContent = thinking;
+        toggle.addEventListener("click", () => {
+          panel.classList.toggle("open");
+          toggle.querySelector("span").textContent = panel.classList.contains("open") ? "Hide thinking" : "Show thinking";
+        });
+        row.appendChild(toggle);
+        row.appendChild(panel);
+      }
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.innerHTML = renderMarkdown(sp.visible);
+      row.appendChild(bubble);
+    } else {
       const bubble = document.createElement("div");
       bubble.className = "bubble";
       bubble.textContent = m.content;
       row.appendChild(bubble);
-      if (m.tokens !== undefined) {
-        const meta = document.createElement("div");
-        meta.className = "msg-meta";
-        meta.textContent = m.tokens + " tokens";
-        row.appendChild(meta);
-      }
-      el.messages.appendChild(row);
-    });
-    el.messages.scrollTop = el.messages.scrollHeight;
+    }
+    return row;
   }
 
   function updateSendState() {
@@ -236,6 +416,14 @@
     }
   }
 
+  function showNote(text) {
+    const note = document.createElement("div");
+    note.className = "limit-note";
+    note.textContent = text;
+    el.messages.appendChild(note);
+    el.messages.scrollTop = el.messages.scrollHeight;
+  }
+
   async function send() {
     const text = el.input.value.trim();
     if (!text || sending) return;
@@ -247,39 +435,51 @@
     messages.push({ role: "user", content: text });
     renderMessages();
 
+    // Client-side timeout — if nothing comes back within 100s, assume the
+    // server is unreachable or badly overloaded rather than hanging forever.
+    const controller = new AbortController();
+    const clientTimeout = setTimeout(() => controller.abort(), 100000);
+
     try {
       const res = await fetch(PROXY_URL + "/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tier: selectedTier, messages })
+        body: JSON.stringify({ tier: selectedTier, messages }),
+        signal: controller.signal,
       });
-      const data = await res.json();
+      clearTimeout(clientTimeout);
+      const data = await res.json().catch(() => ({}));
 
       if (res.status === 429) {
-        const note = document.createElement("div");
-        note.className = "limit-note blocked";
-        note.textContent = `Linden ${selectedTier.toUpperCase()} is out of budget for the next ${Math.ceil(data.reset_in_seconds / 60)} min. Try a lighter tier or wait for it to reset.`;
-        el.messages.appendChild(note);
-        el.messages.scrollTop = el.messages.scrollHeight;
+        showNote(`Linden ${selectedTier.toUpperCase()} is out of budget for the next ${Math.ceil((data.reset_in_seconds || 0) / 60)} min. Try a lighter tier or wait for it to reset.`);
+      } else if (res.status === 503) {
+        showNote(data.message || "Linden is experiencing high demand right now. Please try again shortly.");
+      } else if (res.status === 504) {
+        showNote(data.message || "That request took too long and was stopped. Please try again.");
+      } else if (res.status === 502) {
+        showNote(data.message || "Linden's server appears to be offline right now. Please try again later.");
       } else if (res.ok) {
-        messages.push({ role: "assistant", content: data.content, tokens: data.tokens_used });
+        messages.push({ role: "assistant", content: data.content, thinking: data.thinking || "" });
         renderMessages();
         const r = document.getElementById("rem-" + selectedTier);
         if (r) r.textContent = data.remaining + " / " + TIER_LIMITS[selectedTier];
       } else {
-        throw new Error(data.error || "request failed");
+        showNote(data.message || "Something went wrong. Please try again.");
       }
     } catch (e) {
-      const row = document.createElement("div");
-      row.className = "msg-row assistant";
-      row.innerHTML = `<div class="bubble">Something went wrong reaching Linden. Try again shortly.</div>`;
-      el.messages.appendChild(row);
+      clearTimeout(clientTimeout);
+      if (e.name === "AbortError") {
+        showNote("This is taking longer than expected — Linden may be experiencing high demand. Please try again.");
+      } else {
+        showNote("Can't reach Linden's server right now. It may be offline — please try again later.");
+      }
     }
 
     sending = false;
     updateSendState();
   }
 
+  applyTheme();
   checkStatus();
   setInterval(checkStatus, 20000);
 })();
