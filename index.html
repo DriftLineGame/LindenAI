@@ -9,6 +9,7 @@
     --bg: #0d120f;
     --bg-elevated: #151b17;
     --bg-card: #121712;
+    --bg-hover: #1a221c;
     --border: #23302a;
     --text: #eaf0ec;
     --text-muted: #8fa398;
@@ -27,6 +28,7 @@
     --bg: #f8faf8;
     --bg-elevated: #ffffff;
     --bg-card: #f1f4f1;
+    --bg-hover: #e7ebe7;
     --border: #dfe6e1;
     --text: #182019;
     --text-muted: #5b6d61;
@@ -44,7 +46,7 @@
   body { display: flex; flex-direction: column; }
   button { font-family: var(--font); }
 
-  header { padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  header { padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); flex-shrink: 0; }
   .brand { display: flex; align-items: center; gap: 11px; }
   .brand-mark {
     width: 32px; height: 32px; border-radius: 10px;
@@ -54,43 +56,92 @@
     box-shadow: 0 2px 10px -3px var(--accent-glow);
   }
   .brand-name { font-weight: 700; font-size: 16.5px; letter-spacing: -0.01em; }
-  .header-right { display: flex; align-items: center; gap: 10px; }
-  .status-pill { font-size: 12px; color: var(--text-faint); display: flex; align-items: center; gap: 6px; margin-right: 4px; }
+  .header-right { display: flex; align-items: center; gap: 14px; }
+  .switch-row { display: flex; align-items: center; gap: 7px; }
+  .switch-label { font-size: 11.5px; color: var(--text-faint); white-space: nowrap; }
+  .switch { width: 34px; height: 20px; border-radius: 20px; background: var(--border); border: none; cursor: pointer; position: relative; flex-shrink: 0; transition: background 0.15s; }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--text-muted); transition: transform 0.15s, background 0.15s; }
+  .switch.on { background: var(--accent); }
+  .switch.on::after { transform: translateX(14px); background: #0b120e; }
+  .status-pill { font-size: 12px; color: var(--text-faint); display: flex; align-items: center; gap: 6px; }
   .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-faint); }
   .status-dot.ok { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
   .status-dot.err { background: var(--danger); }
   .icon-btn {
     width: 32px; height: 32px; border-radius: 9px; background: var(--bg-card); border: 1px solid var(--border);
-    color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;
+    color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
   }
   .icon-btn:hover { color: var(--text); border-color: var(--accent); }
 
-  main { flex: 1; display: flex; flex-direction: column; max-width: 760px; width: 100%; margin: 0 auto; padding: 0 20px; overflow: hidden; }
-
-  .intro { padding: 28px 0 16px; text-align: center; }
-  .intro h1 { font-size: 25px; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .intro p { color: var(--text-muted); font-size: 14px; margin: 0 auto; max-width: 480px; line-height: 1.5; }
-
-  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 16px 0 8px; }
-  .tier-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 15px 14px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
+  /* ---------- Body layout: sidebar + fluid main ---------- */
+  #body-wrap { flex: 1; display: flex; overflow: hidden; }
+  #sidebar {
+    width: 250px; flex-shrink: 0; background: var(--bg-card); border-right: 1px solid var(--border);
+    display: none; flex-direction: column; padding: 14px 10px;
   }
-  .tier-card:hover { border-color: var(--accent); }
-  .tier-card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 8px 22px -8px var(--accent-glow); }
-  .tier-name { font-weight: 750; font-size: 15px; margin-bottom: 3px; }
-  .tier-tag { font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; min-height: 32px; }
-  .tier-quota { font-size: 11px; color: var(--text-faint); font-family: var(--mono); display: flex; align-items: center; justify-content: space-between; }
-  .tier-quota .remaining { color: var(--accent); font-weight: 600; }
+  #sidebar.show { display: flex; }
+  #new-chat-btn {
+    width: 100%; padding: 9px 12px; margin-bottom: 10px;
+    background: linear-gradient(145deg, var(--accent), var(--accent-2));
+    color: #0b120e; border: none; border-radius: 10px; font-size: 13px; font-weight: 650; cursor: pointer;
+  }
+  #chat-list { flex: 1; overflow-y: auto; }
+  .chat-item {
+    display: flex; align-items: center; gap: 8px; padding: 8px 9px; border-radius: 8px; cursor: pointer;
+    color: var(--text-muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;
+  }
+  .chat-item:hover { background: var(--bg-elevated); color: var(--text); }
+  .chat-item.active { background: var(--bg-elevated); color: var(--text); box-shadow: inset 0 0 0 1px var(--border); }
+  .chat-item .title { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+  .chat-item .tier-badge { font-size: 9.5px; font-family: var(--mono); color: var(--text-faint); background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 1px 4px; flex-shrink: 0; }
+  .chat-item .del { opacity: 0; font-size: 11px; color: var(--text-faint); padding: 2px 5px; flex-shrink: 0; }
+  .chat-item:hover .del { opacity: 1; }
+  .chat-item .del:hover { color: var(--danger); }
 
-  #messages { flex: 1; overflow-y: auto; padding: 12px 0 16px; }
-  .empty-hint { color: var(--text-faint); text-align: center; font-size: 13px; padding-top: 30px; }
+  main { flex: 1; display: flex; flex-direction: column; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 4vw; overflow: hidden; min-width: 0; }
+
+  .intro { padding: 22px 0 14px; text-align: center; }
+  .intro h1 { font-size: 24px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .intro p { color: var(--text-muted); font-size: 13.5px; margin: 0 auto; max-width: 560px; line-height: 1.5; }
+
+  /* ---------- Model dropdown (replaces the old tier cards) ---------- */
+  .model-picker-wrap { display: flex; flex-direction: column; align-items: center; padding: 4px 0 16px; }
+  .model-picker { position: relative; width: 340px; max-width: 100%; }
+  .model-picker-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--bg-card); color: var(--text); border: 1px solid var(--border);
+    border-radius: 12px; padding: 11px 14px; font-size: 14px; cursor: pointer; text-align: left;
+  }
+  .model-picker-btn:hover { border-color: var(--accent); }
+  .model-picker-btn .mp-name { font-weight: 650; }
+  .model-picker-btn .mp-quota { font-size: 11px; color: var(--text-faint); font-family: var(--mono); flex-shrink: 0; }
+  .model-picker-btn .chev { color: var(--text-faint); flex-shrink: 0; transition: transform 0.15s; margin-left: auto; }
+  .model-picker.open .chev { transform: rotate(180deg); }
+  .model-sub { font-size: 12px; color: var(--text-faint); margin-top: 7px; text-align: center; min-height: 16px; }
+
+  .model-picker-list {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px;
+    padding: 6px; display: none; box-shadow: 0 10px 28px rgba(0,0,0,0.35); z-index: 30;
+  }
+  .model-picker.open .model-picker-list { display: block; }
+  .model-picker-option { padding: 9px 11px; border-radius: 9px; cursor: pointer; margin-bottom: 2px; }
+  .model-picker-option:last-child { margin-bottom: 0; }
+  .model-picker-option:hover { background: var(--bg-hover); }
+  .model-picker-option.selected { background: var(--bg-hover); box-shadow: inset 0 0 0 1px var(--border); }
+  .mp-opt-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+  .mp-opt-name { font-weight: 650; font-size: 13.5px; }
+  .mp-opt-quota { font-size: 11px; font-family: var(--mono); color: var(--text-faint); }
+  .mp-opt-tag { font-size: 11.5px; color: var(--text-muted); line-height: 1.35; }
+
+  #messages { flex: 1; overflow-y: auto; padding: 6px 0 16px; }
+  .empty-hint { color: var(--text-faint); text-align: center; font-size: 13px; padding-top: 20px; }
 
   .msg-row { display: flex; margin-bottom: 18px; flex-direction: column; animation: fadeIn 0.15s ease-out; overflow: visible; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
   .msg-row.user { align-items: flex-end; }
   .msg-row.assistant { align-items: flex-start; }
-  .bubble { line-height: 1.55; width: fit-content; max-width: 85%; padding: 10px 15px; border-radius: 14px; font-size: 14.5px; }
+  .bubble { line-height: 1.55; width: fit-content; max-width: 78%; padding: 10px 15px; border-radius: 14px; font-size: 14.5px; }
   .msg-row.user .bubble { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px 14px 3px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
   .msg-row.assistant .bubble { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px 14px 14px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
   .bubble p { margin: 0 0 8px; }
@@ -115,7 +166,7 @@
   .think-panel {
     display: none; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
     padding: 10px 13px; margin-bottom: 7px; font-size: 12px; line-height: 1.5; color: var(--text-faint);
-    font-family: var(--mono); white-space: pre-wrap; max-width: 85%; max-height: 240px; overflow-y: auto;
+    font-family: var(--mono); white-space: pre-wrap; max-width: 78%; max-height: 240px; overflow-y: auto;
   }
   .think-panel.open { display: block; }
 
@@ -135,14 +186,21 @@
     background: var(--danger-bg); border: 1px solid var(--danger-border); border-radius: 12px;
     padding: 10px 14px; font-size: 12.5px; color: var(--danger); text-align: center; margin: 10px 0;
   }
+  .limit-banner {
+    display: none; align-items: center; justify-content: center; gap: 8px;
+    background: var(--danger-bg); border: 1px solid var(--danger-border); color: var(--danger);
+    border-radius: 12px; padding: 9px 14px; font-size: 12.5px; text-align: center; margin: 0 0 10px;
+  }
+  .limit-banner.show { display: flex; }
 
-  #input-area { padding: 12px 0 22px; }
+  #input-area { padding: 10px 0 20px; }
   #input-inner {
     display: flex; align-items: flex-end; gap: 8px;
     background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 8px 8px 8px 16px;
     transition: border-color 0.15s;
   }
   #input-inner:focus-within { border-color: var(--accent); }
+  #input-inner.disabled { opacity: 0.5; }
   #prompt-input { flex: 1; background: none; border: none; color: var(--text); font-family: var(--font); font-size: 14.5px; resize: none; max-height: 160px; padding: 8px 0; }
   #prompt-input:focus { outline: none; }
   #prompt-input::placeholder { color: var(--text-faint); }
@@ -153,17 +211,18 @@
   #send-btn:disabled { opacity: 0.3; cursor: default; }
   .hint { text-align: center; font-size: 11px; color: var(--text-faint); margin-top: 8px; }
 
-  #messages::-webkit-scrollbar { width: 8px; }
-  #messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+  #messages::-webkit-scrollbar, #chat-list::-webkit-scrollbar { width: 8px; }
+  #messages::-webkit-scrollbar-thumb, #chat-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
-  #settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
-  #settings-overlay.show { display: flex; }
-  #settings-modal { width: 520px; max-width: 100%; max-height: 82vh; overflow-y: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px 24px; }
-  .settings-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-  #settings-modal h2 { font-size: 16px; margin: 0; display: flex; align-items: center; gap: 9px; }
-  .settings-sub { font-size: 12.5px; color: var(--text-faint); margin-bottom: 16px; }
-  .settings-close { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; }
-  .settings-close:hover { color: var(--text); }
+  /* ---------- Overlays (settings + confirm) ---------- */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+  .overlay.show { display: flex; }
+  .modal-box { width: 480px; max-width: 100%; max-height: 82vh; overflow-y: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px 24px; }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .modal-box h2, .modal-box h3 { font-size: 16px; margin: 0; display: flex; align-items: center; gap: 9px; }
+  .modal-sub { font-size: 12.5px; color: var(--text-faint); margin-bottom: 16px; line-height: 1.5; }
+  .modal-close { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; flex-shrink: 0; }
+  .modal-close:hover { color: var(--text); }
 
   .model-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
   .model-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
@@ -174,40 +233,16 @@
   .model-card-grid span.k { color: var(--text-faint); }
   .health-empty { font-size: 12.5px; color: var(--text-faint); background: var(--bg-card); border: 1px dashed var(--border); border-radius: 10px; padding: 12px 14px; }
 
+  .confirm-actions { display: flex; gap: 8px; margin-top: 18px; justify-content: flex-end; }
+  .confirm-btn { padding: 8px 16px; border-radius: 9px; font-size: 13px; cursor: pointer; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); }
+  .confirm-btn:hover { color: var(--text); }
+  .confirm-btn.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+  .confirm-btn.danger:hover { opacity: 0.9; }
 
-  /* ---------- History sidebar ---------- */
-  #body-wrap { flex: 1; display: flex; overflow: hidden; }
-  #sidebar {
-    width: 240px; flex-shrink: 0; background: var(--bg-card); border-right: 1px solid var(--border);
-    display: none; flex-direction: column; padding: 14px 10px;
+  @media (max-width: 640px) {
+    main { padding: 0 4vw; }
+    .model-picker { width: 100%; }
   }
-  #sidebar.show { display: flex; }
-  #new-chat-btn {
-    width: 100%; padding: 9px 12px; margin-bottom: 10px;
-    background: linear-gradient(145deg, var(--accent), var(--accent-2));
-    color: #0b120e; border: none; border-radius: 10px; font-size: 13px; font-weight: 650; cursor: pointer;
-  }
-  #chat-list { flex: 1; overflow-y: auto; }
-  .chat-item {
-    display: flex; align-items: center; gap: 8px; padding: 8px 9px; border-radius: 8px; cursor: pointer;
-    color: var(--text-muted); font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;
-  }
-  .chat-item:hover { background: var(--bg-elevated); color: var(--text); }
-  .chat-item.active { background: var(--bg-elevated); color: var(--text); box-shadow: inset 0 0 0 1px var(--border); }
-  .chat-item .title { flex: 1; overflow: hidden; text-overflow: ellipsis; }
-  .chat-item .del { opacity: 0; font-size: 11px; color: var(--text-faint); padding: 2px 5px; }
-  .chat-item:hover .del { opacity: 1; }
-  .chat-item .del:hover { color: var(--danger); }
-
-  /* ---------- Toggle switch ---------- */
-  .switch-row { display: flex; align-items: center; gap: 7px; }
-  .switch-label { font-size: 11.5px; color: var(--text-faint); white-space: nowrap; }
-  .switch { width: 34px; height: 20px; border-radius: 20px; background: var(--border); border: none; cursor: pointer; position: relative; flex-shrink: 0; transition: background 0.15s; }
-  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--text-muted); transition: transform 0.15s, background 0.15s; }
-  .switch.on { background: var(--accent); }
-  .switch.on::after { transform: translateX(14px); background: #0b120e; }
-
-  @media (max-width: 560px) { .tiers { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -229,57 +264,63 @@
   </header>
 
   <div id="body-wrap">
-  <div id="sidebar">
-    <button id="new-chat-btn">+ New chat</button>
-    <div id="chat-list"></div>
+    <div id="sidebar">
+      <button id="new-chat-btn">+ New chat</button>
+      <div id="chat-list"></div>
+    </div>
+
+    <main>
+      <div class="intro">
+        <h1>Chat with Linden</h1>
+        <p>A privately hosted AI, running on real hardware rather than a data center. Each model has its own free message budget that renews every 4 hours.</p>
+      </div>
+
+      <div class="model-picker-wrap">
+        <div class="model-picker" id="model-picker">
+          <button class="model-picker-btn" id="model-picker-btn" type="button">
+            <span class="mp-name" id="mp-name">Linden L1</span>
+            <span class="mp-quota" id="mp-quota">— / 2000</span>
+            <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="model-picker-list" id="model-picker-list"></div>
+        </div>
+        <div class="model-sub" id="model-sub">Our fastest model — quick, lightweight answers for everyday questions.</div>
+      </div>
+
+      <div id="messages"><div class="empty-hint">Pick a model above and say hello.</div></div>
+
+      <div id="input-area">
+        <div class="limit-banner" id="limit-banner"></div>
+        <div id="input-inner">
+          <textarea id="prompt-input" placeholder="Message Linden…" rows="1"></textarea>
+          <button id="send-btn" disabled title="Send">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="hint">Enter to send · Each message uses 1 from that model's budget · Full budget renews every 4 hours</div>
+      </div>
+    </main>
   </div>
 
-  <main>
-    <div class="intro">
-      <h1>Chat with Linden</h1>
-      <p>A privately hosted AI, running on real hardware rather than a data center. Pick a tier below — each has its own free budget that resets every 2 hours.</p>
-    </div>
-
-    <div class="tiers" id="tiers">
-      <div class="tier-card" data-tier="l3">
-        <div class="tier-name">Linden L3</div>
-        <div class="tier-tag">Our most powerful model — the deepest reasoning Linden offers.</div>
-        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l3">— / 25</span></div>
-      </div>
-      <div class="tier-card" data-tier="l2">
-        <div class="tier-name">Linden L2</div>
-        <div class="tier-tag">A balanced middle ground — sharper reasoning with more room to talk.</div>
-        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l2">— / 100</span></div>
-      </div>
-      <div class="tier-card selected" data-tier="l1">
-        <div class="tier-name">Linden L1</div>
-        <div class="tier-tag">Our fastest model — quick, lightweight answers for everyday questions.</div>
-        <div class="tier-quota"><span>Messages</span><span class="remaining" id="rem-l1">— / 2000</span></div>
-      </div>
-    </div>
-
-    <div id="messages"><div class="empty-hint">Pick a tier above and say hello.</div></div>
-
-    <div id="input-area">
-      <div id="input-inner">
-        <textarea id="prompt-input" placeholder="Message Linden…" rows="1"></textarea>
-        <button id="send-btn" disabled title="Send">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <div class="hint">Enter to send · Each message uses 1 from that tier's budget — full budget renews every 4 hours · Resets every 2 hours</div>
-    </div>
-  </main>
-  </div>
-
-  <div id="settings-overlay">
-    <div id="settings-modal">
-      <div class="settings-header">
+  <div class="overlay" id="settings-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
         <h2><span class="brand-mark" style="width:22px;height:22px;font-size:11px;border-radius:7px;">L</span>Model details</h2>
-        <button class="settings-close" id="settings-close">✕</button>
+        <button class="modal-close" id="settings-close">✕</button>
       </div>
-      <div class="settings-sub">Read live from the server currently hosting Linden.</div>
+      <div class="modal-sub">Read live from the server currently hosting Linden.</div>
       <div id="models-section"><div class="health-empty">Loading…</div></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="confirm-overlay">
+    <div class="modal-box" style="width:400px;">
+      <h3 id="confirm-title">Are you sure?</h3>
+      <div class="modal-sub" id="confirm-message"></div>
+      <div class="confirm-actions">
+        <button class="confirm-btn" id="confirm-cancel">Cancel</button>
+        <button class="confirm-btn danger" id="confirm-ok">Continue</button>
+      </div>
     </div>
   </div>
 
@@ -288,17 +329,26 @@
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
   const PROXY_URL = "https://theorem-diabetes-degree-targets.trycloudflare.com";
 
+  const TIER_INFO = {
+    l1: { name: "Linden L1", tagline: "Our fastest model — quick, lightweight answers for everyday questions." },
+    l2: { name: "Linden L2", tagline: "A balanced middle ground — sharper reasoning with more room to talk." },
+    l3: { name: "Linden L3", tagline: "Our most powerful model — the deepest reasoning Linden offers." },
+  };
+
   let tierLimits = { l1: 2000, l2: 100, l3: 25 };
+  let tierRemaining = {};
+  let tierResetAt = {};
   let selectedTier = "l1";
   let messages = [];
   let sending = false;
   let theme = localStorage.getItem("linden_theme") || "dark";
 
   const el = {
-    tiers: document.getElementById("tiers"),
     messages: document.getElementById("messages"),
     input: document.getElementById("prompt-input"),
     sendBtn: document.getElementById("send-btn"),
+    inputInner: document.getElementById("input-inner"),
+    limitBanner: document.getElementById("limit-banner"),
     statusDot: document.getElementById("status-dot"),
     statusText: document.getElementById("status-text"),
     themeToggle: document.getElementById("theme-toggle"),
@@ -310,8 +360,45 @@
     sidebar: document.getElementById("sidebar"),
     chatList: document.getElementById("chat-list"),
     newChatBtn: document.getElementById("new-chat-btn"),
+    modelPicker: document.getElementById("model-picker"),
+    modelPickerBtn: document.getElementById("model-picker-btn"),
+    modelPickerList: document.getElementById("model-picker-list"),
+    mpName: document.getElementById("mp-name"),
+    mpQuota: document.getElementById("mp-quota"),
+    modelSub: document.getElementById("model-sub"),
+    confirmOverlay: document.getElementById("confirm-overlay"),
+    confirmTitle: document.getElementById("confirm-title"),
+    confirmMessage: document.getElementById("confirm-message"),
+    confirmCancel: document.getElementById("confirm-cancel"),
+    confirmOk: document.getElementById("confirm-ok"),
   };
 
+  function formatRenewTime(epochSeconds) {
+    if (!epochSeconds) return "soon";
+    const d = new Date(epochSeconds * 1000);
+    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  }
+
+  // ---------- Confirm modal (Promise-based) ----------
+  function showConfirm(title, message) {
+    return new Promise((resolve) => {
+      el.confirmTitle.textContent = title;
+      el.confirmMessage.textContent = message;
+      el.confirmOverlay.classList.add("show");
+      function cleanup(result) {
+        el.confirmOverlay.classList.remove("show");
+        el.confirmOk.removeEventListener("click", onOk);
+        el.confirmCancel.removeEventListener("click", onCancel);
+        resolve(result);
+      }
+      function onOk() { cleanup(true); }
+      function onCancel() { cleanup(false); }
+      el.confirmOk.addEventListener("click", onOk);
+      el.confirmCancel.addEventListener("click", onCancel);
+    });
+  }
+
+  // ---------- Theme ----------
   function applyTheme() {
     document.body.classList.toggle("light", theme === "light");
     el.themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
@@ -322,108 +409,7 @@
     applyTheme();
   });
 
-
-  // ---------- Chat history (opt-in, local only) ----------
-  const HISTORY_KEY = "linden_history_enabled";
-  const CHATS_KEY = "linden_chats";
-  let historyEnabled = localStorage.getItem(HISTORY_KEY) === "true";
-  let chats = [];
-  let currentChatId = null;
-
-  function loadChats() {
-    try { chats = JSON.parse(localStorage.getItem(CHATS_KEY) || "[]"); } catch (e) { chats = []; }
-  }
-  function saveChats() {
-    localStorage.setItem(CHATS_KEY, JSON.stringify(chats));
-  }
-  function getCurrentChat() {
-    return chats.find(c => c.id === currentChatId) || null;
-  }
-  function newChat() {
-    const id = "c" + Date.now();
-    chats.unshift({ id, title: "New chat", messages: [] });
-    currentChatId = id;
-    saveChats();
-    renderChatList();
-    messages = getCurrentChat().messages;
-    renderMessages();
-  }
-  function switchChat(id) {
-    if (sending) return;
-    currentChatId = id;
-    saveChats();
-    renderChatList();
-    messages = getCurrentChat().messages;
-    renderMessages();
-  }
-  function deleteChat(id, evt) {
-    evt.stopPropagation();
-    chats = chats.filter(c => c.id !== id);
-    if (currentChatId === id) {
-      currentChatId = chats.length ? chats[0].id : null;
-    }
-    saveChats();
-    renderChatList();
-    if (currentChatId) {
-      messages = getCurrentChat().messages;
-    } else if (historyEnabled) {
-      newChat();
-      return;
-    }
-    renderMessages();
-  }
-  function renderChatList() {
-    el.chatList.innerHTML = "";
-    chats.forEach(chat => {
-      const row = document.createElement("div");
-      row.className = "chat-item" + (chat.id === currentChatId ? " active" : "");
-      row.onclick = () => switchChat(chat.id);
-      const title = document.createElement("span");
-      title.className = "title";
-      title.textContent = chat.title;
-      const del = document.createElement("span");
-      del.className = "del";
-      del.textContent = "✕";
-      del.onclick = (e) => deleteChat(chat.id, e);
-      row.appendChild(title);
-      row.appendChild(del);
-      el.chatList.appendChild(row);
-    });
-  }
-
-  function applyHistoryMode() {
-    el.historySwitch.classList.toggle("on", historyEnabled);
-    el.sidebar.classList.toggle("show", historyEnabled);
-    if (historyEnabled) {
-      loadChats();
-      if (chats.length === 0) {
-        newChat();
-      } else {
-        if (!getCurrentChat()) currentChatId = chats[0].id;
-        renderChatList();
-        messages = getCurrentChat().messages;
-        renderMessages();
-      }
-    } else {
-      messages = [];
-      renderMessages();
-    }
-  }
-
-  el.historySwitch.addEventListener("click", () => {
-    historyEnabled = !historyEnabled;
-    localStorage.setItem(HISTORY_KEY, historyEnabled ? "true" : "false");
-    if (!historyEnabled) {
-      // Turning off means "exactly as it was" — don't keep saved chats around silently.
-      localStorage.removeItem(CHATS_KEY);
-      chats = [];
-      currentChatId = null;
-    }
-    applyHistoryMode();
-  });
-
-  el.newChatBtn.addEventListener("click", newChat);
-
+  // ---------- Settings ----------
   el.settingsBtn.addEventListener("click", () => { el.settingsOverlay.classList.add("show"); loadModels(); });
   el.settingsClose.addEventListener("click", () => el.settingsOverlay.classList.remove("show"));
   el.settingsOverlay.addEventListener("click", (e) => { if (e.target === el.settingsOverlay) el.settingsOverlay.classList.remove("show"); });
@@ -446,7 +432,7 @@
           <div class="model-card-grid">
             <div><span class="k">Parameters</span> ${m.parameter_size}</div>
             <div><span class="k">Quantization</span> ${m.quantization}</div>
-            <div><span class="k">Messages / 4h</span> ${m.messages_per_4h}</div>
+            <div><span class="k">Budget / 4h</span> ${m.messages_per_4h}</div>
             <div><span class="k">Family</span> ${m.family}</div>
           </div>
         </div>`).join("");
@@ -481,33 +467,212 @@
     return out || "<p></p>";
   }
 
-  // ---------- Tiers ----------
+  // ---------- Chat history (opt-in, local only) ----------
+  const HISTORY_KEY = "linden_history_enabled";
+  const CHATS_KEY = "linden_chats";
+  let historyEnabled = localStorage.getItem(HISTORY_KEY) === "true";
+  let chats = [];
+  let currentChatId = null;
 
-  function formatRenewTime(epochSeconds) {
-    if (!epochSeconds) return "soon";
-    const d = new Date(epochSeconds * 1000);
-    return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  function loadChats() {
+    try { chats = JSON.parse(localStorage.getItem(CHATS_KEY) || "[]"); } catch (e) { chats = []; }
+  }
+  function saveChats() { localStorage.setItem(CHATS_KEY, JSON.stringify(chats)); }
+  function getCurrentChat() { return chats.find(c => c.id === currentChatId) || null; }
+
+  function newChat(tier) {
+    const id = "c" + Date.now() + Math.random().toString(36).slice(2, 6);
+    chats.unshift({ id, title: "New chat", tier: tier || selectedTier, messages: [] });
+    currentChatId = id;
+    saveChats();
+    renderChatList();
+    selectedTier = getCurrentChat().tier;
+    messages = getCurrentChat().messages;
+    updateModelPickerLabel();
+    renderMessages();
+    updateInputAvailability();
+  }
+  function switchChat(id) {
+    if (sending) return;
+    currentChatId = id;
+    saveChats();
+    renderChatList();
+    const chat = getCurrentChat();
+    selectedTier = chat.tier || "l1";
+    messages = chat.messages;
+    updateModelPickerLabel();
+    renderMessages();
+    updateInputAvailability();
+  }
+  function deleteChat(id, evt) {
+    evt.stopPropagation();
+    chats = chats.filter(c => c.id !== id);
+    if (currentChatId === id) currentChatId = chats.length ? chats[0].id : null;
+    saveChats();
+    renderChatList();
+    if (currentChatId) {
+      switchChat(currentChatId);
+    } else if (historyEnabled) {
+      newChat(selectedTier);
+    }
+  }
+  function renderChatList() {
+    el.chatList.innerHTML = "";
+    chats.forEach(chat => {
+      const row = document.createElement("div");
+      row.className = "chat-item" + (chat.id === currentChatId ? " active" : "");
+      row.onclick = () => switchChat(chat.id);
+      const title = document.createElement("span");
+      title.className = "title";
+      title.textContent = chat.title;
+      const badge = document.createElement("span");
+      badge.className = "tier-badge";
+      badge.textContent = (chat.tier || "l1").toUpperCase();
+      const del = document.createElement("span");
+      del.className = "del";
+      del.textContent = "✕";
+      del.onclick = (e) => deleteChat(chat.id, e);
+      row.appendChild(title);
+      row.appendChild(badge);
+      row.appendChild(del);
+      el.chatList.appendChild(row);
+    });
   }
 
-  el.tiers.addEventListener("click", (e) => {
-    const card = e.target.closest(".tier-card");
-    if (!card || sending) return;
-    document.querySelectorAll(".tier-card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedTier = card.dataset.tier;
+  function applyHistoryMode() {
+    el.historySwitch.classList.toggle("on", historyEnabled);
+    el.sidebar.classList.toggle("show", historyEnabled);
     if (historyEnabled) {
-      const chat = getCurrentChat();
-      if (chat) { chat.messages.length = 0; messages = chat.messages; saveChats(); }
+      loadChats();
+      if (chats.length === 0) {
+        newChat(selectedTier);
+      } else {
+        if (!getCurrentChat()) currentChatId = chats[0].id;
+        switchChat(currentChatId);
+      }
     } else {
       messages = [];
+      renderMessages();
+      updateInputAvailability();
     }
-    renderMessages();
+  }
+
+  el.historySwitch.addEventListener("click", async () => {
+    const turningOn = !historyEnabled;
+    if (turningOn) {
+      if (messages.length > 0) {
+        const ok = await showConfirm(
+          "Turn on chat history?",
+          "Your current conversation isn't saved anywhere yet, and turning history on will start a fresh saved chat. This conversation will be lost. Continue?"
+        );
+        if (!ok) return;
+      }
+    } else {
+      loadChats();
+      if (chats.length > 0) {
+        const ok = await showConfirm(
+          "Turn off chat history?",
+          `This will permanently delete ${chats.length} saved chat${chats.length === 1 ? "" : "s"} on this device. This can't be undone. Continue?`
+        );
+        if (!ok) return;
+      }
+    }
+    historyEnabled = turningOn;
+    localStorage.setItem(HISTORY_KEY, historyEnabled ? "true" : "false");
+    if (!historyEnabled) {
+      localStorage.removeItem(CHATS_KEY);
+      chats = [];
+      currentChatId = null;
+    }
+    applyHistoryMode();
   });
 
+  el.newChatBtn.addEventListener("click", () => newChat(selectedTier));
+
+  // ---------- Model picker ----------
+  function updateModelPickerLabel() {
+    const info = TIER_INFO[selectedTier];
+    el.mpName.textContent = info.name;
+    el.modelSub.textContent = info.tagline;
+    const rem = tierRemaining[selectedTier];
+    el.mpQuota.textContent = (rem !== undefined ? rem : "—") + " / " + tierLimits[selectedTier];
+    document.querySelectorAll(".model-picker-option").forEach(opt => {
+      opt.classList.toggle("selected", opt.dataset.tier === selectedTier);
+    });
+  }
+
+  function renderModelPickerList() {
+    el.modelPickerList.innerHTML = "";
+    ["l1", "l2", "l3"].forEach(tier => {
+      const info = TIER_INFO[tier];
+      const rem = tierRemaining[tier];
+      const opt = document.createElement("div");
+      opt.className = "model-picker-option" + (tier === selectedTier ? " selected" : "");
+      opt.dataset.tier = tier;
+      opt.innerHTML = `
+        <div class="mp-opt-top"><span class="mp-opt-name">${info.name}</span><span class="mp-opt-quota">${rem !== undefined ? rem : "—"} / ${tierLimits[tier]}</span></div>
+        <div class="mp-opt-tag">${info.tagline}</div>`;
+      opt.addEventListener("click", () => selectTier(tier));
+      el.modelPickerList.appendChild(opt);
+    });
+  }
+
+  function selectTier(tier) {
+    el.modelPicker.classList.remove("open");
+    if (tier === selectedTier && !historyEnabled) return;
+    if (historyEnabled) {
+      const chat = getCurrentChat();
+      if (chat && chat.messages.length === 0) {
+        // Empty/unused chat — just relabel it rather than making a new one.
+        chat.tier = tier;
+        saveChats();
+        renderChatList();
+        selectedTier = tier;
+        updateModelPickerLabel();
+        updateInputAvailability();
+      } else {
+        // Existing conversation — start a fresh chat with the new model,
+        // leaving the old one untouched.
+        newChat(tier);
+      }
+    } else {
+      selectedTier = tier;
+      messages = [];
+      updateModelPickerLabel();
+      renderMessages();
+      updateInputAvailability();
+    }
+  }
+
+  el.modelPickerBtn.addEventListener("click", () => {
+    renderModelPickerList();
+    el.modelPicker.classList.toggle("open");
+  });
+  document.addEventListener("click", (e) => {
+    if (!el.modelPicker.contains(e.target)) el.modelPicker.classList.remove("open");
+  });
+
+  // ---------- Limit-aware input ----------
+  function updateInputAvailability() {
+    const rem = tierRemaining[selectedTier];
+    const atLimit = rem !== undefined && rem <= 0;
+    el.inputInner.classList.toggle("disabled", atLimit);
+    el.input.disabled = atLimit;
+    if (atLimit) {
+      const renewTime = tierResetAt[selectedTier] ? formatRenewTime(tierResetAt[selectedTier]) : "later";
+      el.limitBanner.textContent = `${TIER_INFO[selectedTier].name} is out of messages until it renews at ${renewTime}. Pick a different model, or wait.`;
+      el.limitBanner.classList.add("show");
+    } else {
+      el.limitBanner.classList.remove("show");
+    }
+    updateSendState();
+  }
+
+  // ---------- Rendering ----------
   function renderMessages() {
     el.messages.innerHTML = "";
     if (messages.length === 0) {
-      el.messages.innerHTML = `<div class="empty-hint">Chatting with Linden ${selectedTier.toUpperCase()}. Say hello.</div>`;
+      el.messages.innerHTML = `<div class="empty-hint">Chatting with ${TIER_INFO[selectedTier].name}. Say hello.</div>`;
       return;
     }
     messages.forEach(m => el.messages.appendChild(buildMessageRow(m.role, m.content, m.thinking || "")));
@@ -560,7 +725,7 @@
   }
 
   function updateSendState() {
-    el.sendBtn.disabled = sending || el.input.value.trim().length === 0;
+    el.sendBtn.disabled = sending || el.input.disabled || el.input.value.trim().length === 0;
   }
   el.input.addEventListener("input", () => {
     el.input.style.height = "auto";
@@ -570,8 +735,6 @@
   el.input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } });
   el.sendBtn.addEventListener("click", send);
 
-  let tierResetAt = {};
-
   async function checkStatus() {
     try {
       const res = await fetch(PROXY_URL + "/status");
@@ -580,19 +743,10 @@
       el.statusDot.className = "status-dot ok";
       el.statusText.textContent = "Online";
       if (data.limits) tierLimits = data.limits;
+      if (data.remaining) tierRemaining = data.remaining;
       if (data.reset_at) tierResetAt = data.reset_at;
-      if (data.remaining) {
-        for (const tier of ["l1", "l2", "l3"]) {
-          const r = document.getElementById("rem-" + tier);
-          if (!r || data.remaining[tier] === undefined) continue;
-          const remaining = data.remaining[tier];
-          if (remaining <= 0 && data.reset_at && data.reset_at[tier]) {
-            r.textContent = "renews " + formatRenewTime(data.reset_at[tier]);
-          } else {
-            r.textContent = remaining + " / " + tierLimits[tier];
-          }
-        }
-      }
+      updateModelPickerLabel();
+      updateInputAvailability();
     } catch (e) {
       el.statusDot.className = "status-dot err";
       el.statusText.textContent = "Offline";
@@ -609,7 +763,7 @@
 
   async function send() {
     const text = el.input.value.trim();
-    if (!text || sending) return;
+    if (!text || sending || el.input.disabled) return;
     sending = true;
     el.input.value = "";
     el.input.style.height = "auto";
@@ -648,23 +802,16 @@
         loaderRow.remove();
         if (res.status === 429) {
           const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
-          showNote(`Linden ${selectedTier.toUpperCase()} is out of messages (${data.limit || tierLimits[selectedTier]} used). Renews at ${renewTime}. Try a lighter tier in the meantime.`);
-          checkStatus();
-        } else if (res.status === 503) {
-          showNote(data.message || "Linden is handling another request right now — please try again in a few seconds.");
-        } else if (res.status === 504) {
-          showNote(data.message || "That request took too long and was stopped. Please try again.");
-        } else if (res.status === 502) {
-          showNote(data.message || "Linden's server appears to be offline right now. Please try again later.");
+          showNote(`${TIER_INFO[selectedTier].name} is out of messages (${data.limit || tierLimits[selectedTier]} used). Renews at ${renewTime}. Try a different model in the meantime.`);
         } else {
           showNote(data.message || `Something went wrong (error ${res.status}). Please try again.`);
         }
+        checkStatus();
         sending = false;
         updateSendState();
         return;
       }
 
-      // Streaming NDJSON response — same format Ollama itself uses.
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buf = "";
@@ -762,6 +909,7 @@
 
   applyTheme();
   applyHistoryMode();
+  updateModelPickerLabel();
   checkStatus();
   setInterval(checkStatus, 20000);
 })();
