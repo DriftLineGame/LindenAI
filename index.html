@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linden AI</title>
+<title>SCODE AI</title>
 <style>
   :root {
     --bg: #0d120f;
@@ -174,14 +174,18 @@
 
   .loader-row { display: flex; align-items: center; gap: 12px; padding: 6px 6px 10px 2px; overflow: visible; }
   .loader-mark-wrap { position: relative; width: 34px; height: 34px; margin: 3px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: visible; }
-  .loader-mark-wrap::before {
-    content: ""; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 13px;
-    border: 2px solid transparent; border-top-color: var(--accent); border-right-color: var(--accent-2);
-    animation: spin 0.9s linear infinite; opacity: 0.8; box-sizing: border-box;
+  .loader-mark-wrap::before, .loader-mark-wrap::after {
+    content: ""; position: absolute; inset: 0; border-radius: 9px;
+    background: var(--accent); opacity: 0.3;
+    animation: breathe 1.9s ease-in-out infinite;
   }
-  .loader-mark { width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(145deg, var(--accent), var(--accent-2)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0b120e; font-size: 13px; animation: markPulse 1.5s ease-in-out infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes markPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+  .loader-mark-wrap::after { animation-delay: 0.55s; opacity: 0.2; }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.35; }
+    50% { transform: scale(1.7); opacity: 0; }
+  }
+  .loader-mark { width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(145deg, var(--accent), var(--accent-2)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0b120e; font-size: 13px; animation: markPulse 1.9s ease-in-out infinite; }
+  @keyframes markPulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.14); } 70% { transform: scale(0.97); } }
   .loader-label { font-size: 13px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
 
   .limit-note {
@@ -255,6 +259,31 @@
   #image-preview-row .remove-img:hover { color: var(--danger); border-color: var(--danger); }
   .msg-row .bubble img.attached-image { max-width: 220px; border-radius: 10px; display: block; margin-bottom: 6px; }
 
+  #sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; }
+  /* Note: no general ".show { display:block }" rule here on purpose — the
+     backdrop should only ever appear on mobile, when the drawer is actually
+     open (see the media query below). Without this scoping, it was showing
+     full-screen on desktop the moment "Save chats" was turned on. */
+
+  @media (max-width: 720px) {
+    #mobile-menu-btn { display: flex; }
+    .switch-label { display: none; }
+    .status-pill span#status-text { display: none; }
+    header { padding: 12px 14px; }
+    .header-right { gap: 8px; }
+
+    #sidebar.show {
+      display: flex;
+      position: fixed; top: 0; left: 0; bottom: 0; width: 80%; max-width: 300px; z-index: 200;
+      transform: translateX(-100%);
+      transition: transform 0.22s ease;
+      box-shadow: 10px 0 28px rgba(0,0,0,0.4);
+    }
+    #sidebar.show.mobile-open { transform: translateX(0); }
+    #sidebar-backdrop.show.mobile-open { display: block; }
+    #sidebar-backdrop.show:not(.mobile-open) { display: none; }
+  }
+
   @media (max-width: 640px) {
     main { padding: 0 4vw; }
     .model-picker { width: 100%; }
@@ -265,10 +294,11 @@
 
   <header>
     <div class="brand">
-      <div class="brand-mark">L</div>
-      <div class="brand-name">Linden AI</div>
+      <div class="brand-mark">S</div>
+      <div class="brand-name">SCODE AI</div>
     </div>
     <div class="header-right">
+      <button class="icon-btn" id="mobile-menu-btn" title="Chats" style="display:none;">☰</button>
       <div class="switch-row" title="Save chat history on this device">
         <span class="switch-label">Save chats</span>
         <button class="switch" id="history-switch"></button>
@@ -284,10 +314,11 @@
       <button id="new-chat-btn">+ New chat</button>
       <div id="chat-list"></div>
     </div>
+    <div id="sidebar-backdrop"></div>
 
     <main>
       <div class="intro">
-        <h1>Chat with Linden</h1>
+        <h1>Chat with SCODE AI</h1>
         <p>A privately hosted AI, running on real hardware rather than a data center. You have one shared budget to spend across any option below.</p>
       </div>
 
@@ -318,7 +349,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12.5V7a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><path d="M4 16l4.5-4.5a2 2 0 0 1 2.8 0L15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 19l2.5-2.5a1.8 1.8 0 0 1 2.5 0L23 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <input type="file" id="image-input" accept="image/*" style="display:none;">
-          <textarea id="prompt-input" placeholder="Message Linden…" rows="1"></textarea>
+          <textarea id="prompt-input" placeholder="Message SCODE AI…" rows="1"></textarea>
           <button id="send-btn" disabled title="Send">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -353,7 +384,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://mark-fees-bike-huntington.trycloudflare.com";
+  const PROXY_URL = "https://fleet-observe-contractor-garmin.trycloudflare.com";
 
   // Static fallback shown before /models loads; live data overrides this.
   const TIER_ORDER = ["l1", "l2", "l2_5", "l3"];
@@ -387,6 +418,8 @@
     modelsSection: document.getElementById("models-section"),
     historySwitch: document.getElementById("history-switch"),
     sidebar: document.getElementById("sidebar"),
+    sidebarBackdrop: document.getElementById("sidebar-backdrop"),
+    mobileMenuBtn: document.getElementById("mobile-menu-btn"),
     chatList: document.getElementById("chat-list"),
     newChatBtn: document.getElementById("new-chat-btn"),
     modelPicker: document.getElementById("model-picker"),
@@ -534,6 +567,7 @@
     updateModelPickerLabel();
     renderMessages();
     updateInputAvailability();
+    closeMobileSidebar();
   }
   function switchChat(id) {
     if (sending) return;
@@ -546,6 +580,7 @@
     updateModelPickerLabel();
     renderMessages();
     updateInputAvailability();
+    closeMobileSidebar();
   }
   function deleteChat(id, evt) {
     evt.stopPropagation();
@@ -582,9 +617,24 @@
     });
   }
 
+  // ---------- Mobile sidebar drawer ----------
+  function openMobileSidebar() {
+    el.sidebar.classList.add("mobile-open");
+    el.sidebarBackdrop.classList.add("mobile-open");
+  }
+  function closeMobileSidebar() {
+    el.sidebar.classList.remove("mobile-open");
+    el.sidebarBackdrop.classList.remove("mobile-open");
+  }
+  el.mobileMenuBtn.addEventListener("click", openMobileSidebar);
+  el.sidebarBackdrop.addEventListener("click", closeMobileSidebar);
+
   function applyHistoryMode() {
     el.historySwitch.classList.toggle("on", historyEnabled);
     el.sidebar.classList.toggle("show", historyEnabled);
+    el.sidebarBackdrop.classList.toggle("show", historyEnabled);
+    el.mobileMenuBtn.style.display = historyEnabled ? "" : "none";
+    if (!historyEnabled) closeMobileSidebar();
     if (historyEnabled) {
       loadChats();
       if (chats.length === 0) {
@@ -817,7 +867,7 @@
     row.className = "msg-row assistant";
     row.innerHTML = `
       <div class="loader-row">
-        <div class="loader-mark-wrap"><div class="loader-mark">L</div></div>
+        <div class="loader-mark-wrap"><div class="loader-mark">S</div></div>
         <span class="loader-label" id="loader-label">Thinking</span>
       </div>`;
     const phrases = ["Thinking", "Reasoning", "Composing", "Almost there"];
