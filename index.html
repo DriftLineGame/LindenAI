@@ -72,6 +72,7 @@
     color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
   }
   .icon-btn:hover { color: var(--text); border-color: var(--accent); }
+  #mobile-menu-btn { display: none; }
 
   #body-wrap { flex: 1; display: flex; overflow: hidden; }
   #sidebar {
@@ -266,7 +267,7 @@
      full-screen on desktop the moment "Save chats" was turned on. */
 
   @media (max-width: 720px) {
-    #mobile-menu-btn { display: flex; }
+    #mobile-menu-btn.enabled { display: flex; }
     .switch-label { display: none; }
     .status-pill span#status-text { display: none; }
     header { padding: 12px 14px; }
@@ -298,7 +299,7 @@
       <div class="brand-name">SCODE AI</div>
     </div>
     <div class="header-right">
-      <button class="icon-btn" id="mobile-menu-btn" title="Chats" style="display:none;">☰</button>
+      <button class="icon-btn" id="mobile-menu-btn" title="Chats">☰</button>
       <div class="switch-row" title="Save chat history on this device">
         <span class="switch-label">Save chats</span>
         <button class="switch" id="history-switch"></button>
@@ -387,12 +388,13 @@
   const PROXY_URL = "https://fleet-observe-contractor-garmin.trycloudflare.com";
 
   // Static fallback shown before /models loads; live data overrides this.
-  const TIER_ORDER = ["l1", "l2", "l2_5", "l3"];
+  const TIER_ORDER = ["l1", "l2", "l2_5", "l3", "l4"];
   let TIER_INFO = {
-    l1:   { label: "Lite",          tagline: "Instant, lightweight answers using our smallest model.", cost: 1 },
-    l2:   { label: "General",       tagline: "A solid everyday model — more capable than Lite, still efficient.", cost: 5 },
-    l2_5: { label: "General Plus",  tagline: "Chatty and quick — but built on the same size model as our top tier, priced to match its real compute cost. The only option that can see images.", cost: 15 },
-    l3:   { label: "General Ultra", tagline: "Our most powerful option — genuine reasoning before answering. Takes the longest and costs the most.", cost: 25 },
+    l1:   { label: "General Mini",  tagline: "Instant, lightweight answers using our smallest model.", cost: 1 },
+    l2:   { label: "General",       tagline: "A solid everyday model — more capable than General Mini, still efficient.", cost: 5 },
+    l2_5: { label: "General Plus",  tagline: "Chatty and quick — built on the same size model as our reasoning tier, priced to match its real compute cost. Can see and describe photos.", cost: 15 },
+    l3:   { label: "General Pro",   tagline: "Genuine reasoning before answering. Takes the longest and costs the most of the text-only options.", cost: 25 },
+    l4:   { label: "General Ultra", tagline: "Our top option — specialized at reading text out of photographed documents, forms, and papers, not just describing a scene.", cost: 20 },
   };
 
   let sharedLimit = 1000;
@@ -605,7 +607,7 @@
       title.textContent = chat.title;
       const badge = document.createElement("span");
       badge.className = "tier-badge";
-      badge.textContent = ({l1:"L1", l2:"L2", l2_5:"L2.5", l3:"L3"})[chat.tier] || "L1";
+      badge.textContent = ({l1:"L1", l2:"L2", l2_5:"L2.5", l3:"L3", l4:"L4"})[chat.tier] || "L1";
       const del = document.createElement("span");
       del.className = "del";
       del.textContent = "✕";
@@ -633,7 +635,7 @@
     el.historySwitch.classList.toggle("on", historyEnabled);
     el.sidebar.classList.toggle("show", historyEnabled);
     el.sidebarBackdrop.classList.toggle("show", historyEnabled);
-    el.mobileMenuBtn.style.display = historyEnabled ? "" : "none";
+    el.mobileMenuBtn.classList.toggle("enabled", historyEnabled);
     if (!historyEnabled) closeMobileSidebar();
     if (historyEnabled) {
       loadChats();
@@ -683,7 +685,7 @@
   el.newChatBtn.addEventListener("click", () => newChat(selectedTier));
 
   // ---------- Image upload (Fast / Gemma 3 only) ----------
-  const VISION_TIERS = new Set(["l2_5"]);
+  const VISION_TIERS = new Set(["l2_5", "l4"]);
   let pendingImageBase64 = null;
 
   function updateAttachVisibility() {
@@ -942,11 +944,10 @@
     renderMessages();
 
     const controller = new AbortController();
-    // Long enough to comfortably outlast the server's own longest timeout
-    // (General Plus image analysis and General Ultra deep thinking can both
-    // legitimately take several minutes on this hardware) — this should
-    // never be the thing that cuts off a reply the server was still working on.
-    const clientTimeout = setTimeout(() => controller.abort(), 480000);
+    // Long enough to comfortably outlast the server's own longest timeout —
+    // General Ultra's complex photo analysis can now run up to 900s
+    // server-side, so this needs real margin above that.
+    const clientTimeout = setTimeout(() => controller.abort(), 950000);
 
     const loaderRow = buildLoaderRow();
     el.messages.appendChild(loaderRow);
