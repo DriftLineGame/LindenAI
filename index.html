@@ -73,7 +73,6 @@
   }
   .icon-btn:hover { color: var(--text); border-color: var(--accent); }
 
-  /* ---------- Body layout: sidebar + fluid main ---------- */
   #body-wrap { flex: 1; display: flex; overflow: hidden; }
   #sidebar {
     width: 250px; flex-shrink: 0; background: var(--bg-card); border-right: 1px solid var(--border);
@@ -104,8 +103,10 @@
   .intro h1 { font-size: 24px; margin: 0 0 6px; letter-spacing: -0.01em; }
   .intro p { color: var(--text-muted); font-size: 13.5px; margin: 0 auto; max-width: 560px; line-height: 1.5; }
 
-  /* ---------- Model dropdown (replaces the old tier cards) ---------- */
-  .model-picker-wrap { display: flex; flex-direction: column; align-items: center; padding: 4px 0 16px; }
+  .budget-row { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-faint); margin-bottom: 14px; font-family: var(--mono); }
+  .budget-row .val { color: var(--accent); font-weight: 650; }
+
+  .model-picker-wrap { display: flex; flex-direction: column; align-items: center; padding: 0 0 16px; }
   .model-picker { position: relative; width: 340px; max-width: 100%; }
   .model-picker-btn {
     width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -129,9 +130,10 @@
   .model-picker-option:last-child { margin-bottom: 0; }
   .model-picker-option:hover { background: var(--bg-hover); }
   .model-picker-option.selected { background: var(--bg-hover); box-shadow: inset 0 0 0 1px var(--border); }
+  .model-picker-option.disabled { opacity: 0.45; cursor: not-allowed; }
   .mp-opt-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
   .mp-opt-name { font-weight: 650; font-size: 13.5px; }
-  .mp-opt-quota { font-size: 11px; font-family: var(--mono); color: var(--text-faint); }
+  .mp-opt-cost { font-size: 11px; font-family: var(--mono); color: var(--text-faint); }
   .mp-opt-tag { font-size: 11.5px; color: var(--text-muted); line-height: 1.35; }
 
   #messages { flex: 1; overflow-y: auto; padding: 6px 0 16px; }
@@ -214,7 +216,6 @@
   #messages::-webkit-scrollbar, #chat-list::-webkit-scrollbar { width: 8px; }
   #messages::-webkit-scrollbar-thumb, #chat-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
-  /* ---------- Overlays (settings + confirm) ---------- */
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
   .overlay.show { display: flex; }
   .modal-box { width: 480px; max-width: 100%; max-height: 82vh; overflow-y: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px 24px; }
@@ -238,6 +239,21 @@
   .confirm-btn:hover { color: var(--text); }
   .confirm-btn.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
   .confirm-btn.danger:hover { opacity: 0.9; }
+
+
+  /* ---------- Image upload (Fast/Gemma3 only) ---------- */
+  #attach-btn {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer; flex-shrink: 0; display: none; align-items: center; justify-content: center;
+  }
+  #attach-btn.show { display: flex; }
+  #attach-btn:hover { color: var(--accent); border-color: var(--accent); }
+  #image-preview-row { display: none; align-items: center; gap: 8px; padding: 0 0 8px; }
+  #image-preview-row.show { display: flex; }
+  #image-preview-row img { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+  #image-preview-row .remove-img { font-size: 11px; color: var(--text-faint); cursor: pointer; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; }
+  #image-preview-row .remove-img:hover { color: var(--danger); border-color: var(--danger); }
+  .msg-row .bubble img.attached-image { max-width: 220px; border-radius: 10px; display: block; margin-bottom: 6px; }
 
   @media (max-width: 640px) {
     main { padding: 0 4vw; }
@@ -272,32 +288,42 @@
     <main>
       <div class="intro">
         <h1>Chat with Linden</h1>
-        <p>A privately hosted AI, running on real hardware rather than a data center. Each model has its own free message budget that renews every 4 hours.</p>
+        <p>A privately hosted AI, running on real hardware rather than a data center. You have one shared budget to spend across any option below.</p>
       </div>
+
+      <div class="budget-row">Your budget: <span class="val" id="budget-remaining">— / —</span></div>
 
       <div class="model-picker-wrap">
         <div class="model-picker" id="model-picker">
           <button class="model-picker-btn" id="model-picker-btn" type="button">
-            <span class="mp-name" id="mp-name">Linden L1</span>
-            <span class="mp-quota" id="mp-quota">— / 2000</span>
+            <span class="mp-name" id="mp-name">Ultra</span>
+            <span class="mp-quota" id="mp-quota">cost 1</span>
             <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="model-picker-list" id="model-picker-list"></div>
         </div>
-        <div class="model-sub" id="model-sub">Our fastest model — quick, lightweight answers for everyday questions.</div>
+        <div class="model-sub" id="model-sub">Instant, lightweight answers using our smallest model.</div>
       </div>
 
-      <div id="messages"><div class="empty-hint">Pick a model above and say hello.</div></div>
+      <div id="messages"><div class="empty-hint">Pick an option above and say hello.</div></div>
 
       <div id="input-area">
         <div class="limit-banner" id="limit-banner"></div>
+        <div id="image-preview-row">
+          <img id="image-preview-thumb" alt="">
+          <button class="remove-img" id="remove-image-btn" type="button">Remove image</button>
+        </div>
         <div id="input-inner">
+          <button id="attach-btn" type="button" title="Attach an image (Fast only)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 12.5V7a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><path d="M4 16l4.5-4.5a2 2 0 0 1 2.8 0L15 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 19l2.5-2.5a1.8 1.8 0 0 1 2.5 0L23 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <input type="file" id="image-input" accept="image/*" style="display:none;">
           <textarea id="prompt-input" placeholder="Message Linden…" rows="1"></textarea>
           <button id="send-btn" disabled title="Send">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <div class="hint">Enter to send · Each message uses 1 from that model's budget · Full budget renews every 4 hours</div>
+        <div class="hint">Enter to send · One shared budget, spent per message by the option you pick · Renews every 4 hours</div>
       </div>
     </main>
   </div>
@@ -327,17 +353,20 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://theorem-diabetes-degree-targets.trycloudflare.com";
+  const PROXY_URL = "https://mark-fees-bike-huntington.trycloudflare.com";
 
-  const TIER_INFO = {
-    l1: { name: "Linden L1", tagline: "Our fastest model — quick, lightweight answers for everyday questions." },
-    l2: { name: "Linden L2", tagline: "A balanced middle ground — sharper reasoning with more room to talk." },
-    l3: { name: "Linden L3", tagline: "Our most powerful model — the deepest reasoning Linden offers." },
+  // Static fallback shown before /models loads; live data overrides this.
+  const TIER_ORDER = ["l1", "l2", "l2_5", "l3"];
+  let TIER_INFO = {
+    l1:   { label: "Lite",          tagline: "Instant, lightweight answers using our smallest model.", cost: 1 },
+    l2:   { label: "General",       tagline: "A solid everyday model — more capable than Lite, still efficient.", cost: 5 },
+    l2_5: { label: "General Plus",  tagline: "Chatty and quick — but built on the same size model as our top tier, priced to match its real compute cost. The only option that can see images.", cost: 15 },
+    l3:   { label: "General Ultra", tagline: "Our most powerful option — genuine reasoning before answering. Takes the longest and costs the most.", cost: 25 },
   };
 
-  let tierLimits = { l1: 2000, l2: 100, l3: 25 };
-  let tierRemaining = {};
-  let tierResetAt = {};
+  let sharedLimit = 1000;
+  let sharedRemaining = null;
+  let sharedResetAt = null;
   let selectedTier = "l1";
   let messages = [];
   let sending = false;
@@ -366,11 +395,17 @@
     mpName: document.getElementById("mp-name"),
     mpQuota: document.getElementById("mp-quota"),
     modelSub: document.getElementById("model-sub"),
+    budgetRemaining: document.getElementById("budget-remaining"),
     confirmOverlay: document.getElementById("confirm-overlay"),
     confirmTitle: document.getElementById("confirm-title"),
     confirmMessage: document.getElementById("confirm-message"),
     confirmCancel: document.getElementById("confirm-cancel"),
     confirmOk: document.getElementById("confirm-ok"),
+    attachBtn: document.getElementById("attach-btn"),
+    imageInput: document.getElementById("image-input"),
+    imagePreviewRow: document.getElementById("image-preview-row"),
+    imagePreviewThumb: document.getElementById("image-preview-thumb"),
+    removeImageBtn: document.getElementById("remove-image-btn"),
   };
 
   function formatRenewTime(epochSeconds) {
@@ -379,7 +414,6 @@
     return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
   }
 
-  // ---------- Confirm modal (Promise-based) ----------
   function showConfirm(title, message) {
     return new Promise((resolve) => {
       el.confirmTitle.textContent = title;
@@ -398,7 +432,6 @@
     });
   }
 
-  // ---------- Theme ----------
   function applyTheme() {
     document.body.classList.toggle("light", theme === "light");
     el.themeToggle.textContent = theme === "light" ? "☀️" : "🌙";
@@ -409,7 +442,6 @@
     applyTheme();
   });
 
-  // ---------- Settings ----------
   el.settingsBtn.addEventListener("click", () => { el.settingsOverlay.classList.add("show"); loadModels(); });
   el.settingsClose.addEventListener("click", () => el.settingsOverlay.classList.remove("show"));
   el.settingsOverlay.addEventListener("click", (e) => { if (e.target === el.settingsOverlay) el.settingsOverlay.classList.remove("show"); });
@@ -425,14 +457,14 @@
       el.modelsSection.innerHTML = models.map(m => `
         <div class="model-card">
           <div class="model-card-top">
-            <span class="model-card-name">Linden ${m.tier.toUpperCase()}</span>
+            <span class="model-card-name">${m.label} <span style="color:var(--text-faint);font-weight:500;font-size:11px;font-family:var(--mono);">${m.l_code} · ${m.technical_name}</span></span>
             <span class="model-card-live">${m.installed ? "● online" : "unavailable"}</span>
           </div>
           <div class="model-card-tag">${m.tagline}</div>
           <div class="model-card-grid">
             <div><span class="k">Parameters</span> ${m.parameter_size}</div>
             <div><span class="k">Quantization</span> ${m.quantization}</div>
-            <div><span class="k">Budget / 4h</span> ${m.messages_per_4h}</div>
+            <div><span class="k">Cost per message</span> ${m.cost}</div>
             <div><span class="k">Family</span> ${m.family}</div>
           </div>
         </div>`).join("");
@@ -441,7 +473,18 @@
     }
   }
 
-  // ---------- Markdown ----------
+  function splitThinkTags(raw) {
+    let thinking = "", visible = "";
+    const re = /<think>([\s\S]*?)<\/think>/g;
+    let lastIndex = 0, m;
+    while ((m = re.exec(raw)) !== null) { visible += raw.slice(lastIndex, m.index); thinking += m[1]; lastIndex = re.lastIndex; }
+    let tail = raw.slice(lastIndex);
+    const openIdx = tail.indexOf("<think>");
+    if (openIdx !== -1) { visible += tail.slice(0, openIdx); thinking += tail.slice(openIdx + 7); }
+    else { visible += tail; }
+    return { visible, thinking };
+  }
+
   function escapeHtml(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function renderMarkdown(text) {
     let src = escapeHtml(text);
@@ -469,7 +512,7 @@
 
   // ---------- Chat history (opt-in, local only) ----------
   const HISTORY_KEY = "linden_history_enabled";
-  const CHATS_KEY = "linden_chats";
+  const CHATS_KEY = "linden_chats_v2";
   let historyEnabled = localStorage.getItem(HISTORY_KEY) === "true";
   let chats = [];
   let currentChatId = null;
@@ -527,7 +570,7 @@
       title.textContent = chat.title;
       const badge = document.createElement("span");
       badge.className = "tier-badge";
-      badge.textContent = (chat.tier || "l1").toUpperCase();
+      badge.textContent = ({l1:"L1", l2:"L2", l2_5:"L2.5", l3:"L3"})[chat.tier] || "L1";
       const del = document.createElement("span");
       del.className = "del";
       del.textContent = "✕";
@@ -589,30 +632,76 @@
 
   el.newChatBtn.addEventListener("click", () => newChat(selectedTier));
 
-  // ---------- Model picker ----------
+  // ---------- Image upload (Fast / Gemma 3 only) ----------
+  const VISION_TIERS = new Set(["l2_5"]);
+  let pendingImageBase64 = null;
+
+  function updateAttachVisibility() {
+    el.attachBtn.classList.toggle("show", VISION_TIERS.has(selectedTier));
+    if (!VISION_TIERS.has(selectedTier)) clearPendingImage();
+  }
+
+  function clearPendingImage() {
+    pendingImageBase64 = null;
+    el.imagePreviewRow.classList.remove("show");
+    el.imageInput.value = "";
+  }
+  el.removeImageBtn.addEventListener("click", clearPendingImage);
+
+  el.attachBtn.addEventListener("click", () => el.imageInput.click());
+  el.imageInput.addEventListener("change", () => {
+    const file = el.imageInput.files && el.imageInput.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        // Resize so uploads stay reasonably small over the tunnel.
+        const maxDim = 1400;
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          const scale = maxDim / Math.max(width, height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+        pendingImageBase64 = dataUrl.split(",")[1];
+        el.imagePreviewThumb.src = dataUrl;
+        el.imagePreviewRow.classList.add("show");
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ---------- Model picker (also serves as manual selection) ----------
   function updateModelPickerLabel() {
     const info = TIER_INFO[selectedTier];
-    el.mpName.textContent = info.name;
+    el.mpName.textContent = info.label;
     el.modelSub.textContent = info.tagline;
-    const rem = tierRemaining[selectedTier];
-    el.mpQuota.textContent = (rem !== undefined ? rem : "—") + " / " + tierLimits[selectedTier];
+    el.mpQuota.textContent = "cost " + info.cost;
     document.querySelectorAll(".model-picker-option").forEach(opt => {
       opt.classList.toggle("selected", opt.dataset.tier === selectedTier);
     });
+    updateAttachVisibility();
   }
 
   function renderModelPickerList() {
     el.modelPickerList.innerHTML = "";
-    ["l1", "l2", "l3"].forEach(tier => {
+    TIER_ORDER.forEach(tier => {
       const info = TIER_INFO[tier];
-      const rem = tierRemaining[tier];
+      const affordable = sharedRemaining === null || sharedRemaining >= info.cost;
       const opt = document.createElement("div");
-      opt.className = "model-picker-option" + (tier === selectedTier ? " selected" : "");
+      opt.className = "model-picker-option" + (tier === selectedTier ? " selected" : "") + (affordable ? "" : " disabled");
       opt.dataset.tier = tier;
       opt.innerHTML = `
-        <div class="mp-opt-top"><span class="mp-opt-name">${info.name}</span><span class="mp-opt-quota">${rem !== undefined ? rem : "—"} / ${tierLimits[tier]}</span></div>
+        <div class="mp-opt-top"><span class="mp-opt-name">${info.label}</span><span class="mp-opt-cost">cost ${info.cost}</span></div>
         <div class="mp-opt-tag">${info.tagline}</div>`;
-      opt.addEventListener("click", () => selectTier(tier));
+      opt.addEventListener("click", () => { if (affordable) selectTier(tier); });
       el.modelPickerList.appendChild(opt);
     });
   }
@@ -623,7 +712,6 @@
     if (historyEnabled) {
       const chat = getCurrentChat();
       if (chat && chat.messages.length === 0) {
-        // Empty/unused chat — just relabel it rather than making a new one.
         chat.tier = tier;
         saveChats();
         renderChatList();
@@ -631,7 +719,7 @@
         updateModelPickerLabel();
         updateInputAvailability();
       } else {
-        // Existing conversation — start a fresh chat with the new model,
+        // Existing conversation — start a fresh chat with the new option,
         // leaving the old one untouched.
         newChat(tier);
       }
@@ -654,13 +742,13 @@
 
   // ---------- Limit-aware input ----------
   function updateInputAvailability() {
-    const rem = tierRemaining[selectedTier];
-    const atLimit = rem !== undefined && rem <= 0;
+    const info = TIER_INFO[selectedTier];
+    const atLimit = sharedRemaining !== null && sharedRemaining < info.cost;
     el.inputInner.classList.toggle("disabled", atLimit);
     el.input.disabled = atLimit;
     if (atLimit) {
-      const renewTime = tierResetAt[selectedTier] ? formatRenewTime(tierResetAt[selectedTier]) : "later";
-      el.limitBanner.textContent = `${TIER_INFO[selectedTier].name} is out of messages until it renews at ${renewTime}. Pick a different model, or wait.`;
+      const renewTime = sharedResetAt ? formatRenewTime(sharedResetAt) : "later";
+      el.limitBanner.textContent = `${info.label} costs ${info.cost}, but you only have ${sharedRemaining} left. Pick a cheaper option, or wait — your budget renews at ${renewTime}.`;
       el.limitBanner.classList.add("show");
     } else {
       el.limitBanner.classList.remove("show");
@@ -668,28 +756,34 @@
     updateSendState();
   }
 
-  // ---------- Rendering ----------
   function renderMessages() {
     el.messages.innerHTML = "";
     if (messages.length === 0) {
-      el.messages.innerHTML = `<div class="empty-hint">Chatting with ${TIER_INFO[selectedTier].name}. Say hello.</div>`;
+      el.messages.innerHTML = `<div class="empty-hint">Chatting with ${TIER_INFO[selectedTier].label}. Say hello.</div>`;
       return;
     }
-    messages.forEach(m => el.messages.appendChild(buildMessageRow(m.role, m.content, m.thinking || "")));
+    messages.forEach(m => el.messages.appendChild(buildMessageRow(m.role, m.content, m.thinking || "", m.images || null)));
     el.messages.scrollTop = el.messages.scrollHeight;
   }
 
-  function buildMessageRow(role, content, thinking) {
+  function buildMessageRow(role, content, thinking, images) {
     const row = document.createElement("div");
     row.className = "msg-row " + role;
-    if (role === "assistant" && thinking && thinking.trim()) {
+    let displayContent = content;
+    let displayThinking = thinking || "";
+    if (role === "assistant") {
+      const sp = splitThinkTags(content || "");
+      displayContent = sp.visible;
+      displayThinking = (displayThinking + " " + sp.thinking).trim();
+    }
+    if (role === "assistant" && displayThinking && displayThinking.trim()) {
       const toggle = document.createElement("button");
       toggle.className = "think-toggle";
       toggle.type = "button";
       toggle.innerHTML = "<span>Show thinking</span>";
       const panel = document.createElement("div");
       panel.className = "think-panel";
-      panel.textContent = thinking.trim();
+      panel.textContent = displayThinking.trim();
       toggle.addEventListener("click", () => {
         panel.classList.toggle("open");
         toggle.querySelector("span").textContent = panel.classList.contains("open") ? "Hide thinking" : "Show thinking";
@@ -699,8 +793,21 @@
     }
     const bubble = document.createElement("div");
     bubble.className = "bubble";
-    if (role === "assistant") bubble.innerHTML = renderMarkdown(content);
-    else bubble.textContent = content;
+    if (role === "user" && images && images.length) {
+      const img = document.createElement("img");
+      img.className = "attached-image";
+      img.src = "data:image/jpeg;base64," + images[0];
+      bubble.appendChild(img);
+    }
+    if (role === "assistant") {
+      const textSpan = document.createElement("div");
+      textSpan.innerHTML = renderMarkdown(displayContent);
+      bubble.appendChild(textSpan);
+    } else {
+      const textNode = document.createElement("div");
+      textNode.textContent = content;
+      bubble.appendChild(textNode);
+    }
     row.appendChild(bubble);
     return row;
   }
@@ -742,10 +849,10 @@
       const data = await res.json();
       el.statusDot.className = "status-dot ok";
       el.statusText.textContent = "Online";
-      if (data.limits) tierLimits = data.limits;
-      if (data.remaining) tierRemaining = data.remaining;
-      if (data.reset_at) tierResetAt = data.reset_at;
-      updateModelPickerLabel();
+      if (data.limit) sharedLimit = data.limit;
+      if (data.remaining !== undefined) sharedRemaining = data.remaining;
+      if (data.reset_at) sharedResetAt = data.reset_at;
+      el.budgetRemaining.textContent = (sharedRemaining !== null ? sharedRemaining : "—") + " / " + sharedLimit;
       updateInputAvailability();
     } catch (e) {
       el.statusDot.className = "status-dot err";
@@ -769,7 +876,13 @@
     el.input.style.height = "auto";
     updateSendState();
 
-    messages.push({ role: "user", content: text });
+    const hadImageBefore = messages.some(m => m.images && m.images.length);
+    const addingImageNow = !!pendingImageBase64;
+    messages.push({ role: "user", content: text, images: pendingImageBase64 ? [pendingImageBase64] : undefined });
+    clearPendingImage();
+    if (!hadImageBefore && addingImageNow) {
+      showNote(`Heads up: since this chat now includes an image, every message here costs double (${TIER_INFO[selectedTier].cost * 2} instead of ${TIER_INFO[selectedTier].cost}) until you start a new chat.`);
+    }
     if (historyEnabled) {
       const chat = getCurrentChat();
       if (chat && chat.title === "New chat") chat.title = text.length > 38 ? text.slice(0, 38) + "…" : text;
@@ -779,7 +892,11 @@
     renderMessages();
 
     const controller = new AbortController();
-    const clientTimeout = setTimeout(() => controller.abort(), 110000);
+    // Long enough to comfortably outlast the server's own longest timeout
+    // (General Plus image analysis and General Ultra deep thinking can both
+    // legitimately take several minutes on this hardware) — this should
+    // never be the thing that cuts off a reply the server was still working on.
+    const clientTimeout = setTimeout(() => controller.abort(), 480000);
 
     const loaderRow = buildLoaderRow();
     el.messages.appendChild(loaderRow);
@@ -802,7 +919,7 @@
         loaderRow.remove();
         if (res.status === 429) {
           const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
-          showNote(`${TIER_INFO[selectedTier].name} is out of messages (${data.limit || tierLimits[selectedTier]} used). Renews at ${renewTime}. Try a different model in the meantime.`);
+          showNote(data.message || `Out of budget. Renews at ${renewTime}.`);
         } else {
           showNote(data.message || `Something went wrong (error ${res.status}). Please try again.`);
         }
@@ -855,6 +972,8 @@
         liveRow.insertBefore(liveToggle, livePanel);
       }
 
+      let streamError = null;
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -865,31 +984,58 @@
           if (!line.trim()) continue;
           let chunk;
           try { chunk = JSON.parse(line); } catch (e) { continue; }
+          if (chunk.error) {
+            // The server hit a problem after it had already started
+            // streaming (so it couldn't send a normal HTTP error status) —
+            // it sends this special line instead.
+            streamError = chunk.message || "Something went wrong. Please try again.";
+            break;
+          }
           const msg = chunk.message || {};
           if (msg.thinking) {
             thinkingBuf += msg.thinking;
             if (!revealed) reveal();
             ensureThinkUI();
-            livePanel.textContent = thinkingBuf;
+            livePanel.textContent = thinkingBuf.trim();
             if (!livePanel.classList.contains("open")) liveToggleSpan.textContent = "Thinking…";
           }
           if (msg.content) {
             rawContent += msg.content;
+            const sp = splitThinkTags(rawContent);
+            if (sp.thinking) {
+              if (!revealed) reveal();
+              ensureThinkUI();
+              livePanel.textContent = (thinkingBuf + sp.thinking).trim();
+              if (!livePanel.classList.contains("open")) liveToggleSpan.textContent = "Thinking…";
+            }
             if (!revealed) reveal();
-            liveBubble.innerHTML = renderMarkdown(rawContent);
+            liveBubble.innerHTML = renderMarkdown(sp.visible);
             el.messages.scrollTop = el.messages.scrollHeight;
           }
         }
+        if (streamError) break;
+      }
+
+      if (streamError) {
+        if (loaderRow._clear) loaderRow._clear();
+        if (loaderRow.parentNode) loaderRow.remove();
+        if (liveRow) liveRow.remove();
+        showNote(streamError);
+        checkStatus();
+        sending = false;
+        updateSendState();
+        return;
       }
 
       if (!revealed) reveal();
+      const finalSplit = splitThinkTags(rawContent);
       if (liveBubble) liveBubble.classList.remove("cursor-blink");
       if (liveToggleSpan) liveToggleSpan.textContent = "Show thinking";
-      if (!rawContent.trim() && !thinkingBuf.trim() && liveBubble) {
+      if (!finalSplit.visible.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim() && liveBubble) {
         liveBubble.innerHTML = renderMarkdown("(No reply generated — try again.)");
       }
 
-      messages.push({ role: "assistant", content: rawContent, thinking: thinkingBuf });
+      messages.push({ role: "assistant", content: finalSplit.visible, thinking: (thinkingBuf + finalSplit.thinking).trim() });
       if (historyEnabled) saveChats();
       checkStatus();
     } catch (e) {
