@@ -193,6 +193,29 @@
   }
   .user-img { max-width: min(260px, 70%); border-radius: 14px; margin-bottom: 6px; display: block; border: 1px solid var(--border); }
 
+  /* Photo scan: while the model looks at a photo, a scan line sweeps up and down over it */
+  .img-wrap { position: relative; display: block; max-width: min(260px, 70%); margin-bottom: 6px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+  .img-wrap .user-img { max-width: 100%; margin: 0; border: none; border-radius: 0; }
+  .scan-tint, .scan-line, .scan-c { position: absolute; pointer-events: none; opacity: 0; transition: opacity 0.35s ease; }
+  .scan-tint { inset: 0; background: rgba(95,191,142,0.10); }
+  .scan-line { left: 0; right: 0; top: 0; height: 3px; background: #5fbf8e; box-shadow: 0 0 16px 4px rgba(95,191,142,0.7); }
+  .scan-line::before { content: ""; position: absolute; left: 0; right: 0; top: -42px; height: 84px; background: linear-gradient(rgba(95,191,142,0), rgba(95,191,142,0.28), rgba(95,191,142,0)); }
+  .scan-c { width: 22px; height: 22px; border: 3px solid #8fe3b8; transform: scale(1.4); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.2,.8,.2,1.3); }
+  .scan-c.c1 { left: 8px; top: 8px; border-right: none; border-bottom: none; border-radius: 6px 0 0 0; }
+  .scan-c.c2 { right: 8px; top: 8px; border-left: none; border-bottom: none; border-radius: 0 6px 0 0; }
+  .scan-c.c3 { left: 8px; bottom: 8px; border-right: none; border-top: none; border-radius: 0 0 0 6px; }
+  .scan-c.c4 { right: 8px; bottom: 8px; border-left: none; border-top: none; border-radius: 0 0 6px 0; }
+  .img-wrap.scanning .scan-tint { opacity: 1; animation: scanTint 2.4s ease-in-out infinite; }
+  .img-wrap.scanning .scan-line { opacity: 1; animation: scanMove 2.4s ease-in-out infinite; }
+  .img-wrap.scanning .scan-c { opacity: 1; transform: none; }
+  @keyframes scanMove { 0% { top: 0; } 50% { top: calc(100% - 3px); } 100% { top: 0; } }
+  @keyframes scanTint { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .img-wrap.scan-done::after { content: ""; position: absolute; inset: 0; background: rgba(143,227,184,0.35); pointer-events: none; animation: scanDone 0.7s ease forwards; }
+  @keyframes scanDone { from { opacity: 1; } to { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .img-wrap.scanning .scan-line { animation: none; top: 50%; }
+  }
+
   .msg.assistant { animation: fadeIn 0.35s ease both; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -226,6 +249,24 @@
   .act-btn:hover { background: var(--hover); color: var(--text); }
   .act-btn.done { color: var(--accent); }
   .msg-tier { font-size: 12px; color: var(--faint); margin-left: 6px; }
+
+  /* Web search: sources under a reply */
+  .sources { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+  .src-label { font-size: 12px; color: var(--faint); margin-right: 2px; }
+  .src-chip {
+    display: inline-flex; align-items: center; gap: 6px; max-width: 100%; padding: 4px 11px 4px 5px;
+    border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--muted); text-decoration: none;
+    opacity: 0; animation: srcIn 0.45s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i, 0) * 70ms);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .src-chip:hover { background: var(--hover); color: var(--text); border-color: var(--border-strong); }
+  .src-chip .n {
+    width: 17px; height: 17px; border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+    font-size: 10.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .src-chip .d { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 170px; }
+  @keyframes srcIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+  .search-note { margin-top: 10px; font-size: 12.5px; color: var(--faint); }
 
   /* =========================================================
      Thinking: pending loader + collapsible thought block
@@ -360,6 +401,22 @@
   #attach-btn.show { display: flex; }
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
+  /* Web search toggle */
+  #web-btn {
+    height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
+    cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+  }
+  #web-btn.show { display: flex; }
+  #web-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked { opacity: 0.45; }
+  @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
+  @media (max-width: 420px) { #web-btn .wcost { display: none; } #web-btn { padding: 0 9px; } }
+
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
   .model-picker-btn {
@@ -449,6 +506,52 @@
   .modal-box h2, .modal-box h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin: 0; letter-spacing: -0.01em; }
   .modal-box h3 { font-size: 19px; margin-bottom: 8px; }
   .modal-sub { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* What's new: SCODE Search launch popup */
+  #whatsnew { z-index: 250; }
+  #whatsnew .modal-box { width: 400px; padding: 0; position: relative; overflow: hidden;
+    transform: translateY(26px) scale(0.96); opacity: 0;
+    transition: transform 0.55s cubic-bezier(.2,.8,.2,1), opacity 0.35s ease; }
+  #whatsnew.show .modal-box { transform: none; opacity: 1; transition-delay: 0.05s; }
+  .wn-close { position: absolute; top: 10px; right: 10px; z-index: 2; }
+  .wn-art { position: relative; height: 158px; overflow: hidden; border-bottom: 1px solid var(--border);
+    background: radial-gradient(circle at 50% 60%, var(--accent-soft), transparent 70%), var(--surface-2);
+    display: flex; align-items: center; justify-content: center; }
+  .wn-ring { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%;
+    border: 1.5px solid var(--accent); opacity: 0; animation: wnRing 2.8s cubic-bezier(.2,.6,.3,1) infinite; }
+  .wn-ring.r2 { animation-delay: 0.93s; } .wn-ring.r3 { animation-delay: 1.86s; }
+  @keyframes wnRing { 0% { transform: scale(0.9); opacity: 0.55; } 100% { transform: scale(2.9); opacity: 0; } }
+  .wn-orb { position: relative; width: 76px; height: 76px; border-radius: 50%; background: var(--accent); color: var(--accent-ink);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 34px var(--accent-soft), 0 0 0 8px var(--accent-soft); }
+  #whatsnew.show .wn-orb { animation: wnPop 0.7s 0.2s cubic-bezier(.2,.8,.2,1.35) both; }
+  #whatsnew.show .wn-orb svg { animation: webSpin 1s 0.3s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes wnPop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+  .wn-body { padding: 20px 24px 22px; }
+  .wn-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
+  .wn-body h2 { font-family: var(--serif); font-weight: 500; font-size: 25px; letter-spacing: -0.015em; margin: 0 0 8px; }
+  .wn-pts { list-style: none; margin: 14px 0 20px; padding: 0; }
+  .wn-pts li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.45; color: var(--text); padding: 5px 0;
+    opacity: 0; transform: translateY(6px); }
+  #whatsnew.show .wn-pts li { animation: wnIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
+  #whatsnew.show .wn-pts li:nth-child(1) { animation-delay: 0.32s; }
+  #whatsnew.show .wn-pts li:nth-child(2) { animation-delay: 0.42s; }
+  #whatsnew.show .wn-pts li:nth-child(3) { animation-delay: 0.52s; }
+  @keyframes wnIn { to { opacity: 1; transform: none; } }
+  .wn-pts svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+  .wn-actions { display: flex; gap: 10px; }
+  .wn-btn { flex: 1; height: 44px; border-radius: 12px; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--border); background: none; color: var(--text); transition: background 0.15s, transform 0.15s; }
+  .wn-btn:hover { background: var(--hover); }
+  .wn-btn:active { transform: scale(0.97); }
+  .wn-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .wn-btn.primary:hover { filter: brightness(1.06); background: var(--accent); }
+  #web-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+    padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
+  @media (prefers-reduced-motion: reduce) {
+    .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
+    .wn-pts li { opacity: 1; transform: none; } #whatsnew.show .wn-pts li { animation: none; }
+  }
   .set-section { margin-bottom: 22px; }
   .set-section-title { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 10px; }
   .set-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; }
@@ -594,6 +697,10 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </button>
             <input type="file" id="image-input" accept="image/*" style="display:none;">
+            <button id="web-btn" type="button" aria-pressed="false" title="Search the web">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <span>Search</span><span class="wcost" id="web-cost">+5</span><span class="wnew" id="web-new" hidden>NEW</span>
+            </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
               <button class="model-picker-btn" id="model-picker-btn" type="button" aria-haspopup="listbox">
@@ -655,6 +762,32 @@
   </div>
 </div>
 
+<div class="overlay" id="whatsnew">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="wn-title">
+    <button class="icon-btn wn-close" id="wn-close" type="button" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="wn-art" aria-hidden="true">
+      <span class="wn-ring"></span><span class="wn-ring r2"></span><span class="wn-ring r3"></span>
+      <div class="wn-orb"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="wn-body">
+      <span class="wn-tag">New &middot; Beta</span>
+      <h2 id="wn-title">Introducing SCODE Search</h2>
+      <div class="modal-sub">SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses.</div>
+      <ul class="wn-pts">
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Answers from today&rsquo;s web, not last year&rsquo;s</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Links to every source, so you can check it</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="wn-cost-line">On General and General Plus, +5 points per message</span></li>
+      </ul>
+      <div class="wn-actions">
+        <button class="wn-btn" id="wn-later" type="button">Maybe later</button>
+        <button class="wn-btn primary" id="wn-try" type="button">Try now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="confirm-overlay">
   <div class="modal-box" style="width:420px;" role="alertdialog" aria-modal="true">
     <h3 id="confirm-title">Are you sure?</h3>
@@ -668,8 +801,8 @@
 
 <script>
 (function () {
-  // ⚠️ Set this to your Cloudflare Tunnel URL once it's running,  "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://manner-updating-poker-talked.trycloudflare.com";
+  // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
+  const PROXY_URL = "https://aid-fixes-wheel-sept.trycloudflare.com";
 
   // Static fallback shown before /models loads; live data overrides this.
   const TIER_ORDER = ["l1", "l2", "l2_5", "l3", "l4"];
@@ -728,6 +861,7 @@
     confirmCancel: $("confirm-cancel"),
     confirmOk: $("confirm-ok"),
     attachBtn: $("attach-btn"),
+    webBtn: $("web-btn"),
     imageInput: $("image-input"),
     imagePreviewRow: $("image-preview-row"),
     imagePreviewThumb: $("image-preview-thumb"),
@@ -814,6 +948,7 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       if (el.confirmOverlay.classList.contains("show")) { el.confirmCancel.click(); return; }
+      if ($("whatsnew").classList.contains("show")) { $("wn-close").click(); return; }
       el.settingsOverlay.classList.remove("show");
       el.modelPicker.classList.remove("open");
       closeMobileSidebar();
@@ -1081,7 +1216,92 @@
     el.attachBtn.classList.toggle("show", VISION_TIERS.has(selectedTier));
     el.attachBtn.title = "Add a photo (" + TIER_INFO[selectedTier].label + " can see images)";
     if (!VISION_TIERS.has(selectedTier)) clearPendingImage();
+    updateWebBtn();
   }
+
+  // ---------- SCODE Search: web search toggle (General and General Plus) ----------
+  // Unlocks on launch day. Before then, add ?preview=search to the site's link
+  // to test it on your own device (?preview=off turns preview back off).
+  const SEARCH_LAUNCH = Date.parse("2026-10-09T00:00:00-07:00");   // Oct 9, midnight Pacific
+  const SEARCH_NEW_UNTIL = SEARCH_LAUNCH + 7 * 864e5;                // "NEW" badge + popup for one week
+  let searchPreview = false;
+  try {
+    const qs = location.search;
+    if (/[?&]preview=search\b/.test(qs)) localStorage.setItem("scode_search_preview", "1");
+    if (/[?&]preview=off\b/.test(qs)) localStorage.removeItem("scode_search_preview");
+    searchPreview = localStorage.getItem("scode_search_preview") === "1";
+  } catch (e) {}
+  function searchUnlocked() { return searchPreview || Date.now() >= SEARCH_LAUNCH; }
+  function searchIsNew() { return searchUnlocked() && Date.now() < SEARCH_NEW_UNTIL; }
+
+  let WEB_TIERS = new Set(["l2", "l2_5"]);   // the server can override this via /status
+  let searchCost = 5;
+  let webOn = false;
+  try { webOn = localStorage.getItem("linden_web") === "1"; } catch (e) {}
+  const DEFAULT_PLACEHOLDER = el.input.placeholder;
+
+  function chatHasPhoto() {
+    return !!pendingImageBase64 || messages.some(m => m.images && m.images.length);
+  }
+  function updateWebBtn() {
+    const avail = searchUnlocked() && WEB_TIERS.has(selectedTier);
+    const blocked = avail && chatHasPhoto();
+    const on = avail && webOn && !blocked;
+    el.webBtn.classList.toggle("show", avail);
+    el.webBtn.classList.toggle("on", on);
+    el.webBtn.classList.toggle("blocked", blocked);
+    el.webBtn.setAttribute("aria-pressed", String(on));
+    $("web-cost").textContent = "+" + searchCost;
+    $("web-new").hidden = !(searchIsNew() && !on);
+    el.webBtn.title = blocked
+      ? "SCODE Search can't be used in a chat with a photo. Start a new chat to search."
+      : (webOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + ` (+${searchCost} per message)`;
+    el.input.placeholder = on ? "Ask anything. I'll check the web." : DEFAULT_PLACEHOLDER;
+  }
+  el.webBtn.addEventListener("click", () => {
+    if (chatHasPhoto()) {
+      showNote("SCODE Search can't be used in a chat with a photo. Start a new chat to search.");
+      return;
+    }
+    webOn = !webOn;
+    try { localStorage.setItem("linden_web", webOn ? "1" : "0"); } catch (e) {}
+    updateWebBtn();
+    if (!touchLike) el.input.focus();
+  });
+
+  // ---------- Launch popup: "Introducing SCODE Search" (shown once, launch week) ----------
+  const wn = $("whatsnew");
+  function wnSeen() { try { return localStorage.getItem("scode_search_intro") === "1"; } catch (e) { return false; } }
+  function closeWhatsNew() {
+    try { localStorage.setItem("scode_search_intro", "1"); } catch (e) {}
+    wn.classList.remove("show");
+  }
+  function maybeShowWhatsNew() {
+    const forced = /[?&]whatsnew=1\b/.test(location.search);
+    if (!forced && (!searchIsNew() || wnSeen())) return;
+    $("wn-cost-line").textContent = `On General and General Plus, +${searchCost} points per message`;
+    wn.classList.add("show");
+  }
+  $("wn-close").addEventListener("click", closeWhatsNew);
+  $("wn-later").addEventListener("click", closeWhatsNew);
+  wn.addEventListener("click", (e) => { if (e.target === wn) closeWhatsNew(); });
+  $("wn-try").addEventListener("click", () => {
+    closeWhatsNew();
+    webOn = true;
+    try { localStorage.setItem("linden_web", "1"); } catch (e) {}
+    // SCODE Search needs General or General Plus, and a chat without a photo.
+    const tier = WEB_TIERS.has(selectedTier) ? selectedTier : "l2";
+    if (chatHasPhoto()) {
+      clearPendingImage();
+      if (messages.some(m => m.images && m.images.length)) {
+        if (historyEnabled) newChat(tier);
+        else { selectedTier = tier; messages = []; updateModelPickerLabel(); renderMessages(); updateInputAvailability(); }
+      }
+    }
+    if (tier !== selectedTier) selectTier(tier);
+    updateWebBtn();
+    setTimeout(() => el.input.focus(), 250);
+  });
 
   function clearPendingImage() {
     pendingImageBase64 = null;
@@ -1370,11 +1590,15 @@
     row.className = "msg " + role;
     if (role === "user") {
       if (images && images.length) {
+        const wrap = document.createElement("div");
+        wrap.className = "img-wrap";
         const img = document.createElement("img");
         img.className = "user-img";
         img.alt = "Attached image";
         img.src = "data:image/jpeg;base64," + images[0];
-        row.appendChild(img);
+        wrap.appendChild(img);
+        wrap.insertAdjacentHTML("beforeend", '<div class="scan-tint"></div><div class="scan-line"></div><span class="scan-c c1"></span><span class="scan-c c2"></span><span class="scan-c c3"></span><span class="scan-c c4"></span>');
+        row.appendChild(wrap);
       }
       const bubble = document.createElement("div");
       bubble.className = "user-bubble";
@@ -1393,6 +1617,8 @@
     md.className = "md";
     md.innerHTML = renderMarkdown(displayContent);
     row.appendChild(md);
+    const srcEl = meta && meta.sources && meta.sources.length ? buildSources(meta.sources) : null;
+    if (srcEl) row.appendChild(srcEl);
     row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -1417,15 +1643,56 @@
     function setLabel(t) { lbl.textContent = t; lbl.classList.remove("swap"); void lbl.offsetWidth; lbl.classList.add("swap"); }
     const iv = setInterval(() => {
       const secs = Math.floor((Date.now() - started) / 1000);
-      if (secs % 4 === 0 && secs < 45) { i = (i + 1) % phrases.length; setLabel(phrases[i]); }
+      if (!row._lock && secs % 4 === 0 && secs < 45) { i = (i + 1) % phrases.length; setLabel(phrases[i]); }
       if (secs >= 8) {
         const m = Math.floor(secs / 60), s = secs % 60;
         timeEl.textContent = m ? `${m}:${String(s).padStart(2, "0")}` : `${s}s`;
       }
-      if (secs === 45) setLabel(hasImage ? "Photos can take a few minutes" : "Still working");
+      if (!row._lock && secs === 45) setLabel(hasImage ? "Photos can take a few minutes" : "Still working");
     }, 1000);
     row._clear = () => clearInterval(iv);
+    // While a web search is running the label is fixed ("Searching the web", then "Reading the results").
+    row._setStage = (text) => { row._lock = true; setLabel(text); };
     return row;
+  }
+
+  // ---------- Web sources under a reply ----------
+  function buildSources(sources) {
+    const wrap = document.createElement("div");
+    wrap.className = "sources";
+    const lab = document.createElement("span");
+    lab.className = "src-label";
+    lab.textContent = "Sources";
+    wrap.appendChild(lab);
+    let i = 0;
+    (sources || []).forEach(s => {
+      let u;
+      try { u = new URL(String(s.url)); } catch (e) { return; }
+      if (u.protocol !== "http:" && u.protocol !== "https:") return;   // never link anything but web pages
+      const a = document.createElement("a");
+      a.className = "src-chip";
+      a.href = u.href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.title = String(s.title || u.hostname);
+      a.style.setProperty("--i", i++);
+      const n = document.createElement("span");
+      n.className = "n";
+      n.textContent = String(s.n || i);
+      const d = document.createElement("span");
+      d.className = "d";
+      d.textContent = u.hostname.replace(/^www\d*\./, "");
+      a.appendChild(n);
+      a.appendChild(d);
+      wrap.appendChild(a);
+    });
+    return i ? wrap : null;
+  }
+  function buildSearchNote(text) {
+    const d = document.createElement("div");
+    d.className = "search-note";
+    d.textContent = text;
+    return d;
   }
 
   function autoGrow() {
@@ -1435,6 +1702,7 @@
   function updateSendState() {
     el.sendBtn.disabled = sending || el.input.disabled || el.input.value.trim().length === 0;
     document.body.classList.toggle("is-sending", sending);
+    updateWebBtn();
   }
   el.input.addEventListener("input", () => { autoGrow(); updateSendState(); });
   el.input.addEventListener("keydown", (e) => {
@@ -1453,6 +1721,9 @@
       if (data.limit) sharedLimit = data.limit;
       if (data.remaining !== undefined) sharedRemaining = data.remaining;
       if (data.reset_at) sharedResetAt = data.reset_at;
+      if (Array.isArray(data.web_tiers)) WEB_TIERS = new Set(data.web_tiers);
+      if (typeof data.search_cost === "number") searchCost = data.search_cost;
+      updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
       el.budgetBarFill.style.width = pct + "%";
@@ -1511,7 +1782,24 @@
       showNote(`Heads up: this chat now has a photo in it, so every message here costs double (${TIER_INFO[selectedTier].cost * 2} instead of ${TIER_INFO[selectedTier].cost}) until you start a new chat.`);
     }
 
+    // Scan the photo that was just sent, until the reply is finished (or fails).
+    let scanWrap = null;
+    if (addingImageNow) {
+      const wraps = el.messages.querySelectorAll(".msg.user .img-wrap");
+      scanWrap = wraps[wraps.length - 1] || null;
+      if (scanWrap) scanWrap.classList.add("scanning");
+    }
+    function stopScan() {
+      if (!scanWrap) return;
+      const w = scanWrap; scanWrap = null;
+      w.classList.remove("scanning");
+      w.classList.add("scan-done");
+      setTimeout(() => w.classList.remove("scan-done"), 750);
+    }
+
     const tierAtSend = selectedTier;
+    // Web search only runs on supported options, and never in a chat that has a photo.
+    const useWeb = searchUnlocked() && webOn && WEB_TIERS.has(tierAtSend) && !hadImageBefore && !addingImageNow;
     const controller = new AbortController();
     // Long enough to comfortably outlast the server's own longest timeout —
     // General Ultra's complex photo analysis can run up to 900s
@@ -1529,6 +1817,7 @@
         // Only send what the server actually uses (keeps uploads small).
         body: JSON.stringify({
           tier: selectedTier,
+          web: useWeb,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
             if (m.images) o.images = m.images;
@@ -1552,6 +1841,7 @@
           showNote(data.message || `Something went wrong (error ${res.status}). Try sending it again.`);
         }
         checkStatus();
+        stopScan();
         sending = false;
         updateSendState();
         return;
@@ -1633,6 +1923,7 @@
       }
 
       let streamError = null;
+      let webSources = [], searchNote = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -1650,6 +1941,19 @@
             // it sends this special line instead.
             streamError = chunk.message || "Something went wrong. Try sending it again.";
             break;
+          }
+          if (chunk.search) {
+            // Progress from the server's web search (before the model starts).
+            const s = chunk.search;
+            if (s.status === "searching" && !revealed && loaderRow._setStage) loaderRow._setStage("Searching the web");
+            else if (s.status === "done") {
+              webSources = Array.isArray(s.sources) ? s.sources : [];
+              if (!revealed && loaderRow._setStage) loaderRow._setStage("Reading the results");
+            } else if (s.status === "failed") {
+              searchNote = String(s.message || "Couldn't search the web. Answered without it.");
+              if (!revealed && loaderRow._setStage) loaderRow._setStage("Thinking");
+            }
+            continue;
           }
           const msg = chunk.message || {};
           const stick = nearBottom();
@@ -1686,6 +1990,7 @@
         if (liveRow) liveRow.remove();
         showNote(streamError);
         checkStatus();
+        stopScan();
         sending = false;
         updateSendState();
         return;
@@ -1705,6 +2010,9 @@
         await new Promise(r => setTimeout(r, reduceMotion ? 0 : 320));
         liveTail.remove();
       }
+      const srcEl = webSources.length ? buildSources(webSources) : null;
+      if (srcEl) liveRow.appendChild(srcEl);
+      else if (searchNote) liveRow.appendChild(buildSearchNote(searchNote));
       liveRow.appendChild(buildActions(finalText, tierAtSend));
 
       messages.push({
@@ -1713,6 +2021,7 @@
         thinking: (thinkingBuf + finalSplit.thinking).trim(),
         thinkSeconds: thinkSeconds || undefined,
         tier: tierAtSend,
+        sources: srcEl ? webSources : undefined,
       });
       if (historyEnabled) saveChats();
       updateJumpBtn();
@@ -1728,6 +2037,7 @@
       }
     }
 
+    stopScan();
     sending = false;
     updateSendState();
     if (!touchLike) el.input.focus();
@@ -1740,6 +2050,7 @@
   checkStatus();
   setInterval(checkStatus, 20000);
   if (!touchLike) el.input.focus();
+  setTimeout(maybeShowWhatsNew, reduceMotion ? 300 : 1100);
 })();
 </script>
 </body>
