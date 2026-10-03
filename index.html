@@ -325,7 +325,9 @@
   #lh-x { border: none; background: none; color: var(--faint); cursor: pointer; width: 24px; height: 24px; border-radius: 6px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   #lh-x:hover { background: var(--hover); color: var(--text); }
-  #link-hint.info #lh-x { display: none; }
+  #link-hint.info:not(.suggest) #lh-x { display: none; }
+  #link-hint.suggest { cursor: pointer; }
+  #link-hint.suggest:hover { background: var(--accent-soft); }
   @keyframes hintIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
   /* Paste a link: card under the reply, with citations */
@@ -473,7 +475,7 @@
 
   #composer {
     background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-    box-shadow: var(--composer-shadow); padding: 12px 12px 10px 16px; position: relative;
+    box-shadow: var(--composer-shadow); padding: 12px 12px 10px 16px; position: relative; z-index: 5;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   #composer:focus-within { border-color: var(--border-strong); box-shadow: var(--composer-shadow), 0 0 0 4px var(--accent-soft); }
@@ -510,20 +512,20 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn {
+  #web-btn, #link-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show { display: flex; }
-  #web-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost { display: none; } #web-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost { display: none; } #web-btn, #link-btn { padding: 0 9px; } }
 
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
@@ -572,7 +574,7 @@
   body.is-sending #send-btn .busy { display: block; }
   @keyframes busyPulse { 0%,100% { transform: scale(0.75); opacity: 0.7; } 50% { transform: scale(1); opacity: 1; } }
 
-  .suggestions { display: none; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+  .suggestions { display: none; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; position: relative; z-index: 1; }
   body.is-empty .suggestions { display: flex; }
   body.is-empty .chip { animation: welcomeIn 0.6s cubic-bezier(.2,.8,.2,1) both; }
   body.is-empty .chip:nth-child(1) { animation-delay: 0.55s; } body.is-empty .chip:nth-child(2) { animation-delay: 0.62s; }
@@ -647,6 +649,26 @@
   #whatsnew.show .wn-pts li:nth-child(3) { animation-delay: 0.52s; }
   #whatsnew.show .wn-pts li:nth-child(4) { animation-delay: 0.62s; }
   @keyframes wnIn { to { opacity: 1; transform: none; } }
+  .wn-feats { display: grid; gap: 10px; margin: 16px 0 12px; }
+  .wn-feat { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-2);
+    opacity: 0; transform: translateY(6px); }
+  #whatsnew.show .wn-feat { animation: wnIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
+  #whatsnew.show .wn-feat:nth-child(1) { animation-delay: 0.3s; }
+  #whatsnew.show .wn-feat:nth-child(2) { animation-delay: 0.42s; }
+  .wn-fi { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wn-fi svg { width: 21px; height: 21px; }
+  .wn-ft { flex: 1; min-width: 0; }
+  .wn-ft b { display: block; font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; }
+  .wn-ft span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.4; margin-top: 1px; }
+  .wn-try { height: 34px; padding: 0 14px; border-radius: 10px; border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-size: 13px;
+    font-weight: 600; cursor: pointer; flex-shrink: 0; transition: transform 0.15s, filter 0.15s; }
+  .wn-try:hover { filter: brightness(1.06); }
+  .wn-try:active { transform: scale(0.96); }
+  .wn-small { font-size: 12px; color: var(--faint); text-align: center; margin: 0 0 14px; }
+  .wn-orbs { display: flex; gap: 14px; position: relative; }
+  .wn-orbs .wn-orb { width: 64px; height: 64px; }
+  #whatsnew.show .wn-orbs .wn-orb:nth-child(2) { animation-delay: 0.32s; }
+  @media (prefers-reduced-motion: reduce) { .wn-feat { opacity: 1; transform: none; } #whatsnew.show .wn-feat { animation: none; } }
   .wn-pts svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
   .wn-actions { display: flex; gap: 10px; }
   .wn-btn { flex: 1; height: 44px; border-radius: 12px; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer;
@@ -732,7 +754,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+  #web-btn .wnew, #link-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -788,6 +810,11 @@
     .md { font-size: 16.5px; line-height: 1.65; }
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
+    /* Search / Link become round icon buttons on phones so the row fits */
+    #web-btn, #link-btn { width: 34px; padding: 0; justify-content: center; position: relative; }
+    #web-btn .mlabel, #link-btn .mlabel, #web-btn .wcost, #link-btn .wcost { display: none; }
+    #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
     .model-picker-list { position: fixed; left: 12px; right: 12px; width: auto; max-width: none; bottom: calc(118px + env(safe-area-inset-bottom)); }
@@ -929,7 +956,11 @@
             <input type="file" id="image-input" accept="image/*" style="display:none;">
             <button id="web-btn" type="button" aria-pressed="false" title="Search the web">
               <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-              <span>Search</span><span class="wcost" id="web-cost">+5</span><span class="wnew" id="web-new" hidden>NEW</span>
+              <span class="mlabel">Search</span><span class="wcost" id="web-cost">+5</span><span class="wnew" id="web-new" hidden>NEW</span>
+            </button>
+            <button id="link-btn" type="button" aria-pressed="false" title="SCODE Link">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span class="mlabel">Link</span><span class="wcost" id="link-cost">+5</span><span class="wnew" id="link-new" hidden>NEW</span>
             </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
@@ -999,21 +1030,30 @@
     </button>
     <div class="wn-art" aria-hidden="true">
       <span class="wn-ring"></span><span class="wn-ring r2"></span><span class="wn-ring r3"></span>
-      <div class="wn-orb"><svg width="38" height="38" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      <div class="wn-orbs">
+        <div class="wn-orb"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="wn-orb"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      </div>
     </div>
     <div class="wn-body">
       <span class="wn-tag">New &middot; Beta</span>
-      <h2 id="wn-title">Introducing SCODE Search</h2>
-      <div class="modal-sub">SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses.</div>
-      <ul class="wn-pts">
-        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Answers from today&rsquo;s web, not last year&rsquo;s</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Links to every source, so you can check it</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>New: paste any link to get a summary and a ready-made citation</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="wn-cost-line">On General and General Plus, +5 points per message</span></li>
-      </ul>
+      <h2 id="wn-title">Introducing SCODE Search &amp; SCODE Link</h2>
+      <div class="modal-sub">Two new ways to get answers you can trust, with sources you can check.</div>
+      <div class="wn-feats">
+        <div class="wn-feat">
+          <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <div class="wn-ft"><b>SCODE Search</b><span>Checks today&rsquo;s web before answering, and links every source.</span></div>
+          <button class="wn-try" type="button" data-try="search">Try</button>
+        </div>
+        <div class="wn-feat">
+          <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="wn-ft"><b>SCODE Link</b><span>Paste any web page, PDF or Google Doc for a summary and a ready-made citation.</span></div>
+          <button class="wn-try" type="button" data-try="link">Try</button>
+        </div>
+      </div>
+      <p class="wn-small" id="wn-cost-line">On General and General Plus &middot; +5 points per message</p>
       <div class="wn-actions">
         <button class="wn-btn" id="wn-later" type="button">Maybe later</button>
-        <button class="wn-btn primary" id="wn-try" type="button">Try now</button>
       </div>
     </div>
   </div>
@@ -1034,7 +1074,7 @@
       <ul class="au-perks">
         <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>1,000 points every 4 hours<small>Guests get 100 points an hour</small></span></li>
         <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M3 18L10 6l4 7 2.5-4L21 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>All five models<small>Guests can only use General Mini</small></span></li>
-        <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>New features first<small>Like SCODE Search, links and photo reading</small></span></li>
+        <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>New features first<small>Like SCODE Search, SCODE Link and photo reading</small></span></li>
         <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Your chats saved on this device<small>Pick up where you left off</small></span></li>
       </ul>
       <div class="au-btns">
@@ -1624,11 +1664,12 @@
     updateWebBtn();
   }
 
-  // ---------- SCODE Search: web search toggle (General and General Plus) ----------
-  // Unlocks on launch day. Before then, add ?preview=search to the site's link
-  // to test it on your own device (?preview=off turns preview back off).
+  // ---------- SCODE Search + SCODE Link: mode buttons (General and General Plus) ----------
+  // Both unlock on launch day. Before then, add ?preview=search to the site's link
+  // to test them on your own device (?preview=off turns preview back off).
   const SEARCH_LAUNCH = Date.parse("2026-10-09T00:00:00-07:00");   // Oct 9, midnight Pacific
-  const SEARCH_NEW_UNTIL = SEARCH_LAUNCH + 7 * 864e5;                // "NEW" badge + popup for one week
+  const LAUNCH_POPUP_DAYS = 3;                                      // launch popup shows for 3 days
+  const SEARCH_NEW_UNTIL = SEARCH_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; // "NEW" badges for the same 3 days
   let searchPreview = false;
   try {
     const qs = location.search;
@@ -1642,61 +1683,84 @@
   let WEB_TIERS = new Set(["l2", "l2_5"]);   // the server can override this via /status
   let searchCost = 5;
   let webOn = false;
-  try { webOn = localStorage.getItem("linden_web") === "1"; } catch (e) {}
+  var linkOn = false;                        // SCODE Link mode (only one mode is on at a time)
+  try {
+    webOn = localStorage.getItem("linden_web") === "1";
+    linkOn = !webOn && localStorage.getItem("scode_link_on") === "1";
+  } catch (e) {}
   const DEFAULT_PLACEHOLDER = el.input.placeholder;
 
   function chatHasPhoto() {
     return !!pendingImageBase64 || messages.some(m => m.images && m.images.length);
   }
+  function saveModes() {
+    try { localStorage.setItem("linden_web", webOn ? "1" : "0"); localStorage.setItem("scode_link_on", linkOn ? "1" : "0"); } catch (e) {}
+  }
+  function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost) {
+    btn.classList.toggle("show", avail);
+    btn.classList.toggle("on", on);
+    btn.classList.toggle("blocked", blocked);
+    btn.setAttribute("aria-pressed", String(on));
+    costEl.textContent = "+" + cost;
+    newEl.hidden = !(searchIsNew() && !on);
+  }
   function updateWebBtn() {
-    const avail = searchUnlocked() && WEB_TIERS.has(selectedTier);
-    const blocked = avail && chatHasPhoto();
-    const on = avail && webOn && !blocked;
-    el.webBtn.classList.toggle("show", avail);
-    el.webBtn.classList.toggle("on", on);
-    el.webBtn.classList.toggle("blocked", blocked);
-    el.webBtn.setAttribute("aria-pressed", String(on));
-    $("web-cost").textContent = "+" + searchCost;
-    $("web-new").hidden = !(searchIsNew() && !on);
-    el.webBtn.title = blocked
-      ? "SCODE Search can't be used in a chat with a photo. Start a new chat to search."
-      : (webOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + ` (+${searchCost} per message)`;
-    el.input.placeholder = on ? "Ask anything. I'll check the web." : DEFAULT_PLACEHOLDER;
+    const tiersL = (typeof LINK_TIERS !== "undefined" && LINK_TIERS) ? LINK_TIERS : WEB_TIERS;
+    const cost = (typeof linkCost !== "undefined") ? linkCost : 5;
+    const photo = chatHasPhoto();
+    const wAvail = searchUnlocked() && WEB_TIERS.has(selectedTier);
+    const lAvail = searchUnlocked() && tiersL.has(selectedTier);
+    const wOn = wAvail && webOn && !photo, lOn = lAvail && linkOn && !photo;
+    paintModeBtn(el.webBtn, $("web-new"), $("web-cost"), wAvail, wAvail && photo, wOn, searchCost);
+    paintModeBtn($("link-btn"), $("link-new"), $("link-cost"), lAvail, lAvail && photo, lOn, cost);
+    el.webBtn.title = photo ? "SCODE Search can't be used in a chat with a photo. Start a new chat to search."
+      : (wOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + ` (+${searchCost} per message)`;
+    $("link-btn").title = photo ? "SCODE Link can't be used in a chat with a photo. Start a new chat."
+      : (lOn ? "SCODE Link is on" : "SCODE Link: read a web page, PDF or Google Doc you paste") + ` (+${cost} per message)`;
+    el.input.placeholder = wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it." : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
   }
-  el.webBtn.addEventListener("click", () => {
-    if (chatHasPhoto()) {
-      showNote("SCODE Search can't be used in a chat with a photo. Start a new chat to search.");
-      return;
-    }
-    webOn = !webOn;
-    try { localStorage.setItem("linden_web", webOn ? "1" : "0"); } catch (e) {}
+  function setMode(mode) {
+    // "search", "link" or null. Only one at a time.
+    webOn = mode === "search";
+    linkOn = mode === "link";
+    if (!linkOn && typeof activeLink !== "undefined") activeLink = null;
+    saveModes();
     updateWebBtn();
+  }
+  el.webBtn.addEventListener("click", () => {
+    if (chatHasPhoto()) { showNote("SCODE Search can't be used in a chat with a photo. Start a new chat to search."); return; }
+    setMode(webOn ? null : "search");
+    if (!touchLike) el.input.focus();
+  });
+  $("link-btn").addEventListener("click", () => {
+    if (chatHasPhoto()) { showNote("SCODE Link can't be used in a chat with a photo. Start a new chat."); return; }
+    setMode(linkOn ? null : "link");
     if (!touchLike) el.input.focus();
   });
 
-  // ---------- Launch popup: "Introducing SCODE Search" (shown once, launch week) ----------
+  // ---------- Launch popup: shows on each visit for 3 days after a launch ----------
   const wn = $("whatsnew");
-  function wnSeen() { try { return localStorage.getItem("scode_search_intro") === "1"; } catch (e) { return false; } }
   function closeWhatsNew() {
-    try { localStorage.setItem("scode_search_intro", "1"); } catch (e) {}
+    try { sessionStorage.setItem("scode_launch_popup", "1"); } catch (e) {}   // once per visit
     wn.classList.remove("show");
   }
   function maybeShowWhatsNew() {
     const forced = /[?&]whatsnew=1\b/.test(location.search);
-    if (!forced && (!searchIsNew() || wnSeen())) return;
-    $("wn-cost-line").textContent = `On General and General Plus, +${searchCost} points per message`;
+    let seenThisVisit = false;
+    try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
+    if (!forced && (!searchIsNew() || seenThisVisit)) return;
+    $("wn-cost-line").textContent = `On General and General Plus · +${searchCost} points per message`;
     wn.classList.add("show");
   }
   $("wn-close").addEventListener("click", closeWhatsNew);
   $("wn-later").addEventListener("click", closeWhatsNew);
   wn.addEventListener("click", (e) => { if (e.target === wn) closeWhatsNew(); });
-  $("wn-try").addEventListener("click", () => {
+  function tryMode(mode) {
     closeWhatsNew();
-    if (isGuest()) { openAuth("welcome", "SCODE Search needs a free account."); return; }
-    webOn = true;
-    try { localStorage.setItem("linden_web", "1"); } catch (e) {}
-    // SCODE Search needs General or General Plus, and a chat without a photo.
+    const name = mode === "link" ? "SCODE Link" : "SCODE Search";
+    if (isGuest()) { openAuth("welcome", `${name} needs a free account.`); return; }
+    // Both need General or General Plus, and a chat without a photo.
     const tier = WEB_TIERS.has(selectedTier) ? selectedTier : "l2";
     if (chatHasPhoto()) {
       clearPendingImage();
@@ -1706,9 +1770,10 @@
       }
     }
     if (tier !== selectedTier) selectTier(tier);
-    updateWebBtn();
+    setMode(mode);
     setTimeout(() => el.input.focus(), 250);
-  });
+  }
+  wn.querySelectorAll(".wn-try").forEach(b => b.addEventListener("click", () => tryMode(b.dataset.try)));
 
   // ---------- Paste a link (General and General Plus) ----------
   // Ships with SCODE Search: same launch day, same ?preview=search for early testing.
@@ -1731,13 +1796,14 @@
     const photo = chatHasPhoto();
     if (typed) {
       if (typed === linkSkipFor) return null;
-      if (isGuest()) return { kind: "info", signin: true, html: "<b>Sign in</b> so SCODE can read this link for you." };
-      if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General or General Plus and I can read this link." };
-      if (photo) return { kind: "info", html: "Links can't be read in a chat with a photo. Start a new chat." };
-      return { kind: "read", url: typed, html: `I'll read <b>${escapeHtml(hostOf(typed))}</b> before answering &middot; +${linkCost}` };
+      if (isGuest()) return { kind: "info", signin: true, html: "<b>Sign in</b> to use SCODE Link and have this page read for you." };
+      if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General or General Plus to use SCODE Link on this page." };
+      if (photo) return { kind: "info", html: "SCODE Link can't be used in a chat with a photo. Start a new chat." };
+      if (!linkOn) return { kind: "suggest", url: typed, html: `Turn on <b>SCODE Link</b> to read ${escapeHtml(hostOf(typed))} &middot; tap here` };
+      return { kind: "read", url: typed, html: `<b>SCODE Link</b> will read ${escapeHtml(hostOf(typed))} before answering &middot; +${linkCost}` };
     }
-    if (activeLink && LINK_TIERS.has(selectedTier) && !photo) {
-      return { kind: "follow", url: activeLink.url, html: `Asking about <b>${escapeHtml(activeLink.domain)}</b> &middot; +${linkCost}` };
+    if (linkOn && activeLink && LINK_TIERS.has(selectedTier) && !photo) {
+      return { kind: "follow", url: activeLink.url, html: `<b>SCODE Link</b> &middot; asking about ${escapeHtml(activeLink.domain)} &middot; +${linkCost}` };
     }
     return null;
   }
@@ -1752,7 +1818,8 @@
     else {
       const t = $("lh-text");
       if (t.innerHTML !== plan.html) t.innerHTML = plan.html;
-      hint.classList.toggle("info", plan.kind === "info");
+      hint.classList.toggle("info", plan.kind === "info" || plan.kind === "suggest");
+      hint.classList.toggle("suggest", plan.kind === "suggest");
       if (!wasShown) hint.classList.add("show");
     }
     if (stick) requestAnimationFrame(() => scrollToBottom(false));
@@ -1760,12 +1827,13 @@
   $("link-hint").addEventListener("click", (e) => {
     if (e.target.closest("#lh-x")) return;
     const plan = linkPlan();
-    if (plan && plan.signin) openAuth("welcome", "Reading links needs a free account.");
+    if (plan && plan.signin) openAuth("welcome", "SCODE Link needs a free account.");
+    else if (plan && plan.kind === "suggest") { setMode("link"); el.input.focus(); }
   });
   $("lh-x").addEventListener("click", () => {
     const plan = linkPlan();
     if (!plan) return;
-    if (plan.kind === "read") linkSkipFor = plan.url;
+    if (plan.kind === "read" || plan.kind === "suggest") linkSkipFor = plan.url;
     else if (plan.kind === "follow") {
       activeLink = null;
       const last = messages[messages.length - 1];
@@ -2011,6 +2079,7 @@
       }
     }
     el.modelPicker.classList.toggle("open");
+    if (opening) el.modelPickerList.scrollTop = 0;   // always open at the top of the list
   });
   document.addEventListener("click", (e) => {
     if (!el.modelPicker.contains(e.target)) el.modelPicker.classList.remove("open");
@@ -2613,7 +2682,10 @@
   const UPCOMING = [
     { id: "search", title: "SCODE Search", launch: "2026-10-09T00:00:00-07:00",
       blurb: "Answers from today's web, with links to every source.",
-      details: "Turn on Search and SCODE AI checks the web before it answers, so you get current info like schedules, news and scores. Every answer lists its sources so you can check them. Also launching: Paste a link, where you drop in any web page, PDF or shared Google Doc to get a summary and a ready-made MLA or APA citation." },
+      details: "Turn on Search and SCODE AI checks the web before it answers, so you get current info like schedules, news and scores. Every answer lists its sources so you can check them." },
+    { id: "link", title: "SCODE Link", launch: "2026-10-09T00:00:00-07:00",
+      blurb: "Paste a link, get a summary and a citation.",
+      details: "Turn on Link and paste any web page, PDF or shared Google Doc. SCODE AI reads it, answers your questions about it, and builds a correct MLA or APA citation from the page's own details." },
     { id: "study", title: "Study Mode",
       blurb: "Turn notes into flashcards and practice quizzes.",
       details: "Paste your notes or snap a photo of a worksheet, and SCODE AI turns it into flashcards and a short practice quiz, giving hints before answers so you actually learn it." },
@@ -2628,9 +2700,9 @@
     { id: "f-search", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Search",
       text: "SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses. Every answer shows the sites it used.",
       how: ["Sign in, then pick General or General Plus.", "Tap the Search button next to the text box so it turns green.", "Ask anything current, like “When do the Canucks play next?”", "Tap a numbered source under the answer to open the page."] },
-    { id: "f-link", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "Paste a link + citations",
-      text: "Drop in a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
-      how: ["On General or General Plus, paste a link into your message, with or without a question.", "A bar says “I'll read … before answering”. Tap ✕ if you don't want it read.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; it keeps using the same page until you tap ✕."] },
+    { id: "f-link", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Link",
+      text: "Paste a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
+      how: ["Sign in, then pick General or General Plus.", "Tap the Link button next to the text box so it turns green.", "Paste a link, with or without a question, and send.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; Link keeps using the same page until you tap ✕."] },
     { id: "f-accounts", type: "feature", date: "2026-10-02", title: "Free SCODE accounts",
       text: "Create a free account to unlock every model, a much bigger budget (1,000 points every 4 hours) and chats saved on your device. Guests can still use General Mini with 100 points an hour.",
       how: ["Tap Sign in at the top right, then Create a free account.", "Enter your name, email and a password.", "Type in the 6-digit code we email you. That's it."] },
@@ -2999,7 +3071,7 @@
           }
           if (chunk.link) {
             const s = chunk.link;
-            if (s.status === "reading" && !revealed && loaderRow._setStage) loaderRow._setStage("Reading the page");
+            if (s.status === "reading" && !revealed && loaderRow._setStage) loaderRow._setStage("SCODE Link is reading the page");
             else if (s.status === "done") linkInfo = s;
             else if (s.status === "failed") linkNote = String(s.message || "Couldn't read that link.");
             continue;
