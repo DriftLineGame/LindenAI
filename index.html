@@ -767,12 +767,32 @@
   @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn { padding: 0 9px; } }
   /* Auto-fit: fitTools() adds .fit1 (drop costs, NEW becomes a dot) then .fit2 (icons only) when the row runs out of room */
   .composer-tools { min-width: 0; }
+  .composer-tools > button { flex-shrink: 0; }
   .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .wcost { display: none; }
   .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { position: relative; padding: 0 10px 0 9px; }
   .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
   .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { width: 34px; padding: 0; justify-content: center; }
   .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .mlabel { display: none; }
   .composer-tools.fit2 .model-picker-btn .mp-quota { display: none; }
+  /* Mode cost: total next to the model name, plus a short pop-up with the breakdown */
+  .model-picker-btn .mp-quota.plus { color: var(--accent); font-weight: 600; }
+  .composer-tools.fit2 .model-picker-btn .mp-quota.plus { display: inline; }
+  #cost-toast { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 6px); z-index: 6;
+    background: var(--text); color: var(--surface); font-size: 12.5px; line-height: 1.35; padding: 7px 13px; border-radius: 999px;
+    box-shadow: var(--shadow); white-space: nowrap; max-width: calc(100vw - 32px); overflow: hidden; text-overflow: ellipsis;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.25s cubic-bezier(.2,.8,.2,1); }
+  #cost-toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .composer-tools.fit3 { gap: 4px; }
+  .composer-tools.fit3 .mp-quota .q-word { display: none; }
+  .composer-tools.fit3 .model-picker-btn { padding: 0 6px; }
+  .composer-tools.fit4 .model-picker-btn .mp-quota.plus { display: none; }
+  .composer-tools.fit5 { gap: 3px; }
+  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { width: 29px; height: 29px; }
+  .composer-tools.fit5 .model-picker-btn { padding: 0 3px; }
+  .composer-tools.fit6 > button { flex-shrink: 1; }
+  .composer-tools.fit6 .model-picker-btn .chev { display: none; }
+  #cost-toast b { font-weight: 700; }
+  @media (max-width: 720px) { #cost-toast { white-space: normal; text-align: center; width: max-content; max-width: calc(100vw - 40px); border-radius: 14px; } }
 
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
@@ -993,6 +1013,54 @@
   .au-err { display: none; font-size: 13px; color: var(--warn); margin: 2px 0 10px; line-height: 1.4; }
   .au-err.show { display: block; animation: auShake 0.35s; }
   @keyframes auShake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+  .au-checks { display: grid; gap: 8px; margin: 4px 0 12px; }
+  .au-tick { display: flex; align-items: center; gap: 10px; font-size: 13.5px; line-height: 1.35; color: var(--text); cursor: pointer; }
+  .au-tick input { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; margin: 0; flex-shrink: 0; border: 1.6px solid var(--border-strong);
+    border-radius: 6px; background: var(--surface); display: grid; place-items: center; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .au-tick input::after { content: ""; width: 10px; height: 6px; border: solid var(--accent-ink); border-width: 0 0 2.2px 2.2px; transform: rotate(-45deg) translate(1px, -1px) scale(0); transition: transform 0.15s; }
+  .au-tick input:checked { background: var(--accent); border-color: var(--accent); }
+  .au-tick input:checked::after { transform: rotate(-45deg) translate(1px, -1px) scale(1); }
+  .au-tick input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .au-tick .au-link { font-size: inherit; padding: 0; }
+  .au-tick.need input { border-color: var(--warn); }
+  .hint-link { background: none; border: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  .hint-link:hover { color: var(--text); }
+  .set-btn { height: 34px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0; }
+  .set-btn:hover { background: var(--hover); }
+  /* Privacy Policy */
+  #privacy-overlay { z-index: 320; padding: 16px; }
+  #privacy-overlay .modal-box { width: 620px; padding: 0; display: flex; flex-direction: column; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow: hidden; }
+  .pv-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 22px 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .pv-date { font-size: 12.5px; color: var(--faint); margin-top: 4px; }
+  .pv-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 6px 24px 20px; font-size: 14px; line-height: 1.6; color: var(--text); }
+  .pv-body:focus { outline: none; }
+  .pv-body h3 { font-family: var(--serif); font-weight: 500; font-size: 18.5px; margin: 22px 0 6px; letter-spacing: -0.01em; }
+  .pv-body p { margin: 0 0 10px; }
+  .pv-body ul { margin: 0 0 10px; padding-left: 20px; }
+  .pv-body li { margin: 4px 0; }
+  .pv-body a { color: var(--accent); }
+  .pv-lead { margin-top: 14px !important; color: var(--muted); }
+  .pv-short { list-style: none; padding: 14px 16px !important; background: var(--accent-soft); border-radius: 14px; }
+  .pv-short li { position: relative; padding-left: 22px; }
+  .pv-short li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 9px; height: 5px; border: solid var(--accent); border-width: 0 0 2px 2px; transform: rotate(-45deg); }
+  .pv-list { margin: 0 0 10px; }
+  .pv-list dt { font-weight: 600; margin-top: 10px; }
+  .pv-list dd { margin: 2px 0 0; color: var(--muted); }
+  .pv-agree-intro { display: none; margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); font-size: 13.5px; }
+  #privacy-overlay.agree .pv-agree-intro { display: block; }
+  #privacy-overlay.agree #pv-close { display: none; }
+  .pv-foot { flex-shrink: 0; border-top: 1px solid var(--border); padding: 14px 22px 18px; display: none; }
+  #privacy-overlay:not(.agree) #pv-foot-read { display: flex; justify-content: flex-end; }
+  #privacy-overlay:not(.agree) #pv-foot-read .wn-btn { flex: 0 0 auto; width: 120px; }
+  #privacy-overlay.agree #pv-foot-agree { display: grid; gap: 8px; }
+  .pv-btns { display: flex; gap: 10px; margin-top: 4px; }
+  .pv-btns .wn-btn.primary { flex: 1.6; }
+  @media (max-width: 720px) {
+    #privacy-overlay { padding: 10px; }
+    #privacy-overlay .modal-box { max-height: calc(100vh - 20px); max-height: calc(100dvh - 20px); }
+    .pv-head { padding: 16px 16px 12px; } .pv-body { padding: 4px 18px 18px; font-size: 14.5px; } .pv-foot { padding: 12px 16px 16px; }
+  }
   .au-note { font-size: 12px; color: var(--faint); line-height: 1.5; margin: 10px 0 0; }
   .au-alt { text-align: center; font-size: 13px; color: var(--muted); margin-top: 14px; }
   .au-link { border: none; background: none; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; padding: 0; }
@@ -1102,6 +1170,7 @@
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
+    .model-picker-btn .mp-quota.plus { display: inline; }
     .model-picker-list { position: fixed; left: 12px; right: 12px; width: auto; max-width: none; bottom: calc(118px + env(safe-area-inset-bottom)); }
     .model-picker.drop-down .model-picker-list { top: auto; bottom: calc(118px + env(safe-area-inset-bottom)); }
     .suggestions { display: none !important; }
@@ -1233,6 +1302,7 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
             </button>
           </div>
+          <div id="cost-toast" role="status" aria-live="polite"></div>
           <div id="wx-hint" role="status">
             <span class="wh-ico" id="wh-ico" aria-hidden="true"></span>
             <span class="wh-text" id="wh-text"></span>
@@ -1276,7 +1346,7 @@
             </button>
             <button id="wx-btn" type="button" aria-pressed="false" title="Weather">
               <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 2.4v1.4M3.8 4.3l1 1M2.4 8.5h1.4M13.2 4.3l-1 1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
-              <span class="mlabel">Weather</span><span class="wnew" id="wx-new" hidden>NEW</span>
+              <span class="mlabel">Weather</span><span class="wcost" id="wx-cost">+1</span><span class="wnew" id="wx-new" hidden>NEW</span>
             </button>
             <button id="img-btn" type="button" aria-pressed="false" title="SCODE Image Gen">
               <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
@@ -1311,7 +1381,7 @@
             <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M5 17l4.5-4 3 2.5L16 12l3 3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Read a photo
           </button>
         </div>
-        <div class="hint">SCODE AI can make mistakes, so double-check anything important. Powered by SCODE.</div>
+        <div class="hint">SCODE AI can make mistakes, so double-check anything important. Powered by SCODE. &middot; <button type="button" class="hint-link" id="hint-privacy">Privacy</button></div>
       </div>
     </div>
   </div>
@@ -1336,9 +1406,119 @@
       </div>
     </div>
     <div class="set-section">
+      <div class="set-section-title">Privacy</div>
+      <div class="set-row">
+        <div>
+          <div class="set-row-title">Privacy Policy</div>
+          <div class="modal-sub">What we collect, who can see it, and our promises to you.</div>
+        </div>
+        <button class="set-btn" id="set-privacy" type="button">Read</button>
+      </div>
+    </div>
+    <div class="set-section">
       <div class="set-section-title">Models</div>
       <div class="modal-sub" style="margin:-4px 0 10px;">Read live from the server hosting Linden.</div>
       <div id="models-section"><div class="health-empty">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="privacy-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pv-title">
+    <div class="pv-head">
+      <div>
+        <h2 id="pv-title">Privacy Policy</h2>
+        <div class="pv-date">SCODE AI &middot; Effective October 3, 2026 &middot; Version 1</div>
+      </div>
+      <button class="icon-btn" id="pv-close" type="button" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="pv-body" id="pv-body" tabindex="0">
+      <div class="pv-agree-intro" id="pv-agree-intro">We've added a Privacy Policy. Please read it, then confirm the two boxes at the bottom to keep using your account.</div>
+      <p class="pv-lead">SCODE AI is a small, independent project run from Campbell River, British Columbia, Canada. This page explains, in plain words, what information we collect, who can see it, and what we promise. Questions? Email <a href="mailto:scodeai2026@gmail.com">scodeai2026@gmail.com</a>.</p>
+
+      <h3>The short version</h3>
+      <ul class="pv-short">
+        <li>We collect as little as we can: your name, email and a scrambled password if you make an account.</li>
+        <li>Your chats are saved only in your own browser, not on our server.</li>
+        <li>The AI runs on our own computer. We don't send your messages to big AI companies.</li>
+        <li>No ads, no tracking, no selling or sharing your information. Ever.</li>
+        <li>You must be 16 or older to make an account.</li>
+        <li>You can delete your account anytime.</li>
+      </ul>
+
+      <h3>Who can use SCODE AI</h3>
+      <p>You must be <b>16 or older</b> to make an account. Guests can try General Mini without an account, and we don't ask guests for any personal details.</p>
+      <p><b>Why 16?</b> Canadian privacy law says people have to really understand what they're agreeing to. Privacy regulators say kids under 13 can't do that on their own, Quebec requires a parent's permission under 14, and Europe uses 16 as its default age. 16 clears all of those without collecting parents' details. We don't use 18 because SCODE AI has no payments, no ads, no public profiles and no way to message other people, and Image Gen has safety filters. If we learn an account belongs to someone under 16, we'll delete it.</p>
+
+      <h3>What we collect</h3>
+      <dl class="pv-list">
+        <dt>Your account</dt><dd>Your name, email address, a scrambled (hashed) copy of your password, when you made the account, and when you agreed to this policy and confirmed your age. We can't see your real password.</dd>
+        <dt>Staying signed in</dt><dd>A random sign-in key saved in your browser. Our server keeps a scrambled copy so it knows it's you. It expires after 90 days of not using SCODE AI.</dd>
+        <dt>Email codes</dt><dd>The 6-digit codes we email you. They're deleted or stop working after 15 minutes.</dd>
+        <dt>Your messages and photos</dt><dd>Sent to our computer so the AI can answer. They're used for that answer and then <b>not saved</b> on our server. Nobody reads them.</dd>
+        <dt>Your chat history</dt><dd>Saved only in your browser on your device (if Save chats is on in Settings). We can't see it. Turning it off, or clearing your browser, deletes it.</dd>
+        <dt>Points</dt><dd>How many points you've used, counted per account (or, for guests, per internet address). This is only kept in memory and is wiped whenever our server restarts.</dd>
+        <dt>Weather location</dt><dd>If you tap &ldquo;Use my location,&rdquo; your browser sends your location once to find the closest town. It isn't saved. The town you pick is remembered only on your device.</dd>
+        <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're <b>not saved</b> on our server.</dd>
+        <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
+      </dl>
+      <p>We don't use cookies for tracking, ads, or analytics. The site only stores things in your browser that make it work (like your sign-in, your settings and your saved chats).</p>
+
+      <h3>Who can see it</h3>
+      <ul>
+        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the account file, and only to keep the service running or answer your requests.</li>
+        <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
+        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). None of these get your name or email.</li>
+        <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
+      </ul>
+      <p>We <b>never sell, rent or trade</b> your information, and we never use it for ads.</p>
+
+      <h3>Where it's kept and for how long</h3>
+      <p>Account information is stored on the SCODE computer in British Columbia, Canada. We keep it until you delete your account. If you delete it, your name, email, password and sign-ins are removed right away.</p>
+
+      <h3>How we protect it</h3>
+      <ul>
+        <li>Passwords are scrambled with a strong one-way method (scrypt).</li>
+        <li>Connections to SCODE AI are encrypted (HTTPS).</li>
+        <li>The account file is never uploaded or made public, and sign-ins are rate-limited to stop guessing.</li>
+      </ul>
+      <p>No system is perfect. If there's ever a breach that could harm you, we'll email you and report it to the privacy regulator as the law requires.</p>
+
+      <h3>Your choices and rights</h3>
+      <ul>
+        <li><b>Delete your account</b> anytime from the account menu (tap your initial, then Delete account).</li>
+        <li><b>See or fix your information:</b> email us and we'll send you what we have or correct it, within 30 days.</li>
+        <li><b>Clear your chats</b> by deleting them, or by turning off Save chats in Settings.</li>
+        <li><b>Take back your agreement</b> by deleting your account.</li>
+      </ul>
+      <p>If you're not happy with how we handled something, you can complain to the Office of the Information and Privacy Commissioner for British Columbia (<a href="https://www.oipc.bc.ca" target="_blank" rel="noopener">oipc.bc.ca</a>).</p>
+
+      <h3>Using the AI safely</h3>
+      <ul>
+        <li>AI can be wrong. Double-check anything important, and never use SCODE AI in an emergency.</li>
+        <li>Don't type private things like passwords, ID numbers, bank details or health details.</li>
+        <li>Don't use SCODE AI for anything illegal, harmful or hateful. Image Gen blocks unsafe requests and pictures. We may block accounts that break these rules.</li>
+      </ul>
+
+      <h3>Changes</h3>
+      <p>If we change this policy in a way that matters, we'll update the date at the top and ask you to read and agree again before you keep using your account.</p>
+
+      <h3>Contact</h3>
+      <p>SCODE AI, Campbell River, BC, Canada &middot; <a href="mailto:scodeai2026@gmail.com">scodeai2026@gmail.com</a></p>
+    </div>
+    <div class="pv-foot" id="pv-foot-agree">
+      <label class="au-tick"><input type="checkbox" id="pv-read"><span>I've read the Privacy Policy</span></label>
+      <label class="au-tick"><input type="checkbox" id="pv-age"><span>I'm 16 years old or older</span></label>
+      <div class="au-err" id="pv-err"></div>
+      <div class="pv-btns">
+        <button class="wn-btn" type="button" id="pv-signout">Sign out</button>
+        <button class="wn-btn primary" type="button" id="pv-agree">Agree and continue</button>
+      </div>
+    </div>
+    <div class="pv-foot" id="pv-foot-read">
+      <button class="wn-btn primary" type="button" id="pv-done">Done</button>
     </div>
   </div>
 </div>
@@ -1378,7 +1558,7 @@
         </div>
         <div class="wn-feat">
           <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 2.6v1.3M3.9 4.4l.9.9M2.6 8.5h1.3M13.1 4.4l-.9.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <div class="wn-ft"><b>SCODE Weather</b><span>Real Environment Canada forecasts, in plain words. Free for everyone.</span></div>
+          <div class="wn-ft"><b>SCODE Weather</b><span>Real Environment Canada forecasts, in plain words. Works without an account.</span></div>
           <button class="wn-try" type="button" data-try="weather">Try</button>
         </div>
         <div class="wn-feat">
@@ -1426,9 +1606,13 @@
       <label class="au-field"><span>Name</span><input name="name" autocomplete="given-name" maxlength="40" required></label>
       <label class="au-field"><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
       <label class="au-field"><span>Password</span><div class="au-pw"><input name="password" type="password" autocomplete="new-password" minlength="8" required><button type="button" class="au-eye">Show</button></div></label>
+      <div class="au-checks">
+        <label class="au-tick"><input type="checkbox" name="policy"><span>I've read the <button type="button" class="au-link au-policy">Privacy Policy</button></span></label>
+        <label class="au-tick"><input type="checkbox" name="age"><span>I'm 16 years old or older</span></label>
+      </div>
       <div class="au-err"></div>
       <div class="au-btns"><button class="wn-btn primary" type="submit">Create account</button></div>
-      <p class="au-note">Your name, email and a scrambled copy of your password are stored on the SCODE server. We only email you codes, and we never share your details. You can delete your account anytime.</p>
+      <p class="au-note">Your name, email and a scrambled copy of your password are stored on the SCODE server. We never sell or share your details. You can delete your account anytime.</p>
       <div class="au-alt">Already have an account? <button class="au-link" type="button" data-go="signin">Sign in</button></div>
     </form>
 
@@ -1531,6 +1715,7 @@
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
   try { auth = JSON.parse(localStorage.getItem("scode_auth") || "null"); } catch (e) {}
+  const PRIVACY_VERSION = 1;   // match PRIVACY_VERSION in linden_proxy.py
   if (!auth || !auth.token) auth = null;
   var GUEST_TIERS = new Set(["l1"]);   // the server can override this via /status
   var guestLimit = 100;
@@ -1685,6 +1870,7 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       if (el.confirmOverlay.classList.contains("show")) { el.confirmCancel.click(); return; }
+      if ($("privacy-overlay").classList.contains("show")) { if (!$("privacy-overlay").classList.contains("agree")) closePrivacy(); return; }
       if ($("whatsnew").classList.contains("show")) { $("wn-close").click(); return; }
       if ($("auth-overlay").classList.contains("show")) { $("auth-overlay").classList.remove("show"); return; }
       if ($("news-overlay").classList.contains("show")) { $("news-overlay").classList.remove("show"); return; }
@@ -2022,6 +2208,7 @@
   var STUDY_TIERS = new Set(["l2", "l2_5", "l4"]);
   let searchCost = 5;
   var studyCost = 5;
+  var weatherCost = 1;
   let webOn = false;
   var linkOn = false;                        // SCODE Link mode
   var studyOn = false;                       // Study Mode (only one mode is on at a time)
@@ -2094,7 +2281,8 @@
     $("wx-new").hidden = !(xAvail && xState === "off" && typeof weatherIsNew === "function" && weatherIsNew());
     xb.title = xState === "on" ? "Weather is on: every message gets the Environment Canada forecast"
       : xState === "auto" ? "Weather turned on by itself for this question. Tap to skip the forecast."
-      : "Weather: answer from the Environment Canada forecast (free)";
+      : `Weather: answer from the Environment Canada forecast (+${weatherCost} per message)`;
+    $("wx-cost").textContent = "+" + weatherCost;
     // Image Gen: same idea as Weather (on by hand, or lit up by itself for "draw me…").
     const iAvail = typeof imageUnlocked === "function" && imageUnlocked();
     const iState = iAvail ? imgState() : "off";
@@ -2103,7 +2291,7 @@
     ib.classList.toggle("on", iState !== "off");
     ib.classList.toggle("auto", iState === "auto");
     ib.setAttribute("aria-pressed", String(iState !== "off"));
-    $("img-cost").textContent = "+" + (typeof imageCost !== "undefined" ? imageCost : 25);
+    $("img-cost").textContent = "+" + (typeof imageCost !== "undefined" ? imageCost : 30);
     $("img-new").hidden = !(iAvail && iState === "off" && typeof imageIsNew === "function" && imageIsNew());
     ib.title = iState === "on" ? "SCODE Image Gen is on: describe a picture"
       : iState === "auto" ? "Image Gen turned on by itself. Tap to send this as a normal message."
@@ -2113,7 +2301,53 @@
       : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
+    updateCostInfo();
   }
+  // ---------- What the next message costs ----------
+  // Returns the mode that will add points to the next message (or null), so the
+  // model picker can show the real total and a pop-up can explain it.
+  function activeCostMode() {
+    if (typeof TIER_INFO === "undefined" || !TIER_INFO[selectedTier]) return null;
+    const iOn = typeof imageUnlocked === "function" && imageUnlocked() && imgState() !== "off";
+    if (iOn) return { key: "image", name: "Image Gen", extra: imageCost, unit: "picture" };
+    if (studyActive()) return { key: "study", name: "Study", extra: studyCost, unit: "set" };
+    const photo = chatHasPhoto();
+    const lp = (typeof linkPlan === "function" && typeof LINK_TIERS !== "undefined") ? linkPlan() : null;
+    if (lp && (lp.kind === "read" || lp.kind === "follow")) return { key: "link", name: "Link", extra: linkCost, unit: "message" };
+    if (searchUnlocked() && webOn && WEB_TIERS.has(selectedTier) && !photo) return { key: "search", name: "Search", extra: searchCost, unit: "message" };
+    if (typeof weatherUnlocked === "function" && weatherUnlocked() && wxState() !== "off") return { key: "weather", name: "Weather", extra: weatherCost, unit: "message" };
+    if (linkOn && searchUnlocked() && !photo) return { key: "link-idle", name: "Link", extra: linkCost, unit: "message", idle: true };
+    return null;
+  }
+  var lastCostKey = null, costToastTimer = null;
+  function updateCostInfo() {
+    if (typeof TIER_INFO === "undefined" || !TIER_INFO[selectedTier] || !el.mpQuota) return;
+    const info = TIER_INFO[selectedTier];
+    const m = activeCostMode();
+    const base = (m && m.key === "image") ? info.cost : info.cost * (chatHasPhoto() ? 2 : 1);
+    const charged = m && !m.idle;
+    const total = base + (charged ? m.extra : 0);
+    el.mpQuota.innerHTML = '<span class="q-word">cost </span>' + total;
+    el.mpQuota.classList.toggle("plus", !!charged);
+    el.modelPickerBtn.title = charged
+      ? `${total} points per ${m.unit}: ${info.label} ${base} + ${m.name} ${m.extra}`
+      : `${info.label}: ${base} points per message`;
+    const key = m ? m.key + ":" + selectedTier : null;
+    if (key !== lastCostKey) {
+      lastCostKey = key;
+      if (m) showCostToast(m.idle
+        ? `<b>Link is on</b> · paste a link: +${m.extra} when it reads the page (${base + m.extra} total)`
+        : `<b>${m.name} is on</b> · ${info.label} ${base} + ${m.name} ${m.extra} = <b>${total} points</b> per ${m.unit}`);
+      else hideCostToast();
+    }
+  }
+  function showCostToast(html) {
+    const t = $("cost-toast"); if (!t) return;
+    t.innerHTML = html; t.classList.add("show");
+    clearTimeout(costToastTimer); costToastTimer = setTimeout(hideCostToast, 4200);
+  }
+  function hideCostToast() { const t = $("cost-toast"); if (t) t.classList.remove("show"); clearTimeout(costToastTimer); }
+  el.input.addEventListener("input", () => updateCostInfo());
   function setMode(mode) {
     // "search", "link", "study" or null. Only one at a time.
     webOn = mode === "search";
@@ -2178,11 +2412,11 @@
     weather: { icon: WN_WEATHER_ICON, tag: "New", title: "Introducing Local weather",
       sub: "Ask about the weather and get the real Environment Canada forecast for your town, not a guess.",
       name: "Local weather", text: "Ask &ldquo;Do I need a jacket tomorrow?&rdquo; and get a straight answer, plus the next hours, the week and any warnings.",
-      cost: () => "Free on every model, even without an account." },
+      cost: () => `Every model, even without an account · +${weatherCost} point per message` },
     image: { icon: WN_IMAGE_ICON, tag: "New · Beta", title: "Introducing SCODE Image Gen",
       sub: "Describe a picture and SCODE AI paints it for you, right on the SCODE server.",
       name: "SCODE Image Gen", text: "Type something like &ldquo;a cozy cabin in a snowy forest at night&rdquo; and watch it appear. Download it when it's done.",
-      cost: () => `Free account · +${imageCost} points per picture · about ${Math.max(10, Math.round(imageEta / 5) * 5)} seconds each` },
+      cost: () => `Free account · model cost +${imageCost} points per picture · about ${Math.max(10, Math.round(imageEta / 5) * 5)} seconds each` },
   };
   function fillFeaturePopup(key) {
     const f = FEATURE_POPUPS[key];
@@ -2210,7 +2444,7 @@
     }
     if (!which) return;
     if (which === "big") {
-      $("wn-cost-line").textContent = `Weather is free for everyone · the rest need a free account · Image Gen +${imageCost} per picture`;
+      $("wn-cost-line").textContent = `On top of the model's cost: Search +${searchCost} · Link +${linkCost} · Study +${studyCost} · Weather +${weatherCost} · Image Gen +${imageCost}`;
       const orbs = wn.querySelector(".wn-orbs");
       orbs.classList.add("many");
       orbs.innerHTML = [...wn.querySelectorAll(".wn-feat .wn-fi svg")].map(s => `<div class="wn-orb">${s.outerHTML}</div>`).join("");
@@ -2262,7 +2496,7 @@
   // Ships with SCODE Search: same launch day, same ?preview=search for early testing.
   // (These use var so they exist even if something renders before this point runs.)
   var LINK_TIERS = new Set(["l2", "l2_5"]);   // the server can override this via /status
-  var linkCost = 5;
+  var linkCost = 1;
   var activeLink = null;      // { url, domain } of the page the chat is about, for follow-ups
   var linkSkipFor = null;     // a typed link the visitor said not to read
   var URL_FIND = /\bhttps?:\/\/[^\s<>"'`]+|\bwww\.[^\s<>"'`]+/i;
@@ -2475,6 +2709,7 @@
     const info = TIER_INFO[selectedTier];
     el.mpName.textContent = info.label;
     el.mpQuota.textContent = "cost " + info.cost;
+    if (typeof updateCostInfo === "function") updateCostInfo();
     document.querySelectorAll(".model-picker-option").forEach(opt => {
       opt.classList.toggle("selected", opt.dataset.tier === selectedTier);
     });
@@ -3400,7 +3635,7 @@
   // It also needs the image add-ons installed on the laptop (the proxy reports that in /status).
   var IMAGE_LAUNCH = Date.parse("2026-10-03T00:00:00-07:00");
   var imagePreview = /[?&]preview=image\b/.test(location.search);
-  var imageServerOn = false, imageCost = 25, imageEta = 40;
+  var imageServerOn = false, imageCost = 30, imageEta = 40;
   var imgSkipped = false, imgForceOnce = false;
   function imageUnlocked() { return !!imageServerOn && (imagePreview || Date.now() >= IMAGE_LAUNCH); }
   function imageIsNew() { return Date.now() >= IMAGE_LAUNCH && Date.now() < IMAGE_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; }
@@ -3432,7 +3667,7 @@
     else {
       const html = isGuest()
         ? '<b>SCODE Image Gen</b> &middot; <button type="button" data-img="signin">Sign in</button> to make pictures'
-        : `<b>SCODE Image Gen</b> &middot; describe your picture &middot; about ${Math.max(10, Math.round(imageEta / 5) * 5)} s &middot; +${imageCost}`;
+        : `<b>SCODE Image Gen</b> &middot; describe your picture &middot; about ${Math.max(10, Math.round(imageEta / 5) * 5)} s &middot; ${(TIER_INFO[selectedTier] ? TIER_INFO[selectedTier].cost : 0) + imageCost} points`;
       const t = $("ih-text");
       if (t.innerHTML !== html) t.innerHTML = html;
       $("ih-x").title = st === "on" ? "Turn off Image Gen" : "Don't make a picture";
@@ -3582,6 +3817,10 @@
       el.statusDot.className = "status-dot ok";
       // A sign-in that expired (or an account deleted elsewhere) falls back to guest.
       if (auth && data.token_valid === false) { signOutLocal(); showNote("You've been signed out. Sign in again to get every model back."); }
+      if (auth && data.account && data.account.policy_ok === false && !privacyAskedThisLoad) {
+        privacyAskedThisLoad = true;
+        openPrivacy(true);
+      }
       if (auth && data.account) {
         if (data.account.name !== auth.name) { auth.name = data.account.name; saveAuth(); updateAccountUI(); }
       }
@@ -3600,6 +3839,7 @@
       if (typeof data.weather === "boolean") weatherServerOn = data.weather;
       if (typeof data.image === "boolean") imageServerOn = data.image;
       if (typeof data.image_cost === "number") imageCost = data.image_cost;
+      if (typeof data.weather_cost === "number") weatherCost = data.weather_cost;
       if (typeof data.image_eta === "number") imageEta = data.image_eta;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
@@ -3664,6 +3904,50 @@
     e.textContent = msg;
     e.classList.remove("show"); void e.offsetWidth; e.classList.add("show");
   }
+  // ---------- Privacy Policy ----------
+  // Read from Settings, the footer or the sign-up form. Accounts made before the
+  // policy existed see it once with two boxes to check ("agree" mode).
+  var privacyAskedThisLoad = false;
+  function openPrivacy(agree) {
+    const ov = $("privacy-overlay");
+    ov.classList.toggle("agree", !!agree);
+    $("pv-close").hidden = !!agree;
+    $("pv-err").classList.remove("show");
+    if (agree) { $("pv-read").checked = false; $("pv-age").checked = false; }
+    $("pv-body").scrollTop = 0;
+    ov.classList.add("show");
+    setTimeout(() => $("pv-body").focus({ preventScroll: true }), 60);
+  }
+  function closePrivacy() { $("privacy-overlay").classList.remove("show"); }
+  $("pv-close").addEventListener("click", closePrivacy);
+  $("pv-done").addEventListener("click", closePrivacy);
+  $("privacy-overlay").addEventListener("click", (e) => {
+    if (e.target === $("privacy-overlay") && !$("privacy-overlay").classList.contains("agree")) closePrivacy();
+  });
+  $("set-privacy").addEventListener("click", () => openPrivacy(false));
+  $("hint-privacy").addEventListener("click", () => openPrivacy(false));
+  authOv.querySelectorAll(".au-policy").forEach(b => b.addEventListener("click", (e) => { e.preventDefault(); openPrivacy(false); }));
+  authOv.querySelectorAll('form[data-view="signup"] .au-tick input').forEach(i =>
+    i.addEventListener("change", () => i.closest(".au-tick").classList.remove("need")));
+  $("pv-agree").addEventListener("click", async () => {
+    const err = $("pv-err");
+    const fail = (m) => { err.textContent = m; err.classList.add("show"); };
+    if (!$("pv-read").checked) return fail("Please check that you've read the Privacy Policy.");
+    if (!$("pv-age").checked) return fail("SCODE accounts are for people 16 and older. If you're under 16, please delete your account from the account menu, or sign out and keep using SCODE AI as a guest.");
+    $("pv-agree").disabled = true;
+    const r = await authApi("/auth/agree", { policy: PRIVACY_VERSION, age_ok: true }, true);
+    $("pv-agree").disabled = false;
+    if (!r.ok) return fail(r.data.message || "Couldn't save that. Try again.");
+    closePrivacy();
+    checkStatus();
+  });
+  $("pv-signout").addEventListener("click", async () => {
+    try { await authApi("/auth/logout", {}, true); } catch (e) {}
+    signOutLocal();
+    closePrivacy();
+    checkStatus();
+  });
+
   async function authApi(path, body, withToken) {
     let res;
     try {
@@ -3772,8 +4056,12 @@
     if (!name) return authError("signup", "Enter your name.");
     if (!/^\S+@\S+\.\S{2,}$/.test(email)) return authError("signup", "That email doesn't look right.");
     if (password.length < 8) return authError("signup", "Use a password with at least 8 characters.");
+    f.policy.closest(".au-tick").classList.toggle("need", !f.policy.checked);
+    f.age.closest(".au-tick").classList.toggle("need", !f.age.checked);
+    if (!f.policy.checked) return authError("signup", "Please read the Privacy Policy and check the box to say you have.");
+    if (!f.age.checked) return authError("signup", "You need to be 16 or older to make a SCODE account.");
     busy(f, true);
-    const r = await authApi("/auth/signup", { name, email, password });
+    const r = await authApi("/auth/signup", { name, email, password, policy: PRIVACY_VERSION, age_ok: true });
     busy(f, false);
     if (!r.ok) {
       if (r.data.error === "exists") { formOf("signin").email.value = email; authView("signin"); authError("signin", r.data.message); return; }
@@ -3923,6 +4211,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "u-privacy", type: "feature", date: "2026-10-03", title: "Privacy Policy and clearer point costs",
+      text: "SCODE AI now has a Privacy Policy that explains what we collect, who can see it and our promises to you. Read it any time in Settings. Accounts are for people 16 and older. Modes now show exactly what a message costs: tap one and you'll see the model's cost plus the mode's, added up next to the model name. Links to long papers also get more time to load.",
+      how: ["Open Settings (the sliders icon) and tap Read next to Privacy Policy.", "Turn on a mode, like Search, and look next to the model name for the total.", "Search +5, Link +1, Study +5, Weather +1, Image Gen +30, on top of the model."] },
     { id: "f-search", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Search",
       text: "SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses. Every answer shows the sites it used.",
       how: ["Sign in, then pick General or General Plus.", "Tap the Search button next to the text box so it turns green.", "Ask anything current, like “When do the Canucks play next?”", "Tap a numbered source under the answer to open the page."] },
@@ -3936,7 +4227,7 @@
       text: "Turn notes, a photo of a worksheet, a link or just a topic into flip-card flashcards or a practice quiz, with hints, explanations and a score at the end.",
       how: ["Sign in, then pick General, General Plus or General Ultra.", "Tap the Study button next to the text box so it turns green.", "Pick Flashcards or Practice quiz in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Tap a card to flip it, or pick an answer. You'll see your score at the end."] },
     { id: "f-weather", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "Local weather",
-      text: "Ask about the weather and SCODE AI answers from the real Environment Canada forecast for your town. A card under the answer shows right now, the next 12 hours, the week ahead and any weather warnings. Free on every model.",
+      text: "Ask about the weather and SCODE AI answers from the real Environment Canada forecast for your town. A card under the answer shows right now, the next 12 hours, the week ahead and any weather warnings. Works on every model for +1 point.",
       how: ["Ask something like “Do I need a jacket tomorrow?” and the Weather button turns on by itself, or tap Weather to keep it on.", "The first time, tap Use my location or pick your town in the bar above the text box.", "Ask follow-ups like “What about Sunday?” and it keeps using the same forecast.", "To change towns, tap Change in that bar, or name the town in your question."] },
     { id: "f-accounts", type: "feature", date: "2026-10-02", title: "Free SCODE accounts",
       text: "Create a free account to unlock every model, a much bigger budget (1,000 points every 4 hours) and chats saved on your device. Guests can still use General Mini with 100 points an hour.",
@@ -4190,6 +4481,11 @@
           const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
           showNote(data.message || `You're out of budget. It refills at ${renewTime}.`);
           if (data.guest) openAuth("welcome", `You've used your ${guestLimit} guest points for this hour. They refill at ${renewTime}.`);
+        } else if (res.status === 403 && data.error === "policy_required") {
+          messages.pop();
+          renderMessages();
+          el.input.value = text; autoGrow();
+          openPrivacy(true);
         } else if (res.status === 403 && data.error === "signin_required") {
           // The server says this needs an account: put their message back so nothing is lost.
           messages.pop();
@@ -4505,8 +4801,8 @@
     let busy = false;
     function fitTools() {
       if (busy) return; busy = true;
-      tools.classList.remove("fit1", "fit2");
-      if (over()) { tools.classList.add("fit1"); if (over()) tools.classList.add("fit2"); }
+      tools.classList.remove("fit1", "fit2", "fit3", "fit4", "fit5", "fit6");
+      for (const k of ["fit1", "fit2", "fit3", "fit4", "fit5", "fit6"]) { if (!over()) break; tools.classList.add(k); }
       busy = false;
     }
     window.fitTools = fitTools;
