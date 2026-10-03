@@ -895,6 +895,9 @@
   #whatsnew.show .wn-feat:nth-child(1) { animation-delay: 0.3s; }
   #whatsnew.show .wn-feat:nth-child(2) { animation-delay: 0.42s; }
   #whatsnew.show .wn-feat:nth-child(3) { animation-delay: 0.54s; }
+  #whatsnew.show .wn-feat:nth-child(4) { animation-delay: 0.66s; }
+  #whatsnew.show .wn-feat:nth-child(5) { animation-delay: 0.78s; }
+  @media (max-width: 720px) { .wn-feat .wn-ft span { display: none; } .wn-feat { padding: 8px 10px; } .wn-try { height: 30px; } }
   .wn-fi { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .wn-fi svg { width: 21px; height: 21px; }
   .wn-ft { flex: 1; min-width: 0; }
@@ -1320,8 +1323,8 @@
     </div>
     <div class="wn-body">
       <span class="wn-tag">New &middot; Beta</span>
-      <h2 id="wn-title">Introducing Search, Link &amp; Study Mode</h2>
-      <div class="modal-sub">Three new ways to get answers you can trust and actually learn the stuff.</div>
+      <h2 id="wn-title">Five new things in SCODE AI</h2>
+      <div class="modal-sub">Search, Link, Study, Weather and Image Gen are all here. Tap Try on any of them.</div>
       <div class="wn-feats">
         <div class="wn-feat">
           <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
@@ -1335,8 +1338,18 @@
         </div>
         <div class="wn-feat">
           <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M7 11h5M7 15h3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
-          <div class="wn-ft"><b>Study Mode</b><span>Turn notes, a photo or a topic into flashcards or a practice quiz.</span></div>
+          <div class="wn-ft"><b>SCODE Study</b><span>Turn notes, a photo or a topic into flashcards or a practice quiz.</span></div>
           <button class="wn-try" type="button" data-try="study">Try</button>
+        </div>
+        <div class="wn-feat">
+          <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 2.6v1.3M3.9 4.4l.9.9M2.6 8.5h1.3M13.1 4.4l-.9.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div class="wn-ft"><b>SCODE Weather</b><span>Real Environment Canada forecasts, in plain words. Free for everyone.</span></div>
+          <button class="wn-try" type="button" data-try="weather">Try</button>
+        </div>
+        <div class="wn-feat">
+          <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div class="wn-ft"><b>SCODE Image Gen</b><span>Describe a picture and watch it appear, then download it.</span></div>
+          <button class="wn-try" type="button" data-try="image">Try</button>
         </div>
       </div>
       <p class="wn-small" id="wn-cost-line">On General and General Plus &middot; +5 points per message</p>
@@ -1955,7 +1968,7 @@
   // ---------- SCODE Search + SCODE Link: mode buttons (General and General Plus) ----------
   // Both unlock on launch day. Before then, add ?preview=search to the site's link
   // to test them on your own device (?preview=off turns preview back off).
-  const SEARCH_LAUNCH = Date.parse("2026-10-09T00:00:00-07:00");   // Oct 9, midnight Pacific
+  const SEARCH_LAUNCH = Date.parse("2026-10-03T00:00:00-07:00");   // Oct 3, midnight Pacific
   const LAUNCH_POPUP_DAYS = 3;                                      // launch popup shows for 3 days
   const SEARCH_NEW_UNTIL = SEARCH_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; // "NEW" badges for the same 3 days
   // Preview only works while the link actually ends in ?preview=search (nothing is remembered).
@@ -2160,7 +2173,7 @@
       which = searchIsNew() ? "big" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
     }
     if (!which) return;
-    if (which === "big") $("wn-cost-line").textContent = `Search and Link: General and General Plus, +${searchCost} per message · Study: General, Plus and Ultra, +${studyCost} per set`;
+    if (which === "big") $("wn-cost-line").textContent = `Weather is free for everyone · the rest need a free account · Image Gen +${imageCost} per picture`;
     else fillFeaturePopup(which);
     wn.classList.add("show");
   }
@@ -3342,9 +3355,9 @@
   }
 
   // ---------- SCODE Image Gen ----------
-  // Launches Nov 1 at midnight Pacific. Before then, ?preview=image shows it.
+  // Launches Oct 3 at midnight Pacific. Before then, ?preview=image shows it.
   // It also needs the image add-ons installed on the laptop (the proxy reports that in /status).
-  var IMAGE_LAUNCH = Date.parse("2026-11-01T00:00:00-07:00");
+  var IMAGE_LAUNCH = Date.parse("2026-10-03T00:00:00-07:00");
   var imagePreview = /[?&]preview=image\b/.test(location.search);
   var imageServerOn = false, imageCost = 25, imageEta = 40;
   var imgSkipped = false, imgForceOnce = false;
@@ -3852,33 +3865,33 @@
   //  "showFrom" hides an entry until that date (for launches).
   // =====================================================================
   const UPCOMING = [
-    { id: "search", title: "SCODE Search", launch: "2026-10-09T00:00:00-07:00",
+    { id: "search", title: "SCODE Search", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Answers from today's web, with links to every source.",
       details: "Turn on Search and SCODE AI checks the web before it answers, so you get current info like schedules, news and scores. Every answer lists its sources so you can check them." },
-    { id: "link", title: "SCODE Link", launch: "2026-10-09T00:00:00-07:00",
+    { id: "link", title: "SCODE Link", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Paste a link, get a summary and a citation.",
       details: "Turn on Link and paste any web page, PDF or shared Google Doc. SCODE AI reads it, answers your questions about it, and builds a correct MLA or APA citation from the page's own details." },
-    { id: "study", title: "Study Mode", launch: "2026-10-09T00:00:00-07:00",
+    { id: "study", title: "Study Mode", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Turn notes into flashcards and practice quizzes.",
       details: "Turn on Study, then paste your notes, add a photo of a worksheet, paste a link, or just name a topic. SCODE AI makes a deck of flip cards or a practice quiz with hints, explanations and a score at the end, so you actually learn it." },
     { id: "weather", title: "Local weather", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Real forecasts, right in the chat.",
       details: "Ask “do I need a jacket tomorrow?” and get an answer from real Environment Canada forecast data, not a guess." },
-    { id: "imagegen", title: "SCODE Image Gen", launch: "2026-11-01T00:00:00-07:00",
+    { id: "imagegen", title: "SCODE Image Gen", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Describe a picture and get one back.",
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
-    { id: "f-search", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Search",
+    { id: "f-search", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Search",
       text: "SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses. Every answer shows the sites it used.",
       how: ["Sign in, then pick General or General Plus.", "Tap the Search button next to the text box so it turns green.", "Ask anything current, like “When do the Canucks play next?”", "Tap a numbered source under the answer to open the page."] },
-    { id: "f-link", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Link",
+    { id: "f-link", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Link",
       text: "Paste a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
       how: ["Sign in, then pick General or General Plus.", "Tap the Link button next to the text box so it turns green.", "Paste a link, with or without a question, and send.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; Link keeps using the same page until you tap ✕."] },
-    { id: "f-image", type: "feature", date: "2026-11-01", showFrom: "2026-11-01T00:00:00-07:00", title: "SCODE Image Gen",
+    { id: "f-image", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Image Gen",
       text: "Describe a picture and SCODE AI makes it, right on the SCODE server, in about 40 seconds. Every picture goes through a safety filter, and nothing is saved on the server.",
       how: ["Sign in, then tap the Image button next to the text box (or just type “draw me…”).", "Describe what you want to see, like “a red kayak on a calm lake at sunrise”.", "Watch it appear, then tap Download to save it, or Try again for a new version."] },
-    { id: "f-study", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "Study Mode",
+    { id: "f-study", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "Study Mode",
       text: "Turn notes, a photo of a worksheet, a link or just a topic into flip-card flashcards or a practice quiz, with hints, explanations and a score at the end.",
       how: ["Sign in, then pick General, General Plus or General Ultra.", "Tap the Study button next to the text box so it turns green.", "Pick Flashcards or Practice quiz in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Tap a card to flip it, or pick an answer. You'll see your score at the end."] },
     { id: "f-weather", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "Local weather",
@@ -3893,11 +3906,11 @@
     { id: "f-beta", type: "feature", date: "2026-09", title: "SCODE AI public beta",
       text: "SCODE AI opened to everyone with five models, from the tiny, instant General Mini to General Pro, which thinks step by step, and General Ultra, which reads text in photos.",
       how: ["Pick a model with the button at the bottom right of the text box.", "Each message costs points from your budget, and bigger models cost more."] },
-    { id: "x-dates", type: "fix", date: "2026-10-02", showFrom: "2026-10-09T00:00:00-07:00", title: "Search knows today's date",
+    { id: "x-dates", type: "fix", date: "2026-10-02", showFrom: "2026-10-03T00:00:00-07:00", title: "Search knows today's date",
       text: "Questions like “when's the next game?” no longer get answers about games or events that already happened." },
-    { id: "x-labels", type: "fix", date: "2026-10-02", showFrom: "2026-10-09T00:00:00-07:00", title: "Cleaner Search answers",
+    { id: "x-labels", type: "fix", date: "2026-10-02", showFrom: "2026-10-03T00:00:00-07:00", title: "Cleaner Search answers",
       text: "Removed stray labels like “(past)” that sometimes showed up inside Search answers." },
-    { id: "x-linkcard", type: "fix", date: "2026-10-02", showFrom: "2026-10-09T00:00:00-07:00", title: "Link cards stay in view",
+    { id: "x-linkcard", type: "fix", date: "2026-10-02", showFrom: "2026-10-03T00:00:00-07:00", title: "Link cards stay in view",
       text: "The link card under an answer no longer hides behind the text box, and link summaries stick to what the page actually says." },
     { id: "x-safari", type: "fix", date: "2026-09", title: "Better on iPhone",
       text: "Fixed the chat list covering most of the screen in Safari on iPhone." },
