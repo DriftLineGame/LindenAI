@@ -330,6 +330,94 @@
   #link-hint.suggest:hover { background: var(--accent-soft); }
   @keyframes hintIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
+  /* Local weather: hint above the text box */
+  #wx-hint { display: none; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: var(--muted);
+    background: var(--accent-soft); border-radius: 10px; padding: 5px 6px 5px 10px; margin: 0 2px 8px -4px; }
+  #wx-btn.auto { border-style: dashed; }
+  #wx-hint.show { display: flex; animation: hintIn 0.35s cubic-bezier(.2,.8,.2,1); }
+  #wx-hint .wh-ico { width: 17px; height: 17px; flex-shrink: 0; display: flex; }
+  #wx-hint .wh-ico svg { width: 17px; height: 17px; }
+  #wx-hint .wh-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #wx-hint b { color: var(--text); font-weight: 600; }
+  #wx-hint .wh-text button { border: none; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  #wh-x { border: none; background: none; color: var(--faint); cursor: pointer; width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #wh-x:hover { background: var(--hover); color: var(--text); }
+  .wh-pick { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .wh-pick[hidden] { display: none; }
+  #wh-input { width: 100%; height: 30px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--surface); color: var(--text);
+    font: inherit; font-size: 13.5px; padding: 0 10px; outline: none; }
+  #wh-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .wh-towns { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wh-towns:empty { display: none; }
+  .wh-towns button { border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 12.5px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .wh-towns button:hover, .wh-towns button:focus-visible { border-color: var(--accent); background: var(--accent-soft); outline: none; }
+  .wh-towns span { font-size: 12px; color: var(--faint); padding: 3px 2px; }
+
+  /* Local weather: the card under the answer */
+  :root { --wx-sun: #f2a93b; --wx-drop: #4b8fd6; --wx-bolt: #f2b630; --wx-cloud: #9aa3ad; --wx-moon: #b9c2d6; }
+  .wx-card { margin-top: 10px; max-width: 560px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); overflow: hidden;
+    opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
+  .wx-top { display: flex; align-items: center; gap: 14px; padding: 16px 16px 10px;
+    background: radial-gradient(130% 140% at 0% 0%, var(--accent-soft), transparent 60%); }
+  .wx-big { width: 60px; height: 60px; flex-shrink: 0; }
+  .wx-big svg { width: 60px; height: 60px; }
+  .wx-temp { font-family: var(--serif); font-size: 44px; line-height: 1; letter-spacing: -0.03em; color: var(--text); font-variant-numeric: tabular-nums; }
+  .wx-temp sup { font-size: 20px; vertical-align: top; margin-left: 1px; color: var(--muted); }
+  .wx-what { min-width: 0; flex: 1; }
+  .wx-cond { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .wx-place { font-size: 12.5px; color: var(--muted); margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+  .wx-place svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .wx-stats { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; }
+  .wx-stats span { font-size: 12px; color: var(--muted); background: var(--hover); border-radius: 20px; padding: 3px 9px; font-variant-numeric: tabular-nums; }
+  .wx-stats b { color: var(--text); font-weight: 600; }
+  .wx-warn { display: flex; align-items: center; gap: 8px; margin: 0 16px 12px; padding: 9px 11px; border-radius: 11px; font-size: 13px; font-weight: 600;
+    text-decoration: none; background: rgba(242,182,48,0.16); color: var(--text); border: 1px solid rgba(242,182,48,0.45); }
+  .wx-warn.warning { background: rgba(214,69,65,0.12); border-color: rgba(214,69,65,0.45); }
+  .wx-warn.watch { background: rgba(240,130,50,0.14); border-color: rgba(240,130,50,0.45); }
+  .wx-warn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .wx-warn span { flex: 1; }
+  .wx-warn small { font-size: 11.5px; color: var(--muted); font-weight: 500; }
+  .wx-sec { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 2px 16px 6px; }
+  .wx-scroll { display: flex; gap: 4px; overflow-x: auto; padding: 0 12px 12px; scroll-snap-type: x proximity; scrollbar-width: thin;
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+  .wx-scroll::-webkit-scrollbar { height: 4px; }
+  .wx-scroll::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+  .wx-h, .wx-d { flex: 0 0 auto; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; gap: 3px; border-radius: 12px; font-variant-numeric: tabular-nums; }
+  .wx-h { width: 50px; padding: 6px 0; }
+  .wx-h small { font-size: 11px; color: var(--faint); white-space: nowrap; }
+  .wx-h svg { width: 26px; height: 26px; }
+  .wx-h b { font-size: 13.5px; color: var(--text); font-weight: 600; }
+  .wx-pop { font-size: 10.5px; font-weight: 600; color: var(--wx-drop); min-height: 13px; }
+  .wx-d { width: 78px; padding: 8px 4px; background: var(--surface-2); border: 1px solid var(--border); }
+  .wx-d.night { background: transparent; }
+  .wx-d small { font-size: 11.5px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .wx-d svg { width: 32px; height: 32px; }
+  .wx-d b { font-size: 14px; color: var(--text); font-weight: 700; }
+  .wx-d b i { font-style: normal; font-size: 10px; font-weight: 600; color: var(--faint); margin-right: 2px; }
+  .wx-d em { font-style: normal; font-size: 10.5px; color: var(--muted); line-height: 1.25; text-align: center; height: 26px; overflow: hidden; }
+  .wx-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; padding: 10px 16px 12px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--faint); }
+  .wx-foot .wx-src { flex: 1; min-width: 160px; line-height: 1.45; }
+  .wx-foot .wx-old { color: var(--warn); font-weight: 600; }
+  .wx-btn { height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--border); background: none; color: var(--text); font: inherit; font-size: 12px; font-weight: 600;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 5px; text-decoration: none; transition: background 0.15s; }
+  .wx-btn:hover { background: var(--hover); }
+  .wx-btn svg { width: 13px; height: 13px; }
+  .wx-need { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  /* icon pieces */
+  .wxi .sun { fill: var(--wx-sun); } .wxi .ray { stroke: var(--wx-sun); stroke-width: 1.7; stroke-linecap: round; }
+  .wxi .moon { fill: var(--wx-moon); }
+  .wxi .cloud { fill: var(--surface); stroke: var(--wx-cloud); stroke-width: 1.6; stroke-linejoin: round; }
+  .wxi .cloud.dark { fill: var(--wx-cloud); fill-opacity: 0.35; }
+  .wxi .drop { stroke: var(--wx-drop); stroke-width: 1.8; stroke-linecap: round; }
+  .wxi .flake { fill: var(--wx-drop); }
+  .wxi .bolt { fill: var(--wx-bolt); }
+  .wxi .fogl { stroke: var(--wx-cloud); stroke-width: 1.8; stroke-linecap: round; }
+  @media (max-width: 720px) { .wx-temp { font-size: 38px; } .wx-big, .wx-big svg { width: 52px; height: 52px; } .wx-top { padding: 14px 12px 8px; gap: 10px; }
+    .wx-stats { padding: 0 12px 10px; } .wx-warn { margin: 0 12px 10px; } .wx-sec { padding: 2px 12px 6px; } .wx-scroll { padding: 0 8px 10px; } .wx-foot { padding: 10px 12px 12px; } }
+  @media (max-width: 420px) { #wx-hint .wh-text { white-space: normal; } }
+
   /* Paste a link: card under the reply, with citations */
   .link-card { margin-top: 12px; max-width: 540px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
     background: var(--surface); opacity: 0; animation: srcIn 0.5s 0.05s cubic-bezier(.2,.8,.2,1) forwards; }
@@ -609,20 +697,20 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn, #study-btn {
+  #web-btn, #link-btn, #study-btn, #wx-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show, #study-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg, #study-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover, #study-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on, #study-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn, #wx-btn { padding: 0 9px; } }
 
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
@@ -752,6 +840,7 @@
   #whatsnew.show .wn-feat { animation: wnIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
   #whatsnew.show .wn-feat:nth-child(1) { animation-delay: 0.3s; }
   #whatsnew.show .wn-feat:nth-child(2) { animation-delay: 0.42s; }
+  #whatsnew.show .wn-feat:nth-child(3) { animation-delay: 0.54s; }
   .wn-fi { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .wn-fi svg { width: 21px; height: 21px; }
   .wn-ft { flex: 1; min-width: 0; }
@@ -764,6 +853,12 @@
   .wn-small { font-size: 12px; color: var(--faint); text-align: center; margin: 0 0 14px; }
   .wn-orbs { display: flex; gap: 14px; position: relative; }
   .wn-orbs .wn-orb { width: 64px; height: 64px; }
+  @media (max-width: 720px) {
+    .wn-art { height: 100px; } .wn-orbs { gap: 10px; } .wn-orbs .wn-orb { width: 50px; height: 50px; } .wn-orbs .wn-orb svg { width: 25px; height: 25px; }
+    .wn-ring { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+    .wn-body { padding: 16px 18px 18px; } .wn-body h2 { font-size: 22px; } .wn-feats { margin: 12px 0 10px; gap: 8px; }
+    .wn-feat { padding: 9px 10px; gap: 10px; } .wn-fi { width: 34px; height: 34px; } .wn-ft span { font-size: 12px; }
+  }
   #whatsnew.show .wn-orbs .wn-orb:nth-child(2) { animation-delay: 0.32s; }
   @media (prefers-reduced-motion: reduce) { .wn-feat { opacity: 1; transform: none; } #whatsnew.show .wn-feat { animation: none; } }
   .wn-pts svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
@@ -851,7 +946,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -908,10 +1003,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn, #study-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #web-btn, #link-btn, #study-btn, #wx-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
     #attach-btn { width: 32px; height: 32px; }
-    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost { display: none; }
-    #study-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost { display: none; }
+    #study-btn .wnew, #wx-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -1046,6 +1141,17 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
             </button>
           </div>
+          <div id="wx-hint" role="status">
+            <span class="wh-ico" id="wh-ico" aria-hidden="true"></span>
+            <span class="wh-text" id="wh-text"></span>
+            <div class="wh-pick" id="wh-pick" hidden>
+              <input id="wh-input" type="text" placeholder="Type your town or city" autocomplete="off" maxlength="60" aria-label="Your town">
+              <div class="wh-towns" id="wh-towns"></div>
+            </div>
+            <button id="wh-x" type="button" title="Skip the forecast" aria-label="Skip the forecast">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+            </button>
+          </div>
           <div id="study-bar" role="group" aria-label="Study Mode">
             <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
             <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz">Practice quiz</button></div>
@@ -1068,6 +1174,10 @@
             <button id="study-btn" type="button" aria-pressed="false" title="Study Mode">
               <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M7 11h5M7 15h3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
               <span class="mlabel">Study</span><span class="wcost" id="study-cost">+5</span><span class="wnew" id="study-new" hidden>NEW</span>
+            </button>
+            <button id="wx-btn" type="button" aria-pressed="false" title="Weather">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 2.4v1.4M3.8 4.3l1 1M2.4 8.5h1.4M13.2 4.3l-1 1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+              <span class="mlabel">Weather</span><span class="wnew" id="wx-new" hidden>NEW</span>
             </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
@@ -1140,12 +1250,13 @@
       <div class="wn-orbs">
         <div class="wn-orb"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
         <div class="wn-orb"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="wn-orb"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M7 11h5M7 15h3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
       </div>
     </div>
     <div class="wn-body">
       <span class="wn-tag">New &middot; Beta</span>
-      <h2 id="wn-title">Introducing SCODE Search &amp; SCODE Link</h2>
-      <div class="modal-sub">Two new ways to get answers you can trust, with sources you can check.</div>
+      <h2 id="wn-title">Introducing Search, Link &amp; Study Mode</h2>
+      <div class="modal-sub">Three new ways to get answers you can trust and actually learn the stuff.</div>
       <div class="wn-feats">
         <div class="wn-feat">
           <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
@@ -1156,6 +1267,11 @@
           <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
           <div class="wn-ft"><b>SCODE Link</b><span>Paste any web page, PDF or Google Doc for a summary and a ready-made citation.</span></div>
           <button class="wn-try" type="button" data-try="link">Try</button>
+        </div>
+        <div class="wn-feat">
+          <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M7 11h5M7 15h3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
+          <div class="wn-ft"><b>Study Mode</b><span>Turn notes, a photo or a topic into flashcards or a practice quiz.</span></div>
+          <button class="wn-try" type="button" data-try="study">Try</button>
         </div>
       </div>
       <p class="wn-small" id="wn-cost-line">On General and General Plus &middot; +5 points per message</p>
@@ -1783,9 +1899,8 @@
   function searchUnlocked() { return searchPreview || Date.now() >= SEARCH_LAUNCH; }
   function searchIsNew() { return searchUnlocked() && Date.now() < SEARCH_NEW_UNTIL; }
 
-  // Study Mode has no launch date yet: it's hidden for everyone except ?preview=study.
-  // When it's ready, put a date here, e.g. Date.parse("2026-11-01T00:00:00-07:00").
-  const STUDY_LAUNCH = null;
+  // Study Mode launches with Search and Link. Before then, ?preview=study shows it.
+  const STUDY_LAUNCH = SEARCH_LAUNCH;
   const studyPreview = /[?&]preview=study\b/.test(location.search);
   function studyUnlocked() { return studyPreview || (STUDY_LAUNCH !== null && Date.now() >= STUDY_LAUNCH); }
   function studyIsNew() { return studyUnlocked() && (STUDY_LAUNCH === null || Date.now() < STUDY_LAUNCH + LAUNCH_POPUP_DAYS * 864e5); }
@@ -1798,11 +1913,13 @@
   var linkOn = false;                        // SCODE Link mode
   var studyOn = false;                       // Study Mode (only one mode is on at a time)
   var studyKind = "flashcards";
+  var weatherOn = false;                     // Weather mode (also lights up by itself for weather questions)
   try {
     webOn = localStorage.getItem("linden_web") === "1";
     linkOn = !webOn && localStorage.getItem("scode_link_on") === "1";
     studyOn = !webOn && !linkOn && localStorage.getItem("scode_study_on") === "1";
     studyKind = localStorage.getItem("scode_study_kind") === "quiz" ? "quiz" : "flashcards";
+    weatherOn = !webOn && !linkOn && !studyOn && localStorage.getItem("scode_weather_on") === "1";
   } catch (e) {}
   const DEFAULT_PLACEHOLDER = el.input.placeholder;
 
@@ -1815,6 +1932,7 @@
       localStorage.setItem("scode_link_on", linkOn ? "1" : "0");
       localStorage.setItem("scode_study_on", studyOn ? "1" : "0");
       localStorage.setItem("scode_study_kind", studyKind);
+      localStorage.setItem("scode_weather_on", weatherOn ? "1" : "0");
     } catch (e) {}
   }
   function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost, isNew) {
@@ -1849,8 +1967,21 @@
     $("sb-tip").textContent = VISION_TIERS.has(selectedTier)
       ? "Paste notes, add a photo, paste a link, or name a topic."
       : "Paste notes, paste a link, or name a topic.";
+    // Weather: on by hand, or lit up by itself while a weather question is typed.
+    const xAvail = typeof weatherUnlocked === "function" && weatherUnlocked();
+    const xState = xAvail ? wxState() : "off";
+    const xb = $("wx-btn");
+    xb.classList.toggle("show", !!xAvail);
+    xb.classList.toggle("on", xState !== "off");
+    xb.classList.toggle("auto", xState === "auto");
+    xb.setAttribute("aria-pressed", String(xState !== "off"));
+    $("wx-new").hidden = !(xAvail && xState === "off" && typeof weatherIsNew === "function" && weatherIsNew());
+    xb.title = xState === "on" ? "Weather is on: every message gets the Environment Canada forecast"
+      : xState === "auto" ? "Weather turned on by itself for this question. Tap to skip the forecast."
+      : "Weather: answer from the Environment Canada forecast (free)";
     el.input.placeholder = wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
-      : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?") : DEFAULT_PLACEHOLDER;
+      : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
+      : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
   }
   function setMode(mode) {
@@ -1858,6 +1989,8 @@
     webOn = mode === "search";
     linkOn = mode === "link";
     studyOn = mode === "study";
+    weatherOn = mode === "weather";
+    if (typeof wxSkipped !== "undefined") wxSkipped = false;
     if (!linkOn && typeof activeLink !== "undefined") activeLink = null;
     saveModes();
     updateWebBtn();
@@ -1870,6 +2003,12 @@
   $("link-btn").addEventListener("click", () => {
     if (chatHasPhoto()) { showNote("SCODE Link can't be used in a chat with a photo. Start a new chat."); return; }
     setMode(linkOn ? null : "link");
+    if (!touchLike) el.input.focus();
+  });
+  $("wx-btn").addEventListener("click", () => {
+    const st = wxState();
+    if (st === "auto") { wxSkipped = true; updateWebBtn(); }      // skip the forecast for this question
+    else setMode(st === "on" ? null : "weather");
     if (!touchLike) el.input.focus();
   });
   $("study-btn").addEventListener("click", () => {
@@ -1889,12 +2028,31 @@
     try { sessionStorage.setItem("scode_launch_popup", "1"); } catch (e) {}   // once per visit
     wn.classList.remove("show");
   }
+  // Local weather gets its own version of the popup for its first 3 days.
+  function weatherIsNew() {
+    return WEATHER_LAUNCH !== null && Date.now() >= WEATHER_LAUNCH && Date.now() < WEATHER_LAUNCH + LAUNCH_POPUP_DAYS * 864e5;
+  }
+  const WN_WEATHER_ICON = '<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 2.6v1.3M3.9 4.4l.9.9M2.6 8.5h1.3M13.1 4.4l-.9.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+  function fillWeatherPopup() {
+    wn.querySelector(".wn-orbs").innerHTML = `<div class="wn-orb">${WN_WEATHER_ICON.replace("<svg ", '<svg width="32" height="32" ')}</div>`;
+    wn.querySelector(".wn-tag").textContent = "New";
+    $("wn-title").textContent = "Introducing Local weather";
+    wn.querySelector(".modal-sub").textContent = "Ask about the weather and get the real Environment Canada forecast for your town, not a guess.";
+    wn.querySelector(".wn-feats").innerHTML = `<div class="wn-feat">
+        <div class="wn-fi">${WN_WEATHER_ICON}</div>
+        <div class="wn-ft"><b>Local weather</b><span>Ask &ldquo;Do I need a jacket tomorrow?&rdquo; and get a straight answer, plus the next hours, the week and any warnings.</span></div>
+        <button class="wn-try" type="button" data-try="weather">Try</button>
+      </div>`;
+    $("wn-cost-line").textContent = "Free on every model, even without an account.";
+  }
   function maybeShowWhatsNew() {
-    const forced = /[?&]whatsnew=1\b/.test(location.search);
+    const forcedWx = /[?&]whatsnew=weather\b/.test(location.search);
+    const forced = forcedWx || /[?&]whatsnew=1\b/.test(location.search);
     let seenThisVisit = false;
     try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
-    if (!forced && (!searchIsNew() || seenThisVisit)) return;
-    $("wn-cost-line").textContent = `On General and General Plus · +${searchCost} points per message`;
+    if (!forced && (seenThisVisit || !(searchIsNew() || weatherIsNew()))) return;
+    if (forcedWx || (!forced && !searchIsNew() && weatherIsNew())) fillWeatherPopup();
+    else $("wn-cost-line").textContent = `Search and Link: General and General Plus, +${searchCost} per message · Study: General, Plus and Ultra, +${studyCost} per set`;
     wn.classList.add("show");
   }
   $("wn-close").addEventListener("click", closeWhatsNew);
@@ -1902,8 +2060,20 @@
   wn.addEventListener("click", (e) => { if (e.target === wn) closeWhatsNew(); });
   function tryMode(mode) {
     closeWhatsNew();
-    const name = mode === "link" ? "SCODE Link" : "SCODE Search";
+    if (mode === "weather") {
+      setMode("weather");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
+    const name = mode === "link" ? "SCODE Link" : mode === "study" ? "Study Mode" : "SCODE Search";
     if (isGuest()) { openAuth("welcome", `${name} needs a free account.`); return; }
+    if (mode === "study") {
+      // Study works on General, General Plus and General Ultra, photos included.
+      if (!STUDY_TIERS.has(selectedTier)) selectTier("l2");
+      setMode("study");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
     // Both need General or General Plus, and a chat without a photo.
     const tier = WEB_TIERS.has(selectedTier) ? selectedTier : "l2";
     if (chatHasPhoto()) {
@@ -1917,7 +2087,7 @@
     setMode(mode);
     setTimeout(() => el.input.focus(), 250);
   }
-  wn.querySelectorAll(".wn-try").forEach(b => b.addEventListener("click", () => tryMode(b.dataset.try)));
+  wn.addEventListener("click", (e) => { const b = e.target.closest(".wn-try"); if (b) tryMode(b.dataset.try); });
 
   // ---------- Paste a link (General and General Plus) ----------
   // Ships with SCODE Search: same launch day, same ?preview=search for early testing.
@@ -1972,6 +2142,7 @@
       if (!wasShown) hint.classList.add("show");
     }
     if (stick) requestAnimationFrame(() => scrollToBottom(false));
+    if (typeof updateWxHint === "function") updateWxHint(!!plan);
   }
   $("link-hint").addEventListener("click", (e) => {
     if (e.target.closest("#lh-x")) return;
@@ -2414,6 +2585,8 @@
     if (srcEl) row.appendChild(srcEl);
     const lcEl = meta && meta.link ? buildLinkCard(meta.link) : null;
     if (lcEl) row.appendChild(lcEl);
+    const wxEl = meta && meta.weather ? buildWeatherCard(meta.weather) : null;
+    if (wxEl) row.appendChild(wxEl);
     row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -2730,6 +2903,326 @@
     render();
   }
 
+  // ---------- Local weather (Environment Canada) ----------
+  // Launches Oct 3 at midnight Pacific. Before then, ?preview=weather shows it.
+  var WEATHER_LAUNCH = Date.parse("2026-10-03T00:00:00-07:00");
+  var weatherPreview = /[?&]preview=weather\b/.test(location.search);
+  var weatherServerOn = true;                 // the server can switch it off via /status
+  function weatherUnlocked() {
+    return weatherServerOn && (weatherPreview || (WEATHER_LAUNCH !== null && Date.now() >= WEATHER_LAUNCH));
+  }
+  // Same test the server uses: is this message about the weather?
+  var WX_STRONG = /\b(weather|forecast|umbrella|rain ?coat|sunscreen|uv index|humidex|wind ?chill|(will|is|does|gonna|going to|supposed to)( it)?( be)? (rain|snow|hail|storm|sunny|cloudy|windy|cold|hot|warm|nice|freezing)\w*|how (cold|hot|warm|windy) is it)\b/i;
+  var WX_WORDS = /\b(jacket|coat|rain\w*|snow\w*|sunny|cloudy|windy|wind|storm\w*|thunder\w*|fog\w*|frost\w*|freez\w*|hot|cold|warm|chilly|temperature|temp|degrees|sunrise|sunset)\b/i;
+  var WX_WHEN = /\b(today|tonight|tomorrow|right now|outside|later|this (morning|afternoon|evening|week|weekend)|weekend|monday|tuesday|wednesday|thursday|friday|saturday|sunday|next few days)\b/i;
+  var WX_TOWN = /\b(?:in|for|at|near|around)\s+(?!(?:the|a|an|my|our|this|that|it|today|tonight|tomorrow|next|morning|afternoon|evening|weekend|week|monday|tuesday|wednesday|thursday|friday|saturday|sunday|now|school|class|work|general)\b)[a-z]/i;
+  function weatherAsked(t) { t = t || ""; return WX_STRONG.test(t) || (WX_WORDS.test(t) && WX_WHEN.test(t)); }
+  // Right after a forecast, follow-ups like "what about Saturday?" keep using it.
+  var wxFollowOff = false;
+  function wxFollow() {
+    if (wxFollowOff) return null;   // (set when they pick a different town)
+    const last = messages[messages.length - 1];
+    return last && last.role === "assistant" && last.weather && last.weather.code ? last.weather : null;
+  }
+  function weatherWanted(t) {
+    t = t || "";
+    if (!weatherUnlocked() || URL_FIND.test(t)) return false;
+    return weatherAsked(t) || (!!wxFollow() && (WX_WHEN.test(t) || WX_WORDS.test(t) || /\b(what about|and|how about)\b/i.test(t)));
+  }
+  function wxTarget() {
+    const f = wxFollow();
+    return f ? { code: f.code, name: f.place } : wxPlace;
+  }
+  var wxPlace = null, wxSkipped = false, wxPicking = false, wxFinding = false, wxFindTimer = null, wxPickMsg = "";
+  try { wxPlace = JSON.parse(localStorage.getItem("scode_weather_place") || "null"); } catch (e) {}
+  function setWxPlace(p) {
+    wxPlace = p && p.code ? { code: String(p.code), name: String(p.name), prov: String(p.prov || "") } : null;
+    try { localStorage.setItem("scode_weather_place", JSON.stringify(wxPlace)); } catch (e) {}
+  }
+  // "on" = turned on by hand, "auto" = lit up by itself for a weather question, "off".
+  function wxState(text) {
+    if (!weatherUnlocked()) return "off";
+    const v = text === undefined ? el.input.value : text;
+    if (URL_FIND.test(v)) return "off";
+    if (weatherOn) return "on";
+    const studyBusy = typeof studyActive === "function" && studyActive();
+    const linkBusy = linkOn && searchUnlocked() && typeof LINK_TIERS !== "undefined" && LINK_TIERS.has(selectedTier);
+    if (wxSkipped || studyBusy || linkBusy) return "off";
+    return v.trim() && weatherWanted(v) ? "auto" : "off";
+  }
+  function weatherPlan() {
+    if (!weatherUnlocked()) return null;
+    if (wxPicking) return { kind: "pick" };
+    const v = el.input.value;
+    const st = wxState();
+    if (st === "off") return null;
+    if (st === "auto" && !v.trim()) return null;
+    if (wxFinding) return { kind: "busy", html: "Finding your town&hellip;" };
+    if (WX_TOWN.test(v)) return { kind: "named", html: "<b>Weather</b> &middot; Environment Canada forecast for the town you named" };
+    const target = wxTarget();
+    if (target) return { kind: "saved", html: `<b>Weather</b> &middot; Environment Canada forecast for <b>${escapeHtml(target.name)}</b> &middot; <button type="button" data-wx="pick">Change</button>` };
+    return { kind: "need", html: `<b>Weather</b> &middot; <button type="button" data-wx="locate">Use my location</button> or <button type="button" data-wx="pick">pick your town</button>` };
+  }
+  function updateWxHint(linkHintShown) {
+    const hint = $("wx-hint");
+    if (!hint) return;
+    const plan = linkHintShown ? null : weatherPlan();
+    const wasShown = hint.classList.contains("show");
+    const stick = (!!plan !== wasShown) && messages.length && nearBottom();
+    if (!plan) hint.classList.remove("show");
+    else {
+      $("wh-ico").innerHTML = wxIcon("02");
+      const picking = plan.kind === "pick";
+      $("wh-pick").hidden = !picking;
+      $("wh-text").hidden = picking;
+      if (!picking && $("wh-text").innerHTML !== plan.html) $("wh-text").innerHTML = plan.html;
+      if (picking) $("wh-input").placeholder = wxPickMsg || "Type your town or city";
+      $("wh-x").title = picking ? "Cancel" : "Skip the forecast";
+      if (!wasShown) hint.classList.add("show");
+    }
+    if (stick) requestAnimationFrame(() => scrollToBottom(false));
+  }
+  function wxStartPick(msg) {
+    wxPicking = true; wxPickMsg = msg || "";
+    $("wh-input").value = ""; $("wh-towns").innerHTML = "";
+    updateWxHint(false);
+    setTimeout(() => $("wh-input").focus(), 30);
+  }
+  function wxEndPick() {
+    wxPicking = false; wxPickMsg = "";
+    updateLinkHint();
+    if (!touchLike) el.input.focus();
+  }
+  function wxLocate() {
+    if (!navigator.geolocation) { wxStartPick("Location isn't available here. Type your town"); return; }
+    wxFinding = true; updateLinkHint();
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      try {
+        // Rounded to about 1 km. Only used to find the nearest forecast town, never stored by the server.
+        const r = await fetch(`${PROXY_URL}/weather/near?lat=${pos.coords.latitude.toFixed(2)}&lon=${pos.coords.longitude.toFixed(2)}`);
+        const d = await r.json();
+        wxFinding = false;
+        if (!r.ok) { wxStartPick(d.error === "outside_canada" ? "Forecasts cover Canada only. Type a Canadian town" : "Couldn't find your town. Type it instead"); return; }
+        setWxPlace(d);
+        wxFollowOff = true;
+        updateLinkHint();
+        if (!touchLike) el.input.focus();
+      } catch (e) { wxFinding = false; wxStartPick("Couldn't reach the server. Type your town"); }
+    }, () => { wxFinding = false; wxStartPick("Location is off. Type your town instead"); },
+    { timeout: 12000, maximumAge: 30 * 60000 });
+  }
+  async function wxFind() {
+    const q = $("wh-input").value.trim();
+    const box = $("wh-towns");
+    if (q.length < 2) { box.innerHTML = ""; return; }
+    try {
+      const r = await fetch(`${PROXY_URL}/weather/find?q=${encodeURIComponent(q)}`);
+      const d = await r.json();
+      if ($("wh-input").value.trim() !== q) return;   // they kept typing
+      box.innerHTML = "";
+      const towns = (d.towns || []).slice(0, 6);
+      if (!towns.length) { const s = document.createElement("span"); s.textContent = r.ok ? "No forecast for that name. Try the nearest bigger town." : (d.message || "Couldn't search towns."); box.appendChild(s); return; }
+      towns.forEach(t => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = `${t.name}, ${t.prov}`;
+        b.addEventListener("click", () => {
+          setWxPlace(t);
+          wxFollowOff = true;   // use the town they just picked, not the last forecast's
+          wxEndPick();
+        });
+        box.appendChild(b);
+      });
+    } catch (e) { box.innerHTML = "<span>Couldn't reach the server.</span>"; }
+  }
+  $("wh-input").addEventListener("input", () => { clearTimeout(wxFindTimer); wxFindTimer = setTimeout(wxFind, 220); });
+  $("wh-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); const first = $("wh-towns").querySelector("button"); if (first) first.click(); }
+    else if (e.key === "Escape") { e.preventDefault(); wxEndPick(); }
+  });
+  $("wx-hint").addEventListener("click", (e) => {
+    const a = e.target.closest("[data-wx]");
+    if (!a) return;
+    if (a.dataset.wx === "locate") wxLocate();
+    else if (a.dataset.wx === "pick") wxStartPick();
+  });
+  // A skipped forecast only lasts for that question.
+  el.input.addEventListener("input", () => { if (wxSkipped && !el.input.value.trim()) { wxSkipped = false; updateWebBtn(); } });
+  $("wh-x").addEventListener("click", () => {
+    if (wxPicking) { wxEndPick(); return; }
+    if (weatherOn) setMode(null);
+    else wxSkipped = true;
+    updateWebBtn();
+    el.input.focus();
+  });
+
+  // ---- Weather icons (Environment Canada icon codes 00-48) ----
+  const WXI = {
+    sun: (x = 12, y = 12, r = 4.2) => `<circle class="sun" cx="${x}" cy="${y}" r="${r}"/>` +
+      [0, 45, 90, 135, 180, 225, 270, 315].map(a => { const t = a * Math.PI / 180, r1 = r + 2.2, r2 = r + 4.2;
+        return `<line class="ray" x1="${(x + Math.cos(t) * r1).toFixed(1)}" y1="${(y + Math.sin(t) * r1).toFixed(1)}" x2="${(x + Math.cos(t) * r2).toFixed(1)}" y2="${(y + Math.sin(t) * r2).toFixed(1)}"/>`; }).join(""),
+    moon: (dx = 0, dy = 0) => `<path class="moon" transform="translate(${dx} ${dy})" d="M15.5 3.6a8.2 8.2 0 1 0 4.9 12.9A7 7 0 0 1 15.5 3.6z"/>`,
+    cloud: (dy = 0, dark = false) => `<path class="cloud${dark ? " dark" : ""}" transform="translate(0 ${dy})" d="M7.2 19h10.3a3.9 3.9 0 0 0 .5-7.77A5.6 5.6 0 0 0 7.3 10.4 4.3 4.3 0 0 0 7.2 19z"/>`,
+    drops: () => '<line class="drop" x1="8.5" y1="17.6" x2="7.6" y2="20.4"/><line class="drop" x1="12.5" y1="17.6" x2="11.6" y2="20.4"/><line class="drop" x1="16.5" y1="17.6" x2="15.6" y2="20.4"/>',
+    flakes: () => '<circle class="flake" cx="8" cy="19" r="1.15"/><circle class="flake" cx="12" cy="20.4" r="1.15"/><circle class="flake" cx="16" cy="19" r="1.15"/>',
+    mix: () => '<line class="drop" x1="8.5" y1="17.6" x2="7.6" y2="20.4"/><circle class="flake" cx="12" cy="19.6" r="1.15"/><line class="drop" x1="16.5" y1="17.6" x2="15.6" y2="20.4"/>',
+    bolt: () => '<path class="bolt" d="M12.6 14.5 9.8 19h2.6l-1.2 3.6 3.9-5.2h-2.6l1.4-2.9z"/>',
+    fog: () => '<line class="fogl" x1="4" y1="9" x2="20" y2="9"/><line class="fogl" x1="6" y1="13" x2="18" y2="13"/><line class="fogl" x1="4" y1="17" x2="20" y2="17"/>',
+    wind: () => '<path class="fogl" fill="none" d="M3 9h11a2.5 2.5 0 1 0-2.5-2.5M3 13h15a2.5 2.5 0 1 1-2.5 2.5M3 17h8"/>',
+  };
+  function wxKind(code) {
+    const c = parseInt(code, 10);
+    if (isNaN(c)) return "cloud";
+    if (c === 0 || c === 1) return "sun";
+    if (c === 30 || c === 31) return "moon";
+    if ([2, 3, 4, 5, 22].includes(c)) return "partsun";
+    if ([32, 33, 34, 35].includes(c)) return "partmoon";
+    if ([6, 11, 12, 13, 28, 36].includes(c)) return "rain";
+    if ([7, 14, 15, 27, 37].includes(c)) return "mix";
+    if ([8, 16, 17, 18, 25, 26, 38, 40].includes(c)) return "snow";
+    if ([9, 19, 39, 41, 42, 46, 47, 48].includes(c)) return "thunder";
+    if ([23, 24, 44, 45].includes(c)) return "fog";
+    if (c === 43) return "wind";
+    return "cloud";
+  }
+  function wxIcon(code) {
+    const k = wxKind(code);
+    const body = {
+      sun: WXI.sun(),
+      moon: WXI.moon(-2, 1),
+      partsun: WXI.sun(8.5, 8.5, 3.4) + WXI.cloud(1.5),
+      partmoon: '<path class="moon" transform="translate(-6 -3) scale(0.75)" d="M15.5 3.6a8.2 8.2 0 1 0 4.9 12.9A7 7 0 0 1 15.5 3.6z"/>' + WXI.cloud(1.5),
+      cloud: WXI.cloud(0),
+      rain: WXI.cloud(-3.5, true) + WXI.drops(),
+      mix: WXI.cloud(-3.5, true) + WXI.mix(),
+      snow: WXI.cloud(-3.5) + WXI.flakes(),
+      thunder: WXI.cloud(-4, true) + WXI.bolt(),
+      fog: WXI.fog(),
+      wind: WXI.wind(),
+    }[k];
+    return `<svg class="wxi" viewBox="0 0 24 24" fill="none" aria-hidden="true">${body}</svg>`;
+  }
+  function wxDeg(n) { return n === null || n === undefined || isNaN(n) ? "–" : (n < 0 ? "−" + Math.abs(n) : String(n)) + "°"; }
+  function wxShortName(name) {
+    return String(name || "").replace(/\b(Mon|Tues?|Wed(nes)?|Thu(rs)?|Fri|Sat(ur)?|Sun)(day)\b/gi, (m) => m.slice(0, 3));
+  }
+  const WX_PIN = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.3" stroke="currentColor" stroke-width="2"/></svg>';
+  const WX_ALERT = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5 2.8 19.5h18.4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.1" fill="currentColor"/></svg>';
+  const WX_OUT = '<svg viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function wxSafeUrl(u) {
+    try { const x = new URL(String(u)); return /(^|\.)weather\.gc\.ca$/.test(x.hostname) && x.protocol === "https:" ? x.href : null; } catch (e) { return null; }
+  }
+  function buildWeatherCard(w) {
+    if (!w || !w.place) return null;
+    const card = stEl("div", "wx-card");
+    const now = w.now || null;
+    const first = (w.periods || [])[0] || null;
+    // Top: right now (or the first forecast period if the station has no reading)
+    const top = stEl("div", "wx-top");
+    const big = stEl("div", "wx-big"); big.innerHTML = wxIcon(now && now.icon ? now.icon : first && first.icon);
+    const temp = stEl("div", "wx-temp");
+    const tval = now && now.temp !== null && now.temp !== undefined ? now.temp : first ? first.temp : null;
+    temp.textContent = wxDeg(tval).replace("°", "");
+    temp.insertAdjacentHTML("beforeend", "<sup>°C</sup>");
+    const what = stEl("div", "wx-what");
+    what.appendChild(stEl("div", "wx-cond", (now && now.cond) || (first && first.short) || "Forecast"));
+    const place = stEl("div", "wx-place"); place.innerHTML = WX_PIN;
+    place.appendChild(document.createTextNode(`${w.place}${w.prov ? ", " + w.prov : ""}${now && now.time ? " · now (" + now.time + ")" : ""}`));
+    what.appendChild(place);
+    top.appendChild(big); top.appendChild(temp); top.appendChild(what);
+    card.appendChild(top);
+    if (now) {
+      const stats = stEl("div", "wx-stats");
+      const add = (label, val) => { if (val === null || val === undefined || val === "") return; const s = stEl("span"); s.append(label + " "); s.appendChild(stEl("b", "", val)); stats.appendChild(s); };
+      if (now.feels !== null && now.feels !== undefined && now.feels !== now.temp) add("Feels", wxDeg(now.feels));
+      if (now.wind !== null && now.wind !== undefined) add("Wind", `${now.dir ? now.dir + " " : ""}${now.wind} km/h${now.gust ? ", gusts " + now.gust : ""}`);
+      if (now.humidity !== null && now.humidity !== undefined) add("Humidity", now.humidity + "%");
+      if (stats.children.length) card.appendChild(stats);
+    }
+    (w.warnings || []).slice(0, 2).forEach(a => {
+      const href = wxSafeUrl(a.url) || wxSafeUrl(w.url);
+      const warn = stEl(href ? "a" : "div", "wx-warn " + (a.type || ""));
+      if (href) { warn.href = href; warn.target = "_blank"; warn.rel = "noopener noreferrer"; }
+      warn.innerHTML = WX_ALERT;
+      warn.appendChild(stEl("span", "", a.title));
+      if (href) warn.appendChild(stEl("small", "", "Details"));
+      card.appendChild(warn);
+    });
+    if (w.hours && w.hours.length) {
+      card.appendChild(stEl("div", "wx-sec", "Next hours"));
+      const row = stEl("div", "wx-scroll");
+      w.hours.forEach(h => {
+        const c = stEl("div", "wx-h"); c.title = h.cond || "";
+        c.appendChild(stEl("small", "", h.t));
+        c.insertAdjacentHTML("beforeend", wxIcon(h.icon));
+        c.appendChild(stEl("b", "", wxDeg(h.temp)));
+        c.appendChild(stEl("span", "wx-pop", h.pop >= 20 ? h.pop + "%" : ""));
+        row.appendChild(c);
+      });
+      card.appendChild(row);
+    }
+    if (w.periods && w.periods.length) {
+      card.appendChild(stEl("div", "wx-sec", "Forecast"));
+      const row = stEl("div", "wx-scroll");
+      w.periods.forEach(p => {
+        const night = /night/i.test(p.name);
+        const c = stEl("div", "wx-d" + (night ? " night" : "")); c.title = p.short || "";
+        c.appendChild(stEl("small", "", wxShortName(p.name)));
+        c.insertAdjacentHTML("beforeend", wxIcon(p.icon));
+        const b = stEl("b");
+        if (p.cls === "high" || p.cls === "low") b.appendChild(stEl("i", "", p.cls === "high" ? "H" : "L"));
+        b.append(wxDeg(p.temp));
+        c.appendChild(b);
+        c.appendChild(stEl("em", "", p.short || ""));
+        c.appendChild(stEl("span", "wx-pop", p.pop ? p.pop + "%" : ""));
+        row.appendChild(c);
+      });
+      card.appendChild(row);
+    }
+    const foot = stEl("div", "wx-foot");
+    const src = stEl("div", "wx-src");
+    const bits = ["Environment Canada"];
+    if (w.issued) bits.push("forecast " + w.issued);
+    if (w.sunrise) bits.push("sunrise " + w.sunrise);
+    if (w.sunset) bits.push("sunset " + w.sunset);
+    src.textContent = bits.join(" · ");
+    if (w.at && Date.now() - w.at > 3 * 3600e3) {
+      const d = new Date(w.at);
+      src.appendChild(stEl("div", "wx-old", `Saved ${d.toLocaleDateString([], { month: "short", day: "numeric" })}, ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}. Ask again for a fresh forecast.`));
+    }
+    foot.appendChild(src);
+    if (w.code && (!wxPlace || wxPlace.code !== w.code)) {
+      const mine = stEl("button", "wx-btn", "Make this my town");
+      mine.type = "button";
+      mine.addEventListener("click", () => {
+        setWxPlace({ code: w.code, name: w.place, prov: w.prov });
+        mine.textContent = "Saved as your town";
+        mine.disabled = true;
+      });
+      foot.appendChild(mine);
+    }
+    const full = wxSafeUrl(w.url);
+    if (full) {
+      const a = stEl("a", "wx-btn");
+      a.href = full; a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.append("Full forecast");
+      a.insertAdjacentHTML("beforeend", WX_OUT);
+      foot.appendChild(a);
+    }
+    card.appendChild(foot);
+    return card;
+  }
+  function buildWeatherNeed() {
+    const box = stEl("div", "wx-need");
+    const a = stEl("button", "wx-btn", "Use my location"); a.type = "button";
+    a.insertAdjacentHTML("afterbegin", WX_PIN);
+    a.addEventListener("click", () => { wxLocate(); box.remove(); });
+    const b = stEl("button", "wx-btn", "Pick my town"); b.type = "button";
+    b.addEventListener("click", () => { wxStartPick(); box.remove(); });
+    box.appendChild(a); box.appendChild(b);
+    return box;
+  }
+
   function autoGrow() {
     el.input.style.height = "auto";
     el.input.style.height = Math.min(el.input.scrollHeight, 200) + "px";
@@ -2770,6 +3263,7 @@
       if (typeof data.link_cost === "number") linkCost = data.link_cost;
       if (Array.isArray(data.study_tiers)) STUDY_TIERS = new Set(data.study_tiers);
       if (typeof data.study_cost === "number") studyCost = data.study_cost;
+      if (typeof data.weather === "boolean") weatherServerOn = data.weather;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -3081,10 +3575,10 @@
     { id: "link", title: "SCODE Link", launch: "2026-10-09T00:00:00-07:00",
       blurb: "Paste a link, get a summary and a citation.",
       details: "Turn on Link and paste any web page, PDF or shared Google Doc. SCODE AI reads it, answers your questions about it, and builds a correct MLA or APA citation from the page's own details." },
-    { id: "study", title: "Study Mode",
+    { id: "study", title: "Study Mode", launch: "2026-10-09T00:00:00-07:00",
       blurb: "Turn notes into flashcards and practice quizzes.",
       details: "Turn on Study, then paste your notes, add a photo of a worksheet, paste a link, or just name a topic. SCODE AI makes a deck of flip cards or a practice quiz with hints, explanations and a score at the end, so you actually learn it." },
-    { id: "weather", title: "Local weather",
+    { id: "weather", title: "Local weather", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Real forecasts, right in the chat.",
       details: "Ask “do I need a jacket tomorrow?” and get an answer from real Environment Canada forecast data, not a guess." },
     { id: "imagegen", title: "SCODE Image Gen",
@@ -3098,6 +3592,12 @@
     { id: "f-link", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Link",
       text: "Paste a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
       how: ["Sign in, then pick General or General Plus.", "Tap the Link button next to the text box so it turns green.", "Paste a link, with or without a question, and send.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; Link keeps using the same page until you tap ✕."] },
+    { id: "f-study", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "Study Mode",
+      text: "Turn notes, a photo of a worksheet, a link or just a topic into flip-card flashcards or a practice quiz, with hints, explanations and a score at the end.",
+      how: ["Sign in, then pick General, General Plus or General Ultra.", "Tap the Study button next to the text box so it turns green.", "Pick Flashcards or Practice quiz in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Tap a card to flip it, or pick an answer. You'll see your score at the end."] },
+    { id: "f-weather", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "Local weather",
+      text: "Ask about the weather and SCODE AI answers from the real Environment Canada forecast for your town. A card under the answer shows right now, the next 12 hours, the week ahead and any weather warnings. Free on every model.",
+      how: ["Ask something like “Do I need a jacket tomorrow?” and the Weather button turns on by itself, or tap Weather to keep it on.", "The first time, tap Use my location or pick your town in the bar above the text box.", "Ask follow-ups like “What about Sunday?” and it keeps using the same forecast.", "To change towns, tap Change in that bar, or name the town in your question."] },
     { id: "f-accounts", type: "feature", date: "2026-10-02", title: "Free SCODE accounts",
       text: "Create a free account to unlock every model, a much bigger budget (1,000 points every 4 hours) and chats saved on your device. Guests can still use General Mini with 100 points an hour.",
       how: ["Tap Sign in at the top right, then Create a free account.", "Enter your name, email and a password.", "Type in the 6-digit code we email you. That's it."] },
@@ -3123,7 +3623,7 @@
     return m[3] ? `${MONTHS[+m[2] - 1].slice(0, 3)} ${+m[3]}, ${m[1]}` : `${MONTHS[+m[2] - 1]} ${m[1]}`;
   }
   function visibleLog() {
-    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview);
+    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview);
   }
   function upcomingNow() {
     return UPCOMING.filter(u => !u.launch || Date.now() < Date.parse(u.launch));
@@ -3255,6 +3755,9 @@
     const lp = linkPlan();
     const linkToSend = lp && (lp.kind === "read" || lp.kind === "follow") ? lp.url : null;
     linkSkipFor = null;
+    const wxWanted = wxState(text) !== "off";
+    const wxSendTo = wxTarget();
+    wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
     sending = true;
     el.input.value = "";
     autoGrow();
@@ -3321,6 +3824,7 @@
           web: useWeb && !linkToSend && !studyNow,
           link: (!studyNow && linkToSend) || undefined,
           study: studyNow ? { kind: studyKind } : undefined,
+          weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
             if (m.images) o.images = m.images;
@@ -3436,6 +3940,7 @@
       let webSources = [], searchNote = "";
       let linkInfo = null, linkNote = "";
       let studySet = null, studyNote = "";
+      let wxData = null, wxNote = "", wxNeed = false;
       const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
 
       while (true) {
@@ -3473,6 +3978,15 @@
             if (s.status === "reading" && !revealed && loaderRow._setStage) loaderRow._setStage("SCODE Link is reading the page");
             else if (s.status === "done") linkInfo = s;
             else if (s.status === "failed") linkNote = String(s.message || "Couldn't read that link.");
+            continue;
+          }
+          if (chunk.weather) {
+            const s = chunk.weather;
+            if (s.status === "checking" && !revealed && loaderRow._setStage)
+              loaderRow._setStage(s.place ? `Checking the forecast for ${s.place}` : "Checking the forecast");
+            else if (s.status === "done" && s.data) { wxData = s.data; wxData.at = Date.now(); }
+            else if (s.status === "need_town") wxNeed = true;
+            else if (s.status === "failed") wxNote = String(s.message || "Couldn't get the forecast.");
             continue;
           }
           if (chunk.study) {
@@ -3562,6 +4076,12 @@
       const lcEl = linkMeta ? buildLinkCard(linkMeta) : null;
       if (lcEl) liveRow.appendChild(lcEl);
       else if (linkNote) liveRow.appendChild(buildSearchNote(linkNote));
+      const wxEl = wxData ? buildWeatherCard(wxData) : null;
+      if (wxEl) liveRow.appendChild(wxEl);
+      else if (wxNote) liveRow.appendChild(buildSearchNote(wxNote));
+      else if (wxNeed) liveRow.appendChild(buildWeatherNeed());
+      // The first town someone gets a forecast for becomes their town.
+      if (wxData && !wxPlace) setWxPlace({ code: wxData.code, name: wxData.place, prov: wxData.prov });
       liveRow.appendChild(buildActions(finalText, tierAtSend));
 
       messages.push({
@@ -3573,6 +4093,7 @@
         sources: srcEl ? webSources : undefined,
         link: linkMeta || undefined,
         study: studySet || undefined,
+        weather: wxData || undefined,
       });
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
       updateLinkHint();
