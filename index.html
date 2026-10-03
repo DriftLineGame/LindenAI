@@ -330,6 +330,60 @@
   #link-hint.suggest:hover { background: var(--accent-soft); }
   @keyframes hintIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
+  /* SCODE Image Gen: bar above the text box */
+  #img-hint { display: none; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted);
+    background: var(--accent-soft); border-radius: 10px; padding: 5px 6px 5px 10px; margin: 0 2px 8px -4px; }
+  #img-hint.show { display: flex; animation: hintIn 0.35s cubic-bezier(.2,.8,.2,1); }
+  #img-hint > svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+  #img-hint .ih-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #img-hint b { color: var(--text); font-weight: 600; }
+  #img-hint .ih-text button { border: none; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  #ih-x { border: none; background: none; color: var(--faint); cursor: pointer; width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #ih-x:hover { background: var(--hover); color: var(--text); }
+  #img-btn.auto { border-style: dashed; }
+
+  /* SCODE Image Gen: the picture card */
+  .ig { margin-top: 4px; width: min(100%, 400px); }
+  .ig-frame { position: relative; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--border); isolation: isolate; }
+  .ig-blobs { position: absolute; inset: -25%; filter: blur(40px) saturate(1.25); transition: opacity 0.9s ease; }
+  .ig-blobs i { position: absolute; width: 58%; height: 58%; border-radius: 50%; animation: igFloat 7s ease-in-out infinite alternate; }
+  .ig-blobs i:nth-child(1) { background: #5fbf8e; left: 6%; top: 8%; }
+  .ig-blobs i:nth-child(2) { background: #7fb4e6; right: 2%; top: 4%; animation-duration: 9s; animation-delay: -3s; }
+  .ig-blobs i:nth-child(3) { background: #f2c38b; left: 18%; bottom: 2%; animation-duration: 8s; animation-delay: -5s; }
+  .ig-blobs i:nth-child(4) { background: #b79be8; right: 8%; bottom: 10%; animation-duration: 10s; animation-delay: -1s; }
+  @keyframes igFloat { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(14%, -10%) scale(1.18); } 100% { transform: translate(-12%, 12%) scale(0.88); } }
+  .ig-grain { position: absolute; inset: 0; opacity: 0.28; mix-blend-mode: overlay; pointer-events: none; transition: opacity 0.9s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .ig-sweep { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.6s ease;
+    background: linear-gradient(110deg, transparent 32%, rgba(255,255,255,0.38) 50%, transparent 68%); background-size: 260% 100%; animation: igSweep 2.4s linear infinite; }
+  @keyframes igSweep { from { background-position: 160% 0; } to { background-position: -60% 0; } }
+  .ig-stage { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px; display: flex; align-items: center; gap: 8px; color: #fff;
+    font-size: 13.5px; font-weight: 600; text-shadow: 0 1px 8px rgba(0,0,0,0.35); background: linear-gradient(transparent, rgba(0,0,0,0.3)); transition: opacity 0.5s ease; }
+  .ig-stage svg { width: 16px; height: 16px; flex-shrink: 0; animation: igPulse 1.4s ease-in-out infinite; }
+  @keyframes igPulse { 0%, 100% { transform: scale(0.85); opacity: 0.7; } 50% { transform: scale(1.15); opacity: 1; } }
+  .ig-st { flex: 1; min-width: 0; }
+  .ig-time { font-variant-numeric: tabular-nums; font-weight: 500; opacity: 0.9; }
+  .ig-prog { margin-top: 10px; }
+  .ig-bar { height: 6px; border-radius: 6px; background: var(--hover); overflow: hidden; }
+  .ig-bar i { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--accent), #8fd9b2); transition: width 0.25s linear; }
+  .ig-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .ig-prompt { font-size: 12.5px; color: var(--faint); margin-top: 8px; font-style: italic; line-height: 1.4; }
+  .ig-img, .ig-soft { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ig-soft { filter: blur(26px) saturate(0.7) brightness(1.1); transform: scale(1.12); opacity: 0; animation: igFadeIn 0.6s ease forwards; }
+  .ig-frame.reveal .ig-img { -webkit-mask-image: linear-gradient(180deg, #000 42%, transparent 58%); mask-image: linear-gradient(180deg, #000 42%, transparent 58%);
+    -webkit-mask-size: 100% 260%; mask-size: 100% 260%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; animation: igWipe 1.7s cubic-bezier(.45,.05,.25,1) 0.25s both; }
+  @keyframes igWipe { from { -webkit-mask-position: 0 100%; mask-position: 0 100%; filter: blur(6px); } to { -webkit-mask-position: 0 0; mask-position: 0 0; filter: blur(0); } }
+  @keyframes igFadeIn { to { opacity: 1; } }
+  .ig-frame.settled .ig-blobs, .ig-frame.settled .ig-grain, .ig-frame.settled .ig-sweep, .ig-frame.settled .ig-stage, .ig-frame.settled .ig-soft { opacity: 0; }
+  .ig-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; animation: hintIn 0.4s ease both; }
+  .ig-made { flex: 1; min-width: 120px; display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .ig-made svg { width: 14px; height: 14px; color: var(--accent); }
+  .ig-frame.blocked { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 28px; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+  .ig-frame.blocked svg { width: 40px; height: 40px; color: var(--faint); }
+  .ig-frame.blocked b { color: var(--text); font-size: 15px; }
+  @media (prefers-reduced-motion: reduce) { .ig-blobs i, .ig-sweep, .ig-stage svg { animation: none; } .ig-frame.reveal .ig-img { animation-duration: 0.01s; } }
+
   /* Local weather: hint above the text box */
   #wx-hint { display: none; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: var(--muted);
     background: var(--accent-soft); border-radius: 10px; padding: 5px 6px 5px 10px; margin: 0 2px 8px -4px; }
@@ -697,20 +751,20 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn, #study-btn, #wx-btn {
+  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn, #wx-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn { padding: 0 9px; } }
 
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
@@ -946,7 +1000,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -1003,10 +1057,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn, #study-btn, #wx-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
     #attach-btn { width: 32px; height: 32px; }
-    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost { display: none; }
-    #study-btn .wnew, #wx-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
+    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -1152,6 +1206,13 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
             </button>
           </div>
+          <div id="img-hint" role="status">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+            <span class="ih-text" id="ih-text"></span>
+            <button id="ih-x" type="button" title="Don't make a picture" aria-label="Don't make a picture">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+            </button>
+          </div>
           <div id="study-bar" role="group" aria-label="Study Mode">
             <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
             <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz">Practice quiz</button></div>
@@ -1178,6 +1239,10 @@
             <button id="wx-btn" type="button" aria-pressed="false" title="Weather">
               <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 2.4v1.4M3.8 4.3l1 1M2.4 8.5h1.4M13.2 4.3l-1 1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
               <span class="mlabel">Weather</span><span class="wnew" id="wx-new" hidden>NEW</span>
+            </button>
+            <button id="img-btn" type="button" aria-pressed="false" title="SCODE Image Gen">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+              <span class="mlabel">Image</span><span class="wcost" id="img-cost">+25</span><span class="wnew" id="img-new" hidden>NEW</span>
             </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
@@ -1913,13 +1978,15 @@
   var linkOn = false;                        // SCODE Link mode
   var studyOn = false;                       // Study Mode (only one mode is on at a time)
   var studyKind = "flashcards";
-  var weatherOn = false;                     // Weather mode (also lights up by itself for weather questions)
+  var weatherOn = false;
+  var imageOn = false;                       // SCODE Image Gen (also lights up by itself for "draw me…")                     // Weather mode (also lights up by itself for weather questions)
   try {
     webOn = localStorage.getItem("linden_web") === "1";
     linkOn = !webOn && localStorage.getItem("scode_link_on") === "1";
     studyOn = !webOn && !linkOn && localStorage.getItem("scode_study_on") === "1";
     studyKind = localStorage.getItem("scode_study_kind") === "quiz" ? "quiz" : "flashcards";
     weatherOn = !webOn && !linkOn && !studyOn && localStorage.getItem("scode_weather_on") === "1";
+    imageOn = !webOn && !linkOn && !studyOn && !weatherOn && localStorage.getItem("scode_image_on") === "1";
   } catch (e) {}
   const DEFAULT_PLACEHOLDER = el.input.placeholder;
 
@@ -1933,6 +2000,7 @@
       localStorage.setItem("scode_study_on", studyOn ? "1" : "0");
       localStorage.setItem("scode_study_kind", studyKind);
       localStorage.setItem("scode_weather_on", weatherOn ? "1" : "0");
+      localStorage.setItem("scode_image_on", imageOn ? "1" : "0");
     } catch (e) {}
   }
   function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost, isNew) {
@@ -1979,7 +2047,21 @@
     xb.title = xState === "on" ? "Weather is on: every message gets the Environment Canada forecast"
       : xState === "auto" ? "Weather turned on by itself for this question. Tap to skip the forecast."
       : "Weather: answer from the Environment Canada forecast (free)";
-    el.input.placeholder = wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
+    // Image Gen: same idea as Weather (on by hand, or lit up by itself for "draw me…").
+    const iAvail = typeof imageUnlocked === "function" && imageUnlocked();
+    const iState = iAvail ? imgState() : "off";
+    const ib = $("img-btn");
+    ib.classList.toggle("show", !!iAvail);
+    ib.classList.toggle("on", iState !== "off");
+    ib.classList.toggle("auto", iState === "auto");
+    ib.setAttribute("aria-pressed", String(iState !== "off"));
+    $("img-cost").textContent = "+" + (typeof imageCost !== "undefined" ? imageCost : 25);
+    $("img-new").hidden = !(iAvail && iState === "off" && typeof imageIsNew === "function" && imageIsNew());
+    ib.title = iState === "on" ? "SCODE Image Gen is on: describe a picture"
+      : iState === "auto" ? "Image Gen turned on by itself. Tap to send this as a normal message."
+      : "SCODE Image Gen: make a picture from a description";
+    if (typeof updateImgHint === "function") updateImgHint();
+    el.input.placeholder = iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
       : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
@@ -1990,7 +2072,9 @@
     linkOn = mode === "link";
     studyOn = mode === "study";
     weatherOn = mode === "weather";
+    imageOn = mode === "image";
     if (typeof wxSkipped !== "undefined") wxSkipped = false;
+    if (typeof imgSkipped !== "undefined") imgSkipped = false;
     if (!linkOn && typeof activeLink !== "undefined") activeLink = null;
     saveModes();
     updateWebBtn();
@@ -2003,6 +2087,13 @@
   $("link-btn").addEventListener("click", () => {
     if (chatHasPhoto()) { showNote("SCODE Link can't be used in a chat with a photo. Start a new chat."); return; }
     setMode(linkOn ? null : "link");
+    if (!touchLike) el.input.focus();
+  });
+  $("img-btn").addEventListener("click", () => {
+    const st = imgState();
+    if (st === "auto") { imgSkipped = true; updateWebBtn(); }
+    else if (st === "off" && isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
+    else setMode(st === "on" ? null : "image");
     if (!touchLike) el.input.focus();
   });
   $("wx-btn").addEventListener("click", () => {
@@ -2033,26 +2124,44 @@
     return WEATHER_LAUNCH !== null && Date.now() >= WEATHER_LAUNCH && Date.now() < WEATHER_LAUNCH + LAUNCH_POPUP_DAYS * 864e5;
   }
   const WN_WEATHER_ICON = '<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 2.6v1.3M3.9 4.4l.9.9M2.6 8.5h1.3M13.1 4.4l-.9.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
-  function fillWeatherPopup() {
-    wn.querySelector(".wn-orbs").innerHTML = `<div class="wn-orb">${WN_WEATHER_ICON.replace("<svg ", '<svg width="32" height="32" ')}</div>`;
-    wn.querySelector(".wn-tag").textContent = "New";
-    $("wn-title").textContent = "Introducing Local weather";
-    wn.querySelector(".modal-sub").textContent = "Ask about the weather and get the real Environment Canada forecast for your town, not a guess.";
+  // Single-feature launch popups (Weather on Oct 3, Image Gen on Nov 1).
+  const WN_IMAGE_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+  const FEATURE_POPUPS = {
+    weather: { icon: WN_WEATHER_ICON, tag: "New", title: "Introducing Local weather",
+      sub: "Ask about the weather and get the real Environment Canada forecast for your town, not a guess.",
+      name: "Local weather", text: "Ask &ldquo;Do I need a jacket tomorrow?&rdquo; and get a straight answer, plus the next hours, the week and any warnings.",
+      cost: () => "Free on every model, even without an account." },
+    image: { icon: WN_IMAGE_ICON, tag: "New · Beta", title: "Introducing SCODE Image Gen",
+      sub: "Describe a picture and SCODE AI paints it for you, right on the SCODE server.",
+      name: "SCODE Image Gen", text: "Type something like &ldquo;a cozy cabin in a snowy forest at night&rdquo; and watch it appear. Download it when it's done.",
+      cost: () => `Free account · +${imageCost} points per picture · about ${Math.max(10, Math.round(imageEta / 5) * 5)} seconds each` },
+  };
+  function fillFeaturePopup(key) {
+    const f = FEATURE_POPUPS[key];
+    wn.querySelector(".wn-orbs").innerHTML = `<div class="wn-orb">${f.icon.replace("<svg ", '<svg width="32" height="32" ')}</div>`;
+    wn.querySelector(".wn-tag").textContent = f.tag;
+    $("wn-title").textContent = f.title;
+    wn.querySelector(".modal-sub").textContent = f.sub;
     wn.querySelector(".wn-feats").innerHTML = `<div class="wn-feat">
-        <div class="wn-fi">${WN_WEATHER_ICON}</div>
-        <div class="wn-ft"><b>Local weather</b><span>Ask &ldquo;Do I need a jacket tomorrow?&rdquo; and get a straight answer, plus the next hours, the week and any warnings.</span></div>
-        <button class="wn-try" type="button" data-try="weather">Try</button>
+        <div class="wn-fi">${f.icon}</div>
+        <div class="wn-ft"><b>${f.name}</b><span>${f.text}</span></div>
+        <button class="wn-try" type="button" data-try="${key}">Try</button>
       </div>`;
-    $("wn-cost-line").textContent = "Free on every model, even without an account.";
+    $("wn-cost-line").textContent = f.cost();
   }
   function maybeShowWhatsNew() {
-    const forcedWx = /[?&]whatsnew=weather\b/.test(location.search);
-    const forced = forcedWx || /[?&]whatsnew=1\b/.test(location.search);
+    const m = /[?&]whatsnew=(1|weather|image)\b/.exec(location.search);
+    const forced = m ? m[1] : null;
     let seenThisVisit = false;
     try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
-    if (!forced && (seenThisVisit || !(searchIsNew() || weatherIsNew()))) return;
-    if (forcedWx || (!forced && !searchIsNew() && weatherIsNew())) fillWeatherPopup();
-    else $("wn-cost-line").textContent = `Search and Link: General and General Plus, +${searchCost} per message · Study: General, Plus and Ultra, +${studyCost} per set`;
+    let which = forced === "1" ? "big" : forced;
+    if (!which) {
+      if (seenThisVisit) return;
+      which = searchIsNew() ? "big" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
+    }
+    if (!which) return;
+    if (which === "big") $("wn-cost-line").textContent = `Search and Link: General and General Plus, +${searchCost} per message · Study: General, Plus and Ultra, +${studyCost} per set`;
+    else fillFeaturePopup(which);
     wn.classList.add("show");
   }
   $("wn-close").addEventListener("click", closeWhatsNew);
@@ -2060,6 +2169,12 @@
   wn.addEventListener("click", (e) => { if (e.target === wn) closeWhatsNew(); });
   function tryMode(mode) {
     closeWhatsNew();
+    if (mode === "image") {
+      if (isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
+      setMode("image");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
     if (mode === "weather") {
       setMode("weather");
       setTimeout(() => el.input.focus(), 250);
@@ -2574,7 +2689,9 @@
       row.appendChild(tb.wrap);
     }
     const studyEl = meta && meta.study ? buildStudy(meta.study) : null;
+    const imgEl = !studyEl && meta && meta.image ? buildImageResult(meta.image) : null;
     if (studyEl) row.appendChild(studyEl);
+    else if (imgEl) row.appendChild(imgEl);
     else {
       const md = document.createElement("div");
       md.className = "md";
@@ -2587,7 +2704,7 @@
     if (lcEl) row.appendChild(lcEl);
     const wxEl = meta && meta.weather ? buildWeatherCard(meta.weather) : null;
     if (wxEl) row.appendChild(wxEl);
-    row.appendChild(buildActions(displayContent, meta && meta.tier));
+    if (!imgEl) row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
 
@@ -2944,6 +3061,7 @@
     if (!weatherUnlocked()) return "off";
     const v = text === undefined ? el.input.value : text;
     if (URL_FIND.test(v)) return "off";
+    if (typeof imgState === "function" && imgState(v) !== "off") return "off";
     if (weatherOn) return "on";
     const studyBusy = typeof studyActive === "function" && studyActive();
     const linkBusy = linkOn && searchUnlocked() && typeof LINK_TIERS !== "undefined" && LINK_TIERS.has(selectedTier);
@@ -3223,6 +3341,168 @@
     return box;
   }
 
+  // ---------- SCODE Image Gen ----------
+  // Launches Nov 1 at midnight Pacific. Before then, ?preview=image shows it.
+  // It also needs the image add-ons installed on the laptop (the proxy reports that in /status).
+  var IMAGE_LAUNCH = Date.parse("2026-11-01T00:00:00-07:00");
+  var imagePreview = /[?&]preview=image\b/.test(location.search);
+  var imageServerOn = false, imageCost = 25, imageEta = 40;
+  var imgSkipped = false, imgForceOnce = false;
+  function imageUnlocked() { return !!imageServerOn && (imagePreview || Date.now() >= IMAGE_LAUNCH); }
+  function imageIsNew() { return Date.now() >= IMAGE_LAUNCH && Date.now() < IMAGE_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; }
+  // "draw me a fox", "make a picture of…", "generate an image of…" turn Image on by itself.
+  var IMG_ASK = /^\s*(?:please\s+)?(?:(?:can|could|would) you\s+)?(?:please\s+)?(?:(?:draw|paint|sketch|generate|create|make|design|render)\b.{0,40}?\b(?:image|picture|photo|pic|drawing|painting|artwork|illustration|wallpaper)s?\b|(?:draw|paint|sketch)\s+(?:me\s+|us\s+)?(?:an?|the|some|my)\b)/i;
+  function imgState(text) {
+    if (typeof imageUnlocked !== "function" || !imageUnlocked()) return "off";
+    const v = text === undefined ? el.input.value : text;
+    if (imageOn) return "on";
+    const studyBusy = typeof studyActive === "function" && studyActive();
+    const linkBusy = linkOn && searchUnlocked() && typeof LINK_TIERS !== "undefined" && LINK_TIERS.has(selectedTier);
+    if (imgSkipped || studyBusy || linkBusy || URL_FIND.test(v)) return "off";
+    return v.trim() && IMG_ASK.test(v) ? "auto" : "off";
+  }
+  const IMG_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>';
+  const IG_SPARK = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z" fill="currentColor"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor"/></svg>';
+  const IG_SHIELD = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12.2l2.1 2.1L15.2 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const IG_CLOCK = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const IG_DOWN = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const IG_AGAIN = '<svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function updateImgHint() {
+    const hint = $("img-hint");
+    if (!hint) return;
+    const st = imgState();
+    const show = st === "on" || (st === "auto" && el.input.value.trim());
+    const wasShown = hint.classList.contains("show");
+    if (!show) hint.classList.remove("show");
+    else {
+      const html = isGuest()
+        ? '<b>SCODE Image Gen</b> &middot; <button type="button" data-img="signin">Sign in</button> to make pictures'
+        : `<b>SCODE Image Gen</b> &middot; describe your picture &middot; about ${Math.max(10, Math.round(imageEta / 5) * 5)} s &middot; +${imageCost}`;
+      const t = $("ih-text");
+      if (t.innerHTML !== html) t.innerHTML = html;
+      $("ih-x").title = st === "on" ? "Turn off Image Gen" : "Don't make a picture";
+      if (!wasShown) hint.classList.add("show");
+    }
+    if (show !== wasShown && messages.length && nearBottom()) requestAnimationFrame(() => scrollToBottom(false));
+  }
+  $("img-hint").addEventListener("click", (e) => {
+    if (e.target.closest("[data-img=signin]")) openAuth("welcome", "SCODE Image Gen needs a free account.");
+  });
+  $("ih-x").addEventListener("click", () => {
+    if (imageOn) setMode(null); else { imgSkipped = true; updateWebBtn(); }
+    el.input.focus();
+  });
+  el.input.addEventListener("input", () => { if (imgSkipped && !el.input.value.trim()) { imgSkipped = false; updateWebBtn(); } });
+
+  function igSlug(s) { return (String(s || "picture").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40)) || "picture"; }
+  function igMeta(img) {
+    const meta = stEl("div", "ig-meta");
+    const made = stEl("div", "ig-made"); made.innerHTML = IG_CLOCK;
+    made.append(img.seconds ? `Made in ${Number(img.seconds).toFixed(1)} s` : "Made with SCODE Image Gen");
+    const dl = stEl("a", "wx-btn");
+    dl.href = "data:image/jpeg;base64," + img.data;
+    dl.download = "SCODE-" + igSlug(img.prompt) + ".jpg";
+    dl.innerHTML = IG_DOWN; dl.append("Download");
+    const again = stButton("wx-btn", "Try again", IG_AGAIN + "<span>Try again</span>");
+    again.addEventListener("click", () => {
+      if (sending || el.input.disabled) return;
+      el.input.value = img.prompt || "";
+      imgForceOnce = true;
+      autoGrow(); updateSendState();
+      send();
+    });
+    meta.append(made, dl, again);
+    return meta;
+  }
+  function igBlockedFrame(msg) {
+    const f = stEl("div", "ig-frame blocked");
+    f.innerHTML = IG_SHIELD;
+    f.appendChild(stEl("b", "", "Couldn't make that picture"));
+    f.appendChild(stEl("span", "", msg || "The safety filter stopped it. You weren't charged."));
+    return f;
+  }
+  // A finished picture, as it shows in saved chats.
+  function buildImageResult(img) {
+    const wrap = stEl("div", "ig");
+    if (img.blocked) { wrap.appendChild(igBlockedFrame(img.message)); }
+    else {
+      const frame = stEl("div", "ig-frame");
+      const pic = document.createElement("img");
+      pic.className = "ig-img"; pic.alt = img.prompt || "Picture made with SCODE Image Gen";
+      pic.src = "data:image/jpeg;base64," + img.data;
+      frame.appendChild(pic);
+      wrap.appendChild(frame);
+      wrap.appendChild(igMeta(img));
+    }
+    if (img.prompt) wrap.appendChild(stEl("div", "ig-prompt", "“" + img.prompt + "”"));
+    return wrap;
+  }
+  // The live card: shimmering square, progress bar, then the reveal.
+  function buildImageGen(prompt, eta) {
+    const wrap = stEl("div", "ig");
+    const frame = stEl("div", "ig-frame");
+    frame.innerHTML = '<div class="ig-blobs"><i></i><i></i><i></i><i></i></div><div class="ig-grain"></div><div class="ig-sweep"></div>';
+    const stage = stEl("div", "ig-stage"); stage.innerHTML = IG_SPARK;
+    const st = stEl("span", "ig-st", "Getting ready");
+    const tm = stEl("span", "ig-time", "0:00");
+    stage.append(st, tm);
+    frame.appendChild(stage);
+    wrap.appendChild(frame);
+    const prog = stEl("div", "ig-prog");
+    const bar = stEl("div", "ig-bar"); const fill = document.createElement("i"); bar.appendChild(fill);
+    const info = stEl("div", "ig-info"); const pctEl = stEl("span", "", "0%"); const left = stEl("span", "", "");
+    info.append(pctEl, left); prog.append(bar, info);
+    wrap.appendChild(prog);
+    const promptEl = stEl("div", "ig-prompt", "“" + prompt + "”");
+    wrap.appendChild(promptEl);
+    const FLOORS = { start: 0, loading: 2, drawing: 6, finishing: 50, checking: 90 };
+    const LABELS = { start: "Getting ready", loading: "Waking up the image model", drawing: "Creating image", finishing: "Adding the details", checking: "Safety check" };
+    const t0 = performance.now();
+    let floor = 0, pct = 0, finished = false;
+    const etaMs = Math.max(8, eta || 40) * 1000;
+    const fmt = (s) => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+    function tick() {
+      if (finished) return;
+      if (!wrap.isConnected && performance.now() - t0 > 3000) { clearInterval(timer); return; }
+      const ms = performance.now() - t0;
+      const curve = 97 * (1 - Math.exp(-2.3 * ms / etaMs));
+      pct = Math.max(pct, floor, Math.min(curve, 97));
+      fill.style.width = pct.toFixed(1) + "%";
+      pctEl.textContent = Math.floor(pct) + "%";
+      tm.textContent = fmt(ms / 1000);
+      const rem = (etaMs - ms) / 1000;
+      left.textContent = rem > 3 ? `about ${Math.ceil(rem)} s left` : "almost done";
+    }
+    const timer = setInterval(tick, 200);
+    tick();
+    return {
+      el: wrap,
+      phase(p) { if (!LABELS[p]) return; floor = Math.max(floor, FLOORS[p]); st.textContent = LABELS[p]; tick(); },
+      stop() { finished = true; clearInterval(timer); },
+      done(img) {
+        finished = true; clearInterval(timer);
+        fill.style.width = "100%"; pctEl.textContent = "100%"; left.textContent = ""; st.textContent = "Done";
+        return new Promise(resolve => setTimeout(() => {
+          const src = "data:image/jpeg;base64," + img.data;
+          const soft = document.createElement("img"); soft.className = "ig-soft"; soft.src = src; soft.alt = "";
+          const pic = document.createElement("img"); pic.className = "ig-img"; pic.src = src; pic.alt = img.prompt || "Picture made with SCODE Image Gen";
+          frame.insertBefore(soft, stage); frame.insertBefore(pic, stage);
+          frame.classList.add("reveal");
+          setTimeout(() => frame.classList.add("settled"), 900);
+          setTimeout(() => { frame.querySelectorAll(".ig-blobs, .ig-grain, .ig-sweep, .ig-stage, .ig-soft").forEach(n => n.remove()); }, 2400);
+          prog.replaceWith(igMeta(img));
+          resolve();
+        }, reduceMotion ? 0 : 380));
+      },
+      blocked(msg) {
+        finished = true; clearInterval(timer);
+        frame.replaceWith(igBlockedFrame(msg));
+        prog.remove();
+      },
+    };
+  }
+
   function autoGrow() {
     el.input.style.height = "auto";
     el.input.style.height = Math.min(el.input.scrollHeight, 200) + "px";
@@ -3264,6 +3544,9 @@
       if (Array.isArray(data.study_tiers)) STUDY_TIERS = new Set(data.study_tiers);
       if (typeof data.study_cost === "number") studyCost = data.study_cost;
       if (typeof data.weather === "boolean") weatherServerOn = data.weather;
+      if (typeof data.image === "boolean") imageServerOn = data.image;
+      if (typeof data.image_cost === "number") imageCost = data.image_cost;
+      if (typeof data.image_eta === "number") imageEta = data.image_eta;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -3581,9 +3864,9 @@
     { id: "weather", title: "Local weather", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Real forecasts, right in the chat.",
       details: "Ask “do I need a jacket tomorrow?” and get an answer from real Environment Canada forecast data, not a guess." },
-    { id: "imagegen", title: "SCODE Image Gen",
+    { id: "imagegen", title: "SCODE Image Gen", launch: "2026-11-01T00:00:00-07:00",
       blurb: "Describe a picture and get one back.",
-      details: "Type what you want to see and SCODE AI makes the image, right on the SCODE server." },
+      details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
     { id: "f-search", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Search",
@@ -3592,6 +3875,9 @@
     { id: "f-link", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Link",
       text: "Paste a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
       how: ["Sign in, then pick General or General Plus.", "Tap the Link button next to the text box so it turns green.", "Paste a link, with or without a question, and send.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; Link keeps using the same page until you tap ✕."] },
+    { id: "f-image", type: "feature", date: "2026-11-01", showFrom: "2026-11-01T00:00:00-07:00", title: "SCODE Image Gen",
+      text: "Describe a picture and SCODE AI makes it, right on the SCODE server, in about 40 seconds. Every picture goes through a safety filter, and nothing is saved on the server.",
+      how: ["Sign in, then tap the Image button next to the text box (or just type “draw me…”).", "Describe what you want to see, like “a red kayak on a calm lake at sunrise”.", "Watch it appear, then tap Download to save it, or Try again for a new version."] },
     { id: "f-study", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "Study Mode",
       text: "Turn notes, a photo of a worksheet, a link or just a topic into flip-card flashcards or a practice quiz, with hints, explanations and a score at the end.",
       how: ["Sign in, then pick General, General Plus or General Ultra.", "Tap the Study button next to the text box so it turns green.", "Pick Flashcards or Practice quiz in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Tap a card to flip it, or pick an answer. You'll see your score at the end."] },
@@ -3623,7 +3909,7 @@
     return m[3] ? `${MONTHS[+m[2] - 1].slice(0, 3)} ${+m[3]}, ${m[1]}` : `${MONTHS[+m[2] - 1]} ${m[1]}`;
   }
   function visibleLog() {
-    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview);
+    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview);
   }
   function upcomingNow() {
     return UPCOMING.filter(u => !u.launch || Date.now() < Date.parse(u.launch));
@@ -3755,7 +4041,11 @@
     const lp = linkPlan();
     const linkToSend = lp && (lp.kind === "read" || lp.kind === "follow") ? lp.url : null;
     linkSkipFor = null;
-    const wxWanted = wxState(text) !== "off";
+    const imgNow = imgForceOnce || imgState(text) !== "off";
+    imgForceOnce = false;
+    if (imgNow && isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
+    imgSkipped = false;
+    const wxWanted = !imgNow && wxState(text) !== "off";
     const wxSendTo = wxTarget();
     wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
     sending = true;
@@ -3821,9 +4111,10 @@
         // Only send what the server actually uses (keeps uploads small).
         body: JSON.stringify({
           tier: selectedTier,
-          web: useWeb && !linkToSend && !studyNow,
-          link: (!studyNow && linkToSend) || undefined,
-          study: studyNow ? { kind: studyKind } : undefined,
+          web: useWeb && !linkToSend && !studyNow && !imgNow,
+          link: (!studyNow && !imgNow && linkToSend) || undefined,
+          study: studyNow && !imgNow ? { kind: studyKind } : undefined,
+          image: imgNow || undefined,
           weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
@@ -3941,6 +4232,7 @@
       let linkInfo = null, linkNote = "";
       let studySet = null, studyNote = "";
       let wxData = null, wxNote = "", wxNeed = false;
+      let imgGen = null, imgData = null, imgBlocked = null, imgPrompt = text;
       const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
 
       while (true) {
@@ -3980,6 +4272,27 @@
             else if (s.status === "failed") linkNote = String(s.message || "Couldn't read that link.");
             continue;
           }
+          if (chunk.image) {
+            const s = chunk.image;
+            if (!revealed) reveal();
+            if (!imgGen) {
+              liveMd.style.display = "none";
+              if (liveTail) liveTail.style.display = "none";
+              if (s.prompt) imgPrompt = s.prompt;
+              imgGen = buildImageGen(imgPrompt, s.eta || imageEta);
+              liveRow.insertBefore(imgGen.el, liveTail);
+              scrollToBottom(true);
+            }
+            if (s.status === "done" && s.data) {
+              imgData = { data: s.data, prompt: s.prompt || imgPrompt, seconds: s.seconds, size: s.size };
+              await imgGen.done(imgData);
+              if (nearBottom()) scrollToBottom(true);
+            } else if (s.status === "blocked") {
+              imgBlocked = { blocked: true, prompt: imgPrompt, message: s.message };
+              imgGen.blocked(s.message);
+            } else imgGen.phase(s.status);
+            continue;
+          }
           if (chunk.weather) {
             const s = chunk.weather;
             if (s.status === "checking" && !revealed && loaderRow._setStage)
@@ -4004,7 +4317,7 @@
             continue;
           }
           const msg = chunk.message || {};
-          if (studySet && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
+          if ((studySet || imgGen) && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
           const stick = nearBottom();
           if (msg.thinking) {
             thinkingBuf += msg.thinking;
@@ -4033,6 +4346,7 @@
       }
 
       if (streamError) {
+        if (imgGen) imgGen.stop();
         if (loaderRow._clear) loaderRow._clear();
         if (loaderRow.parentNode) loaderRow.remove();
         if (typeRaf) cancelAnimationFrame(typeRaf);
@@ -4056,11 +4370,13 @@
         studyEl = buildStudy(studySet);
         liveRow.insertBefore(studyEl, liveTail);
         if (studyNote) liveRow.insertBefore(buildSearchNote(studyNote), liveTail);
+      } else if (imgGen) {
+        // The picture card is already in place.
       } else {
         typeTo(finalText);
         await typeDone();
       }
-      if (!studySet && !finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
+      if (!studySet && !imgGen && !finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
         liveMd.innerHTML = renderMarkdown("(No reply came back. Try sending it again.)");
       }
       if (liveTail) {
@@ -4082,7 +4398,7 @@
       else if (wxNeed) liveRow.appendChild(buildWeatherNeed());
       // The first town someone gets a forecast for becomes their town.
       if (wxData && !wxPlace) setWxPlace({ code: wxData.code, name: wxData.place, prov: wxData.prov });
-      liveRow.appendChild(buildActions(finalText, tierAtSend));
+      if (!imgGen) liveRow.appendChild(buildActions(finalText, tierAtSend));
 
       messages.push({
         role: "assistant",
@@ -4094,6 +4410,7 @@
         link: linkMeta || undefined,
         study: studySet || undefined,
         weather: wxData || undefined,
+        image: imgData || imgBlocked || undefined,
       });
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
       updateLinkHint();
