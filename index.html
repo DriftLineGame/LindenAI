@@ -765,6 +765,14 @@
   #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
   @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn { padding: 0 9px; } }
+  /* Auto-fit: fitTools() adds .fit1 (drop costs, NEW becomes a dot) then .fit2 (icons only) when the row runs out of room */
+  .composer-tools { min-width: 0; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .wcost { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { position: relative; padding: 0 10px 0 9px; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { width: 34px; padding: 0; justify-content: center; }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .mlabel { display: none; }
+  .composer-tools.fit2 .model-picker-btn .mp-quota { display: none; }
 
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
@@ -918,6 +926,33 @@
   }
   #whatsnew.show .wn-orbs .wn-orb:nth-child(2) { animation-delay: 0.32s; }
   @media (prefers-reduced-motion: reduce) { .wn-feat { opacity: 1; transform: none; } #whatsnew.show .wn-feat { animation: none; } }
+  /* Launch popup fits any screen: art on top, list scrolls, buttons stay pinned at the bottom */
+  #whatsnew { padding: 16px; }
+  #whatsnew .modal-box { width: 460px; display: flex; flex-direction: column; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); }
+  #whatsnew .wn-art { flex-shrink: 0; height: 124px; }
+  #whatsnew .wn-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 0; }
+  #whatsnew .wn-actions { position: sticky; bottom: 0; z-index: 1; background: var(--surface); margin: 0 -24px; padding: 12px 24px 20px;
+    box-shadow: 0 -14px 14px -6px var(--surface); }
+  #whatsnew .wn-small { margin: 4px 0 2px; }
+  .wn-orbs.many { gap: 10px; }
+  .wn-orbs.many .wn-orb { width: 52px; height: 52px; }
+  .wn-orbs.many .wn-orb svg { width: 25px; height: 25px; }
+  #whatsnew.show .wn-orbs .wn-orb:nth-child(3) { animation-delay: 0.38s; }
+  #whatsnew.show .wn-orbs .wn-orb:nth-child(4) { animation-delay: 0.44s; }
+  #whatsnew.show .wn-orbs .wn-orb:nth-child(5) { animation-delay: 0.5s; }
+  #whatsnew .wn-feats { gap: 8px; }
+  #whatsnew .wn-feat { padding: 10px 10px 10px 12px; }
+  #whatsnew .wn-ft span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  #whatsnew .wn-try { flex-shrink: 0; }
+  @media (max-width: 720px) {
+    #whatsnew { padding: 12px; }
+    #whatsnew .modal-box { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); }
+    #whatsnew .wn-art { height: 92px; }
+    .wn-orbs.many { gap: 8px; } .wn-orbs.many .wn-orb { width: 42px; height: 42px; } .wn-orbs.many .wn-orb svg { width: 21px; height: 21px; }
+    #whatsnew .wn-ft span { display: -webkit-box; -webkit-line-clamp: 3; font-size: 12px; }
+    #whatsnew .wn-actions { margin: 0 -18px; padding: 10px 18px 16px; }
+  }
+  @media (max-height: 560px) { #whatsnew .wn-art { display: none; } }
   .wn-pts svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
   .wn-actions { display: flex; gap: 10px; }
   .wn-btn { flex: 1; height: 44px; border-radius: 12px; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer;
@@ -1052,7 +1087,7 @@
     .top-right .icon-btn { width: 34px; }
     #signin-btn { padding: 0 11px; font-size: 12.5px; margin-right: 0; margin-left: 2px; }
     #acct-btn { margin: 0 0 0 4px; }
-    #acct-menu { right: -4px; width: min(260px, calc(100vw - 24px)); }
+    #acct-menu { right: 0; width: min(260px, calc(100vw - 24px)); }
     .budget-bar { display: none; }
     .budget-pill { padding: 0 10px; font-size: 12px; }
     .col { padding: 0 14px; }
@@ -2151,6 +2186,7 @@
   };
   function fillFeaturePopup(key) {
     const f = FEATURE_POPUPS[key];
+    wn.querySelector(".wn-orbs").classList.remove("many");
     wn.querySelector(".wn-orbs").innerHTML = `<div class="wn-orb">${f.icon.replace("<svg ", '<svg width="32" height="32" ')}</div>`;
     wn.querySelector(".wn-tag").textContent = f.tag;
     $("wn-title").textContent = f.title;
@@ -2173,7 +2209,12 @@
       which = searchIsNew() ? "big" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
     }
     if (!which) return;
-    if (which === "big") $("wn-cost-line").textContent = `Weather is free for everyone · the rest need a free account · Image Gen +${imageCost} per picture`;
+    if (which === "big") {
+      $("wn-cost-line").textContent = `Weather is free for everyone · the rest need a free account · Image Gen +${imageCost} per picture`;
+      const orbs = wn.querySelector(".wn-orbs");
+      orbs.classList.add("many");
+      orbs.innerHTML = [...wn.querySelectorAll(".wn-feat .wn-fi svg")].map(s => `<div class="wn-orb">${s.outerHTML}</div>`).join("");
+    }
     else fillFeaturePopup(which);
     wn.classList.add("show");
   }
@@ -4455,6 +4496,28 @@
   updateModelPickerLabel();
   checkStatus();
   setInterval(checkStatus, 20000);
+
+  // Mode buttons shrink to fit: full labels -> no costs -> icons only
+  (function () {
+    const tools = document.querySelector(".composer-tools");
+    if (!tools) return;
+    const over = () => tools.scrollWidth > tools.clientWidth + 1;
+    let busy = false;
+    function fitTools() {
+      if (busy) return; busy = true;
+      tools.classList.remove("fit1", "fit2");
+      if (over()) { tools.classList.add("fit1"); if (over()) tools.classList.add("fit2"); }
+      busy = false;
+    }
+    window.fitTools = fitTools;
+    if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(fitTools)).observe(tools);
+    window.addEventListener("resize", fitTools);
+    const mo = new MutationObserver(() => requestAnimationFrame(fitTools));
+    tools.querySelectorAll(":scope > button, .model-picker-btn").forEach(b =>
+      mo.observe(b, { attributes: true, attributeFilter: ["class", "hidden"], childList: true, subtree: true, characterData: true }));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTools);
+    fitTools();
+  })();
   if (!touchLike) el.input.focus();
   setTimeout(maybeShowWhatsNew, reduceMotion ? 300 : 1100);
   setTimeout(maybeNudgeSignIn, reduceMotion ? 600 : 1900);
