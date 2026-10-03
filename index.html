@@ -360,6 +360,103 @@
   .lc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .lc-note { font-size: 11.5px; color: var(--faint); }
 
+  /* Study Mode: bar above the text box */
+  #study-bar { display: none; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 2px 8px -4px; padding: 6px 6px 6px 10px; border-radius: 10px; background: var(--accent-soft); font-size: 12.5px; color: var(--muted); }
+  #study-bar.show { display: flex; animation: hintIn 0.35s cubic-bezier(.2,.8,.2,1); }
+  #study-bar > svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+  .sb-seg { display: inline-flex; padding: 2px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); }
+  .sb-seg button { border: none; background: none; font: inherit; font-size: 12px; font-weight: 600; color: var(--muted); padding: 4px 11px; border-radius: 7px; cursor: pointer; transition: background 0.15s, color 0.15s; }
+  .sb-seg button.on { background: var(--accent); color: var(--accent-ink); }
+  .sb-tip { flex: 1; min-width: 140px; }
+  @media (max-width: 420px) { .sb-tip { display: none; } }
+
+  /* Study sets: shared */
+  .study { margin-top: 4px; max-width: 560px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); padding: 16px 16px 14px;
+    opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
+  .st-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .st-ico { width: 34px; height: 34px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .st-ico svg { width: 18px; height: 18px; }
+  .st-kind { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .st-title { font-family: var(--serif); font-size: 18px; font-weight: 500; letter-spacing: -0.01em; color: var(--text); line-height: 1.25; }
+  .st-src { font-size: 12px; color: var(--faint); margin-top: 2px; }
+  .st-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+  .st-count { font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .st-nav { width: 38px; height: 38px; border-radius: 11px; border: 1px solid var(--border); background: none; color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, opacity 0.15s; }
+  .st-nav:hover { background: var(--hover); }
+  .st-nav:disabled { opacity: 0.35; cursor: default; }
+  .st-nav svg { width: 17px; height: 17px; }
+  .st-btn { height: 38px; padding: 0 16px; border-radius: 11px; border: 1px solid var(--border); background: none; color: var(--text); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.15s; }
+  .st-btn:hover { background: var(--hover); }
+  .st-btn:active { transform: scale(0.97); }
+  .st-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .st-btn.primary:hover { filter: brightness(1.06); }
+  .st-bar { height: 5px; border-radius: 5px; background: var(--hover); overflow: hidden; margin: 2px 0 14px; }
+  .st-bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 5px; transition: width 0.45s cubic-bezier(.2,.8,.2,1); }
+  .st-end { text-align: center; padding: 10px 0 4px; }
+  .st-ring { width: 96px; height: 96px; margin: 2px auto 10px; position: relative; }
+  .st-ring svg { width: 96px; height: 96px; transform: rotate(-90deg); }
+  .st-ring circle { fill: none; stroke-width: 8; }
+  .st-ring .bg { stroke: var(--hover); }
+  .st-ring .fg { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1); }
+  .st-ring b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .st-end h4 { font-family: var(--serif); font-size: 19px; font-weight: 500; margin: 0 0 4px; }
+  .st-end p { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+  .st-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+  /* Flashcards */
+  .fc-stage { perspective: 1200px; }
+  .fc { position: relative; height: 210px; cursor: pointer; outline: none; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(.2,.8,.2,1); }
+  .fc.flipped { transform: rotateY(180deg); }
+  .fc:focus-visible .fc-face { box-shadow: 0 0 0 3px var(--accent-soft); border-color: var(--accent); }
+  .fc-face { position: absolute; inset: 0; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 22px 24px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow-y: auto; }
+  .fc-front { background: var(--surface-2); }
+  .fc-back { background: radial-gradient(120% 120% at 50% 0%, var(--accent-soft), transparent 70%), var(--surface-2); transform: rotateY(180deg); }
+  .fc-face small { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+  .fc-face span { font-family: var(--serif); font-size: 19px; line-height: 1.4; color: var(--text); }
+  .fc-back span { font-size: 16.5px; }
+  .fc-swap { animation: fcIn 0.38s cubic-bezier(.2,.8,.2,1); }
+  .fc-swap.back { animation-name: fcInBack; }
+  @keyframes fcIn { from { opacity: 0; transform: translateX(26px) scale(0.97); } to { opacity: 1; transform: none; } }
+  @keyframes fcInBack { from { opacity: 0; transform: translateX(-26px) scale(0.97); } to { opacity: 1; transform: none; } }
+  .fc-tip { text-align: center; font-size: 12px; color: var(--faint); margin-top: 8px; min-height: 16px; }
+  .fc-grade { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+  .fc-grade .st-btn.miss { color: var(--warn); }
+  .fc-mark { font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+  .fc-mark.got { background: var(--accent-soft); color: var(--accent); }
+  .fc-mark.miss { background: var(--hover); color: var(--warn); }
+
+  /* Practice quiz */
+  .qz-q { font-family: var(--serif); font-size: 18px; line-height: 1.45; color: var(--text); margin: 0 0 12px; }
+  .qz-opts { display: grid; gap: 8px; }
+  .qz-opt { display: flex; align-items: center; gap: 11px; width: 100%; padding: 11px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2);
+    color: var(--text); font: inherit; font-size: 14.5px; text-align: left; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.15s; }
+  .qz-opt:hover:not(:disabled) { border-color: var(--border-strong); background: var(--hover); }
+  .qz-opt:active:not(:disabled) { transform: scale(0.99); }
+  .qz-opt:disabled { cursor: default; }
+  .qz-letter { width: 26px; height: 26px; border-radius: 8px; border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted); flex-shrink: 0; }
+  .qz-opt.right { border-color: var(--accent); background: var(--accent-soft); animation: qzPop 0.4s cubic-bezier(.2,.8,.2,1.4); }
+  .qz-opt.right .qz-letter { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .qz-opt.wrong { border-color: var(--warn); animation: auShake 0.35s; }
+  .qz-opt.wrong .qz-letter { background: var(--warn); border-color: var(--warn); color: #fff; }
+  .qz-opt.dim { opacity: 0.55; }
+  @keyframes qzPop { 50% { transform: scale(1.02); } }
+  .qz-hint-btn { border: none; background: none; color: var(--accent); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; padding: 0; margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; }
+  .qz-hint-btn svg { width: 15px; height: 15px; }
+  .qz-hint { font-size: 13.5px; color: var(--muted); background: var(--hover); border-radius: 10px; padding: 9px 12px; margin-top: 10px; line-height: 1.5; animation: hintIn 0.3s ease; }
+  .qz-fb { margin-top: 12px; padding: 11px 13px; border-radius: 12px; font-size: 13.5px; line-height: 1.5; animation: hintIn 0.35s ease; }
+  .qz-fb b { display: block; font-size: 14px; margin-bottom: 2px; }
+  .qz-fb.right { background: var(--accent-soft); color: var(--text); }
+  .qz-fb.right b { color: var(--accent); }
+  .qz-fb.wrong { background: var(--hover); color: var(--text); }
+  .qz-fb.wrong b { color: var(--warn); }
+  .qz-review { text-align: left; margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .qz-review li { font-size: 13px; line-height: 1.45; padding: 9px 11px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); }
+  .qz-review li b { display: block; color: var(--text); margin-bottom: 2px; }
+  .qz-review li span { color: var(--accent); font-weight: 600; }
+  .qz-review li.missed { border-color: var(--warn); }
+  @media (max-width: 720px) { .fc { height: 230px; } .fc-face span { font-size: 17.5px; } .study { padding: 14px 12px 12px; } }
+
   /* Web search: sources under a reply */
   .sources { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
   .src-label { font-size: 12px; color: var(--faint); margin-right: 2px; }
@@ -512,20 +609,20 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn {
+  #web-btn, #link-btn, #study-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost { display: none; } #web-btn, #link-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn { padding: 0 9px; } }
 
   /* Model picker (lives inside the composer, like a model switcher) */
   .model-picker { position: relative; }
@@ -754,7 +851,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -811,9 +908,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn { width: 34px; padding: 0; justify-content: center; position: relative; }
-    #web-btn .mlabel, #link-btn .mlabel, #web-btn .wcost, #link-btn .wcost { display: none; }
-    #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn, #link-btn, #study-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #attach-btn { width: 32px; height: 32px; }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost { display: none; }
+    #study-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -948,6 +1046,11 @@
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
             </button>
           </div>
+          <div id="study-bar" role="group" aria-label="Study Mode">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+            <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz">Practice quiz</button></div>
+            <span class="sb-tip" id="sb-tip">Paste notes, add a photo, paste a link, or name a topic.</span>
+          </div>
           <textarea id="prompt-input" placeholder="How can I help you today?" rows="1"></textarea>
           <div class="composer-tools">
             <button id="attach-btn" type="button" title="Add a photo" aria-label="Add a photo">
@@ -961,6 +1064,10 @@
             <button id="link-btn" type="button" aria-pressed="false" title="SCODE Link">
               <svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
               <span class="mlabel">Link</span><span class="wcost" id="link-cost">+5</span><span class="wnew" id="link-new" hidden>NEW</span>
+            </button>
+            <button id="study-btn" type="button" aria-pressed="false" title="Study Mode">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M7 11h5M7 15h3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+              <span class="mlabel">Study</span><span class="wcost" id="study-cost">+5</span><span class="wnew" id="study-new" hidden>NEW</span>
             </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
@@ -1676,13 +1783,26 @@
   function searchUnlocked() { return searchPreview || Date.now() >= SEARCH_LAUNCH; }
   function searchIsNew() { return searchUnlocked() && Date.now() < SEARCH_NEW_UNTIL; }
 
-  let WEB_TIERS = new Set(["l2", "l2_5"]);   // the server can override this via /status
+  // Study Mode has no launch date yet: it's hidden for everyone except ?preview=study.
+  // When it's ready, put a date here, e.g. Date.parse("2026-11-01T00:00:00-07:00").
+  const STUDY_LAUNCH = null;
+  const studyPreview = /[?&]preview=study\b/.test(location.search);
+  function studyUnlocked() { return studyPreview || (STUDY_LAUNCH !== null && Date.now() >= STUDY_LAUNCH); }
+  function studyIsNew() { return studyUnlocked() && (STUDY_LAUNCH === null || Date.now() < STUDY_LAUNCH + LAUNCH_POPUP_DAYS * 864e5); }
+
+  let WEB_TIERS = new Set(["l2", "l2_5"]);   // the server can override these via /status
+  var STUDY_TIERS = new Set(["l2", "l2_5", "l4"]);
   let searchCost = 5;
+  var studyCost = 5;
   let webOn = false;
-  var linkOn = false;                        // SCODE Link mode (only one mode is on at a time)
+  var linkOn = false;                        // SCODE Link mode
+  var studyOn = false;                       // Study Mode (only one mode is on at a time)
+  var studyKind = "flashcards";
   try {
     webOn = localStorage.getItem("linden_web") === "1";
     linkOn = !webOn && localStorage.getItem("scode_link_on") === "1";
+    studyOn = !webOn && !linkOn && localStorage.getItem("scode_study_on") === "1";
+    studyKind = localStorage.getItem("scode_study_kind") === "quiz" ? "quiz" : "flashcards";
   } catch (e) {}
   const DEFAULT_PLACEHOLDER = el.input.placeholder;
 
@@ -1690,36 +1810,54 @@
     return !!pendingImageBase64 || messages.some(m => m.images && m.images.length);
   }
   function saveModes() {
-    try { localStorage.setItem("linden_web", webOn ? "1" : "0"); localStorage.setItem("scode_link_on", linkOn ? "1" : "0"); } catch (e) {}
+    try {
+      localStorage.setItem("linden_web", webOn ? "1" : "0");
+      localStorage.setItem("scode_link_on", linkOn ? "1" : "0");
+      localStorage.setItem("scode_study_on", studyOn ? "1" : "0");
+      localStorage.setItem("scode_study_kind", studyKind);
+    } catch (e) {}
   }
-  function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost) {
+  function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost, isNew) {
     btn.classList.toggle("show", avail);
     btn.classList.toggle("on", on);
     btn.classList.toggle("blocked", blocked);
     btn.setAttribute("aria-pressed", String(on));
     costEl.textContent = "+" + cost;
-    newEl.hidden = !(searchIsNew() && !on);
+    newEl.hidden = !(isNew && !on);
   }
+  function studyActive() { return studyUnlocked() && studyOn && STUDY_TIERS.has(selectedTier); }
   function updateWebBtn() {
     const tiersL = (typeof LINK_TIERS !== "undefined" && LINK_TIERS) ? LINK_TIERS : WEB_TIERS;
     const cost = (typeof linkCost !== "undefined") ? linkCost : 5;
     const photo = chatHasPhoto();
     const wAvail = searchUnlocked() && WEB_TIERS.has(selectedTier);
     const lAvail = searchUnlocked() && tiersL.has(selectedTier);
-    const wOn = wAvail && webOn && !photo, lOn = lAvail && linkOn && !photo;
-    paintModeBtn(el.webBtn, $("web-new"), $("web-cost"), wAvail, wAvail && photo, wOn, searchCost);
-    paintModeBtn($("link-btn"), $("link-new"), $("link-cost"), lAvail, lAvail && photo, lOn, cost);
+    const sAvail = studyUnlocked() && STUDY_TIERS.has(selectedTier);
+    const wOn = wAvail && webOn && !photo, lOn = lAvail && linkOn && !photo, sOn = sAvail && studyOn;
+    paintModeBtn(el.webBtn, $("web-new"), $("web-cost"), wAvail, wAvail && photo, wOn, searchCost, searchIsNew());
+    paintModeBtn($("link-btn"), $("link-new"), $("link-cost"), lAvail, lAvail && photo, lOn, cost, searchIsNew());
+    paintModeBtn($("study-btn"), $("study-new"), $("study-cost"), sAvail, false, sOn, studyCost, studyIsNew());
     el.webBtn.title = photo ? "SCODE Search can't be used in a chat with a photo. Start a new chat to search."
       : (wOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + ` (+${searchCost} per message)`;
     $("link-btn").title = photo ? "SCODE Link can't be used in a chat with a photo. Start a new chat."
       : (lOn ? "SCODE Link is on" : "SCODE Link: read a web page, PDF or Google Doc you paste") + ` (+${cost} per message)`;
-    el.input.placeholder = wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it." : DEFAULT_PLACEHOLDER;
+    $("study-btn").title = (sOn ? "Study Mode is on" : "Study Mode: make flashcards or a practice quiz") + ` (+${studyCost} per set)`;
+    // Study bar: pick flashcards or a quiz
+    const bar = $("study-bar");
+    bar.classList.toggle("show", sOn);
+    bar.querySelectorAll(".sb-seg button").forEach(b => b.classList.toggle("on", b.dataset.kind === studyKind));
+    $("sb-tip").textContent = VISION_TIERS.has(selectedTier)
+      ? "Paste notes, add a photo, paste a link, or name a topic."
+      : "Paste notes, paste a link, or name a topic.";
+    el.input.placeholder = wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
+      : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?") : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
   }
   function setMode(mode) {
-    // "search", "link" or null. Only one at a time.
+    // "search", "link", "study" or null. Only one at a time.
     webOn = mode === "search";
     linkOn = mode === "link";
+    studyOn = mode === "study";
     if (!linkOn && typeof activeLink !== "undefined") activeLink = null;
     saveModes();
     updateWebBtn();
@@ -1734,6 +1872,16 @@
     setMode(linkOn ? null : "link");
     if (!touchLike) el.input.focus();
   });
+  $("study-btn").addEventListener("click", () => {
+    setMode(studyOn ? null : "study");
+    if (!touchLike) el.input.focus();
+  });
+  $("study-bar").querySelectorAll(".sb-seg button").forEach(b => b.addEventListener("click", () => {
+    studyKind = b.dataset.kind;
+    saveModes();
+    updateWebBtn();
+    if (!touchLike) el.input.focus();
+  }));
 
   // ---------- Launch popup: shows on each visit for 3 days after a launch ----------
   const wn = $("whatsnew");
@@ -1786,9 +1934,14 @@
   }
   function hostOf(u) { try { return new URL(u).hostname.replace(/^www\d*\./, ""); } catch (e) { return u; } }
   function linkPlan() {
-    if (!LINK_TIERS || !searchUnlocked()) return null;
+    if (!LINK_TIERS) return null;
     const m = el.input.value.match(URL_FIND);
     const typed = m ? cleanUrl(m[0]) : null;
+    if (typeof studyActive === "function" && studyActive()) {
+      // In Study Mode a pasted link becomes the study material.
+      return typed ? { kind: "info", html: `Study Mode will make your ${studyKind === "quiz" ? "quiz" : "flashcards"} from <b>${escapeHtml(hostOf(typed))}</b>` } : null;
+    }
+    if (!searchUnlocked()) return null;
     const photo = chatHasPhoto();
     if (typed) {
       if (typed === linkSkipFor) return null;
@@ -2249,10 +2402,14 @@
       const tb = buildThinkBlock(displayThinking, thoughtLabel(meta && meta.thinkSeconds), false);
       row.appendChild(tb.wrap);
     }
-    const md = document.createElement("div");
-    md.className = "md";
-    md.innerHTML = renderMarkdown(displayContent);
-    row.appendChild(md);
+    const studyEl = meta && meta.study ? buildStudy(meta.study) : null;
+    if (studyEl) row.appendChild(studyEl);
+    else {
+      const md = document.createElement("div");
+      md.className = "md";
+      md.innerHTML = renderMarkdown(displayContent);
+      row.appendChild(md);
+    }
     const srcEl = meta && meta.sources && meta.sources.length ? buildSources(meta.sources) : null;
     if (srcEl) row.appendChild(srcEl);
     const lcEl = meta && meta.link ? buildLinkCard(meta.link) : null;
@@ -2333,6 +2490,246 @@
     return d;
   }
 
+  // ---------- Study Mode: flashcards and practice quizzes ----------
+  const ST_ICON = {
+    flashcards: '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    quiz: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.1" fill="currentColor"/></svg>',
+  };
+  const ST_PREV = '<svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const ST_NEXT = '<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const ST_BULB = '<svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function stEl(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = String(text);
+    return n;
+  }
+  function stButton(cls, label, html) {
+    const b = stEl("button", cls);
+    b.type = "button";
+    if (html) b.innerHTML = html; else b.textContent = label;
+    if (html && label) b.setAttribute("aria-label", label);
+    return b;
+  }
+  function stShuffle(a) {
+    const r = a.slice();
+    for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; }
+    return r;
+  }
+  function stRing(got, total) {
+    const pct = total ? got / total : 0;
+    const C = 2 * Math.PI * 40;
+    const ring = stEl("div", "st-ring");
+    ring.innerHTML = `<svg viewBox="0 0 96 96"><circle class="bg" cx="48" cy="48" r="40"/><circle class="fg" cx="48" cy="48" r="40" stroke-dasharray="${C}" stroke-dashoffset="${C}"/></svg><b>${Math.round(pct * 100)}%</b>`;
+    const fg = ring.querySelector(".fg");
+    requestAnimationFrame(() => requestAnimationFrame(() => { fg.style.strokeDashoffset = String(C * (1 - pct)); }));
+    return ring;
+  }
+  function stCheer(pct) {
+    if (pct >= 0.9) return "Nailed it";
+    if (pct >= 0.7) return "Nice work";
+    if (pct >= 0.4) return "Getting there";
+    return "Good start";
+  }
+
+  function buildStudy(set) {
+    if (!set || (set.kind !== "flashcards" && set.kind !== "quiz")) return null;
+    const isQuiz = set.kind === "quiz";
+    const items = (isQuiz ? set.questions : set.cards) || [];
+    if (!Array.isArray(items) || !items.length) return null;
+    const box = stEl("div", "study " + (isQuiz ? "study-quiz" : "study-cards"));
+    const head = stEl("div", "st-head");
+    const ico = stEl("div", "st-ico"); ico.innerHTML = ST_ICON[set.kind];
+    const hm = stEl("div");
+    hm.appendChild(stEl("div", "st-kind", isQuiz ? `Practice quiz · ${items.length} questions` : `Flashcards · ${items.length} cards`));
+    hm.appendChild(stEl("div", "st-title", set.title || (isQuiz ? "Practice quiz" : "Flashcards")));
+    if (set.source) hm.appendChild(stEl("div", "st-src", "Made from " + set.source));
+    else if (set.general) hm.appendChild(stEl("div", "st-src", "Made from general knowledge, so double-check the facts"));
+    head.appendChild(ico); head.appendChild(hm);
+    box.appendChild(head);
+    const body = stEl("div", "st-body");
+    box.appendChild(body);
+    if (isQuiz) runQuiz(body, items); else runCards(body, items);
+    return box;
+  }
+
+  function runCards(body, allCards) {
+    let deck = allCards.map((c, i) => ({ ...c, i }));
+    let pos = 0, marks = {};
+    function render(dir) {
+      body.innerHTML = "";
+      if (pos >= deck.length) return renderEnd();
+      const c = deck[pos];
+      const stage = stEl("div", "fc-stage" + (dir ? " fc-swap" + (dir < 0 ? " back" : "") : ""));
+      const card = stEl("div", "fc");
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", "Flashcard. Press to flip.");
+      const f = stEl("div", "fc-face fc-front"); f.appendChild(stEl("small", "", "Question")); f.appendChild(stEl("span", "", c.front));
+      const b = stEl("div", "fc-face fc-back"); b.appendChild(stEl("small", "", "Answer")); b.appendChild(stEl("span", "", c.back));
+      card.appendChild(f); card.appendChild(b);
+      stage.appendChild(card);
+      body.appendChild(stage);
+      const tip = stEl("div", "fc-tip", "Tap the card to flip it");
+      body.appendChild(tip);
+      const grade = stEl("div", "fc-grade");
+      const miss = stButton("st-btn miss", "Still learning");
+      const got = stButton("st-btn primary", "Got it");
+      grade.appendChild(miss); grade.appendChild(got);
+      grade.style.visibility = "hidden";
+      body.appendChild(grade);
+      const row = stEl("div", "st-row");
+      const prev = stButton("st-nav", "Previous card", ST_PREV);
+      const next = stButton("st-nav", "Next card", ST_NEXT);
+      prev.disabled = pos === 0;
+      const mid = stEl("div", "st-count");
+      mid.textContent = `${pos + 1} of ${deck.length}`;
+      if (marks[c.i]) {
+        const m = stEl("span", "fc-mark " + marks[c.i], marks[c.i] === "got" ? "Got it" : "Still learning");
+        mid.append(" · "); mid.appendChild(m);
+      }
+      const shuf = stButton("st-nav", "Shuffle cards", '<svg viewBox="0 0 24 24" fill="none"><path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      shuf.title = "Shuffle";
+      const left = stEl("div"); left.style.display = "flex"; left.style.gap = "6px";
+      left.appendChild(prev); left.appendChild(shuf);
+      row.appendChild(left); row.appendChild(mid); row.appendChild(next);
+      body.appendChild(row);
+      function flip() {
+        card.classList.toggle("flipped");
+        const on = card.classList.contains("flipped");
+        tip.textContent = on ? "How did you do?" : "Tap the card to flip it";
+        grade.style.visibility = on ? "visible" : "hidden";
+      }
+      function mark(kind) { marks[c.i] = kind; pos++; render(1); focusCard(); }
+      card.addEventListener("click", flip);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
+        else if (e.key === "ArrowRight") { e.preventDefault(); pos++; render(1); focusCard(); }
+        else if (e.key === "ArrowLeft" && pos > 0) { e.preventDefault(); pos--; render(-1); focusCard(); }
+      });
+      miss.addEventListener("click", () => mark("miss"));
+      got.addEventListener("click", () => mark("got"));
+      prev.addEventListener("click", () => { if (pos > 0) { pos--; render(-1); } });
+      next.addEventListener("click", () => { pos++; render(1); });
+      shuf.addEventListener("click", () => { deck = stShuffle(deck); pos = 0; render(1); });
+    }
+    function focusCard() { const c = body.querySelector(".fc"); if (c) c.focus({ preventScroll: true }); }
+    function renderEnd() {
+      const end = stEl("div", "st-end");
+      const ids = deck.map((c) => c.i);
+      const gotN = ids.filter((i) => marks[i] === "got").length;
+      const missed = deck.filter((c) => marks[c.i] !== "got");
+      end.appendChild(stRing(gotN, deck.length));
+      end.appendChild(stEl("h4", "", missed.length ? stCheer(gotN / deck.length) : "You know them all"));
+      end.appendChild(stEl("p", "", `You got ${gotN} of ${deck.length} cards.` + (missed.length ? ` ${missed.length} still to learn.` : "")));
+      const btns = stEl("div", "st-btns");
+      if (missed.length && missed.length < deck.length) {
+        const again = stButton("st-btn primary", `Study the ${missed.length} you missed`);
+        again.addEventListener("click", () => { deck = missed; pos = 0; marks = {}; render(1); });
+        btns.appendChild(again);
+      }
+      const restart = stButton("st-btn" + (missed.length && missed.length < deck.length ? "" : " primary"), "Start over");
+      restart.addEventListener("click", () => { deck = allCards.map((c, i) => ({ ...c, i })); pos = 0; marks = {}; render(1); });
+      btns.appendChild(restart);
+      end.appendChild(btns);
+      body.appendChild(end);
+    }
+    render(0);
+  }
+
+  function runQuiz(body, allQs) {
+    let qs = allQs.slice(), pos = 0, answers = [];
+    const LET = "ABCDEFGH";
+    function render() {
+      body.innerHTML = "";
+      if (pos >= qs.length) return renderEnd();
+      const q = qs[pos];
+      const bar = stEl("div", "st-bar"); const fill = document.createElement("i");
+      fill.style.width = (pos / qs.length * 100) + "%";
+      bar.appendChild(fill); body.appendChild(bar);
+      body.appendChild(stEl("p", "qz-q", q.question));
+      const opts = stEl("div", "qz-opts");
+      const btns = (q.options || []).map((o, i) => {
+        const b = stButton("qz-opt");
+        b.appendChild(stEl("span", "qz-letter", LET[i] || "?"));
+        b.appendChild(stEl("span", "", o));
+        b.addEventListener("click", () => choose(i));
+        opts.appendChild(b);
+        return b;
+      });
+      body.appendChild(opts);
+      let hintBtn = null;
+      if (q.hint) {
+        hintBtn = stButton("qz-hint-btn", "Show hint", ST_BULB + "<span>Show hint</span>");
+        hintBtn.addEventListener("click", () => {
+          hintBtn.replaceWith(stEl("div", "qz-hint", q.hint));
+          answers[pos] = { ...(answers[pos] || {}), hinted: true };
+        });
+        body.appendChild(hintBtn);
+      }
+      const row = stEl("div", "st-row");
+      row.appendChild(stEl("div", "st-count", `Question ${pos + 1} of ${qs.length}`));
+      const next = stButton("st-btn primary", pos === qs.length - 1 ? "See my score" : "Next");
+      next.style.visibility = "hidden";
+      next.addEventListener("click", () => { pos++; render(); scrollStudy(); });
+      row.appendChild(next);
+      function choose(i) {
+        const right = i === q.answer;
+        answers[pos] = { ...(answers[pos] || {}), pick: i, right };
+        btns.forEach((b, j) => {
+          b.disabled = true;
+          if (j === q.answer) b.classList.add("right");
+          else if (j === i) b.classList.add("wrong");
+          else b.classList.add("dim");
+        });
+        const hintNow = body.querySelector(".qz-hint-btn"); if (hintNow) hintNow.remove();
+        const fb = stEl("div", "qz-fb " + (right ? "right" : "wrong"));
+        fb.appendChild(stEl("b", "", right ? "Correct!" : `Not quite. It's ${LET[q.answer]}.`));
+        if (q.explanation) fb.appendChild(document.createTextNode(q.explanation));
+        body.insertBefore(fb, row);
+        next.style.visibility = "visible";
+        fill.style.width = ((pos + 1) / qs.length * 100) + "%";
+        next.focus({ preventScroll: true });
+      }
+      body.appendChild(row);
+    }
+    function scrollStudy() {
+      const r = body.getBoundingClientRect();
+      if (r.top < 70) body.closest(".study").scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+    function renderEnd() {
+      const end = stEl("div", "st-end");
+      const gotN = answers.filter((a) => a && a.right).length;
+      end.appendChild(stRing(gotN, qs.length));
+      end.appendChild(stEl("h4", "", stCheer(gotN / qs.length)));
+      end.appendChild(stEl("p", "", `You got ${gotN} of ${qs.length} right.`));
+      const btns = stEl("div", "st-btns");
+      const wrongQs = qs.filter((_, i) => !(answers[i] && answers[i].right));
+      if (wrongQs.length && wrongQs.length < qs.length) {
+        const redo = stButton("st-btn primary", `Retry the ${wrongQs.length} you missed`);
+        redo.addEventListener("click", () => { qs = wrongQs; pos = 0; answers = []; render(); });
+        btns.appendChild(redo);
+      }
+      const again = stButton("st-btn" + (wrongQs.length && wrongQs.length < qs.length ? "" : " primary"), "Try again");
+      again.addEventListener("click", () => { qs = stShuffle(allQs); pos = 0; answers = []; render(); });
+      btns.appendChild(again);
+      end.appendChild(btns);
+      const list = stEl("ul", "qz-review");
+      qs.forEach((q, i) => {
+        const a = answers[i] || {};
+        const li = stEl("li", a.right ? "" : "missed");
+        li.appendChild(stEl("b", "", `${i + 1}. ${q.question}`));
+        const ans = stEl("span", "", (q.options || [])[q.answer]);
+        li.append(a.right ? "✓ " : "✗ Answer: ");
+        li.appendChild(ans);
+        list.appendChild(li);
+      });
+      end.appendChild(list);
+      body.appendChild(end);
+    }
+    render();
+  }
+
   function autoGrow() {
     el.input.style.height = "auto";
     el.input.style.height = Math.min(el.input.scrollHeight, 200) + "px";
@@ -2371,6 +2768,8 @@
       if (typeof data.search_cost === "number") searchCost = data.search_cost;
       if (Array.isArray(data.link_tiers)) LINK_TIERS = new Set(data.link_tiers);
       if (typeof data.link_cost === "number") linkCost = data.link_cost;
+      if (Array.isArray(data.study_tiers)) STUDY_TIERS = new Set(data.study_tiers);
+      if (typeof data.study_cost === "number") studyCost = data.study_cost;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -2684,7 +3083,7 @@
       details: "Turn on Link and paste any web page, PDF or shared Google Doc. SCODE AI reads it, answers your questions about it, and builds a correct MLA or APA citation from the page's own details." },
     { id: "study", title: "Study Mode",
       blurb: "Turn notes into flashcards and practice quizzes.",
-      details: "Paste your notes or snap a photo of a worksheet, and SCODE AI turns it into flashcards and a short practice quiz, giving hints before answers so you actually learn it." },
+      details: "Turn on Study, then paste your notes, add a photo of a worksheet, paste a link, or just name a topic. SCODE AI makes a deck of flip cards or a practice quiz with hints, explanations and a score at the end, so you actually learn it." },
     { id: "weather", title: "Local weather",
       blurb: "Real forecasts, right in the chat.",
       details: "Ask “do I need a jacket tomorrow?” and get an answer from real Environment Canada forecast data, not a guess." },
@@ -2901,6 +3300,7 @@
     const tierAtSend = selectedTier;
     // Web search only runs on supported options, and never in a chat that has a photo.
     const useWeb = searchUnlocked() && webOn && WEB_TIERS.has(tierAtSend) && !hadImageBefore && !addingImageNow;
+    const studyNow = studyActive() && !isGuest();
     const controller = new AbortController();
     // Long enough to comfortably outlast the server's own longest timeout —
     // General Ultra's complex photo analysis can run up to 900s
@@ -2918,8 +3318,9 @@
         // Only send what the server actually uses (keeps uploads small).
         body: JSON.stringify({
           tier: selectedTier,
-          web: useWeb && !linkToSend,
-          link: linkToSend || undefined,
+          web: useWeb && !linkToSend && !studyNow,
+          link: (!studyNow && linkToSend) || undefined,
+          study: studyNow ? { kind: studyKind } : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
             if (m.images) o.images = m.images;
@@ -3034,6 +3435,8 @@
       let streamError = null;
       let webSources = [], searchNote = "";
       let linkInfo = null, linkNote = "";
+      let studySet = null, studyNote = "";
+      const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -3072,7 +3475,22 @@
             else if (s.status === "failed") linkNote = String(s.message || "Couldn't read that link.");
             continue;
           }
+          if (chunk.study) {
+            // Study Mode progress, then the finished set.
+            const s = chunk.study;
+            const stage = (t) => { if (!revealed && loaderRow._setStage) loaderRow._setStage(t); };
+            if (s.status === "start") stage("Getting your study set ready");
+            else if (s.status === "reading") stage(`Reading ${s.domain || "the page"}`);
+            else if (s.status === "making") stage(studyWord === "quiz" ? "Writing your quiz" : "Making your flashcards");
+            else if (s.status === "progress") stage(studyWord === "quiz"
+              ? `Writing your quiz · ${s.made} question${s.made === 1 ? "" : "s"} so far`
+              : `Making your flashcards · ${s.made} so far`);
+            else if (s.status === "note") studyNote = String(s.message || "");
+            else if (s.status === "done") studySet = s.set;
+            continue;
+          }
           const msg = chunk.message || {};
+          if (studySet && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
           const stick = nearBottom();
           if (msg.thinking) {
             thinkingBuf += msg.thinking;
@@ -3117,9 +3535,18 @@
       finishThinking();
       const finalSplit = splitThinkTags(rawContent);
       let finalText = finalSplit.visible;
-      typeTo(finalText);
-      await typeDone();
-      if (!finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
+      let studyEl = null;
+      if (studySet) {
+        // Draw the flashcards / quiz instead of text.
+        liveMd.style.display = "none";
+        studyEl = buildStudy(studySet);
+        liveRow.insertBefore(studyEl, liveTail);
+        if (studyNote) liveRow.insertBefore(buildSearchNote(studyNote), liveTail);
+      } else {
+        typeTo(finalText);
+        await typeDone();
+      }
+      if (!studySet && !finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
         liveMd.innerHTML = renderMarkdown("(No reply came back. Try sending it again.)");
       }
       if (liveTail) {
@@ -3145,6 +3572,7 @@
         tier: tierAtSend,
         sources: srcEl ? webSources : undefined,
         link: linkMeta || undefined,
+        study: studySet || undefined,
       });
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
       updateLinkHint();
