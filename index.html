@@ -1392,11 +1392,17 @@
     const hint = $("link-hint");
     if (!hint) return;
     const plan = linkPlan();
-    if (!plan) { hint.classList.remove("show", "info"); return; }
-    const t = $("lh-text");
-    if (t.innerHTML !== plan.html) t.innerHTML = plan.html;
-    hint.classList.toggle("info", plan.kind === "info");
-    if (!hint.classList.contains("show")) hint.classList.add("show");
+    const wasShown = hint.classList.contains("show");
+    // The bar makes the text box taller; keep the newest message in view when it appears or goes.
+    const stick = (!!plan !== wasShown) && messages.length && nearBottom();
+    if (!plan) hint.classList.remove("show", "info");
+    else {
+      const t = $("lh-text");
+      if (t.innerHTML !== plan.html) t.innerHTML = plan.html;
+      hint.classList.toggle("info", plan.kind === "info");
+      if (!wasShown) hint.classList.add("show");
+    }
+    if (stick) requestAnimationFrame(() => scrollToBottom(false));
   }
   $("lh-x").addEventListener("click", () => {
     const plan = linkPlan();
