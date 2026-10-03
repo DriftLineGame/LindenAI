@@ -1670,13 +1670,9 @@
   const SEARCH_LAUNCH = Date.parse("2026-10-09T00:00:00-07:00");   // Oct 9, midnight Pacific
   const LAUNCH_POPUP_DAYS = 3;                                      // launch popup shows for 3 days
   const SEARCH_NEW_UNTIL = SEARCH_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; // "NEW" badges for the same 3 days
-  let searchPreview = false;
-  try {
-    const qs = location.search;
-    if (/[?&]preview=search\b/.test(qs)) localStorage.setItem("scode_search_preview", "1");
-    if (/[?&]preview=off\b/.test(qs)) localStorage.removeItem("scode_search_preview");
-    searchPreview = localStorage.getItem("scode_search_preview") === "1";
-  } catch (e) {}
+  // Preview only works while the link actually ends in ?preview=search (nothing is remembered).
+  const searchPreview = /[?&]preview=search\b/.test(location.search);
+  try { localStorage.removeItem("scode_search_preview"); } catch (e) {}   // clear the old remembered setting
   function searchUnlocked() { return searchPreview || Date.now() >= SEARCH_LAUNCH; }
   function searchIsNew() { return searchUnlocked() && Date.now() < SEARCH_NEW_UNTIL; }
 
