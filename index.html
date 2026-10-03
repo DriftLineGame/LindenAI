@@ -137,6 +137,69 @@
   @media (hover: none) { .chat-item .del { opacity: 1; } }
   #sidebar-backdrop { display: none; }
 
+  /* Empty chat list (guests, or history off) */
+  .side-empty { margin: 4px 4px 0; padding: 14px; border: 1px dashed var(--border-strong); border-radius: 12px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .side-empty b { color: var(--text); font-weight: 600; display: block; margin-bottom: 4px; }
+  .side-empty button { display: block; margin-top: 10px; height: 32px; padding: 0 12px; border-radius: 9px; border: none; background: var(--accent); color: var(--accent-ink);
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+
+  /* Sidebar bottom: Coming soon + What's new */
+  .side-bottom { flex-shrink: 0; padding-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  #soon-card { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; padding: 12px 12px 10px; cursor: pointer;
+    background: radial-gradient(120% 90% at 100% 0%, var(--accent-soft), transparent 60%), var(--surface); text-align: left; width: 100%; font: inherit; color: inherit;
+    transition: border-color 0.2s, transform 0.2s; }
+  #soon-card:hover { border-color: var(--border-strong); }
+  #soon-card:active { transform: scale(0.99); }
+  .soon-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .soon-tag i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: soonPulse 1.8s ease-in-out infinite; }
+  @keyframes soonPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
+  .soon-title { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: -0.01em; color: var(--text); margin: 6px 0 2px; }
+  .soon-blurb { font-size: 12px; color: var(--muted); line-height: 1.45; }
+  .soon-count { display: flex; gap: 6px; margin: 10px 0 8px; }
+  .soon-count div { flex: 1; text-align: center; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 5px 0 4px; }
+  .soon-count b { display: block; font-size: 16px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .soon-count span { font-size: 9.5px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.06em; }
+  .soon-more { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 7px; display: flex; flex-direction: column; gap: 3px; }
+  .soon-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); }
+  .soon-row em { font-style: normal; font-size: 10.5px; color: var(--faint); white-space: nowrap; }
+  .side-links { display: flex; gap: 6px; }
+  .side-link { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; height: 36px; border-radius: 10px; border: 1px solid var(--border);
+    background: none; color: var(--muted); font: inherit; font-size: 12.5px; font-weight: 500; cursor: pointer; text-decoration: none; position: relative;
+    transition: background 0.15s, color 0.15s; }
+  .side-link:hover { background: var(--hover); color: var(--text); }
+  .side-link svg { width: 15px; height: 15px; }
+  .side-link .dot-new { position: absolute; top: 7px; right: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--sidebar); display: none; }
+  .side-link.unseen .dot-new { display: block; }
+
+  /* Account button + menu */
+  #signin-btn { height: 32px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--accent); background: var(--accent-soft); color: var(--accent);
+    font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; margin-right: 4px; white-space: nowrap; display: none; transition: filter 0.15s; }
+  #signin-btn:hover { filter: brightness(1.08); }
+  body.guest #signin-btn { display: block; }
+  #acct-wrap { position: relative; display: none; }
+  body.signed-in #acct-wrap { display: block; }
+  #acct-btn { width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 700;
+    font-size: 14px; cursor: pointer; margin: 0 4px; display: flex; align-items: center; justify-content: center; }
+  #acct-menu { position: absolute; right: 0; top: 42px; width: 250px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 6px; z-index: 120; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(0.98); transform-origin: top right;
+    transition: opacity 0.18s, transform 0.22s cubic-bezier(.2,.8,.2,1), visibility 0s 0.2s; }
+  #acct-wrap.open #acct-menu { opacity: 1; visibility: visible; transform: none; transition: opacity 0.18s, transform 0.22s cubic-bezier(.2,.8,.2,1); }
+  .am-head { padding: 10px 10px 10px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .am-name { font-weight: 600; font-size: 14px; }
+  .am-email { font-size: 12px; color: var(--faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .am-perk { font-size: 11.5px; color: var(--accent); margin-top: 6px; }
+  .am-item { display: flex; align-items: center; gap: 9px; width: 100%; padding: 9px 10px; border: none; background: none; border-radius: 9px; font: inherit;
+    font-size: 13.5px; color: var(--text); cursor: pointer; text-align: left; }
+  .am-item:hover { background: var(--hover); }
+  .am-item.danger { color: var(--warn); }
+  .am-item svg { width: 16px; height: 16px; color: var(--faint); }
+  .am-item.danger svg { color: var(--warn); }
+
+  /* Locked models for guests */
+  .model-picker-option.locked .mp-opt-name, .model-picker-option.locked .mp-opt-tag { opacity: 0.6; }
+  .mp-lock { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); font-weight: 600; }
+  .mp-lock svg { width: 12px; height: 12px; }
+
   /* ---- Main column ---- */
   #main { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
 
@@ -146,7 +209,7 @@
   }
   .top-left, .top-right { display: flex; align-items: center; gap: 4px; min-width: 0; }
   .top-brand { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; padding: 0 6px; white-space: nowrap; }
-  body.history-on .top-brand { display: none; }
+  .top-brand { display: none; }
   .icon-btn {
     width: 36px; height: 36px; border-radius: 9px; border: none; background: none; color: var(--muted);
     cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -592,6 +655,83 @@
   .wn-btn:active { transform: scale(0.97); }
   .wn-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .wn-btn.primary:hover { filter: brightness(1.06); background: var(--accent); }
+  /* Sign-in window */
+  #auth-overlay { z-index: 260; }
+  #auth-overlay .modal-box { width: 420px; padding: 0; position: relative; overflow: hidden;
+    transform: translateY(22px) scale(0.97); opacity: 0; transition: transform 0.5s cubic-bezier(.2,.8,.2,1), opacity 0.3s ease; }
+  #auth-overlay.show .modal-box { transform: none; opacity: 1; }
+  .au-close { position: absolute; top: 10px; right: 10px; z-index: 2; }
+  .au-view { display: none; padding: 26px 26px 22px; }
+  .au-view.on { display: block; animation: auIn 0.4s cubic-bezier(.2,.8,.2,1); }
+  @keyframes auIn { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+  .au-mark { width: 46px; height: 46px; border-radius: 14px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .au-mark svg { width: 28px; height: 28px; }
+  .au-view h2 { font-family: var(--serif); font-weight: 500; font-size: 24px; letter-spacing: -0.015em; margin: 0 0 6px; }
+  .au-reason { display: none; font-size: 12.5px; color: var(--accent); background: var(--accent-soft); border-radius: 9px; padding: 7px 10px; margin: 0 0 12px; }
+  .au-reason.show { display: block; }
+  .au-perks { list-style: none; margin: 16px 0 20px; padding: 0; display: grid; gap: 9px; }
+  .au-perks li { display: flex; gap: 11px; align-items: flex-start; font-size: 14px; line-height: 1.4; }
+  .au-perks .pi { width: 30px; height: 30px; border-radius: 9px; background: var(--surface-2); border: 1px solid var(--border); color: var(--accent);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .au-perks .pi svg { width: 16px; height: 16px; }
+  .au-perks small { display: block; font-size: 12px; color: var(--faint); }
+  .au-field { display: block; margin-bottom: 11px; }
+  .au-field span { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 5px; }
+  .au-field input { width: 100%; height: 44px; border-radius: 11px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text);
+    font: inherit; font-size: 15px; padding: 0 13px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+  .au-field input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .au-pw { position: relative; }
+  .au-pw button { position: absolute; right: 6px; top: 6px; height: 32px; padding: 0 10px; border: none; background: none; color: var(--faint); font: inherit; font-size: 12px; cursor: pointer; border-radius: 8px; }
+  .au-pw button:hover { background: var(--hover); color: var(--text); }
+  input.au-code { text-align: center; font-size: 28px !important; font-weight: 600; letter-spacing: 0.45em; height: 60px !important; padding-left: 0.45em !important; font-variant-numeric: tabular-nums; }
+  .au-err { display: none; font-size: 13px; color: var(--warn); margin: 2px 0 10px; line-height: 1.4; }
+  .au-err.show { display: block; animation: auShake 0.35s; }
+  @keyframes auShake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+  .au-note { font-size: 12px; color: var(--faint); line-height: 1.5; margin: 10px 0 0; }
+  .au-alt { text-align: center; font-size: 13px; color: var(--muted); margin-top: 14px; }
+  .au-link { border: none; background: none; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; padding: 0; }
+  .au-link:disabled { color: var(--faint); cursor: default; font-weight: 500; }
+  .au-btns { display: grid; gap: 9px; }
+  .au-btns .wn-btn { width: 100%; }
+  .wn-btn.danger { background: var(--warn); border-color: var(--warn); color: #fff; }
+  .wn-btn[disabled] { opacity: 0.6; cursor: default; }
+  .au-done { text-align: center; padding: 18px 0 6px; }
+  .au-check { width: 64px; height: 64px; margin: 0 auto 14px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: flex; align-items: center; justify-content: center;
+    animation: wnPop 0.6s cubic-bezier(.2,.8,.2,1.35) both; }
+  .au-check svg { width: 32px; height: 32px; stroke-dasharray: 30; stroke-dashoffset: 30; animation: auDraw 0.5s 0.25s ease forwards; }
+  @keyframes auDraw { to { stroke-dashoffset: 0; } }
+
+  /* What's new panel */
+  #news-overlay { z-index: 240; }
+  #news-overlay .modal-box { width: 560px; padding: 0; display: flex; flex-direction: column; max-height: 86vh; overflow: hidden;
+    transform: translateY(22px) scale(0.97); opacity: 0; transition: transform 0.5s cubic-bezier(.2,.8,.2,1), opacity 0.3s ease; }
+  #news-overlay.show .modal-box { transform: none; opacity: 1; }
+  .nw-head { padding: 20px 22px 0; position: relative; }
+  .nw-head h2 { font-family: var(--serif); font-weight: 500; font-size: 23px; margin: 0 0 12px; }
+  .nw-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin: 0 -22px; padding: 0 18px; }
+  .nw-tab { border: none; background: none; font: inherit; font-size: 13.5px; font-weight: 600; color: var(--faint); padding: 9px 8px 11px; cursor: pointer; position: relative; }
+  .nw-tab.on { color: var(--text); }
+  .nw-tab.on::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: -1px; height: 2px; border-radius: 2px; background: var(--accent); }
+  .nw-body { overflow-y: auto; padding: 6px 22px 10px; flex: 1; }
+  .nw-item { padding: 16px 0; border-bottom: 1px solid var(--border); opacity: 0; animation: srcIn 0.45s cubic-bezier(.2,.8,.2,1) forwards; }
+  .nw-item:last-child { border-bottom: none; }
+  .nw-meta { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--faint); margin-bottom: 4px; }
+  .nw-kind { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 7px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+  .nw-kind.fix { background: var(--hover); color: var(--muted); }
+  .nw-kind.soon { background: transparent; border: 1px solid var(--accent); }
+  .nw-item h3 { font-size: 16px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .nw-item p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0; }
+  .nw-how { margin: 10px 0 0; padding: 10px 12px 10px 30px; background: var(--surface-2); border-radius: 10px; font-size: 13px; color: var(--text); line-height: 1.55; }
+  .nw-how li + li { margin-top: 3px; }
+  .nw-how-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin: 10px 0 -4px; }
+  .nw-count { display: inline-flex; gap: 4px; margin-top: 8px; font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; color: var(--accent); }
+  .nw-empty { padding: 30px 0; text-align: center; color: var(--faint); font-size: 13.5px; }
+  .nw-foot { border-top: 1px solid var(--border); padding: 12px 22px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--muted); }
+  .nw-foot a { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--border); color: var(--text);
+    text-decoration: none; font-weight: 600; white-space: nowrap; }
+  .nw-foot a:hover { background: var(--hover); }
+  .nw-foot svg { width: 15px; height: 15px; }
+
   #web-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
@@ -633,8 +773,15 @@
   @media (max-width: 720px) {
     :root { --sidebar-w: 84vw; }
     #topbar { height: 52px; padding-left: 8px; padding-right: 8px; }
-    body.history-on #menu-btn { display: flex; }
-    body.history-on .top-brand { display: flex; }
+    #menu-btn { display: flex; }
+    .top-brand { display: flex; }
+    /* Keep the top bar on one line: just the mountain for the brand, tighter buttons */
+    .top-brand { font-size: 0; gap: 0; padding: 0 2px; }
+    .top-right { gap: 0; }
+    .top-right .icon-btn { width: 34px; }
+    #signin-btn { padding: 0 11px; font-size: 12.5px; margin-right: 0; margin-left: 2px; }
+    #acct-btn { margin: 0 0 0 4px; }
+    #acct-menu { right: -4px; width: min(260px, calc(100vw - 24px)); }
     .budget-bar { display: none; }
     .budget-pill { padding: 0 10px; font-size: 12px; }
     .col { padding: 0 14px; }
@@ -653,9 +800,9 @@
     #sidebar.show {
       position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); max-width: 320px; z-index: 200;
       transform: translateX(-102%); transition: transform 0.28s cubic-bezier(.2,.8,.2,1);
-      padding-top: calc(12px + env(safe-area-inset-top)); box-shadow: 12px 0 40px rgba(0,0,0,0.3);
+      padding-top: calc(12px + env(safe-area-inset-top)); box-shadow: none;
     }
-    #sidebar.show.mobile-open { transform: none; }
+    #sidebar.show.mobile-open { transform: none; box-shadow: 12px 0 40px rgba(0,0,0,0.3); }
     #sidebar-backdrop.show { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
     #sidebar-backdrop.show.mobile-open { opacity: 1; pointer-events: auto; }
   }
@@ -685,6 +832,19 @@
     </button>
     <div class="side-label">Recents</div>
     <div id="chat-list"></div>
+    <div class="side-bottom">
+      <button id="soon-card" type="button" aria-label="Coming soon: see details"></button>
+      <div class="side-links">
+        <button class="side-link" id="news-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          What's new<span class="dot-new"></span>
+        </button>
+        <a class="side-link" id="report-btn" href="mailto:scodeai2026@gmail.com?subject=SCODE%20AI%20issue" title="Email scodeai2026@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 21V4h11l-1.5 4L16 12H5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          Report issue
+        </a>
+      </div>
+    </div>
   </aside>
   <div id="sidebar-backdrop"></div>
 
@@ -709,6 +869,23 @@
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="16" cy="7" r="2.2" stroke="currentColor" stroke-width="1.9"/><circle cx="10" cy="17" r="2.2" stroke="currentColor" stroke-width="1.9"/></svg>
         </button>
         <button class="icon-btn" id="theme-toggle" title="Switch light / dark" aria-label="Switch theme"></button>
+        <button id="signin-btn" type="button">Sign in</button>
+        <div id="acct-wrap">
+          <button id="acct-btn" type="button" aria-haspopup="menu" aria-label="Your account">L</button>
+          <div id="acct-menu" role="menu">
+            <div class="am-head">
+              <div class="am-name" id="am-name"></div>
+              <div class="am-email" id="am-email"></div>
+              <div class="am-perk">1,000 points every 4 hours &middot; every model</div>
+            </div>
+            <button class="am-item" id="am-signout" type="button" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Sign out
+            </button>
+            <button class="am-item danger" id="am-delete" type="button" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Delete account
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -842,6 +1019,123 @@
   </div>
 </div>
 
+<!-- Sign in / create account -->
+<div class="overlay" id="auth-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Your SCODE account">
+    <button class="icon-btn au-close" id="au-close" type="button" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="au-view" data-view="welcome">
+      <div class="au-mark"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="mk-body" d="M3.5 26.5 L12.6 9.2 L18 18.6 L21.4 13.4 L28.5 26.5 Z"/><path class="mk-snow" d="M12.6 9.2 L9.7 14.7 L11.9 13.4 L13.4 15 L15.3 13.9 Z"/></svg></div>
+      <div class="au-reason" id="au-reason"></div>
+      <h2>Get more with a free account</h2>
+      <div class="modal-sub">You're using SCODE AI as a guest. Sign in to unlock everything.</div>
+      <ul class="au-perks">
+        <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>1,000 points every 4 hours<small>Guests get 100 points an hour</small></span></li>
+        <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M3 18L10 6l4 7 2.5-4L21 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>All five models<small>Guests can only use General Mini</small></span></li>
+        <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><span>New features first<small>Like SCODE Search, links and photo reading</small></span></li>
+        <li><span class="pi"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span>Your chats saved on this device<small>Pick up where you left off</small></span></li>
+      </ul>
+      <div class="au-btns">
+        <button class="wn-btn primary" type="button" data-go="signup">Create a free account</button>
+        <button class="wn-btn" type="button" data-go="signin">I already have an account</button>
+      </div>
+      <div class="au-alt"><button class="au-link" type="button" id="au-guest">Continue as a guest</button></div>
+    </div>
+
+    <form class="au-view" data-view="signup" novalidate>
+      <h2>Create your account</h2>
+      <div class="modal-sub" style="margin-bottom:16px">It's free. We'll email you a code to confirm it's you.</div>
+      <label class="au-field"><span>Name</span><input name="name" autocomplete="given-name" maxlength="40" required></label>
+      <label class="au-field"><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      <label class="au-field"><span>Password</span><div class="au-pw"><input name="password" type="password" autocomplete="new-password" minlength="8" required><button type="button" class="au-eye">Show</button></div></label>
+      <div class="au-err"></div>
+      <div class="au-btns"><button class="wn-btn primary" type="submit">Create account</button></div>
+      <p class="au-note">Your name, email and a scrambled copy of your password are stored on the SCODE server. We only email you codes, and we never share your details. You can delete your account anytime.</p>
+      <div class="au-alt">Already have an account? <button class="au-link" type="button" data-go="signin">Sign in</button></div>
+    </form>
+
+    <form class="au-view" data-view="code" novalidate>
+      <h2>Check your email</h2>
+      <div class="modal-sub" style="margin-bottom:16px">We sent a 6-digit code to <b id="au-code-email"></b>. It works for 15 minutes.</div>
+      <label class="au-field"><span>Code</span><input name="code" class="au-code" inputmode="numeric" autocomplete="one-time-code" maxlength="7" required></label>
+      <div class="au-err"></div>
+      <div class="au-btns"><button class="wn-btn primary" type="submit">Confirm</button></div>
+      <p class="au-note" id="au-code-note">Can't find it? Check your spam folder.</p>
+      <div class="au-alt"><button class="au-link au-resend" type="button">Send a new code</button></div>
+    </form>
+
+    <form class="au-view" data-view="signin" novalidate>
+      <h2>Welcome back</h2>
+      <div class="modal-sub" style="margin-bottom:16px">Sign in to your SCODE account.</div>
+      <label class="au-field"><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      <label class="au-field"><span>Password</span><div class="au-pw"><input name="password" type="password" autocomplete="current-password" required><button type="button" class="au-eye">Show</button></div></label>
+      <div class="au-err"></div>
+      <div class="au-btns"><button class="wn-btn primary" type="submit">Sign in</button></div>
+      <div class="au-alt"><button class="au-link" type="button" data-go="forgot">Forgot your password?</button></div>
+      <div class="au-alt" style="margin-top:8px">New here? <button class="au-link" type="button" data-go="signup">Create an account</button></div>
+    </form>
+
+    <form class="au-view" data-view="forgot" novalidate>
+      <h2>Reset your password</h2>
+      <div class="modal-sub" style="margin-bottom:16px">Enter your email and we'll send you a code.</div>
+      <label class="au-field"><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      <div class="au-err"></div>
+      <div class="au-btns"><button class="wn-btn primary" type="submit">Send code</button></div>
+      <div class="au-alt"><button class="au-link" type="button" data-go="signin">Back to sign in</button></div>
+    </form>
+
+    <form class="au-view" data-view="reset" novalidate>
+      <h2>Choose a new password</h2>
+      <div class="modal-sub" style="margin-bottom:16px">If <b id="au-reset-email"></b> has an account, we just emailed it a code.</div>
+      <label class="au-field"><span>Code</span><input name="code" class="au-code" inputmode="numeric" autocomplete="one-time-code" maxlength="7" required></label>
+      <label class="au-field"><span>New password</span><div class="au-pw"><input name="password" type="password" autocomplete="new-password" minlength="8" required><button type="button" class="au-eye">Show</button></div></label>
+      <div class="au-err"></div>
+      <div class="au-btns"><button class="wn-btn primary" type="submit">Save new password</button></div>
+      <div class="au-alt"><button class="au-link au-resend" type="button" data-purpose="reset">Send a new code</button></div>
+    </form>
+
+    <form class="au-view" data-view="delete" novalidate>
+      <h2>Delete your account?</h2>
+      <div class="modal-sub" style="margin-bottom:16px">This removes your name, email and password from the SCODE server for good, and deletes the chats saved on this device. Type your password to confirm.</div>
+      <label class="au-field"><span>Password</span><div class="au-pw"><input name="password" type="password" autocomplete="current-password" required><button type="button" class="au-eye">Show</button></div></label>
+      <div class="au-err"></div>
+      <div class="au-btns"><button class="wn-btn danger" type="submit">Delete my account</button><button class="wn-btn" type="button" data-close>Keep my account</button></div>
+    </form>
+
+    <div class="au-view" data-view="done">
+      <div class="au-done">
+        <div class="au-check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 id="au-done-title">You're in!</h2>
+        <div class="modal-sub" id="au-done-sub">Every model is unlocked, and your chats now save on this device.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- What's new / Coming soon -->
+<div class="overlay" id="news-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="nw-title">
+    <div class="nw-head">
+      <button class="icon-btn au-close" id="nw-close" type="button" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <h2 id="nw-title">What's new in SCODE AI</h2>
+      <div class="nw-tabs" role="tablist">
+        <button class="nw-tab" type="button" data-tab="soon">Coming soon</button>
+        <button class="nw-tab" type="button" data-tab="feature">New features</button>
+        <button class="nw-tab" type="button" data-tab="fix">Fixes</button>
+      </div>
+    </div>
+    <div class="nw-body" id="nw-body"></div>
+    <div class="nw-foot">
+      <span>Found a bug, or have a concern?</span>
+      <a href="mailto:scodeai2026@gmail.com?subject=SCODE%20AI%20issue"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>scodeai2026@gmail.com</a>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="confirm-overlay">
   <div class="modal-box" style="width:420px;" role="alertdialog" aria-modal="true">
     <h3 id="confirm-title">Are you sure?</h3>
@@ -857,6 +1151,19 @@
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
   const PROXY_URL = "https://aid-fixes-wheel-sept.trycloudflare.com";
+
+  // ---------- Account state (filled in by the sign-in window) ----------
+  var auth = null;   // { token, name, email } when signed in
+  try { auth = JSON.parse(localStorage.getItem("scode_auth") || "null"); } catch (e) {}
+  if (!auth || !auth.token) auth = null;
+  var GUEST_TIERS = new Set(["l1"]);   // the server can override this via /status
+  var guestLimit = 100;
+  function isGuest() { return !auth; }
+  function authHeaders(extra) {
+    const h = Object.assign({}, extra || {});
+    if (auth) h.Authorization = "Bearer " + auth.token;
+    return h;
+  }
 
   // Static fallback shown before /models loads; live data overrides this.
   const TIER_ORDER = ["l1", "l2", "l2_5", "l3", "l4"];
@@ -1003,6 +1310,9 @@
     if (e.key === "Escape") {
       if (el.confirmOverlay.classList.contains("show")) { el.confirmCancel.click(); return; }
       if ($("whatsnew").classList.contains("show")) { $("wn-close").click(); return; }
+      if ($("auth-overlay").classList.contains("show")) { $("auth-overlay").classList.remove("show"); return; }
+      if ($("news-overlay").classList.contains("show")) { $("news-overlay").classList.remove("show"); return; }
+      $("acct-wrap").classList.remove("open");
       el.settingsOverlay.classList.remove("show");
       el.modelPicker.classList.remove("open");
       closeMobileSidebar();
@@ -1094,17 +1404,37 @@
   el.jumpBtn.addEventListener("click", () => scrollToBottom(true));
 
   // ---------- Chat history (opt-in, local only) ----------
-  const HISTORY_KEY = "linden_history_enabled";
-  const CHATS_KEY = "linden_chats_v2";
-  let historyEnabled = localStorage.getItem(HISTORY_KEY) === "true";
+  // Saved chats belong to an account: each account gets its own space on this device,
+  // and guests don't save chats at all.
+  const LEGACY_HISTORY_KEY = "linden_history_enabled";
+  const LEGACY_CHATS_KEY = "linden_chats_v2";
+  function historyKey() { return "scode_history_" + (auth ? auth.email.toLowerCase() : "guest"); }
+  function chatsKey() { return "scode_chats_" + (auth ? auth.email.toLowerCase() : "guest"); }
+  function readHistoryPref() {
+    if (isGuest()) return false;
+    const v = localStorage.getItem(historyKey());
+    return v === null ? true : v === "true";   // on by default for accounts
+  }
+  function adoptLegacyChats() {
+    // Chats saved before accounts existed move into the first account that signs in here.
+    try {
+      const old = localStorage.getItem(LEGACY_CHATS_KEY);
+      if (auth && old && !localStorage.getItem(chatsKey())) localStorage.setItem(chatsKey(), old);
+      if (auth) { localStorage.removeItem(LEGACY_CHATS_KEY); localStorage.removeItem(LEGACY_HISTORY_KEY); }
+    } catch (e) {}
+  }
+  adoptLegacyChats();
+  let historyEnabled = readHistoryPref();
   let chats = [];
   let currentChatId = null;
 
   function loadChats() {
-    try { chats = JSON.parse(localStorage.getItem(CHATS_KEY) || "[]"); } catch (e) { chats = []; }
+    if (isGuest()) { chats = []; return; }
+    try { chats = JSON.parse(localStorage.getItem(chatsKey()) || "[]"); } catch (e) { chats = []; }
   }
   function saveChats() {
-    try { localStorage.setItem(CHATS_KEY, JSON.stringify(chats)); }
+    if (isGuest() || !historyEnabled) return;
+    try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); }
     catch (e) { showNote("Your browser's storage is full, so this chat couldn't be saved. Delete a few old chats (especially ones with photos) to free up space."); }
   }
   function getCurrentChat() { return chats.find(c => c.id === currentChatId) || null; }
@@ -1152,6 +1482,21 @@
   }
   function renderChatList() {
     el.chatList.innerHTML = "";
+    if (!historyEnabled) {
+      const box = document.createElement("div");
+      box.className = "side-empty";
+      if (isGuest()) {
+        box.innerHTML = "<b>Save your chats</b>Sign in and your chats are saved on this device, so you can come back to them.";
+        const b = document.createElement("button");
+        b.type = "button"; b.textContent = "Sign in";
+        b.addEventListener("click", () => { closeMobileSidebar(); openAuth("welcome"); });
+        box.appendChild(b);
+      } else {
+        box.innerHTML = "<b>Chat history is off</b>Turn on “Save chats on this device” in Settings to keep your chats here.";
+      }
+      el.chatList.appendChild(box);
+      return;
+    }
     chats.forEach(chat => {
       const row = document.createElement("div");
       row.className = "chat-item" + (chat.id === currentChatId ? " active" : "");
@@ -1192,10 +1537,11 @@
 
   function applyHistoryMode() {
     el.historySwitch.classList.toggle("on", historyEnabled);
-    el.sidebar.classList.toggle("show", historyEnabled);
-    el.sidebarBackdrop.classList.toggle("show", historyEnabled);
+    // The sidebar is always there now: it also holds Coming soon and What's new.
+    el.sidebar.classList.add("show");
+    el.sidebarBackdrop.classList.add("show");
     document.body.classList.toggle("history-on", historyEnabled);
-    if (!historyEnabled) closeMobileSidebar();
+    renderChatList();
     if (historyEnabled) {
       loadChats();
       if (chats.length === 0) {
@@ -1213,6 +1559,11 @@
 
   el.historySwitch.addEventListener("click", async () => {
     if (sending) return;
+    if (isGuest()) {
+      el.settingsOverlay.classList.remove("show");
+      openAuth("welcome", "Saving chats on this device needs a free account.");
+      return;
+    }
     const turningOn = !historyEnabled;
     if (turningOn) {
       if (messages.length > 0) {
@@ -1233,9 +1584,9 @@
       }
     }
     historyEnabled = turningOn;
-    localStorage.setItem(HISTORY_KEY, historyEnabled ? "true" : "false");
+    localStorage.setItem(historyKey(), historyEnabled ? "true" : "false");
     if (!historyEnabled) {
-      localStorage.removeItem(CHATS_KEY);
+      localStorage.removeItem(chatsKey());
       chats = [];
       currentChatId = null;
     }
@@ -1342,6 +1693,7 @@
   wn.addEventListener("click", (e) => { if (e.target === wn) closeWhatsNew(); });
   $("wn-try").addEventListener("click", () => {
     closeWhatsNew();
+    if (isGuest()) { openAuth("welcome", "SCODE Search needs a free account."); return; }
     webOn = true;
     try { localStorage.setItem("linden_web", "1"); } catch (e) {}
     // SCODE Search needs General or General Plus, and a chat without a photo.
@@ -1379,6 +1731,7 @@
     const photo = chatHasPhoto();
     if (typed) {
       if (typed === linkSkipFor) return null;
+      if (isGuest()) return { kind: "info", signin: true, html: "<b>Sign in</b> so SCODE can read this link for you." };
       if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General or General Plus and I can read this link." };
       if (photo) return { kind: "info", html: "Links can't be read in a chat with a photo. Start a new chat." };
       return { kind: "read", url: typed, html: `I'll read <b>${escapeHtml(hostOf(typed))}</b> before answering &middot; +${linkCost}` };
@@ -1404,6 +1757,11 @@
     }
     if (stick) requestAnimationFrame(() => scrollToBottom(false));
   }
+  $("link-hint").addEventListener("click", (e) => {
+    if (e.target.closest("#lh-x")) return;
+    const plan = linkPlan();
+    if (plan && plan.signin) openAuth("welcome", "Reading links needs a free account.");
+  });
   $("lh-x").addEventListener("click", () => {
     const plan = linkPlan();
     if (!plan) return;
@@ -1570,23 +1928,33 @@
     el.modelPickerList.innerHTML = "";
     TIER_ORDER.forEach(tier => {
       const info = TIER_INFO[tier];
-      const affordable = sharedRemaining === null || sharedRemaining >= info.cost;
+      const locked = isGuest() && !GUEST_TIERS.has(tier);
+      const affordable = locked || sharedRemaining === null || sharedRemaining >= info.cost;
       const opt = document.createElement("div");
-      opt.className = "model-picker-option" + (tier === selectedTier ? " selected" : "") + (affordable ? "" : " disabled");
+      opt.className = "model-picker-option" + (tier === selectedTier ? " selected" : "") + (affordable ? "" : " disabled") + (locked ? " locked" : "");
       opt.dataset.tier = tier;
       opt.setAttribute("role", "option");
+      const costHtml = locked
+        ? '<span class="mp-lock"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.2"/></svg>Sign in</span>'
+        : (affordable ? "cost " + info.cost : "not enough budget");
       opt.innerHTML = `
         <div class="mp-opt-main">
-          <div class="mp-opt-top"><span class="mp-opt-name">${info.label}</span><span class="mp-opt-cost">${affordable ? "cost " + info.cost : "not enough budget"}</span></div>
+          <div class="mp-opt-top"><span class="mp-opt-name">${info.label}</span><span class="mp-opt-cost">${costHtml}</span></div>
           <div class="mp-opt-tag">${info.tagline}</div>
         </div>
         <svg class="mp-check" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-      opt.addEventListener("click", () => { if (affordable) selectTier(tier); });
+      opt.addEventListener("click", () => {
+        if (locked) { el.modelPicker.classList.remove("open"); openAuth("welcome", `${info.label} needs a free account. Guests can use General Mini.`); return; }
+        if (affordable) selectTier(tier);
+      });
       el.modelPickerList.appendChild(opt);
     });
     const foot = document.createElement("div");
     foot.className = "mp-foot";
-    if (sharedRemaining !== null) {
+    if (isGuest()) {
+      foot.textContent = `Guests can use General Mini with ${sharedRemaining !== null ? sharedRemaining + " of " : ""}${guestLimit} points an hour. ` +
+        "Sign in for every model and 1,000 points every 4 hours.";
+    } else if (sharedRemaining !== null) {
       foot.textContent = `You have ${sharedRemaining} of ${sharedLimit} left, shared across every option. ` +
         (sharedResetAt ? `It refills to ${sharedLimit} at ${formatRenewTime(sharedResetAt)}.` : "It refills every 4 hours.") +
         " Photos double the cost of every message in that chat.";
@@ -1653,6 +2021,7 @@
     chip.addEventListener("click", () => {
       if (chip.dataset.photo) {
         const t = chip.dataset.photo;
+        if (isGuest() && !GUEST_TIERS.has(t)) { openAuth("welcome", "Reading photos needs a free account."); return; }
         if (sharedRemaining === null || sharedRemaining >= TIER_INFO[t].cost) selectTier(t);
         if (VISION_TIERS.has(selectedTier)) {
           if (!el.input.value) el.input.value = "What does this say? ";
@@ -1918,10 +2287,18 @@
   // ---------- Server status ----------
   async function checkStatus() {
     try {
-      const res = await fetch(PROXY_URL + "/status");
+      const res = await fetch(PROXY_URL + "/status", { headers: authHeaders() });
       if (!res.ok) throw new Error();
       const data = await res.json();
       el.statusDot.className = "status-dot ok";
+      // A sign-in that expired (or an account deleted elsewhere) falls back to guest.
+      if (auth && data.token_valid === false) { signOutLocal(); showNote("You've been signed out. Sign in again to get every model back."); }
+      if (auth && data.account) {
+        if (data.account.name !== auth.name) { auth.name = data.account.name; saveAuth(); updateAccountUI(); }
+      }
+      if (Array.isArray(data.guest_tiers)) GUEST_TIERS = new Set(data.guest_tiers);
+      if (typeof data.guest_limit === "number") guestLimit = data.guest_limit;
+      if (isGuest() && !GUEST_TIERS.has(selectedTier)) { selectedTier = "l1"; updateModelPickerLabel(); }
       if (data.limit) sharedLimit = data.limit;
       if (data.remaining !== undefined) sharedRemaining = data.remaining;
       if (data.reset_at) sharedResetAt = data.reset_at;
@@ -1934,7 +2311,8 @@
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
       el.budgetBarFill.style.width = pct + "%";
       el.budgetPill.title = sharedRemaining !== null
-        ? `${sharedRemaining} of ${sharedLimit} left. Refills at ${formatRenewTime(sharedResetAt)}.`
+        ? `${isGuest() ? "Guest: " : ""}${sharedRemaining} of ${sharedLimit} left. Refills at ${formatRenewTime(sharedResetAt)}.` +
+          (isGuest() ? " Sign in for 1,000 points every 4 hours." : "")
         : "Online";
       updateInputAvailability();
     } catch (e) {
@@ -1943,6 +2321,451 @@
       el.budgetBarFill.style.width = "0%";
       el.budgetPill.title = "Can't reach the server right now.";
     }
+  }
+
+  // =====================================================================
+  //  Accounts: sign-in window, account menu
+  // =====================================================================
+  const authOv = $("auth-overlay");
+  let authEmail = "";            // the email a code was sent to
+  let authAfter = null;          // something to do after signing in (not used for now)
+  let resendTimer = null;
+
+  function saveAuth() { try { localStorage.setItem("scode_auth", JSON.stringify(auth)); } catch (e) {} }
+  function updateAccountUI() {
+    document.body.classList.toggle("guest", isGuest());
+    document.body.classList.toggle("signed-in", !isGuest());
+    if (auth) {
+      $("acct-btn").textContent = (auth.name || auth.email || "?").trim().charAt(0).toUpperCase();
+      $("am-name").textContent = auth.name || "";
+      $("am-email").textContent = auth.email || "";
+    }
+    el.historySwitch.classList.toggle("on", historyEnabled);
+  }
+  function authView(name) {
+    authOv.querySelectorAll(".au-view").forEach(v => {
+      const on = v.dataset.view === name;
+      v.classList.toggle("on", on);
+      if (on) {
+        const err = v.querySelector(".au-err");
+        if (err) { err.classList.remove("show"); err.textContent = ""; }
+      }
+    });
+    const first = authOv.querySelector(`.au-view[data-view="${name}"] input`);
+    if (first && !touchLike) setTimeout(() => first.focus(), 60);
+  }
+  function openAuth(view, reason) {
+    const r = $("au-reason");
+    r.textContent = reason || "";
+    r.classList.toggle("show", !!reason);
+    authView(view || "welcome");
+    $("whatsnew").classList.remove("show");
+    authOv.classList.add("show");
+    try { sessionStorage.setItem("scode_nudged", "1"); } catch (e) {}
+  }
+  function closeAuth() { authOv.classList.remove("show"); }
+  function authError(view, msg) {
+    const e = authOv.querySelector(`.au-view[data-view="${view}"] .au-err`);
+    e.textContent = msg;
+    e.classList.remove("show"); void e.offsetWidth; e.classList.add("show");
+  }
+  async function authApi(path, body, withToken) {
+    let res;
+    try {
+      res = await fetch(PROXY_URL + path, {
+        method: "POST",
+        headers: withToken ? authHeaders({ "Content-Type": "application/json" }) : { "Content-Type": "application/json" },
+        body: JSON.stringify(body || {}),
+      });
+    } catch (e) {
+      return { ok: false, data: { message: "Can't reach the server right now. It may be offline, so try again later." } };
+    }
+    const data = await res.json().catch(() => ({}));
+    return { ok: res.ok, status: res.status, data };
+  }
+  function busy(form, on) {
+    const b = form.querySelector('button[type="submit"]');
+    if (!b) return;
+    if (on) { b.dataset.label = b.textContent; b.textContent = "One moment…"; b.disabled = true; }
+    else { b.textContent = b.dataset.label || b.textContent; b.disabled = false; }
+  }
+  function startResendCooldown(seconds) {
+    clearInterval(resendTimer);
+    let left = seconds;
+    const btns = authOv.querySelectorAll(".au-resend");
+    const paint = () => btns.forEach(b => {
+      b.disabled = left > 0;
+      b.textContent = left > 0 ? `Send a new code in ${left}s` : "Send a new code";
+    });
+    paint();
+    resendTimer = setInterval(() => { left--; paint(); if (left <= 0) clearInterval(resendTimer); }, 1000);
+  }
+  function codeNote(emailed) {
+    $("au-code-note").textContent = emailed === false
+      ? "Email isn't set up on the SCODE server yet, so the code is shown in the proxy window on the server."
+      : "Can't find it? Check your spam or junk folder.";
+  }
+
+  function finishSignIn(data, title, sub) {
+    // Keep a conversation the guest was in the middle of: it becomes their first saved chat.
+    const carry = messages.length ? messages.slice() : null;
+    const carryTier = selectedTier;
+    auth = { token: data.token, name: data.account.name, email: data.account.email };
+    saveAuth();
+    adoptLegacyChats();
+    historyEnabled = readHistoryPref();
+    if (historyEnabled && carry) {
+      loadChats();
+      const id = "c" + Date.now() + Math.random().toString(36).slice(2, 6);
+      const first = carry.find(m => m.role === "user");
+      const t = first ? first.content : "Chat";
+      chats.unshift({ id, title: t.length > 38 ? t.slice(0, 38) + "…" : t, tier: carryTier, messages: carry });
+      currentChatId = id;
+      saveChats();
+    }
+    updateAccountUI();
+    $("au-done-title").textContent = title || `You're in, ${auth.name}!`;
+    $("au-done-sub").textContent = sub || "Every model is unlocked, and your chats now save on this device.";
+    authView("done");
+    applyHistoryMode();
+    updateModelPickerLabel();
+    checkStatus();
+    setTimeout(closeAuth, 1700);
+  }
+  function signOutLocal() {
+    auth = null;
+    try { localStorage.removeItem("scode_auth"); } catch (e) {}
+    historyEnabled = false;
+    chats = []; currentChatId = null; messages = [];
+    activeLink = null;
+    if (!GUEST_TIERS.has(selectedTier)) selectedTier = "l1";
+    updateAccountUI();
+    applyHistoryMode();
+    updateModelPickerLabel();
+  }
+
+  // Wire up the window
+  authOv.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => {
+    const go = b.dataset.go;
+    if (go === "signin" || go === "forgot") {
+      const known = authOv.querySelector('.au-view[data-view="signup"] input[name="email"]').value ||
+                    authOv.querySelector('.au-view[data-view="signin"] input[name="email"]').value;
+      authOv.querySelectorAll(`.au-view[data-view="${go}"] input[name="email"]`).forEach(i => { if (!i.value) i.value = known; });
+    }
+    authView(go);
+  }));
+  authOv.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeAuth));
+  $("au-close").addEventListener("click", closeAuth);
+  $("au-guest").addEventListener("click", closeAuth);
+  authOv.addEventListener("click", (e) => { if (e.target === authOv) closeAuth(); });
+  authOv.querySelectorAll(".au-eye").forEach(b => b.addEventListener("click", () => {
+    const i = b.parentElement.querySelector("input");
+    const show = i.type === "password";
+    i.type = show ? "text" : "password";
+    b.textContent = show ? "Hide" : "Show";
+  }));
+  authOv.querySelectorAll("input.au-code").forEach(i => i.addEventListener("input", () => {
+    i.value = i.value.replace(/\D/g, "").slice(0, 6);
+    if (i.value.length === 6 && i.form.dataset.view === "code") i.form.requestSubmit();
+  }));
+  const formOf = (v) => authOv.querySelector(`form[data-view="${v}"]`);
+
+  formOf("signup").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const name = f.name.value.trim(), email = f.email.value.trim(), password = f.password.value;
+    if (!name) return authError("signup", "Enter your name.");
+    if (!/^\S+@\S+\.\S{2,}$/.test(email)) return authError("signup", "That email doesn't look right.");
+    if (password.length < 8) return authError("signup", "Use a password with at least 8 characters.");
+    busy(f, true);
+    const r = await authApi("/auth/signup", { name, email, password });
+    busy(f, false);
+    if (!r.ok) {
+      if (r.data.error === "exists") { formOf("signin").email.value = email; authView("signin"); authError("signin", r.data.message); return; }
+      return authError("signup", r.data.message || "Something went wrong. Try again.");
+    }
+    authEmail = r.data.email || email.toLowerCase();
+    $("au-code-email").textContent = authEmail;
+    formOf("code").code.value = "";
+    codeNote(r.data.emailed);
+    authView("code");
+    startResendCooldown(45);
+  });
+
+  formOf("code").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const code = f.code.value.replace(/\D/g, "");
+    if (code.length !== 6) return authError("code", "Enter the 6-digit code from the email.");
+    busy(f, true);
+    const r = await authApi("/auth/verify", { email: authEmail, code });
+    busy(f, false);
+    if (!r.ok) { f.code.value = ""; return authError("code", r.data.message || "That code didn't work."); }
+    finishSignIn(r.data);
+  });
+
+  authOv.querySelectorAll(".au-resend").forEach(b => b.addEventListener("click", async () => {
+    const purpose = b.dataset.purpose === "reset" ? "reset" : "signup";
+    const view = purpose === "reset" ? "reset" : "code";
+    let r;
+    if (purpose === "reset") r = await authApi("/auth/forgot", { email: authEmail });
+    else r = await authApi("/auth/resend", { email: authEmail, purpose });
+    if (!r.ok) return authError(view, r.data.message || "Couldn't send a new code.");
+    if (purpose === "signup") codeNote(r.data.emailed);
+    authError(view, "");
+    const err = authOv.querySelector(`.au-view[data-view="${view}"] .au-err`);
+    err.classList.remove("show");
+    startResendCooldown(45);
+  }));
+
+  formOf("signin").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const email = f.email.value.trim(), password = f.password.value;
+    if (!email || !password) return authError("signin", "Enter your email and password.");
+    busy(f, true);
+    const r = await authApi("/auth/login", { email, password });
+    busy(f, false);
+    if (!r.ok) {
+      if (r.data.error === "unverified") {
+        authEmail = email.toLowerCase();
+        $("au-code-email").textContent = authEmail;
+        codeNote(undefined);
+        authView("code");
+        authError("code", r.data.message);
+        return;
+      }
+      return authError("signin", r.data.message || "Couldn't sign in.");
+    }
+    f.password.value = "";
+    finishSignIn(r.data, `Welcome back, ${r.data.account.name}!`, "Every model is unlocked, and your saved chats are here.");
+  });
+
+  formOf("forgot").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const email = f.email.value.trim();
+    if (!/^\S+@\S+\.\S{2,}$/.test(email)) return authError("forgot", "That email doesn't look right.");
+    busy(f, true);
+    const r = await authApi("/auth/forgot", { email });
+    busy(f, false);
+    if (!r.ok) return authError("forgot", r.data.message || "Couldn't send a code.");
+    authEmail = email.toLowerCase();
+    $("au-reset-email").textContent = authEmail;
+    formOf("reset").code.value = ""; formOf("reset").password.value = "";
+    authView("reset");
+    startResendCooldown(45);
+  });
+
+  formOf("reset").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const code = f.code.value.replace(/\D/g, ""), password = f.password.value;
+    if (code.length !== 6) return authError("reset", "Enter the 6-digit code from the email.");
+    if (password.length < 8) return authError("reset", "Use a password with at least 8 characters.");
+    busy(f, true);
+    const r = await authApi("/auth/reset", { email: authEmail, code, password });
+    busy(f, false);
+    if (!r.ok) return authError("reset", r.data.message || "That didn't work.");
+    finishSignIn(r.data, "Password changed", "You're signed in with your new password.");
+  });
+
+  formOf("delete").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    if (!f.password.value) return authError("delete", "Type your password to confirm.");
+    busy(f, true);
+    const r = await authApi("/auth/delete", { password: f.password.value }, true);
+    busy(f, false);
+    if (!r.ok) return authError("delete", r.data.message || "Couldn't delete the account.");
+    f.password.value = "";
+    try { localStorage.removeItem(chatsKey()); localStorage.removeItem(historyKey()); } catch (err) {}
+    signOutLocal();
+    $("au-done-title").textContent = "Account deleted";
+    $("au-done-sub").textContent = "Your details are gone from the SCODE server, and your chats are gone from this device.";
+    authView("done");
+    checkStatus();
+    setTimeout(closeAuth, 2200);
+  });
+
+  // Top bar
+  $("signin-btn").addEventListener("click", () => openAuth("welcome"));
+  $("acct-btn").addEventListener("click", (e) => { e.stopPropagation(); $("acct-wrap").classList.toggle("open"); });
+  document.addEventListener("click", (e) => { if (!$("acct-wrap").contains(e.target)) $("acct-wrap").classList.remove("open"); });
+  $("am-signout").addEventListener("click", async () => {
+    $("acct-wrap").classList.remove("open");
+    if (sending) return;
+    authApi("/auth/logout", {}, true);
+    signOutLocal();
+    checkStatus();
+    showNote("You're signed out. Your saved chats stay on this device for when you sign back in.");
+  });
+  $("am-delete").addEventListener("click", () => {
+    $("acct-wrap").classList.remove("open");
+    openAuth("delete");
+  });
+
+  // =====================================================================
+  //  Coming soon + What's new
+  //  To announce something: add an entry to CHANGELOG (newest first).
+  //  "showFrom" hides an entry until that date (for launches).
+  // =====================================================================
+  const UPCOMING = [
+    { id: "search", title: "SCODE Search", launch: "2026-10-09T00:00:00-07:00",
+      blurb: "Answers from today's web, with links to every source.",
+      details: "Turn on Search and SCODE AI checks the web before it answers, so you get current info like schedules, news and scores. Every answer lists its sources so you can check them. Also launching: Paste a link, where you drop in any web page, PDF or shared Google Doc to get a summary and a ready-made MLA or APA citation." },
+    { id: "study", title: "Study Mode",
+      blurb: "Turn notes into flashcards and practice quizzes.",
+      details: "Paste your notes or snap a photo of a worksheet, and SCODE AI turns it into flashcards and a short practice quiz, giving hints before answers so you actually learn it." },
+    { id: "weather", title: "Local weather",
+      blurb: "Real forecasts, right in the chat.",
+      details: "Ask “do I need a jacket tomorrow?” and get an answer from real Environment Canada forecast data, not a guess." },
+    { id: "imagegen", title: "SCODE Image Gen",
+      blurb: "Describe a picture and get one back.",
+      details: "Type what you want to see and SCODE AI makes the image, right on the SCODE server." },
+  ];
+  const CHANGELOG = [
+    { id: "f-search", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Search",
+      text: "SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses. Every answer shows the sites it used.",
+      how: ["Sign in, then pick General or General Plus.", "Tap the Search button next to the text box so it turns green.", "Ask anything current, like “When do the Canucks play next?”", "Tap a numbered source under the answer to open the page."] },
+    { id: "f-link", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "Paste a link + citations",
+      text: "Drop in a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
+      how: ["On General or General Plus, paste a link into your message, with or without a question.", "A bar says “I'll read … before answering”. Tap ✕ if you don't want it read.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; it keeps using the same page until you tap ✕."] },
+    { id: "f-accounts", type: "feature", date: "2026-10-02", title: "Free SCODE accounts",
+      text: "Create a free account to unlock every model, a much bigger budget (1,000 points every 4 hours) and chats saved on your device. Guests can still use General Mini with 100 points an hour.",
+      how: ["Tap Sign in at the top right, then Create a free account.", "Enter your name, email and a password.", "Type in the 6-digit code we email you. That's it."] },
+    { id: "f-scan", type: "feature", date: "2026-10-02", title: "Photo scan animation",
+      text: "When you send a photo, a scan line sweeps up and down it while SCODE AI reads it, and stops the moment the answer is done.",
+      how: ["Pick General Plus or General Ultra.", "Tap + to add a photo, type a question and send."] },
+    { id: "f-beta", type: "feature", date: "2026-09", title: "SCODE AI public beta",
+      text: "SCODE AI opened to everyone with five models, from the tiny, instant General Mini to General Pro, which thinks step by step, and General Ultra, which reads text in photos.",
+      how: ["Pick a model with the button at the bottom right of the text box.", "Each message costs points from your budget, and bigger models cost more."] },
+    { id: "x-dates", type: "fix", date: "2026-10-02", showFrom: "2026-10-09T00:00:00-07:00", title: "Search knows today's date",
+      text: "Questions like “when's the next game?” no longer get answers about games or events that already happened." },
+    { id: "x-labels", type: "fix", date: "2026-10-02", showFrom: "2026-10-09T00:00:00-07:00", title: "Cleaner Search answers",
+      text: "Removed stray labels like “(past)” that sometimes showed up inside Search answers." },
+    { id: "x-linkcard", type: "fix", date: "2026-10-02", showFrom: "2026-10-09T00:00:00-07:00", title: "Link cards stay in view",
+      text: "The link card under an answer no longer hides behind the text box, and link summaries stick to what the page actually says." },
+    { id: "x-safari", type: "fix", date: "2026-09", title: "Better on iPhone",
+      text: "Fixed the chat list covering most of the screen in Safari on iPhone." },
+  ];
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function fmtDate(d) {
+    const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(d || "");
+    if (!m) return d || "";
+    return m[3] ? `${MONTHS[+m[2] - 1].slice(0, 3)} ${+m[3]}, ${m[1]}` : `${MONTHS[+m[2] - 1]} ${m[1]}`;
+  }
+  function visibleLog() {
+    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview);
+  }
+  function upcomingNow() {
+    return UPCOMING.filter(u => !u.launch || Date.now() < Date.parse(u.launch));
+  }
+  function countdownParts(target) {
+    let s = Math.max(0, Math.floor((target - Date.now()) / 1000));
+    const d = Math.floor(s / 86400); s -= d * 86400;
+    const h = Math.floor(s / 3600); s -= h * 3600;
+    const m = Math.floor(s / 60); s -= m * 60;
+    return { d, h, m, s };
+  }
+  function renderSoonCard() {
+    const card = $("soon-card");
+    const list = upcomingNow();
+    if (!list.length) { card.style.display = "none"; return; }
+    card.style.display = "";
+    const dated = list.filter(u => u.launch).sort((a, b) => Date.parse(a.launch) - Date.parse(b.launch));
+    const lead = dated[0] || list[0];
+    const rest = list.filter(u => u !== lead);
+    let html = `<span class="soon-tag"><i></i>${lead.launch ? "Coming soon" : "In the works"}</span>
+      <div class="soon-title">${escapeHtml(lead.title)}</div><div class="soon-blurb">${escapeHtml(lead.blurb)}</div>`;
+    if (lead.launch) {
+      const p = countdownParts(Date.parse(lead.launch));
+      html += `<div class="soon-count"><div><b>${p.d}</b><span>days</span></div><div><b>${p.h}</b><span>hrs</span></div><div><b>${p.m}</b><span>min</span></div><div><b>${p.s}</b><span>sec</span></div></div>`;
+    }
+    if (rest.length) {
+      html += `<div class="soon-more">` + rest.map(u => `<div class="soon-row"><span>${escapeHtml(u.title)}</span><em>${u.launch ? new Date(u.launch).toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "Coming later"}</em></div>`).join("") + `</div>`;
+    }
+    if (card.innerHTML !== html) card.innerHTML = html;
+  }
+  function tickSoon() {
+    // Only redraw the numbers each second; rebuild the card if the countdown ended.
+    const card = $("soon-card");
+    const list = upcomingNow();
+    const dated = list.filter(u => u.launch).sort((a, b) => Date.parse(a.launch) - Date.parse(b.launch));
+    const bs = card.querySelectorAll(".soon-count b");
+    if (dated[0] && bs.length === 4) {
+      const p = countdownParts(Date.parse(dated[0].launch));
+      [p.d, p.h, p.m, p.s].forEach((v, i) => { if (bs[i].textContent !== String(v)) bs[i].textContent = v; });
+    } else renderSoonCard();
+  }
+  renderSoonCard();
+  setInterval(tickSoon, 1000);
+
+  const newsOv = $("news-overlay");
+  let newsTab = "feature";
+  function renderNews() {
+    newsOv.querySelectorAll(".nw-tab").forEach(t => t.classList.toggle("on", t.dataset.tab === newsTab));
+    const body = $("nw-body");
+    let items = [];
+    if (newsTab === "soon") {
+      items = upcomingNow().map(u => ({ kind: "soon", label: "Coming soon",
+        meta: u.launch ? "Launches " + new Date(u.launch).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) : "Coming later",
+        title: u.title, text: u.details, launch: u.launch }));
+    } else {
+      items = visibleLog().filter(c => c.type === newsTab).map(c => ({ kind: c.type, label: c.type === "fix" ? "Fix" : "New",
+        meta: fmtDate(c.date), title: c.title, text: c.text, how: c.how }));
+    }
+    if (!items.length) {
+      body.innerHTML = `<div class="nw-empty">${newsTab === "soon" ? "Everything we've announced is out now." : "Nothing here yet."}</div>`;
+      return;
+    }
+    body.innerHTML = items.map((it, i) => {
+      let h = `<div class="nw-item" style="animation-delay:${i * 50}ms"><div class="nw-meta"><span class="nw-kind ${it.kind}">${it.label}</span>${escapeHtml(it.meta)}</div>
+        <h3>${escapeHtml(it.title)}</h3><p>${escapeHtml(it.text)}</p>`;
+      if (it.how && it.how.length) h += `<div class="nw-how-label">How to use it</div><ol class="nw-how">${it.how.map(s => `<li>${escapeHtml(s)}</li>`).join("")}</ol>`;
+      if (it.launch) h += `<div class="nw-count" data-launch="${escapeHtml(it.launch)}"></div>`;
+      return h + `</div>`;
+    }).join("");
+    tickNewsCount();
+  }
+  function tickNewsCount() {
+    newsOv.querySelectorAll(".nw-count").forEach(n => {
+      const p = countdownParts(Date.parse(n.dataset.launch));
+      n.textContent = `${p.d}d ${p.h}h ${p.m}m ${p.s}s to go`;
+    });
+  }
+  setInterval(() => { if (newsOv.classList.contains("show")) tickNewsCount(); }, 1000);
+  function newestSeenKey() { return "scode_news_seen"; }
+  function updateNewsDot() {
+    const newest = visibleLog()[0];
+    let seen = null;
+    try { seen = localStorage.getItem(newestSeenKey()); } catch (e) {}
+    $("news-btn").classList.toggle("unseen", !!newest && newest.id !== seen);
+  }
+  function openNews(tab) {
+    newsTab = tab || "feature";
+    renderNews();
+    newsOv.classList.add("show");
+    const newest = visibleLog()[0];
+    try { if (newest) localStorage.setItem(newestSeenKey(), newest.id); } catch (e) {}
+    updateNewsDot();
+    closeMobileSidebar();
+  }
+  newsOv.querySelectorAll(".nw-tab").forEach(t => t.addEventListener("click", () => { newsTab = t.dataset.tab; renderNews(); }));
+  $("news-btn").addEventListener("click", () => openNews("feature"));
+  $("soon-card").addEventListener("click", () => openNews("soon"));
+  $("nw-close").addEventListener("click", () => newsOv.classList.remove("show"));
+  newsOv.addEventListener("click", (e) => { if (e.target === newsOv) newsOv.classList.remove("show"); });
+  updateNewsDot();
+
+  // Guests get a friendly "sign in for more" window once per visit,
+  // unless the launch popup is already showing.
+  function maybeNudgeSignIn() {
+    if (!isGuest()) return;
+    let nudged = false;
+    try { nudged = sessionStorage.getItem("scode_nudged") === "1"; } catch (e) {}
+    if (nudged || $("whatsnew").classList.contains("show") || authOv.classList.contains("show")) return;
+    openAuth("welcome");
   }
 
   function showNote(text) {
@@ -2023,7 +2846,7 @@
     try {
       const res = await fetch(PROXY_URL + "/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: authHeaders({ "Content-Type": "application/json" }),
         // Only send what the server actually uses (keeps uploads small).
         body: JSON.stringify({
           tier: selectedTier,
@@ -2048,6 +2871,13 @@
         if (res.status === 429) {
           const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
           showNote(data.message || `You're out of budget. It refills at ${renewTime}.`);
+          if (data.guest) openAuth("welcome", `You've used your ${guestLimit} guest points for this hour. They refill at ${renewTime}.`);
+        } else if (res.status === 403 && data.error === "signin_required") {
+          // The server says this needs an account: put their message back so nothing is lost.
+          messages.pop();
+          renderMessages();
+          el.input.value = text; autoGrow();
+          openAuth("welcome", data.message);
         } else {
           showNote(data.message || `Something went wrong (error ${res.status}). Try sending it again.`);
         }
@@ -2272,12 +3102,15 @@
 
   applyTheme();
   setGreeting();
+  updateAccountUI();
   applyHistoryMode();
+  if (isGuest() && !GUEST_TIERS.has(selectedTier)) selectedTier = "l1";
   updateModelPickerLabel();
   checkStatus();
   setInterval(checkStatus, 20000);
   if (!touchLike) el.input.focus();
   setTimeout(maybeShowWhatsNew, reduceMotion ? 300 : 1100);
+  setTimeout(maybeNudgeSignIn, reduceMotion ? 600 : 1900);
 })();
 </script>
 </body>
