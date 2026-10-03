@@ -250,6 +250,51 @@
   .act-btn.done { color: var(--accent); }
   .msg-tier { font-size: 12px; color: var(--faint); margin-left: 6px; }
 
+  /* Paste a link: hint above the text box */
+  #link-hint { display: none; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted);
+    background: var(--accent-soft); border-radius: 10px; padding: 5px 6px 5px 10px; margin: 0 2px 8px -4px; }
+  #link-hint.show { display: flex; animation: hintIn 0.35s cubic-bezier(.2,.8,.2,1); }
+  #link-hint.info { background: var(--hover); }
+  #link-hint > svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+  #link-hint.info > svg { color: var(--faint); }
+  #link-hint .lh-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #link-hint b { color: var(--text); font-weight: 600; }
+  #lh-x { border: none; background: none; color: var(--faint); cursor: pointer; width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #lh-x:hover { background: var(--hover); color: var(--text); }
+  #link-hint.info #lh-x { display: none; }
+  @keyframes hintIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* Paste a link: card under the reply, with citations */
+  .link-card { margin-top: 12px; max-width: 540px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    background: var(--surface); opacity: 0; animation: srcIn 0.5s 0.05s cubic-bezier(.2,.8,.2,1) forwards; }
+  .lc-top { display: flex; align-items: center; gap: 11px; padding: 10px 10px 10px 12px; }
+  .lc-ico { width: 34px; height: 34px; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .lc-ico svg { width: 18px; height: 18px; }
+  .lc-meta { flex: 1; min-width: 0; text-decoration: none; }
+  .lc-title { font-size: 13.5px; font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lc-sub { font-size: 12px; color: var(--faint); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lc-meta:hover .lc-title { text-decoration: underline; text-underline-offset: 2px; }
+  .lc-cite-btn { height: 30px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--border); background: none; color: var(--text);
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s; }
+  .lc-cite-btn:hover { background: var(--hover); }
+  .link-card.open .lc-cite-btn { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .lc-cite-btn svg { width: 14px; height: 14px; }
+  .lc-cite { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s cubic-bezier(.2,.8,.2,1); }
+  .link-card.open .lc-cite { grid-template-rows: 1fr; }
+  .lc-cite-in { overflow: hidden; }
+  .lc-cite-pad { border-top: 1px solid var(--border); background: var(--surface-2); padding: 12px 14px 12px; }
+  .lc-tabs { display: inline-flex; padding: 3px; border-radius: 9px; background: var(--hover); gap: 2px; }
+  .lc-tab { border: none; background: none; font: inherit; font-size: 12px; font-weight: 600; color: var(--muted); padding: 4px 12px;
+    border-radius: 7px; cursor: pointer; }
+  .lc-tab.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+  .lc-text { font-family: var(--serif); font-size: 14.5px; line-height: 1.6; color: var(--text); margin: 10px 0 10px;
+    padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; user-select: text; }
+  .lc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .lc-note { font-size: 11.5px; color: var(--faint); }
+
   /* Web search: sources under a reply */
   .sources { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
   .src-label { font-size: 12px; color: var(--faint); margin-right: 2px; }
@@ -537,6 +582,7 @@
   #whatsnew.show .wn-pts li:nth-child(1) { animation-delay: 0.32s; }
   #whatsnew.show .wn-pts li:nth-child(2) { animation-delay: 0.42s; }
   #whatsnew.show .wn-pts li:nth-child(3) { animation-delay: 0.52s; }
+  #whatsnew.show .wn-pts li:nth-child(4) { animation-delay: 0.62s; }
   @keyframes wnIn { to { opacity: 1; transform: none; } }
   .wn-pts svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
   .wn-actions { display: flex; gap: 10px; }
@@ -691,6 +737,13 @@
               </button>
             </div>
           </div>
+          <div id="link-hint" role="status">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="lh-text" id="lh-text"></span>
+            <button id="lh-x" type="button" title="Don't read this link" aria-label="Don't read this link">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+            </button>
+          </div>
           <textarea id="prompt-input" placeholder="How can I help you today?" rows="1"></textarea>
           <div class="composer-tools">
             <button id="attach-btn" type="button" title="Add a photo" aria-label="Add a photo">
@@ -778,6 +831,7 @@
       <ul class="wn-pts">
         <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Answers from today&rsquo;s web, not last year&rsquo;s</span></li>
         <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Links to every source, so you can check it</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>New: paste any link to get a summary and a ready-made citation</span></li>
         <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="wn-cost-line">On General and General Plus, +5 points per message</span></li>
       </ul>
       <div class="wn-actions">
@@ -1257,6 +1311,7 @@
       ? "SCODE Search can't be used in a chat with a photo. Start a new chat to search."
       : (webOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + ` (+${searchCost} per message)`;
     el.input.placeholder = on ? "Ask anything. I'll check the web." : DEFAULT_PLACEHOLDER;
+    if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
   }
   el.webBtn.addEventListener("click", () => {
     if (chatHasPhoto()) {
@@ -1302,6 +1357,146 @@
     updateWebBtn();
     setTimeout(() => el.input.focus(), 250);
   });
+
+  // ---------- Paste a link (General and General Plus) ----------
+  // Ships with SCODE Search: same launch day, same ?preview=search for early testing.
+  // (These use var so they exist even if something renders before this point runs.)
+  var LINK_TIERS = new Set(["l2", "l2_5"]);   // the server can override this via /status
+  var linkCost = 5;
+  var activeLink = null;      // { url, domain } of the page the chat is about, for follow-ups
+  var linkSkipFor = null;     // a typed link the visitor said not to read
+  var URL_FIND = /\bhttps?:\/\/[^\s<>"'`]+|\bwww\.[^\s<>"'`]+/i;
+  function cleanUrl(u) {
+    u = u.trim().replace(/[.,;:!?)\]}'"]+$/, "");
+    if (/^www\./i.test(u)) u = "https://" + u;
+    return u;
+  }
+  function hostOf(u) { try { return new URL(u).hostname.replace(/^www\d*\./, ""); } catch (e) { return u; } }
+  function linkPlan() {
+    if (!LINK_TIERS || !searchUnlocked()) return null;
+    const m = el.input.value.match(URL_FIND);
+    const typed = m ? cleanUrl(m[0]) : null;
+    const photo = chatHasPhoto();
+    if (typed) {
+      if (typed === linkSkipFor) return null;
+      if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General or General Plus and I can read this link." };
+      if (photo) return { kind: "info", html: "Links can't be read in a chat with a photo. Start a new chat." };
+      return { kind: "read", url: typed, html: `I'll read <b>${escapeHtml(hostOf(typed))}</b> before answering &middot; +${linkCost}` };
+    }
+    if (activeLink && LINK_TIERS.has(selectedTier) && !photo) {
+      return { kind: "follow", url: activeLink.url, html: `Asking about <b>${escapeHtml(activeLink.domain)}</b> &middot; +${linkCost}` };
+    }
+    return null;
+  }
+  function updateLinkHint() {
+    const hint = $("link-hint");
+    if (!hint) return;
+    const plan = linkPlan();
+    if (!plan) { hint.classList.remove("show", "info"); return; }
+    const t = $("lh-text");
+    if (t.innerHTML !== plan.html) t.innerHTML = plan.html;
+    hint.classList.toggle("info", plan.kind === "info");
+    if (!hint.classList.contains("show")) hint.classList.add("show");
+  }
+  $("lh-x").addEventListener("click", () => {
+    const plan = linkPlan();
+    if (!plan) return;
+    if (plan.kind === "read") linkSkipFor = plan.url;
+    else if (plan.kind === "follow") {
+      activeLink = null;
+      const last = messages[messages.length - 1];
+      if (last && last.link) { last.linkDismissed = true; if (historyEnabled) saveChats(); }
+    }
+    updateLinkHint();
+    el.input.focus();
+  });
+  function syncActiveLink() {
+    const last = messages[messages.length - 1];
+    activeLink = (last && last.role === "assistant" && last.link && last.link.asked && !last.linkDismissed)
+      ? { url: last.link.asked, domain: last.link.domain } : null;
+    linkSkipFor = null;
+    updateLinkHint();
+  }
+
+  const LINK_ICONS = {
+    page: '<svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    pdf: '<svg viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+  };
+  LINK_ICONS.doc = LINK_ICONS.pdf;
+  const KIND_LABEL = { page: "Web page", pdf: "PDF", doc: "Google Doc" };
+  function safeCiteHtml(s) { return String(s || "").replace(/<(?!\/?i>)[^>]*>/gi, ""); }   // only <i> survives
+  function buildLinkCard(info) {
+    let u;
+    try { u = new URL(String(info.url)); } catch (e) { return null; }
+    if (u.protocol !== "http:" && u.protocol !== "https:") return null;
+    const card = document.createElement("div");
+    card.className = "link-card";
+    const top = document.createElement("div");
+    top.className = "lc-top";
+    const ico = document.createElement("div");
+    ico.className = "lc-ico";
+    ico.innerHTML = LINK_ICONS[info.kind] || LINK_ICONS.page;
+    const meta = document.createElement("a");
+    meta.className = "lc-meta";
+    meta.href = u.href; meta.target = "_blank"; meta.rel = "noopener noreferrer";
+    const ttl = document.createElement("div");
+    ttl.className = "lc-title";
+    ttl.textContent = String(info.title || info.domain || u.hostname);
+    const sub = document.createElement("div");
+    sub.className = "lc-sub";
+    sub.textContent = [u.hostname.replace(/^www\d*\./, ""), KIND_LABEL[info.kind] || "Web page", info.partial ? "long page, read in part" : ""].filter(Boolean).join(" · ");
+    meta.appendChild(ttl); meta.appendChild(sub);
+    top.appendChild(ico); top.appendChild(meta);
+    card.appendChild(top);
+    if (info.cite && info.cite.mla_text) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "lc-cite-btn";
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><path d="M7 7h4v4c0 3-1.5 5-4 6M15 7h4v4c0 3-1.5 5-4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cite</span>';
+      top.appendChild(btn);
+      const wrap = document.createElement("div");
+      wrap.className = "lc-cite";
+      wrap.innerHTML = `<div class="lc-cite-in"><div class="lc-cite-pad">
+          <div class="lc-tabs" role="tablist"><button type="button" class="lc-tab" data-style="mla">MLA 9</button><button type="button" class="lc-tab" data-style="apa">APA 7</button></div>
+          <div class="lc-text"></div>
+          <div class="lc-row"><span class="lc-note">Check the details before you hand it in.</span></div>
+        </div></div>`;
+      card.appendChild(wrap);
+      const text = wrap.querySelector(".lc-text");
+      const row = wrap.querySelector(".lc-row");
+      const copyBtn = document.createElement("button");
+      copyBtn.type = "button";
+      copyBtn.className = "act-btn";
+      copyBtn.innerHTML = ICONS.copy + "<span>Copy</span>";
+      row.appendChild(copyBtn);
+      let style = "mla";
+      try { style = localStorage.getItem("scode_cite_style") === "apa" ? "apa" : "mla"; } catch (e) {}
+      function show(s) {
+        style = s;
+        wrap.querySelectorAll(".lc-tab").forEach(t => t.classList.toggle("on", t.dataset.style === s));
+        text.innerHTML = safeCiteHtml(info.cite[s + "_html"]);
+        try { localStorage.setItem("scode_cite_style", s); } catch (e) {}
+      }
+      wrap.querySelectorAll(".lc-tab").forEach(t => t.addEventListener("click", () => show(t.dataset.style)));
+      show(style);
+      btn.addEventListener("click", () => card.classList.toggle("open"));
+      copyBtn.addEventListener("click", () => {
+        const plain = String(info.cite[style + "_text"] || text.textContent);
+        const html = safeCiteHtml(info.cite[style + "_html"]);
+        // Copy with italics when the browser allows it (pastes nicely into Google Docs / Word).
+        if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write && window.isSecureContext) {
+          navigator.clipboard.write([new ClipboardItem({
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([plain], { type: "text/plain" }),
+          })]).then(() => {
+            copyBtn.classList.add("done"); copyBtn.innerHTML = ICONS.check + "<span>Copied</span>";
+            setTimeout(() => { copyBtn.classList.remove("done"); copyBtn.innerHTML = ICONS.copy + "<span>Copy</span>"; }, 1600);
+          }).catch(() => copyText(plain, copyBtn));
+        } else copyText(plain, copyBtn);
+      });
+    }
+    return card;
+  }
 
   function clearPendingImage() {
     pendingImageBase64 = null;
@@ -1488,6 +1683,7 @@
   function renderMessages() {
     el.messages.innerHTML = "";
     document.body.classList.toggle("is-empty", messages.length === 0);
+    syncActiveLink();
     if (messages.length === 0) { setGreeting(); updateJumpBtn(); return; }
     messages.forEach(m => el.messages.appendChild(buildMessageRow(m.role, m.content, m.thinking || "", m.images || null, m)));
     scrollToBottom(false);
@@ -1619,6 +1815,8 @@
     row.appendChild(md);
     const srcEl = meta && meta.sources && meta.sources.length ? buildSources(meta.sources) : null;
     if (srcEl) row.appendChild(srcEl);
+    const lcEl = meta && meta.link ? buildLinkCard(meta.link) : null;
+    if (lcEl) row.appendChild(lcEl);
     row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -1723,6 +1921,8 @@
       if (data.reset_at) sharedResetAt = data.reset_at;
       if (Array.isArray(data.web_tiers)) WEB_TIERS = new Set(data.web_tiers);
       if (typeof data.search_cost === "number") searchCost = data.search_cost;
+      if (Array.isArray(data.link_tiers)) LINK_TIERS = new Set(data.link_tiers);
+      if (typeof data.link_cost === "number") linkCost = data.link_cost;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -1755,6 +1955,10 @@
   async function send() {
     const text = el.input.value.trim();
     if (!text || sending || el.input.disabled) return;
+    // Decide before the box is cleared: read a pasted link, or keep asking about the last one.
+    const lp = linkPlan();
+    const linkToSend = lp && (lp.kind === "read" || lp.kind === "follow") ? lp.url : null;
+    linkSkipFor = null;
     sending = true;
     el.input.value = "";
     autoGrow();
@@ -1817,7 +2021,8 @@
         // Only send what the server actually uses (keeps uploads small).
         body: JSON.stringify({
           tier: selectedTier,
-          web: useWeb,
+          web: useWeb && !linkToSend,
+          link: linkToSend || undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
             if (m.images) o.images = m.images;
@@ -1924,6 +2129,7 @@
 
       let streamError = null;
       let webSources = [], searchNote = "";
+      let linkInfo = null, linkNote = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -1953,6 +2159,13 @@
               searchNote = String(s.message || "Couldn't search the web. Answered without it.");
               if (!revealed && loaderRow._setStage) loaderRow._setStage("Thinking");
             }
+            continue;
+          }
+          if (chunk.link) {
+            const s = chunk.link;
+            if (s.status === "reading" && !revealed && loaderRow._setStage) loaderRow._setStage("Reading the page");
+            else if (s.status === "done") linkInfo = s;
+            else if (s.status === "failed") linkNote = String(s.message || "Couldn't read that link.");
             continue;
           }
           const msg = chunk.message || {};
@@ -2013,6 +2226,11 @@
       const srcEl = webSources.length ? buildSources(webSources) : null;
       if (srcEl) liveRow.appendChild(srcEl);
       else if (searchNote) liveRow.appendChild(buildSearchNote(searchNote));
+      const linkMeta = linkInfo ? { url: linkInfo.url, domain: linkInfo.domain, title: linkInfo.title, kind: linkInfo.kind,
+                                    partial: !!linkInfo.partial, cite: linkInfo.cite, asked: linkToSend } : null;
+      const lcEl = linkMeta ? buildLinkCard(linkMeta) : null;
+      if (lcEl) liveRow.appendChild(lcEl);
+      else if (linkNote) liveRow.appendChild(buildSearchNote(linkNote));
       liveRow.appendChild(buildActions(finalText, tierAtSend));
 
       messages.push({
@@ -2022,7 +2240,10 @@
         thinkSeconds: thinkSeconds || undefined,
         tier: tierAtSend,
         sources: srcEl ? webSources : undefined,
+        link: linkMeta || undefined,
       });
+      activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
+      updateLinkHint();
       if (historyEnabled) saveChats();
       updateJumpBtn();
       checkStatus();
