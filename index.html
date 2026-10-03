@@ -512,6 +512,77 @@
   .sb-tip { flex: 1; min-width: 140px; }
   @media (max-width: 420px) { .sb-tip { display: none; } }
 
+  /* SCODE Scores: bar above the text box */
+  #sc-bar { display: none; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 2px 8px -4px; padding: 6px 8px 6px 10px; border-radius: 10px; background: var(--accent-soft); font-size: 12.5px; color: var(--muted); }
+  #sc-bar.show { display: flex; animation: hintIn 0.35s cubic-bezier(.2,.8,.2,1); }
+  #sc-bar > svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+  #sc-bar .sc-try { font-weight: 600; color: var(--muted); }
+  .sc-chips { display: flex; gap: 6px; flex-wrap: wrap; min-width: 0; flex: 1; }
+  .sc-chip { border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px; cursor: pointer; white-space: nowrap; transition: background 0.15s, border-color 0.15s; }
+  .sc-chip:hover, .sc-chip:focus-visible { border-color: var(--accent); background: var(--accent-soft); outline: none; }
+  @media (max-width: 420px) { #sc-bar .sc-try { display: none; } .sc-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .sc-chips::-webkit-scrollbar { display: none; } }
+
+  /* SCODE Scores: the card under the answer */
+  .sc-card { margin-top: 10px; max-width: 600px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); overflow: hidden;
+    opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; font-variant-numeric: tabular-nums; }
+  .sc-top { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; background: radial-gradient(130% 140% at 0% 0%, var(--accent-soft), transparent 60%); }
+  .sc-lg { flex-shrink: 0; font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border-radius: 7px; padding: 4px 7px; }
+  .sc-title { flex: 1; min-width: 0; font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.25; }
+  .sc-tabs { display: flex; gap: 4px; padding: 0 12px 10px; overflow-x: auto; scrollbar-width: none; }
+  .sc-tabs::-webkit-scrollbar { display: none; }
+  .sc-tab { flex-shrink: 0; border: 1px solid var(--border); background: none; color: var(--muted); font: inherit; font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 20px; cursor: pointer; }
+  .sc-tab.on { background: var(--text); color: var(--surface); border-color: var(--text); }
+  .sc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .sc-table th { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--faint); text-align: right; padding: 4px 8px 6px; border-bottom: 1px solid var(--border); }
+  .sc-table th.tm { text-align: left; }
+  .sc-table td { padding: 6px 8px; text-align: right; color: var(--muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .sc-table tr:last-child td { border-bottom: none; }
+  .sc-table td.rk { width: 24px; text-align: right; color: var(--faint); font-size: 12px; padding-left: 14px; }
+  .sc-table td.tm { text-align: left; color: var(--text); font-weight: 600; width: 100%; max-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .sc-table td.tm .sc-tn { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; vertical-align: middle; }
+  .sc-table td.tm .sc-tn span { overflow: hidden; text-overflow: ellipsis; }
+  .sc-table td.pts { color: var(--text); font-weight: 700; padding-right: 16px; }
+  .sc-table tr.hl td { background: var(--accent-soft); }
+  .sc-table tr.hl td.tm { color: var(--accent); }
+  .sc-table tr.cut td { border-bottom: 2px dashed var(--border-strong); }
+  .sc-table small { font-size: 10px; color: var(--faint); font-weight: 600; margin-left: 2px; }
+  .sc-short { display: none; }
+  @media (max-width: 520px) { .sc-full { display: none; } .sc-short { display: inline; } .sc-table td, .sc-table th { padding-left: 5px; padding-right: 5px; } .sc-table td.rk { padding-left: 10px; } .sc-table td.pts { padding-right: 12px; } }
+  .sc-logo { width: 22px; height: 22px; flex-shrink: 0; object-fit: contain; }
+  .sc-abbr { width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--hover); color: var(--muted); font-size: 8px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; letter-spacing: -0.02em; }
+  .sc-more { display: block; width: 100%; border: none; border-top: 1px solid var(--border); background: none; color: var(--accent); font: inherit; font-size: 12.5px; font-weight: 600; padding: 9px; cursor: pointer; }
+  .sc-more:hover { background: var(--hover); }
+  .sc-day { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 10px 16px 4px; }
+  .sc-games { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; padding: 2px 12px 10px; }
+  .sc-game { border: 1px solid var(--border); border-radius: 13px; padding: 8px 10px; background: var(--surface-2); display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; }
+  .sc-game.hl { border-color: var(--accent); }
+  .sc-side { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .sc-side span.nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sc-side.lost { color: var(--muted); font-weight: 500; }
+  .sc-side .rec { font-size: 11px; color: var(--faint); font-weight: 500; }
+  .sc-score { font-size: 17px; font-weight: 700; color: var(--text); text-align: right; min-width: 22px; }
+  .sc-score.lost { color: var(--faint); font-weight: 600; }
+  .sc-stat { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 11.5px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 6px; margin-top: 2px; }
+  .sc-stat b { font-weight: 700; color: var(--text); }
+  .sc-stat .tv { margin-left: auto; color: var(--faint); }
+  .sc-live { display: inline-flex; align-items: center; gap: 5px; color: #d64541; font-weight: 800; letter-spacing: 0.04em; }
+  .sc-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #d64541; animation: scPulse 1.4s ease-in-out infinite; }
+  @keyframes scPulse { 50% { opacity: 0.25; } }
+  .sc-empty { padding: 6px 16px 14px; font-size: 13.5px; color: var(--muted); }
+  .sc-race { display: flex; align-items: center; gap: 12px; margin: 2px 12px 10px; padding: 10px 12px; border-radius: 13px; border: 1px solid var(--border); background: var(--surface-2); }
+  .sc-race .rd { flex-shrink: 0; width: 38px; text-align: center; font-size: 10px; font-weight: 700; color: var(--faint); letter-spacing: 0.06em; line-height: 1.2; }
+  .sc-race .rd b { display: block; font-size: 17px; color: var(--text); letter-spacing: 0; }
+  .sc-race .rn { flex: 1; min-width: 0; }
+  .sc-race .rn b { display: block; font-size: 14px; color: var(--text); }
+  .sc-race .rn span { font-size: 12px; color: var(--muted); }
+  .sc-race .in { flex-shrink: 0; font-size: 11.5px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 20px; padding: 3px 9px; }
+  .sc-pos { display: inline-flex; width: 22px; height: 22px; border-radius: 6px; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 800; background: var(--hover); color: var(--muted); }
+  .sc-pos.p1 { background: #e8b923; color: #3a2c00; } .sc-pos.p2 { background: #c3c9d1; color: #2b3138; } .sc-pos.p3 { background: #cd8a4f; color: #3a1d05; }
+  .sc-foot { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 9px 16px 11px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--faint); }
+  .sc-foot span { flex: 1; min-width: 150px; }
+  .sc-need { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
   /* Study sets: shared */
   .study { margin-top: 4px; max-width: 560px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); padding: 16px 16px 14px;
     opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
@@ -751,28 +822,28 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn {
+  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; } #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn { padding: 0 9px; } }
   /* Auto-fit: fitTools() adds .fit1 (drop costs, NEW becomes a dot) then .fit2 (icons only) when the row runs out of room */
   .composer-tools { min-width: 0; }
   .composer-tools > button { flex-shrink: 0; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .wcost { display: none; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { position: relative; padding: 0 10px 0 9px; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { width: 34px; padding: 0; justify-content: center; }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) .mlabel { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) .wcost { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) { position: relative; padding: 0 10px 0 9px; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) { width: 34px; padding: 0; justify-content: center; }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) .mlabel { display: none; }
   .composer-tools.fit2 .model-picker-btn .mp-quota { display: none; }
   /* Mode cost: total next to the model name, plus a short pop-up with the breakdown */
   .model-picker-btn .mp-quota.plus { color: var(--accent); font-weight: 600; }
@@ -787,7 +858,7 @@
   .composer-tools.fit3 .model-picker-btn { padding: 0 6px; }
   .composer-tools.fit4 .model-picker-btn .mp-quota.plus { display: none; }
   .composer-tools.fit5 { gap: 3px; }
-  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn) { width: 29px; height: 29px; }
+  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) { width: 29px; height: 29px; }
   .composer-tools.fit5 .model-picker-btn { padding: 0 3px; }
   .composer-tools.fit6 > button { flex-shrink: 1; }
   .composer-tools.fit6 .model-picker-btn .chev { display: none; }
@@ -925,10 +996,12 @@
   #whatsnew.show .wn-feat:nth-child(3) { animation-delay: 0.54s; }
   #whatsnew.show .wn-feat:nth-child(4) { animation-delay: 0.66s; }
   #whatsnew.show .wn-feat:nth-child(5) { animation-delay: 0.78s; }
+  #whatsnew.show .wn-feat:nth-child(6) { animation-delay: 0.9s; }
   @media (max-width: 720px) { .wn-feat .wn-ft span { display: none; } .wn-feat { padding: 8px 10px; } .wn-try { height: 30px; } }
   .wn-fi { width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .wn-fi svg { width: 21px; height: 21px; }
   .wn-ft { flex: 1; min-width: 0; }
+  .wn-ft b .wn-today { font-style: normal; display: inline-block; vertical-align: 1px; margin-left: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); border-radius: 6px; padding: 1px 6px; }
   .wn-ft b { display: block; font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; }
   .wn-ft span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.4; margin-top: 1px; }
   .wn-try { height: 34px; padding: 0 14px; border-radius: 10px; border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-size: 13px;
@@ -1106,7 +1179,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -1163,10 +1236,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
     #attach-btn { width: 32px; height: 32px; }
-    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
-    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #sc-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
+    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -1326,6 +1399,17 @@
             <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz">Practice quiz</button></div>
             <span class="sb-tip" id="sb-tip">Paste notes, add a photo, paste a link, or name a topic.</span>
           </div>
+          <div id="sc-bar" role="group" aria-label="SCODE Scores">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span class="sc-try">Try</span>
+            <div class="sc-chips">
+              <button class="sc-chip" type="button">NHL standings</button>
+              <button class="sc-chip" type="button">Canucks next game</button>
+              <button class="sc-chip" type="button">NBA games today</button>
+              <button class="sc-chip" type="button">NFL scores</button>
+              <button class="sc-chip" type="button">F1 standings</button>
+            </div>
+          </div>
           <textarea id="prompt-input" placeholder="How can I help you today?" rows="1"></textarea>
           <div class="composer-tools">
             <button id="attach-btn" type="button" title="Add a photo" aria-label="Add a photo">
@@ -1347,6 +1431,10 @@
             <button id="wx-btn" type="button" aria-pressed="false" title="Weather">
               <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 2.4v1.4M3.8 4.3l1 1M2.4 8.5h1.4M13.2 4.3l-1 1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
               <span class="mlabel">Weather</span><span class="wcost" id="wx-cost">+1</span><span class="wnew" id="wx-new" hidden>NEW</span>
+            </button>
+            <button id="sc-btn" type="button" aria-pressed="false" title="SCODE Scores">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+              <span class="mlabel">Scores</span><span class="wcost" id="sc-cost">+1</span><span class="wnew" id="sc-new" hidden>NEW</span>
             </button>
             <button id="img-btn" type="button" aria-pressed="false" title="SCODE Image Gen">
               <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
@@ -1541,6 +1629,11 @@
       <h2 id="wn-title">Five new things in SCODE AI</h2>
       <div class="modal-sub">Search, Link, Study, Weather and Image Gen are all here. Tap Try on any of them.</div>
       <div class="wn-feats">
+        <div class="wn-feat" id="wn-feat-scores" hidden>
+          <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+          <div class="wn-ft"><b>SCODE Scores <i class="wn-today">New today</i></b><span>Live standings, scores and schedules for the NHL, NBA, NFL, F1 and more.</span></div>
+          <button class="wn-try" type="button" data-try="scores">Try</button>
+        </div>
         <div class="wn-feat">
           <div class="wn-fi"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
           <div class="wn-ft"><b>SCODE Search</b><span>Checks today&rsquo;s web before answering, and links every source.</span></div>
@@ -1710,7 +1803,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://download-counts-establishment-redhead.trycloudflare.com";
+  const PROXY_URL = "https://submit-powerseller-pump-mozilla.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -2209,11 +2302,13 @@
   let searchCost = 5;
   var studyCost = 5;
   var weatherCost = 1;
+  var scoresCost = 1, scoresServerOn = true;   // SCODE Scores (the server can change these via /status)
   let webOn = false;
   var linkOn = false;                        // SCODE Link mode
   var studyOn = false;                       // Study Mode (only one mode is on at a time)
   var studyKind = "flashcards";
   var weatherOn = false;
+  var scoresOn = false;                      // SCODE Scores (sports)
   var imageOn = false;                       // SCODE Image Gen (also lights up by itself for "draw me…")                     // Weather mode (also lights up by itself for weather questions)
   try {
     webOn = localStorage.getItem("linden_web") === "1";
@@ -2222,6 +2317,7 @@
     studyKind = localStorage.getItem("scode_study_kind") === "quiz" ? "quiz" : "flashcards";
     weatherOn = !webOn && !linkOn && !studyOn && localStorage.getItem("scode_weather_on") === "1";
     imageOn = !webOn && !linkOn && !studyOn && !weatherOn && localStorage.getItem("scode_image_on") === "1";
+    scoresOn = !webOn && !linkOn && !studyOn && !weatherOn && !imageOn && localStorage.getItem("scode_scores_on") === "1";
   } catch (e) {}
   const DEFAULT_PLACEHOLDER = el.input.placeholder;
 
@@ -2236,6 +2332,7 @@
       localStorage.setItem("scode_study_kind", studyKind);
       localStorage.setItem("scode_weather_on", weatherOn ? "1" : "0");
       localStorage.setItem("scode_image_on", imageOn ? "1" : "0");
+      localStorage.setItem("scode_scores_on", scoresOn ? "1" : "0");
     } catch (e) {}
   }
   function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost, isNew) {
@@ -2297,7 +2394,13 @@
       : iState === "auto" ? "Image Gen turned on by itself. Tap to send this as a normal message."
       : "SCODE Image Gen: make a picture from a description";
     if (typeof updateImgHint === "function") updateImgHint();
-    el.input.placeholder = iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
+    // SCODE Scores: on or off by hand.
+    const cAvail = typeof scoresUnlocked === "function" && scoresUnlocked();
+    const cOn = cAvail && scoresOn && iState === "off";
+    paintModeBtn($("sc-btn"), $("sc-new"), $("sc-cost"), !!cAvail, false, cOn, scoresCost, typeof scoresIsNew === "function" && scoresIsNew());
+    $("sc-btn").title = (cOn ? "SCODE Scores is on" : "SCODE Scores: live standings, games and schedules") + ` (+${scoresCost} per message)`;
+    $("sc-bar").classList.toggle("show", cOn);
+    el.input.placeholder = cOn ? "Ask about any team or league" : iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
       : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
@@ -2315,6 +2418,7 @@
     const lp = (typeof linkPlan === "function" && typeof LINK_TIERS !== "undefined") ? linkPlan() : null;
     if (lp && (lp.kind === "read" || lp.kind === "follow")) return { key: "link", name: "Link", extra: linkCost, unit: "message" };
     if (searchUnlocked() && webOn && WEB_TIERS.has(selectedTier) && !photo) return { key: "search", name: "Search", extra: searchCost, unit: "message" };
+    if (typeof scoresActive === "function" && scoresActive()) return { key: "scores", name: "Scores", extra: scoresCost, unit: "message" };
     if (typeof weatherUnlocked === "function" && weatherUnlocked() && wxState() !== "off") return { key: "weather", name: "Weather", extra: weatherCost, unit: "message" };
     if (linkOn && searchUnlocked() && !photo) return { key: "link-idle", name: "Link", extra: linkCost, unit: "message", idle: true };
     return null;
@@ -2355,6 +2459,7 @@
     studyOn = mode === "study";
     weatherOn = mode === "weather";
     imageOn = mode === "image";
+    scoresOn = mode === "scores";
     if (typeof wxSkipped !== "undefined") wxSkipped = false;
     if (typeof imgSkipped !== "undefined") imgSkipped = false;
     if (!linkOn && typeof activeLink !== "undefined") activeLink = null;
@@ -2384,6 +2489,15 @@
     else setMode(st === "on" ? null : "weather");
     if (!touchLike) el.input.focus();
   });
+  $("sc-btn").addEventListener("click", () => {
+    setMode(scoresOn ? null : "scores");
+    if (!touchLike) el.input.focus();
+  });
+  $("sc-bar").querySelectorAll(".sc-chip").forEach(b => b.addEventListener("click", () => {
+    if (sending) return;
+    el.input.value = b.textContent;
+    send();
+  }));
   $("study-btn").addEventListener("click", () => {
     setMode(studyOn ? null : "study");
     if (!touchLike) el.input.focus();
@@ -2408,7 +2522,12 @@
   const WN_WEATHER_ICON = '<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 2.6v1.3M3.9 4.4l.9.9M2.6 8.5h1.3M13.1 4.4l-.9.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8.2 20h9.3a3.6 3.6 0 0 0 .5-7.2 5.2 5.2 0 0 0-9.8-.8A4 4 0 0 0 8.2 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   // Single-feature launch popups (Weather on Oct 3, Image Gen on Nov 1).
   const WN_IMAGE_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+  const WN_SCORES_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   const FEATURE_POPUPS = {
+    scores: { icon: WN_SCORES_ICON, tag: "New", title: "Introducing SCODE Scores",
+      sub: "Live standings, scores and schedules for the NHL, NBA, NFL, MLB, CFL, soccer and F1.",
+      name: "SCODE Scores", text: "Turn on Scores and ask &ldquo;NHL standings&rdquo;, &ldquo;When do the Canucks play next?&rdquo; or &ldquo;F1 standings&rdquo;. A neat card shows the real numbers.",
+      cost: () => `Every model, even without an account · +${scoresCost} point per message` },
     weather: { icon: WN_WEATHER_ICON, tag: "New", title: "Introducing Local weather",
       sub: "Ask about the weather and get the real Environment Canada forecast for your town, not a guess.",
       name: "Local weather", text: "Ask &ldquo;Do I need a jacket tomorrow?&rdquo; and get a straight answer, plus the next hours, the week and any warnings.",
@@ -2433,21 +2552,28 @@
     $("wn-cost-line").textContent = f.cost();
   }
   function maybeShowWhatsNew() {
-    const m = /[?&]whatsnew=(1|weather|image)\b/.exec(location.search);
+    const m = /[?&]whatsnew=(1|weather|image|scores)\b/.exec(location.search);
     const forced = m ? m[1] : null;
     let seenThisVisit = false;
     try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
     let which = forced === "1" ? "big" : forced;
     if (!which) {
       if (seenThisVisit) return;
-      which = searchIsNew() ? "big" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
+      which = searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
     }
     if (!which) return;
     if (which === "big") {
-      $("wn-cost-line").textContent = `On top of the model's cost: Search +${searchCost} · Link +${linkCost} · Study +${studyCost} · Weather +${weatherCost} · Image Gen +${imageCost}`;
+      // Once Scores is out, it joins the big popup as the newest of six.
+      const withScores = scoresUnlocked();
+      $("wn-feat-scores").hidden = !withScores;
+      $("wn-title").textContent = withScores ? "Six new things in SCODE AI" : "Five new things in SCODE AI";
+      wn.querySelector(".modal-sub").textContent = withScores
+        ? "Scores is new today. Search, Link, Study, Weather and Image Gen are here too. Tap Try on any of them."
+        : "Search, Link, Study, Weather and Image Gen are all here. Tap Try on any of them.";
+      $("wn-cost-line").textContent = `On top of the model's cost: Search +${searchCost} · Link +${linkCost} · Study +${studyCost} · Weather +${weatherCost} · Image Gen +${imageCost}` + (withScores ? ` · Scores +${scoresCost}` : "");
       const orbs = wn.querySelector(".wn-orbs");
       orbs.classList.add("many");
-      orbs.innerHTML = [...wn.querySelectorAll(".wn-feat .wn-fi svg")].map(s => `<div class="wn-orb">${s.outerHTML}</div>`).join("");
+      orbs.innerHTML = [...wn.querySelectorAll(".wn-feat:not([hidden]) .wn-fi svg")].map(s => `<div class="wn-orb">${s.outerHTML}</div>`).join("");
     }
     else fillFeaturePopup(which);
     wn.classList.add("show");
@@ -2460,6 +2586,11 @@
     if (mode === "image") {
       if (isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
       setMode("image");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
+    if (mode === "scores") {
+      setMode("scores");
       setTimeout(() => el.input.focus(), 250);
       return;
     }
@@ -2993,6 +3124,8 @@
     if (lcEl) row.appendChild(lcEl);
     const wxEl = meta && meta.weather ? buildWeatherCard(meta.weather) : null;
     if (wxEl) row.appendChild(wxEl);
+    const scEl = meta && meta.scores ? buildScoresCard(meta.scores) : null;
+    if (scEl) row.appendChild(scEl);
     if (!imgEl) row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -3351,6 +3484,7 @@
     const v = text === undefined ? el.input.value : text;
     if (URL_FIND.test(v)) return "off";
     if (typeof imgState === "function" && imgState(v) !== "off") return "off";
+    if (typeof scoresActive === "function" && scoresActive()) return "off";
     if (weatherOn) return "on";
     const studyBusy = typeof studyActive === "function" && studyActive();
     const linkBusy = linkOn && searchUnlocked() && typeof LINK_TIERS !== "undefined" && LINK_TIERS.has(selectedTier);
@@ -3630,6 +3764,208 @@
     return box;
   }
 
+  // ---------- SCODE Scores (live sports) ----------
+  // Launches Oct 4 at midnight Pacific. Before then, ?preview=scores shows it.
+  var SCORES_LAUNCH = Date.parse("2026-10-04T00:00:00-07:00");
+  var scoresPreview = /[?&]preview=scores\b/.test(location.search);
+  function scoresUnlocked() { return scoresServerOn && (scoresPreview || Date.now() >= SCORES_LAUNCH); }
+  function scoresIsNew() { return scoresUnlocked() && Date.now() < SCORES_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; }
+  function scoresActive() { return scoresUnlocked() && scoresOn && !(typeof imgState === "function" && imgState() !== "off"); }
+  // The league of the last sports answer, so "what about yesterday?" keeps the league.
+  function lastScoresLeague() {
+    for (let i = messages.length - 1; i >= 0 && i >= messages.length - 6; i--) {
+      const m = messages[i];
+      if (m.role === "assistant" && m.scores && m.scores.key) return m.scores.key;
+    }
+    return null;
+  }
+  const SC_LEAGUES = [["NHL", "NHL"], ["NBA", "NBA"], ["NFL", "NFL"], ["MLB", "MLB"], ["CFL", "CFL"], ["MLS", "MLS"],
+                      ["Premier League", "Premier League"], ["F1", "F1"]];
+  function scSafeImg(u) {
+    try { const x = new URL(String(u)); return /^https?:$/.test(x.protocol) ? x.href : null; } catch (e) { return null; }
+  }
+  function scLogo(t) {
+    const url = scSafeImg(t.logo);
+    const badge = () => { const b = stEl("span", "sc-abbr", (t.abbr || "?").slice(0, 4)); return b; };
+    if (!url) return badge();
+    const img = document.createElement("img");
+    img.className = "sc-logo"; img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.referrerPolicy = "no-referrer";
+    img.src = url;
+    img.addEventListener("error", () => img.replaceWith(badge()), { once: true });
+    return img;
+  }
+  function scName(t, el) {
+    const full = stEl("span", "sc-full", t.name || t.abbr || "?");
+    const short = stEl("span", "sc-short", t.short || t.abbr || t.name || "?");
+    el.appendChild(full); el.appendChild(short);
+  }
+  function scTime(iso, withDay) {
+    const d = new Date(iso);
+    if (isNaN(d)) return "";
+    const t = d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    return withDay ? d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }) + " · " + t : t;
+  }
+  function scIn(iso) {
+    const ms = new Date(iso) - Date.now();
+    if (!(ms > 0)) return "";
+    const days = Math.floor(ms / 864e5), hrs = Math.floor(ms / 36e5);
+    return days >= 1 ? `in ${days} day${days === 1 ? "" : "s"}` : hrs >= 1 ? `in ${hrs} hr` : "soon";
+  }
+  function scTable(cols, rows, opts) {
+    // opts: { rank: true, cutAt: n, limit: n }
+    const wrap = document.createElement("div");
+    const tbl = stEl("table", "sc-table");
+    const head = document.createElement("tr");
+    head.appendChild(stEl("th", "", "#"));
+    head.appendChild(stEl("th", "tm", opts.teamLabel || "Team"));
+    cols.forEach((c, i) => head.appendChild(stEl("th", i === cols.length - 1 ? "pts" : "", c)));
+    const thead = document.createElement("thead"); thead.appendChild(head); tbl.appendChild(thead);
+    const body = document.createElement("tbody");
+    const limit = opts.limit || 0;
+    const hlAt = rows.findIndex(r => r.hl);
+    const showAll = !limit || rows.length <= limit + 2 || hlAt >= limit;
+    rows.forEach((r, i) => {
+      const tr = document.createElement("tr");
+      if (r.hl) tr.className = "hl";
+      if (!showAll && i >= limit) tr.hidden = true;
+      tr.appendChild(stEl("td", "rk", String(r.rank || i + 1)));
+      const tm = stEl("td", "tm");
+      const tn = stEl("span", "sc-tn");
+      if (r.team) tn.appendChild(scLogo(r.team));
+      const nm = document.createElement("span");
+      if (r.team) scName(r.team, nm); else nm.textContent = r.label;
+      tn.appendChild(nm);
+      if (r.sub) tn.appendChild(stEl("small", "", r.sub));
+      tm.appendChild(tn);
+      tr.appendChild(tm);
+      r.vals.forEach((v, j) => tr.appendChild(stEl("td", j === r.vals.length - 1 ? "pts" : "", v === "" ? "–" : String(v))));
+      body.appendChild(tr);
+    });
+    tbl.appendChild(body);
+    wrap.appendChild(tbl);
+    if (!showAll) {
+      const more = stEl("button", "sc-more", `Show all ${rows.length}`); more.type = "button";
+      more.addEventListener("click", () => {
+        const open = more.dataset.open === "1";
+        body.querySelectorAll("tr").forEach((tr, i) => { if (i >= limit) tr.hidden = open; });
+        more.dataset.open = open ? "0" : "1";
+        more.textContent = open ? `Show all ${rows.length}` : "Show less";
+      });
+      wrap.appendChild(more);
+    }
+    return wrap;
+  }
+  function scTabs(names, onPick) {
+    const bar = stEl("div", "sc-tabs");
+    names.forEach((n, i) => {
+      const b = stEl("button", "sc-tab" + (i === 0 ? " on" : ""), n); b.type = "button";
+      b.addEventListener("click", () => {
+        bar.querySelectorAll(".sc-tab").forEach(x => x.classList.toggle("on", x === b));
+        onPick(i);
+      });
+      bar.appendChild(b);
+    });
+    return bar;
+  }
+  function scGame(g) {
+    const box = stEl("div", "sc-game" + (g.hl ? " hl" : ""));
+    const done = g.state === "post", started = g.state !== "pre";
+    [g.away, g.home].forEach(t => {
+      const lost = done && !t.winner && (g.away.winner || g.home.winner);
+      const side = stEl("div", "sc-side" + (lost ? " lost" : ""));
+      side.appendChild(scLogo(t));
+      const nm = stEl("span", "nm"); scName(t, nm); side.appendChild(nm);
+      if (t.record && !started) side.appendChild(stEl("span", "rec", t.record));
+      box.appendChild(side);
+      box.appendChild(stEl("div", "sc-score" + (lost ? " lost" : ""), started ? (t.score || "0") : ""));
+    });
+    const st = stEl("div", "sc-stat");
+    if (g.state === "in") { st.appendChild(stEl("span", "sc-live", "LIVE")); st.appendChild(stEl("span", "", g.detail)); }
+    else if (done) st.appendChild(stEl("b", "", g.detail || "Final"));
+    else st.appendChild(stEl("b", "", g.start ? scTime(g.start) : (g.detail || "TBD")));
+    if (g.note) st.appendChild(stEl("span", "", g.note));
+    if (g.tv) st.appendChild(stEl("span", "tv", g.tv));
+    box.appendChild(st);
+    return box;
+  }
+  function buildScoresCard(d) {
+    if (!d || !d.type) return null;
+    const card = stEl("div", "sc-card");
+    const top = stEl("div", "sc-top");
+    top.appendChild(stEl("span", "sc-lg", ({ f1: "F1", epl: "EPL", laliga: "Liga", seriea: "Serie A", bundesliga: "BL", ucl: "UCL" })[d.key] || d.league || "Sports"));
+    top.appendChild(stEl("div", "sc-title", d.title || d.league));
+    card.appendChild(top);
+    if (d.type === "standings") {
+      const groups = d.groups || [];
+      const holder = document.createElement("div");
+      const show = (i) => {
+        const g = groups[i];
+        holder.replaceChildren(scTable(d.cols || [], g.rows.map(r => ({ team: r, vals: r.vals, hl: r.hl, sub: r.clinch })), { limit: 10 }));
+      };
+      if (groups.length > 1) card.appendChild(scTabs(groups.map(g => g.name.replace(/ Conference$/, "").replace(/^(American|National) Football /, "")), show));
+      card.appendChild(holder);
+      if (groups.length) show(0);
+    } else if (d.type === "games") {
+      if (!d.days || !d.days.length) card.appendChild(stEl("div", "sc-empty", d.team ? "No games found for that team around now." : "No games right now. The league may be on a break or in its off-season."));
+      (d.days || []).forEach(day => {
+        card.appendChild(stEl("div", "sc-day", day.label));
+        const grid = stEl("div", "sc-games");
+        day.games.forEach(g => grid.appendChild(scGame(g)));
+        card.appendChild(grid);
+      });
+    } else if (d.type === "f1") {
+      if (d.drivers) {
+        const holder = document.createElement("div");
+        const show = (i) => holder.replaceChildren(i === 0
+          ? scTable(["Pts", ], d.drivers.map(x => ({ rank: x.pos, label: x.name, sub: x.team, vals: [x.pts] })), { limit: 10, teamLabel: "Driver" })
+          : scTable(["Wins", "Pts"], d.teams.map(x => ({ rank: x.pos, label: x.name, vals: [x.wins, x.pts] })), { teamLabel: "Team" }));
+        card.appendChild(scTabs(["Drivers", "Teams"], show));
+        card.appendChild(holder);
+        show(0);
+      }
+      const res = d.result;
+      if (res && res.rows && res.rows.length) {
+        card.appendChild(stEl("div", "sc-day", `Last race · ${res.name}`));
+        card.appendChild(scTable(["Time", "Pts"], res.rows.map(x => ({ rank: x.pos, label: x.name, sub: x.team, vals: [x.time, x.pts] })), { limit: 5, teamLabel: "Driver" }));
+        card.querySelectorAll(".sc-table").forEach(t => t.querySelectorAll("td.rk").forEach(td => {
+          const n = +td.textContent; if (n >= 1 && n <= 3) { td.textContent = ""; td.appendChild(stEl("span", "sc-pos p" + n, String(n))); }
+        }));
+      }
+      if (d.races && d.races.length) {
+        card.appendChild(stEl("div", "sc-day", d.races.length > 1 ? "Coming up" : "Next race"));
+        d.races.forEach(r => {
+          const box = stEl("div", "sc-race");
+          const rd = stEl("div", "rd", "RND"); rd.appendChild(stEl("b", "", r.round)); box.appendChild(rd);
+          const rn = stEl("div", "rn"); rn.appendChild(stEl("b", "", r.name));
+          rn.appendChild(stEl("span", "", [r.place, r.start ? scTime(r.start, true) : ""].filter(Boolean).join(" · ")));
+          box.appendChild(rn);
+          const when = r.start ? scIn(r.start) : "";
+          if (when) box.appendChild(stEl("span", "in", when));
+          card.appendChild(box);
+        });
+      }
+    }
+    const foot = stEl("div", "sc-foot");
+    const at = d.at ? new Date(d.at) : null;
+    foot.appendChild(stEl("span", "", `Live data from ${d.source || "ESPN"}` + (at && !isNaN(at) ? ` · as of ${at.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}` + (Date.now() - at > 864e5 ? `, ${at.toLocaleDateString([], { month: "short", day: "numeric" })}` : "") : "")));
+    card.appendChild(foot);
+    return card;
+  }
+  function buildScoresNeed(question) {
+    const box = stEl("div", "sc-need");
+    SC_LEAGUES.forEach(([label, word]) => {
+      const b = stEl("button", "sc-chip", label); b.type = "button";
+      b.addEventListener("click", () => {
+        if (sending) return;
+        el.input.value = `${String(question || "").trim()} (${word})`.trim();
+        box.remove();
+        send();
+      });
+      box.appendChild(b);
+    });
+    return box;
+  }
+
   // ---------- SCODE Image Gen ----------
   // Launches Oct 3 at midnight Pacific. Before then, ?preview=image shows it.
   // It also needs the image add-ons installed on the laptop (the proxy reports that in /status).
@@ -3841,6 +4177,8 @@
       if (typeof data.image_cost === "number") imageCost = data.image_cost;
       if (typeof data.weather_cost === "number") weatherCost = data.weather_cost;
       if (typeof data.image_eta === "number") imageEta = data.image_eta;
+      if (typeof data.scores === "boolean") scoresServerOn = data.scores;
+      if (typeof data.scores_cost === "number") scoresCost = data.scores_cost;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -4194,6 +4532,9 @@
   //  "showFrom" hides an entry until that date (for launches).
   // =====================================================================
   const UPCOMING = [
+    { id: "scores", title: "SCODE Scores", launch: "2026-10-04T00:00:00-07:00",
+      blurb: "Live standings, scores and schedules.",
+      details: "Turn on Scores and ask about the NHL, NBA, NFL, MLB, CFL, soccer or F1, like “NHL standings” or “When do the Canucks play next?”. You get a short answer plus a neat card with the real standings table, today's games with live scores, or the schedule." },
     { id: "search", title: "SCODE Search", launch: "2026-10-03T00:00:00-07:00",
       blurb: "Answers from today's web, with links to every source.",
       details: "Turn on Search and SCODE AI checks the web before it answers, so you get current info like schedules, news and scores. Every answer lists its sources so you can check them." },
@@ -4211,6 +4552,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-scores", type: "feature", date: "2026-10-04", showFrom: "2026-10-04T00:00:00-07:00", title: "SCODE Scores",
+      text: "Live sports, right in the chat. Turn on Scores and ask about standings, today's games, scores or schedules for the NHL, NBA, NFL, MLB, CFL, WNBA, MLS, Premier League, La Liga, Serie A, Bundesliga, Champions League and Formula 1. A card under the answer shows the real table or games. Works on every model, even without an account, for +1 point.",
+      how: ["Tap the Scores button (the trophy) next to the text box so it turns green.", "Ask something like “NHL standings”, “NBA games today” or “When do the Canucks play next?”, or tap one of the examples in the bar.", "Tap the tabs on a standings card to switch conferences, or Show all to see every team.", "Ask follow-ups like “What about yesterday?” and it remembers the league."] },
     { id: "u-privacy", type: "feature", date: "2026-10-03", title: "Privacy Policy and clearer point costs",
       text: "SCODE AI now has a Privacy Policy that explains what we collect, who can see it and our promises to you. Read it any time in Settings. Accounts are for people 16 and older. Modes now show exactly what a message costs: tap one and you'll see the model's cost plus the mode's, added up next to the model name. Links to long papers also get more time to load.",
       how: ["Open Settings (the sliders icon) and tap Read next to Privacy Policy.", "Turn on a mode, like Search, and look next to the model name for the total.", "Search +5, Link +1, Study +5, Weather +1, Image Gen +30, on top of the model."] },
@@ -4254,7 +4598,7 @@
     return m[3] ? `${MONTHS[+m[2] - 1].slice(0, 3)} ${+m[3]}, ${m[1]}` : `${MONTHS[+m[2] - 1]} ${m[1]}`;
   }
   function visibleLog() {
-    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview);
+    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview || scoresPreview);
   }
   function upcomingNow() {
     return UPCOMING.filter(u => !u.launch || Date.now() < Date.parse(u.launch));
@@ -4390,7 +4734,9 @@
     imgForceOnce = false;
     if (imgNow && isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
     imgSkipped = false;
-    const wxWanted = !imgNow && wxState(text) !== "off";
+    const scNow = !imgNow && scoresActive();
+    const scHint = scNow ? lastScoresLeague() : null;
+    const wxWanted = !imgNow && !scNow && wxState(text) !== "off";
     const wxSendTo = wxTarget();
     wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
     sending = true;
@@ -4461,6 +4807,7 @@
           study: studyNow && !imgNow ? { kind: studyKind } : undefined,
           image: imgNow || undefined,
           weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
+          scores: scNow && !studyNow && !linkToSend ? (scHint ? { league: scHint } : {}) : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
             if (m.images) o.images = m.images;
@@ -4582,6 +4929,7 @@
       let linkInfo = null, linkNote = "";
       let studySet = null, studyNote = "";
       let wxData = null, wxNote = "", wxNeed = false;
+      let scData = null, scNote = "", scNeed = false;
       let imgGen = null, imgData = null, imgBlocked = null, imgPrompt = text;
       const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
 
@@ -4650,6 +4998,15 @@
             else if (s.status === "done" && s.data) { wxData = s.data; wxData.at = Date.now(); }
             else if (s.status === "need_town") wxNeed = true;
             else if (s.status === "failed") wxNote = String(s.message || "Couldn't get the forecast.");
+            continue;
+          }
+          if (chunk.scores) {
+            const s = chunk.scores;
+            if (s.status === "checking" && !revealed && loaderRow._setStage)
+              loaderRow._setStage(s.league ? `Checking the ${s.league}` : "Checking the scores");
+            else if (s.status === "done" && s.data) scData = s.data;
+            else if (s.status === "need_league") scNeed = true;
+            else if (s.status === "failed") scNote = String(s.message || "Couldn't get the sports data.");
             continue;
           }
           if (chunk.study) {
@@ -4746,6 +5103,10 @@
       if (wxEl) liveRow.appendChild(wxEl);
       else if (wxNote) liveRow.appendChild(buildSearchNote(wxNote));
       else if (wxNeed) liveRow.appendChild(buildWeatherNeed());
+      const scEl = scData ? buildScoresCard(scData) : null;
+      if (scEl) liveRow.appendChild(scEl);
+      else if (scNote) liveRow.appendChild(buildSearchNote(scNote));
+      else if (scNeed) liveRow.appendChild(buildScoresNeed(text));
       // The first town someone gets a forecast for becomes their town.
       if (wxData && !wxPlace) setWxPlace({ code: wxData.code, name: wxData.place, prov: wxData.prov });
       if (!imgGen) liveRow.appendChild(buildActions(finalText, tierAtSend));
@@ -4760,6 +5121,7 @@
         link: linkMeta || undefined,
         study: studySet || undefined,
         weather: wxData || undefined,
+        scores: scData || undefined,
         image: imgData || imgBlocked || undefined,
       });
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
