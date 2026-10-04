@@ -345,7 +345,10 @@
 
   /* SCODE Image Gen: the picture card */
   .ig { margin-top: 4px; width: min(100%, 400px); }
-  .ig-frame { position: relative; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--border); isolation: isolate; }
+  .ig-frame { position: relative; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--border); isolation: isolate;
+    /* Safari (iPad/iPhone) can let blurred, animated layers spill past rounded corners: clip twice so it can't */
+    clip-path: inset(0 round 18px); -webkit-mask-image: -webkit-radial-gradient(white, black); transform: translateZ(0); }
+  .ig-img, .ig-soft { border-radius: 17px; }
   .ig-blobs { position: absolute; inset: -25%; filter: blur(40px) saturate(1.25); transition: opacity 0.9s ease; }
   .ig-blobs i { position: absolute; width: 58%; height: 58%; border-radius: 50%; animation: igFloat 7s ease-in-out infinite alternate; }
   .ig-blobs i:nth-child(1) { background: #5fbf8e; left: 6%; top: 8%; }
