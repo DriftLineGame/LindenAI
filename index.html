@@ -586,6 +586,170 @@
   .sc-foot span { flex: 1; min-width: 150px; }
   .sc-need { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 
+
+  /* ===== SCODE Study Plus ===== */
+  .sb-seg button .sb-plus { display: inline-block; margin-left: 5px; font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+  .sb-s { display: none; }
+  .sb-seg button { white-space: nowrap; }
+  @media (max-width: 480px) { .sb-l { display: none; } .sb-s { display: inline; } .sb-seg button { padding: 4px 9px; } }
+  .sb-seg button.on .sb-plus { background: rgba(255,255,255,.22); color: inherit; }
+  .sp-card { margin-top: 4px; max-width: 640px; position: relative; border: 1px solid var(--border); border-radius: 18px; background: var(--surface);
+    overflow: hidden; clip-path: inset(0 round 18px); opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
+  /* --- the "making it" animation --- */
+  .sp-gen { position: relative; height: 260px; overflow: hidden; isolation: isolate; transition: opacity .45s ease, transform .45s ease; }
+  .sp-gen.sp-out { opacity: 0; transform: scale(.98); }
+  .sp-blobs { position: absolute; inset: -30%; filter: blur(44px) saturate(1.3); z-index: 0; }
+  .sp-blobs i { position: absolute; width: 55%; height: 55%; border-radius: 50%; opacity: .85; animation: spDrift 9s ease-in-out infinite alternate; }
+  .sp-blobs i:nth-child(1) { left: 5%; top: 10%; background: #5fbf8e; }
+  .sp-blobs i:nth-child(2) { left: 45%; top: 0%; background: #7aa7ff; animation-duration: 11s; animation-delay: -3s; }
+  .sp-blobs i:nth-child(3) { left: 30%; top: 45%; background: #b48cff; animation-duration: 13s; animation-delay: -6s; }
+  .sp-blobs i:nth-child(4) { left: 60%; top: 50%; background: #ffc36b; animation-duration: 10s; animation-delay: -2s; opacity: .6; }
+  @keyframes spDrift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(14%, 10%) scale(1.15); } 100% { transform: translate(-10%, 6%) scale(.92); } }
+  .sp-words { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .sp-word { position: absolute; font-family: var(--serif); font-size: 19px; color: rgba(255,255,255,.95); text-shadow: 0 1px 3px rgba(0,0,0,.28), 0 2px 16px rgba(0,0,0,.22);
+    white-space: nowrap; opacity: 0; animation: spWord 3.6s ease-in-out forwards; letter-spacing: -.01em; }
+  @keyframes spWord { 0% { opacity: 0; transform: translateY(8px) scale(.96); filter: blur(4px); } 25% { opacity: .95; transform: none; filter: none; }
+    70% { opacity: .9; } 100% { opacity: 0; transform: translateY(-8px); filter: blur(3px); } }
+  .sp-gen-top { position: absolute; left: 16px; top: 14px; right: 16px; z-index: 2; display: flex; align-items: center; gap: 8px; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .sp-gen-top svg { width: 16px; height: 16px; }
+  .sp-gen-title { position: absolute; left: 16px; right: 16px; top: 40px; z-index: 2; font-family: var(--serif); font-size: 26px; line-height: 1.15; color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.15); transition: opacity .4s; }
+  .sp-gen-foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 34px 16px 14px; color: #fff;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.32)); }
+  .sp-gen-stage { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; }
+  .sp-gen-stage span { flex: 1; min-width: 0; }
+  .sp-gen-stage b { font-weight: 500; font-variant-numeric: tabular-nums; opacity: .9; }
+  .sp-gen-bar { height: 5px; border-radius: 5px; background: rgba(255,255,255,.3); margin-top: 9px; overflow: hidden; }
+  .sp-gen-bar i { display: block; height: 100%; width: 3%; border-radius: 5px; background: #fff; transition: width .8s cubic-bezier(.2,.8,.2,1); }
+  .sp-gen-note { font-size: 11.5px; opacity: .85; margin-top: 6px; }
+  /* --- the trainer --- */
+  .sp-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .sp-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .sp-kick { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 6px; }
+  .sp-kick svg { width: 14px; height: 14px; }
+  .sp-title { font-family: var(--serif); font-size: 24px; line-height: 1.1; color: var(--text); margin-top: 3px; letter-spacing: -.01em; }
+  .sp-count { font-size: 12px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+  .sp-count b { font-size: 16px; color: var(--text); }
+  .sp-build { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: var(--accent-soft); font-size: 12.5px; color: var(--text); }
+  .sp-build .sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: scPulse 1.4s ease-in-out infinite; }
+  .sp-build span { flex: 1; min-width: 0; }
+  .sp-build b { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--muted); }
+  .sp-map { display: flex; gap: 7px; overflow-x: auto; padding: 2px 2px 4px; scrollbar-width: none; }
+  .sp-map::-webkit-scrollbar { display: none; }
+  .sp-chip { flex: 0 0 auto; display: flex; align-items: center; gap: 7px; border: 1.5px solid var(--border); background: var(--surface); border-radius: 999px;
+    padding: 5px 12px 5px 5px; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--text); cursor: pointer; white-space: nowrap; transition: border-color .15s, opacity .2s; }
+  .sp-chip .n { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 800; border: 1.5px solid var(--border); background: var(--surface-2); font-variant-numeric: tabular-nums; }
+  .sp-chip.done .n { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .sp-chip.cur { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .sp-chip.cur .n { border-color: var(--accent); color: var(--accent); }
+  .sp-chip.done.cur .n { color: var(--accent-ink); }
+  .sp-chip:disabled { opacity: .45; cursor: not-allowed; }
+  .sp-chip.building { color: var(--muted); }
+  .sp-chip.building .n { border-style: dashed; animation: spSpin 2.4s linear infinite; }
+  .sp-chip.final .n { background: var(--text); color: var(--surface); border-color: var(--text); }
+  @keyframes spSpin { to { transform: rotate(360deg); } }
+  .sp-lesson { border: 1px solid var(--border); border-radius: 13px; background: var(--surface-2); }
+  .sp-lesson summary { list-style: none; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; font-size: 13.5px; color: var(--text); }
+  .sp-lesson summary::-webkit-details-marker { display: none; }
+  .sp-lesson summary small { font-weight: 500; color: var(--faint); font-size: 12px; }
+  .sp-lesson .sp-lb { padding: 0 14px 12px; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.55; color: var(--text); }
+  .sp-rule { border-left: 3px solid var(--accent); padding: 1px 0 1px 11px; }
+  .sp-ex { font-size: 13.5px; color: var(--muted); }
+  .sp-ex b { color: var(--text); }
+  .sp-q { border: 1.5px solid var(--text); border-radius: 15px; padding: 15px 14px 14px; display: flex; flex-direction: column; gap: 13px; box-shadow: 4px 4px 0 var(--accent-soft); background: var(--surface); }
+  .sp-qhead { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .sp-lv { font-weight: 800; font-size: 14.5px; color: var(--text); background: linear-gradient(transparent 55%, var(--accent-soft) 55%, var(--accent-soft) 92%, transparent 92%); padding: 0 3px; }
+  .sp-pips { display: flex; gap: 4px; align-items: center; }
+  .sp-pip { width: 13px; height: 13px; border-radius: 4px; border: 1.5px solid var(--accent); transition: background .25s; }
+  .sp-pip.on { background: var(--accent); }
+  .sp-pips small { color: var(--faint); margin-left: 5px; font-size: 11px; }
+  .sp-prompt { font-size: 16px; line-height: 1.55; color: var(--text); }
+  .sp-prompt .sp-big { display: block; text-align: center; font-family: var(--serif); font-size: 28px; padding: 6px 0 0; overflow-x: auto; }
+  .sp-rad { display: inline-flex; align-items: flex-end; white-space: nowrap; vertical-align: middle; margin-left: .1em; }
+  .sp-idx { font-size: .55em; align-self: flex-start; margin-right: -.35em; position: relative; top: .25em; z-index: 1; }
+  .sp-rs { font-size: 1.12em; line-height: 1; }
+  .sp-ri { border-top: .08em solid currentColor; padding: .05em .12em 0; line-height: 1.15; margin-bottom: .05em; }
+  .sp-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+  .sp-opts.stack { grid-template-columns: 1fr; }
+  .sp-opt { border: 1.5px solid var(--border); background: var(--surface-2); color: var(--text); border-radius: 11px; padding: 11px 13px; text-align: left; font: inherit; font-size: 15px; line-height: 1.4;
+    min-height: 48px; cursor: pointer; transition: border-color .15s, background .15s, transform .1s; }
+  .sp-opt:hover:not(:disabled) { border-color: var(--accent); }
+  .sp-opt:active:not(:disabled) { transform: translateY(1px); }
+  .sp-opt:disabled { cursor: default; }
+  .sp-opt.sel { border-color: var(--accent); background: var(--accent-soft); }
+  .sp-opt.right { border-color: #1d9a63; background: rgba(29,154,99,.12); }
+  .sp-opt.wrong { border-color: #d64541; background: rgba(214,69,65,.10); }
+  .sp-opt .sp-sn { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 2px; }
+  .sp-entry { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font-family: var(--serif); font-size: 26px; padding: 4px 0; color: var(--text); }
+  .sp-field { display: inline-flex; align-items: stretch; border: 1.5px solid var(--border); border-radius: 10px; background: var(--surface-2); overflow: hidden; vertical-align: middle; }
+  .sp-field:focus-within { border-color: var(--accent); }
+  .sp-field input { width: 5ch; border: 0; background: transparent; font: inherit; font-size: 22px; color: var(--text); text-align: center; padding: 4px 6px; outline: none; }
+  .sp-field.wide input { width: 12ch; font-family: var(--sans); font-size: 17px; }
+  .sp-field.text { width: 100%; max-width: 360px; }
+  .sp-field.text input { width: 100%; text-align: left; font-family: var(--sans); font-size: 16px; padding: 10px 12px; }
+  .sp-pm { border: 0; border-right: 1.5px solid var(--border); background: transparent; font-family: var(--serif); font-size: 18px; padding: 0 9px; color: var(--muted); cursor: pointer; }
+  .sp-unit { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+  .sp-frac { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+  .sp-frac hr { width: 100%; border: 0; border-top: 2px solid currentColor; margin: 0; }
+  .sp-eq { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; font-family: var(--serif); font-size: 22px; color: var(--text); }
+  .sp-eq .sp-field input { width: 2.6ch; font-size: 19px; padding: 3px 2px; }
+  .sp-eq sub { font-size: .65em; }
+  .sp-match { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sp-match .col { display: flex; flex-direction: column; gap: 7px; }
+  .sp-tag { position: relative; }
+  .sp-tag[data-k]::after { content: attr(data-k); position: absolute; top: -7px; right: -7px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--accent-ink);
+    font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+  .sp-seq { display: flex; flex-direction: column; gap: 6px; min-height: 46px; padding: 8px; border: 1.5px dashed var(--border); border-radius: 12px; }
+  .sp-seq:empty::before { content: "Tap the items below in order"; color: var(--faint); font-size: 13px; padding: 6px; }
+  .sp-seq .sp-opt { min-height: 40px; padding: 8px 12px; }
+  .sp-seq .sp-opt b { color: var(--accent); margin-right: 8px; }
+  .sp-pool { display: flex; flex-wrap: wrap; gap: 7px; }
+  .sp-pool .sp-opt { min-height: 40px; padding: 8px 12px; }
+  .sp-sort { display: flex; flex-direction: column; gap: 8px; }
+  .sp-srow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 11px; background: var(--surface-2); }
+  .sp-srow > span { flex: 1; min-width: 120px; font-size: 15px; color: var(--text); }
+  .sp-srow.right { border-color: #1d9a63; } .sp-srow.wrong { border-color: #d64541; }
+  .sp-seg2 { display: inline-flex; padding: 2px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); flex-wrap: wrap; }
+  .sp-seg2 button { border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--muted); padding: 5px 10px; border-radius: 7px; cursor: pointer; }
+  .sp-seg2 button.on { background: var(--accent); color: var(--accent-ink); }
+  .sp-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .sp-btn { border: 1.5px solid var(--text); background: var(--surface); color: var(--text); border-radius: 10px; padding: 9px 16px; font: inherit; font-size: 14px; font-weight: 700; min-height: 42px; cursor: pointer; }
+  .sp-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .sp-btn.ghost { border-color: var(--border); font-weight: 500; }
+  .sp-btn:disabled { opacity: .45; cursor: not-allowed; }
+  .sp-hint { background: rgba(242,182,48,.16); border-radius: 10px; padding: 9px 12px; font-size: 14px; color: var(--text); }
+  .sp-hint b { color: #a26b00; }
+  .sp-fb { border-radius: 11px; padding: 11px 13px; display: flex; flex-direction: column; gap: 5px; font-size: 14.5px; line-height: 1.5; color: var(--text); }
+  .sp-fb.ok { background: rgba(29,154,99,.12); } .sp-fb.ok .ft { color: #1d9a63; }
+  .sp-fb.no { background: rgba(214,69,65,.10); } .sp-fb.no .ft { color: #d64541; }
+  .sp-fb.part { background: rgba(242,182,48,.16); } .sp-fb.part .ft { color: #a26b00; }
+  .sp-fb .ft { font-weight: 800; font-size: 14.5px; }
+  .sp-fb .wk { color: var(--muted); }
+  .sp-stat { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--faint); }
+  .sp-stat button { background: none; border: 0; color: var(--faint); text-decoration: underline; padding: 0; font: inherit; cursor: pointer; }
+  .sp-modal { position: absolute; inset: 0; z-index: 5; background: rgba(10,14,12,.45); display: grid; place-items: center; padding: 16px; animation: hintIn .25s ease both; }
+  .sp-mbox { background: var(--surface); border: 1.5px solid var(--text); border-radius: 16px; box-shadow: 5px 5px 0 var(--accent-soft); padding: 20px 18px; max-width: 380px; width: 100%;
+    display: flex; flex-direction: column; gap: 10px; text-align: center; }
+  .sp-mbox h3 { font-family: var(--serif); font-weight: 500; font-size: 24px; line-height: 1.15; margin: 0; color: var(--text); }
+  .sp-mbox p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .sp-mbox .sp-actions { justify-content: center; }
+  .sp-wait { height: 6px; border-radius: 6px; overflow: hidden; background: var(--hover); position: relative; }
+  .sp-wait::after { content: ""; position: absolute; inset: 0; width: 40%; border-radius: 6px; background: linear-gradient(90deg, #5fbf8e, #7aa7ff, #b48cff); animation: spSlide 1.4s ease-in-out infinite; }
+  @keyframes spSlide { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+  .sp-foot { font-size: 11.5px; color: var(--faint); padding: 9px 16px 11px; border-top: 1px solid var(--border); }
+  /* --- "it's done" celebration --- */
+  .sp-card.sp-finished::before { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: linear-gradient(110deg, transparent 20%, rgba(95,191,142,.35) 40%, rgba(122,167,255,.35) 50%, rgba(180,140,255,.30) 60%, transparent 80%);
+    background-size: 250% 100%; animation: spSweep 1.6s ease-out forwards; }
+  @keyframes spSweep { from { background-position: 120% 0; opacity: 1; } to { background-position: -60% 0; opacity: 0; } }
+  .sp-done { position: relative; overflow: hidden; display: flex; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 12px; font-size: 13.5px; font-weight: 600; color: var(--text);
+    background: linear-gradient(100deg, rgba(95,191,142,.20), rgba(122,167,255,.18), rgba(180,140,255,.18)); animation: hintIn .5s ease both; }
+  .sp-done svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+  .sp-burst { position: absolute; inset: 0; pointer-events: none; z-index: 6; overflow: hidden; }
+  .sp-burst i { position: absolute; width: 8px; height: 8px; border-radius: 2px; opacity: 0; animation: spPop 1.3s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes spPop { 0% { opacity: 1; transform: translate(0,0) rotate(0); } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--r)); } }
+  @media (max-width: 520px) { .sp-match { grid-template-columns: 1fr 1fr; gap: 6px; } .sp-match .sp-opt { font-size: 13.5px; padding: 9px 10px; } .sp-title { font-size: 21px; } .sp-gen-title { font-size: 22px; } }
+  @media (prefers-reduced-motion: reduce) { .sp-blobs i, .sp-word, .sp-chip.building .n, .sp-wait::after, .sp-build .sp-dot { animation: none !important; } .sp-word { opacity: .9; } .sp-card.sp-finished::before { display: none; } }
+
   /* Study sets: shared */
   .study { margin-top: 4px; max-width: 560px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); padding: 16px 16px 14px;
     opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; }
@@ -1399,7 +1563,7 @@
           </div>
           <div id="study-bar" role="group" aria-label="Study Mode">
             <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
-            <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz">Practice quiz</button></div>
+            <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz"><span class="sb-l">Practice quiz</span><span class="sb-s">Quiz</span></button><button type="button" data-kind="plus" id="sb-plus-btn" hidden>Study Plus<span class="sb-plus" id="sb-plus-cost">30</span></button></div>
             <span class="sb-tip" id="sb-tip">Paste notes, add a photo, paste a link, or name a topic.</span>
           </div>
           <div id="sc-bar" role="group" aria-label="SCODE Scores">
@@ -2317,7 +2481,7 @@
     webOn = localStorage.getItem("linden_web") === "1";
     linkOn = !webOn && localStorage.getItem("scode_link_on") === "1";
     studyOn = !webOn && !linkOn && localStorage.getItem("scode_study_on") === "1";
-    studyKind = localStorage.getItem("scode_study_kind") === "quiz" ? "quiz" : "flashcards";
+    studyKind = ({ quiz: "quiz", plus: "plus" })[localStorage.getItem("scode_study_kind")] || "flashcards";
     weatherOn = !webOn && !linkOn && !studyOn && localStorage.getItem("scode_weather_on") === "1";
     imageOn = !webOn && !linkOn && !studyOn && !weatherOn && localStorage.getItem("scode_image_on") === "1";
     scoresOn = !webOn && !linkOn && !studyOn && !weatherOn && !imageOn && localStorage.getItem("scode_scores_on") === "1";
@@ -2366,8 +2530,13 @@
     // Study bar: pick flashcards or a quiz
     const bar = $("study-bar");
     bar.classList.toggle("show", sOn);
+    const pAvail = typeof plusUnlocked === "function" && plusUnlocked();
+    $("sb-plus-btn").hidden = !pAvail;
+    $("sb-plus-cost").textContent = typeof plusCost !== "undefined" ? plusCost : 30;
+    if (studyKind === "plus" && !pAvail) studyKind = "flashcards";
     bar.querySelectorAll(".sb-seg button").forEach(b => b.classList.toggle("on", b.dataset.kind === studyKind));
-    $("sb-tip").textContent = VISION_TIERS.has(selectedTier)
+    $("sb-tip").textContent = studyKind === "plus" ? "A full trainer with levels. Takes a few minutes, and you can start level 1 early."
+      : VISION_TIERS.has(selectedTier)
       ? "Paste notes, add a photo, paste a link, or name a topic."
       : "Paste notes, paste a link, or name a topic.";
     // Weather: on by hand, or lit up by itself while a weather question is typed.
@@ -2404,7 +2573,7 @@
     $("sc-btn").title = (cOn ? "SCODE Scores is on" : "SCODE Scores: live standings, games and schedules") + ` (+${scoresCost} per message)`;
     $("sc-bar").classList.toggle("show", cOn);
     el.input.placeholder = cOn ? "Ask about any team or league" : iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
-      : sOn ? (studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
+      : sOn ? (studyKind === "plus" ? "What should your trainer teach? Notes, a link or a topic" : studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
     updateCostInfo();
@@ -2416,6 +2585,7 @@
     if (typeof TIER_INFO === "undefined" || !TIER_INFO[selectedTier]) return null;
     const iOn = typeof imageUnlocked === "function" && imageUnlocked() && imgState() !== "off";
     if (iOn) return { key: "image", name: "Image Gen", extra: imageCost, unit: "picture" };
+    if (studyActive() && studyKind === "plus") return { key: "plus", name: "Study Plus", extra: typeof plusCost !== "undefined" ? plusCost : 30, unit: "trainer" };
     if (studyActive()) return { key: "study", name: "Study", extra: studyCost, unit: "set" };
     const photo = chatHasPhoto();
     const lp = (typeof linkPlan === "function" && typeof LINK_TIERS !== "undefined") ? linkPlan() : null;
@@ -2527,6 +2697,10 @@
   const WN_IMAGE_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   const WN_SCORES_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   const FEATURE_POPUPS = {
+    plus: { get icon() { return SP_ICON; }, tag: "New", title: "Introducing SCODE Study Plus",
+      sub: "Not just flashcards. A full trainer that teaches you a topic level by level, then tests you.",
+      name: "SCODE Study Plus", text: "Give it your notes, a photo, a link or a topic. You get levels with rule cards, 11 kinds of practice questions, hints and a final test. Start level 1 while the rest is made.",
+      cost: () => `General, General Plus &amp; Ultra · free account · +${plusCost} points per trainer`.replace("&amp;", "&") },
     scores: { icon: WN_SCORES_ICON, tag: "New", title: "Introducing SCODE Scores",
       sub: "Live standings, scores and schedules for the NHL, NBA, NFL, MLB, CFL, soccer and F1.",
       name: "SCODE Scores", text: "Turn on Scores and ask &ldquo;NHL standings&rdquo;, &ldquo;When do the Canucks play next?&rdquo; or &ldquo;F1 standings&rdquo;. A neat card shows the real numbers.",
@@ -2555,14 +2729,14 @@
     $("wn-cost-line").textContent = f.cost();
   }
   function maybeShowWhatsNew() {
-    const m = /[?&]whatsnew=(1|weather|image|scores)\b/.exec(location.search);
+    const m = /[?&]whatsnew=(1|weather|image|scores|plus)\b/.exec(location.search);
     const forced = m ? m[1] : null;
     let seenThisVisit = false;
     try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
     let which = forced === "1" ? "big" : forced;
     if (!which) {
       if (seenThisVisit) return;
-      which = searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
+      which = plusIsNew() ? "plus" : searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
     }
     if (!which) return;
     if (which === "big") {
@@ -2589,6 +2763,14 @@
     if (mode === "image") {
       if (isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
       setMode("image");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
+    if (mode === "plus") {
+      if (isGuest()) { openAuth("welcome", "SCODE Study Plus needs a free account."); return; }
+      if (!STUDY_TIERS.has(selectedTier)) selectTier("l2");
+      studyKind = "plus";
+      setMode("study");
       setTimeout(() => el.input.focus(), 250);
       return;
     }
@@ -3112,8 +3294,10 @@
       row.appendChild(tb.wrap);
     }
     const studyEl = meta && meta.study ? buildStudy(meta.study) : null;
-    const imgEl = !studyEl && meta && meta.image ? buildImageResult(meta.image) : null;
+    const plusEl = !studyEl && meta && meta.plus ? buildPlusSaved(meta.plus) : null;
+    const imgEl = !studyEl && !plusEl && meta && meta.image ? buildImageResult(meta.image) : null;
     if (studyEl) row.appendChild(studyEl);
+    else if (plusEl) row.appendChild(plusEl);
     else if (imgEl) row.appendChild(imgEl);
     else {
       const md = document.createElement("div");
@@ -3767,6 +3951,543 @@
     return box;
   }
 
+  // ---------- SCODE Study Plus (a full learning trainer) ----------
+  // Launches Wednesday Oct 7 at 12:00 AM Pacific. Before then, ?preview=studyplus shows it.
+  var PLUS_LAUNCH = Date.parse("2026-10-07T00:00:00-07:00");
+  var plusPreview = /[?&]preview=studyplus\b/.test(location.search);
+  var plusServerOn = true, plusCost = 30;
+  function plusUnlocked() { return plusServerOn && (plusPreview || Date.now() >= PLUS_LAUNCH); }
+  function plusIsNew() { return plusUnlocked() && Date.now() >= PLUS_LAUNCH && Date.now() < PLUS_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; }
+  const SP_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M9.5 10.2l.9 2 2.1.2-1.6 1.4.5 2.1-1.9-1.1-1.9 1.1.5-2.1-1.6-1.4 2.1-.2z" fill="currentColor"/></svg>';
+  const SP_CHECK = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15"/><path d="M7 12.5l3.2 3.2L17 9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const SP_STOP = new Set("the a an and or of to in on for with from about make me my this that these those please some study plus trainer notes quiz test practice learn teaching teach how what why is are be it into your you can could would should help need want".split(" "));
+
+  function spRad(n, x) { return `<span class="sp-rad">${+n !== 2 ? `<span class="sp-idx">${n}</span>` : ""}<span class="sp-rs">√</span><span class="sp-ri">${x}</span></span>`; }
+  function spFmt(s) {
+    let h = escapeHtml(String(s == null ? "" : s));
+    for (let k = 0; k < 2; k++) {
+      h = h.replace(/root\(\s*(\d+)\s*,\s*([^()]+?)\)/g, (m, n, x) => spRad(n, x));
+      h = h.replace(/(?:sqrt|√)\(([^()]+)\)/g, (m, x) => spRad(2, x));
+      h = h.replace(/(?:cbrt|∛)\(([^()]+)\)/g, (m, x) => spRad(3, x));
+    }
+    h = h.replace(/\^\(([^()]+)\)/g, "<sup>$1</sup>").replace(/\^(-?[\w.]+)/g, "<sup>$1</sup>");
+    h = h.replace(/-&gt;/g, "→").replace(/&gt;=/g, "≥").replace(/&lt;=/g, "≤").replace(/!=/g, "≠");
+    h = h.replace(/(\d)\s*\*\s*(?=[\d(a-zA-Z])/g, "$1·");
+    h = h.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+    return h;
+  }
+  function spChem(f) { return escapeHtml(String(f)).replace(/(\d+)/g, "<sub>$1</sub>"); }
+  function spShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  function spNorm(s) { return String(s || "").toLowerCase().replace(/[’']/g, "'").replace(/[.!?,;:]+$/g, "").replace(/\s+/g, " ").trim(); }
+  function spBare(s) { return spNorm(s).normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function spParse(s) {
+    s = String(s == null ? "" : s).trim().replace(/[−–—]/g, "-").replace(/\s+/g, "").replace(/,(?=\d{3}\b)/g, "").replace(",", ".");
+    if (!s || s === "-") return null;
+    let m = s.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
+    if (m) { const q = parseFloat(m[2]); return q === 0 ? null : parseFloat(m[1]) / q; }
+    if (/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return parseFloat(s);
+    return null;
+  }
+  function spGcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; }
+  function spWords(text) {
+    const seen = new Set(), out = [];
+    String(text || "").replace(/https?:\/\/\S+/g, " ").split(/[^A-Za-zÀ-ÿ0-9'-]+/).forEach(w => {
+      const k = w.toLowerCase();
+      if (w.length > 3 && !SP_STOP.has(k) && !seen.has(k)) { seen.add(k); out.push(w); }
+    });
+    return out.slice(0, 14);
+  }
+
+  // The animation while the trainer is being made (until level 1 is ready).
+  function buildPlusGen(question) {
+    const el = stEl("div", "sp-gen");
+    el.innerHTML = `<div class="sp-blobs"><i></i><i></i><i></i><i></i></div><div class="sp-words"></div>
+      <div class="sp-gen-top">${SP_ICON}<span>SCODE Study Plus</span></div><div class="sp-gen-title"></div>
+      <div class="sp-gen-foot"><div class="sp-gen-stage"><span>Getting started</span><b>0:00</b></div><div class="sp-gen-bar"><i></i></div>
+      <div class="sp-gen-note">Level 1 is usually ready in a minute or two. You can start it while the rest is made.</div></div>`;
+    const words = el.querySelector(".sp-words"), stage = el.querySelector(".sp-gen-stage span"), clock = el.querySelector(".sp-gen-stage b");
+    const bar = el.querySelector(".sp-gen-bar i"), title = el.querySelector(".sp-gen-title");
+    let pool = spWords(question), wi = 0, alive = true;
+    const t0 = Date.now();
+    const slots = [[8, 34], [52, 30], [16, 52], [58, 50], [30, 42], [64, 38]];
+    let si = 0;
+    function floatWord() {
+      if (!alive) return;
+      if (pool.length && !reduceMotion) {
+        const w = stEl("span", "sp-word", pool[wi++ % pool.length]);
+        const [x, y] = slots[si++ % slots.length];
+        w.style.left = (x + Math.random() * 6) + "%"; w.style.top = (y + Math.random() * 8) + "%";
+        words.appendChild(w);
+        setTimeout(() => w.remove(), 3700);
+      }
+      setTimeout(floatWord, 1250);
+    }
+    const tick = setInterval(() => {
+      const s = Math.floor((Date.now() - t0) / 1000);
+      clock.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+    }, 1000);
+    setTimeout(floatWord, 300);
+    return {
+      el,
+      stage(t, pct) { stage.textContent = t; if (pct != null) bar.style.width = Math.max(3, Math.min(100, pct)) + "%"; },
+      plan(p) {
+        title.textContent = p.title || "";
+        const more = [p.title].concat((p.levels || []).map(l => l.name), spWords((p.levels || []).map(l => l.goal).join(" ")));
+        pool = more.filter(Boolean).concat(pool).slice(0, 18);
+      },
+      stop() { alive = false; clearInterval(tick); },
+    };
+  }
+
+  // The trainer itself. T = {id, title, subject, levels: [level | {pending} | {failed}], complete}
+  function buildTrainer(T, live, host) {
+    const card = host || stEl("div", "sp-card");
+    if (host) host.innerHTML = "";
+    const KEY = "scode_plus_" + T.id;
+    const nL = T.levels.length;
+    let P = { mastery: [], done: [], cur: 0, right: 0, wrong: 0, seen: [] };
+    try { const o = JSON.parse(localStorage.getItem(KEY) || "null"); if (o && Array.isArray(o.mastery)) P = Object.assign(P, o); } catch (e) {}
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(P)); } catch (e) {} };
+    let Q = null, answered = false, lastIdx = -1, bags = {}, waitingFor = null, hinted = false;
+    let buildStart = Date.now(), buildText = "", buildTick = null;
+
+    const body = stEl("div", "sp-body");
+    body.innerHTML = `<div class="sp-head"><div><div class="sp-kick">${SP_ICON}<span>Study Plus · ${escapeHtml(({ math: "Math", science: "Science", socials: "Socials", english: "English", languages: "Languages" })[T.subject] || "General")}</span></div>
+        <div class="sp-title"></div></div><div class="sp-count"><b class="c"></b> levels mastered</div></div>
+      <div class="sp-status"></div>
+      <nav class="sp-map" aria-label="Levels"></nav>
+      <details class="sp-lesson" open><summary><span>The rule</span><small>show / hide</small></summary><div class="sp-lb"></div></details>
+      <section class="sp-q" aria-live="polite"><div class="sp-qhead"><span class="sp-lv"></span><span class="sp-pips"></span></div>
+        <div class="sp-prompt"></div><div class="sp-ans"></div><div class="sp-hb"></div><div class="sp-fbx"></div><div class="sp-actions"></div></section>
+      <div class="sp-stat"><span class="st"></span><button type="button" class="rs">Reset progress</button></div>`;
+    card.appendChild(body);
+    const foot = stEl("div", "sp-foot", (T.source ? `From ${T.source} · ` : T.general ? "From general knowledge, so double-check against your notes · " : "") + "Made by SCODE Study Plus");
+    card.appendChild(foot);
+    const $q = s => body.querySelector(s);
+    $q(".sp-title").textContent = T.title || "Study Plus";
+
+    const isFinal = i => i === nL;
+    const built = i => isFinal(i) ? T.complete && allQs().length > 0 : !!(T.levels[i] && T.levels[i].qs);
+    function allQs() { const a = []; T.levels.forEach((L, i) => { if (L && L.qs) L.qs.forEach((q, j) => a.push([i, j])); }); return a; }
+    function need(i) { return isFinal(i) ? Math.min(6, allQs().length) : Math.min(4, T.levels[i].qs.length); }
+    function open(i) {
+      if (!built(i)) return false;
+      if (T.complete) return true;
+      let pv = i - 1; while (pv >= 0 && T.levels[pv].failed) pv--;
+      return pv < 0 || !!P.done[pv] || !!P.done[i];
+    }
+    function nextBuiltAfter(i) { for (let j = i + 1; j < nL; j++) if (!T.levels[j].failed) return j; return T.complete ? nL : -1; }
+
+    function renderStatus() {
+      const st = $q(".sp-status");
+      if (T.complete) { st.innerHTML = ""; return; }
+      const done = T.levels.filter(L => L && (L.qs || L.failed)).length;
+      const nextI = T.levels.findIndex(L => L && L.pending);
+      st.innerHTML = `<div class="sp-build"><i class="sp-dot"></i><span>Still building ${nextI >= 0 ? `level ${nextI + 1} of ${nL}` : "the last bits"}${buildText ? ` (${escapeHtml(buildText)})` : ""}. Start practising now.</span><b class="t"></b></div>`;
+      if (!buildTick) buildTick = setInterval(() => {
+        const t = card.querySelector(".sp-build .t");
+        if (!t) return;
+        const s = Math.floor((Date.now() - buildStart) / 1000);
+        t.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+      }, 1000);
+      void done;
+    }
+    function renderMap() {
+      const map = $q(".sp-map");
+      const items = T.levels.map((L, i) => ({ i, L })).filter(({ L }) => !L.failed);
+      let h = items.map(({ i, L }) => {
+        const label = L.failed ? "Skipped" : (L.short || L.name || `Level ${i + 1}`);
+        const cls = ["sp-chip", P.done[i] ? "done" : "", i === P.cur ? "cur" : "", L.pending ? "building" : ""].join(" ");
+        return `<button type="button" class="${cls}" data-i="${i}" ${open(i) ? "" : "disabled"} title="${escapeHtml(L.name || "").replace(/"/g, "&quot;")}${L.pending ? " (being made)" : ""}"><span class="n">${P.done[i] ? "✓" : L.pending ? "" : i + 1}</span>${escapeHtml(label)}</button>`;
+      }).join("");
+      if (T.complete && allQs().length) h += `<button type="button" class="sp-chip final ${P.cur === nL ? "cur" : ""} ${P.done[nL] ? "done" : ""}" data-i="${nL}"><span class="n">${P.done[nL] ? "✓" : "★"}</span>Final test</button>`;
+      map.innerHTML = h;
+      map.querySelectorAll(".sp-chip").forEach(b => b.onclick = () => { P.cur = +b.dataset.i; save(); startLevel(); });
+      const tot = T.levels.filter(L => !L.failed).length + (T.complete && allQs().length ? 1 : 0);
+      $q(".sp-count .c").textContent = `${P.done.filter(Boolean).length}/${tot}`;
+      const n = P.right + P.wrong;
+      $q(".st").textContent = n ? `${P.right} right · ${P.wrong} wrong · ${Math.round(100 * P.right / n)}%` : "Answer a question to start tracking";
+    }
+    function renderPips() {
+      const n = need(P.cur), m = P.mastery[P.cur] || 0;
+      let h = ""; for (let i = 0; i < n; i++) h += `<span class="sp-pip ${i < m ? "on" : ""}"></span>`;
+      $q(".sp-pips").innerHTML = h + `<small>${P.done[P.cur] ? "mastered" : "mastery"}</small>`;
+    }
+    function startLevel() {
+      if (!built(P.cur) || !open(P.cur)) { P.cur = 0; }
+      const fin = isFinal(P.cur);
+      const L = fin ? null : T.levels[P.cur];
+      $q(".sp-lv").textContent = fin ? "Final test" : `${P.cur + 1}. ${L.name}`;
+      const lesson = $q(".sp-lesson");
+      if (fin) {
+        $q(".sp-lb").innerHTML = `<p class="sp-rule">Everything mixed together. Fill ${need(nL)} pips. A wrong answer costs a pip, and a hinted answer earns nothing.</p>`;
+      } else {
+        $q(".sp-lb").innerHTML = (L.goal ? `<div class="sp-ex"><b>Goal:</b> ${spFmt(L.goal)}</div>` : "") +
+          `<div class="sp-rule">${spFmt(L.rule)}</div>` + (L.example ? `<div class="sp-ex"><b>Example:</b> ${spFmt(L.example)}</div>` : "");
+      }
+      lesson.open = !P.seen.includes(P.cur);
+      if (!P.seen.includes(P.cur)) { P.seen.push(P.cur); save(); }
+      renderMap(); renderPips(); nextQ(); renderFoot();
+    }
+    function renderFoot() {
+      const skipped = T.levels.filter(L => L.failed).length;
+      foot.textContent = (T.source ? `From ${T.source} · ` : T.general ? "From general knowledge, so double-check against your notes · " : "") +
+        (skipped && T.complete ? `${skipped} level${skipped > 1 ? "s" : ""} couldn't be made and ${skipped > 1 ? "were" : "was"} skipped · ` : "") + "Made by SCODE Study Plus";
+    }
+    function pickQ() {
+      const key = P.cur;
+      const pool = isFinal(key) ? allQs() : T.levels[key].qs.map((q, j) => [key, j]);
+      if (!bags[key] || !bags[key].length) bags[key] = spShuffle(pool.map((_, k) => k));
+      let k = bags[key].pop();
+      if (k === lastIdx && pool.length > 1) { const other = bags[key].pop(); if (other !== undefined) { bags[key].unshift(k); k = other; } }
+      lastIdx = k;
+      const [li, qi] = pool[k];
+      return T.levels[li].qs[qi];
+    }
+    function nextQ() {
+      Q = pickQ(); answered = false; hinted = false;
+      const prompt = $q(".sp-prompt");
+      if (Q.b === "radical") prompt.innerHTML = `${spFmt(Q.p)}<span class="sp-big">${spRad(Q.n, escapeHtml(String(Q.g).replace("-", "−")))}</span>`;
+      else if (Q.b === "balance") prompt.innerHTML = spFmt(Q.p);
+      else prompt.innerHTML = spFmt(Q.p);
+      $q(".sp-hb").innerHTML = ""; $q(".sp-fbx").innerHTML = "";
+      renderAnswer(); renderActions();
+    }
+    // ----- answer areas, one per question type -----
+    let A = {};
+    function field(id, ph, cls) { return `<span class="sp-field ${cls || ""}"><button type="button" class="sp-pm" data-for="${id}" aria-label="Make negative">±</button><input data-id="${id}" inputmode="decimal" autocomplete="off" placeholder="${ph || ""}" aria-label="${ph || "answer"}"></span>`; }
+    function val(id) { const i = card.querySelector(`input[data-id="${id}"]`); return i ? i.value : ""; }
+    function renderAnswer() {
+      const box = $q(".sp-ans"); A = {};
+      const b = Q.b;
+      if (b === "choice" || b === "spot") {
+        const opts = b === "spot" ? Q.steps.map((s, i) => `<span class="sp-sn">Step ${i + 1}</span>${spFmt(s)}`).concat(["No mistake, it's all correct"]) : Q.o.map(spFmt);
+        box.innerHTML = `<div class="sp-opts ${b === "spot" || opts.some(o => o.length > 60) ? "stack" : ""}">${opts.map((o, i) => `<button type="button" class="sp-opt" data-i="${i}">${o}</button>`).join("")}</div>`;
+        box.querySelectorAll(".sp-opt").forEach(x => x.onclick = () => pickChoice(+x.dataset.i));
+      } else if (b === "number") {
+        box.innerHTML = `<div class="sp-entry">${field("n1", "?", Q.u ? "" : "")}${Q.u ? `<span class="sp-unit">${escapeHtml(Q.u)}</span>` : ""}</div>`;
+      } else if (b === "fraction") {
+        box.innerHTML = `<div class="sp-entry"><span class="sp-frac">${field("fn", "top")}<hr><span class="sp-field"><input data-id="fd" inputmode="numeric" autocomplete="off" placeholder="bottom" aria-label="bottom"></span></span></div>`;
+      } else if (b === "radical") {
+        box.innerHTML = `<div class="sp-entry">${field("rc", "")}<span class="sp-rad"><span class="sp-idx">${Q.n !== 2 ? Q.n : ""}</span><span class="sp-rs">√</span><span class="sp-ri"><span class="sp-field"><input data-id="rr" inputmode="numeric" autocomplete="off" aria-label="number inside the root"></span></span></span></div>`;
+      } else if (b === "fill") {
+        box.innerHTML = `<div class="sp-entry"><span class="sp-field text"><input data-id="t1" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the missing part" aria-label="answer"></span></div>`;
+      } else if (b === "balance") {
+        const parts = [];
+        Q.left.forEach((f, i) => { if (i) parts.push("<span>+</span>"); parts.push(`<span class="sp-field"><input data-id="b${i}" inputmode="numeric" placeholder="1" aria-label="coefficient"></span><span>${spChem(f)}</span>`); });
+        parts.push("<span>→</span>");
+        Q.right.forEach((f, i) => { const k = Q.left.length + i; if (i) parts.push("<span>+</span>"); parts.push(`<span class="sp-field"><input data-id="b${k}" inputmode="numeric" placeholder="1" aria-label="coefficient"></span><span>${spChem(f)}</span>`); });
+        box.innerHTML = `<div class="sp-eq">${parts.join("")}</div>`;
+      } else if (b === "match") {
+        A.right = spShuffle(Q.pairs.map((p, i) => i));
+        if (A.right.every((v, i) => v === i) && A.right.length > 1) A.right.push(A.right.shift());
+        A.link = {}; A.sel = null;
+        box.innerHTML = `<div class="sp-match"><div class="col l">${Q.pairs.map((p, i) => `<button type="button" class="sp-opt sp-tag" data-l="${i}">${spFmt(p[0])}</button>`).join("")}</div>
+          <div class="col r">${A.right.map(i => `<button type="button" class="sp-opt sp-tag" data-r="${i}">${spFmt(Q.pairs[i][1])}</button>`).join("")}</div></div>`;
+        const paint = () => {
+          box.querySelectorAll("[data-l]").forEach(x => { const i = +x.dataset.l; x.classList.toggle("sel", A.sel === i); if (A.link[i] != null) x.dataset.k = Object.keys(A.link).sort().indexOf(String(i)) + 1; else delete x.dataset.k; });
+          box.querySelectorAll("[data-r]").forEach(x => { const r = +x.dataset.r; const l = Object.keys(A.link).find(k => A.link[k] === r); if (l != null) x.dataset.k = Object.keys(A.link).sort().indexOf(l) + 1; else delete x.dataset.k; });
+          syncCheck();
+        };
+        box.querySelectorAll("[data-l]").forEach(x => x.onclick = () => { if (answered) return; const i = +x.dataset.l; if (A.link[i] != null) { delete A.link[i]; A.sel = i; } else A.sel = A.sel === i ? null : i; paint(); });
+        box.querySelectorAll("[data-r]").forEach(x => x.onclick = () => {
+          if (answered) return; const r = +x.dataset.r;
+          const owner = Object.keys(A.link).find(k => A.link[k] === r);
+          if (owner != null) { delete A.link[owner]; paint(); return; }
+          if (A.sel == null) { const free = Q.pairs.findIndex((p, i) => A.link[i] == null); if (free < 0) return; A.sel = free; }
+          A.link[A.sel] = r; A.sel = null; paint();
+        });
+        A.paint = paint;
+      } else if (b === "order") {
+        A.seq = []; A.pool = spShuffle(Q.items.map((_, i) => i));
+        if (A.pool.every((v, i) => v === i)) A.pool.reverse();
+        box.innerHTML = `<div class="sp-seq"></div><div class="sp-pool"></div>`;
+        const draw = () => {
+          box.querySelector(".sp-seq").innerHTML = A.seq.map((i, k) => `<button type="button" class="sp-opt" data-s="${k}"><b>${k + 1}</b>${spFmt(Q.items[i])}</button>`).join("");
+          box.querySelector(".sp-pool").innerHTML = A.pool.map(i => `<button type="button" class="sp-opt" data-p="${i}">${spFmt(Q.items[i])}</button>`).join("");
+          box.querySelectorAll("[data-p]").forEach(x => x.onclick = () => { if (answered) return; const i = +x.dataset.p; A.pool = A.pool.filter(v => v !== i); A.seq.push(i); draw(); });
+          box.querySelectorAll("[data-s]").forEach(x => x.onclick = () => { if (answered) return; const k = +x.dataset.s; A.pool.push(A.seq[k]); A.seq.splice(k, 1); draw(); });
+          syncCheck();
+        };
+        A.draw = draw; draw();
+      } else if (b === "sort") {
+        A.items = spShuffle(Q.groups.flatMap((g, gi) => g.items.map(t => [t, gi]))); A.pick = {};
+        box.innerHTML = `<div class="sp-sort">${A.items.map(([t], k) => `<div class="sp-srow" data-k="${k}"><span>${spFmt(t)}</span><span class="sp-seg2">${Q.groups.map((g, gi) => `<button type="button" data-g="${gi}">${escapeHtml(g.name)}</button>`).join("")}</span></div>`).join("")}</div>`;
+        box.querySelectorAll(".sp-srow").forEach(row => row.querySelectorAll("button").forEach(x => x.onclick = () => {
+          if (answered) return; A.pick[row.dataset.k] = +x.dataset.g;
+          row.querySelectorAll("button").forEach(y => y.classList.toggle("on", y === x)); syncCheck();
+        }));
+      }
+      box.querySelectorAll(".sp-pm").forEach(x => x.onclick = () => {
+        if (answered) return; const inp = card.querySelector(`input[data-id="${x.dataset.for}"]`);
+        const v = inp.value.trim(); inp.value = /^[−-]/.test(v) ? v.replace(/^[−-]/, "") : "−" + v; inp.focus();
+      });
+      box.querySelectorAll("input").forEach(inp => inp.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); if (!answered) submit(); else nextQ(); } }));
+      const first = box.querySelector("input");
+      if (first && !touchLike) first.focus({ preventScroll: true });
+    }
+    function typed() { return !["choice", "spot"].includes(Q.b); }
+    function syncCheck() {
+      const c = card.querySelector(".sp-check"); if (!c || !Q) return;
+      let ready = true;
+      if (Q.b === "match") ready = Object.keys(A.link || {}).length === Q.pairs.length;
+      if (Q.b === "order") ready = (A.seq || []).length === Q.items.length;
+      if (Q.b === "sort") ready = Object.keys(A.pick || {}).length === (A.items || []).length;
+      c.disabled = !ready;
+    }
+    function renderActions() {
+      const act = $q(".sp-actions");
+      act.innerHTML = answered ? `<button type="button" class="sp-btn primary sp-next">Next question</button>`
+        : `<button type="button" class="sp-btn ghost sp-hintb" ${hinted ? "disabled" : ""}>Hint</button>${typed() ? `<button type="button" class="sp-btn primary sp-check">Check</button>` : ""}`;
+      if (answered) act.querySelector(".sp-next").onclick = nextQ;
+      else {
+        act.querySelector(".sp-hintb").onclick = () => { hinted = true; $q(".sp-hb").innerHTML = `<div class="sp-hint"><b>Hint:</b> ${spFmt(Q.h || "Re-read the rule card above.")}<br><small>Hinted answers don't fill the meter.</small></div>`; renderActions(); };
+        if (typed()) { act.querySelector(".sp-check").onclick = submit; syncCheck(); }
+      }
+    }
+    function flash(msg) { $q(".sp-fbx").innerHTML = `<div class="sp-fb part"><span>${msg}</span></div>`; }
+    function answerText() {
+      const b = Q.b;
+      if (b === "choice") return spFmt(Q.o[Q.a]);
+      if (b === "number") return `${Q.a}${Q.u ? " " + escapeHtml(Q.u) : ""}`;
+      if (b === "fraction") return `${Q.n}/${Q.d}`;
+      if (b === "radical") return `${Q.c}${spRad(Q.n, Q.r)}`;
+      if (b === "fill") return escapeHtml(Q.a[0]);
+      if (b === "balance") return Q.left.map((f, i) => (Q.a[i] > 1 ? Q.a[i] : "") + spChem(f)).join(" + ") + " → " + Q.right.map((f, i) => (Q.a[Q.left.length + i] > 1 ? Q.a[Q.left.length + i] : "") + spChem(f)).join(" + ");
+      if (b === "match") return Q.pairs.map(p => `${spFmt(p[0])} → ${spFmt(p[1])}`).join("<br>");
+      if (b === "order") return Q.items.map((t, i) => `${i + 1}. ${spFmt(t)}`).join("<br>");
+      if (b === "sort") return Q.groups.map(g => `<b>${escapeHtml(g.name)}:</b> ${g.items.map(spFmt).join(", ")}`).join("<br>");
+      if (b === "spot") return Q.a < 0 ? "Every step is correct." : `Step ${Q.a + 1} is the first mistake.`;
+      return "";
+    }
+    function pickChoice(i) {
+      if (answered) return;
+      const right = Q.b === "spot" ? (Q.a < 0 ? Q.steps.length : Q.a) : Q.a;
+      $q(".sp-ans").querySelectorAll(".sp-opt").forEach((x, j) => { x.disabled = true; if (j === right) x.classList.add("right"); else if (j === i) x.classList.add("wrong"); });
+      finish(i === right ? "ok" : "no", null);
+    }
+    function submit() {
+      const b = Q.b;
+      if (b === "number") {
+        const v = spParse(val("n1")); if (v == null) return flash("Type a number first.");
+        const a = Q.a, ok = Number.isInteger(a) ? v === a : Math.abs(v - a) <= Math.max(1e-6, 0.005 * Math.abs(a));
+        return finish(ok ? "ok" : "no", ok ? null : `The answer is <b>${answerText()}</b>.`);
+      }
+      if (b === "fraction") {
+        const n = spParse(val("fn")), d = spParse(val("fd"));
+        if (n == null || d == null || d === 0) return flash("Fill in the top and the bottom.");
+        if (!Number.isInteger(n) || !Number.isInteger(d)) return flash("Use whole numbers on the top and the bottom.");
+        if (n * Q.d === Q.n * d) {
+          if (spGcd(n, d) !== 1) return flash(`Right value, but it can be reduced. Divide the top and bottom by ${spGcd(n, d)}.`);
+          return finish("ok", null);
+        }
+        return finish("no", `The answer is <b>${answerText()}</b>.`);
+      }
+      if (b === "radical") {
+        const c = spParse(val("rc")), r = spParse(val("rr"));
+        if (c == null || r == null) return flash("Fill in both boxes: the number in front and the number inside.");
+        if (c === Q.c && r === Q.r) return finish("ok", null);
+        if (Number.isInteger(c) && Number.isInteger(r) && r > 0) {
+          const same = Math.pow(c, Q.n) * r === Q.g || (Q.n % 2 === 0 && c > 0 && Math.pow(c, Q.n) * r === Q.g);
+          if (same) {
+            let k = 0; for (let m = 2; Math.pow(m, Q.n) <= r; m++) if (r % Math.pow(m, Q.n) === 0) k = m;
+            if (k) return flash(`Same value, but not fully simplified. ${r} still has a factor of ${Math.pow(k, Q.n)}. Try again.`);
+          }
+          if (Math.abs(c) === Math.abs(Q.c) && r === Q.r) return finish("no", `Right numbers, wrong sign. The answer is <b>${answerText()}</b>.`);
+        }
+        return finish("no", `The answer is <b>${answerText()}</b>.`);
+      }
+      if (b === "fill") {
+        const v = val("t1"); if (!v.trim()) return flash("Type your answer first.");
+        if (Q.a.some(a => spNorm(a) === spNorm(v))) return finish("ok", null);
+        if (Q.a.some(a => spBare(a) === spBare(v))) return finish("ok", `Watch the accents: <b>${escapeHtml(Q.a[0])}</b>.`);
+        return finish("no", `The answer is <b>${answerText()}</b>.`);
+      }
+      if (b === "balance") {
+        const got = Q.a.map((_, i) => { const s = val("b" + i).trim(); return s === "" ? 1 : spParse(s); });
+        if (got.some(v => v == null || !Number.isInteger(v) || v < 1)) return flash("Use whole numbers of 1 or more (an empty box means 1).");
+        if (got.every((v, i) => v === Q.a[i])) return finish("ok", null);
+        const k = got[0] / Q.a[0];
+        if (got.every((v, i) => v === Q.a[i] * k)) return flash("It's balanced, but use the smallest whole numbers. Divide them all by the same number.");
+        return finish("no", `Balanced: <b>${answerText()}</b>.`);
+      }
+      if (b === "match") {
+        let right = 0;
+        $q(".sp-ans").querySelectorAll("[data-l]").forEach(x => { const i = +x.dataset.l; const ok = A.link[i] === i; if (ok) right++; x.classList.add(ok ? "right" : "wrong"); x.disabled = true; });
+        $q(".sp-ans").querySelectorAll("[data-r]").forEach(x => x.disabled = true);
+        return finish(right === Q.pairs.length ? "ok" : "no", right === Q.pairs.length ? null : `${right} of ${Q.pairs.length} right. The matches:<br>${answerText()}`);
+      }
+      if (b === "order") {
+        const ok = A.seq.every((v, k) => v === k);
+        $q(".sp-ans").querySelectorAll("[data-s]").forEach((x, k) => { x.classList.add(A.seq[k] === k ? "right" : "wrong"); x.disabled = true; });
+        return finish(ok ? "ok" : "no", ok ? null : `The right order:<br>${answerText()}`);
+      }
+      if (b === "sort") {
+        let right = 0;
+        $q(".sp-ans").querySelectorAll(".sp-srow").forEach(row => { const k = +row.dataset.k; const ok = A.pick[k] === A.items[k][1]; if (ok) right++; row.classList.add(ok ? "right" : "wrong"); row.querySelectorAll("button").forEach(x => x.disabled = true); });
+        return finish(right === A.items.length ? "ok" : "no", right === A.items.length ? null : `${right} of ${A.items.length} right.<br>${answerText()}`);
+      }
+    }
+    function finish(state, extra) {
+      answered = true;
+      card.querySelectorAll(".sp-ans input, .sp-ans .sp-pm").forEach(x => x.disabled = true);
+      const ok = state === "ok";
+      if (ok) P.right++; else P.wrong++;
+      const before = P.mastery[P.cur] || 0;
+      const delta = ok && !hinted ? 1 : ok ? 0 : -1;
+      P.mastery[P.cur] = Math.max(0, Math.min(need(P.cur), before + delta));
+      const head = ok ? "Correct" + (hinted ? " (hinted, so no pip)" : "") : "Not quite" + (before > 0 ? " (−1 pip)" : "");
+      $q(".sp-fbx").innerHTML = `<div class="sp-fb ${ok ? "ok" : "no"}"><span class="ft">${head}</span>${extra ? `<span>${extra}</span>` : ""}${Q.x ? `<span class="wk">${Q.b === "balance" && /^Balanced:/.test(Q.x) ? "Balanced: " + answerText() : spFmt(Q.x)}</span>` : ""}</div>`;
+      renderActions(); renderPips();
+      if (!P.done[P.cur] && P.mastery[P.cur] >= need(P.cur)) {
+        P.done[P.cur] = true; save(); renderMap(); renderPips();
+        setTimeout(levelUp, 600);
+      } else { save(); renderMap(); }
+      if (nearBottom()) scrollToBottom(false);
+    }
+    function modal(html) {
+      closeModal();
+      const m = stEl("div", "sp-modal"); m.innerHTML = `<div class="sp-mbox">${html}</div>`;
+      card.appendChild(m); return m;
+    }
+    function closeModal() { card.querySelectorAll(".sp-modal").forEach(m => m.remove()); waitingFor = null; }
+    function levelUp() {
+      const cur = P.cur;
+      if (isFinal(cur)) {
+        const n = P.right + P.wrong;
+        const m = modal(`<h3>Trainer mastered</h3><p>You passed the final test on ${escapeHtml(T.title)}. Overall: ${P.right} right of ${n} (${n ? Math.round(100 * P.right / n) : 0}%).</p><div class="sp-actions"><button type="button" class="sp-btn primary">Keep practising</button></div>`);
+        m.querySelector("button").onclick = closeModal; burst(); return;
+      }
+      const nx = nextBuiltAfter(cur);
+      if (nx === -1 || (nx < nL && T.levels[nx].pending)) {
+        const target = nx === -1 ? T.levels.findIndex((L, i) => i > cur && L.pending) : nx;
+        showWaiting(T.levels[cur].name + ": mastered", target);
+        return;
+      }
+      const name = isFinal(nx) ? "Final test" : T.levels[nx].name;
+      const m = modal(`<h3>${escapeHtml(T.levels[cur].name)}: mastered</h3><p>Next up: <b>${escapeHtml(name)}</b>.</p><div class="sp-actions"><button type="button" class="sp-btn ghost">Stay here</button><button type="button" class="sp-btn primary">Next level</button></div>`);
+      const [stay, go] = m.querySelectorAll("button");
+      stay.onclick = closeModal;
+      go.onclick = () => { closeModal(); P.cur = nx; save(); startLevel(); };
+    }
+    function showWaiting(head, target) {
+      const m = modal(`<h3>${escapeHtml(head)}</h3><p><b>${target >= 0 ? escapeHtml(T.levels[target].name || "The next level") : "The next level"}</b> is still being made. It'll unlock here the moment it's ready.</p><div class="sp-wait"></div><div class="sp-actions"><button type="button" class="sp-btn ghost">Keep practising this level</button></div>`);
+      m.querySelector("button").onclick = closeModal;
+      waitingFor = target;
+    }
+    function burst() {
+      if (reduceMotion) return;
+      const b = stEl("div", "sp-burst"); const cols = ["#5fbf8e", "#7aa7ff", "#b48cff", "#ffc36b", "#ff8fa3"];
+      for (let i = 0; i < 36; i++) {
+        const d = stEl("i"); d.style.left = (40 + Math.random() * 20) + "%"; d.style.top = "38%"; d.style.background = cols[i % cols.length];
+        d.style.setProperty("--dx", (Math.random() * 520 - 260) + "px"); d.style.setProperty("--dy", (Math.random() * 300 - 200) + "px"); d.style.setProperty("--r", (Math.random() * 540) + "deg");
+        d.style.animationDelay = (Math.random() * 0.15) + "s"; b.appendChild(d);
+      }
+      card.appendChild(b); setTimeout(() => b.remove(), 1700);
+    }
+    $q(".rs").onclick = (() => { let armed = false; return function () {
+      if (!armed) { armed = true; this.textContent = "Tap again to erase your progress"; setTimeout(() => { armed = false; this.textContent = "Reset progress"; }, 3000); return; }
+      armed = false; this.textContent = "Reset progress";
+      P = { mastery: [], done: [], cur: 0, right: 0, wrong: 0, seen: [] }; save(); startLevel();
+    }; })();
+
+    renderStatus();
+    startLevel();
+    return {
+      el: card,
+      building(text) { buildText = text || ""; renderStatus(); },
+      setLevel(i, data) {
+        T.levels[i] = data; renderMap();
+        if (waitingFor === i) {
+          waitingFor = null;
+          const m = modal(`<h3>${escapeHtml(data.name)} is ready</h3><p>The next level just finished. Jump in whenever you're ready.</p><div class="sp-actions"><button type="button" class="sp-btn ghost">Not yet</button><button type="button" class="sp-btn primary">Start level ${i + 1}</button></div>`);
+          const [no, go] = m.querySelectorAll("button");
+          no.onclick = closeModal; go.onclick = () => { closeModal(); P.cur = i; save(); startLevel(); };
+        }
+        renderStatus();
+      },
+      failLevel(i) {
+        T.levels[i] = Object.assign({}, T.levels[i], { pending: false, failed: true }); renderMap(); renderStatus();
+        if (waitingFor === i) {
+          // That level couldn't be made: wait for the next one instead.
+          const j = T.levels.findIndex((L, k) => k > i && !L.failed);
+          if (j >= 0 && T.levels[j].qs) { waitingFor = j; this.setLevel(j, T.levels[j]); }
+          else if (j >= 0) showWaiting(`${T.levels[i].name || "That level"} couldn't be made`, j);
+        }
+      },
+      complete(celebrate) {
+        T.complete = true;
+        T.levels = T.levels.map(L => L && L.pending ? Object.assign({}, L, { pending: false, failed: true }) : L);
+        clearInterval(buildTick); renderStatus(); renderMap(); renderFoot();
+        if (waitingFor != null) { const w = waitingFor; closeModal(); const nx = nextBuiltAfter(P.cur); if (nx >= 0) { P.cur = nx; save(); startLevel(); } void w; }
+        if (celebrate) {
+          card.classList.remove("sp-finished"); void card.offsetWidth; card.classList.add("sp-finished");
+          const d = stEl("div", "sp-done"); d.innerHTML = `${SP_CHECK}<span>Your trainer is complete. Every level is unlocked, plus a final test.</span>`;
+          body.insertBefore(d, $q(".sp-map")); burst();
+        }
+      },
+      data() { return T; },
+    };
+  }
+
+  // Live: the animation first, then the trainer the moment level 1 arrives.
+  function buildPlusLive(question) {
+    const card = stEl("div", "sp-card");
+    const gen = buildPlusGen(question);
+    card.appendChild(gen.el);
+    let T = null, tr = null, pct = 2, made = 0;
+    const shell = { el: card };
+    shell.event = (s) => {
+      if (s.status === "reading") gen.stage(`Reading ${s.domain || "your link"}`, 5);
+      else if (s.status === "planning") gen.stage("Planning your levels", 8);
+      else if (s.status === "queued") { if (tr) tr.building("waiting for the SCODE server"); else gen.stage("Waiting for the SCODE server (someone else is using it)"); }
+      else if (s.status === "plan") {
+        const p = s.data;
+        T = { id: "t" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), title: p.title, subject: p.subject, source: p.source || "", general: !!p.general,
+              complete: false, levels: p.levels.map(L => Object.assign({ pending: true }, L)) };
+        gen.plan(p); gen.stage("Writing level 1", 15);
+      } else if (s.status === "level_start") {
+        if (!tr) gen.stage(`Writing level ${s.level + 1}`, 15);
+        else tr.building("");
+      } else if (s.status === "writing") {
+        if (!tr && s.level === 0) gen.stage(`Writing level 1 · question ${Math.min(s.made, 5)} of 5`, 15 + Math.min(s.made, 5) * 16);
+        else if (tr) tr.building(`question ${Math.min(s.made, 5)} of 5`);
+      } else if (s.status === "level") {
+        made++;
+        if (!T) return;
+        T.levels[s.level] = s.data;
+        if (!tr) {
+          gen.stage("Level 1 is ready", 100);
+          gen.el.classList.add("sp-out");
+          setTimeout(() => {
+            gen.stop();
+            tr = buildTrainer(T, true, card);
+            shell.tr = tr;
+            if (shell.pendingDone) shell.finish(shell.pendingDone);
+          }, 450);
+        } else tr.setLevel(s.level, s.data);
+      } else if (s.status === "level_failed") {
+        if (T) T.levels[s.level] = Object.assign({}, T.levels[s.level], { pending: false, failed: true });
+        if (tr) tr.failLevel(s.level);
+      } else if (s.status === "done") {
+        if (!tr) { shell.pendingDone = s; return; }
+        shell.finish(s);
+      }
+    };
+    shell.finish = (s) => { if (tr) tr.complete(true); };
+    shell.stop = () => gen.stop();
+    shell.data = () => T;
+    shell.made = () => made;
+    void pct;
+    return shell;
+  }
+  function buildPlusSaved(T) {
+    if (!T || !Array.isArray(T.levels) || !T.levels.some(L => L && L.qs)) return null;
+    T = JSON.parse(JSON.stringify(T)); T.complete = true;
+    T.levels = T.levels.map(L => L && L.pending ? Object.assign({}, L, { pending: false, failed: true }) : L);
+    return buildTrainer(T, false).el;
+  }
+
   // ---------- SCODE Scores (live sports) ----------
   // Launches Oct 4 at midnight Pacific. Before then, ?preview=scores shows it.
   var SCORES_LAUNCH = Date.parse("2026-10-04T00:00:00-07:00");
@@ -4182,6 +4903,8 @@
       if (typeof data.image_eta === "number") imageEta = data.image_eta;
       if (typeof data.scores === "boolean") scoresServerOn = data.scores;
       if (typeof data.scores_cost === "number") scoresCost = data.scores_cost;
+      if (typeof data.studyplus === "boolean") plusServerOn = data.studyplus;
+      if (typeof data.studyplus_cost === "number") plusCost = data.studyplus_cost;
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -4535,6 +5258,9 @@
   //  "showFrom" hides an entry until that date (for launches).
   // =====================================================================
   const UPCOMING = [
+    { id: "studyplus", title: "SCODE Study Plus", launch: "2026-10-07T00:00:00-07:00",
+      blurb: "A full trainer that teaches you, level by level.",
+      details: "Give Study Plus your notes, a photo, a link or a topic, and it builds a trainer: levels with a rule card and an example, then practice with 11 kinds of questions (match, put in order, fill the blank, balance an equation, spot the mistake and more), mastery meters, hints and a final test. Start level 1 while the rest is being made." },
     { id: "scores", title: "SCODE Scores", launch: "2026-10-04T00:00:00-07:00",
       blurb: "Live standings, scores and schedules.",
       details: "Turn on Scores and ask about the NHL, NBA, NFL, MLB, CFL, soccer or F1, like “NHL standings” or “When do the Canucks play next?”. You get a short answer plus a neat card with the real standings table, today's games with live scores, or the schedule." },
@@ -4555,6 +5281,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-studyplus", type: "feature", date: "2026-10-07", showFrom: "2026-10-07T00:00:00-07:00", title: "SCODE Study Plus",
+      text: "Study Plus builds a full learning trainer instead of a quick set: 4 levels that each start with a rule card and a worked example, then practice with 11 kinds of questions, from multiple choice and fill-the-blank to matching, ordering, sorting, balancing chemical equations, simplifying radicals and spotting the mistake. Fill the meter to master each level, then take the final test. Math answers are checked by code, not guessed. +30 points per trainer, on General, General Plus and General Ultra.",
+      how: ["Sign in, then tap the Study button next to the text box.", "Pick Study Plus in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Start level 1 as soon as it appears. The other levels unlock as they finish.", "When it's all done, every level and the final test unlock. Your progress is saved."] },
     { id: "f-scores", type: "feature", date: "2026-10-04", showFrom: "2026-10-04T00:00:00-07:00", title: "SCODE Scores",
       text: "Live sports, right in the chat. Turn on Scores and ask about standings, today's games, scores or schedules for the NHL, NBA, NFL, MLB, CFL, WNBA, MLS, Premier League, La Liga, Serie A, Bundesliga, Champions League and Formula 1. A card under the answer shows the real table or games. Works on every model, even without an account, for +1 point.",
       how: ["Tap the Scores button (the trophy) next to the text box so it turns green.", "Ask something like “NHL standings”, “NBA games today” or “When do the Canucks play next?”, or tap one of the examples in the bar.", "Tap the tabs on a standings card to switch conferences, or Show all to see every team.", "Ask follow-ups like “What about yesterday?” and it remembers the league."] },
@@ -4601,7 +5330,7 @@
     return m[3] ? `${MONTHS[+m[2] - 1].slice(0, 3)} ${+m[3]}, ${m[1]}` : `${MONTHS[+m[2] - 1]} ${m[1]}`;
   }
   function visibleLog() {
-    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview || scoresPreview);
+    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview || scoresPreview || plusPreview);
   }
   function upcomingNow() {
     return UPCOMING.filter(u => !u.launch || Date.now() < Date.parse(u.launch));
@@ -4792,7 +5521,7 @@
     // Long enough to comfortably outlast the server's own longest timeout —
     // General Ultra's complex photo analysis can run up to 900s
     // server-side, so this needs real margin above that.
-    const clientTimeout = setTimeout(() => controller.abort(), 950000);
+    const clientTimeout = setTimeout(() => controller.abort(), studyNow && studyKind === "plus" ? 2400000 : 950000);
 
     const loaderRow = buildLoaderRow();
     el.messages.appendChild(loaderRow);
@@ -4934,6 +5663,7 @@
       let wxData = null, wxNote = "", wxNeed = false;
       let scData = null, scNote = "", scNeed = false;
       let imgGen = null, imgData = null, imgBlocked = null, imgPrompt = text;
+      let plus = null, plusNote = "";
       const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
 
       while (true) {
@@ -5012,6 +5742,21 @@
             else if (s.status === "failed") scNote = String(s.message || "Couldn't get the sports data.");
             continue;
           }
+          if (chunk.plus) {
+            // Study Plus: the animation, then the trainer as each level arrives.
+            const s = chunk.plus;
+            if (!plus) {
+              if (!revealed) reveal();
+              liveMd.style.display = "none";
+              if (liveTail) liveTail.style.display = "none";
+              plus = buildPlusLive(text);
+              liveRow.insertBefore(plus.el, liveTail);
+              scrollToBottom(true);
+            }
+            if (s.status === "note") plusNote = String(s.message || "");
+            plus.event(s);
+            continue;
+          }
           if (chunk.study) {
             // Study Mode progress, then the finished set.
             const s = chunk.study;
@@ -5027,7 +5772,7 @@
             continue;
           }
           const msg = chunk.message || {};
-          if ((studySet || imgGen) && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
+          if ((studySet || imgGen || plus) && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
           const stick = nearBottom();
           if (msg.thinking) {
             thinkingBuf += msg.thinking;
@@ -5057,6 +5802,7 @@
 
       if (streamError) {
         if (imgGen) imgGen.stop();
+        if (plus) plus.stop();
         if (loaderRow._clear) loaderRow._clear();
         if (loaderRow.parentNode) loaderRow.remove();
         if (typeRaf) cancelAnimationFrame(typeRaf);
@@ -5080,13 +5826,16 @@
         studyEl = buildStudy(studySet);
         liveRow.insertBefore(studyEl, liveTail);
         if (studyNote) liveRow.insertBefore(buildSearchNote(studyNote), liveTail);
+      } else if (plus) {
+        // The trainer is already in place.
+        if (plusNote) liveRow.insertBefore(buildSearchNote(plusNote), liveTail);
       } else if (imgGen) {
         // The picture card is already in place.
       } else {
         typeTo(finalText);
         await typeDone();
       }
-      if (!studySet && !imgGen && !finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
+      if (!studySet && !imgGen && !plus && !finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
         liveMd.innerHTML = renderMarkdown("(No reply came back. Try sending it again.)");
       }
       if (liveTail) {
@@ -5126,6 +5875,7 @@
         weather: wxData || undefined,
         scores: scData || undefined,
         image: imgData || imgBlocked || undefined,
+        plus: plus && plus.data() ? plus.data() : undefined,
       });
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
       updateLinkHint();
