@@ -989,28 +989,28 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn {
+  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show, #fy-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg, #fy-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover, #fy-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on, #fy-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg, #fy-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked, #fy-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn { padding: 0 9px; } }
   /* Auto-fit: fitTools() adds .fit1 (drop costs, NEW becomes a dot) then .fit2 (icons only) when the row runs out of room */
   .composer-tools { min-width: 0; }
   .composer-tools > button { flex-shrink: 0; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) .wcost { display: none; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) { position: relative; padding: 0 10px 0 9px; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) { width: 34px; padding: 0; justify-content: center; }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) .mlabel { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) .wcost { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) { position: relative; padding: 0 10px 0 9px; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) { width: 34px; padding: 0; justify-content: center; }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) .mlabel { display: none; }
   .composer-tools.fit2 .model-picker-btn .mp-quota { display: none; }
   /* Mode cost: total next to the model name, plus a short pop-up with the breakdown */
   .model-picker-btn .mp-quota.plus { color: var(--accent); font-weight: 600; }
@@ -1025,7 +1025,7 @@
   .composer-tools.fit3 .model-picker-btn { padding: 0 6px; }
   .composer-tools.fit4 .model-picker-btn .mp-quota.plus { display: none; }
   .composer-tools.fit5 { gap: 3px; }
-  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn) { width: 29px; height: 29px; }
+  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) { width: 29px; height: 29px; }
   .composer-tools.fit5 .model-picker-btn { padding: 0 3px; }
   .composer-tools.fit6 > button { flex-shrink: 1; }
   .composer-tools.fit6 .model-picker-btn .chev { display: none; }
@@ -1346,7 +1346,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -1403,10 +1403,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
     #attach-btn { width: 32px; height: 32px; }
-    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #sc-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
-    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #fy-btn .mlabel, #sc-btn .wcost, #fy-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
+    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -1433,6 +1433,183 @@
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
     .shimmer { -webkit-text-fill-color: var(--muted); }
     .mark .mk-glint { display: none; }
+  }
+  /* =========================================================
+     SCODE Ferries (BC Ferries card)
+     ========================================================= */
+  #fy-bar { display: none; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 2px 8px -4px; padding: 6px 8px 6px 10px; border-radius: 10px; background: var(--accent-soft); font-size: 12.5px; color: var(--muted); }
+  #fy-bar.show { display: flex; animation: hintIn 0.35s cubic-bezier(.2,.8,.2,1); }
+  #fy-bar > svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+  #fy-bar .sc-try { font-weight: 600; color: var(--muted); }
+  #fy-bar .fy-loc { display: inline-flex; align-items: center; gap: 5px; }
+  #fy-bar .fy-loc svg { width: 13px; height: 13px; }
+  #fy-bar .fy-loc.on { color: var(--accent); border-color: var(--accent); background: var(--surface); }
+  @media (max-width: 420px) { #fy-bar .sc-try { display: none; } #fy-bar .sc-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } #fy-bar .sc-chips::-webkit-scrollbar { display: none; } }
+
+  .fy-card [hidden] { display: none !important; }
+  .fy-card { --sea1: #0c3346; --sea2: #11506a; --sea3: #1b7184; --foam: rgba(255,255,255,0.16);
+    margin-top: 12px; max-width: 560px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); overflow: hidden;
+    clip-path: inset(0 round 20px); opacity: 0; animation: srcIn 0.5s cubic-bezier(.2,.8,.2,1) forwards; font-variant-numeric: tabular-nums; }
+  body.light .fy-card { --sea1: #135a74; --sea2: #1c7891; --sea3: #2c97a8; }
+  .fy-head { position: relative; padding: 14px 16px 16px; color: #fff; overflow: hidden; isolation: isolate; min-height: 96px;
+    background: linear-gradient(125deg, var(--sea1), var(--sea2) 55%, var(--sea3)); background-size: 160% 160%; animation: fySea 14s ease-in-out infinite alternate; }
+  @keyframes fySea { from { background-position: 0% 30%; } to { background-position: 100% 70%; } }
+  .fy-waves { position: absolute; left: 0; right: 0; bottom: -2px; height: 46px; z-index: -1; pointer-events: none; }
+  .fy-waves svg { position: absolute; bottom: 0; width: 200%; height: 100%; }
+  .fy-waves .w1 { animation: fyWave 9s linear infinite; opacity: 0.32; }
+  .fy-waves .w2 { animation: fyWave 14s linear infinite reverse; opacity: 0.2; bottom: -6px; }
+  @keyframes fyWave { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .fy-boat { position: absolute; right: 18px; bottom: 15px; width: 64px; height: 34px; z-index: -1; color: rgba(255,255,255,0.9);
+    animation: fyBob 3.4s ease-in-out infinite; transform-origin: 50% 100%; }
+  @keyframes fyBob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-3px) rotate(1.5deg); } }
+  .fy-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+    color: rgba(255,255,255,0.78); }
+  .fy-live { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px 2px 7px; border-radius: 999px; background: rgba(255,255,255,0.14); color: #fff; letter-spacing: 0.06em; }
+  .fy-live i { width: 6px; height: 6px; border-radius: 50%; background: #6ef0a8; box-shadow: 0 0 0 0 rgba(110,240,168,0.7); animation: fyPulse 1.8s ease-out infinite; }
+  .fy-live.tt i { background: #ffd27a; animation: none; }
+  @keyframes fyPulse { 0% { box-shadow: 0 0 0 0 rgba(110,240,168,0.6); } 100% { box-shadow: 0 0 0 7px rgba(110,240,168,0); } }
+  .fy-title { display: flex; align-items: center; gap: 8px; margin-top: 7px; padding-right: 86px; font-family: var(--serif); font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; }
+  .fy-title .ar { opacity: 0.7; font-family: var(--sans); font-size: 15px; }
+  .fy-sub { font-size: 12.5px; color: rgba(255,255,255,0.75); margin-top: 3px; padding-right: 86px; }
+  .fy-swap { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.12); color: #fff; display: grid; place-items: center; cursor: pointer; transition: background 0.2s, transform 0.45s cubic-bezier(.2,.8,.2,1); }
+  .fy-swap:hover { background: rgba(255,255,255,0.22); }
+  .fy-swap.spin { transform: rotate(180deg); }
+  .fy-swap svg { width: 17px; height: 17px; }
+
+  .fy-hero { display: flex; align-items: center; gap: 14px; padding: 14px 16px 6px; }
+  .fy-ring { position: relative; width: 62px; height: 62px; flex-shrink: 0; }
+  .fy-ring svg { width: 62px; height: 62px; transform: rotate(-90deg); }
+  .fy-ring .bg { stroke: var(--border); }
+  .fy-ring .fg { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 0.9s linear, stroke 0.3s; }
+  .fy-ring.warn .fg { stroke: #f0a23b; }
+  .fy-ring.bad .fg { stroke: #e0605a; }
+  .fy-ring b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 15px; font-weight: 700; color: var(--text); line-height: 1; text-align: center; }
+  .fy-ring b small { display: block; font-size: 9.5px; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; margin-top: 2px; }
+  .fy-what { min-width: 0; flex: 1; }
+  .fy-lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .fy-big { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 1px; }
+  .fy-big b { font-family: var(--serif); font-size: 36px; font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; color: var(--text); }
+  .fy-big span { font-size: 13px; color: var(--muted); }
+  .fy-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
+  .fy-pill { font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--hover); color: var(--muted); display: inline-flex; align-items: center; gap: 5px; }
+  .fy-pill.ok { background: var(--accent-soft); color: var(--accent); }
+  .fy-pill.warn { background: rgba(240,162,59,0.16); color: #e9a03c; }
+  .fy-pill.bad { background: rgba(224,96,90,0.15); color: #e4716b; }
+  body.light .fy-pill.warn { color: #a8650f; }
+  body.light .fy-pill.bad { color: #b6403a; }
+  .fy-pill svg { width: 12px; height: 12px; }
+  .fy-cross { display: flex; align-items: center; gap: 8px; margin: 2px 16px 8px; padding: 8px 11px; border-radius: 12px; background: var(--hover); font-size: 12.5px; color: var(--muted); }
+  .fy-cross .bar { flex: 1; height: 5px; border-radius: 5px; background: var(--border); overflow: hidden; min-width: 50px; }
+  .fy-cross .bar i { display: block; height: 100%; width: 0; border-radius: 5px; background: linear-gradient(90deg, var(--accent), #5ec8d8); transition: width 0.9s linear; }
+  .fy-cross b { color: var(--text); font-weight: 600; }
+
+  .fy-make { padding: 6px 16px 12px; }
+  .fy-make .fy-lbl { margin-bottom: 7px; }
+  .fy-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 1px; margin: 0 -1px; }
+  .fy-chips::-webkit-scrollbar { display: none; }
+  .fy-chip { flex-shrink: 0; height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s; }
+  .fy-chip:hover { background: var(--hover); }
+  .fy-chip:active { transform: scale(0.96); }
+  .fy-chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .fy-chip svg { width: 13px; height: 13px; }
+  .fy-chip.busy svg { animation: webSpin 0.9s linear infinite; }
+  .fy-verdict { display: flex; align-items: flex-start; gap: 9px; margin-top: 10px; padding: 10px 12px; border-radius: 13px; font-size: 13.5px; line-height: 1.4; color: var(--text);
+    background: var(--accent-soft); border: 1px solid transparent; animation: hintIn 0.3s cubic-bezier(.2,.8,.2,1); }
+  .fy-verdict.warn { background: rgba(240,162,59,0.12); border-color: rgba(240,162,59,0.3); }
+  .fy-verdict.bad { background: rgba(224,96,90,0.1); border-color: rgba(224,96,90,0.3); }
+  .fy-verdict svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; color: var(--accent); }
+  .fy-verdict.warn svg { color: #e9a03c; }
+  .fy-verdict.bad svg { color: #e4716b; }
+  .fy-verdict small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .fy-map { position: relative; height: 210px; margin: 0 16px 12px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: #0f2a36; isolation: isolate; }
+  body.light .fy-map { background: #dbeef2; }
+  .fy-map > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .fy-map .leaflet-container { position: absolute; inset: 0; background: transparent; font: inherit; }
+  .fy-map .leaflet-control-attribution { font-size: 9px; background: rgba(0,0,0,0.35); color: rgba(255,255,255,0.7); padding: 0 5px; border-top-left-radius: 6px; }
+  body.light .fy-map .leaflet-control-attribution { background: rgba(255,255,255,0.7); color: #555; }
+  .fy-map .leaflet-control-attribution a { color: inherit; }
+  .fy-mk { position: relative; }
+  .fy-mk i { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 3px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+  .fy-mk.to i { border-color: #5ec8d8; }
+  .fy-mk span { position: absolute; left: 11px; top: -11px; white-space: nowrap; font-size: 11.5px; font-weight: 700; color: #fff; padding: 2px 7px; border-radius: 7px;
+    background: rgba(10,30,40,0.72); backdrop-filter: blur(4px); }
+  body.light .fy-mk span { background: rgba(255,255,255,0.88); color: #183a45; box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+  .fy-mk.left span { left: auto; right: 11px; }
+  .fy-me i { position: absolute; left: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; background: #3d8bfd; border: 3px solid #fff; box-shadow: 0 0 0 0 rgba(61,139,253,0.6); animation: fyMe 2s ease-out infinite; }
+  @keyframes fyMe { 0% { box-shadow: 0 0 0 0 rgba(61,139,253,0.55); } 100% { box-shadow: 0 0 0 16px rgba(61,139,253,0); } }
+  .fy-ship { width: 30px; height: 30px; margin: -15px 0 0 -15px; display: grid; place-items: center; border-radius: 50%; background: #fff; color: #0f4d63;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.35); }
+  .fy-ship svg { width: 20px; height: 20px; }
+  .fy-maplegend { position: absolute; left: 8px; top: 8px; z-index: 500; display: flex; gap: 5px; flex-wrap: wrap; pointer-events: none; }
+  .fy-maplegend span { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: rgba(10,30,40,0.7); color: #fff; backdrop-filter: blur(4px); display: inline-flex; align-items: center; gap: 5px; }
+  body.light .fy-maplegend span { background: rgba(255,255,255,0.9); color: #183a45; }
+  .fy-maplegend i { width: 8px; height: 8px; border-radius: 50%; background: #3d8bfd; }
+  .fy-maplegend i.boat { background: #fff; box-shadow: 0 0 0 2px #0f4d63; }
+  .fy-locate { position: absolute; right: 8px; bottom: 8px; z-index: 500; height: 30px; padding: 0 11px; border-radius: 999px; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.95); color: #183a45; font: inherit; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+  .fy-locate svg { width: 13px; height: 13px; }
+  .fy-locate.busy svg { animation: webSpin 0.9s linear infinite; }
+
+  .fy-tabs { display: flex; gap: 4px; padding: 0 16px; }
+  .fy-tab { flex: 1; height: 32px; border: 1px solid var(--border); background: transparent; color: var(--muted); border-radius: 10px; font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+  .fy-tab.on { background: var(--text); color: var(--surface); border-color: var(--text); }
+  .fy-times { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 6px; padding: 10px 16px 6px; }
+  .fy-t { position: relative; padding: 7px 8px 6px; border-radius: 11px; border: 1px solid var(--border); background: var(--surface); text-align: left;
+    opacity: 0; animation: srcIn 0.4s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i, 0) * 22ms); }
+  .fy-t b { display: block; white-space: nowrap; padding-right: 9px; font-size: 13.5px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .fy-t small { display: block; font-size: 10.5px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fy-t.past { opacity: 0; background: transparent; }
+  .fy-t.past b, .fy-t.past small { color: var(--faint); }
+  .fy-t.past { animation-name: fyPast; }
+  @keyframes fyPast { from { opacity: 0; } to { opacity: 0.55; } }
+  .fy-t.cur { border-color: #5ec8d8; background: rgba(94,200,216,0.1); }
+  .fy-t.cur small { color: #5ec8d8; }
+  .fy-t.next { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .fy-t.next small { color: var(--accent); font-weight: 600; }
+  .fy-t.mine { border-color: var(--accent); background: var(--accent); }
+  .fy-t.mine b, .fy-t.mine small { color: var(--accent-ink); }
+  .fy-t.can b { text-decoration: line-through; color: #e4716b; }
+  .fy-t.can small { color: #e4716b; }
+  .fy-t.dg { background: repeating-linear-gradient(135deg, transparent 0 6px, var(--hover) 6px 12px); }
+  .fy-t.dg b { color: var(--muted); }
+  .fy-t .dot { position: absolute; top: 8px; right: 8px; width: 7px; height: 7px; border-radius: 50%; background: #f0a23b; }
+  .fy-t .dot.full { background: #e0605a; }
+  .fy-t .dot.ok { background: var(--accent); }
+  .fy-more { cursor: pointer; font: inherit; border-style: dashed; color: var(--muted); }
+  .fy-more:hover { background: var(--hover); }
+  .fy-more b { color: var(--muted); }
+  .fy-cross > span:first-child, .fy-cross .eta { white-space: nowrap; }
+  .fy-empty { padding: 14px 16px 8px; font-size: 13px; color: var(--muted); }
+  .fy-note { margin: 2px 16px 6px; font-size: 12px; color: var(--muted); }
+  .fy-acts { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 16px 4px; }
+  .fy-act { height: 34px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 12.5px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+  .fy-act:hover { background: var(--hover); }
+  .fy-act.main { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .fy-act.main:hover { filter: brightness(1.06); }
+  .fy-act svg { width: 15px; height: 15px; }
+  .fy-act.busy svg { animation: webSpin 0.9s linear infinite; }
+  .fy-foot { padding: 6px 16px 12px; font-size: 11.5px; color: var(--faint); }
+  .fy-need { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  @media (max-width: 520px) {
+    .fy-head { padding: 12px 14px 14px; }
+    .fy-title { font-size: 18px; padding-right: 48px; }
+    .fy-sub { padding-right: 48px; }
+    .fy-boat { width: 52px; right: 14px; bottom: 12px; opacity: 0.6; }
+    .fy-hero, .fy-make { padding-left: 14px; padding-right: 14px; }
+    .fy-map { margin: 0 14px 12px; height: 190px; }
+    .fy-tabs, .fy-times, .fy-acts, .fy-foot { padding-left: 14px; padding-right: 14px; }
+    .fy-big b { font-size: 32px; }
+    .fy-times { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+    .fy-act { flex: 1; justify-content: center; padding: 0 8px; }
+    .fy-cross { font-size: 12px; gap: 7px; margin-left: 14px; margin-right: 14px; }
+    .fy-cross .bar { min-width: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fy-head, .fy-waves svg, .fy-boat, .fy-live i, .fy-me i { animation: none !important; }
   }
 </style>
 </head>
@@ -1577,6 +1754,18 @@
               <button class="sc-chip" type="button">F1 standings</button>
             </div>
           </div>
+          <div id="fy-bar" role="group" aria-label="SCODE Ferries">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3.5 15l1.7-4.5h13.6l1.7 4.5" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7.5 10.5V7.2h6.8l2.2 3.3" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M10.2 4.6v2.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M2.5 19c1.6 0 1.6-1.1 3.2-1.1s1.6 1.1 3.2 1.1 1.6-1.1 3.1-1.1 1.6 1.1 3.2 1.1 1.6-1.1 3.2-1.1 1.6 1.1 3.1 1.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span class="sc-try">Try</span>
+            <div class="sc-chips">
+              <button class="sc-chip fy-loc" id="fy-loc-chip" type="button"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="2"/></svg><span>Use my location</span></button>
+              <button class="sc-chip fy-ask" type="button">Next ferry to Quadra</button>
+              <button class="sc-chip fy-ask" type="button">Next ferry to Campbell River</button>
+              <button class="sc-chip fy-ask" type="button">Quadra to Cortes</button>
+              <button class="sc-chip fy-ask" type="button">Vancouver to Victoria</button>
+              <button class="sc-chip fy-ask" type="button">Nanaimo to Horseshoe Bay</button>
+            </div>
+          </div>
           <textarea id="prompt-input" placeholder="How can I help you today?" rows="1"></textarea>
           <div class="composer-tools">
             <button id="attach-btn" type="button" title="Add a photo" aria-label="Add a photo">
@@ -1602,6 +1791,10 @@
             <button id="sc-btn" type="button" aria-pressed="false" title="SCODE Scores">
               <svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
               <span class="mlabel">Scores</span><span class="wcost" id="sc-cost">+1</span><span class="wnew" id="sc-new" hidden>NEW</span>
+            </button>
+            <button id="fy-btn" type="button" aria-pressed="false" title="SCODE Ferries">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3.5 15l1.7-4.5h13.6l1.7 4.5" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7.5 10.5V7.2h6.8l2.2 3.3" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M10.2 4.6v2.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M2.5 19c1.6 0 1.6-1.1 3.2-1.1s1.6 1.1 3.2 1.1 1.6-1.1 3.1-1.1 1.6 1.1 3.2 1.1 1.6-1.1 3.2-1.1 1.6 1.1 3.1 1.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span class="mlabel">Ferries</span><span class="wcost" id="fy-cost">+1</span><span class="wnew" id="fy-new" hidden>NEW</span>
             </button>
             <button id="img-btn" type="button" aria-pressed="false" title="SCODE Image Gen">
               <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
@@ -1716,6 +1909,7 @@
         <dt>Your chat history</dt><dd>Saved only in your browser on your device (if Save chats is on in Settings). We can't see it. Turning it off, or clearing your browser, deletes it.</dd>
         <dt>Points</dt><dd>How many points you've used, counted per account (or, for guests, per internet address). This is only kept in memory and is wiped whenever our server restarts.</dd>
         <dt>Weather location</dt><dd>If you tap &ldquo;Use my location,&rdquo; your browser sends your location once to find the closest town. It isn't saved. The town you pick is remembered only on your device.</dd>
+        <dt>Ferry location</dt><dd>Only if you turn on location in SCODE Ferries: your rough location (to about 100 metres) is sent with your ferry questions so we can work out your drive to the terminal. It isn't saved on our server, and you can turn it off any time.</dd>
         <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're <b>not saved</b> on our server.</dd>
         <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
       </dl>
@@ -1725,7 +1919,7 @@
       <ul>
         <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the account file, and only to keep the service running or answer your requests.</li>
         <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
-        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). None of these get your name or email.</li>
+        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and CARTO/OpenStreetMap, which see the map area being shown. None of these get your name or email.</li>
         <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
       </ul>
       <p>We <b>never sell, rent or trade</b> your information, and we never use it for ads.</p>
@@ -2476,6 +2670,7 @@
   var studyKind = "flashcards";
   var weatherOn = false;
   var scoresOn = false;                      // SCODE Scores (sports)
+  var ferryOn = false;                       // SCODE Ferries (BC Ferries)
   var imageOn = false;                       // SCODE Image Gen (also lights up by itself for "draw me…")                     // Weather mode (also lights up by itself for weather questions)
   try {
     webOn = localStorage.getItem("linden_web") === "1";
@@ -2485,6 +2680,7 @@
     weatherOn = !webOn && !linkOn && !studyOn && localStorage.getItem("scode_weather_on") === "1";
     imageOn = !webOn && !linkOn && !studyOn && !weatherOn && localStorage.getItem("scode_image_on") === "1";
     scoresOn = !webOn && !linkOn && !studyOn && !weatherOn && !imageOn && localStorage.getItem("scode_scores_on") === "1";
+    ferryOn = !webOn && !linkOn && !studyOn && !weatherOn && !imageOn && !scoresOn && localStorage.getItem("scode_ferry_on") === "1";
   } catch (e) {}
   const DEFAULT_PLACEHOLDER = el.input.placeholder;
 
@@ -2500,6 +2696,7 @@
       localStorage.setItem("scode_weather_on", weatherOn ? "1" : "0");
       localStorage.setItem("scode_image_on", imageOn ? "1" : "0");
       localStorage.setItem("scode_scores_on", scoresOn ? "1" : "0");
+      localStorage.setItem("scode_ferry_on", ferryOn ? "1" : "0");
     } catch (e) {}
   }
   function paintModeBtn(btn, newEl, costEl, avail, blocked, on, cost, isNew) {
@@ -2572,7 +2769,14 @@
     paintModeBtn($("sc-btn"), $("sc-new"), $("sc-cost"), !!cAvail, false, cOn, scoresCost, typeof scoresIsNew === "function" && scoresIsNew());
     $("sc-btn").title = (cOn ? "SCODE Scores is on" : "SCODE Scores: live standings, games and schedules") + ` (+${scoresCost} per message)`;
     $("sc-bar").classList.toggle("show", cOn);
-    el.input.placeholder = cOn ? "Ask about any team or league" : iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
+    // SCODE Ferries: on or off by hand.
+    const fAvail = typeof ferryUnlocked === "function" && ferryUnlocked();
+    const fOn = fAvail && ferryOn && iState === "off";
+    paintModeBtn($("fy-btn"), $("fy-new"), $("fy-cost"), !!fAvail, false, fOn, ferryCost, typeof ferryIsNew === "function" && ferryIsNew());
+    $("fy-btn").title = (fOn ? "SCODE Ferries is on" : "SCODE Ferries: BC Ferries times, live") + ` (+${ferryCost} per message)`;
+    $("fy-bar").classList.toggle("show", fOn);
+    if (fOn && typeof fyWarmLocation === "function") fyWarmLocation();
+    el.input.placeholder = fOn ? "Ask about a ferry, like “I can be there in 45 min, ferry to Quadra?”" : cOn ? "Ask about any team or league" : iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
       : sOn ? (studyKind === "plus" ? "What should your trainer teach? Notes, a link or a topic" : studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
     if (typeof updateLinkHint === "function" && typeof LINK_TIERS !== "undefined") updateLinkHint();
@@ -2592,6 +2796,7 @@
     if (lp && (lp.kind === "read" || lp.kind === "follow")) return { key: "link", name: "Link", extra: linkCost, unit: "message" };
     if (searchUnlocked() && webOn && WEB_TIERS.has(selectedTier) && !photo) return { key: "search", name: "Search", extra: searchCost, unit: "message" };
     if (typeof scoresActive === "function" && scoresActive()) return { key: "scores", name: "Scores", extra: scoresCost, unit: "message" };
+    if (typeof ferryActive === "function" && ferryActive()) return { key: "ferry", name: "Ferries", extra: ferryCost, unit: "message" };
     if (typeof weatherUnlocked === "function" && weatherUnlocked() && wxState() !== "off") return { key: "weather", name: "Weather", extra: weatherCost, unit: "message" };
     if (linkOn && searchUnlocked() && !photo) return { key: "link-idle", name: "Link", extra: linkCost, unit: "message", idle: true };
     return null;
@@ -2633,6 +2838,7 @@
     weatherOn = mode === "weather";
     imageOn = mode === "image";
     scoresOn = mode === "scores";
+    ferryOn = mode === "ferry";
     if (typeof wxSkipped !== "undefined") wxSkipped = false;
     if (typeof imgSkipped !== "undefined") imgSkipped = false;
     if (!linkOn && typeof activeLink !== "undefined") activeLink = null;
@@ -2671,6 +2877,21 @@
     el.input.value = b.textContent;
     send();
   }));
+  $("fy-btn").addEventListener("click", () => {
+    setMode(ferryOn ? null : "ferry");
+    if (!touchLike) el.input.focus();
+  });
+  $("fy-bar").querySelectorAll(".fy-ask").forEach(b => b.addEventListener("click", () => {
+    if (sending) return;
+    el.input.value = b.textContent;
+    send();
+  }));
+  $("fy-loc-chip").addEventListener("click", () => {
+    const b = $("fy-loc-chip");
+    if (fyLocOn) { fySetLoc(false); fyPos = null; return; }
+    b.lastChild.textContent = "Finding you…";
+    fyLocate(true).then(() => fySetLoc(true)).catch(err => { fySetLoc(false); showNote(err.message); });
+  });
   $("study-btn").addEventListener("click", () => {
     setMode(studyOn ? null : "study");
     if (!touchLike) el.input.focus();
@@ -2697,6 +2918,10 @@
   const WN_IMAGE_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   const WN_SCORES_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   const FEATURE_POPUPS = {
+    ferry: { get icon() { return FY_ICON; }, tag: "New", title: "Introducing SCODE Ferries",
+      sub: "Live BC Ferries times, with a map and a countdown. Quadra, Cortes, Victoria, Nanaimo and more.",
+      name: "SCODE Ferries", text: "Turn on Ferries and ask &ldquo;I can be there in 45 min, which ferry to Quadra can I catch?&rdquo; You get the answer, a live timetable, cancellations and a map from where you are.",
+      cost: () => `Every model, even without an account · +${ferryCost} point per message` },
     plus: { get icon() { return SP_ICON; }, tag: "New", title: "Introducing SCODE Study Plus",
       sub: "Not just flashcards. A full trainer that teaches you a topic level by level, then tests you.",
       name: "SCODE Study Plus", text: "Give it your notes, a photo, a link or a topic. You get levels with rule cards, 11 kinds of practice questions, hints and a final test. Start level 1 while the rest is made.",
@@ -2729,14 +2954,14 @@
     $("wn-cost-line").textContent = f.cost();
   }
   function maybeShowWhatsNew() {
-    const m = /[?&]whatsnew=(1|weather|image|scores|plus)\b/.exec(location.search);
+    const m = /[?&]whatsnew=(1|weather|image|scores|plus|ferry)\b/.exec(location.search);
     const forced = m ? m[1] : null;
     let seenThisVisit = false;
     try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
     let which = forced === "1" ? "big" : forced;
     if (!which) {
       if (seenThisVisit) return;
-      which = plusIsNew() ? "plus" : searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
+      which = ferryIsNew() ? "ferry" : plusIsNew() ? "plus" : searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
     }
     if (!which) return;
     if (which === "big") {
@@ -2771,6 +2996,11 @@
       if (!STUDY_TIERS.has(selectedTier)) selectTier("l2");
       studyKind = "plus";
       setMode("study");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
+    if (mode === "ferry") {
+      setMode("ferry");
       setTimeout(() => el.input.focus(), 250);
       return;
     }
@@ -3313,6 +3543,8 @@
     if (wxEl) row.appendChild(wxEl);
     const scEl = meta && meta.scores ? buildScoresCard(meta.scores) : null;
     if (scEl) row.appendChild(scEl);
+    const fyEl = meta && meta.ferry ? buildFerryCard(meta.ferry) : null;
+    if (fyEl) row.appendChild(fyEl);
     if (!imgEl) row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -4690,6 +4922,575 @@
     return box;
   }
 
+  // ---------- SCODE Ferries (BC Ferries) ----------
+  // Launches Oct 9 at midnight Pacific. Before then, ?preview=ferry shows it.
+  var FERRY_LAUNCH = Date.parse("2026-10-09T00:00:00-07:00");
+  var ferryPreview = /[?&]preview=ferr(y|ies)\b/.test(location.search);
+  var ferryServerOn = true, ferryCost = 1;
+  function ferryUnlocked() { return ferryServerOn && (ferryPreview || Date.now() >= FERRY_LAUNCH); }
+  function ferryIsNew() { return ferryUnlocked() && Date.now() >= FERRY_LAUNCH && Date.now() < FERRY_LAUNCH + LAUNCH_POPUP_DAYS * 864e5; }
+  function ferryActive() { return ferryUnlocked() && ferryOn && !(typeof imgState === "function" && imgState() !== "off"); }
+  const FY_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M3.5 15l1.7-4.5h13.6l1.7 4.5" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7.5 10.5V7.2h6.8l2.2 3.3" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M10.2 4.6v2.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M2.5 19c1.6 0 1.6-1.1 3.2-1.1s1.6 1.1 3.2 1.1 1.6-1.1 3.1-1.1 1.6 1.1 3.2 1.1 1.6-1.1 3.2-1.1 1.6 1.1 3.1 1.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const FY_BOAT = '<svg viewBox="0 0 64 34" fill="none"><path d="M3 22h58l-6 9H10z" fill="currentColor"/><path d="M10 22V14h38l6 8" fill="currentColor" opacity="0.92"/><path d="M18 14V8h22l4 6" fill="currentColor" opacity="0.85"/><rect x="26" y="3" width="4" height="6" rx="1" fill="currentColor"/><g fill="#0d4256" opacity="0.55"><rect x="14" y="16.5" width="4" height="3" rx="1"/><rect x="21" y="16.5" width="4" height="3" rx="1"/><rect x="28" y="16.5" width="4" height="3" rx="1"/><rect x="35" y="16.5" width="4" height="3" rx="1"/><rect x="42" y="16.5" width="4" height="3" rx="1"/><rect x="22" y="10" width="3.5" height="2.5" rx="1"/><rect x="28" y="10" width="3.5" height="2.5" rx="1"/><rect x="34" y="10" width="3.5" height="2.5" rx="1"/></g></svg>';
+  const FY_WAVE = '<svg viewBox="0 0 800 46" preserveAspectRatio="none"><path d="M0 22 Q50 8 100 22 T200 22 T300 22 T400 22 T500 22 T600 22 T700 22 T800 22 V46 H0z" fill="#fff"/></svg>';
+  const FY_SWAP = '<svg viewBox="0 0 24 24" fill="none"><path d="M7 4L3.5 7.5 7 11M3.5 7.5H17M17 13l3.5 3.5L17 20M20.5 16.5H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const FY_PIN = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="2"/></svg>';
+  const FY_LOC = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="2"/><path d="M12 1.8v2.7M12 19.5v2.7M1.8 12h2.7M19.5 12h2.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const FY_OUT = '<svg viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const FY_AGAIN = '<svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const FY_OK = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="currentColor" stroke-width="2"/><path d="M8 12.3l2.7 2.7L16.2 9.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const FY_NO = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="currentColor" stroke-width="2"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  const FY_WARN = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5l9.5 16.5h-19z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.4v.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  const FY_ROUTES = [["To Quadra", "next ferry from Campbell River to Quadra"], ["To Campbell River", "next ferry from Quadra to Campbell River"],
+                     ["Quadra → Cortes", "next ferry from Quadra to Cortes"], ["Cortes → Quadra", "next ferry from Cortes to Quadra"],
+                     ["Vancouver → Victoria", "next ferry from Tsawwassen to Swartz Bay"], ["Victoria → Vancouver", "next ferry from Swartz Bay to Tsawwassen"],
+                     ["Horseshoe Bay → Nanaimo", "next ferry from Horseshoe Bay to Nanaimo"], ["Nanaimo → Horseshoe Bay", "next ferry from Nanaimo to Horseshoe Bay"],
+                     ["Tsawwassen → Duke Point", "next ferry from Tsawwassen to Duke Point"], ["Duke Point → Tsawwassen", "next ferry from Duke Point to Tsawwassen"],
+                     ["Comox → Powell River", "next ferry from Comox to Powell River"], ["Powell River → Comox", "next ferry from Powell River to Comox"]];
+
+  // Your location: only asked for when you tap a location button, and only kept in memory.
+  var fyPos = null, fyLocOn = false;
+  try { fyLocOn = localStorage.getItem("scode_ferry_loc") === "1"; } catch (e) {}
+  function fyLocate(force) {
+    return new Promise((resolve, reject) => {
+      if (fyPos && !force && Date.now() - fyPos.at < 10 * 60000) return resolve(fyPos);
+      if (!navigator.geolocation) return reject(new Error("Location isn't available here."));
+      navigator.geolocation.getCurrentPosition(p => {
+        fyPos = { lat: p.coords.latitude, lon: p.coords.longitude, at: Date.now() };
+        resolve(fyPos);
+      }, () => reject(new Error("Location is off. Turn it on for this site to use it.")),
+      { enableHighAccuracy: false, timeout: 12000, maximumAge: 5 * 60000 });
+    });
+  }
+  function fySetLoc(on) {
+    fyLocOn = on;
+    try { localStorage.setItem("scode_ferry_loc", on ? "1" : "0"); } catch (e) {}
+    const b = $("fy-loc-chip");
+    if (b) { b.classList.toggle("on", on); b.lastChild.textContent = on ? "Location on" : "Use my location"; }
+  }
+  // If location was turned on before and the browser still allows it, get a fresh fix quietly.
+  function fyWarmLocation() {
+    if (!fyLocOn || fyPos) return;
+    try {
+      if (navigator.permissions && navigator.permissions.query) navigator.permissions.query({ name: "geolocation" })
+        .then(p => { if (p.state === "granted") fyLocate().catch(() => {}); else if (p.state === "denied") fySetLoc(false); }).catch(() => {});
+    } catch (e) {}
+  }
+  function fyKm(a, b, c, d) {
+    const r = x => x * Math.PI / 180;
+    const h = Math.sin(r(c - a) / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(r(d - b) / 2) ** 2;
+    return 6371 * 2 * Math.asin(Math.sqrt(h));
+  }
+  function fyDrive(pos, t) {
+    const km = fyKm(pos.lat, pos.lon, t.lat, t.lon) * 1.3;
+    const speed = km < 4 ? 30 : km < 15 ? 45 : km < 60 ? 65 : 80;
+    return { km: Math.round(km * 10) / 10, mins: Math.round(km / speed * 60 + 2) };
+  }
+  // The route of the last ferry answer, so "and the one after?" keeps the route.
+  function lastFerryHint() {
+    for (let i = messages.length - 1; i >= 0 && i >= messages.length - 6; i--) {
+      const m = messages[i];
+      if (m.role === "assistant" && m.ferry && m.ferry.key) {
+        const d = m.ferry.dirs && m.ferry.dirs[m.ferry._dir || 0];
+        return { route: m.ferry.key, from: d ? d.from : undefined };
+      }
+    }
+    return null;
+  }
+  function fyPayload() {
+    const o = Object.assign({}, lastFerryHint() || {});
+    if (fyLocOn && fyPos) { o.lat = Math.round(fyPos.lat * 1000) / 1000; o.lon = Math.round(fyPos.lon * 1000) / 1000; }
+    return o;
+  }
+
+  // ---------- times ----------
+  function fyClock(ts) {
+    return new Date(ts).toLocaleTimeString([], { hour: "numeric", minute: "2-digit", timeZone: "America/Vancouver" }).replace(/\s?([AP])\.?M\.?/i, (m, x) => " " + x.toLowerCase() + "m");
+  }
+  function fyDayKey(ts) { return new Date(ts).toLocaleDateString("en-CA", { timeZone: "America/Vancouver" }); }
+  function fySt(s, mins) {
+    const now = Date.now();
+    if (s.status === "cancelled") return "cancelled";
+    if (s.status === "past") return "past";
+    if (s.status === "current") return now > s.ts + (mins + 20) * 60000 ? "past" : "current";
+    if (now > s.ts + mins * 60000) return "past";
+    if (now >= s.ts) return "current";
+    return s.status === "delayed" ? "delayed" : "future";
+  }
+  function fyUsable(s, mins) { const st = fySt(s, mins); return !s.dg && (st === "future" || st === "delayed"); }
+  function fyLeft(ms) {
+    if (ms <= 0) return "now";
+    const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
+    if (h >= 1) return `${h} h ${m} min`;
+    return `${m}:${String(sec).padStart(2, "0")}`;
+  }
+  function fyAll(dir) { return dir.days[0].sailings.concat(dir.days[1].sailings); }
+  // "21:58" on the same sailing as s -> a timestamp (handles crossing midnight).
+  function fyAt(s, hm) {
+    const m = /^(\d{1,2}):(\d{2})$/.exec(hm || "");
+    if (!m) return null;
+    const toMin = x => +x.slice(0, 2) * 60 + +x.slice(3, 5);
+    let diff = (+m[1] * 60 + +m[2]) - toMin(s.t);
+    if (diff < -720) diff += 1440;
+    if (diff > 720) diff -= 1440;
+    return s.ts + diff * 60000;
+  }
+
+  // ---------- the map (a drawn map right away, then a real one if it loads) ----------
+  var fyLeafletP = null;
+  function fyLoadLeaflet() {
+    if (window.L && window.L.map) return Promise.resolve(window.L);
+    if (fyLeafletP) return fyLeafletP;
+    fyLeafletP = new Promise((resolve, reject) => {
+      const css = document.createElement("link");
+      css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+      document.head.appendChild(css);
+      const js = document.createElement("script");
+      js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+      js.onload = () => window.L ? resolve(window.L) : reject(new Error("no leaflet"));
+      js.onerror = () => { fyLeafletP = null; reject(new Error("leaflet failed")); };
+      document.head.appendChild(js);
+      setTimeout(() => reject(new Error("leaflet timeout")), 9000);
+    });
+    return fyLeafletP;
+  }
+  function fyAlong(path, f) {
+    // A point a fraction f of the way along a path of [lat, lon] points.
+    const seg = []; let total = 0;
+    for (let i = 1; i < path.length; i++) { const d = Math.hypot(path[i][0] - path[i - 1][0], (path[i][1] - path[i - 1][1]) * 0.64); seg.push(d); total += d; }
+    let goal = Math.max(0, Math.min(1, f)) * total;
+    for (let i = 0; i < seg.length; i++) {
+      if (goal <= seg[i] || i === seg.length - 1) {
+        const t = seg[i] ? goal / seg[i] : 0;
+        return [path[i][0] + (path[i + 1][0] - path[i][0]) * t, path[i][1] + (path[i + 1][1] - path[i][1]) * t];
+      }
+      goal -= seg[i];
+    }
+    return path[path.length - 1];
+  }
+  function fyMap(box, st) {
+    // st: { path, from, to, crossing(): fraction|null, you(): {lat, lon}|null }
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    box.appendChild(svg);
+    const legend = stEl("div", "fy-maplegend");
+    box.appendChild(legend);
+    let lmap = null, lparts = null;
+    function pts() {
+      const p = st.path.slice();
+      const y = st.you();
+      if (y && fyKm(y.lat, y.lon, st.from.lat, st.from.lon) < 60) p.push([y.lat, y.lon]);
+      return p;
+    }
+    function drawSvg() {
+      const w = box.clientWidth || 520, h = box.clientHeight || 210;
+      const all = pts();
+      let la0 = Math.min(...all.map(p => p[0])), la1 = Math.max(...all.map(p => p[0]));
+      let lo0 = Math.min(...all.map(p => p[1])), lo1 = Math.max(...all.map(p => p[1]));
+      const k = Math.cos((la0 + la1) / 2 * Math.PI / 180);
+      const pad = 34;
+      const sx = (w - pad * 2) / Math.max(1e-4, (lo1 - lo0) * k), sy = (h - pad * 2) / Math.max(1e-4, la1 - la0);
+      const s = Math.min(sx, sy);
+      const cx = (lo0 + lo1) / 2, cy = (la0 + la1) / 2;
+      const X = lon => w / 2 + (lon - cx) * k * s, Y = lat => h / 2 - (lat - cy) * s;
+      const light = document.body.classList.contains("light");
+      const line = st.path.map(p => `${X(p[1]).toFixed(1)},${Y(p[0]).toFixed(1)}`).join(" ");
+      const y = st.you();
+      let html = `<defs><radialGradient id="fyg" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="${light ? "#e9f6f8" : "#16404f"}"/><stop offset="1" stop-color="${light ? "#cfe7ec" : "#0b2430"}"/></radialGradient>
+        <pattern id="fyd" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="${light ? "rgba(20,80,100,0.12)" : "rgba(255,255,255,0.07)"}"/></pattern></defs>
+        <rect width="100%" height="100%" fill="url(#fyg)"/><rect width="100%" height="100%" fill="url(#fyd)"/>
+        <polyline points="${line}" fill="none" stroke="${light ? "rgba(20,90,110,0.25)" : "rgba(255,255,255,0.18)"}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline class="fy-dash" points="${line}" fill="none" stroke="${light ? "#1c7891" : "#7fd6e3"}" stroke-width="2.4" stroke-dasharray="2 7" stroke-linecap="round" stroke-linejoin="round">
+          ${reduceMotion ? "" : '<animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.4s" repeatCount="indefinite"/>'}</polyline>`;
+      if (y && fyKm(y.lat, y.lon, st.from.lat, st.from.lon) < 60) {
+        html += `<line x1="${X(y.lon)}" y1="${Y(y.lat)}" x2="${X(st.from.lon)}" y2="${Y(st.from.lat)}" stroke="#3d8bfd" stroke-width="2" stroke-dasharray="1 5" stroke-linecap="round" opacity="0.8"/>
+          <circle cx="${X(y.lon)}" cy="${Y(y.lat)}" r="7" fill="#3d8bfd" stroke="#fff" stroke-width="2.5">${reduceMotion ? "" : '<animate attributeName="r" values="7;8.5;7" dur="2s" repeatCount="indefinite"/>'}</circle>`;
+      }
+      [[st.from, "#5fbf8e"], [st.to, "#5ec8d8"]].forEach(([t, c]) => {
+        const tx = X(t.lon), ty = Y(t.lat), right = tx < w - 120;
+        html += `<circle cx="${tx}" cy="${ty}" r="7" fill="#fff" stroke="${c}" stroke-width="3.5"/>
+          <g transform="translate(${right ? tx + 12 : tx - 12},${ty - 10})"><rect x="${right ? 0 : -8 * t.name.length - 12}" y="0" rx="7" height="20" width="${8 * t.name.length + 12}" fill="${light ? "rgba(255,255,255,0.9)" : "rgba(8,26,34,0.75)"}"/>
+          <text x="${right ? 6 : -6}" y="14" text-anchor="${right ? "start" : "end"}" font-size="11.5" font-weight="700" fill="${light ? "#183a45" : "#fff"}" font-family="-apple-system,Segoe UI,Roboto,sans-serif">${t.name.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</text></g>`;
+      });
+      const f = st.crossing();
+      if (f !== null) {
+        const p = fyAlong(st.path, f);
+        html += `<g transform="translate(${X(p[1]) - 13},${Y(p[0]) - 13})"><circle cx="13" cy="13" r="13" fill="#fff"/><g transform="translate(4,6) scale(0.28)" color="#0f4d63">${FY_BOAT.replace("<svg ", "<svg width='64' height='34' ")}</g></g>`;
+      }
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      svg.innerHTML = html;
+    }
+    function legendFill() {
+      legend.innerHTML = "";
+      const y = st.you();
+      if (y) { const d = fyDrive(y, st.from); const s = stEl("span"); s.appendChild(stEl("i")); s.appendChild(document.createTextNode(`You · ~${d.mins} min drive`)); legend.appendChild(s); }
+      if (st.crossing() !== null) { const s = stEl("span"); s.appendChild(stEl("i", "boat")); s.appendChild(document.createTextNode("Ferry crossing now")); legend.appendChild(s); }
+    }
+    function drawLeaflet(L) {
+      if (!document.contains(box)) return;
+      const light = document.body.classList.contains("light");
+      lmap = L.map(box, { zoomSnap: 0.25, zoomControl: false, attributionControl: true, scrollWheelZoom: false, dragging: !touchLike, tap: false, keyboard: false, doubleClickZoom: true, boxZoom: false });
+      L.tileLayer(`https://{s}.basemaps.cartocdn.com/${light ? "rastertiles/voyager" : "dark_all"}/{z}/{x}/{y}{r}.png`,
+        { maxZoom: 18, subdomains: "abcd", attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>' }).addTo(lmap);
+      L.polyline(st.path, { color: light ? "#1c7891" : "#7fd6e3", weight: 3, dashArray: "2 8", lineCap: "round" }).addTo(lmap);
+      const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+      // Put each label on the side away from the other terminal.
+      const mk = (t, other, cls) => L.marker([t.lat, t.lon], { interactive: false, icon: L.divIcon({ className: "", iconSize: [0, 0],
+        html: `<div class="fy-mk ${cls}${t.lon < other.lon ? " left" : ""}"><i></i><span>${esc(t.name)}</span></div>` }) }).addTo(lmap);
+      const marks = [mk(st.from, st.to, ""), mk(st.to, st.from, "to")];
+      lparts = { L, ship: null, me: null, meLine: null };
+      // Keep each name label inside the map: flip it to the other side near an edge.
+      const relabel = () => marks.forEach(m => {
+        const e = m.getElement() && m.getElement().querySelector(".fy-mk"); if (!e) return;
+        const x = lmap.latLngToContainerPoint(m.getLatLng()).x, w = box.clientWidth, lw = (e.querySelector("span").offsetWidth || 90) + 16;
+        if (x + lw > w) e.classList.add("left"); else if (x - lw < 0) e.classList.remove("left");
+      });
+      lmap.on("zoomend moveend", relabel);
+      const fit = () => { lmap.invalidateSize(false); lmap.fitBounds(pts(), { padding: [Math.min(96, box.clientWidth * 0.2), 44], maxZoom: 14, animate: false }); relabel(); };
+      fit(); requestAnimationFrame(fit); setTimeout(fit, 350);
+      box._fyMap = lmap;
+      svg.style.transition = "opacity 0.5s"; svg.style.opacity = "0";
+      setTimeout(() => svg.remove(), 600);
+      update();
+    }
+    function update() {
+      legendFill();
+      if (!lmap) { drawSvg(); return; }
+      const L = lparts.L, f = st.crossing(), y = st.you();
+      if (f !== null) {
+        const p = fyAlong(st.path, f);
+        if (!lparts.ship) lparts.ship = L.marker(p, { interactive: false, icon: L.divIcon({ className: "", iconSize: [0, 0], html: `<div class="fy-ship">${FY_BOAT}</div>` }) }).addTo(lmap);
+        else lparts.ship.setLatLng(p);
+      } else if (lparts.ship) { lparts.ship.remove(); lparts.ship = null; }
+      if (y && fyKm(y.lat, y.lon, st.from.lat, st.from.lon) < 60) {
+        if (!lparts.me) {
+          lparts.me = L.marker([y.lat, y.lon], { interactive: false, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<div class="fy-me"><i></i></div>' }) }).addTo(lmap);
+          lparts.meLine = L.polyline([[y.lat, y.lon], [st.from.lat, st.from.lon]], { color: "#3d8bfd", weight: 2, dashArray: "1 6", lineCap: "round" }).addTo(lmap);
+          lmap.fitBounds(pts(), { padding: [Math.min(96, box.clientWidth * 0.2), 44], maxZoom: 14, animate: false });
+        } else { lparts.me.setLatLng([y.lat, y.lon]); lparts.meLine.setLatLngs([[y.lat, y.lon], [st.from.lat, st.from.lon]]); }
+      }
+    }
+    function destroy() { if (lmap) { lmap.remove(); lmap = null; } }
+    drawSvg();
+    legendFill();
+    // Load the real map only when the card is on screen.
+    const go = () => fyLoadLeaflet().then(drawLeaflet).catch(() => {});
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((es) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); go(); } }, { rootMargin: "200px" });
+      io.observe(box);
+    } else go();
+    return { update, destroy, redraw: () => { if (!lmap) drawSvg(); } };
+  }
+
+  // ---------- the card ----------
+  var FY_CARDS = new Set();
+  setInterval(() => {
+    FY_CARDS.forEach(c => { if (!document.contains(c.el)) { if (c.gone()) FY_CARDS.delete(c); return; } c.tick(); });
+  }, 1000);
+  function buildFerryCard(D) {
+    if (!D || !D.dirs || !D.dirs.length) return null;
+    D = JSON.parse(JSON.stringify(D));
+    const card = stEl("div", "fy-card");
+    let di = Math.min(D._dir || 0, D.dirs.length - 1);
+    let arrive = D.ask && D.ask.arrive && D.ask.arrive > Date.now() - 5 * 60000 ? D.ask.arrive : null;
+    let pick = arrive ? "ask" : null;   // which chip is on
+    let target = D.ask && D.ask.target && di === 0 ? D.ask.target : null;
+    if (!arrive && !target && D.you && D.you.km < 120 && D.ask && D.ask.want === "next" && !D.ask.day) { arrive = Date.now() + D.you.mins * 60000; pick = "loc"; }
+    let dayTab = null, map = null, offscreenAt = 0, showPast = false;
+    const small = !!D.small;
+    const you = () => fyLocOn && fyPos ? fyPos : (D.you ? { lat: D.you.lat, lon: D.you.lon } : null);
+    const dir = () => D.dirs[di];
+    const T = c => D.terminals[c];
+
+    // Head
+    const head = stEl("div", "fy-head");
+    head.innerHTML = `<div class="fy-waves"><svg class="w1" viewBox="0 0 1600 46" preserveAspectRatio="none">${FY_WAVE.replace(/^<svg[^>]*>|<\/svg>$/g, "")}<g transform="translate(800,0)">${FY_WAVE.replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg>
+      <svg class="w2" viewBox="0 0 1600 46" preserveAspectRatio="none">${FY_WAVE.replace(/^<svg[^>]*>|<\/svg>$/g, "")}<g transform="translate(800,0)">${FY_WAVE.replace(/^<svg[^>]*>|<\/svg>$/g, "")}</g></svg></div>
+      <div class="fy-boat">${FY_BOAT}</div>`;
+    const tag = stEl("div", "fy-tag");
+    tag.appendChild(document.createTextNode(`BC Ferries · Route ${D.no}`));
+    const live = stEl("span", "fy-live"); live.appendChild(stEl("i")); live.appendChild(stEl("span"));
+    tag.appendChild(live);
+    head.appendChild(tag);
+    const title = stEl("div", "fy-title");
+    const sub = stEl("div", "fy-sub");
+    head.appendChild(title); head.appendChild(sub);
+    if (D.dirs.length > 1) {
+      const sw = stButton("fy-swap", "Switch direction", FY_SWAP);
+      sw.addEventListener("click", () => { di = 1 - di; target = null; sw.classList.toggle("spin"); D._dir = di; if (map) { map.destroy(); } paint(true); });
+      head.appendChild(sw);
+    }
+    card.appendChild(head);
+
+    // Hero
+    const hero = stEl("div", "fy-hero");
+    hero.innerHTML = `<div class="fy-ring"><svg viewBox="0 0 62 62"><circle class="bg" cx="31" cy="31" r="27" fill="none" stroke-width="5"/><circle class="fg" cx="31" cy="31" r="27" fill="none" stroke-width="5" stroke-dasharray="169.6" stroke-dashoffset="169.6"/></svg><b></b></div>
+      <div class="fy-what"><div class="fy-lbl"></div><div class="fy-big"><b></b><span></span></div><div class="fy-meta"></div></div>`;
+    card.appendChild(hero);
+    const cross = stEl("div", "fy-cross"); cross.hidden = true;
+    card.appendChild(cross);
+
+    // Can I make it?
+    const make = stEl("div", "fy-make");
+    make.appendChild(stEl("div", "fy-lbl", "I can be at the terminal in"));
+    const chips = stEl("div", "fy-chips");
+    const opts = [["now", "Now", 0], ["10", "10 min", 10], ["20", "20 min", 20], ["30", "30 min", 30], ["45", "45 min", 45], ["60", "1 hr", 60], ["90", "1.5 hr", 90]];
+    opts.forEach(([k, label, mins]) => {
+      const b = stEl("button", "fy-chip", label); b.type = "button"; b.dataset.k = k;
+      b.addEventListener("click", () => {
+        if (pick === k) { pick = null; arrive = null; } else { pick = k; arrive = Date.now() + mins * 60000; }
+        target = null; paint();
+      });
+      chips.appendChild(b);
+    });
+    const locB = stEl("button", "fy-chip"); locB.type = "button"; locB.dataset.k = "loc";
+    locB.innerHTML = FY_LOC; locB.appendChild(document.createTextNode("From where I am"));
+    locB.addEventListener("click", () => {
+      if (pick === "loc") { pick = null; arrive = null; paint(); return; }
+      locB.classList.add("busy");
+      fyLocate(true).then(p => {
+        fySetLoc(true);
+        locB.classList.remove("busy");
+        const d = fyDrive(p, T(dir().from));
+        pick = "loc"; arrive = Date.now() + d.mins * 60000; target = null;
+        paint();
+      }).catch(err => { locB.classList.remove("busy"); verdict(null, "bad", FY_NO, err.message, ""); });
+    });
+    chips.appendChild(locB);
+    make.appendChild(chips);
+    const ver = stEl("div", "fy-verdict"); ver.hidden = true;
+    make.appendChild(ver);
+    card.appendChild(make);
+
+    // Map
+    const mapBox = stEl("div", "fy-map");
+    card.appendChild(mapBox);
+
+    // Timetable
+    const tabs = stEl("div", "fy-tabs");
+    const times = stEl("div", "fy-times");
+    const tnote = stEl("div", "fy-note"); tnote.hidden = true;
+    card.appendChild(tabs); card.appendChild(times); card.appendChild(tnote);
+
+    // Buttons + footer
+    const acts = stEl("div", "fy-acts");
+    const dirA = document.createElement("a"); dirA.className = "fy-act main"; dirA.target = "_blank"; dirA.rel = "noopener";
+    dirA.innerHTML = FY_PIN; dirA.appendChild(document.createTextNode("Directions"));
+    const liveA = document.createElement("a"); liveA.className = "fy-act"; liveA.target = "_blank"; liveA.rel = "noopener";
+    liveA.innerHTML = FY_OUT; liveA.appendChild(document.createTextNode("BC Ferries"));
+    const refB = stButton("fy-act", "Refresh", FY_AGAIN); refB.appendChild(document.createTextNode("Refresh"));
+    refB.addEventListener("click", async () => {
+      if (refB.classList.contains("busy")) return;
+      refB.classList.add("busy");
+      try {
+        const r = await fetch(`${PROXY_URL}/ferry/route?key=${encodeURIComponent(D.key)}&from=${encodeURIComponent(dir().from)}`, { headers: authHeaders({}) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || !j.data) throw new Error(j.message || "Couldn't refresh right now.");
+        const fresh = j.data;
+        D.dirs = fresh.dirs; D.at = fresh.at; di = 0; D._dir = 0; target = null;
+        if (map) map.destroy();
+        paint(true);
+      } catch (e) { foot.textContent = e.message || "Couldn't refresh right now."; }
+      refB.classList.remove("busy");
+    });
+    acts.appendChild(dirA); acts.appendChild(liveA); acts.appendChild(refB);
+    card.appendChild(acts);
+    const foot = stEl("div", "fy-foot");
+    card.appendChild(foot);
+
+    function verdict(_, kind, icon, main, smallText) {
+      ver.hidden = false;
+      ver.className = "fy-verdict" + (kind && kind !== "ok" ? " " + kind : "");
+      ver.innerHTML = icon;
+      const t = stEl("div"); t.appendChild(document.createTextNode(main));
+      if (smallText) t.appendChild(stEl("small", "", smallText));
+      ver.appendChild(t);
+    }
+    function catchFrom(ms) {
+      const buf = (small ? 5 : 20) * 60000;
+      return fyAll(dir()).find(s => fyUsable(s, dir().mins) && s.ts >= ms + buf) || null;
+    }
+    function heroSailing() {
+      const d = dir();
+      if (target) { const t = fyAll(d).find(s => s.ts === target); if (t) return { s: t, why: "target" }; }
+      if (arrive) return { s: catchFrom(arrive), why: "catch" };
+      return { s: fyAll(d).find(s => fyUsable(s, d.mins)) || null, why: "next" };
+    }
+    function paint(full) {
+      const d = dir(), A = T(d.from), B = T(d.to);
+      title.innerHTML = "";
+      title.appendChild(document.createTextNode(A.name));
+      title.appendChild(stEl("span", "ar", "→"));
+      title.appendChild(document.createTextNode(B.name));
+      sub.textContent = `${A.full} to ${B.full} · about ${d.mins} min crossing`;
+      const src = d.days[0].source;
+      live.className = "fy-live" + (src === "timetable" ? " tt" : "");
+      live.lastChild.textContent = src === "timetable" ? "Timetable" : "Live";
+      dirA.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(A.maps) + "&travelmode=driving";
+      liveA.href = d.live_url || "https://www.bcferries.com/current-conditions";
+      const at = D.at ? new Date(D.at) : null;
+      foot.textContent = (src === "timetable" ? "From the printed BC Ferries timetable (live status didn't load)"
+        : src === "api" ? "Live sailings via bcferriesapi.ca" : "Live from BC Ferries")
+        + (at && !isNaN(at) ? ` · updated ${fyClock(at.getTime())}` + (Date.now() - at > 864e5 ? `, ${at.toLocaleDateString([], { month: "short", day: "numeric" })}` : "") : "")
+        + " · Drive times are estimates";
+      chips.querySelectorAll(".fy-chip").forEach(b => b.classList.toggle("on", b.dataset.k === pick));
+      // Day tabs
+      const h = heroSailing();
+      if (full || dayTab === null) dayTab = h.s && d.days[1].sailings.includes(h.s) ? 1 : (D.ask && D.ask.day >= 1 ? 1 : 0);
+      tabs.innerHTML = "";
+      d.days.forEach((day, i) => {
+        const b = stEl("button", "fy-tab" + (i === dayTab ? " on" : ""), i === 0 ? "Today" : `Tomorrow · ${day.weekday.slice(0, 3)}`); b.type = "button";
+        b.addEventListener("click", () => { dayTab = i; paintTimes(); tabs.querySelectorAll(".fy-tab").forEach((x, j) => x.classList.toggle("on", j === i)); });
+        tabs.appendChild(b);
+      });
+      paintTimes();
+      if (full || !map) {
+        mapBox.innerHTML = "";
+        map = fyMap(mapBox, { path: d.from === D.dirs[0].from ? D.path : D.path.slice().reverse(), from: A, to: B, crossing: crossingFrac, you });
+      }
+      tick();
+    }
+    function crossingFrac() {
+      const d = dir();
+      const s = d.days[0].sailings.find(x => fySt(x, d.mins) === "current");
+      if (!s) return null;
+      const start = fyAt(s, s.dep) || s.ts;
+      return Math.max(0.02, Math.min(0.98, (Date.now() - start) / (d.mins * 60000)));
+    }
+    function paintTimes() {
+      const d = dir(), day = d.days[dayTab];
+      times.innerHTML = "";
+      const h = heroSailing();
+      const nextS = fyAll(d).find(s => fyUsable(s, d.mins));
+      if (!day.sailings.length) {
+        times.appendChild(stEl("div", "fy-empty", dayTab === 1 ? "Tomorrow's sailings aren't posted yet. Tap BC Ferries for the full schedule." : "No sailings today."));
+      }
+      // Hide most sailings that already left today, behind a button.
+      const pastN = day.sailings.filter(s => fySt(s, d.mins) === "past").length;
+      const hideN = !showPast && pastN > 3 ? pastN - 2 : 0;
+      if (hideN) {
+        const more = stEl("button", "fy-t fy-more"); more.type = "button";
+        more.appendChild(stEl("b", "", `+${hideN}`)); more.appendChild(stEl("small", "", "Earlier"));
+        more.title = `Show ${hideN} earlier sailings that already left`;
+        more.addEventListener("click", () => { showPast = true; paintTimes(); });
+        times.appendChild(more);
+      }
+      let shown = 0;
+      day.sailings.forEach((s, i) => {
+        const st = fySt(s, d.mins);
+        if (hideN && st === "past" && shown++ < hideN) return;
+        const c = stEl("div", "fy-t");
+        c.style.setProperty("--i", i);
+        let note = s.vessel ? s.vessel.replace(/^(Island|Queen of|Spirit of|Coastal)\s+/, "") : "";
+        if (s.dg) { c.classList.add("dg"); note = "Dangerous goods"; }
+        if (st === "past") { c.classList.add("past"); note = "Left"; }
+        else if (st === "current") { c.classList.add("cur"); note = "Crossing now"; }
+        else if (st === "cancelled") { c.classList.add("can"); note = "Cancelled"; }
+        else if (st === "delayed") note = "Delayed";
+        if (h.s === s && (h.why !== "next")) { c.classList.add("mine"); note = h.why === "target" ? "Your pick" : "Your boat"; }
+        else if (s === nextS) { c.classList.add("next"); note = "Next"; }
+        c.appendChild(stEl("b", "", fyClock(s.ts)));
+        c.appendChild(stEl("small", "", note || (s.status === "future" ? "Scheduled" : "")));
+        if ((st === "future" || st === "delayed") && !s.dg) {
+          if (s.full) { const dot = stEl("span", "dot full"); dot.title = "Full for vehicles"; c.appendChild(dot); }
+          else if (typeof s.space === "number") { const dot = stEl("span", "dot" + (s.space >= 30 ? " ok" : "")); dot.title = `${s.space}% car space left`; c.appendChild(dot); }
+        }
+        c.title = [fyClock(s.ts), s.vessel, s.full ? "Full for vehicles" : typeof s.space === "number" ? `${s.space}% car space left` : "", s.note].filter(Boolean).join(" · ");
+        times.appendChild(c);
+      });
+      const notes = [];
+      if (day.partial && day.sailings.length) notes.push("Only the first sailings of tomorrow are posted so far.");
+      if (day.note) notes.push(day.note);
+      if (day.sailings.some(s => typeof s.space === "number" || s.full)) notes.push("Dots show car space: green has room, orange is filling up, red is full.");
+      tnote.hidden = !notes.length; tnote.textContent = notes.join(" ");
+    }
+    function tick() {
+      const d = dir(), h = heroSailing(), s = h.s, now = Date.now();
+      const ring = hero.querySelector(".fy-ring"), fg = hero.querySelector(".fg"), rb = hero.querySelector(".fy-ring b");
+      const lbl = hero.querySelector(".fy-lbl"), big = hero.querySelector(".fy-big b"), when = hero.querySelector(".fy-big span"), meta = hero.querySelector(".fy-meta");
+      lbl.textContent = h.why === "target" ? "Your sailing" : h.why === "catch" ? "The one you'll catch" : "Next sailing";
+      meta.innerHTML = "";
+      const pill = (cls, text, icon) => { const p = stEl("span", "fy-pill" + (cls ? " " + cls : "")); if (icon) p.innerHTML = icon; p.appendChild(document.createTextNode(text)); meta.appendChild(p); };
+      if (!s) {
+        big.textContent = "—"; when.textContent = "No more sailings posted";
+        rb.innerHTML = "–"; fg.style.strokeDashoffset = 169.6; ring.className = "fy-ring bad";
+      } else {
+        const left = s.ts - now, st = fySt(s, d.mins);
+        const isTom = fyDayKey(s.ts) !== fyDayKey(now);
+        big.textContent = fyClock(s.ts);
+        when.textContent = st === "cancelled" ? "Cancelled" : st === "current" ? "Crossing now" : st === "past" ? "Already left"
+          : (isTom ? "tomorrow · " : "") + (left > 0 ? "leaves in " + fyLeft(left) : "boarding now");
+        const mins = Math.max(0, left / 60000);
+        const frac = Math.max(0, Math.min(1, mins / 60));
+        fg.style.strokeDashoffset = (169.6 * (1 - frac)).toFixed(1);
+        ring.className = "fy-ring" + (st === "cancelled" || st === "past" ? " bad" : mins < 10 ? " warn" : "");
+        rb.innerHTML = "";
+        if (left > 0 && mins < 100) rb.innerHTML = `<span>${Math.ceil(mins)}<small>MIN</small></span>`;
+        else if (left > 0) rb.innerHTML = `<span>${Math.floor(mins / 60)}<small>HR</small></span>`;
+        else rb.textContent = st === "current" ? "⛴" : "–";
+        if (s.vessel) pill("", s.vessel);
+        if (st === "cancelled") pill("bad", "Cancelled" + (s.note ? ` · ${s.note.replace(/\.$/, "")}` : ""), FY_WARN);
+        else if (s.dg) pill("bad", "Dangerous goods only", FY_WARN);
+        else if (st === "delayed") pill("warn", "Running late", FY_WARN);
+        else if (s.full) pill("bad", "Full for vehicles");
+        else if (typeof s.space === "number") pill(s.space >= 30 ? "ok" : "warn", `${s.space}% car space left`);
+        else if (st === "future") pill("ok", isTom ? "Scheduled" : "On schedule", FY_OK);
+      }
+      // A ferry crossing right now
+      const c = d.days[0].sailings.find(x => fySt(x, d.mins) === "current");
+      if (c) {
+        const f = crossingFrac();
+        cross.hidden = false;
+        if (!cross.firstChild) { cross.innerHTML = '<span></span><span class="bar"><i></i></span><span class="eta"></span>'; }
+        cross.children[0].innerHTML = `The <b>${fyClock(c.ts)}</b> is crossing`;
+        cross.querySelector(".bar i").style.width = Math.round((f || 0) * 100) + "%";
+        cross.children[2].textContent = fyAt(c, c.arr) ? `ETA ${fyClock(fyAt(c, c.arr))}` : `${Math.max(1, Math.round((1 - (f || 0)) * d.mins))} min to go`;
+      } else cross.hidden = true;
+      // Verdict for "I can be there in…" or a sailing they asked about
+      if (h.why === "catch" && arrive) {
+        const spare = s ? Math.round((s.ts - arrive) / 60000) : null;
+        const atTxt = fyClock(arrive) + (fyDayKey(arrive) !== fyDayKey(now) ? " tomorrow" : "");
+        const prev = fyAll(d).filter(x => fyUsable(x, d.mins) && x.ts < (s ? s.ts : Infinity) && x.ts > arrive - 30 * 60000);
+        const missed = prev.length ? prev[prev.length - 1] : null;
+        if (!s) verdict(null, "bad", FY_NO, `No sailing you can catch after ${atTxt} is posted yet.`, "Tap BC Ferries for later schedules.");
+        else if (fyDayKey(s.ts) !== fyDayKey(arrive))
+          verdict(null, "warn", FY_WARN, `Arrive by ${atTxt} and the next one you can catch is the ${fyClock(s.ts)} tomorrow.`,
+            (missed ? `You'd just miss the ${fyClock(missed.ts)}, the last one tonight.` : "There are no more sailings tonight."));
+        else verdict(null, spare < (small ? 8 : 30) ? "warn" : "ok", spare < (small ? 8 : 30) ? FY_WARN : FY_OK,
+          `Arrive by ${atTxt} and you'll catch the ${fyClock(s.ts)}, with ${spare < 120 ? spare + " min" : Math.floor(spare / 60) + " hr " + (spare % 60) + " min"} to spare.`,
+          (missed ? `You'd just miss the ${fyClock(missed.ts)}. ` : "") + (small ? "" : "Counting 20 min to buy a ticket and board."));
+      } else if (h.why === "target" && s) {
+        const st = fySt(s, d.mins);
+        if (st === "cancelled") verdict(null, "bad", FY_NO, `The ${fyClock(s.ts)} is cancelled.`, s.note || "");
+        else if (s.dg) verdict(null, "bad", FY_NO, `The ${fyClock(s.ts)} is dangerous goods only.`, "No passengers or regular vehicles.");
+        else if (st === "past" || st === "current") verdict(null, "bad", FY_NO, `The ${fyClock(s.ts)} has already left.`, "");
+        else ver.hidden = true;
+      } else ver.hidden = true;
+      if (map) map.update();
+      // Every minute, refresh the timetable so sailings that left turn grey.
+      if (!tick.last || now - tick.last > 60000) { tick.last = now; if (tick.done) paintTimes(); tick.done = true; }
+    }
+    paint(true);
+    D._dir = di;
+    const reg = { el: card, tick, gone: () => { if (!offscreenAt) offscreenAt = Date.now(); return Date.now() - offscreenAt > 5000; } };
+    FY_CARDS.add(reg);
+    return card;
+  }
+  function buildFerryNeed(question) {
+    const box = stEl("div", "fy-need");
+    FY_ROUTES.forEach(([label, ask]) => {
+      const b = stEl("button", "sc-chip", label); b.type = "button";
+      b.addEventListener("click", () => {
+        if (sending) return;
+        el.input.value = ask;
+        box.remove();
+        send();
+      });
+      box.appendChild(b);
+    });
+    return box;
+  }
+
   // ---------- SCODE Image Gen ----------
   // Launches Oct 3 at midnight Pacific. Before then, ?preview=image shows it.
   // It also needs the image add-ons installed on the laptop (the proxy reports that in /status).
@@ -4903,6 +5704,8 @@
       if (typeof data.image_eta === "number") imageEta = data.image_eta;
       if (typeof data.scores === "boolean") scoresServerOn = data.scores;
       if (typeof data.scores_cost === "number") scoresCost = data.scores_cost;
+      if (typeof data.ferries === "boolean") ferryServerOn = data.ferries;
+      if (typeof data.ferries_cost === "number") ferryCost = data.ferries_cost;
       if (typeof data.studyplus === "boolean") plusServerOn = data.studyplus;
       if (typeof data.studyplus_cost === "number") plusCost = data.studyplus_cost;
       updateWebBtn();
@@ -5258,6 +6061,9 @@
   //  "showFrom" hides an entry until that date (for launches).
   // =====================================================================
   const UPCOMING = [
+    { id: "ferries", title: "SCODE Ferries", launch: "2026-10-09T00:00:00-07:00",
+      blurb: "Live BC Ferries times, with a map and a countdown.",
+      details: "Turn on Ferries and ask things like “next ferry to Quadra” or “I can be there in 45 min, which ferry can I catch?”. You get the exact answer, a live timetable with cancellations and how full the big boats are, a map from where you are, and one-tap directions. Campbell River–Quadra, Quadra–Cortes, and the Vancouver Island to mainland routes." },
     { id: "studyplus", title: "SCODE Study Plus", launch: "2026-10-07T00:00:00-07:00",
       blurb: "A full trainer that teaches you, level by level.",
       details: "Give Study Plus your notes, a photo, a link or a topic, and it builds a trainer: levels with a rule card and an example, then practice with 11 kinds of questions (match, put in order, fill the blank, balance an equation, spot the mistake and more), mastery meters, hints and a final test. Start level 1 while the rest is being made." },
@@ -5281,6 +6087,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-ferries", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Ferries",
+      text: "Live BC Ferries times, right in the chat. Turn on Ferries and ask about Campbell River to Quadra, Quadra to Cortes, Vancouver to Victoria, Horseshoe Bay to Nanaimo, Tsawwassen to Duke Point or Comox to Powell River. Tell it when you can be at the terminal and it works out exactly which sailing you'll catch. The card shows a countdown, cancellations, how full the big boats are, a map with you and the ferry on it, and one-tap directions. Works on every model, even without an account, for +1 point.",
+      how: ["Tap the Ferries button (the boat) next to the text box so it turns green.", "Ask something like “next ferry to Quadra” or “I can be there in 45 min, ferry to Quadra?”, or tap an example in the bar.", "On the card, tap how soon you can be at the terminal, or From where I am, to see which sailing you'll catch.", "Tap ⇄ to flip the direction, Directions to open Google Maps, or Refresh for the latest status."] },
     { id: "f-studyplus", type: "feature", date: "2026-10-07", showFrom: "2026-10-07T00:00:00-07:00", title: "SCODE Study Plus",
       text: "Study Plus builds a full learning trainer instead of a quick set: 4 levels that each start with a rule card and a worked example, then practice with 11 kinds of questions, from multiple choice and fill-the-blank to matching, ordering, sorting, balancing chemical equations, simplifying radicals and spotting the mistake. Fill the meter to master each level, then take the final test. Math answers are checked by code, not guessed. +30 points per trainer, on General, General Plus and General Ultra.",
       how: ["Sign in, then tap the Study button next to the text box.", "Pick Study Plus in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Start level 1 as soon as it appears. The other levels unlock as they finish.", "When it's all done, every level and the final test unlock. Your progress is saved."] },
@@ -5330,7 +6139,7 @@
     return m[3] ? `${MONTHS[+m[2] - 1].slice(0, 3)} ${+m[3]}, ${m[1]}` : `${MONTHS[+m[2] - 1]} ${m[1]}`;
   }
   function visibleLog() {
-    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview || scoresPreview || plusPreview);
+    return CHANGELOG.filter(c => !c.showFrom || Date.now() >= Date.parse(c.showFrom) || searchPreview || studyPreview || weatherPreview || imagePreview || scoresPreview || plusPreview || ferryPreview);
   }
   function upcomingNow() {
     return UPCOMING.filter(u => !u.launch || Date.now() < Date.parse(u.launch));
@@ -5468,7 +6277,9 @@
     imgSkipped = false;
     const scNow = !imgNow && scoresActive();
     const scHint = scNow ? lastScoresLeague() : null;
-    const wxWanted = !imgNow && !scNow && wxState(text) !== "off";
+    const fyNow = !imgNow && !scNow && ferryActive();
+    const fyBody = fyNow ? fyPayload() : null;
+    const wxWanted = !imgNow && !scNow && !fyNow && wxState(text) !== "off";
     const wxSendTo = wxTarget();
     wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
     sending = true;
@@ -5540,6 +6351,7 @@
           image: imgNow || undefined,
           weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
           scores: scNow && !studyNow && !linkToSend ? (scHint ? { league: scHint } : {}) : undefined,
+          ferry: fyNow && !studyNow && !linkToSend ? fyBody : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
             if (m.images) o.images = m.images;
@@ -5662,6 +6474,7 @@
       let studySet = null, studyNote = "";
       let wxData = null, wxNote = "", wxNeed = false;
       let scData = null, scNote = "", scNeed = false;
+      let fyData = null, fyNote = "", fyNeed = false;
       let imgGen = null, imgData = null, imgBlocked = null, imgPrompt = text;
       let plus = null, plusNote = "";
       const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
@@ -5740,6 +6553,14 @@
             else if (s.status === "done" && s.data) scData = s.data;
             else if (s.status === "need_league") scNeed = true;
             else if (s.status === "failed") scNote = String(s.message || "Couldn't get the sports data.");
+            continue;
+          }
+          if (chunk.ferry) {
+            const s = chunk.ferry;
+            if (s.status === "checking" && !revealed && loaderRow._setStage) loaderRow._setStage("Checking BC Ferries");
+            else if (s.status === "done" && s.data) fyData = s.data;
+            else if (s.status === "need_route") fyNeed = true;
+            else if (s.status === "failed") fyNote = String(s.message || "Couldn't get the ferry times.");
             continue;
           }
           if (chunk.plus) {
@@ -5859,6 +6680,10 @@
       if (scEl) liveRow.appendChild(scEl);
       else if (scNote) liveRow.appendChild(buildSearchNote(scNote));
       else if (scNeed) liveRow.appendChild(buildScoresNeed(text));
+      const fyEl = fyData ? buildFerryCard(fyData) : null;
+      if (fyEl) liveRow.appendChild(fyEl);
+      else if (fyNote) liveRow.appendChild(buildSearchNote(fyNote));
+      else if (fyNeed) liveRow.appendChild(buildFerryNeed(text));
       // The first town someone gets a forecast for becomes their town.
       if (wxData && !wxPlace) setWxPlace({ code: wxData.code, name: wxData.place, prov: wxData.prov });
       if (!imgGen) liveRow.appendChild(buildActions(finalText, tierAtSend));
@@ -5874,6 +6699,7 @@
         study: studySet || undefined,
         weather: wxData || undefined,
         scores: scData || undefined,
+        ferry: fyData || undefined,
         image: imgData || imgBlocked || undefined,
         plus: plus && plus.data() ? plus.data() : undefined,
       });
