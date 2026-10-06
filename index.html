@@ -1612,6 +1612,69 @@
   @media (prefers-reduced-motion: reduce) {
     .fy-head, .fy-waves svg, .fy-boat, .fy-live i, .fy-me i { animation: none !important; }
   }
+
+  /* ---------- Account page, profile picture, memory ---------- */
+  #acct-btn.has-pic { background-size: cover; background-position: center; color: transparent; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--accent); }
+  .am-head { display: flex; gap: 10px; align-items: center; }
+  .am-pic { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; background: var(--accent) center/cover; color: var(--accent-ink);
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; }
+  .am-head > div:last-child { min-width: 0; }
+  #account-overlay .modal-box { width: 540px; }
+  .ap-hero { display: flex; align-items: center; gap: 18px; padding: 18px; margin-bottom: 22px; border-radius: 18px;
+    background: linear-gradient(135deg, var(--accent-soft), transparent 70%), var(--surface-2); border: 1px solid var(--border); }
+  .ap-pic { position: relative; width: 84px; height: 84px; border-radius: 50%; border: none; padding: 0; cursor: pointer; flex-shrink: 0;
+    background: var(--accent) center/cover; color: var(--accent-ink); font: inherit; font-weight: 700; font-size: 34px;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--accent); transition: transform .2s; }
+  .ap-pic:hover { transform: scale(1.04); }
+  .ap-pic.busy::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--accent); animation: apSpin .8s linear infinite; }
+  @keyframes apSpin { to { transform: rotate(360deg); } }
+  .ap-cam { position: absolute; right: -2px; bottom: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--surface); color: var(--text);
+    border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); }
+  .ap-cam svg { width: 16px; height: 16px; }
+  .ap-who { min-width: 0; flex: 1; }
+  .ap-name { font-family: var(--serif); font-size: 22px; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ap-email { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
+  .ap-pic-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+  .ap-link { border: none; background: none; padding: 0; font: inherit; font-size: 13px; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .ap-link.danger { color: var(--warn); }
+  .ap-link[hidden] { display: none; }
+  .ap-mem-body { margin-top: 10px; }
+  .ap-mem-add { display: flex; gap: 8px; margin-bottom: 10px; }
+  .ap-mem-add input { flex: 1; min-width: 0; height: 38px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg);
+    color: var(--text); font: inherit; font-size: 14px; }
+  .ap-mem-add input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .ap-mem-add .set-btn { height: 38px; }
+  .ap-mem-list { display: flex; flex-direction: column; gap: 6px; max-height: 280px; overflow-y: auto; }
+  .ap-mem { display: flex; align-items: flex-start; gap: 10px; padding: 10px 10px 10px 14px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--surface-2); animation: apIn .28s cubic-bezier(.2,.8,.2,1) both; transition: opacity .2s, transform .2s; }
+  .ap-mem.out { opacity: 0; transform: translateX(16px); }
+  @keyframes apIn { from { opacity: 0; transform: translateY(6px); } }
+  .ap-mem-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+  .ap-mem-text { flex: 1; min-width: 0; font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+  .ap-mem-when { display: block; font-size: 11.5px; color: var(--faint); margin-top: 2px; }
+  .ap-x { width: 28px; height: 28px; border-radius: 8px; border: none; background: none; color: var(--faint); cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; }
+  .ap-x:hover { background: var(--warn-bg); color: var(--warn); }
+  .ap-mem-empty { font-size: 13.5px; color: var(--muted); padding: 14px; text-align: center; border: 1px dashed var(--border-strong); border-radius: 12px; line-height: 1.5; }
+  .ap-mem-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 12.5px; color: var(--faint); }
+  .ap-off { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .ap-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 6px; }
+  .ap-powered { text-align: center; font-size: 11.5px; color: var(--faint); letter-spacing: .08em; margin-top: 18px; }
+  .ap-err { color: var(--warn); font-size: 13px; margin-top: 8px; display: none; }
+  .ap-err.show { display: block; }
+  .mem-chip { display: inline-flex; align-items: center; gap: 7px; margin: 10px 0 2px; padding: 6px 12px 6px 10px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent); font-size: 12.5px; font-weight: 500; animation: apIn .35s cubic-bezier(.2,.8,.2,1) both; }
+  .mem-chip.off { background: var(--warn-bg); color: var(--warn); }
+  .mem-chip svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .mem-chip button { border: none; background: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  .mem-chip .mem-what { color: var(--text); font-weight: 400; max-width: 340px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chat-item .synced-dot { display: none; }
+  @media (max-width: 520px) {
+    .ap-hero { padding: 14px; gap: 14px; }
+    .ap-pic { width: 68px; height: 68px; font-size: 28px; }
+    .ap-name { font-size: 19px; }
+    .mem-chip .mem-what { max-width: 150px; }
+  }
 </style>
 </head>
 <body class="is-empty">
@@ -1673,10 +1736,16 @@
           <button id="acct-btn" type="button" aria-haspopup="menu" aria-label="Your account">L</button>
           <div id="acct-menu" role="menu">
             <div class="am-head">
-              <div class="am-name" id="am-name"></div>
-              <div class="am-email" id="am-email"></div>
-              <div class="am-perk">1,000 points every 4 hours &middot; every model</div>
+              <div class="am-pic" id="am-pic"></div>
+              <div>
+                <div class="am-name" id="am-name"></div>
+                <div class="am-email" id="am-email"></div>
+                <div class="am-perk">1,000 points every 4 hours &middot; every model</div>
+              </div>
             </div>
+            <button class="am-item" id="am-account" type="button" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="3.8" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Account, picture &amp; memory
+            </button>
             <button class="am-item" id="am-signout" type="button" role="menuitem">
               <svg viewBox="0 0 24 24" fill="none"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Sign out
             </button>
@@ -1848,10 +1917,10 @@
       <div class="set-section-title">Chat history</div>
       <div class="set-row">
         <div>
-          <div class="set-row-title">Save chats on this device</div>
-          <div class="modal-sub">Chats are stored only in this browser, never on the server. Turning this off deletes them.</div>
+          <div class="set-row-title">Save chats to your account</div>
+          <div class="modal-sub">Your chats are saved to your SCODE account, so they're on every device you sign in on. Turning this off deletes them everywhere.</div>
         </div>
-        <button class="switch" id="history-switch" aria-label="Save chats on this device"></button>
+        <button class="switch" id="history-switch" aria-label="Save chats to your account"></button>
       </div>
     </div>
     <div class="set-section">
@@ -1872,25 +1941,101 @@
   </div>
 </div>
 
+<div class="overlay" id="account-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="ap-title">
+    <div class="modal-header">
+      <h2 id="ap-title">Your account</h2>
+      <button class="icon-btn" id="ap-close" type="button" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="ap-hero">
+      <button class="ap-pic" id="ap-pic" type="button" aria-label="Change profile picture"><span id="ap-initial"></span>
+        <span class="ap-cam"><svg viewBox="0 0 24 24" fill="none"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.7l1.3-2h5l1.3 2h1.7A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.3" stroke="currentColor" stroke-width="1.8"/></svg></span>
+      </button>
+      <div class="ap-who">
+        <div class="ap-name" id="ap-name"></div>
+        <div class="ap-email" id="ap-email"></div>
+        <div class="ap-pic-actions">
+          <button class="set-btn" id="ap-upload" type="button">Change picture</button>
+          <button class="ap-link" id="ap-remove" type="button" hidden>Remove</button>
+        </div>
+      </div>
+      <input type="file" id="ap-file" accept="image/*" hidden>
+    </div>
+    <div class="ap-err" id="ap-err"></div>
+
+    <div class="set-section">
+      <div class="set-section-title">Memory</div>
+      <div class="set-row">
+        <div>
+          <div class="set-row-title">Memory</div>
+          <div class="modal-sub">SCODE AI remembers what you tell it, on every device. Start a message with &ldquo;Remember that&hellip;&rdquo; or add things here.</div>
+        </div>
+        <button class="switch" id="ap-mem-switch" type="button" aria-label="Memory"></button>
+      </div>
+      <div class="ap-mem-body" id="ap-mem-body">
+        <form class="ap-mem-add" id="ap-mem-add">
+          <input id="ap-mem-input" maxlength="200" autocomplete="off" placeholder="Add a memory, like &ldquo;I'm in Grade 10&rdquo;">
+          <button class="set-btn" type="submit">Add</button>
+        </form>
+        <div class="ap-mem-list" id="ap-mem-list"></div>
+        <div class="ap-mem-foot"><span id="ap-mem-count"></span><button class="ap-link danger" id="ap-mem-clear" type="button">Delete all</button></div>
+      </div>
+      <div class="ap-off" id="ap-mem-off" hidden></div>
+    </div>
+
+    <div class="set-section">
+      <div class="set-section-title">Chats</div>
+      <div class="set-row">
+        <div>
+          <div class="set-row-title" id="ap-chats-title">Saved to your account</div>
+          <div class="modal-sub" id="ap-chats-sub">Your chats are on every device you sign in on, and replies keep going even if you close the page.</div>
+        </div>
+        <button class="set-btn" id="ap-history" type="button">Settings</button>
+      </div>
+    </div>
+
+    <div class="set-section">
+      <div class="set-section-title">Privacy</div>
+      <div class="set-row">
+        <div>
+          <div class="set-row-title">Help improve SCODE AI</div>
+          <div class="modal-sub">Let SCODE use your messages and replies to train future SCODE AI models. Your name, email and account are removed first. <button class="ap-link" id="ap-train-more" type="button">Learn more</button></div>
+        </div>
+        <button class="switch" id="ap-train-switch" type="button" aria-label="Help improve SCODE AI"></button>
+      </div>
+    </div>
+
+    <div class="ap-bottom">
+      <button class="ap-link" id="ap-signout" type="button">Sign out</button>
+      <button class="ap-link danger" id="ap-delete" type="button">Delete account</button>
+    </div>
+    <div class="ap-powered">POWERED BY SCODE</div>
+  </div>
+</div>
+
 <div class="overlay" id="privacy-overlay">
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pv-title">
     <div class="pv-head">
       <div>
         <h2 id="pv-title">Privacy Policy</h2>
-        <div class="pv-date">SCODE AI &middot; Effective October 3, 2026 &middot; Version 1</div>
+        <div class="pv-date">SCODE AI &middot; Effective October 6, 2026 &middot; Version 2</div>
       </div>
       <button class="icon-btn" id="pv-close" type="button" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
     <div class="pv-body" id="pv-body" tabindex="0">
-      <div class="pv-agree-intro" id="pv-agree-intro">We've added a Privacy Policy. Please read it, then confirm the two boxes at the bottom to keep using your account.</div>
+      <div class="pv-agree-intro" id="pv-agree-intro">We've updated our Privacy Policy. Chats now save to your account so they're on all your devices, there's a new Memory feature, and there's a setting about helping train SCODE AI (look for &ldquo;Training copies&rdquo;). Please read it, then confirm the two boxes at the bottom to keep using your account.</div>
       <p class="pv-lead">SCODE AI is a small, independent project run from Campbell River, British Columbia, Canada. This page explains, in plain words, what information we collect, who can see it, and what we promise. Questions? Email <a href="mailto:scodeai2026@gmail.com">scodeai2026@gmail.com</a>.</p>
 
       <h3>The short version</h3>
       <ul class="pv-short">
         <li>We collect as little as we can: your name, email and a scrambled password if you make an account.</li>
-        <li>Your chats are saved only in your own browser, not on our server.</li>
+        <li>If Save chats is on, your chats are saved to your account on our computer, so you can see them on any device. You can delete them anytime.</li>
+        <li>Memory: SCODE AI remembers things you ask it to, and you can turn it off or delete them on your Account page.</li>
+        <li>If &ldquo;Help improve SCODE AI&rdquo; is on, copies of your messages, with your name, email and account removed, may be used to train future SCODE AI models. You can turn it off.</li>
         <li>The AI runs on our own computer. We don't send your messages to big AI companies.</li>
         <li>No ads, no tracking, no selling or sharing your information. Ever.</li>
         <li>You must be 16 or older to make an account.</li>
@@ -1906,19 +2051,23 @@
         <dt>Your account</dt><dd>Your name, email address, a scrambled (hashed) copy of your password, when you made the account, and when you agreed to this policy and confirmed your age. We can't see your real password.</dd>
         <dt>Staying signed in</dt><dd>A random sign-in key saved in your browser. Our server keeps a scrambled copy so it knows it's you. It expires after 90 days of not using SCODE AI.</dd>
         <dt>Email codes</dt><dd>The 6-digit codes we email you. They're deleted or stop working after 15 minutes.</dd>
-        <dt>Your messages and photos</dt><dd>Sent to our computer so the AI can answer. They're used for that answer and then <b>not saved</b> on our server. Nobody reads them.</dd>
-        <dt>Your chat history</dt><dd>Saved only in your browser on your device (if Save chats is on in Settings). We can't see it. Turning it off, or clearing your browser, deletes it.</dd>
+        <dt>Your messages and photos</dt><dd>Sent to our computer so the AI can answer. Guests' messages are used for the answer and then not saved.</dd>
+        <dt>Your saved chats</dt><dd>If you have an account and Save chats is on (Settings), your chats, including photos and pictures you make, are saved to your account on our computer and in your browser, so they show up on every device you sign in on. They're kept until you delete them, turn off Save chats, or delete your account.</dd>
+        <dt>Replies in progress</dt><dd>While SCODE AI is writing a reply, our computer keeps a copy, so the reply still finishes if you close the page and is waiting when you come back. These copies are deleted after 30 days, or sooner if you delete the chat.</dd>
+        <dt>Memory</dt><dd>Things you ask SCODE AI to remember (like &ldquo;Remember that I'm in Grade 10&rdquo;), plus your first name, are added to your messages so answers fit you better. You can see, add and delete them, or turn Memory off, on your Account page.</dd>
+        <dt>Profile picture</dt><dd>If you add one, a small copy is saved to your account so it shows on all your devices. You can remove it anytime.</dd>
+        <dt id="pv-training">Training copies</dt><dd>If &ldquo;Help improve SCODE AI&rdquo; is on (it starts on for accounts), we save a copy of each message you send and the reply you get, to train and test future SCODE AI models. Before it's saved, the copy is <b>separated from your account</b>: no name, email, account number or exact time is kept, and email addresses and phone numbers in the text are blanked out. Photos aren't kept. Because these copies aren't linked to you, we can't find or delete one person's copies later, so <b>turn it off on your Account page</b> if you don't want new messages included. Guests' messages are never used for training.</dd>
         <dt>Points</dt><dd>How many points you've used, counted per account (or, for guests, per internet address). This is only kept in memory and is wiped whenever our server restarts.</dd>
         <dt>Weather location</dt><dd>If you tap &ldquo;Use my location,&rdquo; your browser sends your location once to find the closest town. It isn't saved. The town you pick is remembered only on your device.</dd>
         <dt>Ferry location</dt><dd>Only if you turn on location in SCODE Ferries: your rough location (to about 100 metres) is sent with your ferry questions so we can work out your drive to the terminal. It isn't saved on our server, and you can turn it off any time.</dd>
-        <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're <b>not saved</b> on our server.</dd>
+        <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're saved with your chat if Save chats is on, and otherwise not saved.</dd>
         <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
       </dl>
-      <p>We don't use cookies for tracking, ads, or analytics. The site only stores things in your browser that make it work (like your sign-in, your settings and your saved chats).</p>
+      <p>We don't use cookies for tracking, ads, or analytics. The site only stores things in your browser that make it work (like your sign-in, your settings and a copy of your saved chats).</p>
 
       <h3>Who can see it</h3>
       <ul>
-        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the account file, and only to keep the service running or answer your requests.</li>
+        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats. Training copies (which aren't linked to anyone) may be reviewed to build and check training data.</li>
         <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
         <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and OpenStreetMap (or Esri as a backup), which see the map area being shown. None of these get your name or email.</li>
         <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
@@ -1926,13 +2075,13 @@
       <p>We <b>never sell, rent or trade</b> your information, and we never use it for ads.</p>
 
       <h3>Where it's kept and for how long</h3>
-      <p>Account information is stored on the SCODE computer in British Columbia, Canada. We keep it until you delete your account. If you delete it, your name, email, password and sign-ins are removed right away.</p>
+      <p>Everything is stored on the SCODE computer in British Columbia, Canada. We keep your account, saved chats, memories and picture until you delete them or your account. If you delete your account, your name, email, password, sign-ins, saved chats, memories and picture are removed right away. Training copies aren't linked to your account, so they stay.</p>
 
       <h3>How we protect it</h3>
       <ul>
         <li>Passwords are scrambled with a strong one-way method (scrypt).</li>
         <li>Connections to SCODE AI are encrypted (HTTPS).</li>
-        <li>The account file is never uploaded or made public, and sign-ins are rate-limited to stop guessing.</li>
+        <li>The account, chat and training files are never uploaded or made public, and sign-ins are rate-limited to stop guessing.</li>
       </ul>
       <p>No system is perfect. If there's ever a breach that could harm you, we'll email you and report it to the privacy regulator as the law requires.</p>
 
@@ -1940,7 +2089,9 @@
       <ul>
         <li><b>Delete your account</b> anytime from the account menu (tap your initial, then Delete account).</li>
         <li><b>See or fix your information:</b> email us and we'll send you what we have or correct it, within 30 days.</li>
-        <li><b>Clear your chats</b> by deleting them, or by turning off Save chats in Settings.</li>
+        <li><b>Clear your chats</b> by deleting them, or by turning off Save chats in Settings (that deletes them from every device and our computer).</li>
+        <li><b>Memory:</b> turn it off, or delete one memory or all of them, on your Account page (tap your picture, then Account).</li>
+        <li><b>Training:</b> turn off &ldquo;Help improve SCODE AI&rdquo; on your Account page and new messages won't be used.</li>
         <li><b>Take back your agreement</b> by deleting your account.</li>
       </ul>
       <p>If you're not happy with how we handled something, you can complain to the Office of the Information and Privacy Commissioner for British Columbia (<a href="https://www.oipc.bc.ca" target="_blank" rel="noopener">oipc.bc.ca</a>).</p>
@@ -2165,12 +2316,12 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://exchanges-microphone-cruz-interactions.trycloudflare.com";
+  const PROXY_URL = "https://die-manner-outside-essentially.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
   try { auth = JSON.parse(localStorage.getItem("scode_auth") || "null"); } catch (e) {}
-  const PRIVACY_VERSION = 1;   // match PRIVACY_VERSION in linden_proxy.py
+  const PRIVACY_VERSION = 2;   // match PRIVACY_VERSION in linden_proxy.py
   if (!auth || !auth.token) auth = null;
   var GUEST_TIERS = new Set(["l1"]);   // the server can override this via /status
   var guestLimit = 100;
@@ -2451,8 +2602,10 @@
   }
   function saveChats() {
     if (isGuest() || !historyEnabled) return;
+    markDirty();
     try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); }
-    catch (e) { showNote("Your browser's storage is full, so this chat couldn't be saved. Delete a few old chats (especially ones with photos) to free up space."); }
+    catch (e) { if (!syncOn()) showNote("Your browser's storage is full, so this chat couldn't be saved. Delete a few old chats (especially ones with photos) to free up space."); }
+    if (SYNC.queue.size) schedulePush();
   }
   function getCurrentChat() { return chats.find(c => c.id === currentChatId) || null; }
 
@@ -2483,11 +2636,19 @@
     renderMessages();
     updateInputAvailability();
     closeMobileSidebar();
+    resumePending();
   }
   function deleteChat(id, evt) {
     evt.stopPropagation();
     if (sending) return;
+    const wasSaved = (chats.find(c => c.id === id) || {}).messages;
     chats = chats.filter(c => c.id !== id);
+    if (syncOn() && wasSaved && wasSaved.length) {
+      delete SYNC.sent[id]; SYNC.queue.delete(id);
+      syncFetch("/sync/chat/" + encodeURIComponent(id), { method: "DELETE" })
+        .then(r => { if (!r.ok) writeGone(readGone().concat([id])); })
+        .catch(() => writeGone(readGone().concat([id])));
+    }
     if (currentChatId === id) currentChatId = chats.length ? chats[0].id : null;
     saveChats();
     renderChatList();
@@ -2503,13 +2664,13 @@
       const box = document.createElement("div");
       box.className = "side-empty";
       if (isGuest()) {
-        box.innerHTML = "<b>Save your chats</b>Sign in and your chats are saved on this device, so you can come back to them.";
+        box.innerHTML = "<b>Save your chats</b>Sign in and your chats are saved to your account, on every device.";
         const b = document.createElement("button");
         b.type = "button"; b.textContent = "Sign in";
         b.addEventListener("click", () => { closeMobileSidebar(); openAuth("welcome"); });
         box.appendChild(b);
       } else {
-        box.innerHTML = "<b>Chat history is off</b>Turn on “Save chats on this device” in Settings to keep your chats here.";
+        box.innerHTML = "<b>Chat history is off</b>Turn on “Save chats to your account” in Settings to keep your chats.";
       }
       el.chatList.appendChild(box);
       return;
@@ -2539,6 +2700,132 @@
     });
   }
 
+
+  // ---------- SCODE Sync: chats saved to your account ----------
+  // Every saved chat is copied to the SCODE server, so the same chats show up on
+  // every device. The newest copy wins. Deleted chats stay deleted everywhere.
+  let serverSync = false;   // the server supports syncing (from /status)
+  const SYNC = { sent: {}, queue: new Set(), timer: null, ready: false, pulling: false, pushing: false, lastPull: 0, warned: {} };
+  function syncOn() { return serverSync && !isGuest() && historyEnabled; }
+  function chatSig(c) { const { updated, ...rest } = c; return JSON.stringify(rest); }
+  function goneKey() { return "scode_gone_" + (auth ? auth.email.toLowerCase() : "guest"); }
+  function readGone() { try { return JSON.parse(localStorage.getItem(goneKey()) || "[]"); } catch (e) { return []; } }
+  function writeGone(a) { try { localStorage.setItem(goneKey(), JSON.stringify(a.slice(-200))); } catch (e) {} }
+  function resetSync() { SYNC.sent = {}; SYNC.queue.clear(); SYNC.ready = false; SYNC.lastPull = 0; }
+  async function syncFetch(path, opts) {
+    const o = opts || {};
+    const res = await fetch(PROXY_URL + path, {
+      method: o.method || "GET",
+      headers: authHeaders(o.body ? { "Content-Type": "application/json" } : undefined),
+      body: o.body ? JSON.stringify(o.body) : undefined,
+    });
+    const data = await res.json().catch(() => ({}));
+    return { ok: res.ok, status: res.status, data };
+  }
+  function markDirty() {
+    if (!syncOn() || !SYNC.ready) return;
+    chats.forEach(c => {
+      if (!c.messages || !c.messages.length) return;
+      if (SYNC.sent[c.id] !== chatSig(c)) { c.updated = Date.now(); SYNC.queue.add(c.id); }
+    });
+  }
+  function schedulePush() { clearTimeout(SYNC.timer); SYNC.timer = setTimeout(flushPush, 700); }
+  async function flushPush() {
+    if (!syncOn() || SYNC.pushing || !SYNC.queue.size) return;
+    SYNC.pushing = true;
+    try {
+      for (const id of Array.from(SYNC.queue)) {
+        SYNC.queue.delete(id);
+        const c = chats.find(x => x.id === id);
+        if (!c || !c.messages || !c.messages.length) continue;
+        const sig = chatSig(c);
+        let r;
+        try { r = await syncFetch("/sync/chat/" + encodeURIComponent(id), { method: "PUT", body: { chat: c } }); }
+        catch (e) { SYNC.queue.add(id); break; }
+        if (r.ok && r.data.gone) {   // deleted on another device
+          chats = chats.filter(x => x.id !== id || (sending && x.id === currentChatId));
+          try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); } catch (e) {}
+          renderChatList();
+        } else if (r.ok) {
+          SYNC.sent[id] = sig;
+        } else if (r.status === 413) {
+          SYNC.sent[id] = sig;   // too big for the account: keep it on this device only
+          if (!SYNC.warned[id]) { SYNC.warned[id] = 1; showNote(r.data.message || "This chat is too big to save to your account. It's still saved on this device."); }
+        } else { SYNC.queue.add(id); break; }
+      }
+    } finally {
+      SYNC.pushing = false;
+      if (SYNC.queue.size && syncOn()) setTimeout(flushPush, 15000);
+    }
+  }
+  function sortChats() {
+    chats.sort((a, b) => (b.messages && b.messages.length ? b.updated || 0 : Infinity) - (a.messages && a.messages.length ? a.updated || 0 : Infinity));
+  }
+  async function pullChats(force) {
+    if (!syncOn() || SYNC.pulling) return;
+    if (!force && Date.now() - SYNC.lastPull < 20000) return;
+    SYNC.pulling = true; SYNC.lastPull = Date.now();
+    const who = auth && auth.email;
+    try {
+      for (const id of readGone()) {
+        const d = await syncFetch("/sync/chat/" + encodeURIComponent(id), { method: "DELETE" });
+        if (d.ok) writeGone(readGone().filter(x => x !== id));
+      }
+      const r = await syncFetch("/sync/chats");
+      if (!r.ok || !auth || auth.email !== who) return;
+      const gone = new Set(r.data.gone || []);
+      let changed = false;
+      const before = chats.length;
+      chats = chats.filter(c => !gone.has(c.id) || (sending && c.id === currentChatId));
+      if (chats.length !== before) changed = true;
+      for (const s of r.data.chats || []) {
+        const local = chats.find(c => c.id === s.id);
+        if (local && (local.updated || 0) >= s.updated) {
+          if ((local.updated || 0) === s.updated) SYNC.sent[s.id] = chatSig(local);
+          else SYNC.queue.add(s.id);
+          continue;
+        }
+        if (sending && s.id === currentChatId) continue;
+        const one = await syncFetch("/sync/chat/" + encodeURIComponent(s.id));
+        if (!one.ok || !one.data.chat || !auth || auth.email !== who) continue;
+        const c = one.data.chat;
+        const i = chats.findIndex(x => x.id === c.id);
+        if (i >= 0) chats[i] = c; else chats.push(c);
+        SYNC.sent[c.id] = chatSig(c);
+        changed = true;
+      }
+      const onServer = new Set((r.data.chats || []).map(c => c.id));
+      chats.forEach(c => {
+        if (!onServer.has(c.id) && c.messages && c.messages.length) { c.updated = c.updated || Date.now(); SYNC.queue.add(c.id); }
+      });
+      SYNC.ready = true;
+      if (changed) {
+        sortChats();
+        try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); } catch (e) {}
+        if (!sending) {
+          if (!getCurrentChat()) currentChatId = chats.length ? chats[0].id : null;
+          const cur = getCurrentChat();
+          if (cur) {
+            if (messages !== cur.messages) {
+              messages = cur.messages;
+              selectedTier = cur.tier || selectedTier;
+              updateModelPickerLabel();
+              renderMessages();
+              updateInputAvailability();
+            }
+          } else newChat(selectedTier);
+        }
+        renderChatList();
+      }
+      if (SYNC.queue.size) flushPush();
+    } catch (e) {
+    } finally {
+      SYNC.pulling = false;
+    }
+    resumePending();
+  }
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) pullChats(false); });
+
   // ---------- Mobile sidebar drawer ----------
   function openMobileSidebar() {
     el.sidebar.classList.add("mobile-open");
@@ -2559,8 +2846,10 @@
     el.sidebarBackdrop.classList.add("show");
     document.body.classList.toggle("history-on", historyEnabled);
     renderChatList();
+    resetSync();
     if (historyEnabled) {
       loadChats();
+      setTimeout(() => pullChats(true), 0);
       if (chats.length === 0) {
         newChat(selectedTier);
       } else {
@@ -2578,7 +2867,7 @@
     if (sending) return;
     if (isGuest()) {
       el.settingsOverlay.classList.remove("show");
-      openAuth("welcome", "Saving chats on this device needs a free account.");
+      openAuth("welcome", "Saving chats needs a free account.");
       return;
     }
     const turningOn = !historyEnabled;
@@ -2595,7 +2884,7 @@
       if (chats.length > 0) {
         const ok = await showConfirm(
           "Turn off chat history?",
-          `This permanently deletes ${chats.length} saved chat${chats.length === 1 ? "" : "s"} on this device. This can't be undone.`
+          `This permanently deletes ${chats.length} saved chat${chats.length === 1 ? "" : "s"} from this device and your account, on every device. This can't be undone.`
         );
         if (!ok) return;
       }
@@ -2603,6 +2892,7 @@
     historyEnabled = turningOn;
     localStorage.setItem(historyKey(), historyEnabled ? "true" : "false");
     if (!historyEnabled) {
+      if (serverSync && !isGuest()) syncFetch("/sync/all", { method: "DELETE" }).catch(() => {});
       localStorage.removeItem(chatsKey());
       chats = [];
       currentChatId = null;
@@ -3546,6 +3836,7 @@
     if (scEl) row.appendChild(scEl);
     const fyEl = meta && meta.ferry ? buildFerryCard(meta.ferry) : null;
     if (fyEl) row.appendChild(fyEl);
+    if (meta && meta.memory) row.appendChild(buildMemoryChip(meta.memory));
     if (!imgEl) row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -5719,6 +6010,8 @@
       if (typeof data.ferries_cost === "number") ferryCost = data.ferries_cost;
       if (typeof data.studyplus === "boolean") plusServerOn = data.studyplus;
       if (typeof data.studyplus_cost === "number") plusCost = data.studyplus_cost;
+      if (data.sync && !serverSync) { serverSync = true; pullChats(true); }
+      if (auth && data.account && "avatar" in data) setAvatar(data.avatar);
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
       const pct = sharedRemaining !== null ? Math.max(0, Math.min(100, (sharedRemaining / sharedLimit) * 100)) : 0;
@@ -5749,9 +6042,9 @@
     document.body.classList.toggle("guest", isGuest());
     document.body.classList.toggle("signed-in", !isGuest());
     if (auth) {
-      $("acct-btn").textContent = (auth.name || auth.email || "?").trim().charAt(0).toUpperCase();
       $("am-name").textContent = auth.name || "";
       $("am-email").textContent = auth.email || "";
+      paintAvatar();
     }
     el.historySwitch.classList.toggle("on", historyEnabled);
   }
@@ -5867,7 +6160,7 @@
     // Keep a conversation the guest was in the middle of: it becomes their first saved chat.
     const carry = messages.length ? messages.slice() : null;
     const carryTier = selectedTier;
-    auth = { token: data.token, name: data.account.name, email: data.account.email };
+    auth = { token: data.token, name: data.account.name, email: data.account.email, avatar: data.account.avatar || null };
     saveAuth();
     adoptLegacyChats();
     historyEnabled = readHistoryPref();
@@ -5882,7 +6175,7 @@
     }
     updateAccountUI();
     $("au-done-title").textContent = title || `You're in, ${auth.name}!`;
-    $("au-done-sub").textContent = sub || "Every model is unlocked, and your chats now save on this device.";
+    $("au-done-sub").textContent = sub || "Every model is unlocked, and your chats now save to your account.";
     authView("done");
     applyHistoryMode();
     updateModelPickerLabel();
@@ -6043,11 +6336,220 @@
     try { localStorage.removeItem(chatsKey()); localStorage.removeItem(historyKey()); } catch (err) {}
     signOutLocal();
     $("au-done-title").textContent = "Account deleted";
-    $("au-done-sub").textContent = "Your details are gone from the SCODE server, and your chats are gone from this device.";
+    $("au-done-sub").textContent = "Your details, chats, memories and picture are gone from the SCODE server, and your chats are gone from this device.";
     authView("done");
     checkStatus();
     setTimeout(closeAuth, 2200);
   });
+
+
+  // =====================================================================
+  //  Account page: profile picture, Memory, Help improve SCODE AI
+  // =====================================================================
+  const apOv = $("account-overlay");
+  let meData = null;
+  function initialOf() { return ((auth && (auth.name || auth.email)) || "?").trim().charAt(0).toUpperCase(); }
+  function paintAvatar() {
+    const url = auth && auth.avatar;
+    const btn = $("acct-btn");
+    btn.classList.toggle("has-pic", !!url);
+    btn.style.backgroundImage = url ? `url("${url}")` : "";
+    btn.textContent = initialOf();
+    const am = $("am-pic");
+    if (am) { am.style.backgroundImage = url ? `url("${url}")` : ""; am.textContent = url ? "" : initialOf(); }
+    const pic = $("ap-pic");
+    pic.style.backgroundImage = url ? `url("${url}")` : "";
+    $("ap-initial").textContent = url ? "" : initialOf();
+    $("ap-remove").hidden = !url;
+  }
+  function setAvatar(url) {
+    if (!auth) return;
+    url = url || null;
+    if ((auth.avatar || null) !== url) { auth.avatar = url; saveAuth(); }
+    paintAvatar();
+  }
+  function apError(msg) {
+    const e = $("ap-err");
+    e.textContent = msg || "";
+    e.classList.toggle("show", !!msg);
+  }
+  function memWhen(ts) {
+    const d = new Date(ts * 1000), now = new Date();
+    const days = Math.floor((now - d) / 86400000);
+    if (days < 1 && d.getDate() === now.getDate()) return "Today";
+    if (days < 2) return "Yesterday";
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: d.getFullYear() === now.getFullYear() ? undefined : "numeric" });
+  }
+  function paintAccount() {
+    if (!auth) return;
+    $("ap-name").textContent = auth.name || "";
+    $("ap-email").textContent = auth.email || "";
+    paintAvatar();
+    const d = meData;
+    $("ap-mem-switch").classList.toggle("on", !!(d && d.memory_on));
+    $("ap-train-switch").classList.toggle("on", !!(d && d.train_ok));
+    $("ap-mem-body").hidden = !(d && d.memory_on);
+    const off = $("ap-mem-off");
+    const list = $("ap-mem-list");
+    if (!d) { list.innerHTML = '<div class="ap-mem-empty">Loading…</div>'; off.hidden = true; return; }
+    const n = d.memories.length;
+    off.hidden = d.memory_on;
+    off.innerHTML = "";
+    if (!d.memory_on) {
+      off.textContent = "Memory is off. SCODE AI won't use or save memories" + (n ? `. Your ${n} saved memor${n === 1 ? "y is" : "ies are"} kept until you delete ${n === 1 ? "it" : "them"}. ` : ".");
+      if (n) {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "ap-link danger"; b.textContent = "Delete " + (n === 1 ? "it" : "them");
+        b.addEventListener("click", clearMemories);
+        off.appendChild(b);
+      }
+    }
+    $("ap-mem-count").textContent = n ? `${n} of ${d.memory_max} memories` : "";
+    $("ap-mem-clear").hidden = !n;
+    list.innerHTML = "";
+    if (!n) {
+      list.innerHTML = '<div class="ap-mem-empty">No memories yet. Try sending &ldquo;Remember that I play hockey&rdquo; in any chat.</div>';
+    }
+    d.memories.forEach(m => {
+      const row = document.createElement("div");
+      row.className = "ap-mem";
+      row.innerHTML = '<span class="ap-mem-dot"></span><div class="ap-mem-text"></div>' +
+        '<button class="ap-x" type="button" aria-label="Delete this memory"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+      const t = row.querySelector(".ap-mem-text");
+      t.textContent = m.text;
+      const w = document.createElement("span");
+      w.className = "ap-mem-when"; w.textContent = memWhen(m.created);
+      t.appendChild(w);
+      row.querySelector(".ap-x").addEventListener("click", async () => {
+        row.classList.add("out");
+        const r = await syncFetch("/me/memories/" + m.id, { method: "DELETE" }).catch(() => null);
+        if (r && r.ok) { meData = r.data; setTimeout(paintAccount, 180); }
+        else { row.classList.remove("out"); apError("Couldn't delete that. Try again."); }
+      });
+      list.appendChild(row);
+    });
+    const hist = $("ap-chats-title");
+    hist.textContent = historyEnabled ? (d.chats ? `${d.chats} chat${d.chats === 1 ? "" : "s"} saved to your account` : "Saved to your account") : "Save chats is off";
+    $("ap-chats-sub").textContent = historyEnabled
+      ? "Your chats are on every device you sign in on, and replies keep going even if you close the page."
+      : "Turn on Save chats in Settings to keep your chats on every device.";
+  }
+  async function loadMe() {
+    try {
+      const r = await syncFetch("/me");
+      if (r.ok) { meData = r.data; setAvatar(r.data.avatar); paintAccount(); }
+      else apError(r.data.message || "Couldn't load your account.");
+    } catch (e) { apError("Can't reach the server right now."); }
+  }
+  function openAccount() {
+    if (isGuest()) { openAuth("welcome"); return; }
+    $("acct-wrap").classList.remove("open");
+    apError("");
+    paintAccount();
+    apOv.classList.add("show");
+    loadMe();
+  }
+  function closeAccount() { apOv.classList.remove("show"); }
+  async function clearMemories() {
+    const n = meData ? meData.memories.length : 0;
+    if (!(await showConfirm("Delete all memories?", `SCODE AI will forget ${n === 1 ? "the 1 thing" : "all " + n + " things"} it remembers about you. This can't be undone.`))) return;
+    const r = await syncFetch("/me/memories", { method: "DELETE" }).catch(() => null);
+    if (r && r.ok) { meData = r.data; paintAccount(); } else apError("Couldn't delete them. Try again.");
+  }
+  // Shrink a photo to a 160 px circle-ready square before it's uploaded.
+  function shrinkPicture(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const S = 160, c = document.createElement("canvas");
+        c.width = c.height = S;
+        const ctx = c.getContext("2d");
+        const side = Math.min(img.naturalWidth, img.naturalHeight);
+        ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, S, S);
+        ctx.drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, 0, 0, S, S);
+        URL.revokeObjectURL(url);
+        let q = 0.86, out = c.toDataURL("image/jpeg", q);
+        while (out.length > 55000 && q > 0.4) { q -= 0.12; out = c.toDataURL("image/jpeg", q); }
+        resolve(out);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("bad image")); };
+      img.src = url;
+    });
+  }
+  async function uploadAvatar(data) {
+    $("ap-pic").classList.add("busy");
+    apError("");
+    const r = await syncFetch("/me/avatar", { method: "POST", body: { avatar: data } }).catch(() => null);
+    $("ap-pic").classList.remove("busy");
+    if (r && r.ok) { meData = r.data; setAvatar(r.data.avatar); paintAccount(); }
+    else apError((r && r.data.message) || "Couldn't save your picture. Try again.");
+  }
+  $("ap-file").addEventListener("change", async (e) => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    try { uploadAvatar(await shrinkPicture(f)); }
+    catch (err) { apError("That file didn't work. Try a JPG or PNG photo."); }
+  });
+  $("ap-pic").addEventListener("click", () => $("ap-file").click());
+  $("ap-upload").addEventListener("click", () => $("ap-file").click());
+  $("ap-remove").addEventListener("click", () => uploadAvatar(null));
+  $("ap-mem-switch").addEventListener("click", async () => {
+    if (!meData) return;
+    const on = !meData.memory_on;
+    meData.memory_on = on; paintAccount();
+    const r = await syncFetch("/me/settings", { method: "POST", body: { memory_on: on } }).catch(() => null);
+    if (r && r.ok) { meData = r.data; paintAccount(); } else { meData.memory_on = !on; paintAccount(); apError("Couldn't change that. Try again."); }
+  });
+  $("ap-train-switch").addEventListener("click", async () => {
+    if (!meData) return;
+    const on = !meData.train_ok;
+    meData.train_ok = on; paintAccount();
+    const r = await syncFetch("/me/settings", { method: "POST", body: { train_ok: on } }).catch(() => null);
+    if (r && r.ok) { meData = r.data; paintAccount(); } else { meData.train_ok = !on; paintAccount(); apError("Couldn't change that. Try again."); }
+  });
+  $("ap-mem-add").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const inp = $("ap-mem-input");
+    const text = inp.value.trim();
+    if (!text) return;
+    const r = await syncFetch("/me/memories", { method: "POST", body: { text } }).catch(() => null);
+    if (r && r.ok) { inp.value = ""; meData = r.data; apError(""); paintAccount(); }
+    else apError((r && r.data.message) || "Couldn't save that. Try again.");
+  });
+  $("ap-mem-clear").addEventListener("click", clearMemories);
+  $("ap-train-more").addEventListener("click", () => {
+    openPrivacy(false);
+    setTimeout(() => { const t = $("pv-training"); if (t) $("pv-body").scrollTop = t.offsetTop - 20; }, 80);
+  });
+  $("ap-history").addEventListener("click", () => { closeAccount(); el.settingsOverlay.classList.add("show"); loadModels(); });
+  $("ap-signout").addEventListener("click", () => { closeAccount(); $("am-signout").click(); });
+  $("ap-delete").addEventListener("click", () => { closeAccount(); openAuth("delete"); });
+  $("ap-close").addEventListener("click", closeAccount);
+  apOv.addEventListener("click", (e) => { if (e.target === apOv) closeAccount(); });
+  $("am-account").addEventListener("click", openAccount);
+
+  // "Saved to memory" under a reply.
+  function buildMemoryChip(info) {
+    const chip = document.createElement("div");
+    const icon = '<svg viewBox="0 0 24 24" fill="none"><path d="M9.5 4.5a3 3 0 0 0-5 2.4A3.2 3.2 0 0 0 3 12a3.2 3.2 0 0 0 2 3 3.3 3.3 0 0 0 4.5 4V4.5zM14.5 4.5a3 3 0 0 1 5 2.4A3.2 3.2 0 0 1 21 12a3.2 3.2 0 0 1-2 3 3.3 3.3 0 0 1-4.5 4V4.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+    if (info && info.off) {
+      chip.className = "mem-chip off";
+      chip.innerHTML = icon + "<span>Memory is off, so this wasn't saved.</span>";
+    } else {
+      chip.className = "mem-chip";
+      chip.innerHTML = icon + '<span>Saved to memory</span><span class="mem-what"></span>';
+      chip.querySelector(".mem-what").textContent = (info && info.saved) ? "· " + info.saved : "";
+    }
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = info && info.off ? "Turn on" : "Manage";
+    b.addEventListener("click", openAccount);
+    chip.appendChild(b);
+    const wrap = document.createElement("div");
+    wrap.appendChild(chip);
+    return wrap;
+  }
 
   // Top bar
   $("signin-btn").addEventListener("click", () => openAuth("welcome"));
@@ -6059,7 +6561,7 @@
     authApi("/auth/logout", {}, true);
     signOutLocal();
     checkStatus();
-    showNote("You're signed out. Your saved chats stay on this device for when you sign back in.");
+    showNote("You're signed out. Sign back in to see your chats on any device.");
   });
   $("am-delete").addEventListener("click", () => {
     $("acct-wrap").classList.remove("open");
@@ -6098,6 +6600,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-sync", type: "feature", date: "2026-10-06", title: "Your chats everywhere, and Memory",
+      text: "Chats now save to your SCODE account, so they're on your phone, laptop and iPad. Replies keep going even if you close the page, so a long Study Plus or picture is waiting when you come back. SCODE AI can also remember things about you, and you can add a profile picture.",
+      how: ["Sign in on any device and your chats are there.", "Start a message with “Remember that…” to save something to memory.", "Tap your picture (top right), then Account, picture & memory, to change your picture, see or delete memories, or turn Memory off."] },
     { id: "f-ferries", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Ferries",
       text: "Live BC Ferries times, right in the chat. Turn on Ferries and ask about Campbell River to Quadra, Quadra to Cortes, Vancouver to Victoria, Horseshoe Bay to Nanaimo, Tsawwassen to Duke Point or Comox to Powell River. Tell it when you can be at the terminal and it works out exactly which sailing you'll catch. The card shows a countdown, cancellations, how full the big boats are, a map with you and the ferry on it, and one-tap directions. Works on every model, even without an account, for +1 point.",
       how: ["Tap the Ferries button (the boat) next to the text box so it turns green.", "Ask something like “next ferry to Quadra” or “I can be there in 45 min, ferry to Quadra?”, or tap an example in the bar.", "On the card, tap how soon you can be at the terminal, or From where I am, to see which sailing you'll catch.", "Tap ⇄ to flip the direction, Directions to open Google Maps, or Refresh for the latest status."] },
@@ -6275,135 +6780,9 @@
   }
 
   // ---------- Send ----------
-  async function send() {
-    const text = el.input.value.trim();
-    if (!text || sending || el.input.disabled) return;
-    // Decide before the box is cleared: read a pasted link, or keep asking about the last one.
-    const lp = linkPlan();
-    const linkToSend = lp && (lp.kind === "read" || lp.kind === "follow") ? lp.url : null;
-    linkSkipFor = null;
-    const imgNow = imgForceOnce || imgState(text) !== "off";
-    imgForceOnce = false;
-    if (imgNow && isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
-    imgSkipped = false;
-    const scNow = !imgNow && scoresActive();
-    const scHint = scNow ? lastScoresLeague() : null;
-    const fyNow = !imgNow && !scNow && ferryActive();
-    const fyBody = fyNow ? fyPayload() : null;
-    const wxWanted = !imgNow && !scNow && !fyNow && wxState(text) !== "off";
-    const wxSendTo = wxTarget();
-    wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
-    sending = true;
-    el.input.value = "";
-    autoGrow();
-    updateSendState();
-    if (touchLike) el.input.blur();
-
-    const hadImageBefore = messages.some(m => m.images && m.images.length);
-    const addingImageNow = !!pendingImageBase64;
-    messages.push({ role: "user", content: text, images: pendingImageBase64 ? [pendingImageBase64] : undefined });
-    clearPendingImage();
-    if (historyEnabled) {
-      const chat = getCurrentChat();
-      if (chat && chat.title === "New chat") chat.title = text.length > 38 ? text.slice(0, 38) + "…" : text;
-      saveChats();
-      renderChatList();
-    }
-    // First message: let the box glide from the middle of the screen to the bottom.
-    if (document.body.classList.contains("is-empty") && document.startViewTransition && !reduceMotion && window.innerWidth > 720) {
-      try { await document.startViewTransition(() => renderMessages()).updateCallbackDone; }
-      catch (e) { renderMessages(); }
-    } else {
-      renderMessages();
-    }
-    if (!hadImageBefore && addingImageNow) {
-      showNote(`Heads up: this chat now has a photo in it, so every message here costs double (${TIER_INFO[selectedTier].cost * 2} instead of ${TIER_INFO[selectedTier].cost}) until you start a new chat.`);
-    }
-
-    // Scan the photo that was just sent, until the reply is finished (or fails).
-    let scanWrap = null;
-    if (addingImageNow) {
-      const wraps = el.messages.querySelectorAll(".msg.user .img-wrap");
-      scanWrap = wraps[wraps.length - 1] || null;
-      if (scanWrap) scanWrap.classList.add("scanning");
-    }
-    function stopScan() {
-      if (!scanWrap) return;
-      const w = scanWrap; scanWrap = null;
-      w.classList.remove("scanning");
-      w.classList.add("scan-done");
-      setTimeout(() => w.classList.remove("scan-done"), 750);
-    }
-
-    const tierAtSend = selectedTier;
-    // Web search only runs on supported options, and never in a chat that has a photo.
-    const useWeb = searchUnlocked() && webOn && WEB_TIERS.has(tierAtSend) && !hadImageBefore && !addingImageNow;
-    const studyNow = studyActive() && !isGuest();
-    const controller = new AbortController();
-    // Long enough to comfortably outlast the server's own longest timeout —
-    // General Ultra's complex photo analysis can run up to 900s
-    // server-side, so this needs real margin above that.
-    const clientTimeout = setTimeout(() => controller.abort(), studyNow && studyKind === "plus" ? 2400000 : 950000);
-
-    const loaderRow = buildLoaderRow();
-    el.messages.appendChild(loaderRow);
-    scrollToBottom(true);
-
-    try {
-      const res = await fetch(PROXY_URL + "/chat", {
-        method: "POST",
-        headers: authHeaders({ "Content-Type": "application/json" }),
-        // Only send what the server actually uses (keeps uploads small).
-        body: JSON.stringify({
-          tier: selectedTier,
-          web: useWeb && !linkToSend && !studyNow && !imgNow,
-          link: (!studyNow && !imgNow && linkToSend) || undefined,
-          study: studyNow && !imgNow ? { kind: studyKind } : undefined,
-          image: imgNow || undefined,
-          weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
-          scores: scNow && !studyNow && !linkToSend ? (scHint ? { league: scHint } : {}) : undefined,
-          ferry: fyNow && !studyNow && !linkToSend ? fyBody : undefined,
-          messages: messages.map(m => {
-            const o = { role: m.role, content: m.content };
-            if (m.images) o.images = m.images;
-            return o;
-          }),
-        }),
-        signal: controller.signal,
-      });
-      clearTimeout(clientTimeout);
-
-      const ct = res.headers.get("content-type") || "";
-
-      if (!res.ok || ct.includes("application/json")) {
-        const data = await res.json().catch(() => ({}));
-        if (loaderRow._clear) loaderRow._clear();
-        loaderRow.remove();
-        if (res.status === 429) {
-          const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
-          showNote(data.message || `You're out of budget. It refills at ${renewTime}.`);
-          if (data.guest) openAuth("welcome", `You've used your ${guestLimit} guest points for this hour. They refill at ${renewTime}.`);
-        } else if (res.status === 403 && data.error === "policy_required") {
-          messages.pop();
-          renderMessages();
-          el.input.value = text; autoGrow();
-          openPrivacy(true);
-        } else if (res.status === 403 && data.error === "signin_required") {
-          // The server says this needs an account: put their message back so nothing is lost.
-          messages.pop();
-          renderMessages();
-          el.input.value = text; autoGrow();
-          openAuth("welcome", data.message);
-        } else {
-          showNote(data.message || `Something went wrong (error ${res.status}). Try sending it again.`);
-        }
-        checkStatus();
-        stopScan();
-        sending = false;
-        updateSendState();
-        return;
-      }
-
+  // Reads a reply as it streams in (or a saved one being picked back up) and adds it to the chat.
+  async function runStream(res, o) {
+    const { text, loaderRow, tierAtSend, linkToSend } = o;
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buf = "";
@@ -6480,6 +6859,7 @@
       }
 
       let streamError = null;
+      let memInfo = null;
       let webSources = [], searchNote = "";
       let linkInfo = null, linkNote = "";
       let studySet = null, studyNote = "";
@@ -6488,7 +6868,7 @@
       let fyData = null, fyNote = "", fyNeed = false;
       let imgGen = null, imgData = null, imgBlocked = null, imgPrompt = text;
       let plus = null, plusNote = "";
-      const studyWord = studyKind === "quiz" ? "quiz" : "flashcards";
+      const studyWord = o.kind === "quiz" ? "quiz" : "flashcards";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -6507,6 +6887,7 @@
             streamError = chunk.message || "Something went wrong. Try sending it again.";
             break;
           }
+          if (chunk.memory) { memInfo = chunk.memory; continue; }
           if (chunk.search) {
             // Progress from the server's web search (before the model starts).
             const s = chunk.search;
@@ -6640,11 +7021,9 @@
         if (typeRaf) cancelAnimationFrame(typeRaf);
         if (liveRow) liveRow.remove();
         showNote(streamError);
+        if (o.chat && o.chat.pending) { delete o.chat.pending; saveChats(); }
         checkStatus();
-        stopScan();
-        sending = false;
-        updateSendState();
-        return;
+        return "error";
       }
 
       if (!revealed) reveal();
@@ -6697,6 +7076,7 @@
       else if (fyNeed) liveRow.appendChild(buildFerryNeed(text));
       // The first town someone gets a forecast for becomes their town.
       if (wxData && !wxPlace) setWxPlace({ code: wxData.code, name: wxData.place, prov: wxData.prov });
+      if (memInfo) liveRow.appendChild(buildMemoryChip(memInfo));
       if (!imgGen) liveRow.appendChild(buildActions(finalText, tierAtSend));
 
       messages.push({
@@ -6713,16 +7093,206 @@
         ferry: fyData || undefined,
         image: imgData || imgBlocked || undefined,
         plus: plus && plus.data() ? plus.data() : undefined,
+        memory: memInfo || undefined,
       });
+      if (o.chat) delete o.chat.pending;
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
       updateLinkHint();
       if (historyEnabled) saveChats();
       updateJumpBtn();
       checkStatus();
+      return "ok";
+  }
+
+  // A reply that was still being written when the page closed (or on another
+  // device): the server kept going, so fetch it and show it.
+  let resuming = false;
+  async function resumePending() {
+    const chat = historyEnabled ? getCurrentChat() : null;
+    if (!chat || !chat.pending || sending || resuming || isGuest() || !serverSync) return;
+    const p = chat.pending;
+    resuming = true; sending = true; updateSendState();
+    const loaderRow = buildLoaderRow();
+    if (loaderRow._setStage) loaderRow._setStage("Picking your reply back up");
+    el.messages.appendChild(loaderRow);
+    scrollToBottom(true);
+    try {
+      const res = await fetch(PROXY_URL + "/job/" + encodeURIComponent(p.job), { headers: authHeaders() });
+      if (!res.ok) {
+        if (loaderRow._clear) loaderRow._clear();
+        loaderRow.remove();
+        if (res.status === 404 && getCurrentChat() === chat) {
+          // It never reached the server: put the message back in the box.
+          delete chat.pending;
+          const last = chat.messages[chat.messages.length - 1];
+          if (last && last.role === "user" && last.content === p.text) chat.messages.pop();
+          saveChats();
+          renderMessages();
+          if (!el.input.value.trim()) { el.input.value = p.text; autoGrow(); }
+          showNote("Your last message didn't reach the server, so it's back in the box. Send it again.");
+        } else if (res.status !== 404) {
+          showNote("Couldn't pick up your last reply right now. It'll try again when you come back.");
+        }
+      } else {
+        if (loaderRow._setStage) loaderRow._setStage("Still working on your reply");
+        await runStream(res, { text: p.text, loaderRow, tierAtSend: p.tier || selectedTier, linkToSend: p.link || null, kind: p.kind, chat });
+      }
+    } catch (e) {
+      if (loaderRow._clear) loaderRow._clear();
+      if (loaderRow.parentNode) loaderRow.remove();
+      showNote("Can't reach the server to pick up your last reply. It'll try again when you come back.");
+    }
+    resuming = false; sending = false; updateSendState();
+  }
+
+  async function send() {
+    const text = el.input.value.trim();
+    if (!text || sending || el.input.disabled) return;
+    // Decide before the box is cleared: read a pasted link, or keep asking about the last one.
+    const lp = linkPlan();
+    const linkToSend = lp && (lp.kind === "read" || lp.kind === "follow") ? lp.url : null;
+    linkSkipFor = null;
+    const imgNow = imgForceOnce || imgState(text) !== "off";
+    imgForceOnce = false;
+    if (imgNow && isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
+    imgSkipped = false;
+    const scNow = !imgNow && scoresActive();
+    const scHint = scNow ? lastScoresLeague() : null;
+    const fyNow = !imgNow && !scNow && ferryActive();
+    const fyBody = fyNow ? fyPayload() : null;
+    const wxWanted = !imgNow && !scNow && !fyNow && wxState(text) !== "off";
+    const wxSendTo = wxTarget();
+    wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
+    sending = true;
+    el.input.value = "";
+    autoGrow();
+    updateSendState();
+    if (touchLike) el.input.blur();
+
+    const hadImageBefore = messages.some(m => m.images && m.images.length);
+    const addingImageNow = !!pendingImageBase64;
+    messages.push({ role: "user", content: text, images: pendingImageBase64 ? [pendingImageBase64] : undefined });
+    clearPendingImage();
+    // Signed-in replies run as a job on the server, so they finish even if this page closes.
+    const jobChat = historyEnabled && serverSync && !isGuest() ? getCurrentChat() : null;
+    const jobId = jobChat ? "j" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8) : null;
+    if (jobChat) jobChat.pending = { job: jobId, text, tier: selectedTier, kind: studyActive() ? studyKind : null, link: linkToSend || null, at: Date.now() };
+    if (historyEnabled) {
+      const chat = getCurrentChat();
+      if (chat && chat.title === "New chat") chat.title = text.length > 38 ? text.slice(0, 38) + "…" : text;
+      saveChats();
+      renderChatList();
+    }
+    // First message: let the box glide from the middle of the screen to the bottom.
+    if (document.body.classList.contains("is-empty") && document.startViewTransition && !reduceMotion && window.innerWidth > 720) {
+      try { await document.startViewTransition(() => renderMessages()).updateCallbackDone; }
+      catch (e) { renderMessages(); }
+    } else {
+      renderMessages();
+    }
+    if (!hadImageBefore && addingImageNow) {
+      showNote(`Heads up: this chat now has a photo in it, so every message here costs double (${TIER_INFO[selectedTier].cost * 2} instead of ${TIER_INFO[selectedTier].cost}) until you start a new chat.`);
+    }
+
+    // Scan the photo that was just sent, until the reply is finished (or fails).
+    let scanWrap = null;
+    if (addingImageNow) {
+      const wraps = el.messages.querySelectorAll(".msg.user .img-wrap");
+      scanWrap = wraps[wraps.length - 1] || null;
+      if (scanWrap) scanWrap.classList.add("scanning");
+    }
+    function stopScan() {
+      if (!scanWrap) return;
+      const w = scanWrap; scanWrap = null;
+      w.classList.remove("scanning");
+      w.classList.add("scan-done");
+      setTimeout(() => w.classList.remove("scan-done"), 750);
+    }
+
+    const tierAtSend = selectedTier;
+    // Web search only runs on supported options, and never in a chat that has a photo.
+    const useWeb = searchUnlocked() && webOn && WEB_TIERS.has(tierAtSend) && !hadImageBefore && !addingImageNow;
+    const studyNow = studyActive() && !isGuest();
+    const controller = new AbortController();
+    // Long enough to comfortably outlast the server's own longest timeout —
+    // General Ultra's complex photo analysis can run up to 900s
+    // server-side, so this needs real margin above that.
+    const clientTimeout = setTimeout(() => controller.abort(), studyNow && studyKind === "plus" ? 2400000 : 950000);
+
+    const loaderRow = buildLoaderRow();
+    el.messages.appendChild(loaderRow);
+    scrollToBottom(true);
+
+    try {
+      const res = await fetch(PROXY_URL + "/chat", {
+        method: "POST",
+        headers: authHeaders({ "Content-Type": "application/json" }),
+        // Only send what the server actually uses (keeps uploads small).
+        body: JSON.stringify({
+          tier: selectedTier,
+          web: useWeb && !linkToSend && !studyNow && !imgNow,
+          link: (!studyNow && !imgNow && linkToSend) || undefined,
+          study: studyNow && !imgNow ? { kind: studyKind } : undefined,
+          image: imgNow || undefined,
+          weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
+          scores: scNow && !studyNow && !linkToSend ? (scHint ? { league: scHint } : {}) : undefined,
+          ferry: fyNow && !studyNow && !linkToSend ? fyBody : undefined,
+          job: jobId ? { id: jobId, chat: jobChat.id } : undefined,
+          messages: messages.map(m => {
+            const o = { role: m.role, content: m.content };
+            if (m.images) o.images = m.images;
+            return o;
+          }),
+        }),
+        signal: controller.signal,
+      });
+      clearTimeout(clientTimeout);
+
+      const ct = res.headers.get("content-type") || "";
+
+      if (!res.ok || ct.includes("application/json")) {
+        const data = await res.json().catch(() => ({}));
+        if (jobChat && jobChat.pending) { delete jobChat.pending; saveChats(); }
+        if (loaderRow._clear) loaderRow._clear();
+        loaderRow.remove();
+        if (res.status === 429) {
+          const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
+          showNote(data.message || `You're out of budget. It refills at ${renewTime}.`);
+          if (data.guest) openAuth("welcome", `You've used your ${guestLimit} guest points for this hour. They refill at ${renewTime}.`);
+        } else if (res.status === 403 && data.error === "policy_required") {
+          messages.pop();
+          renderMessages();
+          el.input.value = text; autoGrow();
+          openPrivacy(true);
+        } else if (res.status === 403 && data.error === "signin_required") {
+          // The server says this needs an account: put their message back so nothing is lost.
+          messages.pop();
+          renderMessages();
+          el.input.value = text; autoGrow();
+          openAuth("welcome", data.message);
+        } else {
+          showNote(data.message || `Something went wrong (error ${res.status}). Try sending it again.`);
+        }
+        checkStatus();
+        stopScan();
+        sending = false;
+        updateSendState();
+        return;
+      }
+
+      const out = await runStream(res, { text, loaderRow, tierAtSend, linkToSend, kind: studyKind, chat: jobChat });
+      if (out === "error") { stopScan(); sending = false; updateSendState(); return; }
     } catch (e) {
       clearTimeout(clientTimeout);
       if (loaderRow._clear) loaderRow._clear();
       if (loaderRow.parentNode) loaderRow.remove();
+      if (jobChat && jobChat.pending && e.name !== "AbortError") {
+        // The connection dropped, but the server may still be writing it: pick it back up.
+        stopScan(); sending = false; updateSendState();
+        setTimeout(resumePending, 1200);
+        return;
+      }
+      if (jobChat && jobChat.pending) { delete jobChat.pending; saveChats(); }
       if (e.name === "AbortError") {
         showNote("This is taking longer than expected. The server may be busy, so try again in a bit.");
       } else {
