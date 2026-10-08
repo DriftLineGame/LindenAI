@@ -1677,6 +1677,45 @@
     .ap-name { font-size: 19px; }
     .mem-chip .mem-what { display: none; }
   }
+
+  /* ---------- SCODE Safety ---------- */
+  .sf-warn { margin: 4px 0 6px; border: 1.5px solid #e2a3a0; background: #fdf1f0; border-radius: 16px; padding: 14px 16px 13px; color: #5a3532; max-width: 560px; }
+  [data-theme="dark"] .sf-warn, .dark .sf-warn { background: rgba(192,57,43,.12); border-color: rgba(226,120,110,.5); color: #f3d0cb; }
+  .sf-warn .h { display: flex; align-items: center; gap: 9px; color: #c0392b; font-weight: 700; font-size: 15px; }
+  .sf-warn .h svg { width: 19px; height: 19px; flex-shrink: 0; }
+  .sf-warn .h span { margin-left: auto; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; background: #c0392b; color: #fff; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+  .sf-warn p { font-size: 14.5px; line-height: 1.5; margin-top: 7px; }
+  .sf-meter { display: flex; gap: 6px; margin-top: 11px; }
+  .sf-meter i { flex: 1; height: 6px; border-radius: 4px; background: rgba(192,57,43,.18); }
+  .sf-meter i.on { background: #c0392b; }
+  .sf-warn small { display: block; font-size: 12.5px; opacity: .8; margin-top: 7px; }
+  .sf-support { margin: 4px 0 6px; border-radius: 18px; padding: 18px 18px 16px; max-width: 560px; color: var(--text);
+    background: linear-gradient(160deg, rgba(95,170,220,.14), rgba(95,191,142,.12)); border: 1px solid rgba(95,170,220,.35); }
+  .sf-support .md { font-size: 15px; }
+  .sf-support .lines { display: grid; gap: 8px; margin: 12px 0 4px; }
+  .sf-support .lines a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+  .sf-support .lines a b { display: block; font-size: 14.5px; }
+  .sf-support .lines a small { display: block; font-size: 12.5px; color: var(--muted); }
+  .sf-support .lines a i { width: 34px; height: 34px; border-radius: 10px; background: rgba(95,170,220,.18); color: #3d8bcd; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-style: normal; }
+  .sf-support .lines a i svg { width: 18px; height: 18px; }
+  #sf-ov { position: fixed; inset: 0; z-index: 400; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(60,10,8,.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  #sf-ov.show { display: flex; animation: sfIn .25s ease; }
+  @keyframes sfIn { from { opacity: 0; } }
+  .sf-box { width: 440px; max-width: 100%; max-height: 90vh; overflow-y: auto; background: var(--surface); border-radius: 24px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.45); animation: sfPop .35s cubic-bezier(.2,1.3,.4,1); }
+  @keyframes sfPop { from { transform: scale(.92) translateY(10px); opacity: 0; } }
+  .sf-head { background: linear-gradient(160deg, #d9443a, #a92a22); color: #fff; padding: 24px 22px 20px; }
+  .sf-head .ic { width: 52px; height: 52px; border-radius: 16px; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; }
+  .sf-head .ic svg { width: 28px; height: 28px; }
+  .sf-head h2 { font-family: var(--serif); font-weight: 600; font-size: 27px; margin-top: 14px; }
+  .sf-head small { display: block; font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; font-weight: 700; margin-top: 3px; }
+  .sf-body { padding: 18px 22px 22px; font-size: 15px; line-height: 1.55; color: var(--text); }
+  .sf-body p + p { margin-top: 10px; }
+  .sf-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 11px 14px; background: var(--surface-2); border-radius: 12px; font-size: 14px; color: var(--muted); }
+  .sf-row b { color: var(--text); text-align: right; }
+  .sf-team { margin-top: 12px; padding: 12px 14px; border-left: 3px solid #c0392b; background: var(--surface-2); border-radius: 0 12px 12px 0; font-size: 14px; }
+  .sf-btns { display: flex; gap: 8px; margin-top: 16px; }
+  .sf-btns button { flex: 1; height: 44px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; font-size: 14.5px; cursor: pointer; }
+  .sf-btns button:hover { background: var(--hover); }
 </style>
 </head>
 <body class="is-empty">
@@ -2021,19 +2060,24 @@
   </div>
 </div>
 
+<div id="sf-ov" role="alertdialog" aria-modal="true" aria-labelledby="sf-title"><div class="sf-box">
+  <div class="sf-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 21V4M5 4h11l-2 4 2 4H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 id="sf-title">Message flagged</h2><small id="sf-sub">Account paused for review</small></div>
+  <div class="sf-body" id="sf-body"></div>
+</div></div>
 <div class="overlay" id="privacy-overlay">
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pv-title">
     <div class="pv-head">
       <div>
         <h2 id="pv-title">Privacy Policy</h2>
-        <div class="pv-date">SCODE AI &middot; Effective October 6, 2026 &middot; Version 2</div>
+        <div class="pv-date">SCODE AI &middot; Effective October 9, 2026 &middot; Version 3</div>
       </div>
       <button class="icon-btn" id="pv-close" type="button" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
     <div class="pv-body" id="pv-body" tabindex="0">
-      <div class="pv-agree-intro" id="pv-agree-intro">We've updated our Privacy Policy. Chats now save to your account so they're on all your devices, there's a new Memory feature, and there's a setting about helping train SCODE AI (look for &ldquo;Training copies&rdquo;). Please read it, then confirm the two boxes at the bottom to keep using your account.</div>
+      <div class="pv-agree-intro" id="pv-agree-intro">We've updated our Privacy Policy and added rules for using SCODE AI. Messages are now checked automatically for harmful or illegal content, and flagged messages are reviewed by our safety team (see &ldquo;Safety checks&rdquo; and &ldquo;Rules for using SCODE AI&rdquo;). Please read it, then confirm the two boxes at the bottom to keep using your account.</div>
       <p class="pv-lead">SCODE AI is a small, independent project run from Campbell River, British Columbia, Canada. This page explains, in plain words, what information we collect, who can see it, and what we promise. Questions? Email <a href="mailto:scodeai2026@gmail.com">scodeai2026@gmail.com</a>.</p>
 
       <h3>The short version</h3>
@@ -2045,6 +2089,7 @@
         <li>The AI runs on our own computer. We don't send your messages to big AI companies.</li>
         <li>No ads, no tracking, no selling or sharing your information. Ever.</li>
         <li>You must be 16 or older to make an account.</li>
+        <li>Every message is checked automatically for harmful or illegal content. Flagged messages are reviewed by our safety team, and serious ones can pause or ban an account.</li>
         <li>You can delete your account anytime.</li>
       </ul>
 
@@ -2066,6 +2111,8 @@
         <dt>Points</dt><dd>How many points you've used, counted per account (or, for guests, per internet address). This is only kept in memory and is wiped whenever our server restarts.</dd>
         <dt>Weather location</dt><dd>If you tap &ldquo;Use my location,&rdquo; your browser sends your location once to find the closest town. It isn't saved. The town you pick is remembered only on your device.</dd>
         <dt>Ferry location</dt><dd>Only if you turn on location in SCODE Ferries: your rough location (to about 100 metres) is sent with your ferry questions so we can work out your drive to the terminal. It isn't saved on our server, and you can turn it off any time.</dd>
+        <dt>Safety checks</dt><dd>Every message, and the replies to accounts, is checked by software on our own computer (a safety model and a word list) for harmful or illegal content. Nothing is sent to another company for this.</dd>
+        <dt>Flagged messages</dt><dd>If a message is flagged, a copy of that chat (the last few messages, never photos) is saved for review by the SCODE safety team: the person who runs SCODE AI and our lead security and safety manager. The flagged chat is removed from your account. Records of warnings and cleared flags are deleted after 30 days; flags that led to a ban are kept for the length of the ban plus one year; records the law requires us to keep are kept as long as the law says. Deleting your account doesn&rsquo;t remove a ban or its record while the ban lasts.</dd>
         <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're saved with your chat if Save chats is on, and otherwise not saved.</dd>
         <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
       </dl>
@@ -2073,7 +2120,7 @@
 
       <h3>Who can see it</h3>
       <ul>
-        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats. Training copies (which aren't linked to anyone) may be reviewed to build and check training data.</li>
+        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats, except a chat that was flagged by our safety checks, which the safety team reviews. Training copies (which aren't linked to anyone) may be reviewed to build and check training data.</li>
         <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
         <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and OpenStreetMap (or Esri as a backup), which see the map area being shown. None of these get your name or email.</li>
         <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
@@ -2101,6 +2148,19 @@
         <li><b>Take back your agreement</b> by deleting your account.</li>
       </ul>
       <p>If you're not happy with how we handled something, you can complain to the Office of the Information and Privacy Commissioner for British Columbia (<a href="https://www.oipc.bc.ca" target="_blank" rel="noopener">oipc.bc.ca</a>).</p>
+
+      <h3 id="pv-rules">Rules for using SCODE AI</h3>
+      <ul>
+        <li>Don&rsquo;t use SCODE AI to get help hurting anyone, making weapons, making or buying illegal drugs, or committing crimes, including by pretending it&rsquo;s a story, a game or a test.</li>
+        <li>Never send sexual content involving anyone under 18.</li>
+        <li>Messages are checked automatically. A blocked message shows a warning; after 3 warnings in 30 days, the next one pauses your account. Serious messages pause your account right away while it&rsquo;s reviewed, usually within 24 hours.</li>
+        <li>After a review, we may restore your account, suspend it for a day, a week, a month or a year, or ban it permanently, and block that email from signing up again. We email you the decision and the reason.</li>
+        <li>You can ask for another look at any decision by replying to our email within 14 days.</li>
+        <li>If you&rsquo;re going through a hard time, SCODE AI will never ban you for saying so. It will point you to people who can help, like 9-8-8.</li>
+      </ul>
+
+      <h3>When we share information with authorities</h3>
+      <p>We report child sexual abuse material to Cybertip.ca and the police, as Canadian law requires. If a message makes us believe a child is being harmed, we report it to child protection services, as BC law requires. We may also share information with police when we believe someone is in danger, when it helps a lawful investigation, or when a court orders it. We share only what&rsquo;s needed, and we never share your information for any other reason.</p>
 
       <h3>Using the AI safely</h3>
       <ul>
@@ -2322,12 +2382,12 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://cho-bachelor-podcast-sub.trycloudflare.com";
+  const PROXY_URL = "https://persian-level-vanilla-empty.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
   try { auth = JSON.parse(localStorage.getItem("scode_auth") || "null"); } catch (e) {}
-  const PRIVACY_VERSION = 2;   // match PRIVACY_VERSION in linden_proxy.py
+  const PRIVACY_VERSION = 3;   // match PRIVACY_VERSION in linden_proxy.py
   if (!auth || !auth.token) auth = null;
   var GUEST_TIERS = new Set(["l1"]);   // the server can override this via /status
   var guestLimit = 100;
@@ -2830,7 +2890,8 @@
     }
     resumePending();
   }
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) pullChats(false); });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) { pullChats(false); if (auth) checkStatus(); } });
+  setInterval(() => { if (auth && !document.hidden && !sending) checkStatus(); }, 60000);
 
   // ---------- Mobile sidebar drawer ----------
   function openMobileSidebar() {
@@ -3676,6 +3737,7 @@
 
   // ---------- Limit-aware input ----------
   function updateInputAvailability() {
+    if (typeof sfShown !== "undefined" && sfShown) { el.input.disabled = true; return; }
     const info = TIER_INFO[selectedTier];
     const atLimit = sharedRemaining !== null && sharedRemaining < info.cost;
     el.composer.classList.toggle("disabled", atLimit);
@@ -3819,6 +3881,10 @@
     if (displayThinking) {
       const tb = buildThinkBlock(displayThinking, thoughtLabel(meta && meta.thinkSeconds), false);
       row.appendChild(tb.wrap);
+    }
+    if (meta && meta.safety) {
+      row.appendChild(meta.safety.kind === "support" ? buildSafetySupport() : buildSafetyWarn(meta.safety));
+      return row;
     }
     const studyEl = meta && meta.study ? buildStudy(meta.study) : null;
     const plusEl = !studyEl && meta && meta.plus ? buildPlusSaved(meta.plus) : null;
@@ -5222,7 +5288,7 @@
 
   // ---------- SCODE Ferries (BC Ferries) ----------
   // Launches Oct 9 at midnight Pacific. Before then, ?preview=ferry shows it.
-  var FERRY_LAUNCH = Date.parse("2026-10-09T00:00:00-07:00");
+  var FERRY_LAUNCH = Date.parse("2026-10-09T07:00:00-07:00");
   var ferryPreview = /[?&]preview=ferr(y|ies)\b/.test(location.search);
   var ferryServerOn = true, ferryCost = 1;
   function ferryUnlocked() { return ferryServerOn && (ferryPreview || Date.now() >= FERRY_LAUNCH); }
@@ -6017,6 +6083,7 @@
       if (typeof data.studyplus === "boolean") plusServerOn = data.studyplus;
       if (typeof data.studyplus_cost === "number") plusCost = data.studyplus_cost;
       if (data.sync && !serverSync) { serverSync = true; pullChats(true); }
+      if (auth && data.paused) showSafetyPause(data.paused); else if (auth && "paused" in data) hideSafetyPause();
       if (auth && data.account && "avatar" in data) setAvatar(data.avatar);
       updateWebBtn();
       el.budgetRemaining.textContent = sharedRemaining !== null ? `${sharedRemaining} left` : "Online";
@@ -6580,7 +6647,7 @@
   //  "showFrom" hides an entry until that date (for launches).
   // =====================================================================
   const UPCOMING = [
-    { id: "ferries", title: "SCODE Ferries", launch: "2026-10-09T00:00:00-07:00",
+    { id: "ferries", title: "SCODE Ferries", launch: "2026-10-09T07:00:00-07:00",
       blurb: "Live BC Ferries times, with a map and a countdown.",
       details: "Turn on Ferries and ask things like “next ferry to Quadra” or “I can be there in 45 min, which ferry can I catch?”. You get the exact answer, a live timetable with cancellations and how full the big boats are, a map from where you are, and one-tap directions. Campbell River–Quadra, Quadra–Cortes, and the Vancouver Island to mainland routes." },
     { id: "studyplus", title: "SCODE Study Plus", launch: "2026-10-07T00:00:00-07:00",
@@ -6606,10 +6673,13 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-safety", type: "feature", date: "2026-10-09", title: "SCODE Safety",
+      text: "SCODE AI now checks every message for harmful or illegal content, using a safety model that runs on our own computer. Harmful requests are blocked with up to 3 warnings, serious ones pause the account until a real person reviews them, and anyone who's struggling gets support lines, never a ban. The Privacy Policy now includes the rules for using SCODE AI.",
+      how: ["Nothing changes for normal questions: school, sports, ferries, anything.", "If a message is blocked, you'll see a red warning that says which one it is (1 of 3).", "Read the rules any time: Settings, then Privacy Policy, then Rules for using SCODE AI."] },
     { id: "f-sync", type: "feature", date: "2026-10-06", title: "Your chats everywhere, and Memory",
       text: "Chats now save to your SCODE account, so they're on your phone, laptop and iPad. Replies keep going even if you close the page, so a long Study Plus or picture is waiting when you come back. SCODE AI can also remember things about you, and you can add a profile picture.",
       how: ["Sign in on any device and your chats are there.", "Start a message with “Remember that…” to save something to memory.", "Tap your picture (top right), then Account, picture & memory, to change your picture, see or delete memories, or turn Memory off."] },
-    { id: "f-ferries", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T00:00:00-07:00", title: "SCODE Ferries",
+    { id: "f-ferries", type: "feature", date: "2026-10-09", showFrom: "2026-10-09T07:00:00-07:00", title: "SCODE Ferries",
       text: "Live BC Ferries times, right in the chat. Turn on Ferries and ask about Campbell River to Quadra, Quadra to Cortes, Vancouver to Victoria, Horseshoe Bay to Nanaimo, Tsawwassen to Duke Point or Comox to Powell River. Tell it when you can be at the terminal and it works out exactly which sailing you'll catch. The card shows a countdown, cancellations, how full the big boats are, a map with you and the ferry on it, and one-tap directions. Works on every model, even without an account, for +1 point.",
       how: ["Tap the Ferries button (the boat) next to the text box so it turns green.", "Ask something like “next ferry to Quadra” or “I can be there in 45 min, ferry to Quadra?”, or tap an example in the bar.", "On the card, tap how soon you can be at the terminal, or From where I am, to see which sailing you'll catch.", "Tap ⇄ to flip the direction, Directions to open Google Maps, or Refresh for the latest status."] },
     { id: "f-studyplus", type: "feature", date: "2026-10-07", showFrom: "2026-10-07T00:00:00-07:00", title: "SCODE Study Plus",
@@ -6866,6 +6936,7 @@
 
       let streamError = null;
       let memInfo = null;
+      let safetyEv = null;
       let webSources = [], searchNote = "";
       let linkInfo = null, linkNote = "";
       let studySet = null, studyNote = "";
@@ -6894,6 +6965,7 @@
             break;
           }
           if (chunk.memory) { memInfo = chunk.memory; continue; }
+          if (chunk.safety) { safetyEv = chunk.safety; continue; }
           if (chunk.search) {
             // Progress from the server's web search (before the model starts).
             const s = chunk.search;
@@ -7019,6 +7091,29 @@
         if (streamError) break;
       }
 
+      if (safetyEv) {
+        if (typeRaf) cancelAnimationFrame(typeRaf);
+        if (imgGen) imgGen.stop();
+        if (plus) plus.stop();
+        if (loaderRow._clear) loaderRow._clear();
+        if (loaderRow.parentNode) loaderRow.remove();
+        if (liveRow && liveRow.parentNode) liveRow.remove();
+        if (safetyEv.kind === "flag") {
+          if (o.chat) delete o.chat.pending;
+          removeFlaggedChat(o.chat || null);
+          showSafetyPause(safetyEv.paused || { kind: "review", case: safetyEv.case });
+          return "error";
+        }
+        const sm = { role: "assistant", content: safetyEv.kind === "support" ? splitThinkTags(rawContent).visible : "", tier: tierAtSend,
+                     safety: { kind: safetyEv.kind, n: safetyEv.n, of: safetyEv.of } };
+        messages.push(sm);
+        el.messages.appendChild(buildMessageRow("assistant", sm.content, "", null, sm));
+        if (o.chat) delete o.chat.pending;
+        if (historyEnabled) saveChats();
+        scrollToBottom(true);
+        checkStatus();
+        return "ok";
+      }
       if (streamError) {
         if (imgGen) imgGen.stop();
         if (plus) plus.stop();
@@ -7127,7 +7222,10 @@
       if (!res.ok) {
         if (loaderRow._clear) loaderRow._clear();
         loaderRow.remove();
-        if (res.status === 404 && getCurrentChat() === chat) {
+        if (res.status === 403) {
+          const d = await res.json().catch(() => ({}));
+          if (d.paused) showSafetyPause(d.paused);
+        } else if (res.status === 404 && getCurrentChat() === chat) {
           // It never reached the server: put the message back in the box.
           delete chat.pending;
           const last = chat.messages[chat.messages.length - 1];
@@ -7136,7 +7234,7 @@
           renderMessages();
           if (!el.input.value.trim()) { el.input.value = p.text; autoGrow(); }
           showNote("Your last message didn't reach the server, so it's back in the box. Send it again.");
-        } else if (res.status !== 404) {
+        } else if (res.status !== 404 && res.status !== 403) {
           showNote("Couldn't pick up your last reply right now. It'll try again when you come back.");
         }
       } else {
@@ -7149,6 +7247,95 @@
       showNote("Can't reach the server to pick up your last reply. It'll try again when you come back.");
     }
     resuming = false; sending = false; updateSendState();
+  }
+
+
+  // =====================================================================
+  //  SCODE Safety: warnings, support, and the paused-account screen
+  // =====================================================================
+  const SF_WARN_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5 2.8 19.5h18.4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M12 10v4.2M12 17.2v.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  function buildSafetyWarn(s) {
+    const box = document.createElement("div");
+    box.className = "sf-warn";
+    const n = s.n || 1, of = s.of || 3;
+    box.innerHTML = `<div class="h">${SF_WARN_ICON}Message blocked<span>WARNING ${n} OF ${of}</span></div>
+      <p>SCODE AI can&rsquo;t help with this. This message was flagged for possibly harmful or illegal content and saved for review.</p>
+      <div class="sf-meter">${Array.from({ length: of }, (_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div>
+      <small>${n >= of ? "This was your last warning. The next flagged message pauses your account." : `After ${of} warnings in 30 days, the next flagged message pauses your account.`}</small>`;
+    return box;
+  }
+  function buildSafetySupport() {
+    const box = document.createElement("div");
+    box.className = "sf-support";
+    const phone = '<svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+    const text = '<svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-5 4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+    box.innerHTML = `<div class="md"><p><b>You matter, and we&rsquo;re really glad you said something.</b> What you&rsquo;re feeling right now can change, even if it doesn&rsquo;t feel that way tonight. You don&rsquo;t have to go through this alone. Real people are ready to listen, any time, day or night:</p></div>
+      <div class="lines">
+        <a href="tel:988"><i>${phone}</i><span><b>Call 9-8-8</b><small>Suicide Crisis Helpline &middot; free, 24/7</small></span></a>
+        <a href="sms:988"><i>${text}</i><span><b>Text 9-8-8</b><small>Suicide Crisis Helpline &middot; free, 24/7</small></span></a>
+        <a href="tel:18006686868"><i>${phone}</i><span><b>Kids Help Phone: 1-800-668-6868</b><small>Free, 24/7</small></span></a>
+        <a href="sms:686868?&body=CONNECT"><i>${text}</i><span><b>Text CONNECT to 686868</b><small>Kids Help Phone &middot; free, 24/7</small></span></a>
+        <a href="tel:911"><i>${phone}</i><span><b>In danger right now? Call 911</b><small>Emergency</small></span></a>
+      </div>
+      <div class="md"><p>If you can, tell someone you trust how you&rsquo;re feeling: a friend, family member, teacher or school counsellor.</p></div>`;
+    return box;
+  }
+  function sfWhen(sec) {
+    return new Date(sec * 1000).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  }
+  let sfShown = false;
+  function showSafetyPause(p) {
+    if (!p) return;
+    const ov = $("sf-ov"), body = $("sf-body");
+    const esc = (t) => String(t || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    let title = "Message flagged", sub = "Account paused for review", html = "";
+    if (p.kind === "review") {
+      html = `<p>A message from your account may break SCODE AI&rsquo;s rules on harmful or illegal content, so it has been removed and sent for review.</p>
+        <p>Your account is paused while our team takes a look, usually within 24 hours. We&rsquo;ll email you with the outcome.</p>
+        ${p.case ? `<div class="sf-row"><span>Case</span><b>#${p.case}</b></div>` : ""}
+        ${p.review_by ? `<div class="sf-row"><span>Review expected by</span><b>${sfWhen(p.review_by)}</b></div>` : ""}`;
+    } else if (p.kind === "timed") {
+      title = "Account suspended"; sub = "Decision made";
+      html = `<p>After review, your account was suspended for going against SCODE AI&rsquo;s rules on harmful or illegal content.</p>
+        <div class="sf-row"><span>Suspended until</span><b>${sfWhen(p.until)}</b></div>
+        ${p.case ? `<div class="sf-row"><span>Case</span><b>#${p.case}</b></div>` : ""}
+        ${p.message ? `<div class="sf-team"><b>From the review team:</b> ${esc(p.message)}</div>` : ""}
+        <p style="margin-top:12px">If you think we got this wrong, reply to the email we sent you within 14 days.</p>`;
+    } else if (p.kind === "permanent") {
+      title = "Account banned"; sub = "Decision made";
+      html = `<p>After review, this account was permanently banned for going against SCODE AI&rsquo;s rules on harmful or illegal content.</p>
+        ${p.case ? `<div class="sf-row"><span>Case</span><b>#${p.case}</b></div>` : ""}
+        ${p.message ? `<div class="sf-team"><b>From the review team:</b> ${esc(p.message)}</div>` : ""}
+        <p style="margin-top:12px">If you think we got this wrong, reply to the email we sent you within 14 days.</p>`;
+    } else {
+      sub = "Not available right now";
+      html = `<p>This message may break SCODE AI&rsquo;s rules on harmful or illegal content, so it was removed and sent for review.</p>
+        <p>SCODE AI isn&rsquo;t available from this connection for 24 hours.</p>`;
+    }
+    $("sf-title").textContent = title; $("sf-sub").textContent = sub;
+    body.innerHTML = html + `<div class="sf-btns"><button type="button" id="sf-rules">Read the rules</button>${auth ? '<button type="button" id="sf-out">Sign out</button>' : ""}</div>`;
+    $("sf-rules").onclick = () => { openPrivacy(false); setTimeout(() => { const t = $("pv-rules"); if (t) $("pv-body").scrollTop = t.offsetTop - 20; }, 80); };
+    if ($("sf-out")) $("sf-out").onclick = () => { $("sf-ov").classList.remove("show"); sfShown = false; $("am-signout").click(); };
+    ov.classList.add("show");
+    sfShown = true;
+    if (el.input) { el.input.value = ""; el.input.disabled = true; el.input.placeholder = "Your account is paused"; }
+  }
+  function hideSafetyPause() {
+    if (!sfShown) return;
+    $("sf-ov").classList.remove("show");
+    sfShown = false;
+    if (el.input) { el.input.placeholder = "How can I help you today?"; }
+    updateInputAvailability();
+  }
+  // The flagged chat disappears everywhere (the server already removed its copy).
+  function removeFlaggedChat(chat) {
+    if (!chat) { messages = []; renderMessages(); return; }
+    chats = chats.filter(c => c.id !== chat.id);
+    delete SYNC.sent[chat.id]; SYNC.queue.delete(chat.id);
+    try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); } catch (e) {}
+    currentChatId = chats.length ? chats[0].id : null;
+    if (currentChatId) { const c = getCurrentChat(); messages = c.messages; } else messages = [];
+    renderChatList(); renderMessages();
   }
 
   async function send() {
@@ -7265,6 +7452,10 @@
           const renewTime = data.reset_at ? formatRenewTime(data.reset_at) : "later";
           showNote(data.message || `You're out of budget. It refills at ${renewTime}.`);
           if (data.guest) openAuth("welcome", `You've used your ${guestLimit} guest points for this hour. They refill at ${renewTime}.`);
+        } else if (res.status === 403 && (data.error === "account_paused" || data.error === "guest_blocked")) {
+          messages.pop();
+          renderMessages();
+          showSafetyPause(data.paused || { kind: "guest" });
         } else if (res.status === 403 && data.error === "policy_required") {
           messages.pop();
           renderMessages();
