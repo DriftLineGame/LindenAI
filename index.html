@@ -1666,6 +1666,8 @@
     background: var(--accent-soft); color: var(--accent); font-size: 12.5px; font-weight: 500; animation: apIn .35s cubic-bezier(.2,.8,.2,1) both; }
   .mem-chip.off { background: var(--warn-bg); color: var(--warn); }
   .mem-chip svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .mem-chip > span { white-space: nowrap; }
+  .mem-chip .mem-what { min-width: 0; }
   .mem-chip button { border: none; background: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
   .mem-chip .mem-what { color: var(--text); font-weight: 400; max-width: 340px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .chat-item .synced-dot { display: none; }
@@ -1673,7 +1675,7 @@
     .ap-hero { padding: 14px; gap: 14px; }
     .ap-pic { width: 68px; height: 68px; font-size: 28px; }
     .ap-name { font-size: 19px; }
-    .mem-chip .mem-what { max-width: 150px; }
+    .mem-chip .mem-what { display: none; }
   }
 </style>
 </head>
@@ -1696,6 +1698,10 @@
     <div id="chat-list"></div>
     <div class="side-bottom">
       <button id="soon-card" type="button" aria-label="Coming soon: see details"></button>
+      <a class="side-link" id="about-btn" href="about.html" style="flex:none">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M2.5 19.5 9 8l4 7 2.5-4 6 8.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        About SCODE AI
+      </a>
       <div class="side-links">
         <button class="side-link" id="news-btn" type="button">
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -2316,7 +2322,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://die-manner-outside-essentially.trycloudflare.com";
+  const PROXY_URL = "https://cho-bachelor-podcast-sub.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
