@@ -2113,14 +2113,15 @@
         <dt>Ferry location</dt><dd>Only if you turn on location in SCODE Ferries: your rough location (to about 100 metres) is sent with your ferry questions so we can work out your drive to the terminal. It isn't saved on our server, and you can turn it off any time.</dd>
         <dt>Safety checks</dt><dd>Every message, and the replies to accounts, is checked by software on our own computer (a safety model and a word list) for harmful or illegal content. Nothing is sent to another company for this.</dd>
         <dt>Flagged messages</dt><dd>If a message is flagged, a copy of that chat (the last few messages, never photos) is saved for review by the SCODE safety team: the person who runs SCODE AI and our lead security and safety manager. The flagged chat is removed from your account. Records of warnings and cleared flags are deleted after 30 days; flags that led to a ban are kept for the length of the ban plus one year; records the law requires us to keep are kept as long as the law says. Deleting your account doesn&rsquo;t remove a ban or its record while the ban lasts.</dd>
+        <dt>Safety links</dt><dd>To stop banned people from making new accounts, when you use SCODE AI with an account our computer saves a scrambled code for the internet connection you're on and a random ID that your browser makes for SCODE AI. The scrambled code can't be turned back into your internet address. These are only used by the safety team to spot accounts made to get around a ban, and new accounts can't be made from a browser a banned account used. They're deleted 6 months after they were last used, or when you delete your account (unless the account is banned). Temporary or throwaway email addresses can't be used for accounts.</dd>
         <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're saved with your chat if Save chats is on, and otherwise not saved.</dd>
         <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
       </dl>
-      <p>We don't use cookies for tracking, ads, or analytics. The site only stores things in your browser that make it work (like your sign-in, your settings and a copy of your saved chats).</p>
+      <p>We don't use cookies for tracking, ads, or analytics. The site only stores things in your browser that make it work (like your sign-in, your settings, a copy of your saved chats and the random browser ID used for safety).</p>
 
       <h3>Who can see it</h3>
       <ul>
-        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats, except a chat that was flagged by our safety checks, which the safety team reviews. Training copies (which aren't linked to anyone) may be reviewed to build and check training data.</li>
+        <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats, except a chat that was flagged by our safety checks, which the safety team reviews. Training copies (which aren't linked to anyone) may be reviewed to build and check training data. When checking a flag or a possible ban evasion, the safety team can also see account details (name, email, when it was made and its safety links).</li>
         <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
         <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and OpenStreetMap (or Esri as a backup), which see the map area being shown. None of these get your name or email.</li>
         <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
@@ -2155,6 +2156,7 @@
         <li>Never send sexual content involving anyone under 18.</li>
         <li>Messages are checked automatically. A blocked message shows a warning; after 3 warnings in 30 days, the next one pauses your account. Serious messages pause your account right away while it&rsquo;s reviewed, usually within 24 hours.</li>
         <li>After a review, we may restore your account, suspend it for a day, a week, a month or a year, or ban it permanently, and block that email from signing up again. We email you the decision and the reason.</li>
+        <li>Don&rsquo;t make a new account to get around a pause or ban. Accounts made to get around a ban are banned too, and we may stop new accounts from being made on that browser or internet connection.</li>
         <li>You can ask for another look at any decision by replying to our email within 14 days.</li>
         <li>If you&rsquo;re going through a hard time, SCODE AI will never ban you for saying so. It will point you to people who can help, like 9-8-8.</li>
       </ul>
@@ -2382,7 +2384,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://persian-level-vanilla-empty.trycloudflare.com";
+  const PROXY_URL = "https://loose-panels-tmp-suits.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -2392,8 +2394,22 @@
   var GUEST_TIERS = new Set(["l1"]);   // the server can override this via /status
   var guestLimit = 100;
   function isGuest() { return !auth; }
+  // A random ID for this browser (not tied to anything else). SCODE Safety uses it to
+  // stop banned accounts from making new ones. See "Safety links" in the Privacy Policy.
+  function deviceId() {
+    if (window.__scodeDev) return window.__scodeDev;
+    let d = null;
+    try { d = localStorage.getItem("scode_device"); } catch (e) {}
+    if (!d || !/^[A-Za-z0-9_-]{16,64}$/.test(d)) {
+      const a = new Uint8Array(16);
+      crypto.getRandomValues(a);
+      d = Array.from(a, b => b.toString(16).padStart(2, "0")).join("");
+      try { localStorage.setItem("scode_device", d); } catch (e) {}
+    }
+    return (window.__scodeDev = d);
+  }
   function authHeaders(extra) {
-    const h = Object.assign({}, extra || {});
+    const h = Object.assign({ "X-SCODE-Device": deviceId() }, extra || {});
     if (auth) h.Authorization = "Bearer " + auth.token;
     return h;
   }
@@ -6197,7 +6213,7 @@
     try {
       res = await fetch(PROXY_URL + path, {
         method: "POST",
-        headers: withToken ? authHeaders({ "Content-Type": "application/json" }) : { "Content-Type": "application/json" },
+        headers: withToken ? authHeaders({ "Content-Type": "application/json" }) : { "Content-Type": "application/json", "X-SCODE-Device": deviceId() },
         body: JSON.stringify(body || {}),
       });
     } catch (e) {
