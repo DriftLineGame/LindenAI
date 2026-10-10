@@ -1721,27 +1721,21 @@
      SCODE thinking orb + flowing gradient text
      ========================================================= */
   @property --scf { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
-  .sc-orb { position: relative; display: block; width: min(100%, 720px); height: clamp(170px, 32vh, 360px); margin: 2px 0 0 -10px;
-    pointer-events: none; opacity: 0; transform: translateY(14px) scale(.94); transform-origin: 50% 0;
-    -webkit-mask-image: radial-gradient(closest-side, #000 58%, transparent 100%); mask-image: radial-gradient(closest-side, #000 58%, transparent 100%);
-    animation: scOrbIn .8s cubic-bezier(.2,.8,.2,1) .08s forwards;
-    transition: height .85s cubic-bezier(.65,0,.25,1), margin .85s cubic-bezier(.65,0,.25,1), opacity .7s ease, transform .85s cubic-bezier(.65,0,.25,1), filter .85s ease; }
-  .sc-orb canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; filter: blur(12px) saturate(1.25); }
-  .sc-lens-w { position: absolute; left: 50%; top: 50%; width: 50%; aspect-ratio: 1.35; transform: translate(-50%, -50%);
-    transition: transform .85s cubic-bezier(.65,0,.25,1), opacity .6s ease; }
-  .sc-lens { width: 100%; height: 100%; border-radius: 47% 53% 44% 56% / 55% 45% 55% 45%;
-    background: radial-gradient(22% 11% at 36% 24%, rgba(255,255,255,.85), rgba(255,255,255,0) 100%),
-                radial-gradient(40% 30% at 64% 78%, rgba(255,255,255,.20), rgba(255,255,255,0) 100%),
-                radial-gradient(closest-side, rgba(255,255,255,.07), rgba(255,255,255,.02) 70%, rgba(255,255,255,0));
-    box-shadow: inset 3px 5px 10px rgba(255,255,255,.30), inset -8px -12px 26px rgba(255,255,255,.10);
-    -webkit-mask-image: radial-gradient(closest-side, #000 60%, rgba(0,0,0,.4) 82%, transparent 100%); mask-image: radial-gradient(closest-side, #000 60%, rgba(0,0,0,.4) 82%, transparent 100%);
-    animation: scLens 9s ease-in-out infinite; }
-  body:not(.light) .sc-lens { opacity: .8; }
-  .sc-orb.melt { height: 0; margin-top: 0; opacity: 0; transform: translateY(-30px) scale(.62, .3); filter: blur(16px) saturate(1.9); animation: none; }
-  .sc-orb.melt .sc-lens-w { transform: translate(-50%, -175%) scale(1.7, .16); opacity: 0; }
+  .sc-orb { position: relative; display: block; width: min(100%, 720px); height: clamp(190px, 30vh, 330px); margin: 0 0 0 -10px;
+    pointer-events: none; opacity: 0; transform: translateY(10px); animation: scOrbIn .7s cubic-bezier(.2,.8,.2,1) .05s forwards;
+    transition: height .85s cubic-bezier(.65,0,.25,1), margin .85s cubic-bezier(.65,0,.25,1), opacity .55s ease .2s, transform .85s cubic-bezier(.65,0,.25,1), filter .85s ease; }
+  .sc-orb canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .sc-orb-hit { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: auto; touch-action: none;
+    cursor: grab; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+  .sc-orb.grab .sc-orb-hit { cursor: grabbing; }
+  .sc-orb.melt { height: 0; margin-top: 0; opacity: 0; transform: translateY(-34px); filter: blur(8px) saturate(1.5); animation: none; }
+  .sc-orb.melt .sc-orb-hit { display: none; }
+  .sc-orb-tip { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 12px; color: var(--faint); opacity: 0; white-space: nowrap;
+    pointer-events: none; animation: scTip .6s ease 1.8s forwards; }
+  .sc-orb-tip.gone { animation: none; opacity: 0; transition: opacity .3s; }
+  @keyframes scTip { to { opacity: .9; } }
   @keyframes scOrbIn { to { opacity: 1; transform: none; } }
-  @keyframes scLens { 0%, 100% { transform: rotate(0deg) scale(1, 1); } 25% { transform: rotate(14deg) scale(1.06, .95); }
-    50% { transform: rotate(-6deg) scale(.95, 1.06); } 75% { transform: rotate(9deg) scale(1.04, .97); } }
+  .sc-orb.sm { width: 100%; height: 118px; margin: 0; }
   .md.sc-flow { --g1: #d6307f; --g2: #7546ff; --g3: #0a86d0; --g4: #14936a; --g5: #e25a12; }
   body:not(.light) .md.sc-flow { --g1: #ff7cc4; --g2: #b49dff; --g3: #64d3ff; --g4: #74e0b0; --g5: #ffb07a; }
   .md.sc-flow { background-image: linear-gradient(100deg,
@@ -1889,10 +1883,6 @@
   .ec-again small { font-weight: 600; opacity: .85; font-size: 12px; }
   .ec-focus { display: none; }
   .ec-right { min-height: 0; overflow-y: auto; padding: 20px 20px 30px; background: var(--sidebar); }
-  .ec-wait { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 0 20px; }
-  .ec-wait .sc-orb { margin: 0 auto; width: 100%; height: 260px; }
-  .ec-wait h3 { font-family: var(--serif); font-weight: 500; font-size: 21px; margin: 4px 0 6px; }
-  .ec-wait p { color: var(--muted); font-size: 14px; margin: 0; }
   .ec-card0 { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; margin-bottom: 14px; animation: ecUp .5s cubic-bezier(.2,.8,.2,1) both; }
   @keyframes ecUp { from { opacity: 0; transform: translateY(12px); } }
   .ec-h { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
@@ -1940,12 +1930,103 @@
   .ec-empty { text-align: center; padding: 24px 10px; color: var(--muted); font-size: 14px; }
   .ec-errbox { padding: 16px 18px; border-radius: 16px; background: var(--warn-bg); border: 1px solid var(--warn-border); color: var(--text); font-size: 14.5px; line-height: 1.5; }
   .ec-errbox button { margin-top: 10px; height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+
+  /* ---------- Essay Coach: while it checks ---------- */
+  .ec-ed { isolation: isolate; }
+  .ec-scan { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 3; will-change: transform; transition: opacity .55s ease, filter .55s ease; }
+  .ec-scan.out { opacity: 0; filter: blur(6px); }
+  .ec-scan-glass { position: absolute; inset: 0;
+    background:
+      radial-gradient(34% 150% at var(--sx, 30%) 50%, rgba(255, 84, 170, .52), transparent 72%),
+      radial-gradient(34% 150% at var(--sx2, 70%) 50%, rgba(64, 186, 255, .5), transparent 72%),
+      radial-gradient(30% 160% at var(--sx3, 50%) 60%, rgba(140, 100, 255, .45), transparent 72%),
+      linear-gradient(100deg, rgba(214, 48, 127, .26), rgba(117, 70, 255, .26) 50%, rgba(10, 134, 208, .26));
+    -webkit-backdrop-filter: blur(3.4px) saturate(1.9) brightness(1.06); backdrop-filter: blur(3.4px) saturate(1.9) brightness(1.06); }
+  body:not(.light) .ec-scan-glass { background:
+      radial-gradient(34% 150% at var(--sx, 30%) 50%, rgba(255, 110, 190, .5), transparent 72%),
+      radial-gradient(34% 150% at var(--sx2, 70%) 50%, rgba(90, 200, 255, .46), transparent 72%),
+      radial-gradient(30% 160% at var(--sx3, 50%) 60%, rgba(160, 125, 255, .45), transparent 72%),
+      linear-gradient(100deg, rgba(255, 124, 196, .2), rgba(180, 157, 255, .2) 50%, rgba(100, 211, 255, .2));
+    -webkit-backdrop-filter: blur(3.4px) saturate(1.7) brightness(1.15); backdrop-filter: blur(3.4px) saturate(1.7) brightness(1.15); }
+  .ec-scan-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .ec-scan-svg .g { fill: none; stroke: url(#ecGlowG); stroke-width: 9; opacity: .5; }
+  body:not(.light) .ec-scan-svg .g { opacity: .62; }
+  .ec-scan-svg .f { fill: none; stroke: #fff; stroke-width: 7; opacity: .45; }
+  .ec-scan-svg .r { fill: none; stroke: url(#ecRimG); stroke-width: 1.3; }
+  .ec-review.busy #ec-txt { caret-color: transparent; cursor: default; }
+  .ec-review.busy .ec-askb, .ec-review.busy .ec-legend { visibility: hidden; }
+  .ec-review.busy .ec-askb { display: none; }
+  .ec-bd mark.pop { animation: ecMarkIn .9s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes ecMarkIn { 0% { background: color-mix(in srgb, var(--c) 70%, transparent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--c) 30%, transparent); }
+    100% { background: color-mix(in srgb, var(--c) 20%, transparent); box-shadow: inset 0 -2.5px 0 color-mix(in srgb, var(--c) 85%, transparent); } }
+  .ec-bd.reveal mark { animation: ecFlash .9s ease 1; }
+  .ec-chk { display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 11px; border-radius: 20px; font-weight: 700; color: var(--text);
+    background: linear-gradient(100deg, rgba(214,48,127,.14), rgba(117,70,255,.14), rgba(10,134,208,.14)); border: 1px solid var(--border); }
+  .ec-chk i, .ec-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, #ff5fb0, #8b6bff, #3fc1ff); animation: ecPulse 1.4s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes ecPulse { 50% { transform: scale(.6); opacity: .55; } }
+  .ec-livebox { position: relative; border-radius: 20px; padding: 16px 18px 14px; margin-bottom: 16px; overflow: hidden; border: 1px solid var(--border);
+    background: linear-gradient(150deg, rgba(214,48,127,.08), rgba(117,70,255,.08) 50%, rgba(10,134,208,.08)), var(--surface); animation: ecUp .5s cubic-bezier(.2,.8,.2,1) both; }
+  @media (min-width: 861px) { .ec-livebox { position: sticky; top: -20px; z-index: 2; margin-top: -20px; border-top-left-radius: 0; border-top-right-radius: 0;
+    background: linear-gradient(150deg, rgba(214,48,127,.08), rgba(117,70,255,.08) 50%, rgba(10,134,208,.08)), var(--surface); box-shadow: 0 10px 24px -14px rgba(0,0,0,.4); } }
+  .ec-lv-top { display: flex; align-items: center; gap: 12px; }
+  .ec-lv-orb { width: 92px; height: 78px; flex-shrink: 0; margin: -8px -6px -8px -10px; }
+  .ec-lv-orb .sc-orb.sm { height: 78px; }
+  .ec-lv-tx h3 { margin: 0 0 3px; font-family: var(--serif); font-weight: 500; font-size: 19px; line-height: 1.2; }
+  .ec-lv-tx p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .ec-steps { display: flex; align-items: center; gap: 6px; margin: 14px 0 12px; font-size: 12px; font-weight: 700; color: var(--faint); }
+  .ec-steps span { padding: 4px 9px; border-radius: 20px; border: 1px solid var(--border); transition: all .3s ease; white-space: nowrap; }
+  .ec-steps span.past { color: var(--accent); border-color: transparent; background: var(--accent-soft); }
+  .ec-steps span.on { color: #fff; border-color: transparent; background: linear-gradient(100deg, #d6307f, #7546ff 55%, #0a86d0); box-shadow: 0 4px 14px rgba(117,70,255,.3); }
+  .ec-steps i { flex: 1; height: 2px; min-width: 6px; border-radius: 2px; background: var(--border); transition: background .3s; }
+  .ec-steps i.past { background: var(--accent); }
+  .ec-lv-note { display: flex; gap: 9px; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+  .ec-lv-note svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 1px; color: var(--accent); }
+  .ec-lv-n b { margin-left: 2px; color: var(--text); font-size: 13px; }
+  .ec-lv-later { margin: 6px 2px 0; font-size: 13px; color: var(--faint); text-align: center; padding: 12px; border: 1px dashed var(--border); border-radius: 14px; }
+  .ec-card.pop { animation: ecPop .7s cubic-bezier(.2,1.3,.35,1) both; }
+  .ec-card.pop::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.55) 45%, color-mix(in srgb, var(--c) 30%, transparent) 52%, transparent 66%);
+    transform: translateX(-110%); animation: ecSheen 1.1s ease .15s forwards; }
+  body:not(.light) .ec-card.pop::after { background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.16) 45%, color-mix(in srgb, var(--c) 30%, transparent) 52%, transparent 66%); }
+  @keyframes ecPop { 0% { opacity: 0; transform: translateY(14px) scale(.92); filter: blur(6px); } 60% { opacity: 1; filter: none; } 100% { opacity: 1; transform: none; } }
+  @keyframes ecSheen { to { transform: translateX(110%); } }
+  .ec-card.still { animation: none; }
+  .ec-card0.reveal { animation: ecReveal .8s cubic-bezier(.2,.9,.25,1) both; }
+  .ec-card0.reveal.r2 { animation-delay: .15s; } .ec-card0.reveal.r3 { animation-delay: .28s; }
+  @keyframes ecReveal { from { opacity: 0; transform: translateY(16px) scale(.97); filter: blur(8px); } }
+  .ec-focus.live { display: block; }
+  .ec-fl { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .ec-fl b { color: var(--text); font-size: 13.5px; }
+  .ec-fl span { margin-left: auto; font-weight: 600; }
+  .ec-fl-spot { margin-top: 8px; padding: 8px 10px 8px 12px; border-radius: 12px; background: color-mix(in srgb, var(--c) 10%, var(--bg)); border-left: 3px solid var(--c); }
+  .ec-fl-spot .ec-issue { margin: 2px 0 0; font-size: 13.5px; }
+  .ec-fl-spot.pop { animation: ecPop .6s cubic-bezier(.2,1.3,.35,1) both; }
+  @media (min-width: 861px) { .ec-focus.live { display: none; } }
+  .ec-toast { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 10px; max-width: calc(100% - 32px);
+    padding: 10px 12px 10px 12px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border-strong); color: var(--text); font-size: 14px; line-height: 1.4;
+    box-shadow: 0 16px 48px rgba(0,0,0,.28); animation: ecToastIn .45s cubic-bezier(.2,1.2,.3,1) both; transition: opacity .35s ease, transform .35s ease; }
+  .ec-toast.page { position: fixed; bottom: max(110px, calc(env(safe-area-inset-bottom) + 100px)); z-index: 400; }
+  .ec-toast.out { opacity: 0; transform: translate(-50%, 10px); }
+  .ec-toast .ok { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff;
+    background: linear-gradient(135deg, #d6307f, #7546ff 55%, #0a86d0); }
+  .ec-toast .ok svg { width: 15px; height: 15px; }
+  .ec-toast button { flex-shrink: 0; height: 32px; padding: 0 14px; border-radius: 10px; border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 700; font-size: 13.5px; cursor: pointer; }
+  @keyframes ecToastIn { from { opacity: 0; transform: translate(-50%, 16px) scale(.96); } }
+  /* Essay sessions in Recents */
+  .chat-item.is-essay .title { display: flex; align-items: center; gap: 7px; }
+  .chat-item.is-essay .ec-ri { width: 14px; height: 14px; flex-shrink: 0; color: #8b6bff; }
+  body:not(.light) .chat-item.is-essay .ec-ri { color: #b49dff; }
+  .chat-item .tier-badge.ec-rb { display: inline-flex; align-items: center; gap: 5px; color: #8b6bff; background: rgba(139,107,255,.12); border-color: transparent; }
+  body:not(.light) .chat-item .tier-badge.ec-rb { color: #c4b3ff; background: rgba(180,157,255,.14); }
+  .ec-spin { width: 9px; height: 9px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: ecSpin .9s linear infinite; }
+  @keyframes ecSpin { to { transform: rotate(360deg); } }
   @media (max-width: 860px) {
     #ec-ov { padding: 0; }
     .ec { width: 100%; height: 100%; border-radius: 0; border: 0; }
     .ec-top { padding: 10px 10px 10px 14px; gap: 10px; padding-top: max(10px, env(safe-area-inset-top)); }
     .ec-ic { width: 34px; height: 34px; border-radius: 11px; }
-    .ec-brand h2 { font-size: 18px; }
+    .ec-brand h2 { font-size: 18px; white-space: nowrap; }
+    #ec-ov.busy #ec-new { display: none; }
     .ec-brand small { display: none; }
     .ec-round .rtxt { display: none; }
     .ec-start { padding: 20px 16px 30px; }
@@ -1966,9 +2047,14 @@
     .ec-focus .nav button { width: 30px; height: 30px; border-radius: 9px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; }
     .ec-foot { padding: 10px 12px max(10px, env(safe-area-inset-bottom)); }
     .ec-right { padding: 16px 14px 30px; }
+    .ec-toast { bottom: 76px; }
+    .ec-focus.live { padding: 10px 14px; }
+    .ec-steps { font-size: 11.5px; gap: 4px; }
+    .ec-steps span { padding: 4px 7px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .sc-orb, .sc-lens, .md.sc-flow, .md.sc-pour, .ec, .ec-card, .ec-card0, #chat-list > *, .ec-pill { animation: none !important; }
+    .sc-orb, .md.sc-flow, .md.sc-pour, .ec, .ec-card, .ec-card0, #chat-list > *, .ec-pill, .ec-bd mark, .ec-toast, .ec-fl-spot { animation: none !important; }
+    .ec-chk i, .ec-spin, .ec-dot { animation: none !important; }
     .sc-orb { opacity: 1; transform: none; }
   }
 </style>
@@ -2372,7 +2458,7 @@
         <dt>Safety checks</dt><dd>Every message, and the replies to accounts, is checked by software on our own computer (a safety model and a word list) for harmful or illegal content. Nothing is sent to another company for this.</dd>
         <dt>Flagged messages</dt><dd>If a message is flagged, a copy of that chat (the last few messages, never photos) is saved for review by the SCODE safety team: the person who runs SCODE AI and our lead security and safety manager. The flagged chat is removed from your account. Records of warnings and cleared flags are deleted after 30 days; flags that led to a ban are kept for the length of the ban plus one year; records the law requires us to keep are kept as long as the law says. Deleting your account doesn&rsquo;t remove a ban or its record while the ban lasts.</dd>
         <dt>Safety links</dt><dd>To stop banned people from making new accounts, when you use SCODE AI with an account our computer saves a scrambled code for the internet connection you're on and a random ID that your browser makes for SCODE AI. The scrambled code can't be turned back into your internet address. These are only used by the safety team to spot accounts made to get around a ban, and new accounts can't be made from a browser a banned account used. They're deleted 6 months after they were last used, or when you delete your account (unless the account is banned). Temporary or throwaway email addresses can't be used for accounts.</dd>
-        <dt>Essay Coach</dt><dd>When you check your writing, it's sent to our computer to get feedback and is checked by SCODE Safety. It isn't saved on our server and isn't used for training. Your latest draft and its feedback are kept only in your browser, so you can come back to them.</dd>
+        <dt>Essay Coach</dt><dd>When you check your writing, it's sent to our computer to get feedback and is checked by SCODE Safety. It's never used for training. While a check runs, our computer keeps a copy of the feedback so it finishes even if you close the page (see Replies in progress). If chat history is on, each essay and its feedback is saved to your account in Recents, like a chat, so you can come back to it on any device; delete it there any time. With chat history off, your latest essay is kept only in your browser.</dd>
         <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're saved with your chat if Save chats is on, and otherwise not saved.</dd>
         <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
       </dl>
@@ -2382,7 +2468,7 @@
       <ul>
         <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats, except a chat that was flagged by our safety checks, which the safety team reviews. Training copies (which aren't linked to anyone) may be reviewed to build and check training data. When checking a flag or a possible ban evasion, the safety team can also see account details (name, email, when it was made and its safety links).</li>
         <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
-        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and OpenStreetMap (or Esri as a backup), which see the map area being shown. None of these get your name or email.</li>
+        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and CARTO (map pictures made from OpenStreetMap data), or Esri as a backup, which see the map area being shown. None of these get your name or email.</li>
         <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
       </ul>
       <p>We <b>never sell, rent or trade</b> your information, and we never use it for ads.</p>
@@ -2643,7 +2729,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://appropriate-located-magnificent-yeah.trycloudflare.com";
+  const PROXY_URL = "https://fixes-rendered-minister-bryant.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -2949,6 +3035,7 @@
     if (SYNC.queue.size) schedulePush();
   }
   function getCurrentChat() { return chats.find(c => c.id === currentChatId) || null; }
+  // (firstChatId: the newest real chat, skipping Essay Coach sessions; defined with Essay Coach)
 
   function newChat(tier) {
     const id = "c" + Date.now() + Math.random().toString(36).slice(2, 6);
@@ -2965,6 +3052,8 @@
     closeMobileSidebar();
   }
   function switchChat(id) {
+    const ess = chats.find(c => c.id === id);
+    if (ess && ess.kind === "essay") { closeMobileSidebar(); openEssayCoach(id); return; }
     if (sending) return;
     currentChatId = id;
     saveChats();
@@ -2984,13 +3073,14 @@
     if (sending) return;
     const wasSaved = (chats.find(c => c.id === id) || {}).messages;
     chats = chats.filter(c => c.id !== id);
+    ecForget(id);
     if (syncOn() && wasSaved && wasSaved.length) {
       delete SYNC.sent[id]; SYNC.queue.delete(id);
       syncFetch("/sync/chat/" + encodeURIComponent(id), { method: "DELETE" })
         .then(r => { if (!r.ok) writeGone(readGone().concat([id])); })
         .catch(() => writeGone(readGone().concat([id])));
     }
-    if (currentChatId === id) currentChatId = chats.length ? chats[0].id : null;
+    if (currentChatId === id) currentChatId = firstChatId();
     saveChats();
     renderChatList();
     if (currentChatId) {
@@ -3028,6 +3118,7 @@
       const badge = document.createElement("span");
       badge.className = "tier-badge";
       badge.textContent = L_CODE[chat.tier] || "L1";
+      if (chat.kind === "essay") ecRowDecor(chat, row, title, badge);
       const del = document.createElement("button");
       del.className = "del";
       del.type = "button";
@@ -3144,7 +3235,7 @@
         sortChats();
         try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); } catch (e) {}
         if (!sending) {
-          if (!getCurrentChat()) currentChatId = chats.length ? chats[0].id : null;
+          if (!getCurrentChat()) currentChatId = firstChatId();
           const cur = getCurrentChat();
           if (cur) {
             if (messages !== cur.messages) {
@@ -3157,6 +3248,7 @@
           } else newChat(selectedTier);
         }
         renderChatList();
+        ecSynced();
       }
       if (SYNC.queue.size) flushPush();
     } catch (e) {
@@ -3192,10 +3284,10 @@
     if (historyEnabled) {
       loadChats();
       setTimeout(() => pullChats(true), 0);
-      if (chats.length === 0) {
+      if (!firstChatId()) {
         newChat(selectedTier);
       } else {
-        if (!getCurrentChat()) currentChatId = chats[0].id;
+        if (!getCurrentChat() || getCurrentChat().kind === "essay") currentChatId = firstChatId();
         switchChat(currentChatId);
       }
     } else {
@@ -4197,7 +4289,7 @@
         <span class="pending-text shimmer">Thinking</span>
         <span class="pending-time"></span>
       </div>`;
-    const orb = makeOrb();
+    const orb = makeOrb({ tip: true });
     row.appendChild(orb.el);
     row._orb = orb;
     const lbl = row.querySelector(".pending-text");
@@ -5772,18 +5864,19 @@
       if (!document.contains(box)) return;
       const light = document.body.classList.contains("light");
       lmap = L.map(box, { zoomSnap: 0.25, zoomControl: false, attributionControl: true, scrollWheelZoom: false, dragging: !touchLike, tap: false, keyboard: false, doubleClickZoom: true, boxZoom: false });
-      // Map tiles: OpenStreetMap (no key needed). Dark mode tints them with a filter.
-      // If OpenStreetMap tiles fail to load, switch to Esri's free street map.
-      const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>';
-      let tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: OSM_ATTR, crossOrigin: false }).addTo(lmap);
+      // Map tiles: CARTO's free basemaps (made from OpenStreetMap data, no key needed), light or dark to match
+      // the theme. OpenStreetMap's own tile servers block websites like ours. If CARTO fails, switch to Esri.
+      const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>';
+      let tiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + (light ? "rastertiles/voyager" : "dark_all") + "/{z}/{x}/{y}{r}.png",
+        { maxZoom: 19, subdomains: "abcd", attribution: OSM_ATTR }).addTo(lmap);
       let tileErrs = 0;
       tiles.on("tileerror", () => {
         if (++tileErrs !== 3) return;
         lmap.removeLayer(tiles);
-        tiles = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-          { maxZoom: 19, attribution: "Tiles &copy; Esri" }).addTo(lmap);
+        tiles = L.tileLayer(light ? "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+          : "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+          { maxZoom: light ? 19 : 16, attribution: "Tiles &copy; Esri" }).addTo(lmap);
       });
-      if (!light) box.classList.add("fy-dark");
       L.polyline(st.path, { color: light ? "#1c7891" : "#7fd6e3", weight: 3, dashArray: "2 8", lineCap: "round" }).addTo(lmap);
       const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
       // Put each label on the side away from the other terminal.
@@ -6531,6 +6624,7 @@
     $("au-done-sub").textContent = sub || "Every model is unlocked, and your chats now save to your account.";
     authView("done");
     applyHistoryMode();
+    setTimeout(ecBoot, 0);
     updateModelPickerLabel();
     checkStatus();
     setTimeout(closeAuth, 1700);
@@ -6540,6 +6634,7 @@
     try { localStorage.removeItem("scode_auth"); } catch (e) {}
     historyEnabled = false;
     chats = []; currentChatId = null; messages = [];
+    ecSignedOut();
     activeLink = null;
     if (!GUEST_TIERS.has(selectedTier)) selectedTier = "l1";
     updateAccountUI();
@@ -6956,9 +7051,12 @@
     { id: "f-essay", type: "feature", date: "2026-10-09", title: "Essay Coach",
       text: "Paste your essay, say what you want help with, and Essay Coach highlights the exact spots to fix, explains how, and points out habits across your whole piece, like comma splices or repeated words. It never rewrites your work: you do the fixing, and the highlights clear as you go. Writing for French class? Switch to Français and it flags English words, gives you the French word to use, and checks your grammar (beta).",
       how: ["Sign in, then tap Essay Coach in the menu (or under the greeting).", "Paste your writing and pick what you want help with, like Be more precise.", "Tap a highlight or a card to see what's wrong and how to fix it. Ask about this explains the rule.", "Fix things right in the text, then tap Check again to see your progress."] },
-    { id: "f-orb", type: "feature", date: "2026-10-09", title: "A new look while SCODE AI thinks",
-      text: "While SCODE AI works on your answer, a living, colour-shifting glow fills the space under Thinking. When the answer starts, it pours into the first words, and the reply stays in colour as it's written before settling back to normal text.",
-      how: ["Just send a message and watch.", "If your device is set to reduce motion, you get a calm, still version."] },
+    { id: "f-essay2", type: "improved", date: "2026-10-09", title: "Essay Coach: faster, and it keeps going",
+      text: "Checks are much quicker now, and you can watch them happen: a glassy colour band moves over the lines being read, and each spot to fix pops up the moment it's found. Your scores and habits show up once the whole check is done. Close the page if you want: the check keeps going, and your essay and its feedback are saved in your Recents, so you can open them again on any device.",
+      how: ["Open Essay Coach and check your writing.", "Leave or close the page whenever you like.", "Come back and tap the essay (the one with the pen) in Recents to see your feedback."] },
+    { id: "f-glass", type: "feature", date: "2026-10-09", title: "A Liquid Glass bubble while SCODE AI thinks",
+      text: "While SCODE AI works on your answer, a glassy, colour-filled bubble floats under Thinking. Grab it with your finger or mouse and stretch it: let go and it wobbles back like a drop of liquid. When the answer starts, it melts into the first words, and the reply stays in colour as it's written before settling back to normal text.",
+      how: ["Send a message, then drag the bubble while you wait.", "Tap it for a little splash.", "If your device is set to reduce motion, you get a calm, still version."] },
     { id: "f-safety", type: "feature", date: "2026-10-09", title: "SCODE Safety",
       text: "SCODE AI now checks every message for harmful or illegal content, using a safety model that runs on our own computer. Harmful requests are blocked with up to 3 warnings, serious ones pause the account until a real person reviews them, and anyone who's struggling gets support lines, never a ban. The Privacy Policy now includes the rules for using SCODE AI.",
       how: ["Nothing changes for normal questions: school, sports, ferries, anything.", "If a message is blocked, you'll see a red warning that says which one it is (1 of 3).", "Read the rules any time: Settings, then Privacy Policy, then Rules for using SCODE AI."] },
@@ -7497,64 +7595,304 @@
 
 
   // =====================================================================
-  //  SCODE thinking orb: a morphing colour blob under "Thinking", which
-  //  melts into the first words of the reply (see .sc-orb in the CSS).
+  //  SCODE Liquid Glass bubble (under "Thinking", and in Essay Coach)
+  //  A soft body: a ring of points held to their shape by springs, with
+  //  surface tension between neighbours and pressure that keeps its volume.
+  //  Drag it with a finger or the mouse and it stretches; let go and the
+  //  whole body wobbles back like a drop of liquid. Everything (colour,
+  //  glass rim, shine) is drawn on one canvas from the same shape, so the
+  //  highlights bend with it.
   // =====================================================================
-  const ORB_HUES = [328, 18, 198, 262, 172, 292, 350, 222];
-  function makeOrb() {
+  // Only clean, bright colours: orange, pink, magenta, indigo, blue, cyan (never muddy greens or browns).
+  const ORB_PAL = [18, -25, -62, -100, -140, -168];
+  function orbHue(x) {
+    const n = ORB_PAL.length, f = (((x % 1) + 1) % 1) * n, i = Math.floor(f), u = f - i, s = u * u * (3 - 2 * u);
+    const a = ORB_PAL[i], b = ORB_PAL[(i + 1) % n];
+    return (((a + (b - a) * s) % 360) + 360) % 360;
+  }
+  function makeOrb(opts) {
+    const o = opts || {};
     const wrap = document.createElement("div");
-    wrap.className = "sc-orb";
+    wrap.className = "sc-orb" + (o.small ? " sm" : "");
     wrap.setAttribute("aria-hidden", "true");
-    wrap.innerHTML = '<canvas></canvas><div class="sc-lens-w"><div class="sc-lens"></div></div>';
-    const cv = wrap.querySelector("canvas");
+    wrap.innerHTML = '<canvas></canvas><div class="sc-orb-hit"></div>';
+    const cv = wrap.querySelector("canvas"), hit = wrap.querySelector(".sc-orb-hit");
     const ctx = cv.getContext("2d");
-    const blobs = ORB_HUES.map((h, i) => ({ h, ph: i * 1.9 + Math.random() * 0.8, sp: 0.32 + (i % 3) * 0.11, r: 0.34 + (i % 3) * 0.08 }));
-    let raf = 0, alive = true, melted = false;
+    const N = 64, LX = -0.55, LY = -0.835;              // light from the top left
+    const P = [];
+    for (let i = 0; i < N; i++) P.push({ x: 0, y: 0, vx: 0, vy: 0, a: (i / N) * Math.PI * 2, tx: 0, ty: 0, nx: 0, ny: 0 });
+    const C = { x: 0, y: 0, vx: 0, vy: 0 };
+    const X = new Float32Array(N), Y = new Float32Array(N);
+    let W = 0, H = 0, R = 50, RX = 56, RY = 47, dpr = 1, ready = false, raf = 0, alive = true, melted = false, meltAt = 0;
+    let drag = null, hover = null, acc = 0, lastT = 0, A0 = 1, tipShown = false;
     const t0 = performance.now();
-    function draw(now) {
-      if (!alive) return;
-      if (!wrap.isConnected && now - t0 > 1500) { alive = false; return; }
-      raf = requestAnimationFrame(draw);
-      if (document.hidden || !wrap.isConnected) return;
-      const d = Math.min(window.devicePixelRatio || 1, 1.5);
-      const W = Math.max(1, Math.round(wrap.clientWidth * d)), H = Math.max(1, Math.round(wrap.clientHeight * d));
-      if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-      const t = (now - t0) / 1000, light = document.body.classList.contains("light");
+    const seed = Math.random() * 10;
+    let tip = null;
+    if (o.tip && !reduceMotion) {
+      let n = 0;
+      try { n = +(localStorage.getItem("scode_orb_tip") || 0); } catch (e) {}
+      if (n < 3) {
+        tip = document.createElement("div");
+        tip.className = "sc-orb-tip";
+        tip.textContent = "Psst… you can drag it";
+        wrap.appendChild(tip);
+        try { localStorage.setItem("scode_orb_tip", String(n + 1)); } catch (e) {}
+      }
+    }
+
+    function size() {
+      const w = wrap.clientWidth, h = wrap.clientHeight;
+      if (!w || !h) return false;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (w !== W || h !== H) {
+        W = w; H = h;
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        R = Math.max(18, Math.min(H * (o.small ? 0.36 : 0.33), W * 0.26));
+        RX = R * 1.13; RY = R * 0.93;
+        A0 = Math.PI * RX * RY;
+        hit.style.width = (RX * 2.3) + "px"; hit.style.height = (RY * 2.4) + "px";
+        if (!ready) {
+          ready = true;
+          for (const p of P) { p.x = Math.cos(p.a) * RX * 0.3; p.y = Math.sin(p.a) * RY * 0.3; }   // pops out on arrival
+        }
+      }
+      return true;
+    }
+    // The shape it wants to be: an oval that slowly breathes and ripples.
+    function rest(t) {
+      const br = 1 + 0.022 * Math.sin(t * 1.15 + seed);
+      for (const p of P) {
+        const a = p.a;
+        const f = br * (1 + 0.027 * Math.sin(2 * a + t * 0.9 + seed) + 0.02 * Math.sin(3 * a - t * 1.25 + 1 + seed)
+          + 0.011 * Math.sin(5 * a + t * 1.7 + 2));
+        let sx = 1, sy = 1;
+        if (melted) { const m = Math.min(1, (performance.now() - meltAt) / 650); sx = 1 + 0.55 * m; sy = 1 - 0.78 * m; }
+        p.tx = Math.cos(a) * RX * f * sx; p.ty = Math.sin(a) * RY * f * sy;
+      }
+    }
+    function step(dt, t) {
+      // pulling: the grabbed side follows the pointer, the rest of the body comes along a little
+      let dx = 0, dy = 0, gx = 0, gy = 0, k = 0, ux = 0, uy = 0;
+      if (drag) {
+        dx = drag.px - drag.sx; dy = drag.py - drag.sy;
+        const m = Math.hypot(dx, dy), L = R * 0.9;
+        if (m > 0.01) { const s = L * Math.tanh(m / L) / m; dx *= s; dy *= s; ux = dx / Math.hypot(dx, dy); uy = dy / Math.hypot(dx, dy); }
+        gx = drag.gx; gy = drag.gy; k = Math.min(1, Math.hypot(gx, gy) / R);
+      }
+      const ck = 70, cc = 9;
+      C.vx += (-ck * (C.x - dx * 0.24) - cc * C.vx) * dt; C.vy += (-ck * (C.y - dy * 0.24) - cc * C.vy) * dt;
+      C.x += C.vx * dt; C.y += C.vy * dt;
+      // area now, for the pressure that keeps the volume
+      let A = 0;
+      for (let i = 0, j = N - 1; i < N; j = i++) A += (P[j].x * P[i].y - P[i].x * P[j].y);
+      A = Math.abs(A) / 2;
+      const press = 100 * (A0 - A) / A0 * R;
+      for (let i = 0; i < N; i++) {
+        const p = P[i], a = P[(i + N - 1) % N], b = P[(i + 1) % N];
+        let nx = b.y - a.y, ny = -(b.x - a.x);
+        const nl = Math.hypot(nx, ny) || 1; nx /= nl; ny /= nl;
+        if (nx * (p.x - C.x) + ny * (p.y - C.y) < 0) { nx = -nx; ny = -ny; }
+        p.nx = nx; p.ny = ny;
+      }
+      for (let i = 0; i < N; i++) {
+        const p = P[i];
+        let tx = C.x + p.tx, ty = C.y + p.ty;
+        if (drag) {
+          const ex = p.tx - gx, ey = p.ty - gy;
+          const prox = Math.exp(-(ex * ex + ey * ey) / (2 * (R * 0.8) * (R * 0.8)));
+          const rl = Math.hypot(p.tx, p.ty) || 1;
+          const face = Math.max(0, (p.tx * ux + p.ty * uy) / rl);
+          const w = 0.18 + 0.82 * (k * prox + (1 - k) * Math.pow(face, 1.5));
+          tx += (w - 0.18) * dx * 1.12; ty += (w - 0.18) * dy * 1.12;
+        } else if (hover) {
+          const hx = hover.x - W / 2 - C.x, hy = hover.y - H / 2 - C.y, hl = Math.hypot(hx, hy);
+          if (hl < R * 2.2 && hl > 1) {
+            const rl = Math.hypot(p.tx, p.ty) || 1;
+            const face = Math.max(0, (p.tx * hx + p.ty * hy) / (rl * hl));
+            const s = R * 0.09 * Math.pow(face, 3) * (1 - hl / (R * 2.2));
+            tx += p.tx / rl * s; ty += p.ty / rl * s;
+          }
+        }
+        p.ux = p.x - tx; p.uy = p.y - ty;
+      }
+      const kr = 112, kn = 820, damp = 5.2;
+      for (let i = 0; i < N; i++) {
+        const p = P[i], a = P[(i + N - 1) % N], b = P[(i + 1) % N];
+        const fx = -kr * p.ux + kn * ((a.ux + b.ux) / 2 - p.ux) + press * p.nx - damp * p.vx;
+        const fy = -kr * p.uy + kn * ((a.uy + b.uy) / 2 - p.uy) + press * p.ny - damp * p.vy;
+        p.vx += fx * dt; p.vy += fy * dt;
+      }
+      for (const p of P) { p.x += p.vx * dt; p.y += p.vy * dt; }
+    }
+    function poke(px, py) {
+      const gx = px - W / 2 - C.x, gy = py - H / 2 - C.y;
+      for (const p of P) {
+        const ex = p.x - gx, ey = p.y - gy;
+        const w = Math.exp(-(ex * ex + ey * ey) / (2 * (R * 0.7) * (R * 0.7)));
+        p.vx -= p.nx * R * 5.5 * w; p.vy -= p.ny * R * 5.5 * w;
+      }
+    }
+
+    function draw(t) {
+      const light = document.body.classList.contains("light");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
-      ctx.globalCompositeOperation = light ? "source-over" : "lighter";
-      const cx = W / 2, cy = H / 2, R = Math.min(W * 0.46, H * 0.95);
-      const ch = (262 + t * 22) % 360, cr = R * (0.62 + 0.06 * Math.sin(t * 0.9));
-      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr);
-      core.addColorStop(0, `hsla(${ch}, 95%, ${light ? 66 : 60}%, ${light ? 0.5 : 0.42})`);
-      core.addColorStop(1, `hsla(${ch}, 95%, 60%, 0)`);
-      ctx.fillStyle = core; ctx.beginPath(); ctx.ellipse(cx, cy, cr * 1.5, cr, 0, 0, Math.PI * 2); ctx.fill();
-      for (const b of blobs) {
-        const x = cx + Math.sin(t * b.sp + b.ph) * W * 0.22 + Math.cos(t * b.sp * 0.63 + b.ph * 2) * W * 0.07;
-        const y = cy + Math.cos(t * b.sp * 0.87 + b.ph) * H * 0.17;
-        const r = R * (b.r + 0.09 * Math.sin(t * 1.2 + b.ph * 1.3));
-        const hue = (b.h + t * 16) % 360;
+      const ox = W / 2, oy = H / 2;
+      let minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9, cx = 0, cy = 0;
+      for (let i = 0; i < N; i++) {
+        X[i] = ox + P[i].x; Y[i] = oy + P[i].y; cx += X[i]; cy += Y[i];
+        if (X[i] < minx) minx = X[i]; if (X[i] > maxx) maxx = X[i]; if (Y[i] < miny) miny = Y[i]; if (Y[i] > maxy) maxy = Y[i];
+      }
+      cx /= N; cy /= N;
+      const bw = (maxx - minx) / 2, bh = (maxy - miny) / 2, br = Math.max(bw, bh);
+      const path = new Path2D();
+      path.moveTo((X[N - 1] + X[0]) / 2, (Y[N - 1] + Y[0]) / 2);
+      for (let i = 0; i < N; i++) { const j = (i + 1) % N; path.quadraticCurveTo(X[i], Y[i], (X[i] + X[j]) / 2, (Y[i] + Y[j]) / 2); }
+      const hue = orbHue(t * 0.035 + seed);
+      // 1. soft coloured glow around the bubble
+      ctx.save();
+      ctx.shadowColor = `hsla(${hue}, 92%, ${light ? 64 : 60}%, ${light ? 0.45 : 0.62})`;
+      ctx.shadowBlur = R * (light ? 0.62 : 0.8);
+      ctx.shadowOffsetY = light ? R * 0.16 : R * 0.04;
+      ctx.fillStyle = light ? "rgba(255,255,255,0.9)" : "rgba(22,20,40,0.94)";
+      ctx.fill(path);
+      ctx.restore();
+      // 2. inside: deep colour that moves
+      ctx.save();
+      ctx.clip(path);
+      const base = ctx.createRadialGradient(cx - bw * 0.25, cy - bh * 0.45, 0, cx, cy, br * 1.15);
+      base.addColorStop(0, light ? "hsl(232, 100%, 98%)" : "hsl(238, 48%, 19%)");
+      base.addColorStop(1, light ? "hsl(258, 90%, 91%)" : "hsl(250, 60%, 6%)");
+      ctx.fillStyle = base;
+      ctx.fillRect(minx - 4, miny - 4, bw * 2 + 8, bh * 2 + 8);
+      ctx.globalCompositeOperation = light ? "source-over" : "screen";
+      for (let b = 0; b < 6; b++) {
+        const ph = b * (Math.PI * 2 / 6) + seed, sp = 0.32 + (b % 3) * 0.09;
+        const ang = ph + t * 0.38 + 0.5 * Math.sin(t * sp + b);
+        const x = cx + Math.cos(ang) * bw * (0.5 + 0.12 * Math.sin(t * 0.7 + b));
+        const y = cy + Math.sin(ang) * bh * (0.48 + 0.12 * Math.cos(t * 0.6 + b));
+        const r = br * (0.58 + 0.1 * Math.sin(t * 0.9 + ph));
+        const h = orbHue(t * 0.03 + b / 6 + seed);
         const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-        g.addColorStop(0, `hsla(${hue}, 96%, ${light ? 61 : 63}%, ${light ? 0.62 : 0.52})`);
-        g.addColorStop(0.55, `hsla(${hue}, 96%, ${light ? 64 : 55}%, ${light ? 0.24 : 0.2})`);
-        g.addColorStop(1, `hsla(${hue}, 96%, 60%, 0)`);
+        g.addColorStop(0, `hsla(${h}, 98%, ${light ? 62 : 60}%, ${light ? 0.86 : 0.9})`);
+        g.addColorStop(0.5, `hsla(${h}, 98%, ${light ? 66 : 54}%, ${light ? 0.4 : 0.38})`);
+        g.addColorStop(1, `hsla(${h}, 95%, 60%, 0)`);
         ctx.fillStyle = g;
         ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
       }
-      if (reduceMotion && now - t0 > 120) { alive = false; cancelAnimationFrame(raf); }
+      // 3. coloured glass rim (light bends at the edge, like Liquid Glass)
+      ctx.globalCompositeOperation = light ? "source-over" : "screen";
+      let rim;
+      if (ctx.createConicGradient) {
+        rim = ctx.createConicGradient(t * 0.5 + seed, cx, cy);
+        for (let k = 0; k <= 6; k++) rim.addColorStop(k / 6, `hsla(${orbHue(k / 6 + t * 0.03)}, 100%, ${light ? 64 : 70}%, 1)`);
+      } else rim = `hsla(${hue}, 95%, 68%, 1)`;
+      ctx.strokeStyle = rim;
+      for (let k = 0; k < 9; k++) { const u = k / 8; ctx.globalAlpha = 0.045 + 0.09 * u * u; ctx.lineWidth = R * (0.5 - 0.46 * Math.pow(u, 0.8)); ctx.stroke(path); }
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "source-over";
+      // 4. glass body: a bright Fresnel edge and a lens-like lift in the middle
+      ctx.strokeStyle = light ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)";
+      ctx.lineWidth = R * 0.06; ctx.stroke(path);
+      const lens = ctx.createRadialGradient(cx - bw * 0.1, cy - bh * 0.32, 0, cx - bw * 0.1, cy - bh * 0.32, br * 0.95);
+      lens.addColorStop(0, light ? "rgba(255,255,255,0.28)" : "rgba(255,255,255,0.09)");
+      lens.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = lens; ctx.fill(path);
+      // 5. shine that follows the shape: one along the top-left edge, a softer one bottom-right
+      let best = 0, bv = -2, worst = 0, wv = 2;
+      for (let i = 0; i < N; i++) { const d = P[i].nx * LX + P[i].ny * LY; if (d > bv) { bv = d; best = i; } if (d < wv) { wv = d; worst = i; } }
+      ctx.globalCompositeOperation = light ? "source-over" : "screen";
+      const glint = (i, inset, len, thick, alpha) => {
+        const p = P[i];
+        const gx2 = X[i] - p.nx * R * inset, gy2 = Y[i] - p.ny * R * inset;
+        ctx.save();
+        ctx.translate(gx2, gy2); ctx.rotate(Math.atan2(p.nx, -p.ny)); ctx.scale(1, thick);
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, R * len);
+        g.addColorStop(0, `rgba(255,255,255,${alpha})`); g.addColorStop(0.45, `rgba(255,255,255,${alpha * 0.35})`); g.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R * len, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      };
+      glint(best, 0.13, 0.7, 0.15, light ? 0.95 : 0.75);
+      glint(worst, 0.1, 0.45, 0.14, light ? 0.55 : 0.3);
+      ctx.restore();
+      // 6. the crisp glass edge: brightest where it faces the light, and again on the far side
+      if (light) { ctx.strokeStyle = "rgba(60,40,90,0.10)"; ctx.lineWidth = 1; ctx.stroke(path); }
+      ctx.lineCap = "round";
+      ctx.lineWidth = Math.max(1, R * 0.018);
+      for (let i = 0; i < N; i++) {
+        const j = (i + 1) % N, h0 = (i + N - 1) % N;
+        const d = P[i].nx * LX + P[i].ny * LY;
+        const a = 0.14 + 0.82 * Math.pow(Math.max(0, d), 2.2) + 0.45 * Math.pow(Math.max(0, -d), 3);
+        ctx.strokeStyle = `rgba(255,255,255,${a.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.moveTo((X[h0] + X[i]) / 2, (Y[h0] + Y[i]) / 2);
+        ctx.quadraticCurveTo(X[i], Y[i], (X[i] + X[j]) / 2, (Y[i] + Y[j]) / 2);
+        ctx.stroke();
+      }
     }
-    raf = requestAnimationFrame(draw);
+
+    function frame(now) {
+      if (!alive) return;
+      if (!wrap.isConnected && now - t0 > 1500) { alive = false; return; }
+      raf = requestAnimationFrame(frame);
+      if (document.hidden || !wrap.isConnected || !size()) { lastT = now; return; }
+      const t = (now - t0) / 1000;
+      let dt = Math.min(0.05, Math.max(0, (now - (lastT || now)) / 1000));
+      lastT = now;
+      acc += dt;
+      rest(t);
+      let n = 0;
+      while (acc >= 1 / 120 && n < 8) { step(1 / 120, t); acc -= 1 / 120; n++; }
+      if (n === 8) acc = 0;
+      draw(t);
+      if (reduceMotion && t > 0.15) { alive = false; cancelAnimationFrame(raf); }
+    }
+    if (reduceMotion) {
+      // a calm, still bubble
+      requestAnimationFrame(() => { if (!size()) return; rest(0); for (const p of P) { p.x = p.tx; p.y = p.ty; } step(1 / 120, 0); for (const p of P) { p.x = p.tx; p.y = p.ty; } draw(0); });
+      hit.style.display = "none";
+    } else raf = requestAnimationFrame(frame);
+
+    // Drag with a finger or the mouse
+    const at = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    hit.addEventListener("pointerdown", (e) => {
+      if (melted || reduceMotion) return;
+      const [px, py] = at(e);
+      try { hit.setPointerCapture(e.pointerId); } catch (er) {}
+      drag = { id: e.pointerId, gx: px - W / 2 - C.x, gy: py - H / 2 - C.y, sx: px, sy: py, px, py, moved: 0 };
+      wrap.classList.add("grab");
+      if (tip) { tip.classList.add("gone"); tip = null; try { localStorage.setItem("scode_orb_tip", "9"); } catch (er) {} }
+      e.preventDefault();
+    });
+    hit.addEventListener("pointermove", (e) => {
+      const [px, py] = at(e);
+      if (drag && e.pointerId === drag.id) { drag.px = px; drag.py = py; drag.moved = Math.max(drag.moved, Math.hypot(px - drag.sx, py - drag.sy)); }
+      else if (e.pointerType === "mouse") hover = { x: px, y: py };
+    });
+    const end = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (drag.moved < 6) poke(drag.sx, drag.sy);
+      drag = null;
+      wrap.classList.remove("grab");
+    };
+    hit.addEventListener("pointerup", end);
+    hit.addEventListener("pointercancel", end);
+    hit.addEventListener("pointerleave", () => { hover = null; });
     return {
       el: wrap,
       melt() {
         if (melted) return;
-        melted = true;
+        melted = true; meltAt = performance.now(); drag = null;
         wrap.classList.add("melt");
         setTimeout(() => { alive = false; cancelAnimationFrame(raf); wrap.remove(); }, reduceMotion ? 0 : 950);
       },
       stop() { alive = false; cancelAnimationFrame(raf); wrap.remove(); },
+      // for tests: pull it like a finger would
+      _state() { return { R, W, H, drag: !!drag, x: P.map(p => p.x), y: P.map(p => p.y) }; },
     };
   }
-  // The reply text pours in from the orb, stays in moving colour while it's being written, then settles to normal.
+
+  // The reply text pours in from the bubble, stays in moving colour while it's being written, then settles to normal.
   function flowStart(md) {
     if (!md || md._flow || reduceMotion) return;
     md._flow = true;
@@ -7569,8 +7907,13 @@
   // =====================================================================
   //  SCODE Essay Coach
   //  Paste writing + say what you want help with. The coach points to exact
-  //  spots, habits and strengths, and never rewrites the text. Highlights
-  //  follow the text as it's edited and clear when that part changes.
+  //  spots, habits and strengths, and never rewrites the text.
+  //  Each essay is a session saved in Recents (like a chat). A check runs on
+  //  the server as a background job, so it keeps going if the page closes,
+  //  and the feedback is picked back up later, on any device.
+  //  While it checks, a liquid-glass band moves over the lines being read,
+  //  each spot pops up as soon as it's found, and the scores and habits
+  //  appear only once the whole check is done.
   // =====================================================================
   var essayCost = 20, essayAskCost = 5;
   const EC_MAX = 8000;
@@ -7579,30 +7922,118 @@
                    flow: "flow", structure: "flow", tone: "flow", french: "fr", "english word": "fr" };
   const EC_LABEL = { "english word": "English word", "word choice": "Word choice" };
   const EC_GOALS = ["Be more precise", "Fix grammar & commas", "Make it flow better", "Stronger argument", "More formal tone", "Help my French"];
-  const EC_FR_WORDS = new Set(["le", "la", "les", "des", "est", "et", "je", "nous", "vous", "que", "qui", "une", "pas", "dans", "avec", "pour", "très", "être", "c'est", "j'ai", "mais", "sont", "du", "au", "aux", "il", "elle", "ils", "mon", "ma", "mes", "ce", "cette", "parce", "aussi", "être", "avoir", "fait"]);
+  const EC_FR_WORDS = new Set(["le", "la", "les", "des", "est", "et", "je", "nous", "vous", "que", "qui", "une", "pas", "dans", "avec", "pour", "très", "être", "c'est", "j'ai", "mais", "sont", "du", "au", "aux", "il", "elle", "ils", "mon", "ma", "mes", "ce", "cette", "parce", "aussi", "avoir", "fait"]);
+  const EC_STAGE = {
+    queued: ["Waiting for SCODE AI", "Another reply is being written first. Yours is next."],
+    reading: ["Reading your writing", "Getting a feel for the whole piece first."],
+    looking: ["Finding spots to fix", "Each one pops up here as soon as it's found."],
+    habits: ["Looking for habits", "Checking the whole piece for patterns, then scoring it."],
+    retry: ["Taking another look", "Its first answer came out jumbled, so it's trying again."],
+    lost: ["Reconnecting…", "Your check is still running on SCODE AI. Picking it back up."],
+  };
   const ecIcon = {
     pen: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M13.5 7l3.5 3.5M4 20h7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     shield: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     x: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.9"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
   };
-  const EC = { text: "", goal: "", lang: "en", fb: "en", langSet: false, result: null, hl: [], round: 0, prevScores: null, fixedLast: 0, active: -1, busy: false, view: "start", tab: "text" };
+  // What's saved for a session (in Recents and in this browser).
+  const EC_KEEP = ["id", "text", "goal", "lang", "fb", "langSet", "result", "hl", "round", "prevScores", "fixedLast", "view", "job", "prev"];
+  function ecBlank() {
+    return { id: null, text: "", goal: "", lang: "en", fb: "en", langSet: false, result: null, hl: [], round: 0, prevScores: null,
+             fixedLast: 0, view: "start", job: null, prev: null, tab: "text", active: -1, stage: null };
+  }
+  var EC = ecBlank();                 // the session that's open in the coach
+  const EC_ALL = new Map();           // sessions with a check still going (open or not), by id
   const ecEsc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const ecCat = (t) => EC_CAT[t] || "word";
   const ecType = (t) => EC_LABEL[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : "Note");
   const ecWords = (s) => (s.trim().match(/\S+/g) || []).length;
-
-  function ecSave() {
-    try {
-      localStorage.setItem(EC_KEY, JSON.stringify({ text: EC.view === "start" ? $("ec-in").value : $("ec-txt").value, goal: EC.goal, lang: EC.lang, fb: EC.fb,
-        langSet: EC.langSet, result: EC.result, hl: EC.hl, round: EC.round, prevScores: EC.prevScores, fixedLast: EC.fixedLast, view: EC.view }));
-    } catch (e) {}
+  const ecBuilt = () => !!$("ec-ov");
+  const ecIsOpen = () => ecBuilt() && $("ec-ov").classList.contains("show");
+  const ecPhone = () => window.innerWidth <= 860;
+  function ecKey() { return EC_KEY + "_" + (auth && auth.email ? auth.email.toLowerCase() : "guest"); }
+  function ecSnap(S) { const o = {}; for (const k of EC_KEEP) o[k] = S[k] === undefined ? null : S[k]; return o; }
+  function ecFrom(o, id) {
+    const S = Object.assign(ecBlank(), o || {});
+    if (id) S.id = id;
+    S.hl = Array.isArray(S.hl) ? S.hl : [];
+    S.active = -1; S.tab = "text"; S.stage = S.job ? "lost" : null;
+    return S;
   }
-  function ecLoad() {
-    try {
-      const s = JSON.parse(localStorage.getItem(EC_KEY) || "null");
-      if (s && typeof s === "object") Object.assign(EC, s, { busy: false, active: -1 });
-    } catch (e) {}
+  function ecTitle(t) { const s = String(t || "").replace(/\s+/g, " ").trim(); return s ? (s.length > 40 ? s.slice(0, 40).trim() + "…" : s) : "Essay"; }
+  function ecMsgs(S) {
+    return [{ role: "user", content: "Essay Coach: " + (S.goal || "feedback on my writing") },
+            { role: "assistant", content: S.job ? "Checking…" : (S.result && S.result.summary) || "Feedback ready." }];
+  }
+  function ecSyncOK() { return historyEnabled && !isGuest(); }
+  function ecChat(id) { return id && ecSyncOK() ? chats.find(c => c.id === id && c.kind === "essay") || null : null; }
+  function ecNewId(p) { return p + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+
+  // Save a session: in this browser (if it's the open one) and as its chat in Recents (synced to the account).
+  function ecPersist(S, list) {
+    if (S === EC && !isGuest()) { try { localStorage.setItem(ecKey(), JSON.stringify(ecSnap(S))); } catch (e) {} }
+    const c = ecChat(S.id);
+    if (!c) return;
+    const was = !!(c.essay && c.essay.job);
+    c.essay = ecSnap(S); c.title = ecTitle(S.text); c.messages = ecMsgs(S);
+    saveChats();
+    if (list || was !== !!S.job) renderChatList();
+  }
+  function ecEnsureChat(S) {
+    if (!S.id || !ecSyncOK() || ecChat(S.id)) return;
+    chats.unshift({ id: S.id, kind: "essay", title: ecTitle(S.text), tier: "l2_5", messages: ecMsgs(S), essay: ecSnap(S), updated: Date.now() });
+  }
+  function ecDropChat(id) {
+    if (!id || !chats.some(c => c.id === id)) return;
+    chats = chats.filter(c => c.id !== id);
+    if (syncOn()) {
+      delete SYNC.sent[id]; SYNC.queue.delete(id);
+      syncFetch("/sync/chat/" + encodeURIComponent(id), { method: "DELETE" })
+        .then(r => { if (!r.ok) writeGone(readGone().concat([id])); }).catch(() => writeGone(readGone().concat([id])));
+    }
+    saveChats(); renderChatList();
+  }
+  // The open session's text lives in the text boxes while you type.
+  function ecGrab() {
+    if (!ecBuilt() || EC.job) return;
+    EC.text = EC.view === "start" ? $("ec-in").value : $("ec-txt").value;
+  }
+  function ecSave() { ecGrab(); ecPersist(EC); }
+  let ecSaveT = null;
+  function ecSaveSoon() { clearTimeout(ecSaveT); ecSaveT = setTimeout(ecSave, 700); }
+
+  function ecLoadOpen() {
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(ecKey()) || "null"); } catch (e) {}
+    if (!s) {   // from before sessions were per account
+      try { const old = localStorage.getItem(EC_KEY); if (old) { s = JSON.parse(old); localStorage.removeItem(EC_KEY); } } catch (e) {}
+    }
+    if (s && s.id && EC_ALL.has(s.id)) { EC = EC_ALL.get(s.id); return; }
+    const c = s && s.id ? ecChat(s.id) : null;
+    if (s && s.id && ecSyncOK() && !c) s = null;          // deleted from Recents
+    EC = ecFrom(c && c.essay ? c.essay : s, s && s.id);
+  }
+  function ecOpenSession(id) {
+    if (!id || EC.id === id) return;
+    ecSave();
+    if (EC.job) EC_ALL.set(EC.id, EC);
+    if (EC_ALL.has(id)) EC = EC_ALL.get(id);
+    else { const c = ecChat(id); if (!c) return; EC = ecFrom(c.essay, id); }
+    ecPersist(EC);
+    ecFill();
+  }
+  function ecFill() {
+    if (!ecBuilt()) return;
+    $("ec-in").value = EC.view === "start" ? EC.text : "";
+    $("ec-txt").value = EC.view === "start" ? "" : EC.text;
+    $("ec-goal").value = EC.goal || "";
+    $("ec-err").textContent = "";
+    $("ec-right").innerHTML = "";
+    $("ec-review").dataset.tab = EC.tab = "text";
+    ecScanStop(true);
+    if (EC._orbUI) { EC._orbUI.stop(); EC._orbUI = null; }
   }
 
   function buildEssayCoach() {
@@ -7635,7 +8066,8 @@
           </div>
           <button class="ec-go" id="ec-go" type="button">Check my writing <small id="ec-cost"></small></button>
           <div class="ec-err" id="ec-err"></div>
-          <p class="ec-note">${ecIcon.shield}<span>Your text is checked by SCODE Safety, isn't saved on our server and isn't used for training. Your latest draft stays only in this browser.</span></p>
+          <p class="ec-note">${ecIcon.clock}<span>Takes a few minutes. You can close this while it checks: it keeps going, and your feedback is waiting when you come back.</span></p>
+          <p class="ec-note">${ecIcon.shield}<span id="ec-privacy"></span></p>
         </div></section>
         <section class="ec-review" id="ec-review" hidden data-tab="text">
           <div class="ec-tabs" id="ec-tabs"><button type="button" data-t="text">Your writing</button><button type="button" data-t="fb">Feedback<span class="n" id="ec-tabn"></span></button></div>
@@ -7646,7 +8078,7 @@
                 <div class="ec-ed"><div class="ec-bd" id="ec-bd" aria-hidden="true"></div><textarea id="ec-txt" spellcheck="true" aria-label="Your writing"></textarea></div>
               </div>
               <div class="ec-focus" id="ec-focus"></div>
-              <div class="ec-foot"><span class="ec-live" id="ec-live">Edit right here. Highlights clear as you fix them.</span>
+              <div class="ec-foot"><span class="ec-live" id="ec-live" aria-live="polite">Edit right here. Highlights clear as you fix them.</span>
                 <button class="ec-again" id="ec-again" type="button">Check again <small id="ec-cost2"></small></button></div>
             </div>
             <div class="ec-right" id="ec-right"></div>
@@ -7659,13 +8091,16 @@
     ov.addEventListener("mousedown", (e) => { if (e.target === ov) closeEssayCoach(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && ov.classList.contains("show")) closeEssayCoach(); });
     $("ec-new").onclick = () => {
-      if (EC.busy) return;
-      if (EC.result && !confirm("Start over with new text? This feedback will be cleared.")) return;
-      Object.assign(EC, { result: null, hl: [], round: 0, prevScores: null, fixedLast: 0, active: -1, view: "start" });
-      inp.value = ""; ecShow(); ecSave(); inp.focus();
+      const kept = EC.id && ecChat(EC.id);
+      if (!kept && (EC.result || EC.job) && !confirm(EC.job ? "Your check is still running. Start over with new text? Its feedback will be lost." : "Start over with new text? This feedback will be cleared.")) return;
+      ecSave();
+      if (EC.job) EC_ALL.set(EC.id, EC);          // it keeps going in the background
+      const fb = EC.fb;
+      EC = ecBlank(); EC.fb = fb;
+      ecPersist(EC); ecFill(); ecShow(); renderChatList(); inp.focus();
     };
-    inp.addEventListener("input", () => { ecCount(); ecAutoLang(); ecSave(); });
-    goal.addEventListener("input", () => { EC.goal = goal.value; ecChipsState(); ecSave(); });
+    inp.addEventListener("input", () => { ecCount(); ecAutoLang(); ecSaveSoon(); });
+    goal.addEventListener("input", () => { EC.goal = goal.value; ecChipsState(); ecSaveSoon(); });
     $("ec-chips").addEventListener("click", (e) => {
       const b = e.target.closest(".ec-chip"); if (!b) return;
       const g = b.dataset.g, cur = goal.value.trim();
@@ -7675,42 +8110,47 @@
       goal.value = parts.join(", ");
       EC.goal = goal.value;
       if (g === "Help my French" && i < 0) ecSetLang("fr", true);
-      ecChipsState(); ecSave();
+      ecChipsState(); ecSaveSoon();
     });
     $("ec-lang").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ecSetLang(b.dataset.v, true); });
-    $("ec-fb").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; EC.fb = b.dataset.v; ecSegs(); ecSave(); });
+    $("ec-fb").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; EC.fb = b.dataset.v; ecSegs(); ecSaveSoon(); });
     $("ec-go").onclick = () => ecCheck(false);
     $("ec-again").onclick = () => ecCheck(true);
     $("ec-tabs").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ecTab(b.dataset.t); });
-    txt.addEventListener("input", () => { ecGrow(); ecPaint(); ecSaveSoon(); });
-    const caret = () => { const i = ecAt(txt.selectionStart); if (i !== -1 && i !== EC.active) ecActivate(i, "text"); };
+    txt.addEventListener("input", () => { if (EC.job) return; ecGrow(); ecPaint(); ecSaveSoon(); });
+    const caret = () => { if (EC.job) return; const i = ecAt(txt.selectionStart); if (i !== -1 && i !== EC.active) ecActivate(i, "text"); };
     txt.addEventListener("click", caret);
     txt.addEventListener("keyup", caret);
-    window.addEventListener("resize", () => { if (ov.classList.contains("show")) ecGrow(); });
+    const sc = $("ec-lscroll"), mark = () => { SCAN.user = performance.now(); };
+    ["wheel", "touchstart", "pointerdown", "keydown"].forEach(ev => sc.addEventListener(ev, mark, { passive: true }));
+    window.addEventListener("resize", () => { if (ov.classList.contains("show")) { ecGrow(); SCAN.key = ""; } });
+    ecFill();
   }
-  let ecSaveT = null;
-  function ecSaveSoon() { clearTimeout(ecSaveT); ecSaveT = setTimeout(ecSave, 400); }
 
-  function openEssayCoach() {
+  function openEssayCoach(id) {
     if (isGuest()) { openAuth("welcome", "Essay Coach needs a free account. It only takes a minute."); return; }
-    if (!$("ec-ov")) { buildEssayCoach(); ecLoad(); }
+    if (!ecBuilt()) buildEssayCoach();
+    if (typeof id === "string" && id) ecOpenSession(id);
     $("ec-ov").classList.add("show");
     document.body.style.overflow = "hidden";
     ecShow();
     if (EC.view === "start") setTimeout(() => $("ec-in").focus(), 60);
+    if (EC.job && !EC._live) ecResume(EC);
     try { localStorage.setItem("scode_ec_seen", "1"); } catch (e) {}
     const nb = $("ec-open-side"); if (nb) nb.classList.add("seen");
+    renderChatList();
   }
   function closeEssayCoach() {
     const ov = $("ec-ov"); if (!ov) return;
     ecSave();
     ov.classList.remove("show");
     document.body.style.overflow = "";
+    renderChatList();
   }
   function ecSetLang(v, manual) {
     EC.lang = v === "fr" ? "fr" : "en";
     if (manual) EC.langSet = true;
-    ecSegs(); ecSave();
+    ecSegs(); ecSaveSoon();
   }
   function ecSegs() {
     $("ec-lang").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.v === EC.lang));
@@ -7735,35 +8175,47 @@
     const over = v.length > EC_MAX;
     $("ec-lim").textContent = over ? `Too long: up to about 1,300 words per check` : (v.length > EC_MAX * 0.85 ? `${(EC_MAX - v.length).toLocaleString()} characters left` : "");
     $("ec-lim").classList.toggle("over", over);
-    $("ec-go").disabled = EC.busy || over || v.trim().length < 20;
+    $("ec-go").disabled = !!EC.job || over || v.trim().length < 20;
   }
   function ecCosts() {
     $("ec-cost").textContent = `${essayCost} points`;
     $("ec-cost2").textContent = `· ${essayCost}`;
   }
+  function ecNote() {
+    $("ec-privacy").textContent = ecSyncOK()
+      ? "Checked by SCODE Safety and never used for training. It's saved in your Recents, so you can come back to it on any device. Delete it there any time."
+      : "Checked by SCODE Safety and never used for training. Chat history is off, so it's kept only in this browser.";
+  }
 
   function ecShow() {
-    const start = EC.view === "start";
+    if (!ecBuilt()) return;
+    const start = EC.view === "start", busy = !!EC.job;
     $("ec-start").hidden = !start;
     $("ec-review").hidden = start;
     $("ec-new").hidden = start;
-    ecCosts(); ecSegs();
+    $("ec-review").classList.toggle("busy", busy);
+    $("ec-ov").classList.toggle("busy", busy);
+    ecCosts(); ecSegs(); ecNote();
     if (start) {
       if (!$("ec-in").value && EC.text) $("ec-in").value = EC.text;
       $("ec-goal").value = EC.goal || "";
-      ecChipsState(); ecCount();
-      $("ec-round").innerHTML = "";
-    } else {
-      const txt = $("ec-txt");
-      if (EC.text && txt.value !== EC.text && !txt.value) txt.value = EC.text;
-      ecGrow(); ecPaint(); ecRenderRight(); ecTab(EC.tab || "text");
+      ecChipsState(); ecCount(); ecRound(); ecScanStop(true);
+      if (EC.err) { $("ec-err").textContent = EC.err; EC.err = null; }
+      return;
     }
+    const txt = $("ec-txt");
+    if (txt.value !== EC.text && (busy || !txt.value)) txt.value = EC.text;
+    txt.readOnly = busy;
+    ecGrow(); ecPaint();
+    if (busy) ecLiveUI();
+    else { ecScanStop(true); ecRenderRight(); }
+    ecTab(EC.tab || "text");
   }
   function ecTab(t) {
     EC.tab = t;
     $("ec-review").dataset.tab = t;
     $("ec-tabs").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
-    if (t === "text") ecGrow();
+    if (t === "text") { ecGrow(); SCAN.key = ""; }
   }
   function ecGrow() {
     const txt = $("ec-txt");
@@ -7795,31 +8247,33 @@
     return hit;
   }
   function ecPaint() {
+    if (!ecBuilt()) return;
     const t = $("ec-txt").value;
-    EC.text = t;
+    if (!EC.job) EC.text = t;
     ecAnchor();
     const marks = EC.hl.map((h, i) => ({ h, i })).filter(x => !x.h.changed).sort((a, b) => a.h.s - b.h.s);
     let out = "", p = 0;
     for (const { h, i } of marks) {
-      out += ecEsc(t.slice(p, h.s)) + `<mark class="t-${ecCat(h.type)}${i === EC.active ? " on" : ""}" data-i="${i}">${ecEsc(t.slice(h.s, h.e))}</mark>`;
+      out += ecEsc(t.slice(p, h.s)) + `<mark class="t-${ecCat(h.type)}${i === EC.active ? " on" : ""}${h.fresh ? " pop" : ""}" data-i="${i}">${ecEsc(t.slice(h.s, h.e))}</mark>`;
       p = h.e;
+      h.fresh = false;
     }
     $("ec-bd").innerHTML = out + ecEsc(t.slice(p)) + "\n";
-    // cards follow along
     const right = $("ec-right");
     EC.hl.forEach((h, i) => { const c = right.querySelector(`.ec-card[data-i="${i}"]`); if (c) c.classList.toggle("changed", !!h.changed); });
     const total = EC.hl.length, changed = EC.hl.filter(h => h.changed).length;
     const live = $("ec-live");
-    if (EC.busy) live.textContent = "Checking your writing…";
+    if (EC.job) live.textContent = "Checking… you can close this. It keeps going" + (ecSyncOK() ? " and it's saved in your Recents." : ".");
     else if (!total) live.textContent = EC.result ? "No highlights. Edit and check again any time." : "Edit right here.";
     else live.innerHTML = changed ? `<b>${changed} of ${total}</b> highlighted spot${total === 1 ? "" : "s"} changed. Check again when you're ready.` : "Edit right here. Highlights clear as you fix them.";
-    $("ec-again").disabled = EC.busy || t.trim().length < 20 || t.length > EC_MAX;
+    $("ec-again").disabled = !!EC.job || t.trim().length < 20 || t.length > EC_MAX;
     $("ec-tabn").textContent = total ? String(total - changed) : "";
     ecFocusBar();
     ecRound();
   }
   function ecRound() {
     const r = $("ec-round");
+    if (EC.job) { r.innerHTML = `<span class="ec-chk"><i></i>Checking${EC.hl.length ? `<span class="rtxt"> · ${EC.hl.length} found</span>` : ""}</span>`; return; }
     if (!EC.round) { r.innerHTML = ""; return; }
     const fx = EC.fixedLast ? ` <span class="fx">· ${EC.fixedLast} fixed</span>` : "";
     r.innerHTML = `<span class="rtxt">Round</span> <b>${EC.round}</b>${fx}`;
@@ -7833,14 +8287,15 @@
     ecFocusBar();
     if (!h) return;
     if (from === "card") {
-      if (window.innerWidth <= 860) ecTab("text");
+      if (ecPhone()) ecTab("text");
       const m = $("ec-bd").querySelector(`mark[data-i="${i}"]`);
       if (m) {
         const sc = $("ec-lscroll");
+        SCAN.user = performance.now();
         sc.scrollTo({ top: Math.max(0, m.offsetTop - sc.clientHeight / 3), behavior: reduceMotion ? "auto" : "smooth" });
         m.classList.remove("flash"); void m.offsetWidth; m.classList.add("flash");
       }
-    } else if (window.innerWidth > 860) {
+    } else if (!ecPhone()) {
       const c = $("ec-right").querySelector(`.ec-card[data-i="${i}"]`);
       if (c) c.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
     }
@@ -7848,8 +8303,19 @@
   function ecFocusBar() {
     const f = $("ec-focus");
     if (!f) return;
+    if (EC.job) {     // phone, while checking: what it's doing and the newest spot
+      const st = EC_STAGE[EC.stage] || EC_STAGE.reading, n = EC.hl.length, last = EC.hl[n - 1];
+      if (f.dataset.n === String(n) && f.dataset.st === EC.stage) return;
+      const isNew = f.dataset.n !== String(n);
+      f.dataset.n = String(n); f.dataset.st = EC.stage || "";
+      f.className = "ec-focus live" + (last ? " t-" + ecCat(last.type) : "");
+      f.innerHTML = `<div class="ec-fl"><i class="ec-dot"></i><b>${ecEsc(st[0])}</b><span>${n} spot${n === 1 ? "" : "s"} found</span></div>` +
+        (last ? `<div class="ec-fl-spot${isNew ? " pop" : ""}"><span class="ec-type">${ecEsc(ecType(last.type))}</span><p class="ec-issue">${ecEsc(last.issue)}</p></div>` : "");
+      return;
+    }
+    delete f.dataset.n;
     const h = EC.hl[EC.active];
-    if (!h || h.changed || EC.busy) { f.innerHTML = ""; return; }
+    if (!h || h.changed) { f.className = "ec-focus"; f.innerHTML = ""; return; }
     const live = EC.hl.map((x, i) => i).filter(i => !EC.hl[i].changed);
     const k = live.indexOf(EC.active);
     f.className = `ec-focus t-${ecCat(h.type)}`;
@@ -7862,9 +8328,27 @@
     });
   }
 
-  function ecRenderRight() {
+  function ecCardHTML(h, i, cls) {
+    return `<div class="ec-card t-${ecCat(h.type)}${h.changed ? " changed" : ""}${i === EC.active ? " on" : ""}${cls ? " " + cls : ""}" data-i="${i}" style="animation-delay:${cls === "pop" ? 0 : Math.min(i, 10) * 0.04}s">
+        <div class="ec-ch"><span class="ec-type">${ecEsc(ecType(h.type))}</span><span class="ec-state">Changed ✓</span></div>
+        <span class="ec-q">${ecEsc(h.quote)}</span>
+        <p class="ec-issue">${ecEsc(h.issue)}</p><p class="ec-hint">${ecEsc(h.hint)}</p>
+        ${h.suggest ? `<div class="ec-sug">Try <b>${ecEsc(h.suggest)}</b></div>` : ""}
+        <div><button type="button" class="ec-askb">Ask about this</button></div>
+        <form class="ec-askf" hidden><input maxlength="300" placeholder="e.g. Why is this wrong?"><button type="submit">Ask · ${essayAskCost}</button></form>
+        <div class="ec-ans"></div></div>`;
+  }
+  function ecWireCard(c) {
+    const i = +c.dataset.i;
+    c.addEventListener("click", (e) => { if (e.target.closest(".ec-askf, .ec-askb, .ec-ans")) return; ecActivate(i, "card"); });
+    const f = c.querySelector(".ec-askf"), ab = c.querySelector(".ec-askb");
+    ab.onclick = () => { f.hidden = !f.hidden; if (!f.hidden) f.querySelector("input").focus(); };
+    f.onsubmit = (e) => { e.preventDefault(); ecAsk(i, f, c.querySelector(".ec-ans")); };
+  }
+  function ecRenderRight(reveal) {
     const right = $("ec-right");
-    if (EC.busy) return;
+    if (EC.job) return;
+    if (EC._orbUI) { EC._orbUI.stop(); EC._orbUI = null; }
     const r = EC.result;
     if (!r) { right.innerHTML = '<div class="ec-empty">Your feedback will show up here.</div>'; return; }
     let html = "";
@@ -7875,116 +8359,453 @@
       const em = dlt ? `<em class="${dlt > 0 ? "up" : "down"}">${dlt > 0 ? "+" : ""}${dlt}</em>` : "";
       return `<div class="ec-sc"><div class="top"><span>${k.charAt(0).toUpperCase() + k.slice(1)}</span><span><b>${sc[k]}</b>/10${em}</span></div><div class="ec-bar"><i data-w="${sc[k] * 10}"></i></div></div>`;
     }).join("");
-    html += `<div class="ec-card0"><div class="ec-h">Coach's notes</div><p class="ec-sum">${ecEsc(r.summary || "Here's what to look at.")}</p>${bars ? `<div class="ec-scores">${bars}</div>` : ""}</div>`;
+    html += `<div class="ec-card0 ec-notes${reveal ? " reveal" : ""}"><div class="ec-h">Coach's notes</div><p class="ec-sum">${ecEsc(r.summary || "Here's what to look at.")}</p>${bars ? `<div class="ec-scores">${bars}</div>` : ""}</div>`;
     if (EC.hl.length) {
       html += `<div class="ec-h" style="margin-top:6px">Spots to fix · ${EC.hl.length}</div>`;
-      html += EC.hl.map((h, i) => `<div class="ec-card t-${ecCat(h.type)}${h.changed ? " changed" : ""}${i === EC.active ? " on" : ""}" data-i="${i}" style="animation-delay:${Math.min(i, 10) * 0.04}s">
-        <div class="ec-ch"><span class="ec-type">${ecEsc(ecType(h.type))}</span><span class="ec-state">Changed ✓</span></div>
-        <span class="ec-q">${ecEsc(h.quote)}</span>
-        <p class="ec-issue">${ecEsc(h.issue)}</p><p class="ec-hint">${ecEsc(h.hint)}</p>
-        ${h.suggest ? `<div class="ec-sug">Try <b>${ecEsc(h.suggest)}</b></div>` : ""}
-        <div><button type="button" class="ec-askb">Ask about this</button></div>
-        <form class="ec-askf" hidden><input maxlength="300" placeholder="e.g. Why is this wrong?"><button type="submit">Ask · ${essayAskCost}</button></form>
-        <div class="ec-ans"></div></div>`).join("");
+      html += EC.hl.map((h, i) => ecCardHTML(h, i, reveal ? "still" : "")).join("");
     } else {
       html += `<div class="ec-card0"><div class="ec-h">Spots to fix</div><p class="ec-hint" style="margin:0">Nothing specific to point at. Nice work! Check the habits below, or ask for something more specific next time.</p></div>`;
     }
     if (r.patterns && r.patterns.length) {
-      html += `<div class="ec-card0"><div class="ec-h">Habits across your writing</div>${r.patterns.map((p, i) =>
+      html += `<div class="ec-card0${reveal ? " reveal r2" : ""}"><div class="ec-h">Habits across your writing</div>${r.patterns.map((p, i) =>
         `<div class="ec-pat"><span class="n">${i + 1}</span><div><b>${ecEsc(p.title)}</b><span>${ecEsc(p.detail)}</span></div></div>`).join("")}</div>`;
     }
     if (r.strengths && r.strengths.length) {
-      html += `<div class="ec-card0"><div class="ec-h">What's working</div>${r.strengths.map(s => `<div class="ec-str">${ecIcon.check}<span>${ecEsc(s)}</span></div>`).join("")}</div>`;
+      html += `<div class="ec-card0${reveal ? " reveal r3" : ""}"><div class="ec-h">What's working</div>${r.strengths.map(s => `<div class="ec-str">${ecIcon.check}<span>${ecEsc(s)}</span></div>`).join("")}</div>`;
     }
     right.innerHTML = html;
-    requestAnimationFrame(() => right.querySelectorAll(".ec-bar i").forEach(b => { b.style.width = b.dataset.w + "%"; }));
-    right.querySelectorAll(".ec-card").forEach(c => {
-      const i = +c.dataset.i;
-      c.addEventListener("click", (e) => { if (e.target.closest(".ec-askf, .ec-askb, .ec-ans")) return; ecActivate(i, "card"); });
-      const f = c.querySelector(".ec-askf"), ab = c.querySelector(".ec-askb");
-      ab.onclick = () => { f.hidden = !f.hidden; if (!f.hidden) f.querySelector("input").focus(); };
-      f.onsubmit = (e) => { e.preventDefault(); ecAsk(i, f, c.querySelector(".ec-ans")); };
-    });
+    if (reveal) right.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    setTimeout(() => right.querySelectorAll(".ec-bar i").forEach(b => { b.style.width = b.dataset.w + "%"; }), reveal ? 450 : 30);
+    right.querySelectorAll(".ec-card").forEach(ecWireCard);
   }
 
-  function ecWaiting(stage) {
+  // ---------- while it checks ----------
+  function ecLiveUI() {
+    if (!ecBuilt() || !EC.job || EC.view === "start") return;
     const right = $("ec-right");
-    let w = right.querySelector(".ec-wait");
-    if (!w) {
-      right.innerHTML = '<div class="ec-wait"><div class="ec-orbslot"></div><h3>Reading your writing</h3><p>Usually takes a minute or two.</p></div>';
-      w = right.querySelector(".ec-wait");
-      const orb = makeOrb();
-      w.querySelector(".ec-orbslot").replaceWith(orb.el);
-      EC._orb = orb;
+    let box = right.querySelector(".ec-livebox");
+    if (!box) {
+      right.innerHTML = `<div class="ec-livebox"><div class="ec-lv-top"><div class="ec-lv-orb"></div><div class="ec-lv-tx"><h3></h3><p></p></div></div>
+        <div class="ec-steps"><span>Read</span><i></i><span>Spots</span><i></i><span>Habits</span><i></i><span>Scores</span></div>
+        <div class="ec-lv-note">${ecIcon.clock}<span>You can close this or leave the page. It keeps going${ecSyncOK() ? " and is saved in your Recents" : ""}, so your feedback is waiting when you come back.</span></div></div>
+        <div class="ec-h ec-lv-n">Spots found <b>0</b></div><div class="ec-lv-cards"></div>
+        <div class="ec-lv-later">Your scores, habits and overall notes show up when the check is done.</div>`;
+      box = right.querySelector(".ec-livebox");
+      if (EC._orbUI) EC._orbUI.stop();
+      EC._orbUI = makeOrb({ small: true });
+      box.querySelector(".ec-lv-orb").appendChild(EC._orbUI.el);
+      const cards = right.querySelector(".ec-lv-cards");
+      EC.hl.forEach((h, i) => cards.insertAdjacentHTML("beforeend", ecCardHTML(h, i, "still")));
+      cards.querySelectorAll(".ec-card").forEach(ecWireCard);
     }
-    if (stage) w.querySelector("h3").textContent = stage;
+    const st = EC_STAGE[EC.stage] || EC_STAGE.reading;
+    box.querySelector("h3").textContent = st[0];
+    box.querySelector("p").textContent = st[1];
+    const cur = EC.stage === "habits" ? 2 : (EC.stage === "looking" || EC.hl.length) ? 1 : 0;
+    box.querySelectorAll(".ec-steps span").forEach((s, i) => { s.classList.toggle("on", i === cur); s.classList.toggle("past", i < cur); });
+    box.querySelectorAll(".ec-steps i").forEach((s, i) => s.classList.toggle("past", i < cur));
+    right.querySelector(".ec-lv-n b").textContent = EC.hl.length;
+    ecRound(); ecFocusBar();
+    $("ec-again").disabled = true;
+    ecScanStart();
   }
-  function ecError(msg) {
-    if (EC._orb) { EC._orb.stop(); EC._orb = null; }
-    $("ec-right").innerHTML = `<div class="ec-errbox">${ecEsc(msg)}<br><button type="button" id="ec-retry">Back to my feedback</button></div>`;
-    $("ec-retry").onclick = () => ecRenderRight();
+  function ecLiveSpot(h, i) {
+    ecPaint();
+    if (!EC.job) return;
+    ecLiveUI();
+    const cards = $("ec-right").querySelector(".ec-lv-cards");
+    if (cards && !cards.querySelector(`.ec-card[data-i="${i}"]`)) {
+      cards.insertAdjacentHTML("beforeend", ecCardHTML(h, i, "pop"));
+      const c = cards.lastElementChild;
+      ecWireCard(c);
+      if (!ecPhone() && performance.now() - SCAN.user > 4000) c.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+    }
+    ecScanSpot(h);
   }
 
+  // ---------- the liquid-glass band over the lines being read ----------
+  const SCAN = { el: null, glass: null, paths: null, raf: 0, c: null, tgt: null, line: -1, next: 0, hold: 0, user: 0,
+                 lines: [], key: "", lh: 30, kTop: 200, kBot: 200, last: 0, out: false };
+  function ecScanLines() {
+    const bd = $("ec-bd"), ed = bd.parentNode;
+    const key = bd.textContent.length + "|" + ed.clientWidth + "|" + ed.clientHeight;
+    if (key === SCAN.key && SCAN.lines.length) return SCAN.lines;
+    SCAN.key = key;
+    SCAN.lh = parseFloat(getComputedStyle(bd).lineHeight) || 30;
+    const r0 = ed.getBoundingClientRect();
+    const rg = document.createRange();
+    rg.selectNodeContents(bd);
+    const lines = [];
+    for (const r of rg.getClientRects()) {
+      if (r.width < 1 || r.height < 1) continue;
+      const top = r.top - r0.top, bottom = r.bottom - r0.top, mid = (top + bottom) / 2;
+      const L = lines.find(l => Math.abs(l.mid - mid) < SCAN.lh * 0.4);
+      if (L) { L.top = Math.min(L.top, top); L.bottom = Math.max(L.bottom, bottom); L.mid = (L.top + L.bottom) / 2; }
+      else lines.push({ top, bottom, mid });
+    }
+    lines.sort((a, b) => a.mid - b.mid);
+    SCAN.lines = lines;
+    return lines;
+  }
+  function ecLinesOf(s, e) {
+    const bd = $("ec-bd"), tw = document.createTreeWalker(bd, NodeFilter.SHOW_TEXT);
+    let pos = 0, sn = null, so = 0, en = null, eo = 0, n;
+    while ((n = tw.nextNode())) {
+      const L = n.nodeValue.length;
+      if (!sn && s < pos + L) { sn = n; so = s - pos; }
+      if (sn && e <= pos + L) { en = n; eo = e - pos; break; }
+      pos += L;
+    }
+    if (!sn || !en) return null;
+    const rg = document.createRange();
+    try { rg.setStart(sn, so); rg.setEnd(en, eo); } catch (er) { return null; }
+    const r0 = bd.parentNode.getBoundingClientRect();
+    const rs = Array.from(rg.getClientRects()).filter(r => r.width > 0.5);
+    if (!rs.length) return null;
+    const top = Math.min(...rs.map(r => r.top)) - r0.top, bottom = Math.max(...rs.map(r => r.bottom)) - r0.top;
+    const lines = ecScanLines();
+    let a = -1, b = -1;
+    lines.forEach((l, i) => { if (l.mid >= top - 2 && l.mid <= bottom + 2) { if (a < 0) a = i; b = i; } });
+    return a < 0 ? null : [a, b];
+  }
+  function ecScanEnsure() {
+    const ed = $("ec-bd").parentNode;
+    if (SCAN.el && SCAN.el.parentNode === ed) return;
+    if (SCAN.el) SCAN.el.remove();
+    const el = document.createElement("div");
+    el.className = "ec-scan";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML = `<div class="ec-scan-glass"></div><svg class="ec-scan-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="ecRimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity=".6"/></linearGradient>
+      <linearGradient id="ecGlowG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5fb0"/><stop offset=".5" stop-color="#8b6bff"/><stop offset="1" stop-color="#3fc1ff"/></linearGradient>
+      <filter id="ecBlurF" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="8"/></filter>
+      <filter id="ecSoftF" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="2.2"/></filter>
+      <clipPath id="ecClipP"><path/></clipPath></defs>
+      <path class="g" filter="url(#ecBlurF)"/><path class="f" clip-path="url(#ecClipP)" filter="url(#ecSoftF)"/><path class="r"/></svg>`;
+    ed.appendChild(el);
+    SCAN.el = el; SCAN.glass = el.firstElementChild; SCAN.paths = el.querySelectorAll("path");
+    SCAN.c = null; SCAN.out = false;
+  }
+  function ecScanStart() {
+    if (reduceMotion || !ecBuilt() || EC.view === "start") return;
+    ecScanEnsure();
+    SCAN.el.classList.remove("out");
+    SCAN.out = false;
+    if (!SCAN.raf) { SCAN.last = 0; SCAN.raf = requestAnimationFrame(ecScanTick); }
+  }
+  function ecScanStop(now) {
+    if (!SCAN.el) return;
+    const el = SCAN.el;
+    if (now || reduceMotion) {
+      cancelAnimationFrame(SCAN.raf); SCAN.raf = 0; el.remove(); SCAN.el = null; SCAN.c = null; SCAN.tgt = null; SCAN.line = -1;
+      return;
+    }
+    SCAN.out = true;
+    el.classList.add("out");
+    setTimeout(() => { if (SCAN.el === el && SCAN.out) ecScanStop(true); }, 700);
+  }
+  function ecScanSet(y0, y1, soft) {
+    const ed = $("ec-bd").parentNode;
+    const T = { x0: -12, x1: ed.clientWidth + 12, y0, y1 };
+    const prev = SCAN.tgt;
+    SCAN.tgt = T;
+    if (!SCAN.c) {   // appears as a thin line that opens up
+      const m = (y0 + y1) / 2;
+      SCAN.c = [[T.x0, m], [T.x1, m], [T.x1, m], [T.x0, m]].map(([x, y]) => ({ x, y, vx: 0, vy: 0 }));
+    }
+    const dir = prev ? Math.sign((y0 + y1) / 2 - (prev.y0 + prev.y1) / 2) : 0;
+    const fast = soft ? 120 : 330, slow = soft ? 70 : 125;
+    SCAN.kTop = dir < 0 ? fast : dir > 0 ? slow : fast * 0.7;
+    SCAN.kBot = dir > 0 ? fast : dir < 0 ? slow : fast * 0.7;
+  }
+  function ecScanLinesTo(a, b) {
+    const L = SCAN.lines;
+    if (!L.length) return;
+    a = Math.max(0, Math.min(L.length - 1, a)); b = Math.max(a, Math.min(L.length - 1, b));
+    const half = SCAN.lh / 2;
+    const y0 = L[a].mid - half - 3, y1 = L[b].mid + half + 3;
+    ecScanSet(y0, y1, false);
+    ecScanReveal(y0, y1);
+  }
+  function ecScanReveal(y0, y1) {
+    if (performance.now() - SCAN.user < 4500) return;
+    const sc = $("ec-lscroll"), ed = $("ec-bd").parentNode;
+    const off = ed.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop;
+    const a = off + y0, b = off + y1;
+    if (a < sc.scrollTop + 24 || b > sc.scrollTop + sc.clientHeight - 36) {
+      sc.scrollTo({ top: Math.max(0, a - sc.clientHeight * 0.32), behavior: reduceMotion ? "auto" : "smooth" });
+    }
+  }
+  function ecScanSpot(h) {
+    if (!SCAN.el || h.s < 0) return;
+    ecScanLines();
+    const ab = ecLinesOf(h.s, h.e);
+    if (!ab) return;
+    SCAN.line = ab[1];
+    const now = performance.now();
+    SCAN.hold = now + 1400;
+    SCAN.next = SCAN.hold + 600;
+    ecScanLinesTo(ab[0], ab[1]);
+  }
+  // Decide where the band should be: sweeping while it reads, creeping line by line while it
+  // looks for spots, jumping to each spot it finds, and covering everything while it looks for habits.
+  function ecScanPlan(now) {
+    if (!EC.job) return;
+    const L = ecScanLines();
+    if (!L.length) return;
+    const sc = $("ec-lscroll"), ed = $("ec-bd").parentNode;
+    const vt = sc.getBoundingClientRect().top - ed.getBoundingClientRect().top, vb = vt + sc.clientHeight;
+    if (EC.stage === "habits") {
+      const y0 = Math.max(L[0].mid - SCAN.lh / 2 - 6, vt + 10), y1 = Math.min(L[L.length - 1].mid + SCAN.lh / 2 + 6, vb - 14);
+      if (!SCAN.tgt || Math.abs(SCAN.tgt.y0 - y0) > 1 || Math.abs(SCAN.tgt.y1 - y1) > 1) ecScanSet(y0, Math.max(y0 + SCAN.lh, y1), true);
+      return;
+    }
+    if (now < SCAN.hold || now < SCAN.next) return;
+    if (EC.stage === "looking" || EC.hl.length) {
+      SCAN.line = Math.min(L.length - 1, SCAN.line + 1);
+      SCAN.next = now + 1800;
+      ecScanLinesTo(SCAN.line, SCAN.line + 1);
+    } else {
+      const vis = L.map((l, i) => i).filter(i => L[i].mid > vt && L[i].mid < vb - SCAN.lh);
+      if (!vis.length) return;
+      const k = vis.findIndex(i => i > SCAN.line);
+      SCAN.line = k < 0 ? vis[0] : vis[k];
+      SCAN.next = now + 640;
+      ecScanLinesTo(SCAN.line, SCAN.line + 1);
+    }
+  }
+  function ecScanTick(now) {
+    SCAN.raf = requestAnimationFrame(ecScanTick);
+    if (!SCAN.el || !ecIsOpen() || document.hidden || $("ec-review").hidden || (ecPhone() && EC.tab !== "text")) { SCAN.last = 0; return; }
+    const dt = Math.min(0.04, SCAN.last ? (now - SCAN.last) / 1000 : 0.016);
+    SCAN.last = now;
+    if (!SCAN.out) ecScanPlan(now);
+    const T = SCAN.tgt;
+    if (!T || !SCAN.c) return;
+    const goal = [[T.x0, T.y0], [T.x1, T.y0], [T.x1, T.y1], [T.x0, T.y1]];
+    for (let s = 0; s < 2; s++) {
+      const h = dt / 2;
+      for (let i = 0; i < 4; i++) {
+        const c = SCAN.c[i], k = i < 2 ? SCAN.kTop : SCAN.kBot, d = 2 * 0.6 * Math.sqrt(k);
+        c.vx += (-k * (c.x - goal[i][0]) - d * c.vx) * h; c.vy += (-k * (c.y - goal[i][1]) - d * c.vy) * h;
+        c.x += c.vx * h; c.y += c.vy * h;
+      }
+    }
+    ecScanDraw(now, T);
+  }
+  function ecScanDraw(now, T) {
+    const [tl, tr, br, bl] = SCAN.c;
+    const cl = (v, a, b) => Math.max(a, Math.min(b, v));
+    const x0 = Math.min(tl.x, bl.x), x1 = Math.max(tr.x, br.x), y0 = Math.min(tl.y, tr.y), y1 = Math.max(bl.y, br.y);
+    const h = Math.max(2, y1 - y0), th = Math.max(4, T.y1 - T.y0);
+    const stretch = (h - th) / th;
+    const side = cl(-stretch * 16, -18, 12);                  // pinches in while it stretches, bulges when it lands
+    const bowT = cl((tl.vy + tr.vy) / 2 * 0.016, -14, 14), bowB = cl((bl.vy + br.vy) / 2 * 0.016, -14, 14);
+    const r = Math.max(1, Math.min(15, h / 2.3));
+    const M = 30, ox = x0 - M, oy = y0 - M - 16;
+    const W = x1 - x0 + 2 * M, H = h + 2 * M + 32;
+    const P = (p) => [+(p.x - ox).toFixed(1), +(p.y - oy).toFixed(1)];
+    const [ax, ay] = P(tl), [bx, by] = P(tr), [cx, cy] = P(br), [dx, dy] = P(bl);
+    const f = (n) => n.toFixed(1);
+    const d = `M${f(ax + r)} ${f(ay)}Q${f((ax + bx) / 2)} ${f((ay + by) / 2 + bowT * 2)} ${f(bx - r)} ${f(by)}Q${f(bx)} ${f(by)} ${f(bx)} ${f(by + r)}` +
+      `Q${f(Math.max(bx, cx) + side * 2)} ${f((by + cy) / 2)} ${f(cx)} ${f(cy - r)}Q${f(cx)} ${f(cy)} ${f(cx - r)} ${f(cy)}` +
+      `Q${f((cx + dx) / 2)} ${f((cy + dy) / 2 + bowB * 2)} ${f(dx + r)} ${f(dy)}Q${f(dx)} ${f(dy)} ${f(dx)} ${f(dy - r)}` +
+      `Q${f(Math.min(ax, dx) - side * 2)} ${f((ay + dy) / 2)} ${f(ax)} ${f(ay + r)}Q${f(ax)} ${f(ay)} ${f(ax + r)} ${f(ay)}Z`;
+    const el = SCAN.el;
+    el.style.transform = `translate(${f(ox)}px, ${f(oy)}px)`;
+    el.style.width = f(W) + "px"; el.style.height = f(H) + "px";
+    SCAN.glass.style.clipPath = `path("${d}")`;
+    SCAN.glass.style.webkitClipPath = `path("${d}")`;
+    SCAN.paths.forEach(p => p.setAttribute("d", d));
+    const t = now / 1000;
+    SCAN.glass.style.setProperty("--sx", f(28 + 26 * Math.sin(t * 0.8)) + "%");
+    SCAN.glass.style.setProperty("--sx2", f(72 + 24 * Math.sin(t * 0.63 + 2)) + "%");
+    SCAN.glass.style.setProperty("--sx3", f(50 + 40 * Math.sin(t * 0.47 + 4)) + "%");
+  }
+
+  // ---------- checking ----------
   async function ecCheck(again) {
-    if (EC.busy) return;
+    const S = EC;
+    if (S.job) return;
     const text = (again ? $("ec-txt").value : $("ec-in").value).replace(/\r\n/g, "\n");
     if (text.trim().length < 20) { $("ec-err").textContent = "Paste at least a couple of sentences."; return; }
     if (text.length > EC_MAX) { $("ec-err").textContent = "That's a bit long. Check up to about 1,300 words at a time."; return; }
     $("ec-err").textContent = "";
-    EC.goal = $("ec-goal") ? $("ec-goal").value.trim() || EC.goal : EC.goal;
-    const previous = again ? EC.hl.map(h => ({ type: h.type, issue: h.issue })) : [];
-    const before = again ? EC.hl.length : 0, changedBefore = again ? EC.hl.filter(h => h.changed).length : 0;
-    if (!again) { $("ec-txt").value = text; EC.hl = []; EC.result = null; EC.round = 0; EC.prevScores = null; EC.fixedLast = 0; }
-    EC.view = "review"; EC.busy = true; EC.active = -1;
-    ecShow(); ecTab(window.innerWidth <= 860 ? "fb" : "text");
-    ecWaiting(again ? "Checking your changes" : "Reading your writing");
-    $("ec-again").disabled = true; ecPaint();
+    S.goal = $("ec-goal").value.trim() || S.goal;
+    const previous = again ? S.hl.map(h => ({ type: h.type, issue: h.issue })) : [];
+    const before = again ? S.hl.length : 0, changedBefore = again ? S.hl.filter(h => h.changed).length : 0;
+    S.prev = again ? { result: S.result, hl: S.hl, round: S.round, prevScores: S.prevScores, fixedLast: S.fixedLast }
+                   : { result: null, hl: [], round: 0, prevScores: null, fixedLast: 0, first: true };
+    if (!S.id) S.id = ecNewId("e");
+    S.text = text; S.view = "review"; S.hl = []; S.active = -1; S.stage = "reading"; S.tab = "text";
+    S.job = { id: ecNewId("j"), at: Date.now(), again: !!again, before, changedBefore };
+    EC_ALL.set(S.id, S);
+    ecEnsureChat(S);
+    ecPersist(S, true);
+    $("ec-txt").value = text;
+    $("ec-right").innerHTML = "";
+    ecShow();
     let res;
     try {
       res = await fetch(PROXY_URL + "/essay/check", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ text, goal: EC.goal, lang: EC.lang, feedback: EC.fb, previous }) });
-    } catch (e) { EC.busy = false; ecError("Can't reach SCODE AI right now. It may be offline, so try again later."); ecPaint(); return; }
+        body: JSON.stringify({ text, goal: S.goal, lang: S.lang, feedback: S.fb, previous, job: { id: S.job.id, chat: S.id } }) });
+    } catch (e) { ecRetryLater(S); return; }     // it may have reached the server: look for it in a moment
     if (!res.ok) {
-      EC.busy = false;
       const d = await res.json().catch(() => ({}));
-      if (res.status === 401) { closeEssayCoach(); openAuth("welcome", "Essay Coach needs a free account."); return; }
-      if (d.error === "account_paused") { closeEssayCoach(); showSafetyPause(d.paused); return; }
-      ecError(d.message || "Something went wrong. Try again."); ecPaint(); return;
+      if (res.status === 401) { ecFail(S, "Sign in again to use Essay Coach.", true); closeEssayCoach(); openAuth("welcome", "Essay Coach needs a free account."); return; }
+      if (d.error === "account_paused") { ecFail(S, "", true); closeEssayCoach(); showSafetyPause(d.paused); return; }
+      ecFail(S, d.message || "Something went wrong. Try again.");
+      return;
     }
+    await ecStream(S, res);
+  }
+  // Pick a check back up: live if it's still going, or the saved feedback if it finished.
+  async function ecResume(S) {
+    if (!S.job || S._live || isGuest()) return;
+    S._live = true;
+    if (S === EC) { S.stage = S.stage || "lost"; ecLiveUI(); }
+    let res;
+    try { res = await fetch(PROXY_URL + "/job/" + encodeURIComponent(S.job.id), { headers: authHeaders() }); }
+    catch (e) { S._live = false; ecRetryLater(S); return; }
+    if (!res.ok) {
+      S._live = false;
+      const d = await res.json().catch(() => ({}));
+      if (res.status === 404) { ecFail(S, "That check didn't reach SCODE AI, so there's no feedback for it. You weren't charged. Try again."); return; }
+      if (d.error === "account_paused") { ecFail(S, "", true); closeEssayCoach(); showSafetyPause(d.paused); return; }
+      if (res.status === 401) return;
+      ecRetryLater(S); return;
+    }
+    await ecStream(S, res);
+  }
+  function ecRetryLater(S) {
+    S._tries = (S._tries || 0) + 1;
+    if (S._tries > 8) { ecFail(S, "Lost touch with SCODE AI. It may be offline right now. Try again in a bit."); return; }
+    S.stage = "lost";
+    if (S === EC) ecLiveUI();
+    clearTimeout(S._rt);
+    S._rt = setTimeout(() => { if (!document.hidden) ecResume(S); }, Math.min(30000, 2000 * S._tries));
+  }
+  async function ecStream(S, res) {
+    S._live = true;
+    S.hl = []; S.stage = "reading"; S.active = -1;
+    if (S === EC && ecBuilt()) { $("ec-right").innerHTML = ""; SCAN.line = -1; SCAN.hold = 0; SCAN.next = 0; ecPaint(); ecLiveUI(); }
     const reader = res.body.getReader(), dec = new TextDecoder();
     let buf = "", result = null, err = null, safety = null;
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      const lines = buf.split("\n"); buf = lines.pop();
-      for (const ln of lines) {
-        if (!ln.trim()) continue;
-        let c; try { c = JSON.parse(ln); } catch (e) { continue; }
-        if (c.error) { err = c.message || "Something went wrong."; continue; }
-        if (c.safety) { safety = c.safety; continue; }
-        const s = c.essay; if (!s) continue;
-        if (s.status === "queued") ecWaiting("Waiting for the SCODE server");
-        else if (s.status === "writing") ecWaiting(s.found ? `Found ${s.found} spot${s.found === 1 ? "" : "s"} so far` : "Reading your writing");
-        else if (s.status === "retry") ecWaiting("Taking another look");
-        else if (s.status === "done") result = s.result;
+    const handle = (c) => {
+      if (c.error) { err = c.message || "Something went wrong."; return; }
+      if (c.safety) { safety = c.safety; return; }
+      const s = c.essay;
+      if (!s) return;
+      if (s.spot) {
+        const sp = s.spot;
+        const h = { quote: sp.quote, type: sp.type, issue: sp.issue, hint: sp.hint, suggest: sp.suggest || "", pos: sp.start, fresh: true };
+        if (S.hl.some(x => x.pos === h.pos && x.quote === h.quote)) return;
+        S.hl.push(h);
+        if (S.stage !== "habits") S.stage = "looking";
+        if (S === EC && ecBuilt()) ecLiveSpot(h, S.hl.length - 1);
+        return;
       }
+      if (s.status === "done") { result = s.result; return; }
+      if (EC_STAGE[s.status]) {
+        S.stage = s.status;
+        if (s.status === "retry") S.hl = [];
+        if (S === EC && ecBuilt()) { if (s.status === "retry") { $("ec-right").innerHTML = ""; ecPaint(); } ecLiveUI(); }
+      }
+    };
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        const lines = buf.split("\n"); buf = lines.pop();
+        for (const ln of lines) {
+          if (!ln.trim()) continue;
+          let c; try { c = JSON.parse(ln); } catch (e) { continue; }
+          handle(c);
+        }
+      }
+      if (buf.trim()) { try { handle(JSON.parse(buf)); } catch (e) {} }
+    } catch (e) {}
+    S._live = false;
+    if (safety) {
+      ecFail(S, "", true);
+      if (S === EC) closeEssayCoach();
+      if (safety.kind === "flag") showSafetyPause(safety.paused || { kind: "review", case: safety.case });
+      return;
     }
-    EC.busy = false;
-    if (safety) { closeEssayCoach(); if (safety.kind === "flag") showSafetyPause(safety.paused || { kind: "review", case: safety.case }); return; }
-    if (err || !result) { ecError(err || "No feedback came back. Try again."); ecPaint(); checkStatus(); return; }
-    if (EC._orb) { EC._orb.melt(); EC._orb = null; }
-    const cur = $("ec-txt").value;
-    EC.prevScores = again && EC.result ? EC.result.scores : null;
-    EC.fixedLast = again ? changedBefore : 0;
-    EC.round = (EC.round || 0) + 1;
-    EC.result = result;
-    // positions are for the text that was sent; if it was edited meanwhile, the quotes are found again
-    EC.hl = (result.highlights || []).map(h => ({ quote: h.quote, type: h.type, issue: h.issue, hint: h.hint, suggest: h.suggest || "", pos: cur === text ? h.start : h.start }));
-    ecRenderRight(); ecPaint();
-    if (window.innerWidth <= 860) ecTab("fb");
-    if (again && before) showNote(EC.fixedLast ? `Nice! You changed ${EC.fixedLast} of ${before} highlighted spots.` : "Checked your new draft.");
-    ecSave(); checkStatus();
+    if (result) { ecFinish(S, result); return; }
+    if (err) { ecFail(S, err); return; }
+    ecRetryLater(S);     // the connection dropped, but the check keeps going on the server
+  }
+  function ecFinish(S, result) {
+    const j = S.job || {};
+    const p = S.prev || {};
+    S.prevScores = j.again && p.result ? p.result.scores : null;
+    S.fixedLast = j.again ? (j.changedBefore || 0) : 0;
+    S.round = (p.round || 0) + 1;
+    S.result = result;
+    S.hl = (result.highlights || []).map(h => ({ quote: h.quote, type: h.type, issue: h.issue, hint: h.hint, suggest: h.suggest || "", pos: h.start }));
+    S.job = null; S.prev = null; S.stage = null; S._tries = 0;
+    EC_ALL.delete(S.id);
+    const gone = S.id && ecSyncOK() && !ecChat(S.id);     // deleted while it was checking
+    ecPersist(S, true);
+    checkStatus();
+    if (S === EC && ecBuilt()) {
+      ecScanStop(false);
+      if (EC._orbUI) { EC._orbUI.melt(); EC._orbUI = null; }
+      $("ec-review").classList.remove("busy");
+      $("ec-ov").classList.remove("busy");
+      $("ec-txt").readOnly = false;
+      ecPaint();
+      ecRenderRight(true);
+      const bd = $("ec-bd");
+      bd.classList.remove("reveal"); void bd.offsetWidth; bd.classList.add("reveal");
+      if (ecPhone()) ecTab("fb");
+      if (j.again && j.before) ecToast(S.fixedLast ? `Nice! You changed ${S.fixedLast} of ${j.before} highlighted spots.` : "Checked your new draft.");
+      if (!ecIsOpen()) ecToast("Your Essay Coach feedback is ready.", "Open", () => openEssayCoach());
+    } else if (!gone && !isGuest()) {
+      ecToast("Your Essay Coach feedback is ready.", "Open", () => openEssayCoach(S.id));
+    }
+  }
+  function ecFail(S, msg, quiet) {
+    const p = S.prev || {};
+    const first = !!p.first || !p.result;
+    S.job = null; S._live = false; S.stage = null; S._tries = 0;
+    clearTimeout(S._rt);
+    EC_ALL.delete(S.id);
+    if (S.prev) { S.result = p.result; S.hl = p.hl || []; S.round = p.round || 0; S.prevScores = p.prevScores || null; S.fixedLast = p.fixedLast || 0; }
+    S.prev = null;
+    if (first) {          // nothing to show yet: back to the start, with the text still in the box
+      S.view = "start";
+      // The open one goes back into the box; one that failed in the background stays in Recents so the text isn't lost.
+      if (S.id && S === EC) { ecDropChat(S.id); S.id = null; }
+    }
+    ecPersist(S, true);
+    if (S === EC && ecBuilt()) {
+      ecScanStop(true);
+      if (EC._orbUI) { EC._orbUI.stop(); EC._orbUI = null; }
+      if (first) { $("ec-in").value = S.text; $("ec-right").innerHTML = ""; }
+      ecShow();
+      if (msg) { if (first) $("ec-err").textContent = msg; else ecError(msg); }
+    } else if (msg && !quiet && !isGuest()) {
+      S.err = msg;           // shown again when it's opened
+      ecToast("An Essay Coach check didn't finish. " + msg);
+    }
+  }
+  function ecError(msg) {
+    $("ec-right").innerHTML = `<div class="ec-errbox">${ecEsc(msg)}<br><button type="button" id="ec-retry">Back to my feedback</button></div>`;
+    $("ec-retry").onclick = () => ecRenderRight();
+  }
+  function ecToast(msg, label, fn) {
+    const inCoach = ecIsOpen();
+    const host = inCoach ? $("ec-ov").querySelector(".ec") : document.body;
+    const t = document.createElement("div");
+    t.className = "ec-toast" + (inCoach ? "" : " page");
+    t.setAttribute("role", "status");
+    t.innerHTML = `<span class="ok">${ecIcon.check}</span><span>${ecEsc(msg)}</span>` + (label ? `<button type="button">${ecEsc(label)}</button>` : "");
+    if (label) t.querySelector("button").onclick = () => { t.remove(); fn(); };
+    host.appendChild(t);
+    setTimeout(() => { t.classList.add("out"); setTimeout(() => t.remove(), 400); }, label ? 9000 : 4200);
   }
 
   async function ecAsk(i, form, ans) {
@@ -8016,11 +8837,66 @@
     checkStatus();
   }
 
+  // ---------- Recents ----------
+  function ecRowDecor(chat, row, title, badge) {
+    row.classList.add("is-essay");
+    title.insertAdjacentHTML("afterbegin", '<svg class="ec-ri" viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>');
+    badge.classList.add("ec-rb");
+    if (chat.essay && chat.essay.job) { row.classList.add("busy"); badge.innerHTML = '<i class="ec-spin"></i>Checking'; }
+    else badge.textContent = "Essay";
+    if (EC && EC.id === chat.id && ecIsOpen()) row.classList.add("active");
+    row.title = "Essay Coach: " + chat.title;
+  }
+  function firstChatId() { const c = chats.find(x => x.kind !== "essay"); return c ? c.id : null; }
+  // A session was deleted from Recents.
+  function ecForget(id) {
+    EC_ALL.delete(id);
+    if (EC.id !== id) return;
+    EC = ecBlank();
+    ecPersist(EC);
+    if (ecBuilt()) { ecFill(); if (ecIsOpen()) ecShow(); }
+  }
+  // Chats came in from another device: an open session may have finished (or been deleted) there.
+  function ecSynced() {
+    if (!EC.id || EC._live) return;
+    const c = chats.find(x => x.id === EC.id);
+    if (!c) { if (ecSyncOK() && !EC.job && !ecIsOpen()) ecForget(EC.id); return; }
+    if (!c.essay || JSON.stringify(c.essay) === JSON.stringify(ecSnap(EC))) return;
+    if (ecIsOpen() && !EC.job) return;       // don't pull the text out from under someone typing
+    EC = ecFrom(c.essay, c.id);
+    try { localStorage.setItem(ecKey(), JSON.stringify(ecSnap(EC))); } catch (e) {}
+    if (ecBuilt()) { ecFill(); if (ecIsOpen()) ecShow(); }
+    if (EC.job && !EC._live) ecResume(EC);
+  }
+  function ecSignedOut() {
+    EC_ALL.clear();
+    EC = ecBlank();
+    if (ecBuilt()) { ecFill(); $("ec-ov").classList.remove("show"); document.body.style.overflow = ""; }
+  }
+  // On load: open the last session again and pick up any check that was still going.
+  function ecBoot() {
+    if (isGuest()) return;
+    ecLoadOpen();
+    if (EC.job) { EC.stage = "lost"; EC_ALL.set(EC.id, EC); }
+    if (ecSyncOK()) chats.forEach(c => {
+      if (c.kind !== "essay" || !c.essay || !c.essay.job || EC_ALL.has(c.id)) return;
+      if (Date.now() - (c.essay.job.at || 0) > 12 * 3600e3) return;
+      EC_ALL.set(c.id, ecFrom(c.essay, c.id));
+    });
+    for (const S of EC_ALL.values()) if (!S._live) ecResume(S);
+    if (ecBuilt()) { ecFill(); if (ecIsOpen()) ecShow(); }
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) return;
+    for (const S of EC_ALL.values()) if (S.job && !S._live) { S._tries = 0; ecResume(S); }
+  });
+  setTimeout(ecBoot, 0);
+
   // Entry points: sidebar button and the pill under the greeting
   (function ecEntry() {
     const side = $("ec-open-side"), pill = $("ec-open-pill");
     if (side) side.onclick = () => { closeMobileSidebar(); openEssayCoach(); };
-    if (pill) pill.onclick = openEssayCoach;
+    if (pill) pill.onclick = () => openEssayCoach();
     try { if (localStorage.getItem("scode_ec_seen") && side) side.classList.add("seen"); } catch (e) {}
   })();
 
@@ -8164,7 +9040,7 @@
     chats = chats.filter(c => c.id !== chat.id);
     delete SYNC.sent[chat.id]; SYNC.queue.delete(chat.id);
     try { localStorage.setItem(chatsKey(), JSON.stringify(chats)); } catch (e) {}
-    currentChatId = chats.length ? chats[0].id : null;
+    currentChatId = firstChatId();
     if (currentChatId) { const c = getCurrentChat(); messages = c.messages; } else messages = [];
     renderChatList(); renderMessages();
   }
