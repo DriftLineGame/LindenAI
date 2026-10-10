@@ -2492,7 +2492,7 @@
       <ul>
         <li><b>The SCODE team:</b> only the person who runs SCODE AI can open the files on our computer (accounts, saved chats and memories), and only to keep the service running, fix a problem, or answer your requests. We don't read your saved chats, except a chat that was flagged by our safety checks, which the safety team reviews. Training copies (which aren't linked to anyone) may be reviewed to build and check training data. When checking a flag or a possible ban evasion, the safety team can also see account details (name, email, when it was made and its safety links).</li>
         <li><b>Services that help run the site:</b> GitHub hosts the website, Cloudflare connects your browser to our computer, Google Fonts provides the lettering, and Google&rsquo;s Gmail sends code emails. Like any website, they can see your internet address when you connect.</li>
-        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and CARTO (map pictures made from OpenStreetMap data), or Esri as a backup, which see the map area being shown. None of these get your name or email.</li>
+        <li><b>When you use a mode:</b> Search sends your search words to a search engine (DuckDuckGo). Link visits the page you pasted. Weather asks Environment Canada for a town&rsquo;s forecast (not your exact location). Ferries asks BC Ferries for sailing times (not your location), and its map loads from Leaflet and Esri's map pictures, which see the map area being shown. None of these get your name or email.</li>
         <li><b>The law:</b> we'd only share information if Canadian law truly required it, and only what's required.</li>
       </ul>
       <p>We <b>never sell, rent or trade</b> your information, and we never use it for ads.</p>
@@ -5888,18 +5888,18 @@
       if (!document.contains(box)) return;
       const light = document.body.classList.contains("light");
       lmap = L.map(box, { zoomSnap: 0.25, zoomControl: false, attributionControl: true, scrollWheelZoom: false, dragging: !touchLike, tap: false, keyboard: false, doubleClickZoom: true, boxZoom: false });
-      // Map tiles: CARTO's free basemaps (made from OpenStreetMap data, no key needed), light or dark to match
-      // the theme. OpenStreetMap's own tile servers block websites like ours. If CARTO fails, switch to Esri.
-      const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>';
-      let tiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + (light ? "rastertiles/voyager" : "dark_all") + "/{z}/{x}/{y}{r}.png",
-        { maxZoom: 19, subdomains: "abcd", attribution: OSM_ATTR }).addTo(lmap);
+      // Map tiles: Esri's free basemaps (no key needed), light or dark to match the theme.
+      // (OpenStreetMap blocks websites like ours, and CARTO now asks for an API key.)
+      const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/";
+      const OSM_ATTR = 'Tiles &copy; <a href="https://www.esri.com" target="_blank" rel="noopener">Esri</a>';
+      let tiles = L.tileLayer(ESRI + (light ? "World_Street_Map" : "Canvas/World_Dark_Gray_Base") + "/MapServer/tile/{z}/{y}/{x}",
+        { maxZoom: light ? 19 : 16, attribution: OSM_ATTR }).addTo(lmap);
+      if (!light) L.tileLayer(ESRI + "Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}", { maxZoom: 16, pane: "overlayPane" }).addTo(lmap);
       let tileErrs = 0;
       tiles.on("tileerror", () => {
         if (++tileErrs !== 3) return;
         lmap.removeLayer(tiles);
-        tiles = L.tileLayer(light ? "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
-          : "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
-          { maxZoom: light ? 19 : 16, attribution: "Tiles &copy; Esri" }).addTo(lmap);
+        tiles = L.tileLayer(ESRI + "World_Topo_Map/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: OSM_ATTR }).addTo(lmap);
       });
       L.polyline(st.path, { color: light ? "#1c7891" : "#7fd6e3", weight: 3, dashArray: "2 8", lineCap: "round" }).addTo(lmap);
       const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
