@@ -1716,9 +1716,265 @@
   .sf-btns { display: flex; gap: 8px; margin-top: 16px; }
   .sf-btns button { flex: 1; height: 44px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; font-size: 14.5px; cursor: pointer; }
   .sf-btns button:hover { background: var(--hover); }
+
+  /* =========================================================
+     SCODE thinking orb + flowing gradient text
+     ========================================================= */
+  @property --scf { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
+  .sc-orb { position: relative; display: block; width: min(100%, 720px); height: clamp(170px, 32vh, 360px); margin: 2px 0 0 -10px;
+    pointer-events: none; opacity: 0; transform: translateY(14px) scale(.94); transform-origin: 50% 0;
+    -webkit-mask-image: radial-gradient(closest-side, #000 58%, transparent 100%); mask-image: radial-gradient(closest-side, #000 58%, transparent 100%);
+    animation: scOrbIn .8s cubic-bezier(.2,.8,.2,1) .08s forwards;
+    transition: height .85s cubic-bezier(.65,0,.25,1), margin .85s cubic-bezier(.65,0,.25,1), opacity .7s ease, transform .85s cubic-bezier(.65,0,.25,1), filter .85s ease; }
+  .sc-orb canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; filter: blur(12px) saturate(1.25); }
+  .sc-lens-w { position: absolute; left: 50%; top: 50%; width: 50%; aspect-ratio: 1.35; transform: translate(-50%, -50%);
+    transition: transform .85s cubic-bezier(.65,0,.25,1), opacity .6s ease; }
+  .sc-lens { width: 100%; height: 100%; border-radius: 47% 53% 44% 56% / 55% 45% 55% 45%;
+    background: radial-gradient(22% 11% at 36% 24%, rgba(255,255,255,.85), rgba(255,255,255,0) 100%),
+                radial-gradient(40% 30% at 64% 78%, rgba(255,255,255,.20), rgba(255,255,255,0) 100%),
+                radial-gradient(closest-side, rgba(255,255,255,.07), rgba(255,255,255,.02) 70%, rgba(255,255,255,0));
+    box-shadow: inset 3px 5px 10px rgba(255,255,255,.30), inset -8px -12px 26px rgba(255,255,255,.10);
+    -webkit-mask-image: radial-gradient(closest-side, #000 60%, rgba(0,0,0,.4) 82%, transparent 100%); mask-image: radial-gradient(closest-side, #000 60%, rgba(0,0,0,.4) 82%, transparent 100%);
+    animation: scLens 9s ease-in-out infinite; }
+  body:not(.light) .sc-lens { opacity: .8; }
+  .sc-orb.melt { height: 0; margin-top: 0; opacity: 0; transform: translateY(-30px) scale(.62, .3); filter: blur(16px) saturate(1.9); animation: none; }
+  .sc-orb.melt .sc-lens-w { transform: translate(-50%, -175%) scale(1.7, .16); opacity: 0; }
+  @keyframes scOrbIn { to { opacity: 1; transform: none; } }
+  @keyframes scLens { 0%, 100% { transform: rotate(0deg) scale(1, 1); } 25% { transform: rotate(14deg) scale(1.06, .95); }
+    50% { transform: rotate(-6deg) scale(.95, 1.06); } 75% { transform: rotate(9deg) scale(1.04, .97); } }
+  .md.sc-flow { --g1: #d6307f; --g2: #7546ff; --g3: #0a86d0; --g4: #14936a; --g5: #e25a12; }
+  body:not(.light) .md.sc-flow { --g1: #ff7cc4; --g2: #b49dff; --g3: #64d3ff; --g4: #74e0b0; --g5: #ffb07a; }
+  .md.sc-flow { background-image: linear-gradient(100deg,
+      color-mix(in oklab, var(--g1), var(--text) var(--scf)), color-mix(in oklab, var(--g2), var(--text) var(--scf)),
+      color-mix(in oklab, var(--g3), var(--text) var(--scf)), color-mix(in oklab, var(--g4), var(--text) var(--scf)),
+      color-mix(in oklab, var(--g5), var(--text) var(--scf)), color-mix(in oklab, var(--g1), var(--text) var(--scf)));
+    background-size: 200% 100%; background-repeat: repeat-x; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; animation: scFlow 6s linear infinite; transition: --scf 1.2s ease; }
+  .md.sc-flow :is(pre, code, table, th, td, kbd, .katex) { -webkit-text-fill-color: var(--text); }
+  .md.sc-flow.sc-flow-end { --scf: 100%; }
+  .md.sc-pour { animation: scPour .95s cubic-bezier(.2,.8,.2,1) both, scFlow 6s linear infinite; }
+  @keyframes scFlow { from { background-position: 200% 0; } to { background-position: 0% 0; } }
+  @keyframes scPour { 0% { opacity: 0; filter: blur(14px); transform: translateY(16px) scaleY(1.08); }
+    55% { opacity: 1; filter: blur(3px); } 100% { opacity: 1; filter: none; transform: none; } }
+
+  /* =========================================================
+     SCODE splash (once per visit)
+     ========================================================= */
+  #sc-splash { position: fixed; inset: 0; z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    background: radial-gradient(60% 50% at 50% 45%, rgba(95,191,142,.16), transparent 70%), #0b120e; color: #fff; cursor: pointer;
+    transition: opacity .55s ease, transform .55s ease, filter .55s ease; }
+  #sc-splash { animation: scSplashGone .5s ease 2.6s forwards; }
+  @keyframes scSplashGone { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+  #sc-splash.out { opacity: 0; transform: scale(1.04); filter: blur(6px); pointer-events: none; }
+  #sc-splash svg { width: 92px; overflow: visible; }
+  #sc-splash .sp-m { fill: transparent; stroke: #5fbf8e; stroke-width: 2.4; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 100;
+    animation: scSpDraw .8s cubic-bezier(.65,0,.35,1) .1s forwards, scSpFill .35s ease .75s forwards; }
+  #sc-splash .sp-w { font-weight: 700; font-size: 17px; letter-spacing: .5em; text-indent: .5em; opacity: 0; animation: scSpWord .6s ease .7s forwards; }
+  @keyframes scSpDraw { to { stroke-dashoffset: 0; } }
+  @keyframes scSpFill { to { fill: #f4f3ee; } }
+  @keyframes scSpWord { from { opacity: 0; letter-spacing: .9em; } to { opacity: .92; letter-spacing: .5em; } }
+
+  /* =========================================================
+     Polish: small motion touches
+     ========================================================= */
+  .chip, .side-link, #new-chat-btn, .icon-btn, .ec-chip, .tool-btn { transition: transform .18s cubic-bezier(.2,.8,.2,1), background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .chip:hover { transform: translateY(-1px); }
+  .chip:active, .side-link:active, #new-chat-btn:active, .icon-btn:active, .ec-chip:active { transform: scale(.96); }
+  #send-btn:not(:disabled):active { transform: scale(.9); }
+  .composer:focus-within, #composer:focus-within { box-shadow: 0 0 0 1px var(--accent-soft), 0 8px 32px rgba(0,0,0,.10), var(--composer-shadow); }
+  #chat-list > * { animation: scListIn .35s cubic-bezier(.2,.8,.2,1) both; }
+  #chat-list > *:nth-child(2) { animation-delay: .03s; } #chat-list > *:nth-child(3) { animation-delay: .06s; } #chat-list > *:nth-child(4) { animation-delay: .09s; }
+  #chat-list > *:nth-child(n+5) { animation-delay: .12s; }
+  @keyframes scListIn { from { opacity: 0; transform: translateX(-8px); } }
+  #ec-open-side { display: flex; align-items: center; gap: 10px; width: calc(100% - 16px); margin: 6px 8px 12px; height: 40px; padding: 0 12px; border-radius: 12px;
+    border: 1px solid var(--border); font: inherit; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; text-align: left;
+    background: linear-gradient(120deg, rgba(214,48,127,.10), rgba(117,70,255,.10) 50%, rgba(10,134,208,.10)), var(--surface); }
+  #ec-open-side:hover { border-color: var(--border-strong); }
+  #ec-open-side svg { width: 17px; height: 17px; color: var(--accent); }
+  #ec-open-side.seen .nw { display: none; }
+  #ec-open-side .nw { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 3px 7px; border-radius: 20px; background: var(--accent); color: var(--accent-ink); }
+  .ec-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; height: 34px; padding: 0 14px 0 6px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; animation: welcomeIn .6s cubic-bezier(.2,.8,.2,1) .15s both; }
+  .ec-pill b { font-size: 10px; letter-spacing: .08em; padding: 3px 8px; border-radius: 20px; background: linear-gradient(110deg, #d6307f, #7546ff, #0a86d0); color: #fff; }
+  .ec-pill:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+  .ec-pill svg { width: 15px; height: 15px; color: var(--muted); }
+
+  /* =========================================================
+     Essay Coach
+     ========================================================= */
+  #ec-ov [hidden] { display: none !important; }
+  .ec-tabs .n:empty { display: none !important; }
+  #ec-ov { position: fixed; inset: 0; z-index: 380; display: none; align-items: center; justify-content: center; padding: 18px;
+    background: rgba(8,10,9,.5); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  #ec-ov.show { display: flex; animation: ecFade .25s ease; }
+  @keyframes ecFade { from { opacity: 0; } }
+  .ec { position: relative; width: min(1240px, 100%); height: min(900px, 100%); display: flex; flex-direction: column; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 26px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,.45); animation: ecIn .4s cubic-bezier(.2,1,.3,1); }
+  @keyframes ecIn { from { opacity: 0; transform: translateY(18px) scale(.97); } }
+  .ec-top { display: flex; align-items: center; gap: 14px; padding: 14px 16px 14px 20px; border-bottom: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+  .ec-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .ec-ic { width: 40px; height: 40px; border-radius: 13px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0;
+    background: linear-gradient(135deg, #d6307f, #7546ff 55%, #0a86d0); box-shadow: 0 6px 18px rgba(117,70,255,.3); }
+  .ec-ic svg { width: 21px; height: 21px; }
+  .ec-brand h2 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 21px; letter-spacing: -.01em; line-height: 1.1; }
+  .ec-brand small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ec-round { margin-left: auto; font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; align-items: center; white-space: nowrap; }
+  .ec-round b { color: var(--text); }
+  .ec-round .fx { color: var(--accent); font-weight: 700; }
+  .ec-tbtn { height: 34px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: transparent; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--muted); }
+  .ec-tbtn:hover { background: var(--hover); color: var(--text); }
+  .ec-x { width: 36px; height: 36px; border-radius: 11px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; }
+  .ec-x:hover { background: var(--hover); color: var(--text); }
+  .ec-body { flex: 1; min-height: 0; position: relative; }
+  /* start */
+  .ec-start { height: 100%; overflow-y: auto; padding: 28px 22px 34px; }
+  .ec-start-in { max-width: 760px; margin: 0 auto; }
+  .ec-hero { font-family: var(--serif); font-size: clamp(26px, 3.4vw, 34px); font-weight: 500; letter-spacing: -.015em; margin: 0 0 6px; }
+  .ec-hero em { font-style: normal; background: linear-gradient(100deg, #d6307f, #7546ff, #0a86d0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  body:not(.light) .ec-hero em { background-image: linear-gradient(100deg, #ff7cc4, #b49dff, #64d3ff); }
+  .ec-lead { color: var(--muted); font-size: 15px; margin: 0 0 22px; line-height: 1.5; }
+  .ec-lbl { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
+  #ec-in { width: 100%; min-height: 230px; resize: vertical; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    font-family: var(--serif); font-size: 17px; line-height: 1.65; padding: 16px 18px; outline: none; transition: border-color .2s, box-shadow .2s; }
+  #ec-in:focus, #ec-goal:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .ec-meta { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--faint); margin-top: 6px; }
+  .ec-meta .over { color: var(--warn); font-weight: 600; }
+  #ec-goal { width: 100%; height: 46px; border-radius: 13px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 15px; padding: 0 14px; outline: none; transition: border-color .2s, box-shadow .2s; }
+  .ec-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+  .ec-chip { height: 32px; padding: 0 12px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; }
+  .ec-chip:hover { color: var(--text); border-color: var(--border-strong); background: var(--hover); }
+  .ec-chip.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .ec-row { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 4px; }
+  .ec-seg { display: inline-flex; padding: 3px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); }
+  .ec-seg button { height: 32px; padding: 0 14px; border: none; border-radius: 9px; background: transparent; font: inherit; font-size: 13.5px; font-weight: 600; color: var(--muted); cursor: pointer; transition: background .2s, color .2s; }
+  .ec-seg button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+  .ec-fbw { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .ec-beta { font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 2px 7px; border-radius: 20px; background: rgba(10,134,208,.14); color: #0a86d0; vertical-align: 2px; margin-left: 4px; }
+  body:not(.light) .ec-beta { color: #64d3ff; }
+  .ec-go { margin-top: 26px; width: 100%; height: 54px; border-radius: 16px; border: none; cursor: pointer; font: inherit; font-size: 16px; font-weight: 700; color: #fff;
+    background: linear-gradient(100deg, #d6307f, #7546ff 50%, #0a86d0); background-size: 200% 100%; box-shadow: 0 10px 30px rgba(117,70,255,.28);
+    transition: transform .18s, box-shadow .2s, background-position .6s ease; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .ec-go:hover { background-position: 100% 0; box-shadow: 0 14px 36px rgba(117,70,255,.36); }
+  .ec-go:active { transform: scale(.98); }
+  .ec-go:disabled { opacity: .5; cursor: default; }
+  .ec-go small { font-weight: 600; opacity: .85; font-size: 13px; padding: 3px 9px; border-radius: 20px; background: rgba(255,255,255,.18); }
+  .ec-note { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--muted); line-height: 1.5; margin: 16px 2px 0; }
+  .ec-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--accent); }
+  .ec-err { color: var(--warn); font-size: 13.5px; margin-top: 10px; min-height: 0; }
+  /* review */
+  .ec-review { height: 100%; display: flex; flex-direction: column; }
+  .ec-tabs { display: none; }
+  .ec-cols { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .ec-left { min-height: 0; display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+  .ec-lscroll { flex: 1; min-height: 0; overflow-y: auto; padding: 22px 26px 30px; }
+  .ec-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+  .ec-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .ec-legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--c); opacity: .8; }
+  .ec-ed { position: relative; }
+  .ec-bd, #ec-txt { font-family: var(--serif); font-size: 18px; line-height: 1.75; padding: 0; margin: 0; border: 0; white-space: pre-wrap; overflow-wrap: break-word; word-wrap: break-word;
+    letter-spacing: normal; tab-size: 4; text-align: left; }
+  .ec-bd { position: absolute; inset: 0; color: transparent; pointer-events: none; overflow: hidden; }
+  #ec-txt { position: relative; display: block; width: 100%; resize: none; overflow: hidden; background: transparent; color: var(--text); outline: none; min-height: 200px; caret-color: var(--accent); }
+  .ec-bd mark { color: transparent; border-radius: 4px; background: color-mix(in srgb, var(--c) 20%, transparent); box-shadow: inset 0 -2.5px 0 color-mix(in srgb, var(--c) 85%, transparent); transition: background .25s; }
+  .ec-bd mark.on { background: color-mix(in srgb, var(--c) 38%, transparent); box-shadow: inset 0 -2.5px 0 var(--c), 0 0 0 3px color-mix(in srgb, var(--c) 25%, transparent); }
+  .ec-bd mark.flash { animation: ecFlash 1s ease 2; }
+  @keyframes ecFlash { 50% { background: color-mix(in srgb, var(--c) 60%, transparent); } }
+  .t-fix { --c: #e5484d; } .t-word { --c: #e8930c; } .t-flow { --c: #8b5cf6; } .t-fr { --c: #0a95d6; }
+  .ec-foot { flex-shrink: 0; display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-top: 1px solid var(--border); background: var(--surface); }
+  .ec-live { font-size: 13px; color: var(--muted); flex: 1; min-width: 0; }
+  .ec-live b { color: var(--accent); }
+  .ec-again { height: 42px; padding: 0 18px; border-radius: 12px; border: none; font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer; color: #fff; white-space: nowrap;
+    background: linear-gradient(100deg, #d6307f, #7546ff 50%, #0a86d0); box-shadow: 0 6px 18px rgba(117,70,255,.25); display: inline-flex; align-items: center; gap: 8px; }
+  .ec-again:disabled { opacity: .45; cursor: default; }
+  .ec-again small { font-weight: 600; opacity: .85; font-size: 12px; }
+  .ec-focus { display: none; }
+  .ec-right { min-height: 0; overflow-y: auto; padding: 20px 20px 30px; background: var(--sidebar); }
+  .ec-wait { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 0 20px; }
+  .ec-wait .sc-orb { margin: 0 auto; width: 100%; height: 260px; }
+  .ec-wait h3 { font-family: var(--serif); font-weight: 500; font-size: 21px; margin: 4px 0 6px; }
+  .ec-wait p { color: var(--muted); font-size: 14px; margin: 0; }
+  .ec-card0 { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; margin-bottom: 14px; animation: ecUp .5s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes ecUp { from { opacity: 0; transform: translateY(12px); } }
+  .ec-h { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .ec-sum { font-family: var(--serif); font-size: 16.5px; line-height: 1.55; margin: 0; }
+  .ec-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; margin-top: 14px; }
+  .ec-sc { font-size: 13px; }
+  .ec-sc .top { display: flex; justify-content: space-between; color: var(--muted); margin-bottom: 5px; }
+  .ec-sc .top b { color: var(--text); }
+  .ec-sc .top em { font-style: normal; font-size: 11.5px; font-weight: 700; margin-left: 6px; }
+  .ec-sc .top em.up { color: var(--accent); } .ec-sc .top em.down { color: var(--warn); }
+  .ec-bar { height: 7px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+  .ec-bar i { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, #d6307f, #7546ff, #0a86d0); transition: width 1s cubic-bezier(.2,.8,.2,1); }
+  .ec-pat { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
+  .ec-pat:first-of-type { border-top: 0; padding-top: 0; }
+  .ec-pat .n { width: 26px; height: 26px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+  .ec-pat b { display: block; font-size: 14.5px; margin-bottom: 2px; }
+  .ec-pat span { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+  .ec-str { display: flex; gap: 10px; font-size: 14px; line-height: 1.5; padding: 4px 0; }
+  .ec-str svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 3px; }
+  .ec-card { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 13px 15px 13px 18px; margin-bottom: 10px; cursor: pointer;
+    transition: border-color .2s, box-shadow .2s, transform .2s, opacity .3s; animation: ecUp .45s cubic-bezier(.2,.8,.2,1) both; overflow: hidden; }
+  .ec-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c); }
+  .ec-card:hover { border-color: var(--border-strong); }
+  .ec-card.on { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
+  .ec-card.changed { opacity: .72; }
+  .ec-ch { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .ec-type { font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--c); }
+  .ec-state { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--accent); display: none; }
+  .ec-card.changed .ec-state { display: inline; }
+  .ec-q { display: block; font-family: var(--serif); font-size: 15px; padding: 6px 10px; border-radius: 9px; background: color-mix(in srgb, var(--c) 12%, transparent); margin-bottom: 8px; overflow-wrap: anywhere; }
+  .ec-card.changed .ec-q { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--c) 70%, transparent); }
+  .ec-issue { margin: 0 0 5px; font-size: 14.5px; line-height: 1.45; font-weight: 600; }
+  .ec-hint { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+  .ec-sug { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .ec-sug b { color: var(--text); padding: 2px 9px; border-radius: 8px; background: var(--surface-2); border: 1px dashed var(--border-strong); font-weight: 600; }
+  .ec-askb { margin-top: 9px; border: none; background: none; padding: 0; font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); cursor: pointer; }
+  .ec-askf { display: flex; gap: 6px; margin-top: 9px; }
+  .ec-askf input { flex: 1; min-width: 0; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: 13.5px; padding: 0 10px; outline: none; }
+  .ec-askf input:focus { border-color: var(--accent); }
+  .ec-askf button { height: 36px; padding: 0 12px; border-radius: 10px; border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .ec-ans { margin-top: 9px; font-size: 14px; line-height: 1.55; padding: 10px 12px; border-radius: 11px; background: var(--surface-2); white-space: pre-wrap; }
+  .ec-ans:empty { display: none; }
+  .ec-support { display: flex; gap: 12px; padding: 14px 16px; border-radius: 16px; margin-bottom: 14px; background: linear-gradient(160deg, rgba(95,170,220,.14), rgba(95,191,142,.12)); border: 1px solid rgba(95,170,220,.35); font-size: 14px; line-height: 1.5; }
+  .ec-support a { color: inherit; font-weight: 700; }
+  .ec-empty { text-align: center; padding: 24px 10px; color: var(--muted); font-size: 14px; }
+  .ec-errbox { padding: 16px 18px; border-radius: 16px; background: var(--warn-bg); border: 1px solid var(--warn-border); color: var(--text); font-size: 14.5px; line-height: 1.5; }
+  .ec-errbox button { margin-top: 10px; height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  @media (max-width: 860px) {
+    #ec-ov { padding: 0; }
+    .ec { width: 100%; height: 100%; border-radius: 0; border: 0; }
+    .ec-top { padding: 10px 10px 10px 14px; gap: 10px; padding-top: max(10px, env(safe-area-inset-top)); }
+    .ec-ic { width: 34px; height: 34px; border-radius: 11px; }
+    .ec-brand h2 { font-size: 18px; }
+    .ec-brand small { display: none; }
+    .ec-round .rtxt { display: none; }
+    .ec-start { padding: 20px 16px 30px; }
+    #ec-in { min-height: 200px; font-size: 16.5px; }
+    .ec-tabs { display: flex; gap: 4px; padding: 8px 12px; border-bottom: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+    .ec-tabs button { flex: 1; height: 36px; border-radius: 10px; border: none; background: transparent; font: inherit; font-weight: 600; font-size: 14px; color: var(--muted); cursor: pointer; }
+    .ec-tabs button.on { background: var(--surface-2); color: var(--text); }
+    .ec-tabs .n { display: inline-block; min-width: 20px; height: 20px; line-height: 20px; border-radius: 10px; font-size: 11.5px; background: var(--accent); color: var(--accent-ink); margin-left: 4px; }
+    .ec-cols { display: block; position: relative; }
+    .ec-left, .ec-right { position: absolute; inset: 0; border: 0; }
+    .ec-review[data-tab="text"] .ec-right, .ec-review[data-tab="fb"] .ec-left { display: none; }
+    .ec-lscroll { padding: 18px 16px 24px; }
+    .ec-bd, #ec-txt { font-size: 17px; }
+    .ec-focus { display: block; flex-shrink: 0; padding: 12px 14px; border-top: 1px solid var(--border); background: var(--surface); }
+    .ec-focus:empty { display: none; }
+    .ec-focus .ec-ch { margin-bottom: 4px; }
+    .ec-focus .nav { margin-left: auto; display: flex; gap: 4px; }
+    .ec-focus .nav button { width: 30px; height: 30px; border-radius: 9px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; }
+    .ec-foot { padding: 10px 12px max(10px, env(safe-area-inset-bottom)); }
+    .ec-right { padding: 16px 14px 30px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sc-orb, .sc-lens, .md.sc-flow, .md.sc-pour, .ec, .ec-card, .ec-card0, #chat-list > *, .ec-pill { animation: none !important; }
+    .sc-orb { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body class="is-empty">
+<div id="sc-splash" aria-hidden="true"><svg viewBox="0 0 32 32"><path class="sp-m" pathLength="100" d="M3.5 26.5 L12.6 9.2 L18 18.6 L21.4 13.4 L28.5 26.5 Z"/></svg><div class="sp-w">SCODE</div></div>
 
 
 <div id="app">
@@ -1733,6 +1989,7 @@
       <span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span>
       New chat
     </button>
+    <button id="ec-open-side" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M13.5 7l3.5 3.5M4 20h7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>Essay Coach<span class="nw">NEW</span></button>
     <div class="side-label">Recents</div>
     <div id="chat-list"></div>
     <div class="side-bottom">
@@ -1806,6 +2063,7 @@
       <div id="welcome">
         <h1 class="greet"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="mk-body" pathLength="100" d="M3.5 26.5 L12.6 9.2 L18 18.6 L21.4 13.4 L28.5 26.5 Z"/><path class="mk-snow" d="M12.6 9.2 L9.7 14.7 L11.9 13.4 L13.4 15 L15.3 13.9 Z"/></svg><span id="greet-text">Hello</span></h1>
         <p class="greet-sub">What's on your mind?</p>
+        <button type="button" class="ec-pill" id="ec-open-pill"><b>NEW</b>Essay Coach<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <div id="thread" class="col">
         <div id="messages"></div>
@@ -1980,7 +2238,7 @@
     </div>
     <div class="set-section">
       <div class="set-section-title">Models</div>
-      <div class="modal-sub" style="margin:-4px 0 10px;">Read live from the server hosting Linden.</div>
+      <div class="modal-sub" style="margin:-4px 0 10px;">Read live from the SCODE AI server.</div>
       <div id="models-section"><div class="health-empty">Loading…</div></div>
     </div>
   </div>
@@ -2114,6 +2372,7 @@
         <dt>Safety checks</dt><dd>Every message, and the replies to accounts, is checked by software on our own computer (a safety model and a word list) for harmful or illegal content. Nothing is sent to another company for this.</dd>
         <dt>Flagged messages</dt><dd>If a message is flagged, a copy of that chat (the last few messages, never photos) is saved for review by the SCODE safety team: the person who runs SCODE AI and our lead security and safety manager. The flagged chat is removed from your account. Records of warnings and cleared flags are deleted after 30 days; flags that led to a ban are kept for the length of the ban plus one year; records the law requires us to keep are kept as long as the law says. Deleting your account doesn&rsquo;t remove a ban or its record while the ban lasts.</dd>
         <dt>Safety links</dt><dd>To stop banned people from making new accounts, when you use SCODE AI with an account our computer saves a scrambled code for the internet connection you're on and a random ID that your browser makes for SCODE AI. The scrambled code can't be turned back into your internet address. These are only used by the safety team to spot accounts made to get around a ban, and new accounts can't be made from a browser a banned account used. They're deleted 6 months after they were last used, or when you delete your account (unless the account is banned). Temporary or throwaway email addresses can't be used for accounts.</dd>
+        <dt>Essay Coach</dt><dd>When you check your writing, it's sent to our computer to get feedback and is checked by SCODE Safety. It isn't saved on our server and isn't used for training. Your latest draft and its feedback are kept only in your browser, so you can come back to them.</dd>
         <dt>Pictures you make</dt><dd>Made on our computer and sent to you. They're saved with your chat if Save chats is on, and otherwise not saved.</dd>
         <dt>Reports and emails</dt><dd>If you email us (like with Report issue), we get your email address and what you wrote, in our Gmail inbox.</dd>
       </dl>
@@ -2384,7 +2643,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://loose-panels-tmp-suits.trycloudflare.com";
+  const PROXY_URL = "https://appropriate-located-magnificent-yeah.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -3938,6 +4197,9 @@
         <span class="pending-text shimmer">Thinking</span>
         <span class="pending-time"></span>
       </div>`;
+    const orb = makeOrb();
+    row.appendChild(orb.el);
+    row._orb = orb;
     const lbl = row.querySelector(".pending-text");
     const timeEl = row.querySelector(".pending-time");
     const hasImage = messages.some(m => m.images && m.images.length);
@@ -6098,6 +6360,8 @@
       if (typeof data.ferries_cost === "number") ferryCost = data.ferries_cost;
       if (typeof data.studyplus === "boolean") plusServerOn = data.studyplus;
       if (typeof data.studyplus_cost === "number") plusCost = data.studyplus_cost;
+      if (typeof data.essay_cost === "number") essayCost = data.essay_cost;
+      if (typeof data.essay_ask_cost === "number") essayAskCost = data.essay_ask_cost;
       if (data.sync && !serverSync) { serverSync = true; pullChats(true); }
       if (auth && data.paused) showSafetyPause(data.paused); else if (auth && "paused" in data) hideSafetyPause();
       if (auth && data.account && "avatar" in data) setAvatar(data.avatar);
@@ -6689,6 +6953,12 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-essay", type: "feature", date: "2026-10-09", title: "Essay Coach",
+      text: "Paste your essay, say what you want help with, and Essay Coach highlights the exact spots to fix, explains how, and points out habits across your whole piece, like comma splices or repeated words. It never rewrites your work: you do the fixing, and the highlights clear as you go. Writing for French class? Switch to Français and it flags English words, gives you the French word to use, and checks your grammar (beta).",
+      how: ["Sign in, then tap Essay Coach in the menu (or under the greeting).", "Paste your writing and pick what you want help with, like Be more precise.", "Tap a highlight or a card to see what's wrong and how to fix it. Ask about this explains the rule.", "Fix things right in the text, then tap Check again to see your progress."] },
+    { id: "f-orb", type: "feature", date: "2026-10-09", title: "A new look while SCODE AI thinks",
+      text: "While SCODE AI works on your answer, a living, colour-shifting glow fills the space under Thinking. When the answer starts, it pours into the first words, and the reply stays in colour as it's written before settling back to normal text.",
+      how: ["Just send a message and watch.", "If your device is set to reduce motion, you get a calm, still version."] },
     { id: "f-safety", type: "feature", date: "2026-10-09", title: "SCODE Safety",
       text: "SCODE AI now checks every message for harmful or illegal content, using a safety model that runs on our own computer. Harmful requests are blocked with up to 3 warnings, serious ones pause the account until a real person reviews them, and anyone who's struggling gets support lines, never a ban. The Privacy Policy now includes the rules for using SCODE AI.",
       how: ["Nothing changes for normal questions: school, sports, ferries, anything.", "If a message is blocked, you'll see a red warning that says which one it is (1 of 3).", "Read the rules any time: Settings, then Privacy Policy, then Rules for using SCODE AI."] },
@@ -6919,8 +7189,10 @@
       }
       let think = null, thinkStart = null, thinkSeconds = 0, thinkDone = false;
 
-      function reveal() {
+      const orbMelt = () => { if (loaderRow._orb) { loaderRow._orb.melt(); loaderRow._orb = null; } };
+      function reveal(keepOrb) {
         if (revealed) return;
+        if (!keepOrb) orbMelt();
         revealed = true;
         const stick = nearBottom();
         if (loaderRow._clear) loaderRow._clear();
@@ -7083,7 +7355,7 @@
           const stick = nearBottom();
           if (msg.thinking) {
             thinkingBuf += msg.thinking;
-            if (!revealed) reveal();
+            if (!revealed) reveal(true);
             ensureThinkUI();
             think.inner.textContent = thinkingBuf.trim();
             think.setPreview(thinkingBuf);
@@ -7092,7 +7364,7 @@
           if (msg.content) {
             rawContent += msg.content;
             const sp = splitThinkTags(rawContent);
-            if (!revealed) reveal();
+            if (!revealed) reveal(true);
             if (sp.thinking) {
               ensureThinkUI();
               think.inner.textContent = (thinkingBuf + sp.thinking).trim();
@@ -7101,6 +7373,7 @@
             }
             if (sp.visible.trim()) finishThinking();
             typeTo(sp.visible);
+            if (sp.visible.trim()) { orbMelt(); flowStart(liveMd); }
           }
           if (stick && (msg.thinking || msg.content)) scrollToBottom(false);
         }
@@ -7162,6 +7435,7 @@
       } else {
         typeTo(finalText);
         await typeDone();
+        flowEnd(liveMd);
       }
       if (!studySet && !imgGen && !plus && !finalText.trim() && !thinkingBuf.trim() && !finalSplit.thinking.trim()) {
         liveMd.innerHTML = renderMarkdown("(No reply came back. Try sending it again.)");
@@ -7220,6 +7494,547 @@
       checkStatus();
       return "ok";
   }
+
+
+  // =====================================================================
+  //  SCODE thinking orb: a morphing colour blob under "Thinking", which
+  //  melts into the first words of the reply (see .sc-orb in the CSS).
+  // =====================================================================
+  const ORB_HUES = [328, 18, 198, 262, 172, 292, 350, 222];
+  function makeOrb() {
+    const wrap = document.createElement("div");
+    wrap.className = "sc-orb";
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.innerHTML = '<canvas></canvas><div class="sc-lens-w"><div class="sc-lens"></div></div>';
+    const cv = wrap.querySelector("canvas");
+    const ctx = cv.getContext("2d");
+    const blobs = ORB_HUES.map((h, i) => ({ h, ph: i * 1.9 + Math.random() * 0.8, sp: 0.32 + (i % 3) * 0.11, r: 0.34 + (i % 3) * 0.08 }));
+    let raf = 0, alive = true, melted = false;
+    const t0 = performance.now();
+    function draw(now) {
+      if (!alive) return;
+      if (!wrap.isConnected && now - t0 > 1500) { alive = false; return; }
+      raf = requestAnimationFrame(draw);
+      if (document.hidden || !wrap.isConnected) return;
+      const d = Math.min(window.devicePixelRatio || 1, 1.5);
+      const W = Math.max(1, Math.round(wrap.clientWidth * d)), H = Math.max(1, Math.round(wrap.clientHeight * d));
+      if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+      const t = (now - t0) / 1000, light = document.body.classList.contains("light");
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = light ? "source-over" : "lighter";
+      const cx = W / 2, cy = H / 2, R = Math.min(W * 0.46, H * 0.95);
+      const ch = (262 + t * 22) % 360, cr = R * (0.62 + 0.06 * Math.sin(t * 0.9));
+      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr);
+      core.addColorStop(0, `hsla(${ch}, 95%, ${light ? 66 : 60}%, ${light ? 0.5 : 0.42})`);
+      core.addColorStop(1, `hsla(${ch}, 95%, 60%, 0)`);
+      ctx.fillStyle = core; ctx.beginPath(); ctx.ellipse(cx, cy, cr * 1.5, cr, 0, 0, Math.PI * 2); ctx.fill();
+      for (const b of blobs) {
+        const x = cx + Math.sin(t * b.sp + b.ph) * W * 0.22 + Math.cos(t * b.sp * 0.63 + b.ph * 2) * W * 0.07;
+        const y = cy + Math.cos(t * b.sp * 0.87 + b.ph) * H * 0.17;
+        const r = R * (b.r + 0.09 * Math.sin(t * 1.2 + b.ph * 1.3));
+        const hue = (b.h + t * 16) % 360;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, `hsla(${hue}, 96%, ${light ? 61 : 63}%, ${light ? 0.62 : 0.52})`);
+        g.addColorStop(0.55, `hsla(${hue}, 96%, ${light ? 64 : 55}%, ${light ? 0.24 : 0.2})`);
+        g.addColorStop(1, `hsla(${hue}, 96%, 60%, 0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      }
+      if (reduceMotion && now - t0 > 120) { alive = false; cancelAnimationFrame(raf); }
+    }
+    raf = requestAnimationFrame(draw);
+    return {
+      el: wrap,
+      melt() {
+        if (melted) return;
+        melted = true;
+        wrap.classList.add("melt");
+        setTimeout(() => { alive = false; cancelAnimationFrame(raf); wrap.remove(); }, reduceMotion ? 0 : 950);
+      },
+      stop() { alive = false; cancelAnimationFrame(raf); wrap.remove(); },
+    };
+  }
+  // The reply text pours in from the orb, stays in moving colour while it's being written, then settles to normal.
+  function flowStart(md) {
+    if (!md || md._flow || reduceMotion) return;
+    md._flow = true;
+    md.classList.add("sc-flow", "sc-pour");
+  }
+  function flowEnd(md) {
+    if (!md || !md._flow) return;
+    md.classList.add("sc-flow-end");
+    setTimeout(() => md.classList.remove("sc-flow", "sc-flow-end", "sc-pour"), 1250);
+  }
+
+  // =====================================================================
+  //  SCODE Essay Coach
+  //  Paste writing + say what you want help with. The coach points to exact
+  //  spots, habits and strengths, and never rewrites the text. Highlights
+  //  follow the text as it's edited and clear when that part changes.
+  // =====================================================================
+  var essayCost = 20, essayAskCost = 5;
+  const EC_MAX = 8000;
+  const EC_KEY = "scode_essay";
+  const EC_CAT = { grammar: "fix", spelling: "fix", punctuation: "fix", "word choice": "word", clarity: "word", precision: "word",
+                   flow: "flow", structure: "flow", tone: "flow", french: "fr", "english word": "fr" };
+  const EC_LABEL = { "english word": "English word", "word choice": "Word choice" };
+  const EC_GOALS = ["Be more precise", "Fix grammar & commas", "Make it flow better", "Stronger argument", "More formal tone", "Help my French"];
+  const EC_FR_WORDS = new Set(["le", "la", "les", "des", "est", "et", "je", "nous", "vous", "que", "qui", "une", "pas", "dans", "avec", "pour", "très", "être", "c'est", "j'ai", "mais", "sont", "du", "au", "aux", "il", "elle", "ils", "mon", "ma", "mes", "ce", "cette", "parce", "aussi", "être", "avoir", "fait"]);
+  const ecIcon = {
+    pen: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M13.5 7l3.5 3.5M4 20h7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    shield: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    x: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  };
+  const EC = { text: "", goal: "", lang: "en", fb: "en", langSet: false, result: null, hl: [], round: 0, prevScores: null, fixedLast: 0, active: -1, busy: false, view: "start", tab: "text" };
+  const ecEsc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const ecCat = (t) => EC_CAT[t] || "word";
+  const ecType = (t) => EC_LABEL[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : "Note");
+  const ecWords = (s) => (s.trim().match(/\S+/g) || []).length;
+
+  function ecSave() {
+    try {
+      localStorage.setItem(EC_KEY, JSON.stringify({ text: EC.view === "start" ? $("ec-in").value : $("ec-txt").value, goal: EC.goal, lang: EC.lang, fb: EC.fb,
+        langSet: EC.langSet, result: EC.result, hl: EC.hl, round: EC.round, prevScores: EC.prevScores, fixedLast: EC.fixedLast, view: EC.view }));
+    } catch (e) {}
+  }
+  function ecLoad() {
+    try {
+      const s = JSON.parse(localStorage.getItem(EC_KEY) || "null");
+      if (s && typeof s === "object") Object.assign(EC, s, { busy: false, active: -1 });
+    } catch (e) {}
+  }
+
+  function buildEssayCoach() {
+    const ov = document.createElement("div");
+    ov.id = "ec-ov";
+    ov.setAttribute("role", "dialog");
+    ov.setAttribute("aria-modal", "true");
+    ov.setAttribute("aria-labelledby", "ec-title");
+    ov.innerHTML = `<div class="ec">
+      <header class="ec-top">
+        <div class="ec-brand"><span class="ec-ic">${ecIcon.pen}</span><div><h2 id="ec-title">Essay Coach</h2><small>Feedback on your writing. You do the fixing.</small></div></div>
+        <div class="ec-round" id="ec-round"></div>
+        <button class="ec-tbtn" id="ec-new" type="button" hidden>New text</button>
+        <button class="ec-x" id="ec-close" type="button" aria-label="Close Essay Coach">${ecIcon.x}</button>
+      </header>
+      <div class="ec-body">
+        <section class="ec-start" id="ec-start"><div class="ec-start-in">
+          <h3 class="ec-hero">Make your writing <em>shine.</em></h3>
+          <p class="ec-lead">Paste your essay, paragraph or assignment. Essay Coach highlights what to fix and explains how, but never rewrites it for you.</p>
+          <label class="ec-lbl" for="ec-in">Your writing</label>
+          <textarea id="ec-in" placeholder="Paste or type your writing here…" spellcheck="true"></textarea>
+          <div class="ec-meta"><span id="ec-wc">0 words</span><span id="ec-lim"></span></div>
+          <label class="ec-lbl" for="ec-goal">What do you want help with?</label>
+          <input id="ec-goal" maxlength="300" placeholder="e.g. Make it more precise and fix my commas">
+          <div class="ec-chips" id="ec-chips">${EC_GOALS.map(g => `<button type="button" class="ec-chip" data-g="${ecEsc(g)}">${ecEsc(g)}</button>`).join("")}</div>
+          <label class="ec-lbl">Written in</label>
+          <div class="ec-row">
+            <div class="ec-seg" id="ec-lang"><button type="button" data-v="en">English</button><button type="button" data-v="fr">Français<span class="ec-beta">BETA</span></button></div>
+            <div class="ec-fbw" id="ec-fbw" hidden>Feedback in <div class="ec-seg" id="ec-fb"><button type="button" data-v="en">English</button><button type="button" data-v="fr">French</button></div></div>
+          </div>
+          <button class="ec-go" id="ec-go" type="button">Check my writing <small id="ec-cost"></small></button>
+          <div class="ec-err" id="ec-err"></div>
+          <p class="ec-note">${ecIcon.shield}<span>Your text is checked by SCODE Safety, isn't saved on our server and isn't used for training. Your latest draft stays only in this browser.</span></p>
+        </div></section>
+        <section class="ec-review" id="ec-review" hidden data-tab="text">
+          <div class="ec-tabs" id="ec-tabs"><button type="button" data-t="text">Your writing</button><button type="button" data-t="fb">Feedback<span class="n" id="ec-tabn"></span></button></div>
+          <div class="ec-cols">
+            <div class="ec-left">
+              <div class="ec-lscroll" id="ec-lscroll">
+                <div class="ec-legend"><span class="t-fix"><i></i>Grammar &amp; spelling</span><span class="t-word"><i></i>Word choice &amp; clarity</span><span class="t-flow"><i></i>Flow &amp; structure</span><span class="t-fr"><i></i>French</span></div>
+                <div class="ec-ed"><div class="ec-bd" id="ec-bd" aria-hidden="true"></div><textarea id="ec-txt" spellcheck="true" aria-label="Your writing"></textarea></div>
+              </div>
+              <div class="ec-focus" id="ec-focus"></div>
+              <div class="ec-foot"><span class="ec-live" id="ec-live">Edit right here. Highlights clear as you fix them.</span>
+                <button class="ec-again" id="ec-again" type="button">Check again <small id="ec-cost2"></small></button></div>
+            </div>
+            <div class="ec-right" id="ec-right"></div>
+          </div>
+        </section>
+      </div></div>`;
+    document.body.appendChild(ov);
+    const inp = $("ec-in"), goal = $("ec-goal"), txt = $("ec-txt");
+    $("ec-close").onclick = closeEssayCoach;
+    ov.addEventListener("mousedown", (e) => { if (e.target === ov) closeEssayCoach(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && ov.classList.contains("show")) closeEssayCoach(); });
+    $("ec-new").onclick = () => {
+      if (EC.busy) return;
+      if (EC.result && !confirm("Start over with new text? This feedback will be cleared.")) return;
+      Object.assign(EC, { result: null, hl: [], round: 0, prevScores: null, fixedLast: 0, active: -1, view: "start" });
+      inp.value = ""; ecShow(); ecSave(); inp.focus();
+    };
+    inp.addEventListener("input", () => { ecCount(); ecAutoLang(); ecSave(); });
+    goal.addEventListener("input", () => { EC.goal = goal.value; ecChipsState(); ecSave(); });
+    $("ec-chips").addEventListener("click", (e) => {
+      const b = e.target.closest(".ec-chip"); if (!b) return;
+      const g = b.dataset.g, cur = goal.value.trim();
+      const parts = cur ? cur.split(/\s*[,;]\s*|\s+and\s+/i).filter(Boolean) : [];
+      const i = parts.findIndex(p => p.toLowerCase() === g.toLowerCase());
+      if (i >= 0) parts.splice(i, 1); else parts.push(g);
+      goal.value = parts.join(", ");
+      EC.goal = goal.value;
+      if (g === "Help my French" && i < 0) ecSetLang("fr", true);
+      ecChipsState(); ecSave();
+    });
+    $("ec-lang").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ecSetLang(b.dataset.v, true); });
+    $("ec-fb").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; EC.fb = b.dataset.v; ecSegs(); ecSave(); });
+    $("ec-go").onclick = () => ecCheck(false);
+    $("ec-again").onclick = () => ecCheck(true);
+    $("ec-tabs").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) ecTab(b.dataset.t); });
+    txt.addEventListener("input", () => { ecGrow(); ecPaint(); ecSaveSoon(); });
+    const caret = () => { const i = ecAt(txt.selectionStart); if (i !== -1 && i !== EC.active) ecActivate(i, "text"); };
+    txt.addEventListener("click", caret);
+    txt.addEventListener("keyup", caret);
+    window.addEventListener("resize", () => { if (ov.classList.contains("show")) ecGrow(); });
+  }
+  let ecSaveT = null;
+  function ecSaveSoon() { clearTimeout(ecSaveT); ecSaveT = setTimeout(ecSave, 400); }
+
+  function openEssayCoach() {
+    if (isGuest()) { openAuth("welcome", "Essay Coach needs a free account. It only takes a minute."); return; }
+    if (!$("ec-ov")) { buildEssayCoach(); ecLoad(); }
+    $("ec-ov").classList.add("show");
+    document.body.style.overflow = "hidden";
+    ecShow();
+    if (EC.view === "start") setTimeout(() => $("ec-in").focus(), 60);
+    try { localStorage.setItem("scode_ec_seen", "1"); } catch (e) {}
+    const nb = $("ec-open-side"); if (nb) nb.classList.add("seen");
+  }
+  function closeEssayCoach() {
+    const ov = $("ec-ov"); if (!ov) return;
+    ecSave();
+    ov.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  function ecSetLang(v, manual) {
+    EC.lang = v === "fr" ? "fr" : "en";
+    if (manual) EC.langSet = true;
+    ecSegs(); ecSave();
+  }
+  function ecSegs() {
+    $("ec-lang").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.v === EC.lang));
+    $("ec-fb").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.v === EC.fb));
+    $("ec-fbw").hidden = EC.lang !== "fr";
+  }
+  function ecChipsState() {
+    const cur = $("ec-goal").value.toLowerCase();
+    $("ec-chips").querySelectorAll(".ec-chip").forEach(b => b.classList.toggle("on", cur.includes(b.dataset.g.toLowerCase())));
+  }
+  function ecAutoLang() {
+    if (EC.langSet) return;
+    const w = ($("ec-in").value.toLowerCase().match(/[a-zàâçéèêëîïôûùüÿœ']+/g) || []).slice(0, 400);
+    if (w.length < 12) return;
+    const fr = w.filter(x => EC_FR_WORDS.has(x)).length / w.length;
+    const want = fr > 0.12 ? "fr" : "en";
+    if (want !== EC.lang) ecSetLang(want, false);
+  }
+  function ecCount() {
+    const v = $("ec-in").value, n = ecWords(v);
+    $("ec-wc").textContent = `${n} word${n === 1 ? "" : "s"}`;
+    const over = v.length > EC_MAX;
+    $("ec-lim").textContent = over ? `Too long: up to about 1,300 words per check` : (v.length > EC_MAX * 0.85 ? `${(EC_MAX - v.length).toLocaleString()} characters left` : "");
+    $("ec-lim").classList.toggle("over", over);
+    $("ec-go").disabled = EC.busy || over || v.trim().length < 20;
+  }
+  function ecCosts() {
+    $("ec-cost").textContent = `${essayCost} points`;
+    $("ec-cost2").textContent = `· ${essayCost}`;
+  }
+
+  function ecShow() {
+    const start = EC.view === "start";
+    $("ec-start").hidden = !start;
+    $("ec-review").hidden = start;
+    $("ec-new").hidden = start;
+    ecCosts(); ecSegs();
+    if (start) {
+      if (!$("ec-in").value && EC.text) $("ec-in").value = EC.text;
+      $("ec-goal").value = EC.goal || "";
+      ecChipsState(); ecCount();
+      $("ec-round").innerHTML = "";
+    } else {
+      const txt = $("ec-txt");
+      if (EC.text && txt.value !== EC.text && !txt.value) txt.value = EC.text;
+      ecGrow(); ecPaint(); ecRenderRight(); ecTab(EC.tab || "text");
+    }
+  }
+  function ecTab(t) {
+    EC.tab = t;
+    $("ec-review").dataset.tab = t;
+    $("ec-tabs").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+    if (t === "text") ecGrow();
+  }
+  function ecGrow() {
+    const txt = $("ec-txt");
+    txt.style.height = "auto";
+    txt.style.height = Math.max(200, txt.scrollHeight) + "px";
+  }
+
+  // Find each highlight in the current text (the nearest copy to where it was last seen).
+  function ecAnchor() {
+    const t = $("ec-txt").value;
+    const order = EC.hl.map((h, i) => i).sort((a, b) => (EC.hl[a].pos ?? 0) - (EC.hl[b].pos ?? 0));
+    const taken = [];
+    for (const i of order) {
+      const h = EC.hl[i];
+      let best = -1, bestD = Infinity, from = 0, at;
+      while ((at = t.indexOf(h.quote, from)) !== -1) {
+        const d = Math.abs(at - (h.pos ?? at));
+        if (d < bestD && !taken.some(([s, e]) => at < e && at + h.quote.length > s)) { best = at; bestD = d; }
+        from = at + 1;
+      }
+      if (best === -1) { h.changed = true; h.s = h.e = -1; continue; }
+      h.changed = false; h.pos = best; h.s = best; h.e = best + h.quote.length;
+      taken.push([h.s, h.e]);
+    }
+  }
+  function ecAt(idx) {
+    let hit = -1;
+    EC.hl.forEach((h, i) => { if (!h.changed && idx >= h.s && idx <= h.e) hit = i; });
+    return hit;
+  }
+  function ecPaint() {
+    const t = $("ec-txt").value;
+    EC.text = t;
+    ecAnchor();
+    const marks = EC.hl.map((h, i) => ({ h, i })).filter(x => !x.h.changed).sort((a, b) => a.h.s - b.h.s);
+    let out = "", p = 0;
+    for (const { h, i } of marks) {
+      out += ecEsc(t.slice(p, h.s)) + `<mark class="t-${ecCat(h.type)}${i === EC.active ? " on" : ""}" data-i="${i}">${ecEsc(t.slice(h.s, h.e))}</mark>`;
+      p = h.e;
+    }
+    $("ec-bd").innerHTML = out + ecEsc(t.slice(p)) + "\n";
+    // cards follow along
+    const right = $("ec-right");
+    EC.hl.forEach((h, i) => { const c = right.querySelector(`.ec-card[data-i="${i}"]`); if (c) c.classList.toggle("changed", !!h.changed); });
+    const total = EC.hl.length, changed = EC.hl.filter(h => h.changed).length;
+    const live = $("ec-live");
+    if (EC.busy) live.textContent = "Checking your writing…";
+    else if (!total) live.textContent = EC.result ? "No highlights. Edit and check again any time." : "Edit right here.";
+    else live.innerHTML = changed ? `<b>${changed} of ${total}</b> highlighted spot${total === 1 ? "" : "s"} changed. Check again when you're ready.` : "Edit right here. Highlights clear as you fix them.";
+    $("ec-again").disabled = EC.busy || t.trim().length < 20 || t.length > EC_MAX;
+    $("ec-tabn").textContent = total ? String(total - changed) : "";
+    ecFocusBar();
+    ecRound();
+  }
+  function ecRound() {
+    const r = $("ec-round");
+    if (!EC.round) { r.innerHTML = ""; return; }
+    const fx = EC.fixedLast ? ` <span class="fx">· ${EC.fixedLast} fixed</span>` : "";
+    r.innerHTML = `<span class="rtxt">Round</span> <b>${EC.round}</b>${fx}`;
+  }
+
+  function ecActivate(i, from) {
+    EC.active = i;
+    const h = EC.hl[i];
+    $("ec-bd").querySelectorAll("mark").forEach(m => m.classList.toggle("on", +m.dataset.i === i));
+    $("ec-right").querySelectorAll(".ec-card").forEach(c => c.classList.toggle("on", +c.dataset.i === i));
+    ecFocusBar();
+    if (!h) return;
+    if (from === "card") {
+      if (window.innerWidth <= 860) ecTab("text");
+      const m = $("ec-bd").querySelector(`mark[data-i="${i}"]`);
+      if (m) {
+        const sc = $("ec-lscroll");
+        sc.scrollTo({ top: Math.max(0, m.offsetTop - sc.clientHeight / 3), behavior: reduceMotion ? "auto" : "smooth" });
+        m.classList.remove("flash"); void m.offsetWidth; m.classList.add("flash");
+      }
+    } else if (window.innerWidth > 860) {
+      const c = $("ec-right").querySelector(`.ec-card[data-i="${i}"]`);
+      if (c) c.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+    }
+  }
+  function ecFocusBar() {
+    const f = $("ec-focus");
+    if (!f) return;
+    const h = EC.hl[EC.active];
+    if (!h || h.changed || EC.busy) { f.innerHTML = ""; return; }
+    const live = EC.hl.map((x, i) => i).filter(i => !EC.hl[i].changed);
+    const k = live.indexOf(EC.active);
+    f.className = `ec-focus t-${ecCat(h.type)}`;
+    f.innerHTML = `<div class="ec-ch"><span class="ec-type">${ecEsc(ecType(h.type))}</span><span class="nav">
+        <button type="button" data-d="-1" aria-label="Previous">‹</button><button type="button" data-d="1" aria-label="Next">›</button></span></div>
+      <p class="ec-issue">${ecEsc(h.issue)}</p><p class="ec-hint">${ecEsc(h.hint)}</p>${h.suggest ? `<div class="ec-sug">Try <b>${ecEsc(h.suggest)}</b></div>` : ""}`;
+    f.querySelectorAll(".nav button").forEach(b => b.onclick = () => {
+      const n = live[(k + +b.dataset.d + live.length) % live.length];
+      if (n !== undefined) ecActivate(n, "card");
+    });
+  }
+
+  function ecRenderRight() {
+    const right = $("ec-right");
+    if (EC.busy) return;
+    const r = EC.result;
+    if (!r) { right.innerHTML = '<div class="ec-empty">Your feedback will show up here.</div>'; return; }
+    let html = "";
+    if (r.support) html += `<div class="ec-support"><span>💙</span><span>If anything you wrote about is happening to you, you don't have to deal with it alone. Call or text <a href="tel:988">9-8-8</a> any time, or text CONNECT to <a href="sms:686868">686868</a> (Kids Help Phone). Both are free, 24/7.</span></div>`;
+    const sc = r.scores || {}, prev = EC.prevScores || {};
+    const bars = ["clarity", "grammar", "precision", "flow"].filter(k => sc[k]).map(k => {
+      const dlt = prev[k] ? sc[k] - prev[k] : 0;
+      const em = dlt ? `<em class="${dlt > 0 ? "up" : "down"}">${dlt > 0 ? "+" : ""}${dlt}</em>` : "";
+      return `<div class="ec-sc"><div class="top"><span>${k.charAt(0).toUpperCase() + k.slice(1)}</span><span><b>${sc[k]}</b>/10${em}</span></div><div class="ec-bar"><i data-w="${sc[k] * 10}"></i></div></div>`;
+    }).join("");
+    html += `<div class="ec-card0"><div class="ec-h">Coach's notes</div><p class="ec-sum">${ecEsc(r.summary || "Here's what to look at.")}</p>${bars ? `<div class="ec-scores">${bars}</div>` : ""}</div>`;
+    if (EC.hl.length) {
+      html += `<div class="ec-h" style="margin-top:6px">Spots to fix · ${EC.hl.length}</div>`;
+      html += EC.hl.map((h, i) => `<div class="ec-card t-${ecCat(h.type)}${h.changed ? " changed" : ""}${i === EC.active ? " on" : ""}" data-i="${i}" style="animation-delay:${Math.min(i, 10) * 0.04}s">
+        <div class="ec-ch"><span class="ec-type">${ecEsc(ecType(h.type))}</span><span class="ec-state">Changed ✓</span></div>
+        <span class="ec-q">${ecEsc(h.quote)}</span>
+        <p class="ec-issue">${ecEsc(h.issue)}</p><p class="ec-hint">${ecEsc(h.hint)}</p>
+        ${h.suggest ? `<div class="ec-sug">Try <b>${ecEsc(h.suggest)}</b></div>` : ""}
+        <div><button type="button" class="ec-askb">Ask about this</button></div>
+        <form class="ec-askf" hidden><input maxlength="300" placeholder="e.g. Why is this wrong?"><button type="submit">Ask · ${essayAskCost}</button></form>
+        <div class="ec-ans"></div></div>`).join("");
+    } else {
+      html += `<div class="ec-card0"><div class="ec-h">Spots to fix</div><p class="ec-hint" style="margin:0">Nothing specific to point at. Nice work! Check the habits below, or ask for something more specific next time.</p></div>`;
+    }
+    if (r.patterns && r.patterns.length) {
+      html += `<div class="ec-card0"><div class="ec-h">Habits across your writing</div>${r.patterns.map((p, i) =>
+        `<div class="ec-pat"><span class="n">${i + 1}</span><div><b>${ecEsc(p.title)}</b><span>${ecEsc(p.detail)}</span></div></div>`).join("")}</div>`;
+    }
+    if (r.strengths && r.strengths.length) {
+      html += `<div class="ec-card0"><div class="ec-h">What's working</div>${r.strengths.map(s => `<div class="ec-str">${ecIcon.check}<span>${ecEsc(s)}</span></div>`).join("")}</div>`;
+    }
+    right.innerHTML = html;
+    requestAnimationFrame(() => right.querySelectorAll(".ec-bar i").forEach(b => { b.style.width = b.dataset.w + "%"; }));
+    right.querySelectorAll(".ec-card").forEach(c => {
+      const i = +c.dataset.i;
+      c.addEventListener("click", (e) => { if (e.target.closest(".ec-askf, .ec-askb, .ec-ans")) return; ecActivate(i, "card"); });
+      const f = c.querySelector(".ec-askf"), ab = c.querySelector(".ec-askb");
+      ab.onclick = () => { f.hidden = !f.hidden; if (!f.hidden) f.querySelector("input").focus(); };
+      f.onsubmit = (e) => { e.preventDefault(); ecAsk(i, f, c.querySelector(".ec-ans")); };
+    });
+  }
+
+  function ecWaiting(stage) {
+    const right = $("ec-right");
+    let w = right.querySelector(".ec-wait");
+    if (!w) {
+      right.innerHTML = '<div class="ec-wait"><div class="ec-orbslot"></div><h3>Reading your writing</h3><p>Usually takes a minute or two.</p></div>';
+      w = right.querySelector(".ec-wait");
+      const orb = makeOrb();
+      w.querySelector(".ec-orbslot").replaceWith(orb.el);
+      EC._orb = orb;
+    }
+    if (stage) w.querySelector("h3").textContent = stage;
+  }
+  function ecError(msg) {
+    if (EC._orb) { EC._orb.stop(); EC._orb = null; }
+    $("ec-right").innerHTML = `<div class="ec-errbox">${ecEsc(msg)}<br><button type="button" id="ec-retry">Back to my feedback</button></div>`;
+    $("ec-retry").onclick = () => ecRenderRight();
+  }
+
+  async function ecCheck(again) {
+    if (EC.busy) return;
+    const text = (again ? $("ec-txt").value : $("ec-in").value).replace(/\r\n/g, "\n");
+    if (text.trim().length < 20) { $("ec-err").textContent = "Paste at least a couple of sentences."; return; }
+    if (text.length > EC_MAX) { $("ec-err").textContent = "That's a bit long. Check up to about 1,300 words at a time."; return; }
+    $("ec-err").textContent = "";
+    EC.goal = $("ec-goal") ? $("ec-goal").value.trim() || EC.goal : EC.goal;
+    const previous = again ? EC.hl.map(h => ({ type: h.type, issue: h.issue })) : [];
+    const before = again ? EC.hl.length : 0, changedBefore = again ? EC.hl.filter(h => h.changed).length : 0;
+    if (!again) { $("ec-txt").value = text; EC.hl = []; EC.result = null; EC.round = 0; EC.prevScores = null; EC.fixedLast = 0; }
+    EC.view = "review"; EC.busy = true; EC.active = -1;
+    ecShow(); ecTab(window.innerWidth <= 860 ? "fb" : "text");
+    ecWaiting(again ? "Checking your changes" : "Reading your writing");
+    $("ec-again").disabled = true; ecPaint();
+    let res;
+    try {
+      res = await fetch(PROXY_URL + "/essay/check", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ text, goal: EC.goal, lang: EC.lang, feedback: EC.fb, previous }) });
+    } catch (e) { EC.busy = false; ecError("Can't reach SCODE AI right now. It may be offline, so try again later."); ecPaint(); return; }
+    if (!res.ok) {
+      EC.busy = false;
+      const d = await res.json().catch(() => ({}));
+      if (res.status === 401) { closeEssayCoach(); openAuth("welcome", "Essay Coach needs a free account."); return; }
+      if (d.error === "account_paused") { closeEssayCoach(); showSafetyPause(d.paused); return; }
+      ecError(d.message || "Something went wrong. Try again."); ecPaint(); return;
+    }
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", result = null, err = null, safety = null;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split("\n"); buf = lines.pop();
+      for (const ln of lines) {
+        if (!ln.trim()) continue;
+        let c; try { c = JSON.parse(ln); } catch (e) { continue; }
+        if (c.error) { err = c.message || "Something went wrong."; continue; }
+        if (c.safety) { safety = c.safety; continue; }
+        const s = c.essay; if (!s) continue;
+        if (s.status === "queued") ecWaiting("Waiting for the SCODE server");
+        else if (s.status === "writing") ecWaiting(s.found ? `Found ${s.found} spot${s.found === 1 ? "" : "s"} so far` : "Reading your writing");
+        else if (s.status === "retry") ecWaiting("Taking another look");
+        else if (s.status === "done") result = s.result;
+      }
+    }
+    EC.busy = false;
+    if (safety) { closeEssayCoach(); if (safety.kind === "flag") showSafetyPause(safety.paused || { kind: "review", case: safety.case }); return; }
+    if (err || !result) { ecError(err || "No feedback came back. Try again."); ecPaint(); checkStatus(); return; }
+    if (EC._orb) { EC._orb.melt(); EC._orb = null; }
+    const cur = $("ec-txt").value;
+    EC.prevScores = again && EC.result ? EC.result.scores : null;
+    EC.fixedLast = again ? changedBefore : 0;
+    EC.round = (EC.round || 0) + 1;
+    EC.result = result;
+    // positions are for the text that was sent; if it was edited meanwhile, the quotes are found again
+    EC.hl = (result.highlights || []).map(h => ({ quote: h.quote, type: h.type, issue: h.issue, hint: h.hint, suggest: h.suggest || "", pos: cur === text ? h.start : h.start }));
+    ecRenderRight(); ecPaint();
+    if (window.innerWidth <= 860) ecTab("fb");
+    if (again && before) showNote(EC.fixedLast ? `Nice! You changed ${EC.fixedLast} of ${before} highlighted spots.` : "Checked your new draft.");
+    ecSave(); checkStatus();
+  }
+
+  async function ecAsk(i, form, ans) {
+    const h = EC.hl[i]; const q = form.querySelector("input").value.trim();
+    if (!h || !q) return;
+    const btn = form.querySelector("button"); btn.disabled = true;
+    ans.textContent = "…";
+    let res;
+    try {
+      res = await fetch(PROXY_URL + "/essay/ask", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ question: q, quote: h.quote, issue: h.issue, hint: h.hint, feedback: EC.fb }) });
+    } catch (e) { ans.textContent = "Can't reach SCODE AI right now."; btn.disabled = false; return; }
+    if (!res.ok) { const d = await res.json().catch(() => ({})); ans.textContent = d.message || "Couldn't answer that."; btn.disabled = false; return; }
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", out = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split("\n"); buf = lines.pop();
+      for (const ln of lines) {
+        let c; try { c = JSON.parse(ln); } catch (e) { continue; }
+        if (c.error) { out = c.message || "Couldn't answer that."; continue; }
+        if (c.message && c.message.content) { out += c.message.content; ans.textContent = out; }
+      }
+    }
+    ans.textContent = out.trim() || "No answer came back. Try again.";
+    btn.disabled = false; form.querySelector("input").value = "";
+    checkStatus();
+  }
+
+  // Entry points: sidebar button and the pill under the greeting
+  (function ecEntry() {
+    const side = $("ec-open-side"), pill = $("ec-open-pill");
+    if (side) side.onclick = () => { closeMobileSidebar(); openEssayCoach(); };
+    if (pill) pill.onclick = openEssayCoach;
+    try { if (localStorage.getItem("scode_ec_seen") && side) side.classList.add("seen"); } catch (e) {}
+  })();
+
+  // SCODE splash: once per visit, tap to skip.
+  (function scSplash() {
+    const sp = $("sc-splash");
+    if (!sp) return;
+    let seen = false;
+    try { seen = !!sessionStorage.getItem("scode_splash"); sessionStorage.setItem("scode_splash", "1"); } catch (e) {}
+    if (seen || reduceMotion) { sp.remove(); return; }
+    const go = () => { sp.classList.add("out"); setTimeout(() => sp.remove(), 600); };
+    sp.addEventListener("click", go);
+    setTimeout(go, 1450);
+  })();
 
   // A reply that was still being written when the page closed (or on another
   // device): the server kept going, so fetch it and show it.
