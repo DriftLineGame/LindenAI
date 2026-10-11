@@ -1,0 +1,28 @@
+{
+  "id": "/LindenAI/",
+  "name": "SCODE AI",
+  "short_name": "SCODE AI",
+  "description": "A free AI chat made in Campbell River, BC. Search the web, study, check your essays, and get local weather, scores and ferry times.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08090d",
+  "theme_color": "#08090d",
+  "lang": "en-CA",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "launch_handler": { "client_mode": "focus-existing" },
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "New chat", "url": "./?app=new", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Essay Coach", "url": "./?app=essay", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] }
+  ],
+  "screenshots": [
+    { "src": "shot-wide.jpg", "sizes": "1280x800", "type": "image/jpeg", "form_factor": "wide", "label": "SCODE AI on a laptop, in Bubble mode" },
+    { "src": "shot-phone.jpg", "sizes": "780x1688", "type": "image/jpeg", "form_factor": "narrow", "label": "SCODE AI on a phone" }
+  ]
+}
