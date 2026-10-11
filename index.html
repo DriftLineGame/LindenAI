@@ -267,7 +267,7 @@
   .scan-tint { inset: 0; background: rgba(139,107,255,0.10); }
   .scan-line { left: 0; right: 0; top: 0; height: 3px; background: #8b6bff; box-shadow: 0 0 16px 4px rgba(139,107,255,0.7); }
   .scan-line::before { content: ""; position: absolute; left: 0; right: 0; top: -42px; height: 84px; background: linear-gradient(rgba(139,107,255,0), rgba(139,107,255,0.28), rgba(139,107,255,0)); }
-  .scan-c { width: 22px; height: 22px; border: 3px solid #8fe3b8; transform: scale(1.4); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.2,.8,.2,1.3); }
+  .scan-c { width: 22px; height: 22px; border: 3px solid #c9b8ff; transform: scale(1.4); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.2,.8,.2,1.3); }
   .scan-c.c1 { left: 8px; top: 8px; border-right: none; border-bottom: none; border-radius: 6px 0 0 0; }
   .scan-c.c2 { right: 8px; top: 8px; border-left: none; border-bottom: none; border-radius: 0 6px 0 0; }
   .scan-c.c3 { left: 8px; bottom: 8px; border-right: none; border-top: none; border-radius: 0 0 0 6px; }
@@ -277,7 +277,7 @@
   .img-wrap.scanning .scan-c { opacity: 1; transform: none; }
   @keyframes scanMove { 0% { top: 0; } 50% { top: calc(100% - 3px); } 100% { top: 0; } }
   @keyframes scanTint { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-  .img-wrap.scan-done::after { content: ""; position: absolute; inset: 0; background: rgba(143,227,184,0.35); pointer-events: none; animation: scanDone 0.7s ease forwards; }
+  .img-wrap.scan-done::after { content: ""; position: absolute; inset: 0; background: rgba(201,184,255,0.35); pointer-events: none; animation: scanDone 0.7s ease forwards; }
   @keyframes scanDone { from { opacity: 1; } to { opacity: 0; } }
   @media (prefers-reduced-motion: reduce) {
     .img-wrap.scanning .scan-line { animation: none; top: 50%; }
@@ -373,7 +373,7 @@
   .ig-time { font-variant-numeric: tabular-nums; font-weight: 500; opacity: 0.9; }
   .ig-prog { margin-top: 10px; }
   .ig-bar { height: 6px; border-radius: 6px; background: var(--hover); overflow: hidden; }
-  .ig-bar i { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--accent), #8fd9b2); transition: width 0.25s linear; }
+  .ig-bar i { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--accent), #3fc1ff); transition: width 0.25s linear; }
   .ig-info { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 6px; font-variant-numeric: tabular-nums; }
   .ig-prompt { font-size: 12.5px; color: var(--faint); margin-top: 8px; font-style: italic; line-height: 1.4; }
   .ig-img, .ig-soft { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -680,7 +680,7 @@
   .sp-opt:active:not(:disabled) { transform: translateY(1px); }
   .sp-opt:disabled { cursor: default; }
   .sp-opt.sel { border-color: var(--accent); background: var(--accent-soft); }
-  .sp-opt.right { border-color: #1d9a63; background: rgba(29,154,99,.12); }
+  .sp-opt.right { border-color: #6a46f0; background: rgba(106,70,240,.12); }
   .sp-opt.wrong { border-color: #d64541; background: rgba(214,69,65,.10); }
   .sp-opt .sp-sn { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-bottom: 2px; }
   .sp-entry { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font-family: var(--serif); font-size: 26px; padding: 4px 0; color: var(--text); }
@@ -711,7 +711,7 @@
   .sp-sort { display: flex; flex-direction: column; gap: 8px; }
   .sp-srow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 11px; background: var(--surface-2); }
   .sp-srow > span { flex: 1; min-width: 120px; font-size: 15px; color: var(--text); }
-  .sp-srow.right { border-color: #1d9a63; } .sp-srow.wrong { border-color: #d64541; }
+  .sp-srow.right { border-color: #6a46f0; } .sp-srow.wrong { border-color: #d64541; }
   .sp-seg2 { display: inline-flex; padding: 2px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); flex-wrap: wrap; }
   .sp-seg2 button { border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--muted); padding: 5px 10px; border-radius: 7px; cursor: pointer; }
   .sp-seg2 button.on { background: var(--accent-grad); color: var(--accent-ink); }
@@ -723,7 +723,7 @@
   .sp-hint { background: rgba(242,182,48,.16); border-radius: 10px; padding: 9px 12px; font-size: 14px; color: var(--text); }
   .sp-hint b { color: #a26b00; }
   .sp-fb { border-radius: 11px; padding: 11px 13px; display: flex; flex-direction: column; gap: 5px; font-size: 14.5px; line-height: 1.5; color: var(--text); }
-  .sp-fb.ok { background: rgba(29,154,99,.12); } .sp-fb.ok .ft { color: #1d9a63; }
+  .sp-fb.ok { background: rgba(106,70,240,.12); } .sp-fb.ok .ft { color: #6a46f0; }
   .sp-fb.no { background: rgba(214,69,65,.10); } .sp-fb.no .ft { color: #d64541; }
   .sp-fb.part { background: rgba(242,182,48,.16); } .sp-fb.part .ft { color: #a26b00; }
   .sp-fb .ft { font-weight: 800; font-size: 14.5px; }
@@ -1469,9 +1469,9 @@
   .fy-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
     color: rgba(255,255,255,0.78); }
   .fy-live { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px 2px 7px; border-radius: 999px; background: rgba(255,255,255,0.14); color: #fff; letter-spacing: 0.06em; }
-  .fy-live i { width: 6px; height: 6px; border-radius: 50%; background: #6ef0a8; box-shadow: 0 0 0 0 rgba(110,240,168,0.7); animation: fyPulse 1.8s ease-out infinite; }
+  .fy-live i { width: 6px; height: 6px; border-radius: 50%; background: #3fc1ff; box-shadow: 0 0 0 0 rgba(63,193,255,0.7); animation: fyPulse 1.8s ease-out infinite; }
   .fy-live.tt i { background: #ffd27a; animation: none; }
-  @keyframes fyPulse { 0% { box-shadow: 0 0 0 0 rgba(110,240,168,0.6); } 100% { box-shadow: 0 0 0 7px rgba(110,240,168,0); } }
+  @keyframes fyPulse { 0% { box-shadow: 0 0 0 0 rgba(63,193,255,0.6); } 100% { box-shadow: 0 0 0 7px rgba(63,193,255,0); } }
   .fy-title { display: flex; align-items: center; gap: 8px; margin-top: 7px; padding-right: 86px; font-family: var(--serif); font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; }
   .fy-title .ar { opacity: 0.7; font-family: var(--sans); font-size: 15px; }
   .fy-sub { font-size: 12.5px; color: rgba(255,255,255,0.75); margin-top: 3px; padding-right: 86px; }
@@ -1740,8 +1740,8 @@
   @keyframes scTip { to { opacity: .9; } }
   @keyframes scOrbIn { to { opacity: 1; transform: none; } }
   .sc-orb.sm { width: 100%; height: 118px; margin: 0; }
-  .md.sc-flow { --g1: #d6307f; --g2: #7546ff; --g3: #0a86d0; --g4: #14936a; --g5: #e25a12; }
-  body:not(.light) .md.sc-flow { --g1: #ff7cc4; --g2: #b49dff; --g3: #64d3ff; --g4: #74e0b0; --g5: #ffb07a; }
+  .md.sc-flow { --g1: #d6307f; --g2: #7546ff; --g3: #0a86d0; --g4: #4f5bd5; --g5: #e25a12; }
+  body:not(.light) .md.sc-flow { --g1: #ff7cc4; --g2: #b49dff; --g3: #64d3ff; --g4: #8fa8ff; --g5: #ffb07a; }
   .md.sc-flow { background-image: linear-gradient(100deg,
       color-mix(in oklab, var(--g1), var(--text) var(--scf)), color-mix(in oklab, var(--g2), var(--text) var(--scf)),
       color-mix(in oklab, var(--g3), var(--text) var(--scf)), color-mix(in oklab, var(--g4), var(--text) var(--scf)),
@@ -2081,9 +2081,175 @@
   #sc-splash .sp-w { animation-delay: .45s !important; }
   @keyframes scSpLogo { from { opacity: 0; transform: scale(.45); filter: blur(10px); } }
   @media (prefers-reduced-motion: reduce) { .scmark.live, body.is-empty .greet .scmark { animation: none !important; } }
+
+  /* =========================================================
+     Bubble mode (Settings, Look): the same layout as Classic, but every
+     menu piece is a living Liquid Glass blob drawn on a canvas behind it,
+     models are picked from a row of bubbles, and chats, Recents and
+     Essay Coach are glassy
+     ========================================================= */
+  .look-seg { display: inline-flex; flex-shrink: 0; padding: 3px; gap: 2px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+  .look-seg button { border: 0; background: none; color: var(--muted); font: inherit; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s, box-shadow .2s; }
+  .look-seg button:hover { color: var(--text); }
+  .look-seg button.on { background: var(--accent-grad); color: #fff; box-shadow: 0 4px 14px rgba(139,107,255,.35); }
+  .look-seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .gb-cv { position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none; display: none; }
+  html.look-bubble .gb-cv { display: block; }
+  .bm-row { display: none; }
+
+  /* each area that has blobs keeps them inside its own layer */
+  html.look-bubble #composer, html.look-bubble #welcome, html.look-bubble .suggestions, html.look-bubble #topbar, html.look-bubble #sidebar { isolation: isolate; }
+  html.look-bubble #welcome { position: relative; }
+  html.look-bubble body:not(.is-empty) #topbar { position: relative; }
+  @media (max-width: 720px) { html.look-bubble #topbar { position: relative; } }
+  @media (min-width: 721px) { html.look-bubble #sidebar { position: relative; } }
+
+  /* the canvas draws the glass, so the real pieces go see-through */
+  html.look-bubble #composer, html.look-bubble #composer:focus-within { background: transparent; border-color: transparent; box-shadow: 0 16px 44px rgba(0,0,0,.3); border-radius: 26px; touch-action: none; }
+  html.look-bubble body.light #composer, html.look-bubble body.light #composer:focus-within { box-shadow: 0 14px 40px rgba(80,60,170,.14); }
+  /* the glass can bulge a little past its box, but never makes the page scroll sideways */
+  html.look-bubble #main { overflow-x: clip; }
+  html.look-bubble #sidebar { overflow: clip; }
+  html.look-bubble #prompt-input { touch-action: auto; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #send-btn, .bm, #menu-btn, #top-new-btn, #settings-btn, #theme-toggle, #budget-pill, #signin-btn, #new-chat-btn, #ec-open-side, #ec-open-pill, .suggestions .chip, #about-btn, #news-btn, #report-btn) {
+    background: transparent !important; border-color: transparent !important; box-shadow: none !important; outline: none;
+    touch-action: none; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #send-btn, .bm, #budget-pill, #signin-btn, #ec-open-pill, .suggestions .chip) { border-radius: 999px; }
+  html.look-bubble :is(#menu-btn, #top-new-btn, #settings-btn, #theme-toggle) { border-radius: 50%; color: var(--text); }
+  html.look-bubble :is(#new-chat-btn, #ec-open-side) { border-radius: 16px; }
+  html.look-bubble :is(#about-btn, #news-btn, #report-btn) { border-radius: 12px; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, .suggestions .chip) { color: var(--text); }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn).on { color: #fff; filter: drop-shadow(0 1px 4px rgba(24,8,60,.5)); }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn).on svg { animation: none; }
+  html.look-bubble body.light :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn).on { color: #2a1b55; }
+  html.look-bubble #send-btn { color: #fff; }
+  html.look-bubble body.light #send-btn { color: #2a1b55; }
+  html.look-bubble #send-btn:disabled { opacity: .55; }
+  html.look-bubble #signin-btn { color: #fff; border-width: 0; }
+  html.look-bubble body.light #signin-btn { color: #2a1b55; }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, .bm, #send-btn, #attach-btn) { transition: color .2s, opacity .2s; }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn):hover, html.look-bubble .icon-btn:hover, html.look-bubble .chip:hover { background: transparent !important; }
+
+  /* picking a model: a row of bubbles under the text box (the dropdown goes away) */
+  html.look-bubble #model-picker { display: none !important; }
+  html.look-bubble .bm-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: nowrap; }
+  .bm { position: relative; flex-shrink: 0; height: 32px; padding: 0 13px; border: 0; border-radius: 999px; background: transparent; color: var(--text);
+    font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .bm[hidden] { display: none; }
+  .bm-g { font-weight: 500; opacity: .75; }
+  .bm:not(.sel) { opacity: .86; }
+  .bm-g:empty { display: none; }
+  .bm-c { font-size: 11px; font-weight: 700; opacity: .65; font-variant-numeric: tabular-nums; }
+  .bm-c:empty { display: none; }
+  .bm-ic { display: inline-flex; }
+  .bm-ic:empty { display: none; }
+  .bm-ic svg { width: 12px; height: 12px; }
+  .bm:hover { color: var(--text); }
+  .bm.sel { color: #fff; text-shadow: 0 1px 6px rgba(24,8,60,.55); }
+  body.light .bm.sel { color: #2a1b55; text-shadow: 0 0 8px rgba(255,255,255,.8); }
+  .bm.sel .bm-c { opacity: .95; }
+  .bm.locked .bm-n, .bm.locked .bm-g { opacity: .7; }
+  .bm.low { opacity: .55; }
+  @media (max-width: 720px) {
+    html.look-bubble .bm-row { gap: 5px; margin-top: 9px; }
+    .bm { height: 30px; padding: 0 10px; font-size: 12.5px; }
+    .bm-g { display: none; }
+    .bm:not(.sel) .bm-c { display: none; }
+    html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #attach-btn) { width: 32px; height: 32px; }
+  }
+
+  /* a soft colour wash behind everything, so the glass has something to bend */
+  html.look-bubble #main { isolation: isolate; }
+  html.look-bubble #main::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(42% 36% at 12% 18%, rgba(255,95,176,.08), transparent 70%),
+                radial-gradient(40% 40% at 88% 80%, rgba(63,193,255,.07), transparent 70%),
+                radial-gradient(36% 30% at 62% 10%, rgba(139,107,255,.09), transparent 72%); }
+
+  /* glass chats: every message is a bubble with colour drifting inside it */
+  .gl-fx { display: none; }
+  html.look-bubble .gl-fx { display: block; position: absolute; inset: 0; border-radius: inherit; overflow: hidden; z-index: -1; pointer-events: none; }
+  html.look-bubble .gl-fx b { position: absolute; width: 75%; aspect-ratio: 1; border-radius: 50%; will-change: transform;
+    animation: glDrift 15s ease-in-out infinite alternate; }
+  html.look-bubble .gl-fx b:nth-child(1) { left: -22%; top: -55%; background: radial-gradient(closest-side, rgba(255,95,176,.5), rgba(255,95,176,0)); }
+  html.look-bubble .gl-fx b:nth-child(2) { right: -24%; bottom: -60%; background: radial-gradient(closest-side, rgba(63,193,255,.46), rgba(63,193,255,0)); animation-duration: 18s; animation-delay: -7s; }
+  html.look-bubble .gl-fx b:nth-child(3) { left: -45%; top: 0; bottom: 0; width: 38%; aspect-ratio: auto; border-radius: 0;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.13), transparent); animation: glSheen 11s ease-in-out infinite; }
+  @keyframes glDrift { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(28%, 22%) scale(1.15); } 100% { transform: translate(52%, 6%) scale(.92); } }
+  @keyframes glSheen { 0%, 72% { transform: translateX(0); } 100% { transform: translateX(440%); } }
+  html.look-bubble .gl-idle .gl-fx b { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { html.look-bubble .gl-fx b { animation: none !important; } }
+
+  html.look-bubble .user-bubble { position: relative; isolation: isolate; border-radius: 22px; border: 1px solid rgba(255,255,255,.14);
+    background: linear-gradient(150deg, rgba(169,147,255,.24), rgba(139,107,255,.10)), var(--user-bubble);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 8px 26px rgba(20,10,60,.28);
+    transform-origin: 100% 50%; transition: transform .5s cubic-bezier(.2,1.6,.35,1), box-shadow .3s ease; -webkit-tap-highlight-color: transparent; }
+  html.look-bubble body.light .user-bubble { border-color: rgba(255,255,255,.95);
+    background: linear-gradient(150deg, rgba(169,147,255,.22), rgba(255,255,255,.4)), var(--user-bubble);
+    box-shadow: inset 0 1px 0 #fff, 0 8px 24px rgba(90,60,180,.14); }
+  html.look-bubble .user-bubble.bp-on { transform: scale(1.045);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 0 0 1px rgba(201,184,255,.5), 0 0 30px 4px rgba(169,147,255,.5), 0 10px 30px rgba(20,10,60,.3); }
+
+  html.look-bubble .msg.assistant.glass { position: relative; isolation: isolate; padding: 16px 20px 10px; border-radius: 24px;
+    background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+    border: 1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 40px rgba(0,0,0,.2);
+    transform-origin: 50% 20%; transition: transform .55s cubic-bezier(.2,1.5,.35,1), box-shadow .35s ease; -webkit-tap-highlight-color: transparent; }
+  html.look-bubble .msg.assistant.glass .gl-fx b:nth-child(1), html.look-bubble .msg.assistant.glass .gl-fx b:nth-child(2) { opacity: .34; width: 60%; }
+  html.look-bubble body.light .msg.assistant.glass { background: rgba(255,255,255,.66); border-color: rgba(255,255,255,.95);
+    box-shadow: inset 0 1px 0 #fff, 0 12px 34px rgba(80,60,160,.1); }
+  html.look-bubble .msg.assistant.glass.bp-on { transform: scale(1.012);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 0 0 1px rgba(201,184,255,.34), 0 0 38px 4px rgba(139,107,255,.3), 0 14px 40px rgba(0,0,0,.22); }
+  html.look-bubble body.light .msg.assistant.glass.bp-on { box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(139,107,255,.3), 0 0 34px 4px rgba(139,107,255,.2), 0 12px 34px rgba(80,60,160,.12); }
+  @media (max-width: 720px) { html.look-bubble .msg.assistant.glass { padding: 14px 15px 8px; border-radius: 22px; } }
+
+  /* Recents: glass pills */
+  html.look-bubble .chat-item { border-radius: 14px; transition: transform .45s cubic-bezier(.2,1.6,.35,1), box-shadow .3s ease, background .2s; -webkit-tap-highlight-color: transparent; }
+  html.look-bubble .chat-item.active { background: linear-gradient(110deg, rgba(255,95,176,.14), rgba(139,107,255,.18) 50%, rgba(63,193,255,.13));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.07); }
+  html.look-bubble .chat-item.bp-on { transform: scale(1.035); box-shadow: 0 0 0 1px rgba(201,184,255,.4), 0 0 22px 2px rgba(139,107,255,.35); }
+
+  /* Essay Coach: glass cards that glow and grow when tapped */
+  html.look-bubble #ec-ov .ec-card, html.look-bubble #ec-ov .ec-card0, html.look-bubble #ec-ov .ec-livebox { isolation: isolate; border-radius: 22px;
+    border-color: rgba(255,255,255,.1); background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), var(--surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 10px 30px rgba(0,0,0,.16);
+    transition: transform .5s cubic-bezier(.2,1.6,.35,1), box-shadow .3s ease, border-color .2s; -webkit-tap-highlight-color: transparent; }
+  html.look-bubble #ec-ov .ec-card0, html.look-bubble #ec-ov .ec-livebox { position: relative; }
+  html.look-bubble body.light #ec-ov .ec-card, html.look-bubble body.light #ec-ov .ec-card0, html.look-bubble body.light #ec-ov .ec-livebox {
+    border-color: rgba(255,255,255,.95); background: rgba(255,255,255,.74); box-shadow: inset 0 1px 0 #fff, 0 10px 28px rgba(80,60,160,.1); }
+  html.look-bubble #ec-ov .ec-card .gl-fx b:nth-child(1), html.look-bubble #ec-ov .ec-card .gl-fx b:nth-child(2),
+  html.look-bubble #ec-ov .ec-card0 .gl-fx b:nth-child(1), html.look-bubble #ec-ov .ec-card0 .gl-fx b:nth-child(2) { opacity: .28; }
+  html.look-bubble #ec-ov .ec-card.bp-on { transform: scale(1.03); border-color: color-mix(in srgb, var(--c) 55%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent), 0 0 28px 3px color-mix(in srgb, var(--c) 36%, transparent); }
+  html.look-bubble #ec-ov .ec-card0.bp-on, html.look-bubble #ec-ov .ec-livebox.bp-on { transform: scale(1.015);
+    box-shadow: 0 0 0 1px rgba(201,184,255,.35), 0 0 32px 3px rgba(139,107,255,.3); }
+  @media (min-width: 861px) { html.look-bubble #ec-ov .ec-livebox { border-top-left-radius: 0; border-top-right-radius: 0; } }
+
+  /* While Essay Coach checks, it looks different from a normal chat: the coach's bubble turns
+     ink-coloured, each spot it finds rises in as a round droplet that spreads out into a card,
+     and the cards float gently until the check is done. */
+  html.look-bubble #ec-ov .ec-livebox .gl-fx b:nth-child(1) { background: radial-gradient(closest-side, rgba(214,48,127,.42), rgba(214,48,127,0)); opacity: .9; }
+  html.look-bubble #ec-ov .ec-livebox .gl-fx b:nth-child(2) { background: radial-gradient(closest-side, rgba(117,70,255,.45), rgba(117,70,255,0)); opacity: .9; }
+  html.look-bubble #ec-ov .ec-lv-cards .ec-card.pop { animation: bfDrop .95s cubic-bezier(.2,1.1,.3,1) both, bfBob 3.4s ease-in-out .95s infinite alternate; }
+  html.look-bubble #ec-ov .ec-lv-cards .ec-card.still { animation: bfBob 3.4s ease-in-out infinite alternate; }
+  html.look-bubble #ec-ov .ec-lv-cards .ec-card:nth-child(2n) { animation-delay: 0s, 1.4s; }
+  html.look-bubble #ec-ov .ec-lv-cards .ec-card.still:nth-child(2n) { animation-delay: -1.7s; }
+  html.look-bubble #ec-ov .ec-lv-cards .ec-card.bp-on { animation-play-state: paused; }
+  @keyframes bfDrop {
+    0% { opacity: 0; transform: translateY(30px) scale(.22, .26); border-radius: 50%; filter: blur(5px); }
+    34% { opacity: 1; transform: translateY(-6px) scale(.5, .46); border-radius: 50%; filter: none; }
+    58% { transform: translateY(0) scale(1.05, .95); border-radius: 30px; }
+    78% { transform: scale(.985, 1.015); }
+    100% { opacity: 1; transform: none; border-radius: 22px; }
+  }
+  @keyframes bfBob { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+  html.look-bubble #ec-ov .ec-fl-spot.pop { animation: bfDrop .8s cubic-bezier(.2,1.1,.3,1) both; }
+  @media (prefers-reduced-motion: reduce) {
+    html.look-bubble #ec-ov .ec-lv-cards .ec-card.pop, html.look-bubble #ec-ov .ec-lv-cards .ec-card.still, html.look-bubble #ec-ov .ec-fl-spot.pop { animation: none; }
+  }
 </style>
 </head>
 <body class="is-empty">
+<script>try{if(localStorage.getItem("scode_look")==="bubble")document.documentElement.classList.add("look-bubble")}catch(e){}</script>
 <div id="sc-splash" aria-hidden="true"><div class="sp-logo"><canvas id="sc-splash-c" width="440" height="440"></canvas><span class="scmark sp-fb"></span></div><div class="sp-w">SCODE</div></div>
 
 
@@ -2297,6 +2463,7 @@
               <span class="busy"></span>
             </button>
           </div>
+          <div class="bm-row" id="bm-row" role="radiogroup" aria-label="Choose a model"></div>
         </div>
         <div class="suggestions" id="suggestions">
           <button class="chip" data-prefill="Explain this to me in simple terms: ">
@@ -2325,6 +2492,16 @@
       <button class="icon-btn" id="settings-close" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
+    </div>
+    <div class="set-section">
+      <div class="set-section-title">Look</div>
+      <div class="set-row">
+        <div>
+          <div class="set-row-title">Appearance</div>
+          <div class="modal-sub">Bubble makes the text box, every button and your model choice into living Liquid Glass you can squish and pull, with glassy chats. Classic is the usual look.</div>
+        </div>
+        <div class="look-seg" id="look-seg" role="radiogroup" aria-label="Appearance"><button type="button" role="radio" data-look="classic">Classic</button><button type="button" role="radio" data-look="bubble">Bubble</button></div>
+      </div>
     </div>
     <div class="set-section">
       <div class="set-section-title">Chat history</div>
@@ -7072,6 +7249,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-bubble", type: "feature", date: "2026-10-10", title: "Bubble mode: a whole new look",
+      text: "Turn on Bubble mode and the whole menu becomes living Liquid Glass. The text box, every button and your model choice are glassy blobs that squish when you tap them, stretch when you pull them, and wobble back into place. Turning a mode on or picking a model makes it grow and glow, and nudges its neighbours. Chats and Essay Coach go glassy too. Classic is still there if you like it better.",
+      how: ["Open Settings (the sliders at the top) and pick Bubble under Look.", "Pick a model from the row of bubbles under the text box.", "Grab a button and pull it, then let go."] },
     { id: "f-essay", type: "feature", date: "2026-10-09", title: "Essay Coach",
       text: "Paste your essay, say what you want help with, and Essay Coach highlights the exact spots to fix, explains how, and points out habits across your whole piece, like comma splices or repeated words. It never rewrites your work: you do the fixing, and the highlights clear as you go. Writing for French class? Switch to Français and it flags English words, gives you the French word to use, and checks your grammar (beta).",
       how: ["Sign in, then tap Essay Coach in the menu (or under the greeting).", "Paste your writing and pick what you want help with, like Be more precise.", "Tap a highlight or a card to see what's wrong and how to fix it. Ask about this explains the rule.", "Fix things right in the text, then tap Check again to see your progress."] },
@@ -7789,6 +7969,7 @@
     let drag = null, hover = null, acc = 0, lastT = 0, A0 = 1, tipShown = false;
     const t0 = performance.now();
     const seed = Math.random() * 10;
+    const HUE = o.ink ? (x) => orbHue(0.12 + 0.36 * (0.5 + 0.5 * Math.sin(x * Math.PI * 2))) : orbHue;
     let tip = null;
     if (o.tip && !reduceMotion) {
       let n = 0;
@@ -7910,7 +8091,7 @@
       const path = new Path2D();
       path.moveTo((X[N - 1] + X[0]) / 2, (Y[N - 1] + Y[0]) / 2);
       for (let i = 0; i < N; i++) { const j = (i + 1) % N; path.quadraticCurveTo(X[i], Y[i], (X[i] + X[j]) / 2, (Y[i] + Y[j]) / 2); }
-      const hue = orbHue(t * 0.035 + seed);
+      const hue = HUE(t * 0.035 + seed);
       // 1. soft coloured glow around the bubble
       ctx.save();
       ctx.shadowColor = `hsla(${hue}, 92%, ${light ? 64 : 60}%, ${light ? 0.45 : 0.62})`;
@@ -7934,7 +8115,7 @@
         const x = cx + Math.cos(ang) * bw * (0.5 + 0.12 * Math.sin(t * 0.7 + b));
         const y = cy + Math.sin(ang) * bh * (0.48 + 0.12 * Math.cos(t * 0.6 + b));
         const r = br * (0.58 + 0.1 * Math.sin(t * 0.9 + ph));
-        const h = orbHue(t * 0.03 + b / 6 + seed);
+        const h = HUE(t * 0.03 + b / 6 + seed);
         const g = ctx.createRadialGradient(x, y, 0, x, y, r);
         g.addColorStop(0, `hsla(${h}, 98%, ${light ? 62 : 60}%, ${light ? 0.86 : 0.9})`);
         g.addColorStop(0.5, `hsla(${h}, 98%, ${light ? 66 : 54}%, ${light ? 0.4 : 0.38})`);
@@ -7947,7 +8128,7 @@
       let rim;
       if (ctx.createConicGradient) {
         rim = ctx.createConicGradient(t * 0.5 + seed, cx, cy);
-        for (let k = 0; k <= 6; k++) rim.addColorStop(k / 6, `hsla(${orbHue(k / 6 + t * 0.03)}, 100%, ${light ? 64 : 70}%, 1)`);
+        for (let k = 0; k <= 6; k++) rim.addColorStop(k / 6, `hsla(${HUE(k / 6 + t * 0.03)}, 100%, ${light ? 64 : 70}%, 1)`);
       } else rim = `hsla(${hue}, 95%, 68%, 1)`;
       ctx.strokeStyle = rim;
       for (let k = 0; k < 9; k++) { const u = k / 8; ctx.globalAlpha = 0.045 + 0.09 * u * u; ctx.lineWidth = R * (0.5 - 0.46 * Math.pow(u, 0.8)); ctx.stroke(path); }
@@ -8554,7 +8735,7 @@
         <div class="ec-lv-later">Your scores, habits and overall notes show up when the check is done.</div>`;
       box = right.querySelector(".ec-livebox");
       if (EC._orbUI) EC._orbUI.stop();
-      EC._orbUI = makeOrb({ small: true });
+      EC._orbUI = makeOrb({ small: true, ink: lookBubble() });
       box.querySelector(".ec-lv-orb").appendChild(EC._orbUI.el);
       const cards = right.querySelector(".ec-lv-cards");
       EC.hl.forEach((h, i) => cards.insertAdjacentHTML("beforeend", ecCardHTML(h, i, "still")));
@@ -9410,6 +9591,693 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTools);
     fitTools();
   })();
+
+  // =====================================================================
+  //  SCODE Bubble mode: every menu piece is a living Liquid Glass blob.
+  //  The real buttons and the text box stay exactly where they are; a
+  //  canvas behind each area draws a soft glass body for each of them.
+  //  Each body is a ring of springs around a rounded rectangle (round for
+  //  buttons, rounded-square for the text box) that keeps its volume, so a
+  //  tap dents it, a pull stretches it like goo, letting go makes it wobble
+  //  back, and when one grows (turned on, or the picked model) it bumps
+  //  the ones beside it out of the way for a moment.
+  // =====================================================================
+  const GB = { layers: [], raf: 0, on: false, last: 0, acc: 0, t0: performance.now(), drag: null, quiet: 0, skip: 0, noClick: null };
+  const GB_LX = -0.55, GB_LY = -0.835, GB_TAU = Math.PI * 2;
+  function gbLayer(host, pad) {
+    const cv = document.createElement("canvas");
+    cv.className = "gb-cv";
+    cv.setAttribute("aria-hidden", "true");
+    host.insertBefore(cv, host.firstChild);
+    const L = { host, cv, ctx: cv.getContext("2d"), pad, blobs: [], W: 0, H: 0, dpr: 1, rx: 0, ry: 0 };
+    GB.layers.push(L);
+    return L;
+  }
+  // cfg: kind "panel" (the text box) or "bubble"; group: blobs in the same row bump each other;
+  // h0: colour; move: the real element moves and grows with its blob; state(el): { on, sel, dim }
+  function gbAdd(L, el, cfg) {
+    if (!el || el._gb) return null;
+    const b = Object.assign({
+      el, L, kind: "bubble", group: "", h0: 0.42, hs: 0.09, move: true, drag: true, state: null,
+      x: 0, y: 0, w: 0, h: 0, r: 0, N: 0, vis: false, seen: false,
+      ox: 0, oy: 0, ovx: 0, ovy: 0, tox: 0, toy: 0, sc: 1, scv: 0, a: 0, av: 0,
+      glow: 0, pulse: 0, on: false, sel: false, dim: false, press: false, hover: false, focus: false,
+      tx: 0, ty: 0, ts: 1, seed: Math.random() * 10, rad: -1,
+    }, cfg);
+    el._gb = b;
+    el.dataset.gb = "1";
+    L.blobs.push(b);
+    if (b.kind === "panel") L.blobs.sort((p, q) => (q.kind === "panel") - (p.kind === "panel"));
+    el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") { b.hover = true; gbWake(); } });
+    el.addEventListener("pointerleave", () => { b.hover = false; gbWake(); });
+    el.addEventListener("focusin", () => { b.focus = true; gbWake(); });
+    el.addEventListener("focusout", () => { b.focus = false; gbWake(); });
+    return b;
+  }
+  // the outline: points spaced evenly around a rounded rectangle, each with its outward direction
+  function gbShape(b, w, h, r) {
+    r = Math.max(4, Math.min(r, w / 2, h / 2));
+    const ex = Math.max(0, w / 2 - r), ey = Math.max(0, h / 2 - r), arc = Math.PI * r / 2;
+    const segs = [["l", ex, 0, -h / 2, 1, 0, 0, -1], ["a", arc, ex, -ey, -Math.PI / 2], ["l", 2 * ey, w / 2, -ey, 0, 1, 1, 0],
+                  ["a", arc, ex, ey, 0], ["l", 2 * ex, ex, h / 2, -1, 0, 0, 1], ["a", arc, -ex, ey, Math.PI / 2],
+                  ["l", 2 * ey, -w / 2, ey, 0, -1, -1, 0], ["a", arc, -ex, -ey, Math.PI], ["l", ex, -ex, -h / 2, 1, 0, 0, -1]];
+    const P = segs.reduce((s, g) => s + g[1], 0);
+    const N = w * h > 30000 ? Math.max(48, Math.min(110, Math.round(P / 13))) : Math.max(28, Math.min(80, Math.round(P / 6.5)));
+    const px = new Float32Array(N), py = new Float32Array(N), nx = new Float32Array(N), ny = new Float32Array(N), sa = new Float32Array(N);
+    for (let k = 0; k < N; k++) {
+      let s = (k + 0.5) / N * P;
+      sa[k] = s;
+      for (const g of segs) {
+        if (s > g[1] && g !== segs[segs.length - 1]) { s -= g[1]; continue; }
+        if (g[0] === "l") { px[k] = g[2] + g[4] * s; py[k] = g[3] + g[5] * s; nx[k] = g[6]; ny[k] = g[7]; }
+        else { const a = g[4] + (g[1] > 0 ? s / r : 0); px[k] = g[2] + Math.cos(a) * r; py[k] = g[3] + Math.sin(a) * r; nx[k] = Math.cos(a); ny[k] = Math.sin(a); }
+        break;
+      }
+    }
+    const keep = b.N === N;
+    Object.assign(b, { w, h, r, N, P, px, py, nx, ny, sa });
+    if (!keep) { b.d = new Float32Array(N); b.dv = new Float32Array(N); b.ex = new Float32Array(N); b.rest = new Float32Array(N); b.X = new Float32Array(N); b.Y = new Float32Array(N); }
+    let best = 0, bv = -2, worst = 0, wv = 2;
+    for (let k = 0; k < N; k++) { const d = nx[k] * GB_LX + ny[k] * GB_LY; if (d > bv) { bv = d; best = k; } if (d < wv) { wv = d; worst = k; } }
+    b.lk = best; b.dk = worst;
+  }
+  function gbArcDist(b, s1, s2) { const d = Math.abs(s1 - s2); return Math.min(d, b.P - d); }
+  function gbNearest(b, lx, ly) {
+    let bi = 0, bd = 1e9;
+    for (let k = 0; k < b.N; k++) { const d = (b.px[k] - lx) ** 2 + (b.py[k] - ly) ** 2; if (d < bd) { bd = d; bi = k; } }
+    return bi;
+  }
+  // a dent where it was touched, and the whole thing rings
+  function gbPoke(b, lx, ly, amt) {
+    if (!b.N) return;
+    const k0 = gbNearest(b, lx, ly), sig = Math.max(14, Math.min(b.P * 0.12, 70));
+    const A = Math.min(b.w, b.h) * (b.kind === "panel" ? 1.0 : 3.6) * (amt || 1);
+    for (let k = 0; k < b.N; k++) { const ds = gbArcDist(b, b.sa[k], b.sa[k0]); b.dv[k] -= A * Math.exp(-ds * ds / (2 * sig * sig)); }
+    gbWake();
+  }
+  function gbRing(b, amt) {
+    if (!b.N) return;
+    const A = Math.min(b.w, b.h) * 2.6 * amt;
+    for (let k = 0; k < b.N; k++) b.dv[k] += A * (0.75 + 0.5 * Math.sin(k * 0.7 + b.seed));
+    gbWake();
+  }
+
+  // ---------- layout: read where each real element is ----------
+  function gbMeasure(L) {
+    const hr = L.host.getBoundingClientRect();
+    const w = Math.max(1, Math.round(hr.width + L.pad * 2)), h = Math.max(1, Math.round(hr.height + L.pad * 2));
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (w !== L.W || h !== L.H || dpr !== L.dpr) {
+      L.W = w; L.H = h; L.dpr = dpr;
+      L.cv.width = Math.round(w * dpr); L.cv.height = Math.round(h * dpr);
+      L.cv.style.width = w + "px"; L.cv.style.height = h + "px";
+      L.cv.style.left = -L.pad + "px"; L.cv.style.top = -L.pad + "px";
+    }
+    L.rx = hr.left - L.pad; L.ry = hr.top - L.pad;
+    L.live = hr.width > 0 && hr.height > 0;
+    for (const b of L.blobs) {
+      const el = b.el;
+      const r = el.isConnected ? el.getBoundingClientRect() : null;
+      const vis = !!(r && r.width > 1 && r.height > 1 && L.live);
+      if (vis) {
+        const ts = b.ts || 1;
+        const w2 = r.width / ts, h2 = r.height / ts;
+        b.x = r.left + r.width / 2 - b.tx - L.rx;
+        b.y = r.top + r.height / 2 - b.ty - L.ry;
+        if (Math.abs(w2 - b.w) > 0.6 || Math.abs(h2 - b.h) > 0.6 || b.rad < 0) {
+          const cs = getComputedStyle(el), raw = cs.borderTopLeftRadius || "0";
+          let rad = parseFloat(raw) || 0;
+          if (raw.indexOf("%") > 0) rad = Math.min(w2, h2) * rad / 100;
+          b.rad = rad;
+          gbShape(b, w2, h2, rad);
+        }
+        if (!b.seen) { b.seen = true; b.a = 0; b.av = 0; }
+      }
+      b.vis = vis;
+      if (b.state) {
+        const s = b.state(el) || {};
+        const was = b.on || b.sel;
+        b.on = !!s.on; b.sel = !!s.sel; b.dim = !!s.dim;
+        if (!was && (b.on || b.sel) && b.seen && b.a > 0.5) { b.pulse = 0.6; gbRing(b, 1); }
+      }
+    }
+  }
+
+  // ---------- physics ----------
+  function gbStep(L, dt) {
+    for (const b of L.blobs) {
+      if (!b.N) continue;
+      const big = b.kind === "panel";
+      let st = 1;
+      if (b.press) st = big ? 0.992 : 0.9;
+      else if (b.sel) st = 1.14;
+      else if (b.on) st = 1.06;
+      if (b.hover && !b.press && !big) st *= 1.05;
+      b.scv += (230 * (st - b.sc) - 17 * b.scv) * dt; b.sc += b.scv * dt;
+      const at = b.vis ? 1 : 0;
+      b.av += (170 * (at - b.a) - 15 * b.av) * dt; b.a += b.av * dt;
+      if (b.a < 0) { b.a = 0; b.av = 0; }
+      const gt = b.sel ? 1 : b.on ? 0.75 : (b.hover || b.focus) ? 0.3 : 0;
+      b.glow += (gt - b.glow) * Math.min(1, dt * 6);
+      b.pulse = Math.max(0, b.pulse - dt);
+      b.fx = 0; b.fy = 0;
+    }
+    // bumps between neighbours in the same row
+    const groups = {};
+    for (const b of L.blobs) if (b.group && b.N && b.a > 0.05) (groups[b.group] = groups[b.group] || []).push(b);
+    for (const g in groups) {
+      const list = groups[g].sort((p, q) => p.x - q.x);
+      for (let i = 0; i + 1 < list.length; i++) {
+        const A = list[i], B = list[i + 1];
+        if (Math.abs(A.y - B.y) > Math.min(A.h, B.h) * 0.6) continue;
+        const sa = A.sc * A.a, sb = B.sc * B.a;
+        const right = A.x + A.ox + A.w / 2 * sa, left = B.x + B.ox - B.w / 2 * sb;
+        const ov = right - left + 2;
+        if (ov <= 0) continue;
+        const F = 900 * ov, wa = (B.sc > A.sc + 0.02) ? 0.75 : (A.sc > B.sc + 0.02 ? 0.25 : 0.5);
+        A.fx -= F * wa; B.fx += F * (1 - wa);
+        const mid = (right + left) / 2;
+        gbFlat(A, 1, (mid - (A.x + A.ox)) / Math.max(0.05, sa));
+        gbFlat(B, -1, ((B.x + B.ox) - mid) / Math.max(0.05, sb));
+      }
+    }
+    for (const b of L.blobs) {
+      if (!b.N) continue;
+      const big = b.kind === "panel";
+      // the body follows its spot (or the finger, a little, while pulled)
+      const ko = big ? 260 : 190, co = big ? 22 : 15;
+      const ax = ko * (b.tox - b.ox) - co * b.ovx + b.fx, ay = ko * (b.toy - b.oy) - co * b.ovy + b.fy;
+      b.ovx += ax * dt; b.ovy += ay * dt;
+      b.ox += b.ovx * dt; b.oy += b.ovy * dt;
+      const lim = Math.min(b.w, b.h) * 0.9 + 6;
+      b.ox = Math.max(-lim, Math.min(lim, b.ox)); b.oy = Math.max(-lim, Math.min(lim, b.oy));
+      // the outline: springs back to its shape, smooths itself, keeps its volume, and lags when the body moves
+      const N = b.N, d = b.d, v = b.dv, e = b.ex, rest = b.rest;
+      let mean = 0;
+      for (let k = 0; k < N; k++) mean += d[k] - rest[k];
+      mean /= N;
+      const kr = big ? 150 : 240, kn = big ? 2600 : 1150, kp = big ? 120 : 380, dmp = big ? 9 : 7;
+      const inert = big ? 0.012 : 0.02;
+      for (let k = 0; k < N; k++) {
+        const lap = d[(k + N - 1) % N] + d[(k + 1) % N] - 2 * d[k];
+        const f = -kr * (d[k] - rest[k]) + kn * lap - kp * mean + e[k] - (ax * b.nx[k] + ay * b.ny[k]) * inert - dmp * v[k];
+        v[k] += f * dt;
+      }
+      const m = Math.min(b.w, b.h), lo = -0.42 * m, hi = (big ? 0.7 : 0.9) * m;
+      for (let k = 0; k < N; k++) {
+        d[k] += v[k] * dt;
+        if (d[k] < lo) { d[k] = lo; if (v[k] < 0) v[k] = 0; } else if (d[k] > hi) { d[k] = hi; if (v[k] > 0) v[k] = 0; }
+        e[k] = 0;
+      }
+    }
+  }
+  // flatten the side facing a neighbour (dir = +1: the right side, -1: the left side)
+  function gbFlat(b, dir, lim) {
+    for (let k = 0; k < b.N; k++) {
+      const nx = b.nx[k] * dir;
+      if (nx < 0.2) continue;
+      const reach = b.px[k] * dir + b.d[k] * nx;
+      if (reach > lim) b.ex[k] -= 1600 * (reach - lim) * nx;
+    }
+  }
+
+  // ---------- drawing ----------
+  // Everything is drawn around the blob's own centre, so the gradients can be made once and reused.
+  function gbPath(b, t) {
+    const N = b.N, s = b.sc * b.a, X = b.X, Y = b.Y;
+    const rip = (typeof reduceMotion !== "undefined" && reduceMotion) ? 0 : 1, m = Math.min(b.w, b.h);
+    const amp = rip * Math.min(m * (b.kind === "panel" ? 0.012 : 0.03), 2.2);
+    for (let k = 0; k < N; k++) {
+      const u = b.sa[k] / b.P * GB_TAU;
+      const dd = b.d[k] + amp * (Math.sin(2 * u + t * 0.8 + b.seed) * 0.8 + Math.sin(5 * u - t * 1.2 + b.seed * 1.3) * 0.45);
+      X[k] = (b.px[k] + b.nx[k] * dd) * s;
+      Y[k] = (b.py[k] + b.ny[k] * dd) * s;
+    }
+    const p = new Path2D();
+    p.moveTo((X[N - 1] + X[0]) / 2, (Y[N - 1] + Y[0]) / 2);
+    for (let k = 0; k < N; k++) { const j = (k + 1) % N; p.quadraticCurveTo(X[k], Y[k], (X[k] + X[j]) / 2, (Y[k] + Y[j]) / 2); }
+    return p;
+  }
+  function gbG(b, key, make) {
+    let c = b.gc;
+    if (!c || b.gn > 48) { c = b.gc = {}; b.gn = 0; }
+    let g = c[key];
+    if (!g) { g = c[key] = make(); b.gn++; }
+    return g;
+  }
+  function gbSoft(L) {   // one soft white spot, reused for every glint
+    if (!L.soft) {
+      const g = L.ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+      g.addColorStop(0, "rgba(255,255,255,1)"); g.addColorStop(0.45, "rgba(255,255,255,0.35)"); g.addColorStop(1, "rgba(255,255,255,0)");
+      L.soft = g;
+    }
+    return L.soft;
+  }
+  function gbGlint(ctx, L, b, k, inset, len, thick, alpha) {
+    const N = b.N, j = (k + 1) % N, i0 = (k + N - 1) % N;
+    let nx = b.Y[j] - b.Y[i0], ny = -(b.X[j] - b.X[i0]);
+    const nl = Math.hypot(nx, ny) || 1; nx /= nl; ny /= nl;
+    if (nx * b.nx[k] + ny * b.ny[k] < 0) { nx = -nx; ny = -ny; }
+    const m = Math.min(b.w, b.h) * b.sc * b.a, R = Math.min(m * len, 150);
+    ctx.save();
+    ctx.translate(b.X[k] - nx * m * inset, b.Y[k] - ny * m * inset);
+    ctx.rotate(Math.atan2(nx, -ny)); ctx.scale(R, R * thick);
+    ctx.globalAlpha *= alpha;
+    ctx.fillStyle = gbSoft(L);
+    ctx.beginPath(); ctx.arc(0, 0, 1, 0, GB_TAU); ctx.fill();
+    ctx.restore();
+  }
+  function gbDraw(L, t) {
+    const ctx = L.ctx, light = document.body.classList.contains("light"), still = typeof reduceMotion !== "undefined" && reduceMotion;
+    const LT = light ? 1 : 0;
+    ctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
+    ctx.clearRect(0, 0, L.W, L.H);
+    for (const b of L.blobs) {
+      if (!b.N || b.a < 0.03) continue;
+      const big = b.kind === "panel", lit = b.on || b.sel;
+      const path = gbPath(b, t);
+      const m = Math.min(b.w, b.h) * b.sc * b.a, cx = b.x + b.ox, cy = b.y + b.oy;
+      const hw = b.w / 2 * b.sc * b.a, hh = b.h / 2 * b.sc * b.a, br = Math.max(hw, hh);
+      const hue = Math.round(orbHue(b.h0 + 0.03 * Math.sin(t * 0.3 + b.seed)) / 4) * 4;
+      const alpha = Math.min(1, b.a * 1.4) * (b.dim ? 0.45 : 1);
+      const key = Math.round(hw) + "|" + Math.round(hh) + "|" + LT + (lit ? 1 : 0);
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.globalAlpha = alpha;
+      // 1. a coloured glow behind it when it's on, picked, hovered or just tapped
+      const gAmt = big ? 0 : Math.min(1, (light ? 0.55 : 0.8) * b.glow + b.pulse * 0.9 + (lit ? 0.2 : 0));
+      if (gAmt > 0.01) {
+        const g = gbG(b, "g" + hue + LT, () => {
+          const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+          g.addColorStop(0, `hsla(${hue}, 95%, ${light ? 64 : 60}%, 1)`); g.addColorStop(0.5, `hsla(${hue}, 95%, 60%, 0.4)`); g.addColorStop(1, `hsla(${hue}, 95%, 60%, 0)`);
+          return g;
+        });
+        ctx.save();
+        ctx.globalAlpha = alpha * gAmt * (light ? 0.5 : 0.62);
+        ctx.globalCompositeOperation = light ? "source-over" : "screen";
+        ctx.scale(hw + m * 0.85, hh + m * 0.85);
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 1, 0, GB_TAU); ctx.fill();
+        ctx.restore();
+      }
+      if (light && !big) {   // a soft shadow under it on the light background
+        ctx.save();
+        ctx.globalAlpha = alpha * 0.5;
+        ctx.translate(0, hh * 0.45); ctx.scale(hw * 1.05, hh * 0.9);
+        ctx.fillStyle = gbG(b, "sh", () => { const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1); g.addColorStop(0, "rgba(70,40,140,0.28)"); g.addColorStop(1, "rgba(70,40,140,0)"); return g; });
+        ctx.beginPath(); ctx.arc(0, 0, 1, 0, GB_TAU); ctx.fill();
+        ctx.restore();
+      }
+      // 2. the glass body
+      ctx.fillStyle = gbG(b, "b" + key, () => {
+        let g;
+        if (big) { g = ctx.createLinearGradient(0, -hh, 0, hh); g.addColorStop(0, light ? "rgba(255,255,255,0.97)" : "rgba(40,36,68,0.96)"); g.addColorStop(1, light ? "rgba(245,242,255,0.97)" : "rgba(19,18,34,0.97)"); }
+        else if (lit) { g = ctx.createRadialGradient(-hw * 0.25, -hh * 0.45, 0, 0, 0, br * 1.15); g.addColorStop(0, light ? "hsl(232, 100%, 97%)" : "hsl(238, 48%, 21%)"); g.addColorStop(1, light ? "hsl(258, 85%, 90%)" : "hsl(250, 60%, 7%)"); }
+        else { g = ctx.createLinearGradient(0, -hh, 0, hh); g.addColorStop(0, light ? "rgba(255,255,255,0.94)" : "rgba(58,54,92,0.66)"); g.addColorStop(1, light ? "rgba(244,240,255,0.88)" : "rgba(28,26,48,0.7)"); }
+        return g;
+      });
+      ctx.fill(path);
+      ctx.save();
+      ctx.clip(path);
+      // drifting colour: rich when it's on or picked, a faint wash otherwise
+      ctx.globalCompositeOperation = light ? "source-over" : "screen";
+      const nb = big || lit ? 3 : 2;
+      const a0 = big ? (light ? 0.1 : 0.16) : lit ? (light ? 0.8 : 0.78) : (light ? 0.18 : 0.2);
+      for (let k = 0; k < nb; k++) {
+        const ang = b.seed + k * 2.094 + (still ? 0 : t * (0.3 + k * 0.05) + 0.5 * Math.sin(t * 0.4 + k));
+        const x = Math.cos(ang) * hw * 0.55, y = Math.sin(ang) * hh * 0.5;
+        const r = big ? br * 0.55 : Math.min(br * 0.85, hh * 1.5);
+        const h = Math.round(orbHue(b.h0 + (k - 1) * (big ? 0.18 : b.hs) + 0.02 * Math.sin(t * 0.5 + k)) / 4) * 4;
+        const g = gbG(b, "c" + h + LT, () => {
+          const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+          g.addColorStop(0, `hsla(${h}, 98%, ${light ? 63 : 60}%, 1)`); g.addColorStop(0.55, `hsla(${h}, 98%, ${light ? 68 : 52}%, 0.4)`); g.addColorStop(1, `hsla(${h}, 95%, 60%, 0)`);
+          return g;
+        });
+        ctx.save();
+        ctx.globalAlpha = alpha * a0;
+        ctx.translate(x, y); ctx.scale(r, r);
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 1, 0, GB_TAU); ctx.fill();
+        ctx.restore();
+      }
+      // coloured glass rim: light bending at the edge
+      const aq = Math.round(((still ? 0 : t * 0.4) + b.seed) * 10) / 10;
+      const rs = ctx.createConicGradient ? gbG(b, "r" + aq + LT, () => {
+        const g = ctx.createConicGradient(aq, 0, 0);
+        for (let k = 0; k <= 4; k++) g.addColorStop(k / 4, `hsla(${orbHue(b.h0 + (k % 4 - 1.5) * 0.12)}, 100%, ${light ? 62 : 70}%, 1)`);
+        return g;
+      }) : `hsla(${hue}, 95%, 68%, 1)`;
+      ctx.strokeStyle = rs;
+      const RW = big ? [24, 9, 3] : [0.4, 0.18, 0.07].map(v => v * m);
+      const RA = big ? [0.05, 0.09, 0.17] : lit ? [0.08, 0.12, 0.22] : [0.07, 0.1, 0.17];
+      for (let k = 0; k < 3; k++) { ctx.globalAlpha = alpha * RA[k] * (light ? 1.3 : 1) * (b.focus && big ? 1.8 : 1); ctx.lineWidth = RW[k]; ctx.stroke(path); }
+      ctx.globalAlpha = alpha;
+      ctx.globalCompositeOperation = "source-over";
+      // lens lift near the top
+      ctx.fillStyle = gbG(b, "l" + key, () => {
+        const g = ctx.createRadialGradient(-hw * 0.15, -hh * 0.6, 0, -hw * 0.15, -hh * 0.6, br * (big ? 0.7 : 1));
+        g.addColorStop(0, light ? "rgba(255,255,255,0.32)" : "rgba(255,255,255,0.09)"); g.addColorStop(1, "rgba(255,255,255,0)");
+        return g;
+      });
+      ctx.fill(path);
+      // shine along the top-left edge, and a softer one bottom-right
+      ctx.globalCompositeOperation = light ? "source-over" : "screen";
+      gbGlint(ctx, L, b, b.lk, big ? 0.04 : 0.13, big ? 1.6 : 0.75, big ? 0.06 : 0.16, light ? 0.9 : (big ? 0.5 : 0.72));
+      gbGlint(ctx, L, b, b.dk, big ? 0.03 : 0.1, big ? 1.1 : 0.45, big ? 0.06 : 0.14, light ? 0.45 : 0.26);
+      ctx.restore();
+      // the crisp glass edge
+      if (light) { ctx.strokeStyle = "rgba(60,40,110,0.12)"; ctx.lineWidth = 1; ctx.stroke(path); }
+      ctx.strokeStyle = gbG(b, "e" + key, () => {
+        const yk = big ? 0.4 : 1;
+        const g = ctx.createLinearGradient(GB_LX * br, GB_LY * br * yk, -GB_LX * br, -GB_LY * br * yk);
+        g.addColorStop(0, `rgba(255,255,255,${light ? 1 : 0.85})`); g.addColorStop(0.4, "rgba(255,255,255,0.18)");
+        g.addColorStop(0.75, "rgba(255,255,255,0.12)"); g.addColorStop(1, `rgba(255,255,255,${light ? 0.7 : 0.4})`);
+        return g;
+      });
+      ctx.lineWidth = big ? 1.3 : Math.max(1, m * 0.03); ctx.stroke(path);
+      // turned on / picked / focused: a coloured ring that hugs the outline
+      const ring = Math.min(1, b.glow * 0.8 + b.pulse + (big && b.focus ? 0.55 : 0));
+      if (ring > 0.02) {
+        ctx.globalCompositeOperation = light ? "source-over" : "screen";
+        ctx.globalAlpha = alpha * ring;
+        ctx.strokeStyle = rs;
+        ctx.lineWidth = big ? 2 : Math.max(1.5, m * 0.07);
+        ctx.stroke(path);
+      }
+      ctx.restore();
+    }
+  }
+
+  // ---------- the loop ----------
+  function gbWake() { GB.quiet = 0; if (GB.on && !GB.raf) GB.raf = requestAnimationFrame(gbFrame); }
+  function gbFrame(now) {
+    GB.raf = 0;
+    if (!GB.on) return;
+    if (document.hidden) { GB.last = now; GB.raf = requestAnimationFrame(gbFrame); return; }
+    const t = (now - GB.t0) / 1000;
+    const dt = Math.min(0.05, Math.max(0, (now - (GB.last || now)) / 1000));
+    GB.last = now;
+    GB.acc += dt;
+    let n = 0, energy = 0;
+    const P0 = performance.now();
+    for (const L of GB.layers) gbMeasure(L);
+    const P1 = performance.now();
+    while (GB.acc >= 1 / 120 && n < 10) { for (const L of GB.layers) if (L.live) gbStep(L, 1 / 120); GB.acc -= 1 / 120; n++; }
+    if (n === 10) GB.acc = 0;
+    const P2 = performance.now();
+    for (const L of GB.layers) for (const b of L.blobs) {
+      if (!b.N) continue;
+      energy += Math.abs(b.ovx) + Math.abs(b.ovy) + Math.abs(b.scv) * 40 + Math.abs(b.av) * 40 + b.pulse * 40 + Math.abs(b.a - (b.vis ? 1 : 0)) * 40;
+      for (let k = 0; k < b.N; k += 3) energy += Math.abs(b.dv[k]);
+    }
+    const busy = energy > 6 || GB.drag;
+    GB.quiet = busy ? 0 : GB.quiet + 1;
+    const still = typeof reduceMotion !== "undefined" && reduceMotion;
+    // when nothing's moving, the gentle ripple only needs about 20 frames a second (and none with reduced motion)
+    if (busy || (!still && (GB.skip = (GB.skip + 1) % 3) === 0) || GB.quiet < 3) {
+      for (const L of GB.layers) {
+        if (L.live) { gbDraw(L, t); L.drawn = true; }
+        else if (L.drawn) { L.ctx.setTransform(1, 0, 0, 1, 0, 0); L.ctx.clearRect(0, 0, L.cv.width, L.cv.height); L.drawn = false; }
+      }
+      for (const L of GB.layers) for (const b of L.blobs) gbApply(b);
+    }
+    const P3 = performance.now();
+    if (window.__gbProf) { const q = window.__gbProf; q.n++; q.measure += P1 - P0; q.step += P2 - P1; q.draw += P3 - P2; }
+    if (still && GB.quiet > 30) return;   // fully settled: sleep until something happens
+    GB.raf = requestAnimationFrame(gbFrame);
+  }
+  // the real button moves and grows with its blob
+  function gbApply(b) {
+    if (!b.move) return;
+    const s = b.vis ? b.sc * Math.max(0.01, Math.min(1.2, b.a)) : 1;
+    const tx = b.vis ? b.ox : 0, ty = b.vis ? b.oy : 0;
+    if (Math.abs(tx - b.tx) < 0.05 && Math.abs(ty - b.ty) < 0.05 && Math.abs(s - b.ts) < 0.001) return;
+    b.tx = tx; b.ty = ty; b.ts = s;
+    b.el.style.transform = (Math.abs(tx) < 0.05 && Math.abs(ty) < 0.05 && Math.abs(s - 1) < 0.001) ? "" : `translate(${tx.toFixed(2)}px, ${ty.toFixed(2)}px) scale(${s.toFixed(4)})`;
+  }
+  function gbStart() { if (GB.on) return; GB.on = true; GB.last = 0; for (const L of GB.layers) L.cv.style.display = ""; gbWake(); }
+  function gbStop() {
+    GB.on = false;
+    if (GB.raf) cancelAnimationFrame(GB.raf);
+    GB.raf = 0; GB.drag = null;
+    for (const L of GB.layers) {
+      L.ctx.setTransform(1, 0, 0, 1, 0, 0); L.ctx.clearRect(0, 0, L.cv.width, L.cv.height);
+      for (const b of L.blobs) { b.el.style.transform = ""; b.tx = b.ty = 0; b.ts = 1; b.press = false; b.rest && b.rest.fill(0); b.tox = b.toy = 0; }
+    }
+  }
+
+  // ---------- press, pull and let go ----------
+  function gbLocal(b, cx, cy) {
+    const s = b.sc * b.a || 1;
+    return [(cx - b.L.rx - b.x - b.ox) / s, (cy - b.L.ry - b.y - b.oy) / s];
+  }
+  document.addEventListener("pointerdown", (e) => {
+    if (!GB.on || (e.button && e.button > 0) || !e.target.closest) return;
+    const el = e.target.closest("[data-gb]");
+    const b = el && el._gb;
+    if (!b || !b.N || !b.vis) return;
+    const [lx, ly] = gbLocal(b, e.clientX, e.clientY);
+    const field = e.target.closest("textarea, input, select, [contenteditable]");
+    gbPoke(b, lx, ly, b.kind === "panel" ? (field ? 0.35 : 0.8) : 1);
+    if (b.kind !== "panel") b.press = true;
+    const canPull = b.drag && !field && !(b.kind === "panel" && e.target.closest("button, a"));
+    const mid = Math.abs(lx) < b.w * 0.32 && Math.abs(ly) < b.h * 0.32;   // grabbed near the middle: the side you pull toward stretches
+    GB.drag = { b, id: e.pointerId, sx: e.clientX, sy: e.clientY, k0: gbNearest(b, lx, ly), mid, moved: false, pull: canPull };
+    gbWake();
+  }, true);
+  document.addEventListener("pointermove", (e) => {
+    const g = GB.drag;
+    if (!g || e.pointerId !== g.id) return;
+    const b = g.b, dx = e.clientX - g.sx, dy = e.clientY - g.sy, dist = Math.hypot(dx, dy);
+    if (!g.moved && dist > 7) {
+      g.moved = true; b.press = false;
+      if (!g.pull) { GB.drag = null; gbWake(); return; }
+      try { b.el.setPointerCapture(e.pointerId); } catch (er) {}
+    }
+    if (!g.moved || !g.pull) return;
+    const big = b.kind === "panel";
+    const Lm = big ? 44 : Math.max(22, Math.min(56, Math.min(b.w, b.h) * 1.4));
+    const s = Lm * Math.tanh(dist / Lm) / (dist || 1), px = dx * s, py = dy * s;
+    b.tox = px * (big ? 0.1 : 0.32); b.toy = py * (big ? 0.1 : 0.32);
+    if (g.mid) { let bv = -1e9; for (let k = 0; k < b.N; k++) { const v = b.nx[k] * px + b.ny[k] * py; if (v > bv) { bv = v; g.k0 = k; } } }
+    const sig = Math.max(16, Math.min(b.P * (big ? 0.1 : 0.22), 80));
+    for (let k = 0; k < b.N; k++) {
+      const ds = gbArcDist(b, b.sa[k], b.sa[g.k0]);
+      const w = (big ? 0.05 : 0.3) + (big ? 0.95 : 0.7) * Math.exp(-ds * ds / (2 * sig * sig));
+      b.rest[k] = w * (px * b.nx[k] + py * b.ny[k]) * (big ? 0.9 : 0.9);
+    }
+    e.preventDefault();
+    gbWake();
+  }, { capture: true, passive: false });
+  function gbEnd(e) {
+    const g = GB.drag;
+    if (!g || e.pointerId !== g.id) return;
+    GB.drag = null;
+    const b = g.b;
+    b.press = false;
+    if (g.moved && g.pull) {
+      b.rest.fill(0); b.tox = 0; b.toy = 0;
+      GB.noClick = b.el; setTimeout(() => { if (GB.noClick === b.el) GB.noClick = null; }, 400);   // a pull isn't a tap
+    } else if (!g.moved) b.pulse = Math.max(b.pulse, 0.35);
+    gbWake();
+  }
+  document.addEventListener("pointerup", gbEnd, true);
+  document.addEventListener("pointercancel", gbEnd, true);
+  document.addEventListener("click", (e) => {
+    if (GB.noClick && e.target.closest && e.target.closest("[data-gb]") === GB.noClick) { e.stopPropagation(); e.preventDefault(); GB.noClick = null; }
+  }, true);
+  window.addEventListener("resize", gbWake);
+  document.addEventListener("visibilitychange", gbWake);
+
+  // =====================================================================
+  //  Bubble mode (Settings, Look). Classic stays the default. Same layout
+  //  as Classic, but every menu piece is a glass blob, models are picked
+  //  from a row of bubbles, and chats, Recents and Essay Coach get a glassy
+  //  look that glows and grows a little when you tap it.
+  // =====================================================================
+  function lookBubble() { return document.documentElement.classList.contains("look-bubble"); }
+  const BM_HUE = { l1: 0.83, l2: 0.5, l2_5: 0.34, l3: 0.17, l4: 0.62 };
+  const BM_LOCK = '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2.4"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4"/></svg>';
+
+  // ---------- the row of model bubbles ----------
+  function bmBuild() {
+    const row = $("bm-row");
+    if (!row || row.childElementCount) return;
+    for (const t of TIER_ORDER) {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "bm"; b.dataset.tier = t;
+      b.setAttribute("role", "radio");
+      b.innerHTML = '<span class="bm-ic"></span><span class="bm-g"></span><span class="bm-n"></span><span class="bm-c"></span>';
+      b.addEventListener("click", () => bmPick(t));
+      row.appendChild(b);
+    }
+  }
+  function bmUpdate() {
+    const row = $("bm-row");
+    if (!row) return;
+    const q = ((el.mpQuota && el.mpQuota.textContent) || "").replace(/[^0-9]/g, "");
+    row.querySelectorAll(".bm").forEach(b => {
+      const t = b.dataset.tier, info = TIER_INFO[t];
+      if (!info) { b.hidden = true; return; }
+      b.hidden = false;
+      const sp = info.label.indexOf(" ");
+      const g = sp > 0 ? info.label.slice(0, sp + 1) : "", n = sp > 0 ? info.label.slice(sp + 1) : info.label;
+      const locked = isGuest() && !GUEST_TIERS.has(t);
+      const low = !locked && sharedRemaining !== null && sharedRemaining < info.cost;
+      const sel = t === selectedTier;
+      const c = locked ? "" : String(sel && q ? q : info.cost);
+      const set = (cls, v) => { const s = b.querySelector(cls); if (s.innerHTML !== v) s.innerHTML = v; };
+      set(".bm-ic", locked ? BM_LOCK : ""); set(".bm-g", escapeHtml(g)); set(".bm-n", escapeHtml(n)); set(".bm-c", c);
+      b.classList.toggle("sel", sel); b.classList.toggle("locked", locked); b.classList.toggle("low", low);
+      b.setAttribute("aria-checked", String(sel));
+      b.title = locked ? `${info.label} needs a free account` : `${info.label}: ${info.cost} points a message${low ? " (not enough points left)" : ""}`;
+    });
+  }
+  function bmPick(t) {
+    const info = TIER_INFO[t];
+    if (!info) return;
+    if (isGuest() && !GUEST_TIERS.has(t)) { openAuth("welcome", `${info.label} needs a free account. Guests can use General Mini.`); return; }
+    if (sharedRemaining !== null && sharedRemaining < info.cost) { showNote(`You don't have enough points left for ${info.label} right now.`); return; }
+    selectTier(t);
+    bmUpdate();
+  }
+
+  // ---------- wire every menu piece to a glass blob ----------
+  const GBW = { built: false };
+  function gbBuildAll() {
+    if (GBW.built) return;
+    GBW.built = true;
+    bmBuild(); bmUpdate();
+    const on = (e) => ({ on: e.classList.contains("on"), dim: e.classList.contains("blocked") });
+    // the text box, its buttons and the model row
+    const comp = $("composer");
+    if (comp) {
+      const L = gbLayer(comp, 44);
+      gbAdd(L, comp, { kind: "panel", move: false, h0: 0.45 });
+      gbAdd(L, $("attach-btn"), { group: "tools", h0: 0.45 });
+      [["web-btn", 0.7], ["link-btn", 0.52], ["study-btn", 0.12], ["wx-btn", 0.8], ["sc-btn", 0.06], ["fy-btn", 0.64], ["img-btn", 0.3]]
+        .forEach(([id, h]) => gbAdd(L, $(id), { group: "tools", h0: h, state: on }));
+      gbAdd(L, el.sendBtn || $("send-btn"), { group: "tools", h0: 0.3, state: (e) => ({ on: !e.disabled, dim: e.disabled }) });
+      document.querySelectorAll("#bm-row .bm").forEach(b => gbAdd(L, b, {
+        group: "models", h0: BM_HUE[b.dataset.tier] !== undefined ? BM_HUE[b.dataset.tier] : 0.5, hs: b.dataset.tier === "l4" ? 0.16 : 0.09,
+        state: (e) => ({ sel: e.classList.contains("sel"), dim: e.classList.contains("low") }),
+      }));
+    }
+    // the home screen
+    const wel = $("welcome");
+    if (wel && $("ec-open-pill")) gbAdd(gbLayer(wel, 30), $("ec-open-pill"), { h0: 0.22 });
+    const sug = $("suggestions");
+    if (sug) {
+      const L = gbLayer(sug, 26);
+      sug.querySelectorAll(".chip").forEach((c, i) => gbAdd(L, c, { group: "chips", h0: [0.12, 0.52, 0.3, 0.7][i % 4] }));
+    }
+    // the top bar
+    const top = $("topbar");
+    if (top) {
+      const L = gbLayer(top, 18);
+      gbAdd(L, $("menu-btn"), { h0: 0.5 });
+      gbAdd(L, $("budget-pill"), { group: "top", h0: 0.62, drag: false });
+      ["top-new-btn", "settings-btn", "theme-toggle"].forEach(id => gbAdd(L, $(id), { group: "top", h0: 0.5 }));
+      gbAdd(L, $("signin-btn"), { group: "top", h0: 0.3, state: () => ({ on: true }) });
+    }
+    // the sidebar
+    const side = $("sidebar");
+    if (side) {
+      const L = gbLayer(side, 14);
+      gbAdd(L, $("new-chat-btn"), { h0: 0.3 });
+      gbAdd(L, $("ec-open-side"), { h0: 0.22 });
+      gbAdd(L, $("about-btn"), { h0: 0.5, drag: false });
+      gbAdd(L, $("news-btn"), { group: "side", h0: 0.5, drag: false });
+      gbAdd(L, $("report-btn"), { group: "side", h0: 0.5, drag: false });
+    }
+  }
+  function gbSync() {
+    GBW.raf = 0;
+    if (!lookBubble()) { if (GB.on) gbStop(); return; }
+    gbBuildAll();
+    bmUpdate();
+    gbStart();
+    gbWake();
+  }
+  function gbSoon() { if (!GBW.raf) GBW.raf = requestAnimationFrame(gbSync); }
+
+  // ---------- glassy chats, Recents and Essay Coach ----------
+  const GL_SEL = ".msg.user .user-bubble, #messages > .msg.assistant.glass, #ec-ov .ec-card, #ec-ov .ec-card0, #ec-ov .ec-livebox";
+  const glIO = window.IntersectionObserver ? new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("gl-idle", !e.isIntersecting)), { rootMargin: "120px" }) : null;
+  let glRaf = 0;
+  function glScan() {
+    glRaf = 0;
+    if (!lookBubble()) return;
+    // a reply becomes a glass card as soon as words start coming in (not while it's still just "Thinking")
+    document.querySelectorAll("#messages > .msg.assistant:not(.glass)").forEach(r => {
+      const p = r.querySelector(":scope > .pending");
+      if (!p || p.classList.contains("tail")) r.classList.add("glass");
+    });
+    document.querySelectorAll(GL_SEL).forEach(e => {
+      const f = e.firstElementChild;
+      if (f && f.classList.contains("gl-fx")) return;
+      e.insertAdjacentHTML("afterbegin", '<i class="gl-fx" aria-hidden="true"><b></b><b></b><b></b></i>');
+      if (glIO) glIO.observe(e);
+    });
+  }
+  function glSoon() { if (!glRaf) glRaf = requestAnimationFrame(glScan); }
+
+  // tap or click a chat, a Recents row or an Essay Coach card: it glows and grows a little, then springs back
+  const BP_SEL = ".msg.user .user-bubble, #messages > .msg.assistant.glass, .chat-item, #ec-ov .ec-card, #ec-ov .ec-card0, #ec-ov .ec-livebox";
+  let bpEl = null, bpT = 0, bpX = 0, bpY = 0;
+  function bpRelease(now) {
+    const e = bpEl;
+    if (!e) return;
+    bpEl = null;
+    const wait = now ? 0 : Math.max(0, 260 - (performance.now() - bpT));
+    setTimeout(() => e.classList.remove("bp-on"), wait);
+  }
+  document.addEventListener("pointerdown", (e) => {
+    if (!lookBubble() || (e.button && e.button > 0) || !e.target.closest) return;
+    const box = e.target.closest(BP_SEL);
+    if (!box) return;
+    const inner = e.target.closest("button, a, input, textarea, select, summary, label, form, .leaflet-container");
+    if (inner && box.contains(inner) && inner !== box) return;
+    bpRelease(true);
+    bpEl = box; bpT = performance.now(); bpX = e.clientX; bpY = e.clientY;
+    box.classList.add("bp-on");
+  }, true);
+  document.addEventListener("pointerup", () => bpRelease(false), true);
+  document.addEventListener("pointercancel", () => bpRelease(true), true);
+  document.addEventListener("pointermove", (e) => { if (bpEl && Math.hypot(e.clientX - bpX, e.clientY - bpY) > 12) bpRelease(true); }, true);
+
+  // ---------- the setting ----------
+  function paintLookSeg() {
+    const v = lookBubble() ? "bubble" : "classic";
+    document.querySelectorAll("#look-seg button").forEach(b => {
+      const on = b.dataset.look === v;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-checked", String(on));
+    });
+  }
+  function setLook(v) {
+    document.documentElement.classList.toggle("look-bubble", v === "bubble");
+    try { localStorage.setItem("scode_look", v); } catch (e) {}
+    paintLookSeg();
+    if (typeof window.fitTools === "function") requestAnimationFrame(window.fitTools);
+    gbSoon(); glSoon();
+  }
+  (function bubbleBoot() {
+    document.querySelectorAll("#look-seg button").forEach(b => b.addEventListener("click", () => setLook(b.dataset.look)));
+    paintLookSeg();
+    const kick = () => { if (lookBubble()) { bmUpdate(); gbWake(); } };
+    new MutationObserver(kick).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    const tools = document.querySelector(".composer-tools");
+    if (tools) new MutationObserver(kick).observe(tools, { attributes: true, attributeFilter: ["class", "hidden", "disabled"], subtree: true, childList: true, characterData: true });
+    const br = $("budget-remaining");
+    if (br) new MutationObserver(kick).observe(br, { childList: true, characterData: true, subtree: true });
+    const comp = $("composer");
+    if (comp) new MutationObserver(kick).observe(comp, { attributes: true, attributeFilter: ["class"], subtree: true });
+    new MutationObserver(glSoon).observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("storage", (e) => { if (e.key === "scode_look") { document.documentElement.classList.toggle("look-bubble", e.newValue === "bubble"); paintLookSeg(); gbSoon(); glSoon(); } });
+    gbSoon(); glSoon();
+    // for tests
+    window.scodeBubble = { setLook, blobs: () => GB.layers.map(L => L.blobs.map(b => ({ id: b.el.id || b.el.className, vis: b.vis, a: b.a, sc: b.sc, on: b.on, sel: b.sel, ox: b.ox, oy: b.oy, w: b.w, h: b.h, N: b.N }))), running: () => GB.on, sleeping: () => GB.on && !GB.raf };
+  })();
+
   if (!touchLike) el.input.focus();
   setTimeout(maybeShowWhatsNew, reduceMotion ? 300 : 1100);
   setTimeout(maybeNudgeSignIn, reduceMotion ? 600 : 1900);
