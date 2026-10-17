@@ -306,6 +306,25 @@
   .md pre { background: var(--sidebar); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; overflow-x: auto; margin: 0 0 16px; line-height: 1.55; }
   .md pre code { background: none; border: none; padding: 0; font-size: 13.5px; }
   .md .fade-chunk { animation: fadeIn 0.4s ease both; }
+  /* Math and tables in replies */
+  .md .math-line { display: block; text-align: center; margin: 4px 0 14px; padding: 10px 14px; border-radius: 12px;
+    background: var(--surface-2); border: 1px solid var(--border); font-size: 1.04em; overflow-x: auto; white-space: nowrap; }
+  .md sup, .md sub { font-size: 0.72em; line-height: 0; }
+  .md .md-table { overflow-x: auto; margin: 0 0 16px; border: 1px solid var(--border); border-radius: 12px; }
+  .md table { border-collapse: collapse; width: 100%; font-size: 0.92em; line-height: 1.5; }
+  .md th, .md td { padding: 9px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+  .md th { background: var(--surface-2); font-weight: 600; }
+  .md tr:last-child td { border-bottom: none; }
+  .md td + td, .md th + th { border-left: 1px solid var(--border); }
+  /* General Ultra: version tag, NEW tag and Deep Think */
+  .mp-ver { font-size: 11px; font-weight: 700; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0 6px; margin-left: 4px; vertical-align: 1px; }
+  .mp-new { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: #fff; border-radius: 999px; padding: 1px 7px; margin-left: 6px; vertical-align: 1px;
+    background: linear-gradient(110deg, #ff5fb0, #8b6bff 52%, #3fc1ff); }
+  #deep-btn.on.on { color: #fff; border-color: transparent; background: linear-gradient(110deg, #ff5fb0, #8b6bff 52%, #3fc1ff); box-shadow: 0 4px 16px rgba(139,107,255,0.35); }
+  #deep-btn.on.on .wcost { opacity: 0.9; }
+  #deep-btn.on .dt-spark { animation: dtSpark 1.6s ease-in-out infinite; transform-origin: 18.6px 4.4px; }
+  @keyframes dtSpark { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.6); } }
+  @media (prefers-reduced-motion: reduce) { #deep-btn.on .dt-spark { animation: none; } }
 
 
   /* Action row under finished replies */
@@ -997,28 +1016,28 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn {
+  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show, #fy-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg, #fy-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover, #fy-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on, #fy-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg, #fy-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked, #fy-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show, #fy-btn.show, #deep-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg, #fy-btn svg, #deep-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover, #fy-btn:hover, #deep-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on, #fy-btn.on, #deep-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg, #fy-btn.on svg, #deep-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked, #fy-btn.blocked, #deep-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn { padding: 0 9px; } }
   /* Auto-fit: fitTools() adds .fit1 (drop costs, NEW becomes a dot) then .fit2 (icons only) when the row runs out of room */
   .composer-tools { min-width: 0; }
   .composer-tools > button { flex-shrink: 0; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) .wcost { display: none; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) { position: relative; padding: 0 10px 0 9px; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) { width: 34px; padding: 0; justify-content: center; }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) .mlabel { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) .wcost { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { position: relative; padding: 0 10px 0 9px; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { width: 34px; padding: 0; justify-content: center; }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) .mlabel { display: none; }
   .composer-tools.fit2 .model-picker-btn .mp-quota { display: none; }
   /* Mode cost: total next to the model name, plus a short pop-up with the breakdown */
   .model-picker-btn .mp-quota.plus { color: var(--accent); font-weight: 600; }
@@ -1033,10 +1052,14 @@
   .composer-tools.fit3 .model-picker-btn { padding: 0 6px; }
   .composer-tools.fit4 .model-picker-btn .mp-quota.plus { display: none; }
   .composer-tools.fit5 { gap: 3px; }
-  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn) { width: 29px; height: 29px; }
+  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { width: 29px; height: 29px; }
   .composer-tools.fit5 .model-picker-btn { padding: 0 3px; }
   .composer-tools.fit6 > button { flex-shrink: 1; }
   .composer-tools.fit6 .model-picker-btn .chev { display: none; }
+  .composer-tools.fit7 .model-picker-btn .mp-g { display: none; }
+  .composer-tools.fit8 { gap: 2px; }
+  .composer-tools.fit8 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { width: 26px; height: 26px; }
+  .composer-tools.fit8 .model-picker-btn .mp-quota { display: none; }
   #cost-toast b { font-weight: 700; }
   @media (max-width: 720px) { #cost-toast { white-space: normal; text-align: center; width: max-content; max-width: calc(100vw - 40px); border-radius: 14px; } }
 
@@ -1354,7 +1377,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent-grad);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #deep-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent-grad);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -1411,10 +1434,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
     #attach-btn { width: 32px; height: 32px; }
-    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #fy-btn .mlabel, #sc-btn .wcost, #fy-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
-    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #fy-btn .mlabel, #deep-btn .mlabel, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
+    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #deep-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -2116,24 +2139,24 @@
   html.look-bubble #main { overflow-x: clip; }
   html.look-bubble #sidebar { overflow: clip; }
   html.look-bubble #prompt-input { touch-action: auto; }
-  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #send-btn, .bm, #menu-btn, #top-new-btn, #settings-btn, #theme-toggle, #budget-pill, #signin-btn, #new-chat-btn, #ec-open-side, #ec-open-pill, .suggestions .chip, #about-btn, #news-btn, #report-btn, #app-get) {
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #send-btn, .bm, #menu-btn, #top-new-btn, #settings-btn, #theme-toggle, #budget-pill, #signin-btn, #new-chat-btn, #ec-open-side, #ec-open-pill, .suggestions .chip, #about-btn, #news-btn, #report-btn, #app-get) {
     background: transparent !important; border-color: transparent !important; box-shadow: none !important; outline: none;
     touch-action: none; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
-  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #send-btn, .bm, #budget-pill, #signin-btn, #ec-open-pill, .suggestions .chip) { border-radius: 999px; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #send-btn, .bm, #budget-pill, #signin-btn, #ec-open-pill, .suggestions .chip) { border-radius: 999px; }
   html.look-bubble :is(#menu-btn, #top-new-btn, #settings-btn, #theme-toggle) { border-radius: 50%; color: var(--text); }
   html.look-bubble :is(#new-chat-btn, #ec-open-side) { border-radius: 16px; }
   html.look-bubble :is(#about-btn, #news-btn, #report-btn, #app-get) { border-radius: 12px; }
-  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, .suggestions .chip) { color: var(--text); }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn).on { color: #fff; filter: drop-shadow(0 1px 4px rgba(24,8,60,.5)); }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn).on svg { animation: none; }
-  html.look-bubble body.light :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn).on { color: #2a1b55; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, .suggestions .chip) { color: var(--text); }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn).on { color: #fff; filter: drop-shadow(0 1px 4px rgba(24,8,60,.5)); }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn).on svg { animation: none; }
+  html.look-bubble body.light :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn).on { color: #2a1b55; }
   html.look-bubble #send-btn { color: #fff; }
   html.look-bubble body.light #send-btn { color: #2a1b55; }
   html.look-bubble #send-btn:disabled { opacity: .55; }
   html.look-bubble #signin-btn { color: #fff; border-width: 0; }
   html.look-bubble body.light #signin-btn { color: #2a1b55; }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, .bm, #send-btn, #attach-btn) { transition: color .2s, opacity .2s; }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn):hover, html.look-bubble .icon-btn:hover, html.look-bubble .chip:hover { background: transparent !important; }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, .bm, #send-btn, #attach-btn) { transition: color .2s, opacity .2s; }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn):hover, html.look-bubble .icon-btn:hover, html.look-bubble .chip:hover { background: transparent !important; }
 
   /* picking a model: a row of bubbles under the text box (the dropdown goes away) */
   html.look-bubble #model-picker { display: none !important; }
@@ -2160,7 +2183,7 @@
     .bm { height: 30px; padding: 0 10px; font-size: 12.5px; }
     .bm-g { display: none; }
     .bm:not(.sel) .bm-c { display: none; }
-    html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #attach-btn) { width: 32px; height: 32px; }
+    html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #attach-btn) { width: 32px; height: 32px; }
   }
 
   /* a soft colour wash behind everything, so the glass has something to bend */
@@ -2975,6 +2998,10 @@
               <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
               <span class="mlabel">Image</span><span class="wcost" id="img-cost">+25</span><span class="wnew" id="img-new" hidden>NEW</span>
             </button>
+            <button id="deep-btn" type="button" aria-pressed="false" title="Deep Think">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M9.5 4.5a3 3 0 0 0-5 2.4A3.2 3.2 0 0 0 3 12a3.2 3.2 0 0 0 2 3 3.3 3.3 0 0 0 4.5 4V4.5zM14.5 4.5a3 3 0 0 1 5 2.4A3.2 3.2 0 0 1 21 12a3.2 3.2 0 0 1-2 3 3.3 3.3 0 0 1-4.5 4V4.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.6 2.6l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5.5-1.3z" fill="currentColor" class="dt-spark"/></svg>
+              <span class="mlabel">Deep Think</span><span class="wcost" id="deep-cost">+10</span><span class="wnew" id="deep-new" hidden>NEW</span>
+            </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
               <button class="model-picker-btn" id="model-picker-btn" type="button" aria-haspopup="listbox">
@@ -3001,7 +3028,7 @@
           <button class="chip" data-prefill="Give me 10 ideas for ">
             <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Brainstorm
           </button>
-          <button class="chip" data-photo="l4">
+          <button class="chip" data-photo="l5">
             <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M5 17l4.5-4 3 2.5L16 12l3 3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Read a photo
           </button>
         </div>
@@ -3323,7 +3350,7 @@
           <button class="wn-try" type="button" data-try="image">Try</button>
         </div>
       </div>
-      <p class="wn-small" id="wn-cost-line">On General and General Plus &middot; +5 points per message</p>
+      <p class="wn-small" id="wn-cost-line">On General Plus and General Ultra &middot; +5 points per message</p>
       <div class="wn-actions">
         <button class="wn-btn" id="wn-later" type="button">Maybe later</button>
       </div>
@@ -3466,7 +3493,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://owns-melbourne-trucks-realm.trycloudflare.com";
+  const PROXY_URL = "https://consultancy-buck-realize-cardiac.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -3497,20 +3524,33 @@
   }
 
   // Static fallback shown before /models loads; live data overrides this.
-  const TIER_ORDER = ["l1", "l2", "l2_5", "l3", "l4"];
+  const TIER_ORDER = ["l1", "l2_5", "l4", "l5"];
   let TIER_INFO = {
-    l1:   { label: "General Mini",  tagline: "Instant, lightweight answers using our smallest model.", cost: 1 },
-    l2:   { label: "General",       tagline: "A solid everyday model — more capable than General Mini, still efficient.", cost: 5 },
-    l2_5: { label: "General Plus",  tagline: "Chatty and quick, and can see and describe photos.", cost: 15 },
-    l3:   { label: "General Pro",   tagline: "Thinks it through before answering. Slowest and priciest of the text-only options.", cost: 25 },
-    l4:   { label: "General Ultra", tagline: "Best at reading text out of photos of documents, forms and papers.", cost: 20 },
+    l1:   { label: "General Mini",  version: "1.0", tagline: "Instant, lightweight answers using our smallest model.", cost: 1 },
+    l2_5: { label: "General Plus",  version: "1.0", tagline: "Our everyday model. Quick and chatty, and it can see photos.", cost: 15 },
+    l4:   { label: "General Pro",   version: "1.5", tagline: "Specialized at reading text out of photos of documents, forms and papers.", cost: 20 },
+    l5:   { label: "General Ultra", version: "1.0", tagline: "Our smartest model. Starts replying fast, reads photos best, works with every mode, and can Deep Think.", cost: 30, isNew: true },
   };
-  const L_CODE = { l1: "L1", l2: "L2", l2_5: "L2.5", l3: "L3", l4: "L4" };
+  const L_CODE = { l1: "L1", l2_5: "L2.5", l4: "L4", l5: "L5" };
+  // General (L2) and the old General Pro (L3) were removed. Saved chats that used
+  // them open on the closest model that's left.
+  const TIER_ALIAS = { l2: "l2_5", l3: "l5" };
+  function fixTier(t) {
+    t = TIER_ALIAS[t] || t;
+    if (!TIER_INFO[t]) t = "l2_5";
+    if (isGuest() && !GUEST_TIERS.has(t)) t = "l1";
+    return t;
+  }
+  // Deep Think (General Ultra): thinks the question through before answering.
+  var DEEP_TIERS = new Set(["l5"]);   // the server can override these via /status
+  var deepCost = 10;
+  var deepOn = false;
+  try { deepOn = localStorage.getItem("scode_deep_on") === "1"; } catch (e) {}
 
   let sharedLimit = 1000;
   let sharedRemaining = null;
   let sharedResetAt = null;
-  let selectedTier = "l1";
+  let selectedTier = auth ? "l2_5" : "l1";
   let messages = [];
   let sending = false;
   let theme = localStorage.getItem("linden_theme") ||
@@ -3662,7 +3702,7 @@
       el.modelsSection.innerHTML = models.map(m => `
         <div class="model-card">
           <div class="model-card-top">
-            <span class="model-card-name">${escapeHtml(String(m.label))}
+            <span class="model-card-name">${escapeHtml(String(m.label))}${m.version ? " " + escapeHtml(String(m.version)) : ""}
               <span class="model-card-tech">${escapeHtml(String(m.l_code))} · ${escapeHtml(String(m.technical_name))}</span></span>
             <span class="model-card-live${m.installed ? "" : " off"}">${m.installed ? "Online" : "Unavailable"}</span>
           </div>
@@ -3693,11 +3733,82 @@
   }
 
   function escapeHtml(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  // Models sometimes write LaTeX math ($\frac{a}{b}$, \text{m/s}^2). The chat doesn't
+  // load a math library, so turn it into clean text with real symbols instead.
+  const TEX_SYM = { cdot: "·", times: "×", div: "÷", pm: "±", mp: "∓", approx: "≈", neq: "≠", ne: "≠", leq: "≤", le: "≤",
+    geq: "≥", ge: "≥", rightarrow: "→", to: "→", longrightarrow: "→", Rightarrow: "⇒", implies: "⇒", leftarrow: "←",
+    leftrightarrow: "↔", rightleftharpoons: "⇌", infty: "∞", circ: "°", degree: "°", ldots: "…", cdots: "⋯", dots: "…",
+    Delta: "Δ", delta: "δ", theta: "θ", Theta: "Θ", pi: "π", alpha: "α", beta: "β", gamma: "γ", lambda: "λ", mu: "μ",
+    sigma: "σ", Sigma: "Σ", omega: "ω", Omega: "Ω", phi: "φ", rho: "ρ", epsilon: "ε", tau: "τ", sum: "Σ", int: "∫",
+    partial: "∂", sqrt: "√", propto: "∝", angle: "∠", perp: "⊥", parallel: "∥", therefore: "∴", in: "∈", cup: "∪", cap: "∩" };
+  function texToHtml(t) {
+    let s = t;
+    const group = "\\{([^{}]*)\\}";
+    for (let i = 0; i < 4; i++) {   // inside out, for nested braces
+      s = s.replace(new RegExp("\\\\(?:text|mathrm|textrm|operatorname|mbox|textit|mathit)\\s*" + group, "g"), "$1")
+           .replace(new RegExp("\\\\(?:mathbf|textbf|boldsymbol|bm)\\s*" + group, "g"), "<strong>$1</strong>")
+           .replace(new RegExp("\\\\[dt]?frac\\s*" + group + "\\s*" + group, "g"), (m, a, b) => {
+             const F = { "1/2": "½", "1/3": "⅓", "2/3": "⅔", "1/4": "¼", "3/4": "¾" };
+             if (F[a.trim() + "/" + b.trim()]) return F[a.trim() + "/" + b.trim()];
+             const wrap = x => /^[\w.°²³]+$|^<sup>|^\(.*\)$/.test(x.trim()) ? x.trim() : "(" + x.trim() + ")";
+             return wrap(a) + "/" + wrap(b);
+           })
+           .replace(new RegExp("\\\\sqrt\\s*\\[([^\\]]*)\\]\\s*" + group, "g"), (m, n, x) => "<sup>" + n + "</sup>√(" + x + ")")
+           .replace(new RegExp("\\\\sqrt\\s*" + group, "g"), (m, x) => /^\w+$/.test(x.trim()) ? "√" + x.trim() : "√(" + x + ")")
+           .replace(new RegExp("\\^\\s*" + group, "g"), "<sup>$1</sup>")
+           .replace(new RegExp("_\\s*" + group, "g"), "<sub>$1</sub>")
+           .replace(new RegExp("\\\\(?:overline|bar|vec|hat|underline)\\s*" + group, "g"), "$1");
+    }
+    s = s.replace(/\^\s*\\circ/g, "°")
+         .replace(/\^\s*([\w+\-]|&#?\w+;)/g, "<sup>$1</sup>")
+         .replace(/_\s*([A-Za-z0-9])/g, "<sub>$1</sub>")
+         .replace(/\\(?:left|right|displaystyle|limits)(?![A-Za-z])/g, "")
+         .replace(/\\Delta\s*/g, "Δ").replace(/\\delta\s*/g, "δ")
+         .replace(/\\[,;:! ]|\\q?quad/g, " ")
+         .replace(/\\%/g, "%").replace(/\\\$/g, "$").replace(/\\[{}]/g, m => m[1]).replace(/\\\\/g, " ")
+         .replace(/\\([A-Za-z]+)/g, (m, w) => TEX_SYM[w] !== undefined ? TEX_SYM[w] : w)
+         .replace(/[{}]/g, "")
+         .replace(/ {2,}/g, " ");
+    return s.trim();
+  }
+  function looksLikeTex(x) { return /[\\^_{}]/.test(x) || /^[A-Za-z]$/.test(x.trim()); }
+  function renderTables(src) {
+    // GitHub-style tables: a header row, a |---|---| row, then rows.
+    const lines = src.split("\n"), out = [];
+    const cells = l => l.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map(c => c.trim());
+    for (let i = 0; i < lines.length; i++) {
+      const head = lines[i], sep = lines[i + 1];
+      if (/\|/.test(head) && sep !== undefined && /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(sep) && /\|/.test(sep)) {
+        const hs = cells(head);
+        const al = cells(sep).map(c => /^:-+:$/.test(c) ? "center" : /-:$/.test(c) ? "right" : "");
+        let html = '<div class="md-table"><table><thead><tr>' + hs.map((h, k) => `<th${al[k] ? ` style="text-align:${al[k]}"` : ""}>${h}</th>`).join("") + "</tr></thead><tbody>";
+        i += 2;
+        while (i < lines.length && /\|/.test(lines[i]) && lines[i].trim() !== "") {
+          const cs = cells(lines[i]);
+          html += "<tr>" + hs.map((h, k) => `<td${al[k] ? ` style="text-align:${al[k]}"` : ""}>${cs[k] !== undefined ? cs[k] : ""}</td>`).join("") + "</tr>";
+          i++;
+        }
+        i--;
+        out.push("\u0000TB" + html + "</tbody></table></div>\u0000");
+      } else out.push(head);
+    }
+    return out.join("\n");
+  }
   function renderMarkdown(text) {
     let src = escapeHtml(text);
     const codeBlocks = [];
     src = src.replace(/```([\s\S]*?)(```|$)/g, (m, code) => { codeBlocks.push(code.replace(/^[a-zA-Z0-9_+-]*\n/, "")); return `\u0000CB${codeBlocks.length - 1}\u0000`; });
-    src = src.replace(/`([^`\n]+)`/g, "<code>$1</code>");
+    const inlineCode = [];
+    src = src.replace(/`([^`\n]+)`/g, (m, c) => { inlineCode.push(c); return `\u0000IC${inlineCode.length - 1}\u0000`; });
+    // Math: $$...$$ and \[...\] get their own line; $...$ and \(...\) stay in the sentence.
+    const mathLines = [];
+    src = src.replace(/\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]/g, (m, a, b) => { mathLines.push(texToHtml(a || b)); return `\n\u0000ML${mathLines.length - 1}\u0000\n`; });
+    src = src.replace(/\\\(([^\n]+?)\\\)/g, (m, a) => texToHtml(a));
+    src = src.replace(/(^|[^\w$\\])\$(?!\s)([^$\n]{0,239}?[^\s$])\$(?![\w$])/g, (m, pre, a) => looksLikeTex(a) ? pre + texToHtml(a) : m);
+    src = src.replace(/\\(?:text|mathrm)\{([^{}\n]*)\}/g, "$1");
+    src = src.replace(/\n{3,}/g, "\n\n");
+    src = renderTables(src);
+    src = src.replace(/\u0000IC(\d+)\u0000/g, (m, i) => `<code>${inlineCode[+i]}</code>`);
     src = src.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     src = src.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
     const lines = src.split("\n");
@@ -3714,6 +3825,8 @@
       else if (numMatch) { flushPara(); if (!inList || listType !== "ol") { closeList(); out += "<ol>"; inList = true; listType = "ol"; } out += `<li>${numMatch[1]}</li>`; }
       else if (line.trim() === "") { closeList(); flushPara(); }
       else if (/^\u0000CB\d+\u0000$/.test(line.trim())) { closeList(); flushPara(); out += line.trim(); }
+      else if (/^\u0000ML\d+\u0000$/.test(line.trim())) { closeList(); flushPara(); out += `<span class="math-line">${mathLines[+line.trim().slice(3, -1)]}</span>`; }
+      else if (/^\u0000TB[\s\S]*\u0000$/.test(line.trim())) { closeList(); flushPara(); out += line.trim().slice(3, -1); }
       else { closeList(); paraBuf.push(line); }
     });
     closeList(); flushPara();
@@ -3763,6 +3876,7 @@
   function loadChats() {
     if (isGuest()) { chats = []; return; }
     try { chats = JSON.parse(localStorage.getItem(chatsKey()) || "[]"); } catch (e) { chats = []; }
+    chats.forEach(c => { if (c && c.tier && !TIER_INFO[c.tier]) c.tier = fixTier(c.tier); });
   }
   function saveChats() {
     if (isGuest() || !historyEnabled) return;
@@ -3796,7 +3910,8 @@
     saveChats();
     renderChatList();
     const chat = getCurrentChat();
-    selectedTier = chat.tier || "l1";
+    selectedTier = fixTier(chat.tier || (isGuest() ? "l1" : "l2_5"));
+    if (chat.tier !== selectedTier && chat.kind !== "essay") chat.tier = selectedTier;
     messages = chat.messages;
     clearPendingImage();
     updateModelPickerLabel();
@@ -3958,6 +4073,7 @@
         const one = await syncFetch("/sync/chat/" + encodeURIComponent(s.id));
         if (!one.ok || !one.data.chat || !auth || auth.email !== who) continue;
         const c = one.data.chat;
+        if (c.tier && !TIER_INFO[c.tier]) c.tier = fixTier(c.tier);
         const i = chats.findIndex(x => x.id === c.id);
         if (i >= 0) chats[i] = c; else chats.push(c);
         SYNC.sent[c.id] = chatSig(c);
@@ -4092,7 +4208,7 @@
   });
 
   // ---------- Image upload (vision tiers only) ----------
-  const VISION_TIERS = new Set(["l2_5", "l4"]);
+  var VISION_TIERS = new Set(["l2_5", "l4", "l5"]);
   let pendingImageBase64 = null;
 
   function updateAttachVisibility() {
@@ -4102,7 +4218,7 @@
     updateWebBtn();
   }
 
-  // ---------- SCODE Search + SCODE Link: mode buttons (General and General Plus) ----------
+  // ---------- SCODE Search + SCODE Link: mode buttons (General Plus and General Ultra) ----------
   // Both unlock on launch day. Before then, add ?preview=search to the site's link
   // to test them on your own device (?preview=off turns preview back off).
   const SEARCH_LAUNCH = Date.parse("2026-10-03T00:00:00-07:00");   // Oct 3, midnight Pacific
@@ -4120,8 +4236,8 @@
   function studyUnlocked() { return studyPreview || (STUDY_LAUNCH !== null && Date.now() >= STUDY_LAUNCH); }
   function studyIsNew() { return studyUnlocked() && (STUDY_LAUNCH === null || Date.now() < STUDY_LAUNCH + LAUNCH_POPUP_DAYS * 864e5); }
 
-  let WEB_TIERS = new Set(["l2", "l2_5"]);   // the server can override these via /status
-  var STUDY_TIERS = new Set(["l2", "l2_5", "l4"]);
+  let WEB_TIERS = new Set(["l2_5", "l5"]);   // the server can override these via /status
+  var STUDY_TIERS = new Set(["l2_5", "l4", "l5"]);
   let searchCost = 5;
   var studyCost = 5;
   var weatherCost = 1;
@@ -4238,6 +4354,14 @@
     $("fy-btn").title = (fOn ? "SCODE Ferries is on" : "SCODE Ferries: BC Ferries times, live") + ` (+${ferryCost} per message)`;
     $("fy-bar").classList.toggle("show", fOn);
     if (fOn && typeof fyWarmLocation === "function") fyWarmLocation();
+    // Deep Think: General Ultra only, for normal replies (not study sets or pictures).
+    const dAvail = DEEP_TIERS.has(selectedTier) && !isGuest();
+    const dBlocked = dAvail && (sOn || iState === "on" || cOn || fOn);
+    const dOn = dAvail && deepOn && !dBlocked;
+    paintModeBtn($("deep-btn"), $("deep-new"), $("deep-cost"), dAvail, dBlocked, dOn, deepCost, ultraIsNew());
+    $("deep-btn").title = dBlocked ? "Deep Think works on normal replies, so it's off while this mode is on"
+      : (dOn ? "Deep Think is on: General Ultra thinks it through before answering. Slower, but more careful."
+             : "Deep Think: General Ultra thinks it through before answering (slower, more careful)") + ` (+${deepCost} per message)`;
     el.input.placeholder = fOn ? "Ask about a ferry, like “I can be there in 45 min, ferry to Quadra?”" : cOn ? "Ask about any team or league" : iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
       : sOn ? (studyKind === "plus" ? "What should your trainer teach? Notes, a link or a topic" : studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
@@ -4270,12 +4394,13 @@
     const m = activeCostMode();
     const base = (m && m.key === "image") ? info.cost : info.cost * (chatHasPhoto() ? 2 : 1);
     const charged = m && !m.idle;
-    const total = base + (charged ? m.extra : 0);
+    const dx = (typeof deepActive === "function" && deepActive()) ? deepCost : 0;
+    const total = base + (charged ? m.extra : 0) + dx;
     el.mpQuota.innerHTML = '<span class="q-word">cost </span>' + total;
-    el.mpQuota.classList.toggle("plus", !!charged);
-    el.modelPickerBtn.title = charged
+    el.mpQuota.classList.toggle("plus", !!charged || !!dx);
+    el.modelPickerBtn.title = (charged
       ? `${total} points per ${m.unit}: ${info.label} ${base} + ${m.name} ${m.extra}`
-      : `${info.label}: ${base} points per message`;
+      : `${info.label}: ${base} points per message`) + (dx ? ` + Deep Think ${dx}` : "");
     const key = m ? m.key + ":" + selectedTier : null;
     if (key !== lastCostKey) {
       lastCostKey = key;
@@ -4354,6 +4479,18 @@
     b.lastChild.textContent = "Finding you…";
     fyLocate(true).then(() => fySetLoc(true)).catch(err => { fySetLoc(false); showNote(err.message); });
   });
+  $("deep-btn").addEventListener("click", () => {
+    if ($("deep-btn").classList.contains("blocked")) { showNote("Deep Think works on normal replies. Turn off the mode that's on to use it."); return; }
+    deepOn = !deepOn;
+    try { localStorage.setItem("scode_deep_on", deepOn ? "1" : "0"); } catch (e) {}
+    updateWebBtn();
+    if (deepOn) showCostToast(`<b>Deep Think is on</b> · General Ultra thinks it through first. Slower, more careful · +${deepCost} points`);
+    if (!touchLike) el.input.focus();
+  });
+  function deepActive() {
+    const b = $("deep-btn");
+    return !!(b && b.classList.contains("on"));
+  }
   $("study-btn").addEventListener("click", () => {
     setMode(studyOn ? null : "study");
     if (!touchLike) el.input.focus();
@@ -4379,7 +4516,15 @@
   // Single-feature launch popups (Weather on Oct 3, Image Gen on Nov 1).
   const WN_IMAGE_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9.5" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   const WN_SCORES_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+  // General Ultra 1.0 launch: popup for the first few days, plus NEW tags.
+  var ULTRA_LAUNCH = Date.parse("2026-10-16T17:00:00-07:00");
+  function ultraIsNew() { return Date.now() >= ULTRA_LAUNCH && Date.now() < ULTRA_LAUNCH + 5 * 864e5; }
+  const WN_ULTRA_ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8l2.3 6.1 6.1 2.3-6.1 2.3L12 19.6l-2.3-6.1-6.1-2.3 6.1-2.3L12 2.8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M19 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2z" fill="currentColor"/></svg>';
   const FEATURE_POPUPS = {
+    ultra: { icon: WN_ULTRA_ICON, tag: "New model", title: "Meet General Ultra 1.0",
+      sub: "SCODE AI's biggest upgrade yet: a brand-new, smarter top model that starts replying faster.",
+      name: "General Ultra 1.0", text: "Starts answering quicker, reads photos and worksheets better than ever, and works with every mode: Search, Link, Study and more. Turn on <b>Deep Think</b> for tough problems. General Pro 1.5 now reads documents, and General Plus is the everyday pick.",
+      cost: () => `Free account · ${TIER_INFO.l5.cost} points per message · Deep Think +${deepCost}` },
     ferry: { get icon() { return FY_ICON; }, tag: "New", title: "Introducing SCODE Ferries",
       sub: "Live BC Ferries times, with a map and a countdown. Quadra, Cortes, Victoria, Nanaimo and more.",
       name: "SCODE Ferries", text: "Turn on Ferries and ask &ldquo;I can be there in 45 min, which ferry to Quadra can I catch?&rdquo; You get the answer, a live timetable, cancellations and a map from where you are.",
@@ -4387,7 +4532,7 @@
     plus: { get icon() { return SP_ICON; }, tag: "New", title: "Introducing SCODE Study Plus",
       sub: "Not just flashcards. A full trainer that teaches you a topic level by level, then tests you.",
       name: "SCODE Study Plus", text: "Give it your notes, a photo, a link or a topic. You get levels with rule cards, 11 kinds of practice questions, hints and a final test. Start level 1 while the rest is made.",
-      cost: () => `General, General Plus &amp; Ultra · free account · +${plusCost} points per trainer`.replace("&amp;", "&") },
+      cost: () => `General Plus, Pro &amp; Ultra · free account · +${plusCost} points per trainer`.replace("&amp;", "&") },
     scores: { icon: WN_SCORES_ICON, tag: "New", title: "Introducing SCODE Scores",
       sub: "Live standings, scores and schedules for the NHL, NBA, NFL, MLB, CFL, soccer and F1.",
       name: "SCODE Scores", text: "Turn on Scores and ask &ldquo;NHL standings&rdquo;, &ldquo;When do the Canucks play next?&rdquo; or &ldquo;F1 standings&rdquo;. A neat card shows the real numbers.",
@@ -4416,14 +4561,14 @@
     $("wn-cost-line").textContent = f.cost();
   }
   function maybeShowWhatsNew() {
-    const m = /[?&]whatsnew=(1|weather|image|scores|plus|ferry)\b/.exec(location.search);
+    const m = /[?&]whatsnew=(1|weather|image|scores|plus|ferry|ultra)\b/.exec(location.search);
     const forced = m ? m[1] : null;
     let seenThisVisit = false;
     try { seenThisVisit = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
     let which = forced === "1" ? "big" : forced;
     if (!which) {
       if (seenThisVisit) return;
-      which = ferryIsNew() ? "ferry" : plusIsNew() ? "plus" : searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
+      which = ultraIsNew() ? "ultra" : ferryIsNew() ? "ferry" : plusIsNew() ? "plus" : searchIsNew() ? "big" : scoresIsNew() ? "scores" : imageIsNew() ? "image" : weatherIsNew() ? "weather" : null;
     }
     if (!which) return;
     if (which === "big") {
@@ -4447,6 +4592,12 @@
   wn.addEventListener("click", (e) => { if (e.target === wn) closeWhatsNew(); });
   function tryMode(mode) {
     closeWhatsNew();
+    if (mode === "ultra") {
+      if (isGuest()) { openAuth("welcome", "General Ultra needs a free account."); return; }
+      if (selectedTier !== "l5") selectTier("l5");
+      setTimeout(() => el.input.focus(), 250);
+      return;
+    }
     if (mode === "image") {
       if (isGuest()) { openAuth("welcome", "SCODE Image Gen needs a free account."); return; }
       setMode("image");
@@ -4455,7 +4606,7 @@
     }
     if (mode === "plus") {
       if (isGuest()) { openAuth("welcome", "SCODE Study Plus needs a free account."); return; }
-      if (!STUDY_TIERS.has(selectedTier)) selectTier("l2");
+      if (!STUDY_TIERS.has(selectedTier)) selectTier("l2_5");
       studyKind = "plus";
       setMode("study");
       setTimeout(() => el.input.focus(), 250);
@@ -4479,14 +4630,14 @@
     const name = mode === "link" ? "SCODE Link" : mode === "study" ? "Study Mode" : "SCODE Search";
     if (isGuest()) { openAuth("welcome", `${name} needs a free account.`); return; }
     if (mode === "study") {
-      // Study works on General, General Plus and General Ultra, photos included.
-      if (!STUDY_TIERS.has(selectedTier)) selectTier("l2");
+      // Study works on General Plus, General Pro and General Ultra, photos included.
+      if (!STUDY_TIERS.has(selectedTier)) selectTier("l2_5");
       setMode("study");
       setTimeout(() => el.input.focus(), 250);
       return;
     }
-    // Both need General or General Plus, and a chat without a photo.
-    const tier = WEB_TIERS.has(selectedTier) ? selectedTier : "l2";
+    // Both need General Plus or General Ultra, and a chat without a photo.
+    const tier = WEB_TIERS.has(selectedTier) ? selectedTier : "l2_5";
     if (chatHasPhoto()) {
       clearPendingImage();
       if (messages.some(m => m.images && m.images.length)) {
@@ -4500,10 +4651,10 @@
   }
   wn.addEventListener("click", (e) => { const b = e.target.closest(".wn-try"); if (b) tryMode(b.dataset.try); });
 
-  // ---------- Paste a link (General and General Plus) ----------
+  // ---------- Paste a link (General Plus and General Ultra) ----------
   // Ships with SCODE Search: same launch day, same ?preview=search for early testing.
   // (These use var so they exist even if something renders before this point runs.)
-  var LINK_TIERS = new Set(["l2", "l2_5"]);   // the server can override this via /status
+  var LINK_TIERS = new Set(["l2_5", "l5"]);   // the server can override this via /status
   var linkCost = 1;
   var activeLink = null;      // { url, domain } of the page the chat is about, for follow-ups
   var linkSkipFor = null;     // a typed link the visitor said not to read
@@ -4527,7 +4678,7 @@
     if (typed) {
       if (typed === linkSkipFor) return null;
       if (isGuest()) return { kind: "info", signin: true, html: "<b>Sign in</b> to use SCODE Link and have this page read for you." };
-      if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General or General Plus to use SCODE Link on this page." };
+      if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General Plus or General Ultra to use SCODE Link on this page." };
       if (photo) return { kind: "info", html: "SCODE Link can't be used in a chat with a photo. Start a new chat." };
       if (!linkOn) return { kind: "suggest", url: typed, html: `Turn on <b>SCODE Link</b> to read ${escapeHtml(hostOf(typed))} &middot; tap here` };
       return { kind: "read", url: typed, html: `<b>SCODE Link</b> will read ${escapeHtml(hostOf(typed))} before answering &middot; +${linkCost}` };
@@ -4715,7 +4866,8 @@
   // ---------- Model picker ----------
   function updateModelPickerLabel() {
     const info = TIER_INFO[selectedTier];
-    el.mpName.textContent = info.label;
+    const sp = info.label.indexOf(" ");
+    el.mpName.innerHTML = sp > 0 ? `<span class="mp-g">${escapeHtml(info.label.slice(0, sp + 1))}</span>${escapeHtml(info.label.slice(sp + 1))}` : escapeHtml(info.label);
     el.mpQuota.textContent = "cost " + info.cost;
     if (typeof updateCostInfo === "function") updateCostInfo();
     document.querySelectorAll(".model-picker-option").forEach(opt => {
@@ -4739,7 +4891,7 @@
         : (affordable ? "cost " + info.cost : "not enough budget");
       opt.innerHTML = `
         <div class="mp-opt-main">
-          <div class="mp-opt-top"><span class="mp-opt-name">${info.label}</span><span class="mp-opt-cost">${costHtml}</span></div>
+          <div class="mp-opt-top"><span class="mp-opt-name">${info.label}${info.version ? ` <span class="mp-ver">${info.version}</span>` : ""}${info.isNew && ultraIsNew() ? '<span class="mp-new">NEW</span>' : ""}</span><span class="mp-opt-cost">${costHtml}</span></div>
           <div class="mp-opt-tag">${info.tagline}</div>
         </div>
         <svg class="mp-check" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -7664,6 +7816,9 @@
       if (Array.isArray(data.link_tiers)) LINK_TIERS = new Set(data.link_tiers);
       if (typeof data.link_cost === "number") linkCost = data.link_cost;
       if (Array.isArray(data.study_tiers)) STUDY_TIERS = new Set(data.study_tiers);
+      if (Array.isArray(data.vision_tiers)) VISION_TIERS = new Set(data.vision_tiers);
+      if (Array.isArray(data.deep_tiers)) DEEP_TIERS = new Set(data.deep_tiers);
+      if (typeof data.deep_cost === "number") deepCost = data.deep_cost;
       if (typeof data.study_cost === "number") studyCost = data.study_cost;
       if (typeof data.weather === "boolean") weatherServerOn = data.weather;
       if (typeof data.image === "boolean") imageServerOn = data.image;
@@ -7834,6 +7989,7 @@
     saveAuth();
     adoptLegacyChats();
     historyEnabled = readHistoryPref();
+    if (!carry && selectedTier === "l1") selectedTier = "l2_5";   // accounts start on General Plus
     if (historyEnabled && carry) {
       loadChats();
       const id = "c" + Date.now() + Math.random().toString(36).slice(2, 6);
@@ -8272,6 +8428,9 @@
       details: "Type what you want to see, like “a cozy cabin in a snowy forest at night”, and SCODE AI paints it in about 40 seconds, right on the SCODE server. Then download it." },
   ];
   const CHANGELOG = [
+    { id: "f-ultra", type: "feature", date: "2026-10-16", title: "General Ultra 1.0: our smartest model yet",
+      text: "SCODE AI has a brand-new top model. General Ultra 1.0 starts replying faster than the old top models, reads photos and worksheets much better, and works with every mode, including Search, Link and Study. Turn on Deep Think and it works through tough problems step by step before answering. The lineup is simpler too: General Mini 1.0 for instant answers, General Plus 1.0 for everyday chats (the new default), General Pro 1.5 for reading documents, and General Ultra 1.0 for everything. Replies also look cleaner, with real math symbols and neat tables.",
+      how: ["Sign in, then pick General Ultra in the model menu.", "Ask anything, or tap + to add a photo.", "For a hard problem, tap Deep Think so it lights up, then send."] },
     { id: "f-rush", type: "feature", date: "2026-10-15", title: "Rush Hour: no more \u201cbusy\u201d errors",
       text: "When lots of people use SCODE at once, prompts now take turns instead of failing. You see your place in line and an estimated wait, and your prompt sends by itself when it's your turn. You can line up to 3 prompts, and each person gets one turn per round so nobody hogs it. In a hurry? Switch a waiting prompt to General Mini and it skips ahead. People with a free account go first during Rush Hour.",
       how: ["Just send like normal. If SCODE is busy, the Rush Hour banner shows your place and wait.", "Keep typing: extra prompts line up and send one at a time.", "Tap Use Mini on a waiting prompt to get an answer sooner."] },
@@ -8316,16 +8475,16 @@
       how: ["Open Settings (the sliders icon) and tap Read next to Privacy Policy.", "Turn on a mode, like Search, and look next to the model name for the total.", "Search +5, Link +1, Study +5, Weather +1, Image Gen +30, on top of the model."] },
     { id: "f-search", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Search",
       text: "SCODE AI can now check the web before it answers, so you get up-to-date info instead of old guesses. Every answer shows the sites it used.",
-      how: ["Sign in, then pick General or General Plus.", "Tap the Search button next to the text box so it lights up.", "Ask anything current, like “When do the Canucks play next?”", "Tap a numbered source under the answer to open the page."] },
+      how: ["Sign in, then pick General Plus or General Ultra.", "Tap the Search button next to the text box so it lights up.", "Ask anything current, like “When do the Canucks play next?”", "Tap a numbered source under the answer to open the page."] },
     { id: "f-link", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Link",
       text: "Paste a link to a web page, PDF or shared Google Doc and SCODE AI reads it for you. You also get a correct MLA or APA citation, built from the page's own details.",
-      how: ["Sign in, then pick General or General Plus.", "Tap the Link button next to the text box so it lights up.", "Paste a link, with or without a question, and send.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; Link keeps using the same page until you tap ✕."] },
+      how: ["Sign in, then pick General Plus or General Ultra.", "Tap the Link button next to the text box so it lights up.", "Paste a link, with or without a question, and send.", "Under the answer, tap Cite, pick MLA 9 or APA 7, then Copy.", "Ask follow-up questions; Link keeps using the same page until you tap ✕."] },
     { id: "f-image", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "SCODE Image Gen",
       text: "Describe a picture and SCODE AI makes it, right on the SCODE server, in about 40 seconds. Every picture goes through a safety filter, and nothing is saved on the server.",
       how: ["Sign in, then tap the Image button next to the text box (or just type “draw me…”).", "Describe what you want to see, like “a red kayak on a calm lake at sunrise”.", "Watch it appear, then tap Download to save it, or Try again for a new version."] },
     { id: "f-study", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "Study Mode",
       text: "Turn notes, a photo of a worksheet, a link or just a topic into flip-card flashcards or a practice quiz, with hints, explanations and a score at the end.",
-      how: ["Sign in, then pick General, General Plus or General Ultra.", "Tap the Study button next to the text box so it lights up.", "Pick Flashcards or Practice quiz in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Tap a card to flip it, or pick an answer. You'll see your score at the end."] },
+      how: ["Sign in, then pick General Plus, General Pro or General Ultra.", "Tap the Study button next to the text box so it lights up.", "Pick Flashcards or Practice quiz in the bar above the text box.", "Paste your notes, add a photo, paste a link, or name a topic, and send.", "Tap a card to flip it, or pick an answer. You'll see your score at the end."] },
     { id: "f-weather", type: "feature", date: "2026-10-03", showFrom: "2026-10-03T00:00:00-07:00", title: "Local weather",
       text: "Ask about the weather and SCODE AI answers from the real Environment Canada forecast for your town. A card under the answer shows right now, the next 12 hours, the week ahead and any weather warnings. Works on every model for +1 point.",
       how: ["Ask something like “Do I need a jacket tomorrow?” and the Weather button turns on by itself, or tap Weather to keep it on.", "The first time, tap Use my location or pick your town in the bar above the text box.", "Ask follow-ups like “What about Sunday?” and it keeps using the same forecast.", "To change towns, tap Change in that bar, or name the town in your question."] },
@@ -10458,7 +10617,7 @@
       wxSkipped = false; wxPicking = false; wxFollowOff = false;   // (weatherOn stays, like the other modes)
       P = { text, linkToSend, imgNow, scNow, scHint, fyNow, fyBody, wxWanted, wxSendTo, tier: selectedTier,
             web: searchUnlocked() && webOn && WEB_TIERS.has(selectedTier), study: studyActive() && !isGuest(), studyKind,
-            image: pendingImageBase64 || null, chatId: currentChatId };
+            image: pendingImageBase64 || null, chatId: currentChatId, deep: deepActive() };
       el.input.value = "";
       autoGrow();
       if (rushShouldQueue()) { clearPendingImage(); updateSendState(); rushAdd(P); return; }
@@ -10516,7 +10675,7 @@
     const kindAtSend = P.studyKind;
     const controller = new AbortController();
     // Long enough to comfortably outlast the server's own longest timeout —
-    // General Ultra's complex photo analysis can run up to 900s
+    // General Pro and General Ultra photo questions (and Deep Think) can run up to 900s
     // server-side, so this needs real margin above that.
     const clientTimeout = setTimeout(() => controller.abort(), studyNow && kindAtSend === "plus" ? 2400000 : 950000);
 
@@ -10540,6 +10699,7 @@
           weather: wxWanted && !studyNow && !linkToSend ? (wxSendTo ? { code: wxSendTo.code } : {}) : undefined,
           scores: scNow && !studyNow && !linkToSend ? (scHint ? { league: scHint } : {}) : undefined,
           ferry: fyNow && !studyNow && !linkToSend ? fyBody : undefined,
+          deep: (P.deep && tierAtSend === "l5" && !studyNow && !imgNow) || undefined,
           job: jobId ? { id: jobId, chat: jobChat.id } : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
@@ -10642,8 +10802,8 @@
     let busy = false;
     function fitTools() {
       if (busy) return; busy = true;
-      tools.classList.remove("fit1", "fit2", "fit3", "fit4", "fit5", "fit6");
-      for (const k of ["fit1", "fit2", "fit3", "fit4", "fit5", "fit6"]) { if (!over()) break; tools.classList.add(k); }
+      tools.classList.remove("fit1", "fit2", "fit3", "fit4", "fit5", "fit6", "fit7", "fit8");
+      for (const k of ["fit1", "fit2", "fit3", "fit4", "fit5", "fit6", "fit7", "fit8"]) { if (!over()) break; tools.classList.add(k); }
       busy = false;
     }
     window.fitTools = fitTools;
@@ -11158,7 +11318,7 @@
   //  look that glows and grows a little when you tap it.
   // =====================================================================
   function lookBubble() { return document.documentElement.classList.contains("look-bubble"); }
-  const BM_HUE = { l1: 0.83, l2: 0.5, l2_5: 0.34, l3: 0.17, l4: 0.62 };
+  const BM_HUE = { l1: 0.83, l2_5: 0.34, l4: 0.62, l5: 0.9 };
   const BM_LOCK = '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2.4"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4"/></svg>';
 
   // ---------- the row of model bubbles ----------
@@ -11217,11 +11377,11 @@
       const L = gbLayer(comp, 44);
       gbAdd(L, comp, { kind: "panel", move: false, h0: 0.45 });
       gbAdd(L, $("attach-btn"), { group: "tools", h0: 0.45 });
-      [["web-btn", 0.7], ["link-btn", 0.52], ["study-btn", 0.12], ["wx-btn", 0.8], ["sc-btn", 0.06], ["fy-btn", 0.64], ["img-btn", 0.3]]
+      [["web-btn", 0.7], ["link-btn", 0.52], ["study-btn", 0.12], ["wx-btn", 0.8], ["sc-btn", 0.06], ["fy-btn", 0.64], ["img-btn", 0.3], ["deep-btn", 0.9]]
         .forEach(([id, h]) => gbAdd(L, $(id), { group: "tools", h0: h, state: on }));
       gbAdd(L, el.sendBtn || $("send-btn"), { group: "tools", h0: 0.3, state: (e) => ({ on: !e.disabled, dim: e.disabled }) });
       document.querySelectorAll("#bm-row .bm").forEach(b => gbAdd(L, b, {
-        group: "models", h0: BM_HUE[b.dataset.tier] !== undefined ? BM_HUE[b.dataset.tier] : 0.5, hs: b.dataset.tier === "l4" ? 0.16 : 0.09,
+        group: "models", h0: BM_HUE[b.dataset.tier] !== undefined ? BM_HUE[b.dataset.tier] : 0.5, hs: b.dataset.tier === "l5" ? 0.16 : 0.09,
         state: (e) => ({ sel: e.classList.contains("sel"), dim: e.classList.contains("low") }),
       }));
     }
@@ -11599,7 +11759,7 @@
     try {
       const res = await fetch(PROXY_URL + "/line/join", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ text: P.text, tier: P.tier, web: !!P.web, link: !!P.linkToSend, study: P.study ? { kind: P.studyKind } : null,
-          image: !!P.imgNow, has_images: hadImg || !!P.image, scores: !!P.scNow, ferry: !!P.fyNow }) });
+          image: !!P.imgNow, has_images: hadImg || !!P.image, scores: !!P.scNow, ferry: !!P.fyNow, deep: !!P.deep }) });
       const data = await res.json().catch(() => ({}));
       if (data.rush) RQ.pub = data.rush;
       if (data.error === "rush_full") { rhDrop(it, true); rhRestore(P); showNote(data.message); return; }
@@ -11823,7 +11983,7 @@
   document.addEventListener("click", e => { if (RQ.help && !e.target.closest(".rh-pop, .rh-help")) rhHelp(false); });
   async function rhUseMini(it) {
     if (it.ticket && it.ticket.id) fetch(PROXY_URL + "/line/" + encodeURIComponent(it.ticket.id), { method: "DELETE", headers: authHeaders() }).catch(() => {});
-    it.plan = Object.assign({}, it.plan, { tier: "l1", web: false, study: false });
+    it.plan = Object.assign({}, it.plan, { tier: "l1", web: false, study: false, deep: false });
     it.ticket = null; it.status = "joining"; it.total = 0;
     rhRender();
     await rhJoin(it);
