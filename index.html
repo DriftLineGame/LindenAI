@@ -1767,18 +1767,56 @@
   @keyframes scTip { to { opacity: .9; } }
   @keyframes scOrbIn { to { opacity: 1; transform: none; } }
   .sc-orb.sm { width: 100%; height: 118px; margin: 0; }
-  /* General Ultra: the Ultra Core (in place of the bubble) and the light around the screen */
-  .sc-orb.u-core { height: 132px; margin: 2px 0 0 -6px; }
-  .sc-orb.u-core.melt { height: 0; }
+  /* ---------- General Ultra: thinking + writing ---------- */
+  .sc-orb.u-core { height: 92px; width: min(100%, 560px); margin: 4px 0 0 0; padding-top: 6px; box-sizing: border-box; }
+  .sc-orb.u-core.melt { height: 0; padding-top: 0; transform: translateY(-10px); filter: blur(6px); }
+  .u-lines { position: relative; }
+  .u-lines i { position: relative; display: block; height: 11px; border-radius: 999px; margin: 0 0 12px; overflow: hidden;
+    background: linear-gradient(90deg, rgba(255,95,176,.16), rgba(139,107,255,.42) 30%, rgba(63,193,255,.3) 55%, rgba(255,95,176,.16) 80%, rgba(139,107,255,.16));
+    background-size: 260% 100%; animation: uFlow 2.6s linear infinite, uLineIn .7s cubic-bezier(.2,.8,.2,1) both; transform-origin: left center; }
+  .u-lines i::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.55) 45%, transparent 70%); background-size: 250% 100%;
+    animation: uSheen 2.2s cubic-bezier(.45,0,.55,1) infinite; mix-blend-mode: overlay; }
+  .u-lines i:nth-child(1) { width: 94%; }
+  .u-lines i:nth-child(2) { width: 81%; animation-delay: -.5s, .09s; }
+  .u-lines i:nth-child(2)::after { animation-delay: .25s; }
+  .u-lines i:nth-child(3) { width: 58%; animation-delay: -1s, .18s; }
+  .u-lines i:nth-child(3)::after { animation-delay: .5s; }
+  .u-lines::before { content: ""; position: absolute; left: 0; right: 10%; top: -6px; bottom: 0; border-radius: 30px; pointer-events: none;
+    background: radial-gradient(60% 80% at 25% 40%, rgba(255,95,176,.16), transparent 70%), radial-gradient(60% 80% at 70% 60%, rgba(63,193,255,.13), transparent 70%);
+    filter: blur(14px); animation: uDrift 5s ease-in-out infinite alternate; }
+  body.light .u-lines i { background: linear-gradient(90deg, rgba(255,95,176,.14), rgba(139,107,255,.34) 30%, rgba(63,193,255,.26) 55%, rgba(255,95,176,.14) 80%, rgba(139,107,255,.14));
+    background-size: 260% 100%; }
+  .u-core.deep .u-lines i { animation-duration: 1.5s, .7s; }
+  .u-core.deep .u-lines i::after { animation-duration: 1.3s; }
+  @keyframes uFlow { to { background-position: -260% 0; } }
+  @keyframes uSheen { 0% { background-position: 160% 0; } 100% { background-position: -90% 0; } }
+  @keyframes uLineIn { from { opacity: 0; transform: scaleX(.35); } to { opacity: 1; transform: none; } }
+  @keyframes uDrift { from { transform: translateX(-3%); opacity: .8; } to { transform: translateX(4%); opacity: 1; } }
+  /* the sparkle beside the label */
+  .u-spark { width: 26px; height: 26px; display: block; animation: uSpin 6s linear infinite; filter: drop-shadow(0 0 6px rgba(139,107,255,.55)); }
+  .u-spark .s2 { transform-origin: 12px 12px; animation: uBreath 1.8s ease-in-out infinite; }
+  .ultra-row.deep .u-spark { animation-duration: 2.6s; }
+  @keyframes uSpin { to { transform: rotate(360deg); } }
+  @keyframes uBreath { 0%, 100% { transform: scale(.82); opacity: .75; } 50% { transform: scale(1.05); opacity: 1; } }
+  .ultra-row .pending-glow::before { display: none; }
   .pending-text.u-label { background: linear-gradient(100deg, #ff5fb0, #8b6bff 40%, #3fc1ff 60%, #ff5fb0); background-size: 220% 100%;
     -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; font-weight: 600;
     animation: uLabel 2.4s linear infinite; }
   .pending-text.u-label.swap { animation: labelSwap 0.45s ease, uLabel 2.4s linear infinite; }
   @keyframes uLabel { to { background-position: -220% 0; } }
-  #ultra-edge { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; pointer-events: none; z-index: 60; opacity: 0;
-    transition: opacity .7s ease; filter: blur(1.5px); }
-  #ultra-edge.on { opacity: 1; }
-  @media (prefers-reduced-motion: reduce) { .pending-text.u-label { animation: none; } }
+  /* while Ultra writes */
+  .ultra-row.writing .pending.tail { gap: 8px; }
+  .ultra-row.writing .pending.tail .pending-text { opacity: 1; max-width: 260px; font-size: 13.5px; }
+  .ultra-row.writing .md > :is(p, h2, h3, h4):last-child::after,
+  .ultra-row.writing .md > :is(ul, ol):last-child > li:last-child::after {
+    content: ""; display: inline-block; width: .5em; height: 1.05em; margin-left: 3px; vertical-align: -0.16em; border-radius: 3px;
+    background: linear-gradient(180deg, #ff5fb0, #8b6bff 55%, #3fc1ff); box-shadow: 0 0 10px rgba(139,107,255,.65);
+    animation: uCaret 1s ease-in-out infinite; -webkit-text-fill-color: initial; }
+  @keyframes uCaret { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+  @media (prefers-reduced-motion: reduce) {
+    .u-lines i, .u-lines i::after, .u-lines::before, .u-spark, .u-spark .s2, .pending-text.u-label, .ultra-row.writing .md *::after { animation: none !important; }
+  }
   .md.sc-flow { --g1: #d6307f; --g2: #7546ff; --g3: #0a86d0; --g4: #4f5bd5; --g5: #e25a12; }
   body:not(.light) .md.sc-flow { --g1: #ff7cc4; --g2: #b49dff; --g3: #64d3ff; --g4: #8fa8ff; --g5: #ffb07a; }
   .md.sc-flow { background-image: linear-gradient(100deg,
@@ -3505,7 +3543,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://consultancy-buck-realize-cardiac.trycloudflare.com";
+  const PROXY_URL = "https://recommendation-put-diagram-asking.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -5183,14 +5221,14 @@
 
   function buildLoaderRow(ultra) {
     const row = document.createElement("div");
-    row.className = "msg assistant" + (ultra ? " ultra-row" : "");
+    row.className = "msg assistant" + (ultra ? " ultra-row" + (ultra.deep ? " deep" : "") : "");
     row.innerHTML = `
       <div class="pending">
         <span class="pending-glow">${liveMarkSVG()}</span>
         <span class="pending-text shimmer">Thinking</span>
         <span class="pending-time"></span>
       </div>`;
-    const orb = ultra ? makeUltraCore(ultra) : makeOrb({ tip: true });
+    const orb = ultra ? makeUltraGlow(ultra) : makeOrb({ tip: true });
     row.appendChild(orb.el);
     row._orb = orb;
     const lbl = row.querySelector(".pending-text");
@@ -5198,12 +5236,15 @@
     const hasImage = messages.some(m => m.images && m.images.length);
     const phrases = ultra
       ? (hasImage ? ["Ultra is reading your photo", "Picking out the details", "Putting it together"]
-         : ultra.deep ? ["Ultra is thinking deeply", "Working it through", "Checking the steps"]
+         : ultra.deep ? ["Ultra is thinking deeply", "Working it through", "Checking each step"]
          : ["Ultra is thinking", "Working it out", "Putting it together"])
       : hasImage
       ? ["Looking at your photo", "Reading the details", "Putting it together"]
       : ["Thinking", "Working on it", "Putting it together"];
-    if (ultra) { lbl.classList.add("u-label"); lbl.textContent = phrases[0]; UFX.start(row, !!ultra.deep); }
+    if (ultra) {
+      lbl.classList.add("u-label"); lbl.textContent = phrases[0];
+      row.querySelector(".pending-glow").innerHTML = U_SPARK;
+    }
     const started = Date.now();
     let i = 0;
     function setLabel(t) { lbl.textContent = t; lbl.classList.remove("swap"); void lbl.offsetWidth; lbl.classList.add("swap"); }
@@ -5222,204 +5263,34 @@
     return row;
   }
 
-  // =====================================================================
-  //  General Ultra visuals
-  //  1. The Ultra Core: rings of light that ripple and turn around a bright
-  //     core, with sparks on tilted orbits. It sits where the reply appears
-  //     and melts away when the first words come in.
-  //  2. Edge light: while Ultra works, colour flows around the edge of the
-  //     screen in waves (like a voice assistant listening). Strong while it
-  //     thinks, faster with Deep Think, calm while it writes, then it fades.
-  // =====================================================================
-  const U_COLS = [[255, 95, 176], [139, 107, 255], [63, 193, 255], [178, 120, 255]];
-  function uCol(h, a) {
-    h = ((h % 1) + 1) % 1;
-    const n = U_COLS.length, x = h * n, i = Math.floor(x), f = x - i, A = U_COLS[i % n], B = U_COLS[(i + 1) % n];
-    const k = f * f * (3 - 2 * f);
-    return `rgba(${Math.round(A[0] + (B[0] - A[0]) * k)},${Math.round(A[1] + (B[1] - A[1]) * k)},${Math.round(A[2] + (B[2] - A[2]) * k)},${a})`;
-  }
-
-  function makeUltraCore(opts) {
-    const o = opts || {};
+  // ---------- General Ultra: the thinking look ----------
+  const U_SPARK = '<svg class="u-spark" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="uSpG" x1="0" y1="0" x2="1" y2="1">'
+    + '<stop offset="0" stop-color="#ff5fb0"/><stop offset=".55" stop-color="#8b6bff"/><stop offset="1" stop-color="#3fc1ff"/></linearGradient></defs>'
+    + '<g class="s2"><path d="M12 1.8c.5 4.6 2.2 7.6 4.6 8.9 1.3.7 3 1.1 5.6 1.3-2.6.2-4.3.6-5.6 1.3-2.4 1.3-4.1 4.3-4.6 8.9-.5-4.6-2.2-7.6-4.6-8.9C6.1 12.6 4.4 12.2 1.8 12c2.6-.2 4.3-.6 5.6-1.3C9.8 9.4 11.5 6.4 12 1.8z" fill="url(#uSpG)"/></g></svg>';
+  function makeUltraGlow(opts) {
     const wrap = document.createElement("div");
-    wrap.className = "sc-orb u-core";
+    wrap.className = "sc-orb u-core" + (opts && opts.deep ? " deep" : "");
     wrap.setAttribute("aria-hidden", "true");
-    wrap.innerHTML = "<canvas></canvas>";
-    const cv = wrap.querySelector("canvas"), ctx = cv.getContext("2d");
-    let W = 0, H = 0, dpr = 1, raf = 0, alive = true, melted = false, meltAt = 0;
-    const t0 = performance.now(), deep = !!o.deep, seed = Math.random() * 6;
-    const SP = deep ? 1.75 : 1;
-    const sparks = Array.from({ length: deep ? 8 : 5 }, (_, i) => ({ tilt: i * Math.PI / (deep ? 8 : 5) + seed, sp: 0.9 + (i % 3) * 0.35, ph: i * 1.7, h: i / (deep ? 8 : 5) }));
-    function size() {
-      const w = wrap.clientWidth, h = wrap.clientHeight;
-      if (!w || !h) return false;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      if (w !== W || h !== H) { W = w; H = h; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
-      return true;
-    }
-    function ring(cx, cy, R, t, k) {
-      const pts = 96;
-      ctx.beginPath();
-      for (let i = 0; i <= pts; i++) {
-        const a = (i / pts) * Math.PI * 2;
-        const wob = 1 + 0.075 * Math.sin(3 * a + t * (1.3 + k * 0.4) * SP + k) + 0.045 * Math.sin(5 * a - t * (2.1 - k * 0.3) * SP + seed)
-          + 0.025 * Math.sin(8 * a + t * 3.2 * SP);
-        const r = R * wob, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.92;
-        if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
-      }
-      ctx.closePath();
-      let g;
-      if (ctx.createConicGradient) {
-        g = ctx.createConicGradient(t * (0.6 + k * 0.35) * SP * (k % 2 ? -1 : 1) + k, cx, cy);
-        for (let i = 0; i <= 8; i++) g.addColorStop(i / 8, uCol(i / 8 + k * 0.17, 0.95));
-      } else {
-        g = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
-        g.addColorStop(0, uCol(k * 0.2, .95)); g.addColorStop(.5, uCol(.33 + k * .2, .95)); g.addColorStop(1, uCol(.66 + k * .2, .95));
-      }
-      ctx.strokeStyle = g;
-      return g;
-    }
-    function draw(now) {
-      if (!alive) return;
-      raf = requestAnimationFrame(draw);
-      if (!size()) return;
-      const t = (now - t0) / 1000;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, W, H);
-      const intro = Math.min(1, t / 0.7), e = 1 - Math.pow(1 - intro, 3);
-      let sx = 1, sy = 1, fade = 1;
-      if (melted) { const m = Math.min(1, (now - meltAt) / 650); sx = 1 + 0.5 * m; sy = 1 - 0.75 * m; fade = 1 - m; }
-      const cx = Math.min(78, W * 0.5), cy = H * 0.5;
-      const R = Math.min(H * 0.34, 46) * (0.55 + 0.45 * e);
-      ctx.save();
-      ctx.translate(cx, cy); ctx.scale(sx, sy); ctx.translate(-cx, -cy);
-      ctx.globalAlpha = fade * e;
-      // soft halo
-      const pulse = 0.5 + 0.5 * Math.sin(t * 2.2 * SP);
-      const HR = Math.max(R, Math.min(R * 2.2, cy - 1, cx - 1));
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, HR);
-      halo.addColorStop(0, uCol(t * 0.05, 0.42 + 0.12 * pulse));
-      halo.addColorStop(0.45, uCol(t * 0.05 + 0.33, 0.16));
-      halo.addColorStop(1, "rgba(139,107,255,0)");
-      ctx.fillStyle = halo;
-      ctx.beginPath(); ctx.arc(cx, cy, HR, 0, Math.PI * 2); ctx.fill();
-      ctx.globalCompositeOperation = "lighter";
-      // three rippling rings
-      for (let k = 0; k < 3; k++) {
-        ring(cx, cy, R * (0.62 + 0.2 * k), t, k);
-        ctx.lineWidth = 6.5 - k * 1.2; ctx.globalAlpha = fade * e * 0.22; ctx.stroke();
-        ctx.lineWidth = 2.1 - k * 0.35; ctx.globalAlpha = fade * e * (0.95 - k * 0.18); ctx.stroke();
-      }
-      // sparks on tilted orbits (like electrons)
-      for (const s of sparks) {
-        const a = t * s.sp * 1.6 * SP + s.ph;
-        const ox = Math.cos(a) * R * 1.32, oy = Math.sin(a) * R * 0.42;
-        const x = cx + ox * Math.cos(s.tilt) - oy * Math.sin(s.tilt), y = cy + ox * Math.sin(s.tilt) + oy * Math.cos(s.tilt);
-        const front = Math.sin(a) > 0 ? 1 : 0.45;
-        const gl = ctx.createRadialGradient(x, y, 0, x, y, 7);
-        gl.addColorStop(0, `rgba(255,255,255,${0.95 * front})`); gl.addColorStop(0.35, uCol(s.h + t * 0.1, 0.8 * front)); gl.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.globalAlpha = fade * e; ctx.fillStyle = gl;
-        ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2); ctx.fill();
-      }
-      // white-hot core
-      const cr = R * (0.3 + 0.06 * Math.sin(t * 3.1 * SP));
-      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr * 1.9);
-      core.addColorStop(0, "rgba(255,255,255,0.98)"); core.addColorStop(0.35, uCol(t * 0.12, 0.85)); core.addColorStop(1, "rgba(139,107,255,0)");
-      ctx.globalAlpha = fade * e; ctx.fillStyle = core;
-      ctx.beginPath(); ctx.arc(cx, cy, cr * 1.9, 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
-      ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
-      if (reduceMotion) { cancelAnimationFrame(raf); }
-    }
-    raf = requestAnimationFrame(draw);
+    wrap.innerHTML = '<div class="u-lines"><i></i><i></i><i></i></div>';
+    let gone = false;
     return {
       el: wrap,
       melt() {
-        if (melted) return;
-        melted = true; meltAt = performance.now();
+        if (gone) return; gone = true;
         wrap.classList.add("melt");
-        setTimeout(() => { alive = false; cancelAnimationFrame(raf); wrap.remove(); }, reduceMotion ? 0 : 950);
+        setTimeout(() => wrap.remove(), reduceMotion ? 0 : 900);
       },
-      stop() { alive = false; cancelAnimationFrame(raf); wrap.remove(); },
+      stop() { gone = true; wrap.remove(); },
     };
   }
-
-  // ---- edge light ----
-  const UFX = { cv: null, ctx: null, raf: 0, on: false, row: null, deep: false, e: 0, energy: 0, speed: 1, t: 0, last: 0, W: 0, H: 0, pts: null };
-  UFX.start = function (row, deep) {
-    if (!UFX.cv) {
-      const c = document.createElement("canvas");
-      c.id = "ultra-edge"; c.setAttribute("aria-hidden", "true");
-      document.body.appendChild(c);
-      UFX.cv = c; UFX.ctx = c.getContext("2d");
-    }
-    UFX.row = row; UFX.deep = deep; UFX.on = true;
-    UFX.cv.classList.add("on");
-    if (!UFX.raf) { UFX.last = performance.now(); UFX.raf = requestAnimationFrame(UFX.frame); }
-  };
-  UFX.phase = function () {
-    const r = UFX.row;
-    if (!r || !r.isConnected) return "write";
-    if (r.querySelector(".think:not(.finished)")) return "deep";
-    return r.querySelector(".md") ? "write" : (UFX.deep ? "deep" : "think");
-  };
-  UFX.layout = function () {
-    const S = 0.5;   // drawn at half size: it's all soft light anyway
-    const w = window.innerWidth, h = window.innerHeight;
-    if (w === UFX.W && h === UFX.H && UFX.pts) return;
-    UFX.W = w; UFX.H = h;
-    UFX.cv.width = Math.max(2, Math.round(w * S)); UFX.cv.height = Math.max(2, Math.round(h * S));
-    // points around a rounded rectangle on the very edge of the screen
-    const r = Math.min(touchLike ? 44 : 18, w / 4, h / 4), pts = [];
-    const segs = [];
-    const L = 2 * (w + h) - 8 * r + 2 * Math.PI * r;
-    const N = Math.max(100, Math.min(200, Math.round(L / 12)));
-    for (let i = 0; i < N; i++) {
-      let d = (i / N) * L, x, y;
-      const top = w - 2 * r, side = h - 2 * r, arc = Math.PI * r / 2;
-      const seq = [["l", top, (u) => [r + u, 0]], ["a", arc, (u) => { const a = -Math.PI / 2 + u / r; return [w - r + Math.cos(a) * r, r + Math.sin(a) * r]; }],
-        ["l", side, (u) => [w, r + u]], ["a", arc, (u) => { const a = u / r; return [w - r + Math.cos(a) * r, h - r + Math.sin(a) * r]; }],
-        ["l", top, (u) => [w - r - u, h]], ["a", arc, (u) => { const a = Math.PI / 2 + u / r; return [r + Math.cos(a) * r, h - r + Math.sin(a) * r]; }],
-        ["l", side, (u) => [0, h - r - u]], ["a", arc, (u) => { const a = Math.PI + u / r; return [r + Math.cos(a) * r, r + Math.sin(a) * r]; }]];
-      for (const sgm of seq) { if (d <= sgm[1] || sgm === seq[seq.length - 1]) { [x, y] = sgm[2](Math.min(d, sgm[1])); break; } d -= sgm[1]; }
-      pts.push([x * S, y * S]);
-    }
-    UFX.pts = pts; UFX.S = S;
-  };
-  UFX.frame = function (now) {
-    const dt = Math.min(0.05, (now - UFX.last) / 1000); UFX.last = now;
-    if (UFX.on && !sending) { UFX.on = false; UFX.cv.classList.remove("on"); }
-    const ph = UFX.on ? UFX.phase() : "off";
-    const target = { think: 1, deep: 1.2, write: 0.55, off: 0 }[ph];
-    const speedT = { think: 1, deep: 1.75, write: 0.7, off: 0.6 }[ph];
-    UFX.energy += (target - UFX.energy) * Math.min(1, dt * 2.2);
-    UFX.speed += (speedT - UFX.speed) * Math.min(1, dt * 1.5);
-    UFX.t += dt * UFX.speed;
-    if (!UFX.on && UFX.energy < 0.02) {
-      UFX.ctx.clearRect(0, 0, UFX.cv.width, UFX.cv.height); UFX.raf = 0; UFX.energy = 0; return;
-    }
-    UFX.layout();
-    const ctx = UFX.ctx, P = UFX.pts, N = P.length, t = UFX.t, S = UFX.S, E = UFX.energy;
-    const small = Math.min(UFX.W, UFX.H) < 600 ? 0.62 : 1;
-    ctx.clearRect(0, 0, UFX.cv.width, UFX.cv.height);
-    ctx.globalCompositeOperation = "lighter";
-    ctx.lineCap = "butt";
-    const passes = [[92, 0.09], [50, 0.15], [24, 0.28], [9, 0.55], [2.6, 0.9]];
-    for (const [pw, pa] of passes) {
-      for (let i = 0; i < N; i++) {
-        const s = i / N, a = P[i], b = P[(i + 1) % N];
-        // waves of light rolling around the edge
-        let th = 0.58 + 0.26 * Math.sin(Math.PI * 2 * (2 * s - 0.23 * t)) + 0.17 * Math.sin(Math.PI * 2 * (3 * s + 0.31 * t) + 1.1)
-          + 0.12 * Math.sin(Math.PI * 2 * (7 * s - 0.9 * t) + 2.3);
-        th = Math.max(0.12, th) * E;
-        ctx.strokeStyle = uCol(s * 1.0 + t * 0.07, Math.min(1, pa * (0.75 + 0.5 * th)));
-        ctx.lineWidth = Math.max(0.5, pw * S * th * small);
-        ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
-      }
-    }
-    ctx.globalCompositeOperation = "source-over";
-    UFX.raf = requestAnimationFrame(UFX.frame);
-  };
+  // While Ultra writes: "Ultra is writing" under the reply and a glowing caret.
+  function ultraWriting(row, tail) {
+    if (!row || !row.classList.contains("ultra-row")) return;
+    row.classList.add("writing");
+    const l = tail && tail.querySelector(".pending-text");
+    if (l) { l.classList.add("u-label"); l.textContent = "Ultra is writing"; }
+    const iv = setInterval(() => { if (!sending || !row.isConnected) { row.classList.remove("writing"); clearInterval(iv); } }, 400);
+  }
 
   // ---------- Web sources under a reply ----------
   function buildSources(sources) {
@@ -8915,6 +8786,7 @@
         liveMd.className = "md";
         liveRow.insertBefore(liveMd, liveTail);
         liveTail.classList.add("tail");
+        ultraWriting(liveRow, liveTail);
         if (stick) scrollToBottom(false);
       }
 
@@ -9130,6 +9002,7 @@
 
       if (!revealed) reveal();
       finishThinking();
+      if (liveRow) liveRow.classList.remove("writing");
       const finalSplit = splitThinkTags(rawContent);
       let finalText = finalSplit.visible;
       let studyEl = null;
