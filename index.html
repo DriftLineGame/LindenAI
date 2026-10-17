@@ -1767,6 +1767,18 @@
   @keyframes scTip { to { opacity: .9; } }
   @keyframes scOrbIn { to { opacity: 1; transform: none; } }
   .sc-orb.sm { width: 100%; height: 118px; margin: 0; }
+  /* General Ultra: the Ultra Core (in place of the bubble) and the light around the screen */
+  .sc-orb.u-core { height: 132px; margin: 2px 0 0 -6px; }
+  .sc-orb.u-core.melt { height: 0; }
+  .pending-text.u-label { background: linear-gradient(100deg, #ff5fb0, #8b6bff 40%, #3fc1ff 60%, #ff5fb0); background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; font-weight: 600;
+    animation: uLabel 2.4s linear infinite; }
+  .pending-text.u-label.swap { animation: labelSwap 0.45s ease, uLabel 2.4s linear infinite; }
+  @keyframes uLabel { to { background-position: -220% 0; } }
+  #ultra-edge { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; pointer-events: none; z-index: 60; opacity: 0;
+    transition: opacity .7s ease; filter: blur(1.5px); }
+  #ultra-edge.on { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .pending-text.u-label { animation: none; } }
   .md.sc-flow { --g1: #d6307f; --g2: #7546ff; --g3: #0a86d0; --g4: #4f5bd5; --g5: #e25a12; }
   body:not(.light) .md.sc-flow { --g1: #ff7cc4; --g2: #b49dff; --g3: #64d3ff; --g4: #8fa8ff; --g5: #ffb07a; }
   .md.sc-flow { background-image: linear-gradient(100deg,
@@ -5169,24 +5181,29 @@
     return row;
   }
 
-  function buildLoaderRow() {
+  function buildLoaderRow(ultra) {
     const row = document.createElement("div");
-    row.className = "msg assistant";
+    row.className = "msg assistant" + (ultra ? " ultra-row" : "");
     row.innerHTML = `
       <div class="pending">
         <span class="pending-glow">${liveMarkSVG()}</span>
         <span class="pending-text shimmer">Thinking</span>
         <span class="pending-time"></span>
       </div>`;
-    const orb = makeOrb({ tip: true });
+    const orb = ultra ? makeUltraCore(ultra) : makeOrb({ tip: true });
     row.appendChild(orb.el);
     row._orb = orb;
     const lbl = row.querySelector(".pending-text");
     const timeEl = row.querySelector(".pending-time");
     const hasImage = messages.some(m => m.images && m.images.length);
-    const phrases = hasImage
+    const phrases = ultra
+      ? (hasImage ? ["Ultra is reading your photo", "Picking out the details", "Putting it together"]
+         : ultra.deep ? ["Ultra is thinking deeply", "Working it through", "Checking the steps"]
+         : ["Ultra is thinking", "Working it out", "Putting it together"])
+      : hasImage
       ? ["Looking at your photo", "Reading the details", "Putting it together"]
       : ["Thinking", "Working on it", "Putting it together"];
+    if (ultra) { lbl.classList.add("u-label"); lbl.textContent = phrases[0]; UFX.start(row, !!ultra.deep); }
     const started = Date.now();
     let i = 0;
     function setLabel(t) { lbl.textContent = t; lbl.classList.remove("swap"); void lbl.offsetWidth; lbl.classList.add("swap"); }
@@ -5204,6 +5221,205 @@
     row._setStage = (text) => { row._lock = true; setLabel(text); };
     return row;
   }
+
+  // =====================================================================
+  //  General Ultra visuals
+  //  1. The Ultra Core: rings of light that ripple and turn around a bright
+  //     core, with sparks on tilted orbits. It sits where the reply appears
+  //     and melts away when the first words come in.
+  //  2. Edge light: while Ultra works, colour flows around the edge of the
+  //     screen in waves (like a voice assistant listening). Strong while it
+  //     thinks, faster with Deep Think, calm while it writes, then it fades.
+  // =====================================================================
+  const U_COLS = [[255, 95, 176], [139, 107, 255], [63, 193, 255], [178, 120, 255]];
+  function uCol(h, a) {
+    h = ((h % 1) + 1) % 1;
+    const n = U_COLS.length, x = h * n, i = Math.floor(x), f = x - i, A = U_COLS[i % n], B = U_COLS[(i + 1) % n];
+    const k = f * f * (3 - 2 * f);
+    return `rgba(${Math.round(A[0] + (B[0] - A[0]) * k)},${Math.round(A[1] + (B[1] - A[1]) * k)},${Math.round(A[2] + (B[2] - A[2]) * k)},${a})`;
+  }
+
+  function makeUltraCore(opts) {
+    const o = opts || {};
+    const wrap = document.createElement("div");
+    wrap.className = "sc-orb u-core";
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.innerHTML = "<canvas></canvas>";
+    const cv = wrap.querySelector("canvas"), ctx = cv.getContext("2d");
+    let W = 0, H = 0, dpr = 1, raf = 0, alive = true, melted = false, meltAt = 0;
+    const t0 = performance.now(), deep = !!o.deep, seed = Math.random() * 6;
+    const SP = deep ? 1.75 : 1;
+    const sparks = Array.from({ length: deep ? 8 : 5 }, (_, i) => ({ tilt: i * Math.PI / (deep ? 8 : 5) + seed, sp: 0.9 + (i % 3) * 0.35, ph: i * 1.7, h: i / (deep ? 8 : 5) }));
+    function size() {
+      const w = wrap.clientWidth, h = wrap.clientHeight;
+      if (!w || !h) return false;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (w !== W || h !== H) { W = w; H = h; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+      return true;
+    }
+    function ring(cx, cy, R, t, k) {
+      const pts = 96;
+      ctx.beginPath();
+      for (let i = 0; i <= pts; i++) {
+        const a = (i / pts) * Math.PI * 2;
+        const wob = 1 + 0.075 * Math.sin(3 * a + t * (1.3 + k * 0.4) * SP + k) + 0.045 * Math.sin(5 * a - t * (2.1 - k * 0.3) * SP + seed)
+          + 0.025 * Math.sin(8 * a + t * 3.2 * SP);
+        const r = R * wob, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.92;
+        if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+      }
+      ctx.closePath();
+      let g;
+      if (ctx.createConicGradient) {
+        g = ctx.createConicGradient(t * (0.6 + k * 0.35) * SP * (k % 2 ? -1 : 1) + k, cx, cy);
+        for (let i = 0; i <= 8; i++) g.addColorStop(i / 8, uCol(i / 8 + k * 0.17, 0.95));
+      } else {
+        g = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+        g.addColorStop(0, uCol(k * 0.2, .95)); g.addColorStop(.5, uCol(.33 + k * .2, .95)); g.addColorStop(1, uCol(.66 + k * .2, .95));
+      }
+      ctx.strokeStyle = g;
+      return g;
+    }
+    function draw(now) {
+      if (!alive) return;
+      raf = requestAnimationFrame(draw);
+      if (!size()) return;
+      const t = (now - t0) / 1000;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      const intro = Math.min(1, t / 0.7), e = 1 - Math.pow(1 - intro, 3);
+      let sx = 1, sy = 1, fade = 1;
+      if (melted) { const m = Math.min(1, (now - meltAt) / 650); sx = 1 + 0.5 * m; sy = 1 - 0.75 * m; fade = 1 - m; }
+      const cx = Math.min(78, W * 0.5), cy = H * 0.5;
+      const R = Math.min(H * 0.34, 46) * (0.55 + 0.45 * e);
+      ctx.save();
+      ctx.translate(cx, cy); ctx.scale(sx, sy); ctx.translate(-cx, -cy);
+      ctx.globalAlpha = fade * e;
+      // soft halo
+      const pulse = 0.5 + 0.5 * Math.sin(t * 2.2 * SP);
+      const HR = Math.max(R, Math.min(R * 2.2, cy - 1, cx - 1));
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, HR);
+      halo.addColorStop(0, uCol(t * 0.05, 0.42 + 0.12 * pulse));
+      halo.addColorStop(0.45, uCol(t * 0.05 + 0.33, 0.16));
+      halo.addColorStop(1, "rgba(139,107,255,0)");
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(cx, cy, HR, 0, Math.PI * 2); ctx.fill();
+      ctx.globalCompositeOperation = "lighter";
+      // three rippling rings
+      for (let k = 0; k < 3; k++) {
+        ring(cx, cy, R * (0.62 + 0.2 * k), t, k);
+        ctx.lineWidth = 6.5 - k * 1.2; ctx.globalAlpha = fade * e * 0.22; ctx.stroke();
+        ctx.lineWidth = 2.1 - k * 0.35; ctx.globalAlpha = fade * e * (0.95 - k * 0.18); ctx.stroke();
+      }
+      // sparks on tilted orbits (like electrons)
+      for (const s of sparks) {
+        const a = t * s.sp * 1.6 * SP + s.ph;
+        const ox = Math.cos(a) * R * 1.32, oy = Math.sin(a) * R * 0.42;
+        const x = cx + ox * Math.cos(s.tilt) - oy * Math.sin(s.tilt), y = cy + ox * Math.sin(s.tilt) + oy * Math.cos(s.tilt);
+        const front = Math.sin(a) > 0 ? 1 : 0.45;
+        const gl = ctx.createRadialGradient(x, y, 0, x, y, 7);
+        gl.addColorStop(0, `rgba(255,255,255,${0.95 * front})`); gl.addColorStop(0.35, uCol(s.h + t * 0.1, 0.8 * front)); gl.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.globalAlpha = fade * e; ctx.fillStyle = gl;
+        ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2); ctx.fill();
+      }
+      // white-hot core
+      const cr = R * (0.3 + 0.06 * Math.sin(t * 3.1 * SP));
+      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, cr * 1.9);
+      core.addColorStop(0, "rgba(255,255,255,0.98)"); core.addColorStop(0.35, uCol(t * 0.12, 0.85)); core.addColorStop(1, "rgba(139,107,255,0)");
+      ctx.globalAlpha = fade * e; ctx.fillStyle = core;
+      ctx.beginPath(); ctx.arc(cx, cy, cr * 1.9, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+      if (reduceMotion) { cancelAnimationFrame(raf); }
+    }
+    raf = requestAnimationFrame(draw);
+    return {
+      el: wrap,
+      melt() {
+        if (melted) return;
+        melted = true; meltAt = performance.now();
+        wrap.classList.add("melt");
+        setTimeout(() => { alive = false; cancelAnimationFrame(raf); wrap.remove(); }, reduceMotion ? 0 : 950);
+      },
+      stop() { alive = false; cancelAnimationFrame(raf); wrap.remove(); },
+    };
+  }
+
+  // ---- edge light ----
+  const UFX = { cv: null, ctx: null, raf: 0, on: false, row: null, deep: false, e: 0, energy: 0, speed: 1, t: 0, last: 0, W: 0, H: 0, pts: null };
+  UFX.start = function (row, deep) {
+    if (!UFX.cv) {
+      const c = document.createElement("canvas");
+      c.id = "ultra-edge"; c.setAttribute("aria-hidden", "true");
+      document.body.appendChild(c);
+      UFX.cv = c; UFX.ctx = c.getContext("2d");
+    }
+    UFX.row = row; UFX.deep = deep; UFX.on = true;
+    UFX.cv.classList.add("on");
+    if (!UFX.raf) { UFX.last = performance.now(); UFX.raf = requestAnimationFrame(UFX.frame); }
+  };
+  UFX.phase = function () {
+    const r = UFX.row;
+    if (!r || !r.isConnected) return "write";
+    if (r.querySelector(".think:not(.finished)")) return "deep";
+    return r.querySelector(".md") ? "write" : (UFX.deep ? "deep" : "think");
+  };
+  UFX.layout = function () {
+    const S = 0.5;   // drawn at half size: it's all soft light anyway
+    const w = window.innerWidth, h = window.innerHeight;
+    if (w === UFX.W && h === UFX.H && UFX.pts) return;
+    UFX.W = w; UFX.H = h;
+    UFX.cv.width = Math.max(2, Math.round(w * S)); UFX.cv.height = Math.max(2, Math.round(h * S));
+    // points around a rounded rectangle on the very edge of the screen
+    const r = Math.min(touchLike ? 44 : 18, w / 4, h / 4), pts = [];
+    const segs = [];
+    const L = 2 * (w + h) - 8 * r + 2 * Math.PI * r;
+    const N = Math.max(100, Math.min(200, Math.round(L / 12)));
+    for (let i = 0; i < N; i++) {
+      let d = (i / N) * L, x, y;
+      const top = w - 2 * r, side = h - 2 * r, arc = Math.PI * r / 2;
+      const seq = [["l", top, (u) => [r + u, 0]], ["a", arc, (u) => { const a = -Math.PI / 2 + u / r; return [w - r + Math.cos(a) * r, r + Math.sin(a) * r]; }],
+        ["l", side, (u) => [w, r + u]], ["a", arc, (u) => { const a = u / r; return [w - r + Math.cos(a) * r, h - r + Math.sin(a) * r]; }],
+        ["l", top, (u) => [w - r - u, h]], ["a", arc, (u) => { const a = Math.PI / 2 + u / r; return [r + Math.cos(a) * r, h - r + Math.sin(a) * r]; }],
+        ["l", side, (u) => [0, h - r - u]], ["a", arc, (u) => { const a = Math.PI + u / r; return [r + Math.cos(a) * r, r + Math.sin(a) * r]; }]];
+      for (const sgm of seq) { if (d <= sgm[1] || sgm === seq[seq.length - 1]) { [x, y] = sgm[2](Math.min(d, sgm[1])); break; } d -= sgm[1]; }
+      pts.push([x * S, y * S]);
+    }
+    UFX.pts = pts; UFX.S = S;
+  };
+  UFX.frame = function (now) {
+    const dt = Math.min(0.05, (now - UFX.last) / 1000); UFX.last = now;
+    if (UFX.on && !sending) { UFX.on = false; UFX.cv.classList.remove("on"); }
+    const ph = UFX.on ? UFX.phase() : "off";
+    const target = { think: 1, deep: 1.2, write: 0.55, off: 0 }[ph];
+    const speedT = { think: 1, deep: 1.75, write: 0.7, off: 0.6 }[ph];
+    UFX.energy += (target - UFX.energy) * Math.min(1, dt * 2.2);
+    UFX.speed += (speedT - UFX.speed) * Math.min(1, dt * 1.5);
+    UFX.t += dt * UFX.speed;
+    if (!UFX.on && UFX.energy < 0.02) {
+      UFX.ctx.clearRect(0, 0, UFX.cv.width, UFX.cv.height); UFX.raf = 0; UFX.energy = 0; return;
+    }
+    UFX.layout();
+    const ctx = UFX.ctx, P = UFX.pts, N = P.length, t = UFX.t, S = UFX.S, E = UFX.energy;
+    const small = Math.min(UFX.W, UFX.H) < 600 ? 0.62 : 1;
+    ctx.clearRect(0, 0, UFX.cv.width, UFX.cv.height);
+    ctx.globalCompositeOperation = "lighter";
+    ctx.lineCap = "butt";
+    const passes = [[92, 0.09], [50, 0.15], [24, 0.28], [9, 0.55], [2.6, 0.9]];
+    for (const [pw, pa] of passes) {
+      for (let i = 0; i < N; i++) {
+        const s = i / N, a = P[i], b = P[(i + 1) % N];
+        // waves of light rolling around the edge
+        let th = 0.58 + 0.26 * Math.sin(Math.PI * 2 * (2 * s - 0.23 * t)) + 0.17 * Math.sin(Math.PI * 2 * (3 * s + 0.31 * t) + 1.1)
+          + 0.12 * Math.sin(Math.PI * 2 * (7 * s - 0.9 * t) + 2.3);
+        th = Math.max(0.12, th) * E;
+        ctx.strokeStyle = uCol(s * 1.0 + t * 0.07, Math.min(1, pa * (0.75 + 0.5 * th)));
+        ctx.lineWidth = Math.max(0.5, pw * S * th * small);
+        ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+      }
+    }
+    ctx.globalCompositeOperation = "source-over";
+    UFX.raf = requestAnimationFrame(UFX.frame);
+  };
 
   // ---------- Web sources under a reply ----------
   function buildSources(sources) {
@@ -10465,7 +10681,7 @@
     if (!chat || !chat.pending || sending || resuming || isGuest() || !serverSync) return;
     const p = chat.pending;
     resuming = true; sending = true; updateSendState();
-    const loaderRow = buildLoaderRow();
+    const loaderRow = buildLoaderRow(chat.tier === "l5" ? {} : null);
     if (loaderRow._setStage) loaderRow._setStage("Picking your reply back up");
     el.messages.appendChild(loaderRow);
     scrollToBottom(true);
@@ -10679,7 +10895,7 @@
     // server-side, so this needs real margin above that.
     const clientTimeout = setTimeout(() => controller.abort(), studyNow && kindAtSend === "plus" ? 2400000 : 950000);
 
-    const loaderRow = buildLoaderRow();
+    const loaderRow = buildLoaderRow(tierAtSend === "l5" && !studyNow && !imgNow ? { deep: !!P.deep } : null);
     el.messages.appendChild(loaderRow);
     scrollToBottom(true);
 
