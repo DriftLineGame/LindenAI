@@ -2551,6 +2551,151 @@
   #apps-open-side.seen .nw { display: none; }
   html.look-bubble #apps-open-side { border-radius: 16px; }
 
+  /* ---------- SCODE Study Sites: the order form ---------- */
+  #order-open-side { display: flex; align-items: center; gap: 10px; width: calc(100% - 16px); margin: -4px 8px 12px; height: 40px; padding: 0 12px; border-radius: 12px;
+    border: 1px solid var(--border); font: inherit; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; text-align: left; background: var(--surface); }
+  #order-open-side:hover { border-color: var(--border-strong); }
+  #order-open-side svg { width: 17px; height: 17px; color: var(--accent); }
+  #order-open-side .pr { margin-left: auto; font-size: 11px; font-weight: 800; color: var(--muted); }
+  html.look-bubble #order-open-side { border-radius: 16px; }
+  #ord-ov { position: fixed; inset: 0; z-index: 395; display: none; }
+  #ord-ov.show { display: block; }
+  #ord-ov [hidden] { display: none !important; }
+  #ord-ov.in .ap-dim { opacity: 1; }
+  #ord-ov.in .ap-shell { opacity: 1; transform: none; }
+  .or-body { padding: 4px 24px 0; }
+  .or-form { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+  .or-main { display: flex; flex-direction: column; gap: 18px; padding-bottom: 28px; min-width: 0; }
+  .or-intro { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.5; max-width: 620px; }
+  .or-sec { border: 1px solid var(--border); border-radius: 20px; background: var(--surface); padding: 18px 18px 20px; }
+  .or-sec > h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 4px; font-size: 16.5px; font-weight: 800; }
+  .or-sec > h3 .n { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-grad); color: #fff; font-size: 13px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .or-sec > .sub { margin: 0 0 14px 36px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .or-lbl { display: block; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 14px 0 8px; }
+  .or-lbl:first-of-type { margin-top: 4px; }
+  .or-cards { display: grid; gap: 10px; }
+  .or-cards.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .or-cards.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .or-card { position: relative; display: flex; flex-direction: column; gap: 3px; padding: 13px 14px; border-radius: 16px; border: 1.5px solid var(--border); background: var(--bg); cursor: pointer;
+    transition: border-color .2s, box-shadow .2s, transform .2s; min-width: 0; }
+  .or-card:hover { border-color: var(--border-strong); }
+  .or-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .or-card .t { font-size: 14.5px; font-weight: 800; padding-right: 22px; }
+  .or-card .p { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+  .or-card .d { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+  .or-card .ck { position: absolute; top: 12px; right: 12px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border-strong); }
+  .or-card:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .or-card:has(input:checked) .ck { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 45%, transparent 50%); }
+  .or-card:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .or-card.ultra:has(input:checked) { border-color: transparent; background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--accent-grad) border-box; }
+  .or-card .tag { align-self: flex-start; margin-top: 4px; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; background: var(--accent-soft); color: var(--accent); }
+  .or-checks { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .or-check { display: flex; align-items: flex-start; gap: 10px; padding: 11px 13px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; font-size: 14px; line-height: 1.4; }
+  .or-check input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--accent); flex: none; }
+  .or-check b { font-weight: 700; }
+  .or-check span.m { display: block; font-size: 12.5px; color: var(--muted); }
+  .or-check.off { opacity: .5; cursor: not-allowed; }
+  .or-deal { margin-top: 10px; font-size: 13px; font-weight: 700; padding: 9px 12px; border-radius: 12px; background: rgba(225,29,116,.10); color: #e0559a; }
+  body.light .or-deal { color: #be185d; }
+  .or-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .or-f { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .or-f.full { grid-column: 1 / -1; }
+  .or-f > span { font-size: 13px; font-weight: 700; }
+  .or-f > span i { font-style: normal; font-weight: 600; color: var(--faint); }
+  .or-f input, .or-f select, .or-f textarea { width: 100%; box-sizing: border-box; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--text);
+    font: inherit; font-size: 15px; padding: 10px 12px; transition: border-color .2s, box-shadow .2s; }
+  .or-f input, .or-f select { height: 44px; }
+  .or-f textarea { resize: vertical; line-height: 1.5; }
+  .or-f input:focus, .or-f select:focus, .or-f textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .or-f.bad input, .or-f.bad textarea { border-color: var(--warn); box-shadow: 0 0 0 3px var(--warn-bg); }
+  .or-drop { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 26px 16px; border-radius: 16px; border: 2px dashed var(--border-strong);
+    background: var(--bg); cursor: pointer; text-align: center; transition: border-color .2s, background .2s; }
+  .or-drop:hover, .or-drop.over { border-color: var(--accent); background: var(--accent-soft); }
+  .or-drop svg { width: 30px; height: 30px; color: var(--accent); }
+  .or-drop b { font-size: 15px; }
+  .or-drop span { font-size: 12.5px; color: var(--muted); }
+  .or-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .or-drop.bad { border-color: var(--warn); }
+  .or-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 8px; margin-top: 10px; }
+  .or-thumbs:empty { display: none; }
+  .or-th { position: relative; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); }
+  .or-th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .or-th .pdf { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; font-weight: 800; color: var(--muted); padding: 6px; text-align: center; word-break: break-all; }
+  .or-th .pdf b { font-size: 15px; color: var(--accent); }
+  .or-th .busy { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; }
+  .or-th .busy::after { content: ""; width: 20px; height: 20px; border-radius: 50%; border: 2.5px solid rgba(255,255,255,.4); border-top-color: #fff; animation: apSpin .8s linear infinite; }
+  .or-th button { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; border: none; background: rgba(15,12,30,.72); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .or-th button svg { width: 12px; height: 12px; }
+  .or-count { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+  .or-count .warn { color: var(--warn); }
+  .or-seg { display: inline-flex; padding: 3px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); gap: 2px; }
+  .or-seg label { position: relative; padding: 8px 14px; border-radius: 9px; font-size: 13.5px; font-weight: 700; cursor: pointer; color: var(--muted); }
+  .or-seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .or-seg label:has(input:checked) { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+  .or-seg label:has(input:focus-visible) { outline: 2px solid var(--accent); }
+  .or-terms { margin-top: 2px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border); }
+  .or-terms summary { cursor: pointer; padding: 11px 14px; font-size: 13.5px; font-weight: 700; color: var(--accent); }
+  .or-terms ul { margin: 0; padding: 0 16px 12px 32px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .or-terms li { margin: 3px 0; }
+  .or-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .or-side { position: sticky; top: 4px; display: flex; flex-direction: column; gap: 12px; padding-bottom: 28px; }
+  .or-sum { border-radius: 20px; border: 1px solid var(--border); background: var(--surface); padding: 16px 16px 18px; }
+  .or-sum h4 { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .or-lines { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+  .or-lines div { display: flex; justify-content: space-between; gap: 10px; }
+  .or-lines .neg { color: #e0559a; font-weight: 700; }
+  body.light .or-lines .neg { color: #be185d; }
+  .or-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .or-total span { font-size: 14px; font-weight: 700; }
+  .or-total b { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+  .or-est { margin: 6px 0 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+  .or-send { width: 100%; height: 50px; margin-top: 14px; border: none; border-radius: 14px; background: var(--accent-grad); color: #fff; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(117,70,255,.35); transition: transform .2s, filter .2s; }
+  .or-send:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .or-send:disabled { opacity: .6; cursor: default; transform: none; }
+  .or-err { margin-top: 10px; font-size: 13px; color: var(--warn); line-height: 1.45; }
+  .or-err:empty { display: none; }
+  .or-prog { margin-top: 12px; }
+  .or-prog .bar { height: 8px; border-radius: 8px; background: var(--surface-2); overflow: hidden; }
+  .or-prog .bar i { display: block; height: 100%; width: 0; background: var(--accent-grad); border-radius: 8px; transition: width .2s; }
+  .or-prog .tx { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+  .or-why { border-radius: 20px; border: 1px solid var(--border); background: var(--surface); padding: 14px 16px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .or-why b { color: var(--text); }
+  .or-why div + div { margin-top: 8px; }
+  .or-done { max-width: 520px; margin: 30px auto 40px; text-align: center; }
+  .or-done .ok { width: 76px; height: 76px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-grad); display: flex; align-items: center; justify-content: center; box-shadow: 0 14px 40px rgba(117,70,255,.4);
+    animation: orPop .6s cubic-bezier(.2,1.5,.3,1) both; }
+  .or-done .ok svg { width: 38px; height: 38px; color: #fff; }
+  .or-done h3 { margin: 0 0 8px; font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+  .or-done p { margin: 0 0 10px; font-size: 15px; color: var(--muted); line-height: 1.55; }
+  .or-done .id { display: inline-block; margin: 6px 0 16px; padding: 8px 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); font-family: var(--mono); font-size: 16px; font-weight: 700; }
+  .or-done .or-send { max-width: 260px; }
+  @keyframes orPop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+  @media (max-width: 900px) {
+    .or-form { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .or-side { position: sticky; bottom: 0; top: auto; margin: 0 -24px; padding: 0; gap: 0; z-index: 2; }
+    .or-why { display: none; }
+    .or-sum { border-radius: 20px 20px 0 0; border-bottom: none; padding: 12px 18px 14px; box-shadow: 0 -10px 30px rgba(0,0,0,.18); }
+    .or-sum h4, .or-lines { display: none; }
+    .or-total { margin-top: 0; padding-top: 0; border-top: none; }
+    .or-total b { font-size: 24px; }
+    .or-send { height: 46px; margin-top: 8px; }
+  }
+  @media (max-width: 600px) {
+    #ord-ov .ap-shell { inset: 0; border-radius: 0; border: none; }
+    .or-body { padding: 2px 14px 0; }
+    .or-side { margin: 0 -14px; }
+    .or-cards.c2, .or-cards.c3, .or-grid { grid-template-columns: minmax(0, 1fr); }
+    .or-sec { padding: 16px 14px 18px; }
+    .or-sec > .sub { margin-left: 0; }
+  }
+  .ap-order { cursor: pointer; justify-content: space-between; padding: 22px; min-height: 330px;
+    background: radial-gradient(120% 80% at 100% 0%, rgba(139,107,255,.22), transparent 60%), radial-gradient(90% 70% at 0% 100%, rgba(255,95,176,.16), transparent 60%), var(--surface); }
+  .ap-order h3 { margin: 10px 0 6px; font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+  .ap-order p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .ap-order .big { font-size: 40px; font-weight: 800; letter-spacing: -.03em; margin-top: 14px; }
+  .ap-order .big s { font-size: 18px; color: var(--faint); margin-left: 6px; }
+
   #apps-ov { position: fixed; inset: 0; z-index: 390; display: none; }
   #apps-ov.show { display: block; }
   #apps-ov [hidden] { display: none !important; }
@@ -2862,6 +3007,7 @@
     </button>
     <button id="ec-open-side" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M13.5 7l3.5 3.5M4 20h7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>Essay Coach<span class="nw">NEW</span></button>
     <button id="apps-open-side" type="button"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.9"/><rect x="13.5" y="3.5" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.9"/><rect x="3.5" y="13.5" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.9"/><path d="M17 13.2l1.1 2.6 2.6 1.1-2.6 1.1L17 20.6l-1.1-2.6-2.6-1.1 2.6-1.1z" fill="currentColor"/></svg>SCODE Apps<span class="nw">NEW</span></button>
+    <button id="order-open-side" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M15.5 9.5l1.2 1.2 2-2.4M7 9h1.8M7 12.5h1.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Get a study site<span class="pr">from $10</span></button>
     <div class="side-label">Recents</div>
     <div id="chat-list"></div>
     <div class="side-bottom">
@@ -3543,7 +3689,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://cities-springfield-certified-alike.trycloudflare.com";
+  const PROXY_URL = "https://trends-sunshine-tied-shoot.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -11636,6 +11782,7 @@
       if (q === "essay") setTimeout(() => { const p = $("ec-open-pill"); if (p) p.click(); }, 700);
       else if (q === "new") setTimeout(() => { const b = $("top-new-btn"); if (b) b.click(); }, 300);
       else if (q === "apps") setTimeout(() => { if (window.scodeApps) window.scodeApps.open(); }, 500);
+      else if (q === "order") setTimeout(() => { if (window.scodeOrder) window.scodeOrder.open(); }, 500);
     }
     paint();
     window.scodeApp = { paint, installable: () => !!deferred, standalone };
@@ -11685,6 +11832,14 @@
         <div class="ap-cta"><span class="pw"><span class="scmark"></span>Powered by SCODE</span><span class="go">Preview ${ICONS.arrow}</span></div>
       </button>`;
     }
+    function orderCardHTML() {
+      return `<button class="ap-card ap-order" type="button" aria-label="SCODE Study Sites: get your own study site">
+        <div><span class="ap-tag"><span class="scmark" style="width:12px;height:12px"></span>New from SCODE</span>
+        <h3>Your own study site</h3><p>Send photos of your class notes and get back a site with lessons, practice, flashcards, games and a mock test, ready in 48 hours. Add a SCODE Tutor if you want one.</p>
+        <div class="big">$10 <s>$15</s></div><p style="font-size:12.5px">First site with SCODE Tutor</p></div>
+        <div class="ap-cta"><span class="pw"><span class="scmark"></span>Powered by SCODE</span><span class="go">Get one ${ICONS.arrow}</span></div>
+      </button>`;
+    }
     function soonHTML() {
       return `<div class="ap-card ap-soon"><div class="ap-orbit" aria-hidden="true"><i></i><i></i><span class="scmark"></span></div>
         <h3>More on the way</h3><p>More apps powered by SCODE AI are being built. They'll show up here.</p></div>`;
@@ -11702,7 +11857,7 @@
           <div class="ap-brand"><span class="scmark" aria-hidden="true"></span><div><h2 id="ap-title">SCODE <b>Apps</b></h2><p>Made by SCODE. Powered by SCODE AI.</p></div></div>
           <button class="ap-x" type="button" aria-label="Close SCODE Apps"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></header>
         <div class="ap-body"><section class="ap-list"><p class="ap-intro">Apps and study tools built by SCODE, with SCODE AI working inside them. Pick one to see what it does.</p>
-          <div class="ap-grid">${SCODE_APPS.map(cardHTML).join("")}${soonHTML()}</div>
+          <div class="ap-grid">${SCODE_APPS.map(cardHTML).join("")}${orderCardHTML()}${soonHTML()}</div>
           <div class="ap-foot"><span class="scmark"></span>Powered by <b>SCODE</b></div></section>
           <section class="ap-detail" hidden></section></div></div>`;
       document.body.appendChild(ov);
@@ -11710,6 +11865,7 @@
       ov.querySelector(".ap-x").addEventListener("click", closeApps);
       ov.querySelector(".ap-back").addEventListener("click", showList);
       ov.querySelectorAll(".ap-card[data-app]").forEach(c => c.addEventListener("click", () => showDetail(c.dataset.app)));
+      ov.querySelector(".ap-order").addEventListener("click", () => { closeApps(); setTimeout(() => { if (window.scodeOrder) window.scodeOrder.open(); }, reduceMotion ? 0 : 320); });
       ov.addEventListener("keydown", e => {
         if (e.key === "Escape") { e.stopPropagation(); if (!ov.querySelector(".ap-detail").hidden) showList(); else closeApps(); }
       });
@@ -11778,6 +11934,326 @@
       try { if (localStorage.getItem("scode_apps_seen")) side.classList.add("seen"); } catch (e) {}
     }
     window.scodeApps = { open: openApps, close: closeApps };
+  })();
+
+
+  // ---------- SCODE Study Sites: the order form ----------
+  // People pick what they want, add their notes (photos, PDFs or pasted text) and how to reach them.
+  // The SCODE server saves it, emails it to the SCODE inbox and sends them a "we got it" email.
+  // Prices match the flyers and price sheet (the server works them out again on its side).
+  (function () {
+    const PRICE = { study: 10, big: 20, none: 0, tutor: 5, ultra: 10, rush: 2, deal: 5 };
+    const MAX_FILES = 60, FILE_MAX = 15 * 1024 * 1024, TOTAL_MAX = 85 * 1024 * 1024;
+    const DRAFT = "scode_order_draft";
+    const X = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    let built = false, lastFocus = null, files = [], sending = false, xhr = null;
+
+    function card(name, value, t, p, d, extra, checked) {
+      return `<label class="or-card${value === "ultra" ? " ultra" : ""}"><input type="radio" name="${name}" value="${value}"${checked ? " checked" : ""}><span class="ck" aria-hidden="true"></span>
+        <span class="t">${t}</span><span class="p">${p}</span><span class="d">${d}</span>${extra || ""}</label>`;
+    }
+    function html() {
+      return `<div class="ap-dim"></div><div class="ap-shell"><div class="ap-glow" aria-hidden="true"><i></i><i></i><i></i></div>
+        <header class="ap-head"><div class="ap-brand"><span class="scmark" aria-hidden="true"></span><div><h2 id="or-title">SCODE <b>Study Sites</b></h2><p>Your notes, turned into your own study site.</p></div></div>
+          <button class="ap-x or-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></header>
+        <div class="ap-body or-body">
+        <form class="or-form" novalidate>
+          <div class="or-main">
+            <p class="or-intro">Tell us what you need and send your notes. We'll email you within 12 hours to confirm, then your site is ready within 48 hours. You only pay once you have it.</p>
+
+            <section class="or-sec"><h3><span class="n">1</span>Pick your site</h3><p class="sub">Every site has lessons, practice that levels up, instant checking, flashcards, games and a mock test.</p>
+              <span class="or-lbl">Size</span>
+              <div class="or-cards c2">${card("size", "study", "Study Site", "$10", "Up to 15 pages of notes. Perfect for one unit test.", "", true)}${card("size", "big", "Big Study Site", "$20", "Up to 40 pages of notes. For big units, midterms and finals.")}</div>
+              <span class="or-lbl">SCODE Tutor</span>
+              <div class="or-cards c3">${card("tutor", "none", "No tutor", "$0", "Just the study site.")}${card("tutor", "tutor", "SCODE Tutor", "+$5", "AI hints when you're stuck. General Plus, reads photos. About 40 messages every 4 hours.", "", true)}${card("tutor", "ultra", "Tutor Ultra", "+$10", "Adds General Pro 1.5, General Ultra and Deep Think. About 80 messages every 4 hours.", '<span class="tag">Best</span>')}</div>
+              <div class="or-checks">
+                <label class="or-check" id="or-rush-w"><input type="checkbox" name="rush"><span><b>Rush: within 24 hours (+$2)</b><span class="m">Study Site only. Otherwise it's ready within 48 hours.</span></span></label>
+                <label class="or-check"><input type="checkbox" name="first" checked><span><b>This is my first SCODE study site</b><span class="m">First site deal: Study Site + SCODE Tutor for $10 instead of $15.</span></span></label>
+              </div>
+              <div class="or-deal" id="or-deal" hidden></div>
+            </section>
+
+            <section class="or-sec"><h3><span class="n">2</span>About your test</h3><p class="sub">So we know what the site should cover.</p>
+              <div class="or-grid">
+                <label class="or-f"><span>Subject</span><input name="subject" maxlength="80" placeholder="e.g. Chemistry 11" autocomplete="off"></label>
+                <label class="or-f"><span>Grade <i>(optional)</i></span><select name="grade"><option value="">Pick one</option><option>9</option><option>10</option><option>11</option><option>12</option><option>Other</option></select></label>
+                <label class="or-f full"><span>What the test covers</span><input name="topic" maxlength="160" placeholder="e.g. Unit 3: ionic bonding and naming compounds" autocomplete="off"></label>
+                <label class="or-f"><span>Test date <i>(optional)</i></span><input type="date" name="test_date"></label>
+                <label class="or-f full"><span>Anything to focus on? <i>(optional)</i></span><textarea name="focus" rows="3" maxlength="2000" placeholder="Topics you find hard, how your teacher asks questions, things to skip..."></textarea></label>
+              </div>
+            </section>
+
+            <section class="or-sec"><h3><span class="n">3</span>Your notes</h3><p class="sub">Photos of your notes, worksheets or booklets, PDFs, or paste text. The more you send, the better your site. Please don't send tests, quizzes or answer keys.</p>
+              <label class="or-drop" id="or-drop"><input type="file" id="or-file" multiple accept="image/*,application/pdf,.heic,.heif">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15V4M7.5 8.5L12 4l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <b>Add photos or PDFs</b><span>Tap to choose or take photos, or drag them here. Up to ${MAX_FILES} files.</span></label>
+              <div class="or-thumbs" id="or-thumbs"></div>
+              <div class="or-count"><span id="or-fcount">No files yet</span><span id="or-fsize"></span></div>
+              <label class="or-f full" style="margin-top:14px"><span>Paste notes <i>(optional)</i></span><textarea name="notes" rows="9" maxlength="100000" placeholder="Paste typed notes, outlines, vocabulary lists, anything else..."></textarea></label>
+              <div class="or-count"><span></span><span id="or-ncount">0 / 100,000</span></div>
+            </section>
+
+            <section class="or-sec"><h3><span class="n">4</span>How we reach you</h3><p class="sub">We'll email you within 12 hours to confirm everything.</p>
+              <div class="or-grid">
+                <label class="or-f"><span>Your name</span><input name="name" maxlength="80" autocomplete="name"></label>
+                <label class="or-f"><span>Email</span><input name="email" type="email" maxlength="254" autocomplete="email" inputmode="email"></label>
+                <label class="or-f"><span>Instagram <i>(optional)</i></span><input name="instagram" maxlength="40" placeholder="@yourname" autocomplete="off"></label>
+                <label class="or-f"><span>How did you hear about us? <i>(optional)</i></span><select name="heard"><option value="">Pick one</option><option>Flyer</option><option>A friend</option><option>Instagram</option><option>SCODE AI</option><option>Other</option></select></label>
+                <div class="or-f full"><span>Best way to reach you</span><div class="or-seg" role="radiogroup" aria-label="Best way to reach you"><label><input type="radio" name="contact" value="email" checked>Email</label><label><input type="radio" name="contact" value="instagram">Instagram DM</label></div></div>
+              </div>
+              <div class="or-hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+            </section>
+
+            <section class="or-sec"><h3><span class="n">5</span>Terms</h3>
+              <details class="or-terms"><summary>Read the terms</summary><ul>
+                <li>Personal use only. Don't share your site or access code; shared codes can be turned off.</li>
+                <li>Only send notes you're allowed to use, never tests, quizzes or answer keys.</li>
+                <li>This is a study tool, not homework help. Follow your school's academic honesty rules.</li>
+                <li>Sites are built from your notes and AI can make mistakes, so check with your teacher. No grade guarantees.</li>
+                <li>One unit or test per order: Study Site up to 15 pages of notes, Big Study Site up to 40. Rush is for the Study Site only.</li>
+                <li>The price here is an estimate. We confirm the final price by email before we start, and you pay once you have your site (cash or e-Transfer).</li>
+                <li>Late? Your money back. Plus one free round of fixes within 7 days.</li>
+                <li>Message counts are approximate, refill every 4 hours, and bigger models use more. The SCODE Tutor works while the SCODE server is online (it rests from 12 to 6 AM).</li>
+                <li>Sites stay online until June 30, 2027. Your notes are only used to build your site and are deleted when you ask.</li>
+                <li>First site deal: one per person, on Study Site + SCODE Tutor only. Limited spots each week.</li>
+              </ul></details>
+              <label class="or-check" style="margin-top:10px"><input type="checkbox" name="agree"><span><b>I agree to the terms</b><span class="m">And my notes are mine to share.</span></span></label>
+            </section>
+          </div>
+
+          <aside class="or-side">
+            <div class="or-sum">
+              <h4>Your estimate</h4>
+              <div class="or-lines" id="or-lines"></div>
+              <div class="or-total"><span>Estimate*</span><b id="or-total">$10</b></div>
+              <p class="or-est">*Final price confirmed by email within 12 hours. Pay once you have your site.</p>
+              <button class="or-send" type="submit">Send request</button>
+              <div class="or-prog" id="or-prog" hidden><div class="bar"><i></i></div><div class="tx">Sending...</div></div>
+              <div class="or-err" id="or-err" role="alert"></div>
+            </div>
+            <div class="or-why">
+              <div><b>Built from your notes.</b> Your teacher's methods, not random internet answers.</div>
+              <div><b>Learn by doing.</b> Every answer is checked, so you know what to fix.</div>
+              <div><b>Late? Money back.</b> Plus one free round of fixes.</div>
+            </div>
+          </aside>
+        </form>
+        <section class="or-done" hidden>
+          <div class="ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Request sent!</h3>
+          <div class="id" id="or-id"></div>
+          <p>We emailed you a copy. <b>Expect an email from us within 12 hours</b> to confirm the details and your final price.</p>
+          <p style="font-size:13.5px">Don't see it? Check your spam folder, or email scodeai2026@gmail.com.</p>
+          <button class="or-send or-again" type="button">Done</button>
+        </section>
+        </div></div>`;
+    }
+
+    const $o = sel => document.querySelector("#ord-ov " + sel);
+    const form = () => $o(".or-form");
+    function val(n) { const f = form(); const el = f.elements[n]; if (!el) return ""; if (el.type === "checkbox") return el.checked; if (el.length && el[0] && el[0].type === "radio") { const c = Array.from(el).find(x => x.checked); return c ? c.value : ""; } return (el.value || "").trim(); }
+    function quote() {
+      const size = val("size") || "study", tutor = val("tutor") || "none", rush = val("rush") && size === "study", first = val("first");
+      const L = [[size === "big" ? "Big Study Site" : "Study Site", PRICE[size]]];
+      if (tutor !== "none") L.push([tutor === "ultra" ? "SCODE Tutor Ultra" : "SCODE Tutor", PRICE[tutor]]);
+      if (rush) L.push(["Rush (24 hours)", PRICE.rush]);
+      const deal = first && size === "study" && tutor === "tutor";
+      if (deal) L.push(["First site deal", -PRICE.deal]);
+      return { L, total: L.reduce((a, b) => a + b[1], 0), deal, size, tutor, first };
+    }
+    function paint() {
+      const q = quote();
+      $o("#or-lines").innerHTML = q.L.map(([k, p]) => `<div class="${p < 0 ? "neg" : ""}"><span>${esc(k)}</span><span>${p < 0 ? "-" : ""}$${Math.abs(p)}</span></div>`).join("");
+      $o("#or-total").textContent = "$" + q.total;
+      const rw = $o("#or-rush-w"), big = q.size === "big";
+      rw.classList.toggle("off", big); rw.querySelector("input").disabled = big;
+      if (big) rw.querySelector("input").checked = false;
+      const d = $o("#or-deal");
+      if (q.deal) { d.hidden = false; d.textContent = "First site deal applied: you save $5."; }
+      else if (q.first && !(q.size === "study" && q.tutor === "tutor")) { d.hidden = false; d.textContent = "Tip: the first site deal is for Study Site + SCODE Tutor ($10 instead of $15)."; }
+      else d.hidden = true;
+      const n = val("notes").length;
+      $o("#or-ncount").textContent = n.toLocaleString() + " / 100,000";
+    }
+    function fileInfo() {
+      const tot = files.reduce((a, f) => a + f.blob.size, 0);
+      $o("#or-fcount").textContent = files.length ? `${files.length} file${files.length === 1 ? "" : "s"} added` : "No files yet";
+      const s = $o("#or-fsize");
+      s.textContent = !files.length ? "" : tot < 1048576 ? Math.max(1, Math.round(tot / 1024)) + " KB" : (tot / 1048576).toFixed(1) + " MB";
+      s.className = tot > TOTAL_MAX ? "warn" : "";
+      return tot;
+    }
+    async function shrink(file) {
+      if (!/^image\/(jpeg|png|webp)$/i.test(file.type) || !window.createImageBitmap) return file;
+      try {
+        const bmp = await createImageBitmap(file);
+        const k = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+        if (k === 1 && file.size < 1.6 * 1048576) { bmp.close && bmp.close(); return file; }
+        const c = document.createElement("canvas");
+        c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+        const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height); g.drawImage(bmp, 0, 0, c.width, c.height);
+        bmp.close && bmp.close();
+        const b = await new Promise(r => c.toBlob(r, "image/jpeg", 0.85));
+        if (!b || b.size >= file.size) return file;
+        return new File([b], file.name.replace(/\.[^.]+$/, "") + ".jpg", { type: "image/jpeg" });
+      } catch (e) { return file; }
+    }
+    function thumb(item) {
+      const el = document.createElement("div");
+      el.className = "or-th";
+      const isPdf = /pdf$/i.test(item.blob.type) || /\.pdf$/i.test(item.name);
+      const isImg = /^image\//.test(item.blob.type) && !/hei[cf]/i.test(item.blob.type) && !/\.hei[cf]$/i.test(item.name);
+      el.innerHTML = (isImg ? `<img alt="${esc(item.name)}" src="${item.url}">` : `<div class="pdf"><b>${isPdf ? "PDF" : "PHOTO"}</b>${esc(item.name.slice(0, 28))}</div>`)
+        + (item.busy ? '<div class="busy"></div>' : "") + `<button type="button" aria-label="Remove ${esc(item.name)}">${X}</button>`;
+      el.querySelector("button").addEventListener("click", () => { files = files.filter(f => f !== item); if (item.url) URL.revokeObjectURL(item.url); el.remove(); fileInfo(); });
+      return el;
+    }
+    async function addFiles(list) {
+      const box = $o("#or-thumbs"), err = $o("#or-err");
+      err.textContent = "";
+      for (const f of Array.from(list)) {
+        if (files.length >= MAX_FILES) { err.textContent = `That's the most files we can take at once (${MAX_FILES}). Email the rest to scodeai2026@gmail.com after.`; break; }
+        const ok = /^image\//.test(f.type) || /pdf$/i.test(f.type) || /\.(pdf|heic|heif|jpe?g|png|webp)$/i.test(f.name);
+        if (!ok) { err.textContent = "Only photos and PDFs can be added."; continue; }
+        const item = { name: f.name, blob: f, url: "", busy: true };
+        files.push(item);
+        const el = thumb(item); box.appendChild(el);
+        const small = await shrink(f);
+        item.blob = small; item.busy = false;
+        if (item.blob.size > FILE_MAX) { files = files.filter(x => x !== item); el.remove(); err.textContent = `"${f.name}" is over 15 MB. Try a smaller photo.`; continue; }
+        if (/^image\//.test(item.blob.type)) item.url = URL.createObjectURL(item.blob);
+        el.replaceWith(thumb(item));
+        fileInfo();
+      }
+      fileInfo();
+    }
+    function saveDraft() {
+      const d = {}; ["subject", "topic", "grade", "test_date", "focus", "notes", "name", "email", "instagram", "heard"].forEach(n => d[n] = val(n));
+      try { localStorage.setItem(DRAFT, JSON.stringify(d)); } catch (e) {}
+    }
+    function loadDraft() {
+      let d = null; try { d = JSON.parse(localStorage.getItem(DRAFT) || "null"); } catch (e) {}
+      const f = form();
+      if (d) Object.keys(d).forEach(n => { if (f.elements[n] && d[n]) f.elements[n].value = d[n]; });
+      if (typeof auth !== "undefined" && auth) {
+        if (!f.elements.name.value && auth.name) f.elements.name.value = auth.name;
+        if (!f.elements.email.value && auth.email) f.elements.email.value = auth.email;
+      }
+    }
+    function bad(name, msg) {
+      const f = form(), el = f.elements[name];
+      $o("#or-err").textContent = msg;
+      if (el && el.closest) { const w = el.closest(".or-f, .or-check, .or-drop"); if (w) { w.classList.add("bad"); setTimeout(() => w.classList.remove("bad"), 4000); } }
+      const target = name === "notes" ? $o("#or-drop") : el;
+      if (target && target.scrollIntoView) target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+      if (el && el.focus && name !== "notes") setTimeout(() => el.focus({ preventScroll: true }), 300);
+      if (name === "notes") { const d = $o("#or-drop"); d.classList.add("bad"); setTimeout(() => d.classList.remove("bad"), 4000); }
+      return false;
+    }
+    function check() {
+      if (!val("subject")) return bad("subject", "Add the subject.");
+      if (!val("topic")) return bad("topic", "Add what your test covers.");
+      if (!files.length && val("notes").length < 20) return bad("notes", "Add photos of your notes, or paste your notes in the box.");
+      if (files.some(f => f.busy)) { $o("#or-err").textContent = "Hang on, your photos are still getting ready."; return false; }
+      if (fileInfo() > TOTAL_MAX) return bad("notes", "Those files are too big together. Remove a few and email them after.");
+      if (!val("name")) return bad("name", "Add your name.");
+      if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(val("email"))) return bad("email", "Add an email we can reach you at.");
+      if (val("contact") === "instagram" && !val("instagram")) return bad("instagram", "Add your Instagram, or pick Email.");
+      if (!val("agree")) return bad("agree", "Please agree to the terms first.");
+      return true;
+    }
+    function submit(e) {
+      e.preventDefault();
+      if (sending || !check()) return;
+      if (!/^https?:\/\//.test(PROXY_URL)) { $o("#or-err").textContent = "Requests aren't open on this copy of the site. Email scodeai2026@gmail.com instead."; return; }
+      const q = quote();
+      const data = { size: q.size, tutor: q.tutor, rush: val("rush"), first: val("first"), subject: val("subject"), topic: val("topic"), grade: val("grade"),
+        test_date: val("test_date"), focus: val("focus"), notes: val("notes"), name: val("name"), email: val("email"), instagram: val("instagram"),
+        contact: val("contact"), heard: val("heard"), agree: val("agree"), website: val("website"), estimate: q.total };
+      const fd = new FormData();
+      fd.append("data", JSON.stringify(data));
+      files.forEach(f => fd.append("files", f.blob, f.name));
+      sending = true;
+      const btn = $o(".or-send"), prog = $o("#or-prog"), bar = prog.querySelector("i"), tx = prog.querySelector(".tx");
+      btn.disabled = true; btn.textContent = "Sending..."; prog.hidden = false; $o("#or-err").textContent = "";
+      xhr = new XMLHttpRequest();
+      xhr.open("POST", PROXY_URL + "/order/request");
+      const h = authHeaders(); Object.keys(h).forEach(k => xhr.setRequestHeader(k, h[k]));
+      xhr.upload.onprogress = ev => { if (ev.lengthComputable) { const p = Math.round(ev.loaded / ev.total * 100); bar.style.width = p + "%"; tx.textContent = p < 100 ? `Uploading your notes... ${p}%` : "Almost done..."; } };
+      const fail = msg => { sending = false; btn.disabled = false; btn.textContent = "Send request"; prog.hidden = true; bar.style.width = "0"; $o("#or-err").textContent = msg; };
+      xhr.onload = () => {
+        let j = {}; try { j = JSON.parse(xhr.responseText); } catch (e) {}
+        if (xhr.status === 200 && j.ok) {
+          sending = false;
+          try { localStorage.removeItem(DRAFT); } catch (e) {}
+          $o("#or-id").textContent = "Request " + j.id;
+          form().hidden = true; $o(".or-done").hidden = false;
+          $o(".ap-body").scrollTop = 0;
+          $o(".or-again").focus({ preventScroll: true });
+          return;
+        }
+        if (xhr.status === 413) return fail("Those files are too big to send at once. Remove a few, send the request, then email the rest to scodeai2026@gmail.com.");
+        if (j.error && j.error !== "rate_limited" && form().elements[j.error]) { fail(""); return bad(j.error, j.message || "Check this one."); }
+        fail(j.message || "That didn't go through. Try again, or email scodeai2026@gmail.com.");
+      };
+      xhr.onerror = () => fail("Couldn't reach the SCODE server. It may be offline right now (it rests from 12 to 6 AM). Your answers are saved here, so try again later, or email scodeai2026@gmail.com.");
+      xhr.ontimeout = xhr.onerror;
+      xhr.timeout = 10 * 60 * 1000;
+      xhr.send(fd);
+    }
+    function reset() {
+      files.forEach(f => f.url && URL.revokeObjectURL(f.url)); files = [];
+      const f = form(); f.reset(); f.hidden = false; $o(".or-done").hidden = true;
+      $o("#or-thumbs").innerHTML = ""; $o("#or-prog").hidden = true; $o("#or-prog i").style.width = "0";
+      const b = $o(".or-send"); b.disabled = false; b.textContent = "Send request";
+      loadDraft(); fileInfo(); paint();
+    }
+    function build() {
+      if (built) return;
+      built = true;
+      const ov = document.createElement("div");
+      ov.id = "ord-ov"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-labelledby", "or-title");
+      ov.innerHTML = html();
+      document.body.appendChild(ov);
+      ov.querySelector(".ap-dim").addEventListener("click", close);
+      ov.querySelector(".or-x").addEventListener("click", close);
+      ov.addEventListener("keydown", e => { if (e.key === "Escape") { e.stopPropagation(); close(); } });
+      const f = form();
+      f.addEventListener("submit", submit);
+      f.addEventListener("change", () => { paint(); saveDraft(); });
+      f.addEventListener("input", () => { paint(); saveDraft(); });
+      const inp = ov.querySelector("#or-file"), drop = ov.querySelector("#or-drop");
+      inp.addEventListener("change", () => { addFiles(inp.files); inp.value = ""; });
+      ["dragenter", "dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+      ["dragleave", "drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+      drop.addEventListener("drop", e => { if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files); });
+      ov.querySelector(".or-again").addEventListener("click", () => { reset(); close(); });
+      loadDraft(); paint(); fileInfo();
+    }
+    function open() {
+      build();
+      if (typeof closeMobileSidebar === "function") closeMobileSidebar();
+      const ov = document.getElementById("ord-ov");
+      lastFocus = document.activeElement;
+      ov.classList.add("show");
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => requestAnimationFrame(() => ov.classList.add("in")));
+      setTimeout(() => { const x = ov.querySelector(".or-x"); if (x) x.focus({ preventScroll: true }); }, 60);
+    }
+    function close() {
+      const ov = document.getElementById("ord-ov");
+      if (!ov) return;
+      if (sending && !confirm("Your request is still sending. Close anyway?")) return;
+      if (sending && xhr) { xhr.abort(); sending = false; }
+      ov.classList.remove("in");
+      setTimeout(() => { ov.classList.remove("show"); document.body.style.overflow = ""; }, reduceMotion ? 0 : 300);
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    const side = document.getElementById("order-open-side");
+    if (side) side.addEventListener("click", open);
+    window.scodeOrder = { open, close };
+    if (/^#order$/i.test(location.hash)) setTimeout(open, 600);
   })();
 
   // ---------- SCODE Rush Hour: taking turns when the laptop is busy ----------
