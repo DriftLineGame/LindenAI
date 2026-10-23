@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SCODE AI Status</title>
+<meta name="description" content="Is SCODE AI online? See if it's busy, how many people are waiting and how long replies take.">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1b1b19; --surface: #252522; --surface2: #2d2d29; --border: #3a3a35; --text: #edece7; --muted: #a6a49c; --faint: #75736c;
+    --accent: #a993ff; --grad: linear-gradient(110deg, #ff5fb0, #8b6bff 52%, #3fc1ff);
+    --ok: #3fd29b; --busy: #8b6bff; --rush: #ff5fb0; --sleep: #7fa7ff; --off: #8a877f;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #faf9f6; --surface: #ffffff; --surface2: #f3f1ea; --border: #e4e2da; --text: #22211f; --muted: #6b6963; --faint: #9b988f; --accent: #6a46f0; --grad: linear-gradient(110deg, #d6307f, #7546ff 52%, #0a86d0); --ok: #12a06d; color-scheme: light; } }
+  :root[data-theme="light"] { --bg: #faf9f6; --surface: #ffffff; --surface2: #f3f1ea; --border: #e4e2da; --text: #22211f; --muted: #6b6963; --faint: #9b988f; --accent: #6a46f0; --grad: linear-gradient(110deg, #d6307f, #7546ff 52%, #0a86d0); --ok: #12a06d; color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; overflow-x: hidden; }
+  .mark { width: 30px; height: 30px; background: url(data:image/webp;base64,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) center/contain no-repeat; flex: none; filter: drop-shadow(0 2px 6px rgba(139,107,255,.35)); }
+
+  /* splash */
+  #splash { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--bg); transition: opacity .5s ease, visibility .5s; }
+  #splash .mark { width: 84px; height: 84px; animation: spIn .9s cubic-bezier(.2,1.3,.4,1) both; }
+  #splash p { margin: 14px 0 0; text-align: center; font-weight: 700; letter-spacing: .3em; font-size: 12px; color: var(--muted); animation: spFade .6s .35s ease both; }
+  #splash.gone { opacity: 0; visibility: hidden; }
+  @keyframes spIn { from { transform: scale(.4) rotate(-20deg); opacity: 0; filter: blur(8px); } to { transform: none; opacity: 1; filter: none; } }
+  @keyframes spFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  header { display: flex; align-items: center; gap: 10px; padding: 18px max(16px, env(safe-area-inset-left)); max-width: 880px; width: 100%; margin: 0 auto; }
+  header b { font-size: 17px; }
+  header .sp { flex: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; font: inherit; font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+  .btn.primary { color: #fff; border: 0; background: var(--grad); box-shadow: 0 6px 20px rgba(139,107,255,.3); }
+  main { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 8px 16px 32px; }
+
+  .hero { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; padding: 30px; border-radius: 26px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: -40%; background: radial-gradient(40% 40% at 20% 40%, color-mix(in srgb, var(--c) 30%, transparent), transparent 70%); pointer-events: none; transition: background .6s; }
+  .orb { --c: var(--ok); position: relative; width: 132px; height: 132px; border-radius: 50%; display: grid; place-items: center; }
+  .orb::before, .orb::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--c); opacity: 0; animation: ring 2.6s cubic-bezier(.2,.6,.3,1) infinite; }
+  .orb::after { animation-delay: 1.3s; }
+  .orb i { position: absolute; inset: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, white 55%, var(--c)), var(--c) 55%, color-mix(in srgb, black 25%, var(--c))); box-shadow: 0 0 40px color-mix(in srgb, var(--c) 60%, transparent), inset 0 -8px 18px rgba(0,0,0,.25); }
+  .orb .mark { position: relative; width: 44px; height: 44px; filter: drop-shadow(0 2px 8px rgba(0,0,0,.3)); }
+  .orb.off::before, .orb.off::after, .orb.sleep::after { animation: none; }
+  .orb.sleep i { animation: breathe 5s ease-in-out infinite; }
+  @keyframes ring { 0% { transform: scale(.75); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+  @keyframes breathe { 50% { transform: scale(.94); opacity: .8; } }
+  .hero h1 { position: relative; margin: 0; font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; letter-spacing: -.01em; }
+  .hero h1 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { position: relative; margin: 10px 0 0; color: var(--muted); font-size: 16px; line-height: 1.5; }
+  .pill { position: relative; display: inline-flex; align-items: center; gap: 7px; margin-bottom: 12px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); border-radius: 999px; padding: 5px 11px; }
+  .pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 25%, transparent); }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px; }
+  .card .k { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); }
+  .card .v { font-size: 30px; font-weight: 800; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .card .v small { font-size: 15px; font-weight: 600; color: var(--muted); margin-left: 3px; }
+  .card .s { font-size: 13px; color: var(--muted); margin-top: 3px; min-height: 18px; }
+  .people { display: flex; gap: 4px; margin-top: 10px; height: 18px; }
+  .people span { width: 14px; height: 18px; border-radius: 7px 7px 4px 4px; background: var(--grad); opacity: .9; animation: pop .4s cubic-bezier(.2,1.4,.4,1) both; }
+  @keyframes pop { from { transform: scale(.3); opacity: 0; } }
+
+  .wide { margin-top: 12px; }
+  .row-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  .row-h h2 { margin: 0; font-size: 16px; }
+  .row-h span { font-size: 13px; color: var(--muted); }
+  .bars { display: flex; flex-direction: column; gap: 11px; }
+  .bar { display: grid; grid-template-columns: 150px 1fr 64px; gap: 12px; align-items: center; font-size: 14px; }
+  .bar .n { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+  .bar .n i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex: none; }
+  .bar .n i.warm { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent); }
+  .bar .t { height: 10px; border-radius: 99px; background: var(--surface2); overflow: hidden; }
+  .bar .t u { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--grad); transition: width .9s cubic-bezier(.2,.8,.2,1); }
+  .bar .x { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .legend { display: flex; gap: 14px; margin-top: 12px; font-size: 12.5px; color: var(--faint); flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+  .legend i.warm { background: var(--ok); }
+
+  .day { display: grid; grid-template-columns: repeat(24, 1fr); gap: 3px; margin-top: 4px; }
+  .day b { height: 26px; border-radius: 5px; background: color-mix(in srgb, var(--ok) 55%, transparent); }
+  .day b.z { background: color-mix(in srgb, var(--sleep) 30%, transparent); }
+  .day b.now { outline: 2px solid var(--text); outline-offset: 1px; }
+  .dayk { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--faint); margin-top: 6px; }
+
+  .foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 18px; font-size: 13px; color: var(--faint); }
+  .refresh { display: inline-flex; align-items: center; gap: 8px; }
+  .refresh svg { width: 18px; height: 18px; transform: rotate(-90deg); }
+  .refresh circle { fill: none; stroke-width: 3; }
+  .refresh .bg { stroke: var(--border); }
+  .refresh .fg { stroke: var(--accent); stroke-dasharray: 50.27; stroke-linecap: round; }
+  .powered { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .22em; color: var(--faint); padding: 18px 16px 26px; }
+  .powered b { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; text-align: center; justify-items: center; padding: 26px 18px; gap: 18px; }
+    .orb { width: 112px; height: 112px; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .grid .card:first-child { grid-column: 1 / -1; }
+    .bar { grid-template-columns: 112px 1fr 52px; font-size: 13px; gap: 9px; }
+    .day b { height: 20px; border-radius: 4px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="splash" aria-hidden="true"><div><div class="mark" style="margin:0 auto"></div><p>SCODE</p></div></div>
+<header>
+  <span class="mark" aria-hidden="true"></span><b>SCODE AI</b><span style="color:var(--faint);font-size:14px">Status</span>
+  <span class="sp"></span>
+  <a class="btn primary" href="./">Open SCODE AI</a>
+</header>
+<main>
+  <section class="hero" id="hero" style="--c: var(--off)">
+    <div class="orb off" id="orb"><i></i><span class="mark" aria-hidden="true"></span></div>
+    <div>
+      <span class="pill" id="pill">Checking</span>
+      <h1 id="head">Checking on <em>SCODE AI</em>…</h1>
+      <p id="sub">One second.</p>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card"><div class="k">Right now</div><div class="v" id="now-v">–</div><div class="s" id="now-s"></div></div>
+    <div class="card"><div class="k">People waiting</div><div class="v" id="wait-n">–</div><div class="people" id="people"></div></div>
+    <div class="card"><div class="k">Estimated wait</div><div class="v" id="wait-t">–</div><div class="s" id="wait-s">for a new message</div></div>
+  </section>
+
+  <section class="card wide">
+    <div class="row-h"><h2>Typical reply times</h2><span>Learned from real replies on the SCODE laptop</span></div>
+    <div class="bars" id="bars"></div>
+    <div class="legend"><span><i class="warm"></i>Ready now (loaded)</span><span><i></i>Loads on the first message</span></div>
+  </section>
+
+  <section class="card wide">
+    <div class="row-h"><h2>Hours</h2><span id="hours-s">Pacific time · rests from 12 to 6 AM</span></div>
+    <div class="day" id="day"></div>
+    <div class="dayk"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11 PM</span></div>
+  </section>
+
+  <div class="foot">
+    <span class="refresh"><svg viewBox="0 0 20 20"><circle class="bg" cx="10" cy="10" r="8"/><circle class="fg" id="ring" cx="10" cy="10" r="8"/></svg><span id="ago">Updating…</span></span>
+    <span id="up"></span>
+  </div>
+</main>
+<div class="powered">POWERED BY <b>SCODE</b> · MADE IN CAMPBELL RIVER, BC</div>
+
+<script>
+(function () {
+  try { const t = localStorage.getItem("linden_theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  const $ = (id) => document.getElementById(id);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(() => $("splash").classList.add("gone"), reduce ? 0 : 1100);
+
+  const STATES = {
+    online: { c: "var(--ok)", pill: "Online", head: "SCODE AI is <em>online</em>", sub: "Everything's running. Replies start right away." },
+    busy: { c: "var(--busy)", pill: "Writing a reply", head: "SCODE AI is <em>busy</em>", sub: "It's writing someone's reply right now. Yours starts as soon as it's done." },
+    rush: { c: "var(--rush)", pill: "Rush Hour", head: "It's <em>Rush Hour</em>", sub: "Lots of people at once, so messages wait in a fair line. Accounts go first, and SCODE Pro goes first of all." },
+    sleep: { c: "var(--sleep)", pill: "Asleep", head: "SCODE AI is <em>asleep</em>", sub: "The SCODE laptop rests from 12 to 6 AM Pacific. It'll be back at 6." },
+    off: { c: "var(--off)", pill: "Offline", head: "SCODE AI is <em>offline</em>", sub: "The SCODE laptop isn't reachable right now. It's usually back soon." },
+  };
+  const ORDER = ["l1", "l2_5", "l4", "l5", "deep"];
+  const NAMES = { l1: "General Mini", l2_5: "General Plus", l4: "General Pro", l5: "General Ultra", deep: "Deep Think" };
+  let base = null, last = 0, timer = 0;
+
+  function pacificHour() {
+    try { return +new Intl.DateTimeFormat("en-CA", { hour: "numeric", hourCycle: "h23", timeZone: "America/Vancouver" }).format(new Date()); }
+    catch (e) { return new Date().getHours(); }
+  }
+  function fmt(s) {
+    if (s < 1) return "None";
+    if (s < 60) return Math.round(s) + "<small>sec</small>";
+    const m = Math.floor(s / 60), r = Math.round(s % 60);
+    return m + "<small>min</small>" + (r && m < 10 ? " " + r + "<small>s</small>" : "");
+  }
+  async function findServer() {
+    if (base) return base;
+    try { const q = new URLSearchParams(location.search).get("server"); if (q && /^https?:\/\//.test(q)) return (base = q.replace(/\/$/, "")); } catch (e) {}
+    const r = await fetch("index.html", { cache: "no-store" });
+    const t = await r.text();
+    const m = /const PROXY_URL = "([^"]+)"/.exec(t);
+    if (!m || !/^https?:\/\//.test(m[1])) throw new Error("no server");
+    return (base = m[1].replace(/\/$/, ""));
+  }
+  function paintState(k) {
+    const s = STATES[k];
+    $("hero").style.setProperty("--c", s.c);
+    $("orb").style.setProperty("--c", s.c);
+    $("orb").className = "orb " + k;
+    $("pill").textContent = s.pill;
+    $("head").innerHTML = s.head;
+    $("sub").textContent = s.sub;
+    document.title = s.pill + " · SCODE AI Status";
+  }
+  function paintDay() {
+    const h = pacificHour();
+    $("day").innerHTML = Array.from({ length: 24 }, (_, i) => `<b class="${i < 6 ? "z" : ""}${i === h ? " now" : ""}" title="${(i % 12) || 12} ${i < 12 ? "AM" : "PM"}${i < 6 ? " · asleep" : ""}"></b>`).join("");
+  }
+  function paint(d) {
+    const k = d.state === "rush" ? "rush" : d.state === "busy" ? "busy" : "online";
+    paintState(k);
+    $("now-v").innerHTML = d.writing ? "Writing" : "Ready";
+    $("now-s").textContent = d.writing ? "A reply is being written" : "Nothing in the way";
+    $("wait-n").textContent = d.waiting;
+    $("people").innerHTML = Array.from({ length: Math.min(d.waiting, 12) }, (_, i) => `<span style="animation-delay:${i * 60}ms"></span>`).join("");
+    $("wait-t").innerHTML = fmt(d.wait);
+    $("wait-s").textContent = d.wait < 1 ? "Your message starts right away" : "before a new message starts";
+    const avg = d.avg || {}, ready = new Set(d.ready || []);
+    const max = Math.max(30, ...ORDER.map(t => avg[t] || 0));
+    $("bars").innerHTML = ORDER.filter(t => avg[t]).map(t => `<div class="bar"><span class="n"><i class="${ready.has(t === "deep" ? "l5" : t) ? "warm" : ""}"></i>${(d.labels && d.labels[t]) || NAMES[t]}</span><span class="t"><u data-w="${Math.round((avg[t] / max) * 100)}"></u></span><span class="x">~${avg[t] < 90 ? avg[t] + "s" : Math.round(avg[t] / 6) / 10 + "m"}</span></div>`).join("");
+    requestAnimationFrame(() => document.querySelectorAll(".bar u").forEach(u => u.style.width = u.dataset.w + "%"));
+    if (d.up_since) {
+      const hrs = (d.now - d.up_since) / 3600;
+      $("up").textContent = "Server up " + (hrs < 1 ? Math.max(1, Math.round(hrs * 60)) + " min" : hrs < 48 ? Math.round(hrs) + " h" : Math.round(hrs / 24) + " days");
+    }
+  }
+  function paintDown() {
+    const h = pacificHour();
+    paintState(h < 6 ? "sleep" : "off");
+    $("now-v").textContent = h < 6 ? "Resting" : "Offline";
+    $("now-s").textContent = h < 6 ? "Back at 6 AM Pacific" : "Try again in a bit";
+    $("wait-n").textContent = "–"; $("people").innerHTML = ""; $("wait-t").textContent = "–"; $("wait-s").textContent = "";
+    $("bars").innerHTML = '<div class="bar"><span class="n"><i></i>Reply times</span><span class="t"><u></u></span><span class="x">–</span></div>';
+    $("up").textContent = "";
+  }
+  async function check() {
+    clearTimeout(timer);
+    try {
+      const b = await findServer();
+      const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 8000);
+      const r = await fetch(b + "/pulse", { cache: "no-store", signal: ctl.signal });
+      clearTimeout(to);
+      if (!r.ok) throw new Error(r.status);
+      paint(await r.json());
+    } catch (e) { paintDown(); }
+    paintDay();
+    last = Date.now();
+    timer = setTimeout(check, 10000);
+  }
+  // the little ring counts down to the next check
+  function tick() {
+    const left = Math.max(0, 10000 - (Date.now() - last));
+    $("ring").style.strokeDashoffset = String(50.27 * (left / 10000));
+    $("ago").textContent = last ? (left > 9000 ? "Updated just now" : `Updates in ${Math.ceil(left / 1000)}s`) : "Updating…";
+    requestAnimationFrame(tick);
+  }
+  tick(); check();
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - last > 9000) check(); });
+})();
+</script>
+</body>
+</html>
