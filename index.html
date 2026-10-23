@@ -3211,7 +3211,7 @@
 </style>
 </head>
 <body class="is-empty">
-<script>try{if(localStorage.getItem("scode_look")==="bubble")document.documentElement.classList.add("look-bubble")}catch(e){}</script>
+<script>try{if(localStorage.getItem("scode_look")==="bubble")localStorage.setItem("scode_look","classic")}catch(e){}</script>
 <div id="sc-splash" aria-hidden="true"><div class="sp-logo"><canvas id="sc-splash-c" width="440" height="440"></canvas><span class="scmark sp-fb"></span></div><div class="sp-w">SCODE</div></div>
 
 
@@ -3495,7 +3495,7 @@
       </button>
     </div>
     <div class="set-section">
-      <div class="set-section-title">Look</div>
+      <div class="set-section-title" hidden>Look</div>
       <div class="set-row">
         <div>
           <div class="set-row-title">Appearance</div>
@@ -12043,6 +12043,11 @@
     gbSoon(); glSoon();
   }
   (function bubbleBoot() {
+    // Bubble look is switched off for good: nothing here runs.
+    document.documentElement.classList.remove("look-bubble");
+    const sec = $("look-seg") && $("look-seg").closest(".set-section"); if (sec) sec.hidden = true;
+    window.scodeBubble = { setLook() {}, blobs: () => [], running: () => false, sleeping: () => false };
+    return;
     document.querySelectorAll("#look-seg button").forEach(b => b.addEventListener("click", () => setLook(b.dataset.look)));
     paintLookSeg();
     const kick = () => { if (lookBubble()) { bmUpdate(); gbWake(); } };
@@ -13093,6 +13098,7 @@
   // Bubble look: the model row gets an Auto bubble, and Ultra shows a lock on Free
   const _v4BmUpdate = bmUpdate;
   bmUpdate = function () {
+    if (!document.documentElement.classList.contains("look-bubble")) return;
     _v4BmUpdate();
     const row = $("bm-row");
     if (!row) return;
