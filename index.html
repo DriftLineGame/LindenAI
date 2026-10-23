@@ -3819,7 +3819,7 @@
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
       <div class="v4-log-day"><div class="v4-log-date">October 22, 2026</div><h3>Auto, Photo Help, Build and more</h3><ul>
-        <li><span class="v4-log-tag new">NEW</span><b>Auto</b> <span>picks the best model for every message, instantly. It's on by default; pick a model yourself any time.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Auto</b> <span>picks the best model for every message, instantly: General Mini for a quick hi, General Plus for everyday chat, General Pro for documents, General Ultra for hard questions on Pro. Pick a model yourself any time.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Photo Help</b> <span>redraws the problem in your photo, solves it in the same steps as your notes, checks the math, and writes it out in words.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Build</b> <span>makes web pages, games and tools and runs them right in the chat. Every HTML code block gets a Preview button.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Study: Summary</b> <span>turns notes into a one-page study sheet with key terms and what to remember.</span></li>
@@ -3828,6 +3828,7 @@
         <li><span class="v4-log-tag new">NEW</span><b>Status page</b> <span>shows if SCODE is online, busy or asleep, how many people are waiting and the wait.</span></li>
         <li><span class="v4-log-tag fix">FIX</span><b>Replies stream live again</b> <span>word by word as they're written, instead of showing up all at once at the end.</span></li>
         <li><span class="v4-log-tag fix">FIX</span><b>Server start-up</b> <span>could rarely fail on a busy laptop. Fixed.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>General Mini answers normally again</b> <span>instead of reading out its own instructions.</span></li>
         <li><span class="v4-log-tag fix">FIX</span><b>Photo limits</b> <span>now count every photo in a message correctly.</span></li>
       </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">October 20, 2026</div><h3>Faster first replies</h3><ul>
@@ -4003,7 +4004,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://bite-cayman-guarantees-processed.trycloudflare.com";
+  const PROXY_URL = "https://transcription-locator-kept-sacramento.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -12961,7 +12962,7 @@
   function v4AutoBase() {
     if (isGuest()) return "l1";
     const ok = (t) => v4Allowed(t) && (sharedRemaining === null || sharedRemaining >= TIER_INFO[t].cost);
-    return ["l5", "l2_5", "l1"].find(ok) || "l1";
+    return ["l5", "l2_5", "l4"].find(ok) || "l2_5";
   }
   const V4_HARD = /\b(prove|derive|explain|why|how does|how do|step[- ]by[- ]step|analy[sz]e|compare|contrast|essay|calculate|solve|simplify|factor|integral|derivative|equation|formula|code|program|function|debug|error|algorithm|write (a|an|me)|story|poem|summari[sz]e|translate|plan|strategy|difference between)\b/i;
   const V4_MATH = /[=√∫∑^×÷]|\d\s*[x*/+\-]\s*\d|\b(sin|cos|tan|log|ln)\b/i;
@@ -12983,15 +12984,17 @@
     const fits = (t) => v4Allowed(t) && need.every(s => s.has(t));
     const afford = (t) => sharedRemaining === null || sharedRemaining >= TIER_INFO[t].cost * (photo ? 2 : 1);
     const hard = text.length > 280 || /```/.test(text) || V4_HARD.test(text) || V4_MATH.test(text);
+    // Greetings and "thanks" = General Mini; everyday chat = General Plus;
+    // documents = General Pro; hard questions on Pro = General Ultra.
     let want;
     if (P.deep || P.build) want = ["l5", "l2_5", "l4"];
     else if (photoNow && V4_DOC.test(text)) want = ["l4", "l5", "l2_5"];
     else if (photo || P.study || P.web || P.linkToSend) want = ["l5", "l2_5", "l4"];
     else if (P.imgNow || P.scNow || P.fyNow) want = ["l1", "l2_5", "l5"];
     else if (V4_SMALL.test(text.trim()) && text.length < 40) want = ["l1", "l2_5", "l5"];
-    else if (hard) want = ["l5", "l2_5", "l4", "l1"];
-    else want = V4.plan === "pro" && (text.length > 50 || /\?/.test(text)) ? ["l5", "l2_5", "l1"] : ["l2_5", "l5", "l1"];
-    const pick = want.find(t => fits(t) && afford(t)) || TIER_ORDER.find(t => fits(t) && afford(t)) || want.find(fits) || selectedTier;
+    else if (V4.plan === "pro" && (hard || text.length > 50 || /\?/.test(text)) && !(V4_SMALL.test(text.trim()) && text.length < 40)) want = ["l5", "l2_5", "l4"];
+    else want = ["l2_5", "l5", "l4"];
+    const pick = want.find(t => fits(t) && afford(t)) || want.find(fits) || TIER_ORDER.find(t => fits(t) && afford(t)) || selectedTier;
     return pick;
   }
 
@@ -13042,7 +13045,7 @@
     a.dataset.tier = "auto";
     a.setAttribute("role", "option");
     a.innerHTML = `<div class="mp-opt-main"><div class="mp-opt-top"><span class="mp-opt-name"><span class="v4-auto-ico">${V4_ICONS.auto}</span>Auto<span class="mp-new">NEW</span></span><span class="mp-opt-cost">${isGuest() ? "General Mini" : "cost varies"}</span></div>
-      <div class="mp-opt-tag">${isGuest() ? "Guests always get General Mini. Sign in and Auto picks from every model." : "Picks the best model for every message, instantly. Easy questions use cheaper models so your points last longer."}</div></div>
+      <div class="mp-opt-tag">${isGuest() ? "Guests always get General Mini. Sign in and Auto picks from every model." : "Picks the best model for every message, instantly: General Mini for a quick hi, General Plus for everyday chat, General Pro for documents, and General Ultra for hard questions on Pro."}</div></div>
       <svg class="mp-check" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     a.addEventListener("click", () => {
       el.modelPicker.classList.remove("open");
@@ -13815,7 +13818,7 @@
     if (/[?&]set=/.test(location.search)) return;
     if (!forced && (seen || !v4IsNew())) { _v4ShowWN(); return; }
     const feats = [
-      ["auto", V4_ICONS.auto, "Auto", "Picks the best model for every message, instantly. Easy questions use cheaper models so your points last longer."],
+      ["auto", V4_ICONS.auto, "Auto", "Picks the best model for every message, instantly: General Mini for a quick hi, General Plus for everyday chat, General Pro for documents, and General Ultra for hard questions on Pro."],
       ["ph", V4_ICONS.ph, "Photo Help", "Snap a problem. SCODE redraws the diagram, solves it in the same steps as your notes, and writes it out in words."],
       ["build", V4_ICONS.build, "Build", "Ask for a game, a timer or a quiz page and watch it run right in the chat."],
       ["study", V4_ICONS.sheet, "Study, upgraded", "Up to 5 pages of notes at once, a new one-page Summary, and share links for any study set."],
