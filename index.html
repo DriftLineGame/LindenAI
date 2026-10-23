@@ -1016,28 +1016,28 @@
   #attach-btn:hover { background: var(--hover); color: var(--text); }
 
   /* Web search toggle */
-  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn {
+  #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn {
     height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
     cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit;
     transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
   }
-  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show, #fy-btn.show, #deep-btn.show { display: flex; }
-  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg, #fy-btn svg, #deep-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover, #fy-btn:hover, #deep-btn:hover { background: var(--hover); color: var(--text); }
-  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost { font-size: 11px; opacity: 0.7; }
-  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on, #fy-btn.on, #deep-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg, #fy-btn.on svg, #deep-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
-  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked, #fy-btn.blocked, #deep-btn.blocked { opacity: 0.45; }
+  #web-btn.show, #link-btn.show, #study-btn.show, #wx-btn.show, #img-btn.show, #sc-btn.show, #fy-btn.show, #deep-btn.show, #ph-btn.show, #build-btn.show { display: flex; }
+  #web-btn svg, #link-btn svg, #study-btn svg, #wx-btn svg, #img-btn svg, #sc-btn svg, #fy-btn svg, #deep-btn svg, #ph-btn svg, #build-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #web-btn:hover, #link-btn:hover, #study-btn:hover, #wx-btn:hover, #img-btn:hover, #sc-btn:hover, #fy-btn:hover, #deep-btn:hover, #ph-btn:hover, #build-btn:hover { background: var(--hover); color: var(--text); }
+  #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost, #ph-btn .wcost, #build-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #web-btn.on, #link-btn.on, #study-btn.on, #wx-btn.on, #img-btn.on, #sc-btn.on, #fy-btn.on, #deep-btn.on, #ph-btn.on, #build-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #web-btn.on svg, #link-btn.on svg, #study-btn.on svg, #wx-btn.on svg, #img-btn.on svg, #sc-btn.on svg, #fy-btn.on svg, #deep-btn.on svg, #ph-btn.on svg, #build-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #web-btn.blocked, #link-btn.blocked, #study-btn.blocked, #wx-btn.blocked, #img-btn.blocked, #sc-btn.blocked, #fy-btn.blocked, #deep-btn.blocked, #ph-btn.blocked, #build-btn.blocked { opacity: 0.45; }
   @keyframes webSpin { from { transform: rotate(-120deg) scale(0.7); } to { transform: none; } }
-  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn { padding: 0 9px; } }
+  @media (max-width: 420px) { #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost, #ph-btn .wcost, #build-btn .wcost { display: none; }#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn { padding: 0 9px; } }
   /* Auto-fit: fitTools() adds .fit1 (drop costs, NEW becomes a dot) then .fit2 (icons only) when the row runs out of room */
   .composer-tools { min-width: 0; }
   .composer-tools > button { flex-shrink: 0; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) .wcost { display: none; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { position: relative; padding: 0 10px 0 9px; }
-  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { width: 34px; padding: 0; justify-content: center; }
-  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) .mlabel { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) .wcost { display: none; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) { position: relative; padding: 0 10px 0 9px; }
+  .composer-tools.fit1 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) { width: 34px; padding: 0; justify-content: center; }
+  .composer-tools.fit2 :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) .mlabel { display: none; }
   .composer-tools.fit2 .model-picker-btn .mp-quota { display: none; }
   /* Mode cost: total next to the model name, plus a short pop-up with the breakdown */
   .model-picker-btn .mp-quota.plus { color: var(--accent); font-weight: 600; }
@@ -1052,13 +1052,13 @@
   .composer-tools.fit3 .model-picker-btn { padding: 0 6px; }
   .composer-tools.fit4 .model-picker-btn .mp-quota.plus { display: none; }
   .composer-tools.fit5 { gap: 3px; }
-  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { width: 29px; height: 29px; }
+  .composer-tools.fit5 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) { width: 29px; height: 29px; }
   .composer-tools.fit5 .model-picker-btn { padding: 0 3px; }
   .composer-tools.fit6 > button { flex-shrink: 1; }
   .composer-tools.fit6 .model-picker-btn .chev { display: none; }
   .composer-tools.fit7 .model-picker-btn .mp-g { display: none; }
   .composer-tools.fit8 { gap: 2px; }
-  .composer-tools.fit8 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn) { width: 26px; height: 26px; }
+  .composer-tools.fit8 > :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn) { width: 26px; height: 26px; }
   .composer-tools.fit8 .model-picker-btn .mp-quota { display: none; }
   #cost-toast b { font-weight: 700; }
   @media (max-width: 720px) { #cost-toast { white-space: normal; text-align: center; width: max-content; max-width: calc(100vw - 40px); border-radius: 14px; } }
@@ -1377,7 +1377,7 @@
   .nw-foot a:hover { background: var(--hover); }
   .nw-foot svg { width: 15px; height: 15px; }
 
-  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #deep-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent-grad);
+  #web-btn .wnew, #link-btn .wnew, #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #deep-btn .wnew, #ph-btn .wnew, #build-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent-grad);
     padding: 2px 5px; border-radius: 6px; margin-left: 1px; }
   @media (prefers-reduced-motion: reduce) {
     .wn-ring { animation: none; } #whatsnew.show .wn-orb, #whatsnew.show .wn-orb svg { animation: none; }
@@ -1434,10 +1434,10 @@
     .user-bubble { max-width: 88%; }
     #composer { border-radius: 22px; padding: 10px 10px 8px 14px; }
     /* Search / Link become round icon buttons on phones so the row fits */
-    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
     #attach-btn { width: 32px; height: 32px; }
-    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #fy-btn .mlabel, #deep-btn .mlabel, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
-    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #deep-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #web-btn .mlabel, #link-btn .mlabel, #study-btn .mlabel, #wx-btn .mlabel, #img-btn .mlabel, #sc-btn .mlabel, #fy-btn .mlabel, #deep-btn .mlabel, #ph-btn .mlabel, #build-btn .mlabel, #sc-btn .wcost, #fy-btn .wcost, #deep-btn .wcost, #ph-btn .wcost, #build-btn .wcost, #web-btn .wcost, #link-btn .wcost, #study-btn .wcost, #wx-btn .wcost, #img-btn .wcost { display: none; }
+    #study-btn .wnew, #wx-btn .wnew, #img-btn .wnew, #sc-btn .wnew, #fy-btn .wnew, #deep-btn .wnew, #ph-btn .wnew, #build-btn .wnew, #web-btn .wnew, #link-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
     .composer-tools { gap: 5px; }
     .model-picker-btn { padding: 0 8px; }
     .model-picker-btn .mp-quota { display: none; }
@@ -2189,24 +2189,24 @@
   html.look-bubble #main { overflow-x: clip; }
   html.look-bubble #sidebar { overflow: clip; }
   html.look-bubble #prompt-input { touch-action: auto; }
-  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #send-btn, .bm, #menu-btn, #top-new-btn, #settings-btn, #theme-toggle, #budget-pill, #signin-btn, #new-chat-btn, #ec-open-side, #ec-open-pill, .suggestions .chip, #about-btn, #news-btn, #report-btn, #app-get) {
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn, #send-btn, .bm, #menu-btn, #top-new-btn, #settings-btn, #theme-toggle, #budget-pill, #signin-btn, #new-chat-btn, #ec-open-side, #ec-open-pill, .suggestions .chip, #about-btn, #news-btn, #report-btn, #app-get) {
     background: transparent !important; border-color: transparent !important; box-shadow: none !important; outline: none;
     touch-action: none; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
-  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #send-btn, .bm, #budget-pill, #signin-btn, #ec-open-pill, .suggestions .chip) { border-radius: 999px; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn, #send-btn, .bm, #budget-pill, #signin-btn, #ec-open-pill, .suggestions .chip) { border-radius: 999px; }
   html.look-bubble :is(#menu-btn, #top-new-btn, #settings-btn, #theme-toggle) { border-radius: 50%; color: var(--text); }
   html.look-bubble :is(#new-chat-btn, #ec-open-side) { border-radius: 16px; }
   html.look-bubble :is(#about-btn, #news-btn, #report-btn, #app-get) { border-radius: 12px; }
-  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, .suggestions .chip) { color: var(--text); }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn).on { color: #fff; filter: drop-shadow(0 1px 4px rgba(24,8,60,.5)); }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn).on svg { animation: none; }
-  html.look-bubble body.light :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn).on { color: #2a1b55; }
+  html.look-bubble :is(#attach-btn, #web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn, .suggestions .chip) { color: var(--text); }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn).on { color: #fff; filter: drop-shadow(0 1px 4px rgba(24,8,60,.5)); }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn).on svg { animation: none; }
+  html.look-bubble body.light :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn).on { color: #2a1b55; }
   html.look-bubble #send-btn { color: #fff; }
   html.look-bubble body.light #send-btn { color: #2a1b55; }
   html.look-bubble #send-btn:disabled { opacity: .55; }
   html.look-bubble #signin-btn { color: #fff; border-width: 0; }
   html.look-bubble body.light #signin-btn { color: #2a1b55; }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, .bm, #send-btn, #attach-btn) { transition: color .2s, opacity .2s; }
-  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn):hover, html.look-bubble .icon-btn:hover, html.look-bubble .chip:hover { background: transparent !important; }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn, .bm, #send-btn, #attach-btn) { transition: color .2s, opacity .2s; }
+  html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn):hover, html.look-bubble .icon-btn:hover, html.look-bubble .chip:hover { background: transparent !important; }
 
   /* picking a model: a row of bubbles under the text box (the dropdown goes away) */
   html.look-bubble #model-picker { display: none !important; }
@@ -2233,7 +2233,7 @@
     .bm { height: 30px; padding: 0 10px; font-size: 12.5px; }
     .bm-g { display: none; }
     .bm:not(.sel) .bm-c { display: none; }
-    html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #attach-btn) { width: 32px; height: 32px; }
+    html.look-bubble :is(#web-btn, #link-btn, #study-btn, #wx-btn, #img-btn, #sc-btn, #fy-btn, #deep-btn, #ph-btn, #build-btn, #attach-btn) { width: 32px; height: 32px; }
   }
 
   /* a soft colour wash behind everything, so the glass has something to bend */
@@ -2987,6 +2987,227 @@
     .rh-lanes { display: none; }
   }
 
+
+  /* ================= SCODE AI v4 ================= */
+  .v4-auto-ico { display: inline-flex; width: 15px; height: 15px; margin-right: 5px; vertical-align: -2px; color: #a993ff; }
+  .v4-auto-ico svg { width: 100%; height: 100%; }
+  body.light .v4-auto-ico { color: #6a46f0; }
+  .v4-auto-opt .mp-opt-name { display: inline-flex; align-items: center; }
+  .v4-auto-opt { background: linear-gradient(110deg, rgba(255,95,176,.08), rgba(139,107,255,.10) 52%, rgba(63,193,255,.08)); }
+  .v4-mp-sep { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); padding: 10px 14px 4px; font-weight: 600; }
+  .v4-pro-pill { color: #fff !important; background: var(--accent-grad); border-radius: 999px; padding: 2px 9px 2px 7px; font-weight: 700; font-size: 11px; display: inline-flex; gap: 4px; align-items: center; }
+  .v4-pro-pill svg { width: 11px; height: 11px; }
+  .model-picker-option.pro-locked { opacity: 1; cursor: pointer; }
+  .model-picker-option.pro-locked .mp-opt-name, .model-picker-option.pro-locked .mp-opt-tag { opacity: .62; }
+
+  /* ---- Your plan ---- */
+  #v4-plan-sec.v4-flash { animation: v4Flash 1.6s ease; border-radius: 16px; }
+  @keyframes v4Flash { 0%, 100% { box-shadow: 0 0 0 0 rgba(139,107,255,0); } 25% { box-shadow: 0 0 0 4px rgba(139,107,255,.45); } }
+  .v4-plan-why { font-size: 13px; color: var(--text); background: var(--accent-soft); border-radius: 10px; padding: 8px 12px; margin: 0 0 10px; }
+  .v4-plan-card { position: relative; border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px; background: var(--surface); overflow: hidden; }
+  .v4-plan-card.pro { border-color: transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--accent-grad) border-box; border: 1.5px solid transparent; }
+  .v4-plan-card.pro::before { content: ""; position: absolute; inset: -40% -10% auto auto; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(139,107,255,.18), transparent 70%); pointer-events: none; }
+  .v4-plan-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  .v4-badge { font-weight: 800; font-size: 13px; padding: 4px 11px; border-radius: 999px; background: var(--hover); border: 1px solid var(--border); }
+  .v4-badge.pro { color: #fff; background: var(--accent-grad); border-color: transparent; box-shadow: 0 4px 16px rgba(139,107,255,.35); }
+  .v4-plan-sub { font-size: 13px; color: var(--muted); }
+  .v4-meter { margin: 8px 0; }
+  .v4-meter-top { display: flex; align-items: baseline; gap: 6px; font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+  .v4-meter-top b { font-size: 17px; color: var(--text); }
+  .v4-meter i { display: block; height: 7px; border-radius: 99px; background: var(--hover); overflow: hidden; }
+  .v4-meter u { display: block; height: 100%; border-radius: inherit; background: var(--accent-grad); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+  .v4-plan-refill { font-size: 12px; color: var(--faint); margin-top: 6px; }
+  .v4-compare { display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 0; margin: 12px 0 10px; font-size: 13px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .v4-compare > div { padding: 8px 10px; border-top: 1px solid var(--border); display: flex; align-items: center; }
+  .v4-compare > div:nth-child(-n+3) { border-top: 0; }
+  .v4-compare .h { font-weight: 700; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  .v4-compare .pro { background: var(--accent-soft); font-weight: 600; }
+  .v4-compare .h.pro { color: var(--accent); }
+  .v4-compare .no { color: var(--faint); }
+  .v4-compare svg { width: 16px; height: 16px; color: var(--accent); }
+  .v4-pro-btn { width: 100%; border: 0; border-radius: 14px; padding: 12px 16px; color: #fff; background: var(--accent-grad); font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; box-shadow: 0 6px 22px rgba(139,107,255,.35); position: relative; overflow: hidden; }
+  .v4-pro-btn span { font-weight: 800; font-size: 15px; }
+  .v4-pro-btn small { opacity: .9; font-size: 12px; }
+  .v4-pro-btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); background-size: 250% 100%; animation: v4Sheen 2.8s ease-in-out infinite; }
+  .v4-pro-btn.busy { opacity: .7; pointer-events: none; }
+  @keyframes v4Sheen { 0% { background-position: 150% 0; } 60%, 100% { background-position: -100% 0; } }
+  .v4-plan-note { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); background: var(--hover); border-radius: 12px; padding: 10px 12px; line-height: 1.45; }
+  .v4-plan-note.ok { color: var(--text); background: var(--accent-soft); }
+  .v4-plan-note svg { width: 17px; height: 17px; flex: none; color: var(--accent); margin-top: 1px; }
+  .v4-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent-grad); flex: none; margin-top: 4px; animation: v4Pulse 1.4s ease-in-out infinite; }
+  @keyframes v4Pulse { 50% { transform: scale(.6); opacity: .5; } }
+
+  /* ---- Rush Hour Pro chip ---- */
+  .v4-rh-pro { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font: inherit; font-size: 12px; color: var(--muted); background: none; border: 0; padding: 0; cursor: pointer; }
+  .v4-rh-pro b { font-size: 10px; letter-spacing: .06em; color: #fff; background: var(--accent-grad); border-radius: 6px; padding: 2px 6px; }
+  .v4-rh-pro.is-pro { color: var(--text); cursor: default; }
+
+  /* ---- tool buttons + bars ---- */
+  #ph-bar, #build-bar { display: none; align-items: center; gap: 10px; padding: 8px 12px; margin: 0 0 8px; border-radius: 14px; background: var(--accent-soft); font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+  #ph-bar.show, #build-bar.show { display: flex; }
+  #ph-bar > svg, #build-bar > svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+  #ph-bar b, #build-bar b { color: var(--text); }
+  .v4-bar-btn { font: inherit; font-size: 12.5px; font-weight: 700; border: 0; border-radius: 999px; padding: 6px 12px; color: #fff; background: var(--accent-grad); cursor: pointer; }
+  .v4-idea { font: inherit; font-size: 12.5px; border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; background: var(--surface); color: var(--text); cursor: pointer; }
+  .v4-idea:hover { border-color: var(--accent); }
+
+  /* ---- several pages ---- */
+  .v4-pages { display: flex; align-items: center; gap: 8px; margin-left: 8px; font-size: 12.5px; }
+  .v4-pg-n { font-weight: 700; color: var(--text); background: var(--accent-soft); border-radius: 999px; padding: 3px 9px; }
+  .v4-add-pg { font: inherit; font-size: 12.5px; border: 1px dashed var(--border-strong); background: none; color: var(--muted); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+  .v4-add-pg:hover { color: var(--text); border-color: var(--accent); }
+  .v4-pg-max { color: var(--faint); }
+  .img-wrap.v4-multi { position: relative; }
+  .v4-pg-badge { position: absolute; left: 8px; bottom: 8px; z-index: 3; font-size: 11.5px; font-weight: 700; color: #fff; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); border-radius: 999px; padding: 3px 9px; }
+  .v4-strip { display: flex; gap: 6px; justify-content: flex-end; margin: 6px 0 2px; flex-wrap: wrap; }
+  .v4-strip img { width: 54px; height: 54px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); }
+
+  /* ---- share ---- */
+  .v4-share-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--faint); }
+  .v4-share, .v4-mini { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 13px; font-weight: 600; color: var(--text); background: var(--hover); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+  .v4-share:hover, .v4-mini:hover { border-color: var(--accent); }
+  .v4-share svg, .v4-mini svg { width: 15px; height: 15px; }
+  .v4-share.busy { opacity: .6; }
+  .v4-share-row.done .v4-share-tip { color: var(--text); }
+  .v4-share-row a { color: var(--accent); word-break: break-all; }
+
+  /* ---- Summary (study sheet) ---- */
+  .v4-sum-over { margin: 2px 0 12px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .v4-sum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+  .v4-sum-sec { border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; background: var(--surface); animation: v4Up .5s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i) * 80ms); }
+  .v4-sum-h { font-weight: 700; margin-bottom: 6px; background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .v4-sum-sec ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; }
+  .v4-sum-sec li + li { margin-top: 3px; }
+  .v4-sum-label { font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin: 14px 0 7px; }
+  .v4-terms { display: flex; flex-wrap: wrap; gap: 6px; }
+  .v4-term { font: inherit; text-align: left; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 12px; padding: 6px 11px; cursor: pointer; max-width: 100%; transition: background .2s; }
+  .v4-term span { display: none; font-size: 13px; color: var(--muted); margin-top: 3px; }
+  .v4-term.open { background: var(--accent-soft); border-color: transparent; }
+  .v4-term.open span { display: block; }
+  .v4-remember { margin-top: 4px; border-radius: 14px; padding: 2px 14px 12px; background: linear-gradient(110deg, rgba(255,95,176,.10), rgba(139,107,255,.12) 52%, rgba(63,193,255,.10)); }
+  .v4-remember ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; font-weight: 600; }
+  .v4-card-tools { display: flex; gap: 8px; margin-top: 12px; }
+  @keyframes v4Up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* ---- Photo Help ---- */
+  .v4-ph .ph-stage { position: relative; margin: 6px 0 10px; border-radius: 16px; background: radial-gradient(120% 90% at 30% 20%, rgba(139,107,255,.12), transparent 60%), var(--surface); border: 1px solid var(--border); overflow: hidden; }
+  .v4-ph .ph-stage::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--hover) 1px, transparent 1px), linear-gradient(90deg, var(--hover) 1px, transparent 1px); background-size: 22px 22px; opacity: .8; pointer-events: none; }
+  .ph-svg { position: relative; display: block; width: 100%; max-height: 260px; }
+  .ph-cap { position: absolute; right: 10px; bottom: 8px; font-size: 11px; font-weight: 600; color: var(--faint); letter-spacing: .03em; }
+  .ph-ink { stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 4px rgba(139,107,255,.55)); stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .ph-ink.ph-soft { stroke-width: 2; opacity: .7; }
+  .ph-lbl { font: 600 15px/1 system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--text); }
+  .ph-lbl.big { font-size: 34px; font-weight: 700; }
+  .ph-lbl.mid { font-size: 19px; }
+  .ph-lbl.small { font-size: 13.5px; }
+  .ph-lbl.tiny { font-size: 11px; fill: var(--muted); }
+  .ph-lbl.note { font-size: 12.5px; fill: var(--muted); font-weight: 600; }
+  .ph-lbl.unknown { fill: #ff5fb0; }
+  .ph-lobe { fill: rgba(139,107,255,.18); stroke: rgba(139,107,255,.6); stroke-width: 1.4; }
+  .ph-dot { fill: var(--accent); }
+  .ph-pt { fill: #ff5fb0; stroke: #fff; stroke-width: 2; }
+  .ph-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .ph-step { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; background: var(--surface); position: relative; overflow: hidden; }
+  .ph-num { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12.5px; font-weight: 800; color: #fff; background: var(--accent-grad); }
+  .ph-work { font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+  .ph-say { color: var(--muted); font-size: 13.5px; margin-top: 2px; line-height: 1.45; }
+  .ph-answer { margin-top: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; border-radius: 16px; padding: 12px 14px; background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--accent-grad) border-box; border: 1.5px solid transparent; }
+  .ph-a-l { font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .ph-a-v { font-size: 20px; }
+  .ph-check { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 4px 10px; margin-left: auto; }
+  .ph-check svg { width: 14px; height: 14px; }
+  .ph-check.ok { color: #1f9d6b; background: rgba(31,157,107,.12); }
+  .ph-check.warn { color: var(--warn); background: var(--warn-bg); }
+  .ph-text { margin-top: 10px; font-size: 14px; }
+  .ph-text summary { cursor: pointer; color: var(--muted); font-weight: 600; font-size: 13px; }
+  .ph-text-body { margin: 8px 0; line-height: 1.55; }
+  .ph-text-body p { margin: 0 0 4px; }
+  /* the reveal */
+  .v4-ph.ph-wait .ph-ink { stroke-dashoffset: 1; }
+  .v4-ph.ph-wait .ph-lbl, .v4-ph.ph-wait .ph-lobe, .v4-ph.ph-wait .ph-dot, .v4-ph.ph-wait .ph-pt { opacity: 0; }
+  .v4-ph.ph-wait .ph-step, .v4-ph.ph-wait .ph-answer { opacity: 0; transform: translateY(8px); }
+  .v4-ph.ph-go .ph-ink { animation: phDraw .9s cubic-bezier(.65,0,.35,1) both; animation-delay: var(--d); }
+  .v4-ph.ph-go .ph-lbl, .v4-ph.ph-go .ph-lobe, .v4-ph.ph-go .ph-dot, .v4-ph.ph-go .ph-pt { animation: phFade .5s ease both; animation-delay: var(--d); }
+  .v4-ph.ph-go .ph-step { animation: phStep .55s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(1.6s + var(--i) * .45s); }
+  .v4-ph.ph-go .ph-step::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, rgba(139,107,255,.22) 50%, transparent 80%); background-size: 250% 100%; animation: phSweep 1s ease both; animation-delay: calc(1.7s + var(--i) * .45s); pointer-events: none; }
+  .v4-ph.ph-go .ph-answer { animation: phPop .6s cubic-bezier(.2,1.4,.4,1) both; animation-delay: calc(1.8s + var(--i) * .45s); }
+  @keyframes phDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes phFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes phStep { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes phSweep { from { background-position: 160% 0; } to { background-position: -90% 0; } }
+  @keyframes phPop { 0% { opacity: 0; transform: scale(.94); } 100% { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .v4-ph .ph-ink, .v4-ph .ph-step, .v4-ph .ph-answer, .v4-ph .ph-lbl { animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; } }
+
+  /* ---- code blocks + Build preview ---- */
+  .v4-cb { display: flex; align-items: center; gap: 6px; margin: 10px 0 0; padding: 6px 8px 6px 12px; border: 1px solid var(--border); border-bottom: 0; border-radius: 12px 12px 0 0; background: var(--hover); font-size: 12px; }
+  .v4-cb + pre { margin-top: 0 !important; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; }
+  .v4-cb-lang { font-weight: 700; color: var(--muted); text-transform: lowercase; }
+  .v4-cb-sp { flex: 1; }
+  .v4-cb button { display: inline-flex; align-items: center; gap: 5px; font: inherit; font-size: 12px; font-weight: 600; border: 0; border-radius: 8px; padding: 4px 9px; background: none; color: var(--muted); cursor: pointer; }
+  .v4-cb button:hover { color: var(--text); background: var(--hover); }
+  .v4-cb button svg { width: 13px; height: 13px; }
+  .v4-cb .v4-cb-run { color: #fff; background: var(--accent-grad); }
+  .v4-cb .v4-cb-run:hover { color: #fff; filter: brightness(1.08); background: var(--accent-grad); }
+  #v4-preview { position: fixed; z-index: 60; top: 12px; right: 12px; bottom: 12px; width: min(560px, calc(100vw - 24px)); display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 24px 70px rgba(0,0,0,.35); transform: translateX(calc(100% + 24px)); transition: transform .38s cubic-bezier(.2,.8,.2,1), width .3s ease; overflow: hidden; }
+  #v4-preview.show { transform: none; }
+  #v4-preview.full { width: calc(100vw - 24px); }
+  .v4-pv-head { display: flex; align-items: center; gap: 6px; padding: 10px 10px 10px 14px; border-bottom: 1px solid var(--border); }
+  .v4-pv-title { font-weight: 800; display: flex; align-items: center; gap: 7px; margin-right: 4px; }
+  .v4-pv-title svg { width: 17px; height: 17px; color: var(--accent); }
+  #v4-pv-tabs { display: flex; background: var(--hover); border-radius: 10px; padding: 3px; }
+  #v4-pv-tabs button { font: inherit; font-size: 12.5px; font-weight: 600; border: 0; background: none; color: var(--muted); padding: 5px 11px; border-radius: 8px; cursor: pointer; }
+  #v4-pv-tabs button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+  .v4-pv-sp { flex: 1; }
+  .v4-pv-head .icon-btn { width: 32px; height: 32px; }
+  .v4-pv-head .icon-btn svg { width: 16px; height: 16px; }
+  .v4-pv-body { flex: 1; position: relative; background: #fff; }
+  #v4-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+  #v4-code { position: absolute; inset: 0; margin: 0; overflow: auto; padding: 14px; font-size: 12.5px; line-height: 1.5; background: var(--bg); color: var(--text); white-space: pre; display: none; }
+  #v4-preview[data-tab="code"] #v4-code { display: block; }
+  #v4-preview[data-tab="code"] #v4-frame { visibility: hidden; }
+  .v4-pv-foot { font-size: 11.5px; color: var(--faint); padding: 7px 14px; border-top: 1px solid var(--border); }
+  @media (max-width: 720px) {
+    #v4-preview { top: 0; right: 0; bottom: 0; width: 100vw; border-radius: 0; border: 0; transform: translateY(100%); }
+    #v4-preview.full { width: 100vw; }
+    #v4-pv-full { display: none; }
+  }
+
+  /* ---- shared study set + updates ---- */
+  #v4-shared .modal-box, #v4-log .modal-box { max-width: 640px; }
+  .v4-shared-wait { display: flex; align-items: center; gap: 10px; padding: 28px 6px; color: var(--muted); }
+  .v4-shared-wait.err { color: var(--warn); }
+  .v4-shared-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .v4-made { font-size: 12px; color: var(--faint); font-weight: 600; letter-spacing: .03em; }
+  .v4-made b { background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .v4-log-list { display: flex; flex-direction: column; gap: 16px; max-height: min(64vh, 620px); overflow: auto; padding-right: 4px; }
+  .v4-log-day { border-left: 2px solid var(--border); padding-left: 14px; position: relative; }
+  .v4-log-day::before { content: ""; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-grad); }
+  .v4-log-date { font-size: 12px; font-weight: 700; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
+  .v4-log-day h3 { margin: 3px 0 8px; font-size: 16px; }
+  .v4-log-tag { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; border-radius: 6px; padding: 2px 6px; margin-right: 6px; vertical-align: 1px; }
+  .v4-log-tag.new { color: #fff; background: var(--accent-grad); }
+  .v4-log-tag.fix { color: #1f9d6b; background: rgba(31,157,107,.13); }
+  .v4-log-tag.better { color: var(--accent); background: var(--accent-soft); }
+  .v4-log-day ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; font-size: 14px; line-height: 1.45; }
+  .v4-log-day li span { color: var(--muted); }
+  .side-link.v4-side { position: relative; }
+
+  @media (max-width: 720px) {
+    #ph-bar, #build-bar { padding: 6px 10px; gap: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    #ph-bar .v4-long { display: none; }
+    #ph-bar > span, #build-bar > span { white-space: nowrap; }
+    #build-bar .v4-idea { white-space: nowrap; }
+  }
+  /* the Study bar has four choices now: on narrow phones it scrolls inside itself */
+  #study-bar { min-width: 0; max-width: 100%; }
+  #study-bar .sb-seg { min-width: 0; overflow-x: auto; scrollbar-width: none; flex-shrink: 1; }
+  #study-bar .sb-seg::-webkit-scrollbar { display: none; }
+  #study-bar .sb-seg button { flex: none; }
+  @media (max-width: 420px) {
+    .v4-pv-title { font-size: 0; gap: 0; }
+    #v4-pv-copy { display: none; }
+    .v4-pv-head { gap: 4px; padding: 8px 8px 8px 12px; }
+  }
 </style>
 </head>
 <body class="is-empty">
@@ -3018,6 +3239,16 @@
         <span class="scmark" style="width:17px;height:17px" aria-hidden="true"></span>
         About SCODE AI
       </a>
+      <div class="side-links">
+        <a class="side-link v4-side" id="v4-status-link" href="status.html">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2.5-6 5 12 2.5-6h4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Status
+        </a>
+        <button class="side-link v4-side" id="v4-log-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14M5 10h14M5 15h9M5 20h6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+          Updates<span class="dot-new"></span>
+        </button>
+      </div>
       <div class="side-links">
         <button class="side-link" id="news-btn" type="button">
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -3134,8 +3365,20 @@
           </div>
           <div id="study-bar" role="group" aria-label="Study Mode">
             <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="14" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
-            <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz"><span class="sb-l">Practice quiz</span><span class="sb-s">Quiz</span></button><button type="button" data-kind="plus" id="sb-plus-btn" hidden>Study Plus<span class="sb-plus" id="sb-plus-cost">30</span></button></div>
+            <div class="sb-seg"><button type="button" data-kind="flashcards">Flashcards</button><button type="button" data-kind="quiz"><span class="sb-l">Practice quiz</span><span class="sb-s">Quiz</span></button><button type="button" data-kind="summary">Summary</button><button type="button" data-kind="plus" id="sb-plus-btn" hidden>Study Plus<span class="sb-plus" id="sb-plus-cost">30</span></button></div>
             <span class="sb-tip" id="sb-tip">Paste notes, add a photo, paste a link, or name a topic.</span>
+          </div>
+          <div id="ph-bar" role="group" aria-label="Photo Help">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 9A2.5 2.5 0 0 1 6.5 6.5h1.6l1.4-2.2h4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12.5v4A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="13" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M18.5 2.5l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z" fill="currentColor"/></svg>
+            <span><b>Photo Help</b><span class="v4-long"> &middot; one problem per photo: math, chem, physics, maps and more</span></span>
+            <button class="v4-bar-btn" id="ph-add" type="button">Add a photo</button>
+          </div>
+          <div id="build-bar" role="group" aria-label="Build">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.3 5.5l-2.6 13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><b>Build</b> &middot; try:</span>
+            <button class="v4-idea" type="button" data-ask="Build a reaction-time game: wait for green, then tap as fast as you can. Show my best time.">Reaction game</button>
+            <button class="v4-idea" type="button" data-ask="Build a study timer: 25 minutes of work, 5 minute breaks, with a big ring that counts down.">Study timer</button>
+            <button class="v4-idea" type="button" data-ask="Build a page that flips through flashcards I type in, with a shuffle button.">Flashcard flipper</button>
           </div>
           <div id="sc-bar" role="group" aria-label="SCODE Scores">
             <svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7 6H4.5v1.5A3 3 0 0 0 7.4 10.5M17 6h2.5v1.5a3 3 0 0 1-2.9 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
@@ -3198,6 +3441,14 @@
             <button id="deep-btn" type="button" aria-pressed="false" title="Deep Think">
               <svg viewBox="0 0 24 24" fill="none"><path d="M9.5 4.5a3 3 0 0 0-5 2.4A3.2 3.2 0 0 0 3 12a3.2 3.2 0 0 0 2 3 3.3 3.3 0 0 0 4.5 4V4.5zM14.5 4.5a3 3 0 0 1 5 2.4A3.2 3.2 0 0 1 21 12a3.2 3.2 0 0 1-2 3 3.3 3.3 0 0 1-4.5 4V4.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.6 2.6l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5.5-1.3z" fill="currentColor" class="dt-spark"/></svg>
               <span class="mlabel">Deep Think</span><span class="wcost" id="deep-cost">+10</span><span class="wnew" id="deep-new" hidden>NEW</span>
+            </button>
+            <button id="ph-btn" type="button" aria-pressed="false" title="Photo Help">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 9A2.5 2.5 0 0 1 6.5 6.5h1.6l1.4-2.2h4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12.5v4A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="13" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M18.5 2.5l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z" fill="currentColor"/></svg>
+              <span class="mlabel">Photo Help</span><span class="wcost" id="ph-cost">+5</span><span class="wnew" id="ph-new" hidden>NEW</span>
+            </button>
+            <button id="build-btn" type="button" aria-pressed="false" title="Build">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.3 5.5l-2.6 13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="mlabel">Build</span><span class="wcost" id="build-cost" hidden>+0</span><span class="wnew" id="build-new" hidden>NEW</span>
             </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
@@ -3314,6 +3565,12 @@
       <input type="file" id="ap-file" accept="image/*" hidden>
     </div>
     <div class="ap-err" id="ap-err"></div>
+
+    <div class="set-section" id="v4-plan-sec">
+      <div class="set-section-title">Your plan</div>
+      <div class="v4-plan-why" id="v4-plan-why" hidden></div>
+      <div id="v4-plan"></div>
+    </div>
 
     <div class="set-section">
       <div class="set-section-title">Memory</div>
@@ -3555,6 +3812,62 @@
   </div>
 </div>
 
+
+<div class="overlay" id="v4-log">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="v4-log-title">
+    <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
+      <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+    <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">October 22, 2026</div><h3>Auto, Photo Help, Build and more</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Auto</b> <span>picks the best model for every message, instantly. It's on by default; pick a model yourself any time.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Photo Help</b> <span>redraws the problem in your photo, solves it in the same steps as your notes, checks the math, and writes it out in words.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Build</b> <span>makes web pages, games and tools and runs them right in the chat. Every HTML code block gets a Preview button.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Study: Summary</b> <span>turns notes into a one-page study sheet with key terms and what to remember.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Study: up to 5 pages</b> <span>of notes in one message, and share links for any study set (no account needed to open one).</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Your plan</b> <span>on the Account page shows your points, photos and plan, and lets you ask for free SCODE Pro.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Status page</b> <span>shows if SCODE is online, busy or asleep, how many people are waiting and the wait.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>Replies stream live again</b> <span>word by word as they're written, instead of showing up all at once at the end.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>Server start-up</b> <span>could rarely fail on a busy laptop. Fixed.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>Photo limits</b> <span>now count every photo in a message correctly.</span></li>
+      </ul></div>
+      <div class="v4-log-day"><div class="v4-log-date">October 20, 2026</div><h3>Faster first replies</h3><ul>
+        <li><span class="v4-log-tag better">BETTER</span><b>Models stay ready</b> <span>for 45 minutes after each message, so the first reply after a quiet spell is much quicker.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Study Sites order form</b> <span>in SCODE Apps: send your notes and get a custom study site.</span></li>
+      </ul></div>
+      <div class="v4-log-day"><div class="v4-log-date">October 16, 2026</div><h3>General Ultra 1.0</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>General Ultra 1.0</b> <span>our smartest model, with Deep Think for tough problems.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>General Pro 1.5</b> <span>reads documents, forms and worksheets.</span></li>
+      </ul></div>
+    </div>
+    <div class="ap-powered" style="margin-top:14px">POWERED BY SCODE</div>
+  </div>
+</div>
+
+<div class="overlay" id="v4-shared">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="v4-shared-title">
+    <div class="modal-header"><h2 id="v4-shared-title">Shared study set</h2>
+      <button class="icon-btn" id="v4-shared-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+    <div id="v4-shared-body"></div>
+    <div class="v4-shared-foot"><span class="v4-made">MADE WITH <b>SCODE AI</b></span>
+      <button class="wn-btn primary" id="v4-shared-make" type="button">Make your own</button></div>
+  </div>
+</div>
+
+<div id="v4-preview" data-tab="run" role="dialog" aria-label="Build preview">
+  <div class="v4-pv-head">
+    <span class="v4-pv-title"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.3 5.5l-2.6 13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Build</span>
+    <div id="v4-pv-tabs"><button type="button" data-t="run" class="on">Preview</button><button type="button" data-t="code">Code</button></div>
+    <span class="v4-pv-sp"></span>
+    <button class="icon-btn" id="v4-pv-reload" type="button" title="Run again" aria-label="Run again"><svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v5h-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="icon-btn" id="v4-pv-copy" type="button" title="Copy code" aria-label="Copy code"><svg viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" stroke="currentColor" stroke-width="1.9"/></svg></button>
+    <button class="icon-btn" id="v4-pv-dl" type="button" title="Download the file" aria-label="Download"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="icon-btn" id="v4-pv-full" type="button" title="Bigger" aria-label="Bigger"><svg viewBox="0 0 24 24" fill="none"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="icon-btn" id="v4-pv-close" type="button" aria-label="Close preview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="v4-pv-body"><iframe id="v4-frame" title="Build preview" sandbox="allow-scripts allow-forms allow-pointer-lock"></iframe><pre id="v4-code"></pre></div>
+  <div class="v4-pv-foot">Runs in a locked box, separate from your account. Powered by SCODE</div>
+</div>
+
 <!-- Sign in / create account -->
 <div class="overlay" id="auth-overlay">
   <div class="modal-box" role="dialog" aria-modal="true" aria-label="Your SCODE account">
@@ -3690,7 +4003,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://milk-certified-final-enemies.trycloudflare.com";
+  const PROXY_URL = "https://bite-cayman-guarantees-processed.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -3994,7 +4307,8 @@
   function renderMarkdown(text) {
     let src = escapeHtml(text);
     const codeBlocks = [];
-    src = src.replace(/```([\s\S]*?)(```|$)/g, (m, code) => { codeBlocks.push(code.replace(/^[a-zA-Z0-9_+-]*\n/, "")); return `\u0000CB${codeBlocks.length - 1}\u0000`; });
+    const codeLangs = [];
+    src = src.replace(/```([\s\S]*?)(```|$)/g, (m, code, end) => { const lm = /^([a-zA-Z0-9_+-]*)\n/.exec(code); codeLangs.push({ lang: lm ? lm[1] : "", done: !!end }); codeBlocks.push(code.replace(/^[a-zA-Z0-9_+-]*\n/, "")); return `\u0000CB${codeBlocks.length - 1}\u0000`; });
     const inlineCode = [];
     src = src.replace(/`([^`\n]+)`/g, (m, c) => { inlineCode.push(c); return `\u0000IC${inlineCode.length - 1}\u0000`; });
     // Math: $$...$$ and \[...\] get their own line; $...$ and \(...\) stay in the sentence.
@@ -4027,7 +4341,7 @@
       else { closeList(); paraBuf.push(line); }
     });
     closeList(); flushPara();
-    out = out.replace(/\u0000CB(\d+)\u0000/g, (m, i) => `<pre><code>${codeBlocks[+i]}</code></pre>`);
+    out = out.replace(/\u0000CB(\d+)\u0000/g, (m, i) => `<pre data-lang="${escapeHtml(codeLangs[+i].lang).replace(/"/g, "")}"${codeLangs[+i].done ? " data-done=\"1\"" : ""}><code>${codeBlocks[+i]}</code></pre>`);
     return out || "<p></p>";
   }
 
@@ -4451,7 +4765,7 @@
     webOn = localStorage.getItem("linden_web") === "1";
     linkOn = !webOn && localStorage.getItem("scode_link_on") === "1";
     studyOn = !webOn && !linkOn && localStorage.getItem("scode_study_on") === "1";
-    studyKind = ({ quiz: "quiz", plus: "plus" })[localStorage.getItem("scode_study_kind")] || "flashcards";
+    studyKind = ({ quiz: "quiz", plus: "plus", summary: "summary" })[localStorage.getItem("scode_study_kind")] || "flashcards";
     weatherOn = !webOn && !linkOn && !studyOn && localStorage.getItem("scode_weather_on") === "1";
     imageOn = !webOn && !linkOn && !studyOn && !weatherOn && localStorage.getItem("scode_image_on") === "1";
     scoresOn = !webOn && !linkOn && !studyOn && !weatherOn && !imageOn && localStorage.getItem("scode_scores_on") === "1";
@@ -8029,6 +8343,7 @@
       const res = await fetch(PROXY_URL + "/status", { headers: authHeaders() });
       if (!res.ok) throw new Error();
       const data = await res.json();
+      v4Status(data);
       el.statusDot.className = "status-dot ok";
       // A sign-in that expired (or an account deleted elsewhere) falls back to guest.
       if (auth && data.token_valid === false) { signOutLocal(); showNote("You've been signed out. Sign in again to get every model back."); }
@@ -9071,12 +9386,11 @@
             // Study Mode progress, then the finished set.
             const s = chunk.study;
             const stage = (t) => { if (!revealed && loaderRow._setStage) loaderRow._setStage(t); };
-            if (s.status === "start") stage("Getting your study set ready");
+            const sw = V4_STAGE[s.kind || o.kind] || V4_STAGE[studyWord];
+            if (s.status === "start") stage(sw.start);
             else if (s.status === "reading") stage(`Reading ${s.domain || "the page"}`);
-            else if (s.status === "making") stage(studyWord === "quiz" ? "Writing your quiz" : "Making your flashcards");
-            else if (s.status === "progress") stage(studyWord === "quiz"
-              ? `Writing your quiz · ${s.made} question${s.made === 1 ? "" : "s"} so far`
-              : `Making your flashcards · ${s.made} so far`);
+            else if (s.status === "making") stage(sw.making);
+            else if (s.status === "progress") stage(sw.prog(s.made));
             else if (s.status === "note") studyNote = String(s.message || "");
             else if (s.status === "done") studySet = s.set;
             continue;
@@ -10854,6 +11168,7 @@
       P = { text, linkToSend, imgNow, scNow, scHint, fyNow, fyBody, wxWanted, wxSendTo, tier: selectedTier,
             web: searchUnlocked() && webOn && WEB_TIERS.has(selectedTier), study: studyActive() && !isGuest(), studyKind,
             image: pendingImageBase64 || null, chatId: currentChatId, deep: deepActive() };
+      if (v4Prep(P) === false) return;
       el.input.value = "";
       autoGrow();
       if (rushShouldQueue()) { clearPendingImage(); updateSendState(); rushAdd(P); return; }
@@ -10865,7 +11180,7 @@
 
     const hadImageBefore = messages.some(m => m.images && m.images.length);
     const addingImageNow = !!P.image;
-    messages.push({ role: "user", content: text, images: P.image ? [P.image] : undefined });
+    messages.push({ role: "user", content: text, images: P.image ? [P.image].concat(P.extra || []) : undefined });
     clearPendingImage();
     // Signed-in replies run as a job on the server, so they finish even if this page closes.
     const jobChat = historyEnabled && serverSync && !isGuest() ? getCurrentChat() : null;
@@ -10936,6 +11251,7 @@
           scores: scNow && !studyNow && !linkToSend ? (scHint ? { league: scHint } : {}) : undefined,
           ferry: fyNow && !studyNow && !linkToSend ? fyBody : undefined,
           deep: (P.deep && tierAtSend === "l5" && !studyNow && !imgNow) || undefined,
+          build: (P.build && !studyNow && !imgNow) || undefined,
           job: jobId ? { id: jobId, chat: jobChat.id } : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
@@ -10979,6 +11295,11 @@
           renderMessages();
           el.input.value = text; autoGrow();
           openPrivacy(true);
+        } else if (res.status === 403 && data.error === "pro_required") {
+          messages.pop();
+          renderMessages();
+          el.input.value = text; autoGrow();
+          v4OpenPlan(data.message);
         } else if (res.status === 403 && data.error === "signin_required") {
           // The server says this needs an account: put their message back so nothing is lost.
           messages.pop();
@@ -11554,14 +11875,14 @@
   //  look that glows and grows a little when you tap it.
   // =====================================================================
   function lookBubble() { return document.documentElement.classList.contains("look-bubble"); }
-  const BM_HUE = { l1: 0.83, l2_5: 0.34, l4: 0.62, l5: 0.9 };
+  const BM_HUE = { auto: 0.74, l1: 0.83, l2_5: 0.34, l4: 0.62, l5: 0.9 };
   const BM_LOCK = '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2.4"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.4"/></svg>';
 
   // ---------- the row of model bubbles ----------
   function bmBuild() {
     const row = $("bm-row");
     if (!row || row.childElementCount) return;
-    for (const t of TIER_ORDER) {
+    for (const t of ["auto"].concat(TIER_ORDER)) {
       const b = document.createElement("button");
       b.type = "button"; b.className = "bm"; b.dataset.tier = t;
       b.setAttribute("role", "radio");
@@ -11613,7 +11934,7 @@
       const L = gbLayer(comp, 44);
       gbAdd(L, comp, { kind: "panel", move: false, h0: 0.45 });
       gbAdd(L, $("attach-btn"), { group: "tools", h0: 0.45 });
-      [["web-btn", 0.7], ["link-btn", 0.52], ["study-btn", 0.12], ["wx-btn", 0.8], ["sc-btn", 0.06], ["fy-btn", 0.64], ["img-btn", 0.3], ["deep-btn", 0.9]]
+      [["web-btn", 0.7], ["link-btn", 0.52], ["study-btn", 0.12], ["wx-btn", 0.8], ["sc-btn", 0.06], ["fy-btn", 0.64], ["img-btn", 0.3], ["ph-btn", 0.2], ["build-btn", 0.58], ["deep-btn", 0.9]]
         .forEach(([id, h]) => gbAdd(L, $(id), { group: "tools", h0: h, state: on }));
       gbAdd(L, el.sendBtn || $("send-btn"), { group: "tools", h0: 0.3, state: (e) => ({ on: !e.disabled, dim: e.disabled }) });
       document.querySelectorAll("#bm-row .bm").forEach(b => gbAdd(L, b, {
@@ -12574,6 +12895,953 @@
   }
   window.addEventListener("beforeunload", e => { if (RQ.items.length) { e.preventDefault(); e.returnValue = ""; } });
   window.scodeRush = { state: () => RQ, poll: rhPoll };
+
+
+  // =====================================================================
+  //  SCODE AI v4 (Oct 22, 2026): Your plan, Auto, Photo Help, Build,
+  //  Study Summary + several pages + share links, Updates & fixes.
+  //  This lives inside the main script so it can use (and wrap) its parts.
+  // =====================================================================
+  const V4 = {
+    plan: auth ? "free" : "guest", proTiers: new Set(["l5"]), promoOpen: true,
+    auto: true, lastPick: null, photoHelp: false, build: false, extra: [], maxPhotos: 5,
+    buildTiers: new Set(["l2_5", "l4", "l5"]), autoOpen: false,
+  };
+  try { V4.auto = localStorage.getItem("scode_auto") !== "0"; } catch (e) {}
+  try { V4.photoHelp = localStorage.getItem("scode_ph_on") === "1"; V4.build = !V4.photoHelp && localStorage.getItem("scode_build_on") === "1"; } catch (e) {}
+  const V4_STAGE = {
+    flashcards: { start: "Getting your study set ready", making: "Making your flashcards", prog: n => `Making your flashcards · ${n} so far` },
+    quiz: { start: "Getting your study set ready", making: "Writing your quiz", prog: n => `Writing your quiz · ${n} question${n === 1 ? "" : "s"} so far` },
+    summary: { start: "Reading your notes", making: "Writing your study sheet", prog: n => `Writing your study sheet · ${n} section${n === 1 ? "" : "s"} so far` },
+    photohelp: { start: "Looking at your photo", making: "Working it out", prog: n => `Working it out · step ${n}` },
+  };
+  const v4Esc = (s) => escapeHtml(String(s == null ? "" : s)).replace(/"/g, "&quot;");
+  const V4_ICONS = {
+    ph: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 9A2.5 2.5 0 0 1 6.5 6.5h1.6l1.4-2.2h4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12.5v4A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="13" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M18.5 2.5l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z" fill="currentColor"/></svg>',
+    build: '<svg viewBox="0 0 24 24" fill="none"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.3 5.5l-2.6 13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    auto: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M18 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2zM6 15.5l.6 1.5 1.5.6-1.5.6L6 19.7l-.6-1.5-1.5-.6 1.5-.6.6-1.5z" fill="currentColor"/></svg>',
+    share: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8 7.5L12 3.5l4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 11H5.5A1.5 1.5 0 0 0 4 12.5v6A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-6a1.5 1.5 0 0 0-1.5-1.5H18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    sheet: '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    lock: '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2.2"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" stroke="currentColor" stroke-width="1.9"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l10.5-6.5z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+    down: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    open: '<svg viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-9 9M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    x: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  };
+  function v4Toast(html) { if (typeof showCostToast === "function") showCostToast(html); }
+
+  // ---------------------------------------------------------------- status from the server
+  function v4Status(data) {
+    if (!data) return;
+    const was = V4.plan;
+    V4.plan = !auth ? "guest" : (data.plan || "free");
+    if (Array.isArray(data.pro_tiers)) V4.proTiers = new Set(data.pro_tiers);
+    if (Array.isArray(data.build_tiers)) V4.buildTiers = new Set(data.build_tiers);
+    if (typeof data.max_photos === "number") V4.maxPhotos = data.max_photos;
+    if ("promo_open" in data) V4.promoOpen = !!data.promo_open;
+    document.body.classList.toggle("is-pro", V4.plan === "pro");
+    if (V4.auto && !sending) {
+      const base = v4AutoBase();
+      if (base !== selectedTier) { selectedTier = base; }
+    }
+    if (was !== V4.plan) { updateModelPickerLabel(); updateInputAvailability(); }
+  }
+  function v4Locked(tier) { return !isGuest() && V4.plan !== "pro" && V4.proTiers.has(tier); }
+
+  // ---------------------------------------------------------------- Auto model picker
+  // Plain rules, run in the browser: no extra AI call, so picking takes no time at all.
+  function v4Allowed(t) { return !!TIER_INFO[t] && !(isGuest() && !GUEST_TIERS.has(t)) && !v4Locked(t); }
+  function v4AutoBase() {
+    if (isGuest()) return "l1";
+    const ok = (t) => v4Allowed(t) && (sharedRemaining === null || sharedRemaining >= TIER_INFO[t].cost);
+    return ["l5", "l2_5", "l1"].find(ok) || "l1";
+  }
+  const V4_HARD = /\b(prove|derive|explain|why|how does|how do|step[- ]by[- ]step|analy[sz]e|compare|contrast|essay|calculate|solve|simplify|factor|integral|derivative|equation|formula|code|program|function|debug|error|algorithm|write (a|an|me)|story|poem|summari[sz]e|translate|plan|strategy|difference between)\b/i;
+  const V4_MATH = /[=√∫∑^×÷]|\d\s*[x*/+\-]\s*\d|\b(sin|cos|tan|log|ln)\b/i;
+  const V4_SMALL = /^(hi+|hey+|hello+|yo|sup|thanks?|thank you|ty|ok(ay)?|k|cool|nice|lol|lmao|haha+|good (morning|night|afternoon)|bye|gn|gm|yes|no|yep|nope|sure|great|awesome|wow)\b[\s!.?]*$/i;
+  const V4_DOC = /\b(read|transcribe|what does (this|it) say|type (this|it) out|copy (this|it) (out|down)|worksheet|form|document|receipt|handwriting|text in|word for word)\b/i;
+  function v4AutoPick(P) {
+    if (isGuest()) return "l1";
+    const text = String(P.text || "");
+    const photoNow = !!P.image;
+    const chat = P.chatId ? chats.find(c => c.id === P.chatId) : null;
+    const photo = photoNow || ((chat ? chat.messages : messages) || []).some(m => m.images && m.images.length);
+    const need = [];
+    if (photo) need.push(VISION_TIERS);
+    if (P.web) need.push(WEB_TIERS);
+    if (P.linkToSend) need.push(typeof LINK_TIERS !== "undefined" ? LINK_TIERS : WEB_TIERS);
+    if (P.study) need.push(STUDY_TIERS);
+    if (P.deep) need.push(DEEP_TIERS);
+    if (P.build) need.push(V4.buildTiers);
+    const fits = (t) => v4Allowed(t) && need.every(s => s.has(t));
+    const afford = (t) => sharedRemaining === null || sharedRemaining >= TIER_INFO[t].cost * (photo ? 2 : 1);
+    const hard = text.length > 280 || /```/.test(text) || V4_HARD.test(text) || V4_MATH.test(text);
+    let want;
+    if (P.deep || P.build) want = ["l5", "l2_5", "l4"];
+    else if (photoNow && V4_DOC.test(text)) want = ["l4", "l5", "l2_5"];
+    else if (photo || P.study || P.web || P.linkToSend) want = ["l5", "l2_5", "l4"];
+    else if (P.imgNow || P.scNow || P.fyNow) want = ["l1", "l2_5", "l5"];
+    else if (V4_SMALL.test(text.trim()) && text.length < 40) want = ["l1", "l2_5", "l5"];
+    else if (hard) want = ["l5", "l2_5", "l4", "l1"];
+    else want = V4.plan === "pro" && (text.length > 50 || /\?/.test(text)) ? ["l5", "l2_5", "l1"] : ["l2_5", "l5", "l1"];
+    const pick = want.find(t => fits(t) && afford(t)) || TIER_ORDER.find(t => fits(t) && afford(t)) || want.find(fits) || selectedTier;
+    return pick;
+  }
+
+  // ---------------------------------------------------------------- send hook
+  function v4Prep(P) {
+    // Photo Help: a photo is needed
+    if (V4.photoHelp && v4PhAvail() && !P.imgNow) {
+      const chat = P.chatId ? chats.find(c => c.id === P.chatId) : null;
+      const before = ((chat ? chat.messages : messages) || []).some(m => m.images && m.images.length);
+      if (P.image) { P.study = true; P.studyKind = "photohelp"; P.web = false; P.deep = false; }
+      else if (!before) {
+        showNote("Photo Help needs a photo of the problem. Tap Add a photo, then send.");
+        return false;
+      }
+      // (no new photo, but this chat has one: a normal follow-up question about it)
+    }
+    if (V4.build && v4BuildAvail() && !P.study && !P.imgNow) { P.build = true; V4.autoOpen = true; }
+    if (P.image && V4.extra.length) P.extra = V4.extra.slice(0, Math.max(0, V4.maxPhotos - 1));
+    if (V4.auto) {
+      P.tier = v4AutoPick(P);
+      V4.lastPick = P.tier;
+      updateModelPickerLabel();
+    }
+    return true;
+  }
+
+  // ---------------------------------------------------------------- picker: Auto + Pro lock
+  const _v4RenderPicker = renderModelPickerList;
+  renderModelPickerList = function () {
+    _v4RenderPicker();
+    // Ultra and Deep Think are SCODE Pro
+    el.modelPickerList.querySelectorAll(".model-picker-option").forEach(opt => {
+      const t = opt.dataset.tier;
+      if (V4.auto) opt.classList.remove("selected");
+      if (!v4Locked(t)) return;
+      const c = opt.cloneNode(true);
+      c.classList.add("locked", "pro-locked"); c.classList.remove("disabled", "selected");
+      const cost = c.querySelector(".mp-opt-cost");
+      if (cost) cost.innerHTML = `<span class="mp-lock v4-pro-pill">${V4_ICONS.lock}Pro</span>`;
+      c.addEventListener("click", () => {
+        el.modelPicker.classList.remove("open");
+        v4OpenPlan(`${TIER_INFO[t].label} and Deep Think are part of SCODE Pro.`);
+      });
+      opt.replaceWith(c);
+    });
+    const a = document.createElement("div");
+    a.className = "model-picker-option v4-auto-opt" + (V4.auto ? " selected" : "");
+    a.dataset.tier = "auto";
+    a.setAttribute("role", "option");
+    a.innerHTML = `<div class="mp-opt-main"><div class="mp-opt-top"><span class="mp-opt-name"><span class="v4-auto-ico">${V4_ICONS.auto}</span>Auto<span class="mp-new">NEW</span></span><span class="mp-opt-cost">${isGuest() ? "General Mini" : "cost varies"}</span></div>
+      <div class="mp-opt-tag">${isGuest() ? "Guests always get General Mini. Sign in and Auto picks from every model." : "Picks the best model for every message, instantly. Easy questions use cheaper models so your points last longer."}</div></div>
+      <svg class="mp-check" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    a.addEventListener("click", () => {
+      el.modelPicker.classList.remove("open");
+      V4.auto = true; try { localStorage.setItem("scode_auto", "1"); } catch (e) {}
+      selectedTier = v4AutoBase();
+      const chat = getCurrentChat();
+      if (chat && !chat.messages.length) { chat.tier = selectedTier; saveChats(); }
+      updateModelPickerLabel(); updateInputAvailability();
+      v4Toast("<b>Auto is on</b> · SCODE picks the best model for each message");
+    });
+    el.modelPickerList.insertBefore(a, el.modelPickerList.firstChild);
+    const sep = document.createElement("div"); sep.className = "v4-mp-sep"; sep.textContent = "Or pick one yourself";
+    a.after(sep);
+  };
+  const _v4SelectTier = selectTier;
+  selectTier = function (tier) {
+    if (v4Locked(tier)) { el.modelPicker.classList.remove("open"); v4OpenPlan(`${TIER_INFO[tier].label} is part of SCODE Pro.`); return; }
+    const wasAuto = V4.auto;
+    V4.auto = false; try { localStorage.setItem("scode_auto", "0"); } catch (e) {}
+    if (wasAuto && tier === selectedTier) { el.modelPicker.classList.remove("open"); updateModelPickerLabel(); return; }
+    _v4SelectTier(tier);
+    updateModelPickerLabel();
+  };
+  function v4AutoQuota() {
+    const p = V4.lastPick && TIER_INFO[V4.lastPick] ? TIER_INFO[V4.lastPick].label.replace("General ", "") : null;
+    el.mpQuota.textContent = p ? "last: " + p : (isGuest() ? "Mini" : "best pick");
+    el.mpQuota.classList.remove("plus");
+    el.modelPickerBtn.title = "Auto picks the best model for each message" + (p ? ` (last one: ${TIER_INFO[V4.lastPick].label})` : "");
+  }
+  const _v4Cost = updateCostInfo;
+  updateCostInfo = function () { _v4Cost(); if (V4.auto) v4AutoQuota(); };
+  const _v4Label = updateModelPickerLabel;
+  updateModelPickerLabel = function () {
+    _v4Label();
+    document.body.classList.toggle("v4-auto", V4.auto);
+    if (typeof bmUpdate === "function") bmUpdate();
+    if (V4.auto) {
+      el.mpName.innerHTML = `<span class="v4-auto-ico">${V4_ICONS.auto}</span><span class="mp-g">Auto</span>`;
+      v4AutoQuota();
+      document.querySelectorAll(".model-picker-option").forEach(o => o.classList.toggle("selected", o.dataset.tier === "auto"));
+    }
+  };
+  for (const name of ["newChat", "switchChat"]) {
+    const orig = name === "newChat" ? newChat : switchChat;
+    const wrapped = function () {
+      const r = orig.apply(this, arguments);
+      if (V4.auto && !sending) { selectedTier = v4AutoBase(); updateModelPickerLabel(); updateInputAvailability(); }
+      return r;
+    };
+    if (name === "newChat") newChat = wrapped; else switchChat = wrapped;
+  }
+
+  // Bubble look: the model row gets an Auto bubble, and Ultra shows a lock on Free
+  const _v4BmUpdate = bmUpdate;
+  bmUpdate = function () {
+    _v4BmUpdate();
+    const row = $("bm-row");
+    if (!row) return;
+    const a = row.querySelector('.bm[data-tier="auto"]');
+    if (a) {
+      a.hidden = false;
+      const set = (cls, v) => { const s = a.querySelector(cls); if (s && s.innerHTML !== v) s.innerHTML = v; };
+      set(".bm-ic", V4_ICONS.auto); set(".bm-g", ""); set(".bm-n", "Auto"); set(".bm-c", "");
+      a.classList.toggle("sel", V4.auto); a.setAttribute("aria-checked", String(V4.auto));
+      a.title = "Auto: SCODE picks the best model for each message";
+    }
+    row.querySelectorAll(".bm").forEach(b => {
+      const t = b.dataset.tier;
+      if (t === "auto") return;
+      if (V4.auto) { b.classList.remove("sel"); b.setAttribute("aria-checked", "false"); }
+      if (v4Locked(t)) { b.classList.add("locked"); const ic = b.querySelector(".bm-ic"); if (ic && !ic.innerHTML) ic.innerHTML = BM_LOCK; const c = b.querySelector(".bm-c"); if (c) c.textContent = "Pro"; b.title = `${TIER_INFO[t].label} is part of SCODE Pro`; }
+    });
+  };
+  const _v4BmPick = bmPick;
+  bmPick = function (t) {
+    if (t === "auto") {
+      V4.auto = true; try { localStorage.setItem("scode_auto", "1"); } catch (e) {}
+      selectedTier = v4AutoBase(); updateModelPickerLabel(); updateInputAvailability(); bmUpdate();
+      return;
+    }
+    if (v4Locked(t)) { v4OpenPlan(`${TIER_INFO[t].label} and Deep Think are part of SCODE Pro.`); return; }
+    _v4BmPick(t);
+  };
+
+  // ---------------------------------------------------------------- Your plan (account page)
+  function v4When(ts) { return new Date(ts * 1000).toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" }); }
+  function v4PaintPlan(d) {
+    const box = $("v4-plan");
+    if (!box) return;
+    if (!d || !d.plan) { box.innerHTML = '<div class="ap-mem-empty">Loading your plan…</div>'; return; }
+    const pro = d.plan === "pro";
+    const pct = (a, b) => Math.max(0, Math.min(100, b ? (a / b) * 100 : 0));
+    const left = Math.max(0, d.points_limit - d.points_used), pleft = Math.max(0, d.photos_limit - d.photos_used);
+    const refill = d.reset_at ? new Date(d.reset_at * 1000).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "soon";
+    const promo = d.promo || {};
+    let cta = "";
+    if (pro) cta = `<div class="v4-plan-note ok">${V4_ICONS.check}<span>SCODE Pro is on${d.plan_until ? " until " + v4When(d.plan_until) : ""}. Thanks for helping train SCODE AI! Keep <b>Help improve SCODE AI</b> on to keep Pro.</span></div>`;
+    else if (promo.request === "pending") cta = `<div class="v4-plan-note wait"><span class="v4-dot"></span><span>Your Pro request is in. You'll get an email when it's approved.</span></div>`;
+    else if (!promo.open) cta = `<div class="v4-plan-note">The free Pro offer ended on October 31.</div>`;
+    else if (!d.train_ok) cta = `<div class="v4-plan-note">Free SCODE Pro is for people who help train SCODE AI. Turn on <b>Help improve SCODE AI</b> below, then ask for Pro here.</div>`;
+    else cta = `<button class="v4-pro-btn" id="v4-pro-req" type="button"><span>Get SCODE Pro free</span><small>Until January 1, 2027 · ask by October 31</small></button>`;
+    box.innerHTML = `
+      <div class="v4-plan-card ${pro ? "pro" : ""}">
+        <div class="v4-plan-top"><span class="v4-badge ${pro ? "pro" : ""}">${pro ? "SCODE Pro" : "Free"}</span>
+          <span class="v4-plan-sub">${pro ? "Every model, 3× the points, first in line" : "General Mini, Plus and Pro"}</span></div>
+        <div class="v4-meter"><div class="v4-meter-top"><b>${left.toLocaleString()}</b><span>of ${d.points_limit.toLocaleString()} points left</span></div><i><u style="width:${pct(left, d.points_limit)}%"></u></i></div>
+        <div class="v4-meter"><div class="v4-meter-top"><b>${pleft}</b><span>of ${d.photos_limit} photos left</span></div><i><u style="width:${pct(pleft, d.photos_limit)}%"></u></i></div>
+        <div class="v4-plan-refill">Both refill every 4 hours · next at ${refill}</div>
+      </div>
+      <div class="v4-compare">
+        <div></div><div class="h">Free</div><div class="h pro">Pro</div>
+        <div>Points every 4 hours</div><div>${d.free_points.toLocaleString()}</div><div class="pro">${d.pro_points.toLocaleString()}</div>
+        <div>Photos every 4 hours</div><div>${d.free_photos}</div><div class="pro">${d.pro_photos}</div>
+        <div>General Ultra + Deep Think</div><div class="no">–</div><div class="pro">${V4_ICONS.check}</div>
+        <div>Rush Hour</div><div>Fair line</div><div class="pro">First, 2 replies a turn</div>
+      </div>
+      ${cta}`;
+    const b = $("v4-pro-req");
+    if (b) b.addEventListener("click", async () => {
+      b.disabled = true; b.classList.add("busy");
+      const r = await syncFetch("/me/pro/request", { method: "POST" }).catch(() => null);
+      if (r && r.ok) { meData = r.data; paintAccount(); v4Toast("<b>Request sent</b> · we'll email you when Pro is on"); }
+      else { b.disabled = false; b.classList.remove("busy"); apError((r && r.data && r.data.message) || "Couldn't send that. Try again."); }
+    });
+  }
+  const _v4PaintAccount = paintAccount;
+  paintAccount = function () { _v4PaintAccount(); v4PaintPlan(meData); };
+  function v4OpenPlan(msg) {
+    if (isGuest()) { openAuth("welcome", msg || "Sign in to see plans."); return; }
+    openAccount();
+    setTimeout(() => {
+      const s = $("v4-plan-sec");
+      if (!s) return;
+      s.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      s.classList.remove("v4-flash"); void s.offsetWidth; s.classList.add("v4-flash");
+      const n = $("v4-plan-why");
+      if (n) { n.textContent = msg || ""; n.hidden = !msg; }
+    }, 120);
+  }
+  // Turning training off while on Pro (or waiting for it): ask first.
+  let v4TrainOk = false;
+  document.addEventListener("click", async (e) => {
+    const sw = e.target.closest && e.target.closest("#ap-train-switch");
+    if (!sw || v4TrainOk || !meData || !meData.train_ok) return;
+    const pro = meData.plan === "pro", pend = meData.promo && meData.promo.request === "pending";
+    if (!pro && !pend) return;
+    e.stopPropagation(); e.preventDefault();
+    const yes = await showConfirm(pro ? "Turn off training and lose Pro?" : "Turn off training?",
+      pro ? "Free SCODE Pro is for people who help train SCODE AI. If you turn this off, your account goes back to Free right away: no General Ultra or Deep Think, 1,000 points and 20 photos every 4 hours."
+          : "Your free Pro request will be cancelled, because free Pro is for people who help train SCODE AI.");
+    if (!yes) return;
+    v4TrainOk = true; sw.click(); v4TrainOk = false;
+    setTimeout(checkStatus, 600);
+  }, true);
+
+  // ---------------------------------------------------------------- Rush Hour: Pro goes first
+  const _v4RhRender = rhRender;
+  rhRender = function (fresh) {
+    _v4RhRender(fresh);
+    const b = document.querySelector(".rh-banner:not(.over)");
+    if (!b || isGuest()) return;
+    let chip = b.querySelector(".v4-rh-pro");
+    if (!chip) { chip = document.createElement("button"); chip.type = "button"; chip.className = "v4-rh-pro"; b.querySelector(".rh-text").appendChild(chip);
+      chip.addEventListener("click", (ev) => { ev.stopPropagation(); if (V4.plan !== "pro") v4OpenPlan("SCODE Pro goes first in Rush Hour."); }); }
+    chip.classList.toggle("is-pro", V4.plan === "pro");
+    chip.innerHTML = V4.plan === "pro" ? "<b>PRO</b> You go first, 2 replies a turn" : "Pro goes first · <u>see plans</u>";
+  };
+
+  // ---------------------------------------------------------------- tool buttons: Photo Help, Build
+  function v4PhAvail() { return !isGuest() && typeof studyUnlocked === "function" && studyUnlocked() && (V4.auto || STUDY_TIERS.has(selectedTier)); }
+  function v4BuildAvail() { return !isGuest() && (V4.auto || V4.buildTiers.has(selectedTier)); }
+  function v4SaveToggles() { try { localStorage.setItem("scode_ph_on", V4.photoHelp ? "1" : "0"); localStorage.setItem("scode_build_on", V4.build ? "1" : "0"); } catch (e) {} }
+  const _v4SetMode = setMode;
+  setMode = function (mode) {
+    if (mode) { V4.photoHelp = false; V4.build = false; v4SaveToggles(); }
+    _v4SetMode(mode);
+  };
+  const _v4UpdateWeb = updateWebBtn;
+  updateWebBtn = function () {
+    _v4UpdateWeb();
+    const ph = $("ph-btn"), bd = $("build-btn");
+    if (ph) {
+      const a = v4PhAvail(), on = a && V4.photoHelp;
+      paintModeBtn(ph, $("ph-new"), $("ph-cost"), a, false, on, typeof studyCost !== "undefined" ? studyCost : 5, v4IsNew() && !on);
+      ph.title = on ? "Photo Help is on: send a photo of a problem" : "Photo Help: snap a problem, get it redrawn and solved step by step";
+      $("ph-bar").classList.toggle("show", on);
+    }
+    if (bd) {
+      const a = v4BuildAvail(), on = a && V4.build;
+      paintModeBtn(bd, $("build-new"), $("build-cost"), a, false, on, 0, v4IsNew() && !on);
+      $("build-cost").hidden = true;
+      bd.title = on ? "Build is on: ask for a page, game or tool" : "Build: make a web page, game or tool and see it live";
+      $("build-bar").classList.toggle("show", on);
+    }
+    if (studyKind === "summary" && $("sb-tip")) $("sb-tip").textContent = "A one-page study sheet: key points, terms and what to remember. Add up to 5 pages of notes.";
+    const fresh = !messages.length;
+    if (V4.photoHelp && v4PhAvail() && fresh) el.input.placeholder = "Add a photo of the problem, then ask about it";
+    else if (V4.build && v4BuildAvail() && fresh) el.input.placeholder = "What should I build? A game, a timer, a quiz page…";
+  };
+  function v4Toggle(which) {
+    if (which === "ph") {
+      if (isGuest()) { openAuth("welcome", "Photo Help needs a free account."); return; }
+      V4.photoHelp = !V4.photoHelp; if (V4.photoHelp) V4.build = false;
+    } else {
+      if (isGuest()) { openAuth("welcome", "Build needs a free account."); return; }
+      V4.build = !V4.build; if (V4.build) V4.photoHelp = false;
+    }
+    if (V4.photoHelp || V4.build) _v4SetMode(null);
+    v4SaveToggles();
+    if (!V4.auto) {
+      if (V4.photoHelp && !STUDY_TIERS.has(selectedTier)) selectTier(v4Allowed("l5") ? "l5" : "l2_5");
+      if (V4.build && !V4.buildTiers.has(selectedTier)) selectTier(v4Allowed("l5") ? "l5" : "l2_5");
+    }
+    updateWebBtn();
+    if (V4.photoHelp) {
+      showCostToast(`<b>Photo Help is on</b> · send a photo of a problem and get it redrawn and solved · +${typeof studyCost !== "undefined" ? studyCost : 5} points`);
+    } else if (V4.build) showCostToast("<b>Build is on</b> · ask for a page, game or tool and watch it run");
+    if (!touchLike) el.input.focus();
+  }
+  $("ph-btn").addEventListener("click", () => v4Toggle("ph"));
+  $("build-btn").addEventListener("click", () => v4Toggle("build"));
+  $("ph-add").addEventListener("click", () => el.imageInput.click());
+  document.querySelectorAll("#build-bar .v4-idea").forEach(b => b.addEventListener("click", () => {
+    if (sending) return; el.input.value = b.dataset.ask || b.textContent; autoGrow(); updateSendState(); send();
+  }));
+
+  // ---------------------------------------------------------------- several photos (pages of notes)
+  function v4Resize(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxDim = 1400; let { width, height } = img;
+          if (width > maxDim || height > maxDim) { const s = maxDim / Math.max(width, height); width = Math.round(width * s); height = Math.round(height * s); }
+          const c = document.createElement("canvas"); c.width = width; c.height = height;
+          c.getContext("2d").drawImage(img, 0, 0, width, height);
+          resolve(c.toDataURL("image/jpeg", 0.85).split(",")[1]);
+        };
+        img.onerror = reject; img.src = e.target.result;
+      };
+      r.onerror = reject; r.readAsDataURL(file);
+    });
+  }
+  function v4PaintPages() {
+    const row = el.imagePreviewRow;
+    let tag = row.querySelector(".v4-pages");
+    if (!tag) { tag = document.createElement("div"); tag.className = "v4-pages"; row.appendChild(tag); }
+    const n = (pendingImageBase64 ? 1 : 0) + V4.extra.length;
+    tag.innerHTML = (V4.extra.length ? `<span class="v4-pg-n">${n} pages</span>` : "") +
+      (n < V4.maxPhotos ? `<button type="button" class="v4-add-pg">+ Add a page</button>` : `<span class="v4-pg-max">${V4.maxPhotos} max</span>`);
+    const add = tag.querySelector(".v4-add-pg");
+    if (add) add.addEventListener("click", () => { V4.adding = true; el.imageInput.click(); });
+  }
+  el.imageInput.setAttribute("multiple", "");
+  document.addEventListener("change", async (e) => {
+    if (e.target !== el.imageInput) return;
+    const files = [...(el.imageInput.files || [])].filter(f => f.type && f.type.startsWith("image/"));
+    const adding = V4.adding && pendingImageBase64; V4.adding = false;
+    if (files.length <= 1 && !adding) { V4.extra = []; setTimeout(v4PaintPages, 400); return; }   // the normal one-photo path
+    e.stopImmediatePropagation();
+    const room = V4.maxPhotos - (adding ? 1 + V4.extra.length : 0);
+    if (files.length > room) showNote(`You can send up to ${V4.maxPhotos} photos in one message, so only the first ${Math.max(0, room)} were added.`);
+    const take = files.slice(0, Math.max(0, room));
+    try {
+      const datas = await Promise.all(take.map(v4Resize));
+      if (!adding) {
+        if (!datas.length) return;
+        pendingImageBase64 = datas.shift(); V4.extra = [];
+        el.imagePreviewThumb.src = "data:image/jpeg;base64," + pendingImageBase64;
+        el.imagePreviewRow.classList.add("show");
+      }
+      V4.extra = V4.extra.concat(datas).slice(0, V4.maxPhotos - 1);
+      el.imageInput.value = "";
+      v4PaintPages(); updateSendState();
+    } catch (err) { showNote("One of those photos didn't work. Try JPG or PNG photos."); }
+  }, true);
+  const _v4Clear = clearPendingImage;
+  clearPendingImage = function () { V4.extra = []; const t = el.imagePreviewRow.querySelector(".v4-pages"); if (t) t.innerHTML = ""; _v4Clear(); };
+  const _v4Row = buildMessageRow;
+  buildMessageRow = function (role, content, thinking, images, meta) {
+    const row = _v4Row.apply(this, arguments);
+    if (role === "user" && images && images.length > 1) {
+      const w = row.querySelector(".img-wrap");
+      if (w) {
+        w.classList.add("v4-multi");
+        const strip = document.createElement("div"); strip.className = "v4-strip";
+        images.slice(1).forEach((d, i) => { const im = document.createElement("img"); im.src = "data:image/jpeg;base64," + d; im.alt = "Page " + (i + 2); strip.appendChild(im); });
+        w.after(strip);
+        const n = document.createElement("span"); n.className = "v4-pg-badge"; n.textContent = images.length + " pages"; w.appendChild(n);
+      }
+    }
+    return row;
+  };
+
+  // ---------------------------------------------------------------- Study: summary, Photo Help, share
+  const _v4BuildStudy = buildStudy;
+  buildStudy = function (set) {
+    if (!set) return null;
+    let box = null;
+    if (set.kind === "summary") box = v4BuildSummary(set);
+    else if (set.kind === "photohelp") box = v4BuildPhotoHelp(set);
+    else box = _v4BuildStudy(set);
+    if (box && !V4.inShared) v4ShareRow(box, set);
+    return box;
+  };
+  function v4ShareRow(box, set) {
+    if (isGuest()) return;
+    const row = document.createElement("div"); row.className = "v4-share-row";
+    row.innerHTML = `<button type="button" class="v4-share">${V4_ICONS.share}<span>Share</span></button><span class="v4-share-tip">Anyone with the link can open it, no account needed</span>`;
+    row.querySelector(".v4-share").addEventListener("click", () => v4Share(set, row));
+    box.appendChild(row);
+  }
+  async function v4Share(set, row) {
+    const btn = row.querySelector(".v4-share"), tip = row.querySelector(".v4-share-tip");
+    btn.disabled = true; btn.classList.add("busy");
+    let id = set.shareId;
+    if (!id) {
+      const clean = Object.assign({}, set); delete clean.shareId;
+      const r = await syncFetch("/study/share", { method: "POST", body: { set: clean } }).catch(() => null);
+      if (!r || !r.ok) { btn.disabled = false; btn.classList.remove("busy"); showNote((r && r.data && r.data.message) || "Couldn't make a link right now. Try again."); return; }
+      id = set.shareId = r.data.id;
+      if (historyEnabled) saveChats();
+    }
+    btn.disabled = false; btn.classList.remove("busy");
+    const url = location.origin + location.pathname + "?set=" + encodeURIComponent(id);
+    let shared = false;
+    if (touchLike && navigator.share) {
+      try { await navigator.share({ title: (set.title || "Study set") + " · SCODE AI", url }); shared = true; } catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    if (!shared) { try { await navigator.clipboard.writeText(url); } catch (e) {} }
+    tip.innerHTML = `<b>Link ${shared ? "shared" : "copied"}!</b> <a href="${v4Esc(url)}" target="_blank" rel="noopener">${v4Esc(url.replace(/^https?:\/\//, ""))}</a>`;
+    row.classList.add("done");
+  }
+
+  function v4BuildSummary(set) {
+    const box = stEl("div", "study v4-sum");
+    const head = stEl("div", "st-head");
+    const ico = stEl("div", "st-ico"); ico.innerHTML = V4_ICONS.sheet;
+    const hm = stEl("div");
+    hm.appendChild(stEl("div", "st-kind", `Study sheet · ${set.sections.length} section${set.sections.length === 1 ? "" : "s"}`));
+    hm.appendChild(stEl("div", "st-title", set.title || "Study sheet"));
+    head.appendChild(ico); head.appendChild(hm); box.appendChild(head);
+    if (set.overview) box.appendChild(stEl("p", "v4-sum-over", set.overview));
+    const grid = stEl("div", "v4-sum-grid");
+    set.sections.forEach((s, i) => {
+      const c = stEl("div", "v4-sum-sec"); c.style.setProperty("--i", i);
+      c.appendChild(stEl("div", "v4-sum-h", s.heading));
+      const ul = stEl("ul"); s.points.forEach(p => ul.appendChild(stEl("li", "", p))); c.appendChild(ul);
+      grid.appendChild(c);
+    });
+    box.appendChild(grid);
+    if (set.terms && set.terms.length) {
+      box.appendChild(stEl("div", "v4-sum-label", "Key terms · tap one"));
+      const tw = stEl("div", "v4-terms");
+      set.terms.forEach(t => {
+        const b = stEl("button", "v4-term"); b.type = "button";
+        b.appendChild(stEl("b", "", t.term)); b.appendChild(stEl("span", "", t.meaning));
+        b.addEventListener("click", () => b.classList.toggle("open"));
+        tw.appendChild(b);
+      });
+      box.appendChild(tw);
+    }
+    if (set.remember && set.remember.length) {
+      const r = stEl("div", "v4-remember");
+      r.appendChild(stEl("div", "v4-sum-label", "Remember for the test"));
+      const ol = stEl("ol"); set.remember.forEach(x => ol.appendChild(stEl("li", "", x))); r.appendChild(ol);
+      box.appendChild(r);
+    }
+    const tools = stEl("div", "v4-card-tools");
+    const cp = stEl("button", "v4-mini"); cp.type = "button"; cp.innerHTML = V4_ICONS.copy + "<span>Copy sheet</span>";
+    cp.addEventListener("click", () => { navigator.clipboard && navigator.clipboard.writeText(v4SummaryText(set)); cp.querySelector("span").textContent = "Copied"; setTimeout(() => cp.querySelector("span").textContent = "Copy sheet", 1600); });
+    tools.appendChild(cp); box.appendChild(tools);
+    return box;
+  }
+  function v4SummaryText(s) {
+    const out = [s.title, s.overview || ""];
+    s.sections.forEach(x => { out.push("", x.heading); x.points.forEach(p => out.push("• " + p)); });
+    if (s.terms && s.terms.length) { out.push("", "Key terms"); s.terms.forEach(t => out.push(`• ${t.term}: ${t.meaning}`)); }
+    if (s.remember && s.remember.length) { out.push("", "Remember for the test"); s.remember.forEach((r, i) => out.push(`${i + 1}. ${r}`)); }
+    return out.join("\n");
+  }
+
+  // ---- Photo Help: math checks done in the browser ----
+  function v4SimplifyRadical(coef, n, idx) {
+    coef = coef || 1; idx = idx === 3 ? 3 : 2;
+    let sign = 1;
+    if (n < 0) { if (idx === 2) return null; sign = -1; n = -n; }
+    let out = 1, inside = n;
+    for (let f = 2; Math.pow(f, idx) <= inside; f++) {
+      const p = Math.pow(f, idx);
+      while (inside % p === 0) { inside /= p; out *= f; }
+    }
+    const c = coef * out * sign;
+    const sym = idx === 3 ? "∛" : "√";
+    const text = inside === 1 ? String(c) : (c === 1 ? "" : c === -1 ? "-" : String(c)) + sym + inside;
+    return { coef: c, inside, text, perfect: Math.pow(out, idx), sym };
+  }
+  function v4Nums(s) { return (String(s || "").replace(/,/g, "").match(/-?\d+(\.\d+)?/g) || []).map(Number); }
+  const V4_SHAPES = { "2,0": "linear", "3,0": "trigonal planar", "2,1": "bent", "4,0": "tetrahedral", "3,1": "trigonal pyramidal", "2,2": "bent",
+    "5,0": "trigonal bipyramidal", "4,1": "seesaw", "3,2": "T-shaped", "2,3": "linear", "6,0": "octahedral", "5,1": "square pyramidal", "4,2": "square planar" };
+  function v4Check(set) {
+    const d = set.diagram || {}, ans = String(set.answer || "");
+    const norm = (s) => String(s).toLowerCase().replace(/\s+/g, "").replace(/sqrt\(?(\d+)\)?/g, "√$1").replace(/cbrt\(?(-?\d+)\)?/g, "∛$1").replace(/\*/g, "").replace(/·/g, "");
+    try {
+      if (d.kind === "radical") {
+        const r = v4SimplifyRadical(d.coefficient, d.radicand, d.root_index);
+        if (!r) return null;
+        const ok = norm(ans).includes(norm(r.text));
+        return { ok, text: ok ? `Checked: ${d.coefficient && d.coefficient !== 1 ? d.coefficient : ""}${r.sym}${d.radicand} = ${r.text}` : `SCODE's own check got ${r.text}. Compare it with the steps.` };
+      }
+      if (d.kind === "triangle" && d.right_angle) {
+        const [a, b, c] = d.sides.map(s => s.value);
+        const unknown = [a, b, c].filter(v => !v).length;
+        if (unknown !== 1) return null;
+        const x = !c ? Math.hypot(a, b) : Math.sqrt(Math.max(0, c * c - (a || b) * (a || b)));
+        const nums = v4Nums(ans);
+        const ok = nums.some(v => Math.abs(v - x) <= Math.max(0.051, x * 0.005));
+        const shown = Math.abs(x - Math.round(x)) < 1e-9 ? String(Math.round(x)) : x.toFixed(2);
+        return { ok, text: ok ? `Checked with a² + b² = c²: ${shown}` : `SCODE's own check with a² + b² = c² got ${shown}.` };
+      }
+      if (d.kind === "vsepr") {
+        const shape = V4_SHAPES[d.around.length + "," + d.lone_pairs];
+        if (!shape) return null;
+        const ok = ans.toLowerCase().replace(/-/g, " ").includes(shape.toLowerCase().replace(/-/g, " "));
+        return { ok, text: ok ? `Checked on the VSEPR chart: ${shape}` : `The VSEPR chart says ${d.around.length} bonds + ${d.lone_pairs} lone pair${d.lone_pairs === 1 ? "" : "s"} = ${shape}.` };
+      }
+      if (d.kind === "forces" && d.forces.every(f => f.size > 0) && d.forces.length >= 2) {
+        let x = 0, y = 0;
+        d.forces.forEach(f => { x += f.size * Math.cos(f.angle * Math.PI / 180); y += f.size * Math.sin(f.angle * Math.PI / 180); });
+        const net = Math.hypot(x, y), nums = v4Nums(ans);
+        if (!nums.length) return null;
+        const ok = nums.some(v => Math.abs(v - net) <= Math.max(0.051, net * 0.01));
+        const shown = Math.abs(net - Math.round(net)) < 1e-9 ? String(Math.round(net)) : net.toFixed(2);
+        return { ok, text: ok ? `Checked: net force ${shown}` : `SCODE's own check got a net force of ${shown}.` };
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  // ---- Photo Help: diagrams (drawn with our own templates so they're always neat) ----
+  const SVGNS = "http://www.w3.org/2000/svg";
+  function v4Svg(tag, attrs, parent) { const n = document.createElementNS(SVGNS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+  function v4Ink(tag, attrs, parent, delay) {
+    const n = v4Svg(tag, Object.assign({ class: "ph-ink", pathLength: "1", fill: "none", stroke: `url(#${V4.curG})` }, attrs), parent);
+    n.style.setProperty("--d", (delay || 0) + "s");
+    return n;
+  }
+  function v4Label(x, y, text, parent, delay, cls) {
+    const t = v4Svg("text", { x, y, class: "ph-lbl" + (cls ? " " + cls : ""), "text-anchor": "middle", "dominant-baseline": "middle" }, parent);
+    t.textContent = text; t.style.setProperty("--d", (delay || 0) + "s");
+    return t;
+  }
+  function v4Diagram(set) {
+    const d = set.diagram || {};
+    if (!d.kind || d.kind === "none") return null;
+    const W = 360, H = 220;
+    const svg = v4Svg("svg", { viewBox: `0 0 ${W} ${H}`, class: "ph-svg", role: "img", "aria-label": d.title || "Diagram" });
+    const defs = v4Svg("defs", {}, svg);
+    V4.curG = "ph-g" + (V4.gidN = (V4.gidN || 0) + 1);
+    const lg = v4Svg("linearGradient", { id: V4.curG, x1: "0", y1: "0", x2: "1", y2: "1" }, defs);
+    v4Svg("stop", { offset: "0", "stop-color": "#ff5fb0" }, lg); v4Svg("stop", { offset: ".55", "stop-color": "#8b6bff" }, lg); v4Svg("stop", { offset: "1", "stop-color": "#3fc1ff" }, lg);
+    const g = v4Svg("g", {}, svg);
+    if (d.kind === "radical") {
+      const r = v4SimplifyRadical(d.coefficient, d.radicand, d.root_index);
+      const rad = (x, y, w, coefTxt, inside, idx, delay, big) => {
+        const h = big ? 46 : 38;
+        if (coefTxt) v4Label(x - 16, y, coefTxt, g, delay, big ? "big" : "mid");
+        v4Ink("path", { d: `M${x} ${y + 2} l7 -6 l10 ${h * 0.55} l13 ${-h} h${w}` }, g, delay);
+        if (idx === 3) v4Label(x + 8, y - h * 0.48, "3", g, delay + .2, "tiny");
+        v4Label(x + 30 + w / 2, y + 2, String(inside), g, delay + .35, big ? "big" : "mid");
+      };
+      const co = d.coefficient && d.coefficient !== 1 ? String(d.coefficient) : "";
+      const w1 = String(d.radicand).length * 20 + 14;
+      rad(54, 70, w1, co, d.radicand, d.root_index, 0, true);
+      if (r) {
+        v4Ink("path", { d: `M${100 + w1} 72 h40 m-9 -8 l9 8 l-9 8` }, g, .9);
+        const out = r.inside === 1 ? null : r;
+        if (out) {
+          const cTxt = r.coef === 1 ? "" : String(r.coef);
+          rad(178 + w1 + cTxt.length * 10, 70, String(r.inside).length * 20 + 14, cTxt, r.inside, d.root_index, 1.2, true);
+        } else v4Label(196 + w1, 72, String(r.coef), g, 1.2, "big");
+        if (r.perfect > 1) {
+          v4Ink("rect", { x: 40, y: 128, width: 280, height: 64, rx: 14 }, g, 1.7).classList.add("ph-soft");
+          v4Label(180, 150, `${Math.abs(d.radicand)} = ${r.perfect} × ${Math.abs(d.radicand) / r.perfect}`, g, 2, "mid");
+          v4Label(180, 176, `${r.perfect} is a perfect ${d.root_index === 3 ? "cube" : "square"}`, g, 2.3, "note");
+        }
+      }
+    } else if (d.kind === "triangle" || d.kind === "polygon") {
+      const sides = d.sides;
+      let pts;
+      if (d.kind === "triangle") {
+        let [a, b, c] = sides.map(s => s.value || 0);
+        if (d.right_angle) {
+          if (!a && b && c) a = Math.sqrt(Math.max(1, c * c - b * b));
+          if (!b && a && c) b = Math.sqrt(Math.max(1, c * c - a * a));
+          if (!a) a = 3; if (!b) b = 4;
+          const s = Math.min(230 / b, 150 / a);
+          const x0 = 70, y0 = 185;
+          pts = [[x0, y0 - a * s], [x0, y0], [x0 + b * s, y0]];
+        } else {
+          if (!(a && b && c) || a + b <= c || a + c <= b || b + c <= a) { a = 5; b = 6; c = 7; }
+          // side c on the bottom, a and b meet at the top
+          const cx = (b * b + c * c - a * a) / (2 * c), cy = Math.sqrt(Math.max(0, b * b - cx * cx));
+          const s = Math.min(260 / c, 150 / Math.max(cy, 1));
+          pts = [[50, 190], [50 + c * s, 190], [50 + cx * s, 190 - cy * s]];
+        }
+      } else {
+        const n = sides.length, R = 85, cx = 180, cy = 112;
+        pts = sides.map((_, i) => [cx + R * Math.cos(-Math.PI / 2 + i * 2 * Math.PI / n), cy + R * Math.sin(-Math.PI / 2 + i * 2 * Math.PI / n)]);
+      }
+      v4Ink("path", { d: "M" + pts.map(p => p.map(v => v.toFixed(1)).join(" ")).join(" L") + " Z" }, g, 0);
+      if (d.kind === "triangle" && d.right_angle) v4Ink("path", { d: `M${pts[1][0]} ${pts[1][1] - 16} h16 v16` }, g, .8);
+      const cen = [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
+      const order = d.kind === "triangle" && d.right_angle ? [[0, 1], [1, 2], [2, 0]] : pts.map((_, i) => [i, (i + 1) % pts.length]);
+      order.forEach(([i, j], k) => {
+        const s = sides[k]; if (!s) return;
+        const mx = (pts[i][0] + pts[j][0]) / 2, my = (pts[i][1] + pts[j][1]) / 2;
+        const dx = mx - cen[0], dy = my - cen[1], L = Math.hypot(dx, dy) || 1;
+        const txt = (s.label || "") + (s.value ? (s.label ? " = " : "") + s.value : (s.label ? " = ?" : "?"));
+        const lb = v4Label(mx + dx / L * 14, my + dy / L * 18, txt, g, 1 + k * .25, s.value ? "mid" : "mid unknown");
+        if (Math.abs(dx) > Math.abs(dy) * 1.2) lb.setAttribute("text-anchor", dx < 0 ? "end" : "start");
+      });
+    } else if (d.kind === "vsepr") {
+      const n = d.around.length, lp = d.lone_pairs || 0, cx = 180, cy = 118, R = 70;
+      const total = n + lp;
+      const ang = { 1: [0], 2: [180, 0], 3: [90, 210, 330], 4: [90, 200, 340, 270], 5: [90, 270, 180, 330, 30], 6: [90, 270, 180, 0, 135, 315] }[Math.min(total, 6)] || [0];
+      // lone pairs take the first spots in the bigger shapes, like the textbook drawings
+      const lpFirst = total === 5 ? [2, 3, 4] : [0, 1];
+      const slots = ang.map((a, i) => i);
+      const lpSlots = lp ? (total === 5 ? lpFirst.slice(0, lp) : slots.slice(0, lp)) : [];
+      const bondSlots = slots.filter(i => !lpSlots.includes(i)).slice(0, n);
+      bondSlots.forEach((si, k) => {
+        const a = ang[si] * Math.PI / 180, x = cx + R * Math.cos(a), y = cy - R * Math.sin(a);
+        v4Ink("line", { x1: cx + 22 * Math.cos(a), y1: cy - 22 * Math.sin(a), x2: x - 18 * Math.cos(a), y2: y + 18 * Math.sin(a) }, g, .3 + k * .2);
+        v4Ink("circle", { cx: x, cy: y, r: 17 }, g, .5 + k * .2).classList.add("ph-soft");
+        v4Label(x, y + 1, d.around[k], g, .7 + k * .2, "mid");
+      });
+      lpSlots.forEach((si, k) => {
+        const a = ang[si] * Math.PI / 180, x = cx + 46 * Math.cos(a), y = cy - 46 * Math.sin(a);
+        const px = -Math.sin(a) * 6, py = -Math.cos(a) * 6;
+        const e = v4Svg("ellipse", { cx: x, cy: y, rx: 16, ry: 10, transform: `rotate(${-ang[si]} ${x} ${y})`, class: "ph-lobe" }, g); e.style.setProperty("--d", (1.2 + k * .2) + "s");
+        [[x + px, y + py], [x - px, y - py]].forEach(([dx, dy]) => { const c = v4Svg("circle", { cx: dx, cy: dy, r: 3.2, class: "ph-dot" }, g); c.style.setProperty("--d", (1.3 + k * .2) + "s"); });
+      });
+      v4Ink("circle", { cx, cy, r: 22 }, g, 0);
+      v4Label(cx, cy + 1, d.central, g, .2, "big");
+      const shape = V4_SHAPES[n + "," + lp];
+      if (shape) { const t = v4Label(14, 18, shape, g, 1.8, "note"); t.setAttribute("text-anchor", "start"); }
+    } else if (d.kind === "forces") {
+      const cx = 180, cy = 108;
+      v4Ink("rect", { x: cx - 34, y: cy - 24, width: 68, height: 48, rx: 10 }, g, 0);
+      v4Label(cx, cy, d.object || "object", g, .3, "small");
+      const maxS = Math.max(1, ...d.forces.map(f => f.size || 0));
+      d.forces.forEach((f, k) => {
+        const a = f.angle * Math.PI / 180, L = 40 + 50 * ((f.size || maxS * .7) / maxS);
+        const sx = cx + 38 * Math.cos(a), sy = cy - 28 * Math.sin(a), ex = sx + L * Math.cos(a), ey = sy - L * Math.sin(a);
+        const hx = 9 * Math.cos(a), hy = -9 * Math.sin(a), nx = 6 * Math.sin(a), ny = 6 * Math.cos(a);
+        v4Ink("path", { d: `M${sx} ${sy} L${ex} ${ey} M${ex - hx + nx} ${ey - hy + ny} L${ex} ${ey} L${ex - hx - nx} ${ey - hy - ny}` }, g, .4 + k * .3);
+        v4Label(ex + 26 * Math.cos(a), ey - 18 * Math.sin(a), f.label + (f.size ? ` ${f.size}` : ""), g, .7 + k * .3, "small");
+      });
+    } else if (d.kind === "number_line") {
+      const vals = d.points.map(p => p.value), lo = Math.min(...vals, 0), hi = Math.max(...vals, 0);
+      const pad = Math.max(1, (hi - lo) * .15), a = lo - pad, b = hi + pad, X = v => 30 + (v - a) / (b - a) * 300;
+      v4Ink("path", { d: "M20 120 H340 M332 113 l8 7 l-8 7 M28 113 l-8 7 l8 7" }, g, 0);
+      const step = Math.pow(10, Math.floor(Math.log10(Math.max(1, b - a)))) / ((b - a) / Math.pow(10, Math.floor(Math.log10(Math.max(1, b - a)))) < 3 ? 2 : 1);
+      for (let v = Math.ceil(a / step) * step; v <= b; v += step) { v4Ink("line", { x1: X(v), y1: 114, x2: X(v), y2: 126 }, g, .3); v4Label(X(v), 142, String(+v.toFixed(2)), g, .4, "tiny"); }
+      d.points.forEach((p, k) => {
+        const c = v4Svg("circle", { cx: X(p.value), cy: 120, r: 7, class: "ph-pt" }, g); c.style.setProperty("--d", (.8 + k * .25) + "s");
+        v4Label(X(p.value), 92 - (k % 2) * 22, p.label || String(p.value), g, .9 + k * .25, "small");
+      });
+    } else if (d.kind === "graph") {
+      const xs = d.plot.map(p => p.x), ys = d.plot.map(p => p.y);
+      const x0 = Math.min(...xs, 0), x1 = Math.max(...xs, 0), y0 = Math.min(...ys, 0), y1 = Math.max(...ys, 0);
+      const X = v => 30 + (v - x0) / ((x1 - x0) || 1) * 300, Y = v => 200 - (v - y0) / ((y1 - y0) || 1) * 180;
+      v4Ink("path", { d: `M${X(x0)} ${Y(0)} H${X(x1)} M${X(0)} ${Y(y0)} V${Y(y1)}` }, g, 0).classList.add("ph-soft");
+      v4Ink("polyline", { points: d.plot.map(p => `${X(p.x).toFixed(1)},${Y(p.y).toFixed(1)}`).join(" ") }, g, .4);
+      d.plot.forEach((p, k) => { const c = v4Svg("circle", { cx: X(p.x), cy: Y(p.y), r: 4, class: "ph-pt" }, g); c.style.setProperty("--d", (1 + k * .08) + "s"); });
+    } else if (d.kind === "map") {
+      v4Ink("path", { d: "M40 60 C 80 20, 150 40, 190 30 S 300 40, 320 80 S 300 170, 250 190 S 120 200, 80 170 S 20 100, 40 60 Z" }, g, 0);
+      d.regions.forEach((name, k) => {
+        const x = 80 + (k % 3) * 100 + (k % 2) * 12, y = 70 + Math.floor(k / 3) * 46;
+        const c = v4Svg("circle", { cx: x - 4, cy: y - 14, r: 5, class: "ph-pt" }, g); c.style.setProperty("--d", (.6 + k * .2) + "s");
+        v4Label(x, y + 2, name, g, .7 + k * .2, "small");
+      });
+      v4Label(180, 210, "Labelled sketch · not to scale", g, 1.5, "note");
+    }
+    return svg;
+  }
+  const V4_SUBJ = { math: "Math", chemistry: "Chemistry", physics: "Physics", geography: "Socials", other: "Help" };
+  function v4BuildPhotoHelp(set) {
+    const box = stEl("div", "study v4-ph");
+    const head = stEl("div", "st-head");
+    const ico = stEl("div", "st-ico"); ico.innerHTML = V4_ICONS.ph;
+    const hm = stEl("div");
+    hm.appendChild(stEl("div", "st-kind", `Photo Help · ${V4_SUBJ[set.subject] || "Help"}`));
+    hm.appendChild(stEl("div", "st-title", set.title || "Photo Help"));
+    if (set.question) hm.appendChild(stEl("div", "st-src", set.question));
+    head.appendChild(ico); head.appendChild(hm); box.appendChild(head);
+    const svg = v4Diagram(set);
+    if (svg) {
+      const stage = stEl("div", "ph-stage");
+      stage.appendChild(svg);
+      const cap = stEl("div", "ph-cap", "Redrawn by SCODE"); stage.appendChild(cap);
+      box.appendChild(stage);
+    }
+    const ol = stEl("ol", "ph-steps");
+    set.steps.forEach((s, i) => {
+      const li = stEl("li", "ph-step"); li.style.setProperty("--i", i);
+      li.appendChild(stEl("span", "ph-num", String(i + 1)));
+      const tx = stEl("div", "ph-tx");
+      if (s.work) tx.appendChild(stEl("div", "ph-work", s.work));
+      if (s.say) tx.appendChild(stEl("div", "ph-say", s.say));
+      li.appendChild(tx); ol.appendChild(li);
+    });
+    box.appendChild(ol);
+    if (set.answer) {
+      const a = stEl("div", "ph-answer"); a.style.setProperty("--i", set.steps.length);
+      a.appendChild(stEl("span", "ph-a-l", "Answer"));
+      a.appendChild(stEl("b", "ph-a-v", set.answer));
+      const ck = v4Check(set);
+      if (ck) { const c = stEl("span", "ph-check " + (ck.ok ? "ok" : "warn")); c.innerHTML = (ck.ok ? V4_ICONS.check : "!") + `<span>${v4Esc(ck.text)}</span>`; a.appendChild(c); }
+      box.appendChild(a);
+    }
+    const det = document.createElement("details"); det.className = "ph-text";
+    const sum = document.createElement("summary"); sum.textContent = "Written out in words"; det.appendChild(sum);
+    const txt = v4PhText(set);
+    const p = stEl("div", "ph-text-body"); txt.split("\n").forEach(line => p.appendChild(stEl("p", "", line)));
+    det.appendChild(p);
+    const cp = stEl("button", "v4-mini"); cp.type = "button"; cp.innerHTML = V4_ICONS.copy + "<span>Copy</span>";
+    cp.addEventListener("click", () => { navigator.clipboard && navigator.clipboard.writeText(txt); cp.querySelector("span").textContent = "Copied"; setTimeout(() => cp.querySelector("span").textContent = "Copy", 1600); });
+    det.appendChild(cp);
+    box.appendChild(det);
+    // the reveal: the diagram draws itself, then the steps light up one by one
+    box.classList.add("ph-wait");
+    if (reduceMotion || !("IntersectionObserver" in window)) box.classList.replace("ph-wait", "ph-go");
+    else {
+      const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { box.classList.replace("ph-wait", "ph-go"); io.disconnect(); } }); }, { threshold: 0.25 });
+      requestAnimationFrame(() => io.observe(box));
+    }
+    return box;
+  }
+  function v4PhText(s) {
+    const out = [];
+    if (s.question) out.push("Question: " + s.question);
+    s.steps.forEach((st, i) => out.push(`Step ${i + 1}: ${st.work}${st.say ? ". " + st.say.replace(/\.$/, "") + "." : ""}`.replace(/\.\./g, ".")));
+    if (s.answer) out.push("Answer: " + s.answer);
+    return out.join("\n");
+  }
+
+  // ---------------------------------------------------------------- shared study sets (?set=…)
+  async function v4OpenShared(id) {
+    const ov = $("v4-shared"), body = $("v4-shared-body");
+    body.innerHTML = '<div class="v4-shared-wait"><span class="v4-dot"></span>Opening the study set…</div>';
+    ov.classList.add("show");
+    try {
+      const r = await fetch(PROXY_URL + "/study/shared/" + encodeURIComponent(id), { cache: "no-store" });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.message || "That link isn't working.");
+      V4.inShared = true;
+      const el2 = buildStudy(data.set);
+      V4.inShared = false;
+      body.innerHTML = "";
+      if (el2) body.appendChild(el2); else throw new Error("This study set can't be shown.");
+      $("v4-shared-title").textContent = data.set.title || "Shared study set";
+    } catch (e) {
+      const asleep = new Date().getHours() < 6;
+      body.innerHTML = `<div class="v4-shared-wait err">${v4Esc(e.message && !/fetch|network/i.test(e.message) ? e.message : (asleep ? "SCODE AI is asleep right now (12 to 6 AM). Open the link again after 6 AM." : "SCODE AI's server is offline right now. Try the link again later."))}</div>`;
+    }
+  }
+  $("v4-shared-close").addEventListener("click", () => { $("v4-shared").classList.remove("show"); try { history.replaceState(null, "", location.pathname); } catch (e) {} });
+  $("v4-shared-make").addEventListener("click", () => {
+    $("v4-shared").classList.remove("show");
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    if (isGuest()) { openAuth("welcome", "Make your own study sets with a free account."); return; }
+    setMode("study"); setTimeout(() => el.input.focus(), 200);
+  });
+
+  // ---------------------------------------------------------------- Build: run code blocks
+  function v4CodeOf(pre) { const c = pre.querySelector("code"); return c ? c.textContent : pre.textContent; }
+  function v4LooksHtml(pre) {
+    const lang = (pre.dataset.lang || "").toLowerCase();
+    if (/^(html?|svg|xml)$/.test(lang)) return true;
+    const t = v4CodeOf(pre).slice(0, 600).toLowerCase();
+    return !lang && (/<!doctype html|<html[\s>]|<body[\s>]/.test(t) || (/<(div|canvas|svg|button)[\s>]/.test(t) && /<\/(div|canvas|svg|button)>/.test(t)));
+  }
+  function v4Decorate() {
+    el.messages.querySelectorAll(".msg pre:not([data-v4])").forEach(pre => {
+      pre.dataset.v4 = "1";
+      const bar = document.createElement("div"); bar.className = "v4-cb";
+      const lang = (pre.dataset.lang || "").toLowerCase();
+      const run = v4LooksHtml(pre);
+      bar.innerHTML = `<span class="v4-cb-lang">${v4Esc(lang || (run ? "html" : "code"))}</span><span class="v4-cb-sp"></span>` +
+        (run ? `<button type="button" class="v4-cb-run">${V4_ICONS.play}<span>Preview</span></button>` : "") +
+        `<button type="button" class="v4-cb-copy">${V4_ICONS.copy}<span>Copy</span></button>`;
+      bar.querySelector(".v4-cb-copy").addEventListener("click", (e) => {
+        navigator.clipboard && navigator.clipboard.writeText(v4CodeOf(pre));
+        const s = e.currentTarget.querySelector("span"); s.textContent = "Copied"; setTimeout(() => s.textContent = "Copy", 1500);
+      });
+      if (run) bar.querySelector(".v4-cb-run").addEventListener("click", () => v4OpenPreview(v4CodeOf(pre)));
+      pre.parentNode.insertBefore(bar, pre);
+      pre.classList.add("v4-pre");
+    });
+    if (V4.autoOpen && !sending) {
+      const rows = el.messages.querySelectorAll(".msg.assistant");
+      const last = rows[rows.length - 1];
+      const pre = last && [...last.querySelectorAll("pre[data-done]")].reverse().find(v4LooksHtml);
+      V4.autoOpen = false;
+      if (pre) v4OpenPreview(v4CodeOf(pre));
+    }
+  }
+  let v4DecoQ = 0;
+  new MutationObserver(() => { if (!v4DecoQ) v4DecoQ = requestAnimationFrame(() => { v4DecoQ = 0; v4Decorate(); }); })
+    .observe(el.messages, { childList: true, subtree: true });
+  const _v4SendState = updateSendState;
+  updateSendState = function () {
+    _v4SendState();
+    // Photo Help: a photo on its own is enough to send
+    if (!sending && !el.input.disabled && V4.photoHelp && v4PhAvail() && pendingImageBase64 && !el.input.value.trim()) el.sendBtn.disabled = false;
+    if (!sending && V4.autoOpen) requestAnimationFrame(v4Decorate);
+  };
+  document.addEventListener("click", (e) => {
+    if (e.target.closest && e.target.closest("#send-btn") && V4.photoHelp && v4PhAvail() && pendingImageBase64 && !el.input.value.trim()) el.input.value = "Help me solve this.";
+  }, true);
+  const V4_FRAME_GUARD = '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>window.alert=window.confirm=window.prompt=function(){};try{localStorage.getItem("x")}catch(e){(function(){var m={},s={getItem:function(k){return k in m?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}},key:function(i){return Object.keys(m)[i]||null}};Object.defineProperty(s,"length",{get:function(){return Object.keys(m).length}});try{Object.defineProperty(window,"localStorage",{value:s,configurable:true})}catch(e){}try{Object.defineProperty(window,"sessionStorage",{value:s,configurable:true})}catch(e){}})()}<\/script>';
+  function v4OpenPreview(code) {
+    const pv = $("v4-preview");
+    V4.code = code;
+    const html = /<html[\s>]/i.test(code) ? code.replace(/<head([^>]*)>/i, (m) => m + V4_FRAME_GUARD) : `<!doctype html><html><head>${V4_FRAME_GUARD}<style>body{font-family:system-ui,sans-serif;margin:16px}</style></head><body>${code}</body></html>`;
+    const fr = $("v4-frame");
+    fr.srcdoc = html;
+    $("v4-code").textContent = code;
+    v4PvTab("run");
+    pv.classList.add("show");
+    document.body.classList.add("v4-pv-open");
+  }
+  function v4PvTab(t) {
+    $("v4-preview").dataset.tab = t;
+    $("v4-pv-tabs").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  }
+  $("v4-pv-tabs").querySelectorAll("button").forEach(b => b.addEventListener("click", () => v4PvTab(b.dataset.t)));
+  $("v4-pv-close").addEventListener("click", () => { $("v4-preview").classList.remove("show"); document.body.classList.remove("v4-pv-open"); setTimeout(() => { if (!$("v4-preview").classList.contains("show")) $("v4-frame").srcdoc = ""; }, 400); });
+  $("v4-pv-reload").addEventListener("click", () => { const f = $("v4-frame"); const s = f.srcdoc; f.srcdoc = ""; requestAnimationFrame(() => f.srcdoc = s); });
+  $("v4-pv-copy").addEventListener("click", () => { navigator.clipboard && navigator.clipboard.writeText(V4.code || ""); v4Toast("<b>Code copied</b>"); });
+  $("v4-pv-dl").addEventListener("click", () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([V4.code || ""], { type: "text/html" }));
+    a.download = "scode-build.html"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+  // (No "open in a new tab": a page opened from the site's own address could read your sign-in.
+  //  The preview runs locked in its frame instead, and Download gives you the file.)
+  $("v4-pv-full").addEventListener("click", () => $("v4-preview").classList.toggle("full"));
+
+  // ---------------------------------------------------------------- Updates & fixes, Status
+  $("v4-log-btn").addEventListener("click", () => { $("v4-log").classList.add("show"); closeMobileSidebar(); try { localStorage.setItem("scode_log_seen", V4_LOG_VER); } catch (e) {} $("v4-log-btn").classList.remove("unseen"); });
+  $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
+  $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
+  $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
+  const V4_LOG_VER = "2026-10-22";
+  try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
+
+  // ---------------------------------------------------------------- launch popup for v4
+  var V4_LAUNCH = Date.parse("2026-10-22T12:00:00-07:00");
+  function v4IsNew() { return Date.now() >= V4_LAUNCH && Date.now() < V4_LAUNCH + 5 * 864e5; }
+  const _v4ShowWN = maybeShowWhatsNew;
+  maybeShowWhatsNew = function () {
+    const forced = /[?&]whatsnew=v4\b/.test(location.search);
+    let seen = false;
+    try { seen = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
+    if (/[?&]set=/.test(location.search)) return;
+    if (!forced && (seen || !v4IsNew())) { _v4ShowWN(); return; }
+    const feats = [
+      ["auto", V4_ICONS.auto, "Auto", "Picks the best model for every message, instantly. Easy questions use cheaper models so your points last longer."],
+      ["ph", V4_ICONS.ph, "Photo Help", "Snap a problem. SCODE redraws the diagram, solves it in the same steps as your notes, and writes it out in words."],
+      ["build", V4_ICONS.build, "Build", "Ask for a game, a timer or a quiz page and watch it run right in the chat."],
+      ["study", V4_ICONS.sheet, "Study, upgraded", "Up to 5 pages of notes at once, a new one-page Summary, and share links for any study set."],
+    ];
+    wn.querySelector(".wn-tag").textContent = "New · Oct 22";
+    $("wn-title").textContent = "Four big upgrades to SCODE AI";
+    wn.querySelector(".modal-sub").textContent = "Plus your plan page, a live Status page and bug fixes. Tap Try on any of them.";
+    wn.querySelector(".wn-feats").innerHTML = feats.map(([k, ic, n, t]) => `<div class="wn-feat"><div class="wn-fi">${ic}</div><div class="wn-ft"><b>${n}</b><span>${t}</span></div><button class="wn-try v4-try" type="button" data-v4="${k}">Try</button></div>`).join("");
+    const orbs = wn.querySelector(".wn-orbs"); orbs.classList.add("many");
+    orbs.innerHTML = feats.map(f => `<div class="wn-orb">${f[1].replace("<svg ", '<svg width="32" height="32" ')}</div>`).join("");
+    $("wn-cost-line").textContent = "Auto is free · Photo Help +" + (typeof studyCost !== "undefined" ? studyCost : 5) + " points · Build has no extra cost";
+    wn.querySelectorAll(".v4-try").forEach(b => b.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      closeWhatsNew();
+      const k = b.dataset.v4;
+      if (k === "auto") { if (!V4.auto) $("model-picker-btn").click(); else v4Toast("<b>Auto is already on</b> · it picks for every message"); return; }
+      if (k === "ph") { if (!V4.photoHelp) v4Toggle("ph"); return; }
+      if (k === "build") { if (!V4.build) v4Toggle("build"); return; }
+      if (k === "study") { if (isGuest()) { openAuth("welcome", "Study Mode needs a free account."); return; } studyKind = "summary"; setMode("study"); setTimeout(() => el.input.focus(), 200); }
+    }));
+    wn.classList.add("show");
+  };
+
+  // ---------------------------------------------------------------- start
+  window.scodeV4 = V4;
+  V4.rh = (f) => rhRender(f);   // (used by the tests)
+  updateModelPickerLabel();
+  updateWebBtn();
+  {
+    const m = /[?&]set=([A-Za-z0-9]{4,16})\b/.exec(location.search);
+    if (m) setTimeout(() => v4OpenShared(m[1]), 300);
+  }
 
   if (!touchLike) el.input.focus();
   setTimeout(maybeShowWhatsNew, reduceMotion ? 300 : 1100);
