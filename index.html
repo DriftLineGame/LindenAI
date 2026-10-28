@@ -3818,6 +3818,13 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">October 27, 2026</div><h3>v5.0: a second SCODE computer</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Server</b> <span>a second computer now writes replies next to the laptop. General Mini, Plus and Ultra run on it.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Twice the room</b> <span>two people get answers at the same time, so waiting is much rarer.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Quicker replies</b> <span>the server writes faster than the laptop, and each reply goes to whichever computer is free.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Rush Hour</b> <span>only starts when 3 or more people send at once, and the line moves about twice as fast.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Status page</b> <span>shows both computers and what each one is writing.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">October 22, 2026</div><h3>Auto, Photo Help, Build and more</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Auto</b> <span>picks the best model for every message, instantly: General Mini for a quick hi, General Plus for everyday chat, General Pro for documents, General Ultra for hard questions on Pro. Pick a model yourself any time.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Photo Help</b> <span>redraws the problem in your photo, solves it in the same steps as your notes, checks the math, and writes it out in words.</span></li>
@@ -4004,7 +4011,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://transcription-locator-kept-sacramento.trycloudflare.com";
+  const PROXY_URL = "https://productivity-registered-humanities-country.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -13804,7 +13811,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-10-22";
+  const V4_LOG_VER = "2026-10-27";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -13838,6 +13845,44 @@
       if (k === "ph") { if (!V4.photoHelp) v4Toggle("ph"); return; }
       if (k === "build") { if (!V4.build) v4Toggle("build"); return; }
       if (k === "study") { if (isGuest()) { openAuth("welcome", "Study Mode needs a free account."); return; } studyKind = "summary"; setMode("study"); setTimeout(() => el.input.focus(), 200); }
+    }));
+    wn.classList.add("show");
+  };
+
+  // ---------------------------------------------------------------- launch popup for v5.0 (two computers)
+  var V5_LAUNCH = Date.parse("2026-10-27T20:30:00-07:00");
+  function v5IsNew() { return Date.now() >= V5_LAUNCH && Date.now() < V5_LAUNCH + 5 * 864e5; }
+  const V5_ICONS = {
+    two: '<svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13.5" y="5" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M5 20h3M16 20h3M6.5 9h1M17.5 9h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    fast: '<svg viewBox="0 0 24 24" fill="none"><path d="M13 2.8L5 13.5h6l-1 7.7 8-10.7h-6l1-7.7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    line: '<svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="8" r="2.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="8" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M2.5 18c.4-2.6 1.8-4 3.5-4s3.1 1.4 3.5 4M8.5 18c.4-2.6 1.8-4 3.5-4s3.1 1.4 3.5 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M17 12h4.5M19.3 9.7l2.2 2.3-2.2 2.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    status: '<svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2.5-6 5 12 2.5-6H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  };
+  const _v5ShowWN = maybeShowWhatsNew;
+  maybeShowWhatsNew = function () {
+    const forced = /[?&]whatsnew=v5\b/.test(location.search);
+    let seen = false;
+    try { seen = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
+    if (/[?&]set=/.test(location.search)) return;
+    if (!forced && (seen || !v5IsNew())) { _v5ShowWN(); return; }
+    const feats = [
+      ["try", V5_ICONS.two, "Twice the room", "A second SCODE computer now writes replies next to the laptop, so two people get answers at the same time."],
+      ["try", V5_ICONS.fast, "Quicker replies", "General Mini, Plus and Ultra run on the new SCODE Server, which writes faster. Every message goes to whichever computer is free."],
+      ["try", V5_ICONS.line, "Less waiting", "Rush Hour only starts when 3 or more people send at once, and the line moves about twice as fast."],
+      ["status", V5_ICONS.status, "Watch it live", "The Status page shows both computers and what each one is writing."],
+    ];
+    wn.querySelector(".wn-tag").textContent = "New · v5.0";
+    $("wn-title").textContent = "SCODE AI just got faster";
+    wn.querySelector(".modal-sub").textContent = "More room and quicker replies, with nothing to turn on. Same models, same points.";
+    wn.querySelector(".wn-feats").innerHTML = feats.map(([k, ic, n, t]) => `<div class="wn-feat"><div class="wn-fi">${ic}</div><div class="wn-ft"><b>${n}</b><span>${t}</span></div><button class="wn-try v5-try" type="button" data-v5="${k}">${k === "status" ? "Open" : "Try"}</button></div>`).join("");
+    const orbs = wn.querySelector(".wn-orbs"); orbs.classList.add("many");
+    orbs.innerHTML = feats.map(f => `<div class="wn-orb">${f[1].replace("<svg ", '<svg width="32" height="32" ')}</div>`).join("");
+    $("wn-cost-line").textContent = "Free for everyone · no extra points";
+    wn.querySelectorAll(".v5-try").forEach(b => b.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      closeWhatsNew();
+      if (b.dataset.v5 === "status") { window.open("status.html", "_blank", "noopener"); return; }
+      setTimeout(() => el.input.focus(), 200);
     }));
     wn.classList.add("show");
   };
