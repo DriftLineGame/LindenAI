@@ -99,6 +99,17 @@
   .powered { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .22em; color: var(--faint); padding: 18px 16px 26px; }
   .powered b { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
+  .comp { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pc { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: var(--surface2); }
+  .pc .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex: none; color: var(--c, var(--faint)); background: color-mix(in srgb, var(--c, var(--faint)) 16%, transparent); }
+  .pc .ic svg { width: 22px; height: 22px; }
+  .pc b { display: block; font-size: 15px; }
+  .pc span { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .pc span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--faint)); flex: none; }
+  .pc.busy span::before { animation: blink 1.2s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: .3; } }
+  @media (max-width: 720px) { .comp { grid-template-columns: 1fr; } }
+
   @media (max-width: 720px) {
     .hero { grid-template-columns: 1fr; text-align: center; justify-items: center; padding: 26px 18px; gap: 18px; }
     .orb { width: 112px; height: 112px; }
@@ -134,7 +145,12 @@
   </section>
 
   <section class="card wide">
-    <div class="row-h"><h2>Typical reply times</h2><span>Learned from real replies on the SCODE laptop</span></div>
+    <div class="row-h"><h2>SCODE computers</h2><span id="comp-s">Replies go to whichever one is free</span></div>
+    <div class="comp" id="comp"></div>
+  </section>
+
+  <section class="card wide">
+    <div class="row-h"><h2>Typical reply times</h2><span>Learned from real replies on the SCODE computers</span></div>
     <div class="bars" id="bars"></div>
     <div class="legend"><span><i class="warm"></i>Ready now (loaded)</span><span><i></i>Loads on the first message</span></div>
   </section>
@@ -161,7 +177,7 @@
 
   const STATES = {
     online: { c: "var(--ok)", pill: "Online", head: "SCODE AI is <em>online</em>", sub: "Everything's running. Replies start right away." },
-    busy: { c: "var(--busy)", pill: "Writing a reply", head: "SCODE AI is <em>busy</em>", sub: "It's writing someone's reply right now. Yours starts as soon as it's done." },
+    busy: { c: "var(--busy)", pill: "Busy", head: "SCODE AI is <em>busy</em>", sub: "Both SCODE computers are writing replies right now. Yours starts as soon as one is free." },
     rush: { c: "var(--rush)", pill: "Rush Hour", head: "It's <em>Rush Hour</em>", sub: "Lots of people at once, so messages wait in a fair line. Accounts go first, and SCODE Pro goes first of all." },
     sleep: { c: "var(--sleep)", pill: "Asleep", head: "SCODE AI is <em>asleep</em>", sub: "The SCODE laptop rests from 12 to 6 AM Pacific. It'll be back at 6." },
     off: { c: "var(--off)", pill: "Offline", head: "SCODE AI is <em>offline</em>", sub: "The SCODE laptop isn't reachable right now. It's usually back soon." },
@@ -203,11 +219,25 @@
     const h = pacificHour();
     $("day").innerHTML = Array.from({ length: 24 }, (_, i) => `<b class="${i < 6 ? "z" : ""}${i === h ? " now" : ""}" title="${(i % 12) || 12} ${i < 12 ? "AM" : "PM"}${i < 6 ? " · asleep" : ""}"></b>`).join("");
   }
+  const PC_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const SRV_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 7h6M9 10.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="currentColor"/></svg>';
+  function paintComputers(list) {
+    if (!list || !list.length) { $("comp").innerHTML = ""; return; }
+    $("comp").innerHTML = list.map(c => {
+      const col = !c.online ? "var(--off)" : c.busy ? "var(--busy)" : "var(--ok)";
+      const txt = !c.online ? "Offline" : c.busy ? "Writing " + (c.writing || "a reply") : "Ready";
+      return `<div class="pc${c.busy ? " busy" : ""}" style="--c:${col}"><div class="ic">${c.name === "server" ? SRV_ICON : PC_ICON}</div><div><b>${c.label}</b><span>${txt}</span></div></div>`;
+    }).join("");
+    const on = list.filter(c => c.online).length;
+    $("comp-s").textContent = on > 1 ? "Replies go to whichever one is free" : "Running on one computer right now";
+  }
   function paint(d) {
     const k = d.state === "rush" ? "rush" : d.state === "busy" ? "busy" : "online";
     paintState(k);
-    $("now-v").innerHTML = d.writing ? "Writing" : "Ready";
-    $("now-s").textContent = d.writing ? "A reply is being written" : "Nothing in the way";
+    paintComputers(d.computers);
+    const total = (d.computers || []).filter(c => c.online).length || 1, n = d.writing_n || (d.writing ? 1 : 0);
+    $("now-v").innerHTML = n ? (total > 1 ? n + "<small>of " + total + " writing</small>" : "Writing") : "Ready";
+    $("now-s").textContent = !n ? "Nothing in the way" : n >= total ? "Every computer is writing a reply" : "A computer is free for you";
     $("wait-n").textContent = d.waiting;
     $("people").innerHTML = Array.from({ length: Math.min(d.waiting, 12) }, (_, i) => `<span style="animation-delay:${i * 60}ms"></span>`).join("");
     $("wait-t").innerHTML = fmt(d.wait);
@@ -228,6 +258,7 @@
     $("now-s").textContent = h < 6 ? "Back at 6 AM Pacific" : "Try again in a bit";
     $("wait-n").textContent = "–"; $("people").innerHTML = ""; $("wait-t").textContent = "–"; $("wait-s").textContent = "";
     $("bars").innerHTML = '<div class="bar"><span class="n"><i></i>Reply times</span><span class="t"><u></u></span><span class="x">–</span></div>';
+    $("comp").innerHTML = "";
     $("up").textContent = "";
   }
   async function check() {
