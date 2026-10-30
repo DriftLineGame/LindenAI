@@ -3208,6 +3208,356 @@
     #v4-pv-copy { display: none; }
     .v4-pv-head { gap: 4px; padding: 8px 8px 8px 12px; }
   }
+
+  /* =========================================================
+     SCODE 6: Compute, Research, Eyes, Canvas, Voice, Spaces,
+     Progress, Live Answers and the new reply cards
+     ========================================================= */
+  #cp-btn, #rs-btn {
+    height: 34px; padding: 0 11px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--muted);
+    cursor: pointer; display: none; align-items: center; gap: 6px; font-size: 12.5px; font-family: inherit; flex-shrink: 0;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+  }
+  #cp-btn.show, #rs-btn.show { display: flex; }
+  #cp-btn svg, #rs-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  #cp-btn:hover, #rs-btn:hover { background: var(--hover); color: var(--text); }
+  #cp-btn .wcost, #rs-btn .wcost { font-size: 11px; opacity: 0.7; }
+  #cp-btn.on, #rs-btn.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  #cp-btn.auto { border-style: dashed; }
+  #cp-btn.on svg, #rs-btn.on svg { animation: webSpin 0.7s cubic-bezier(.2,.8,.2,1); }
+  #cp-btn.blocked, #rs-btn.blocked { opacity: 0.45; }
+  #rs-btn.locked .wcost { display: none; }
+  #cp-btn .wnew, #rs-btn .wnew { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-ink); background: var(--accent-grad); border-radius: 6px; padding: 2px 5px; }
+  .composer-tools.fit1 :is(#cp-btn, #rs-btn) .wcost { display: none; }
+  .composer-tools.fit1 :is(#cp-btn, #rs-btn) { position: relative; padding: 0 10px 0 9px; }
+  .composer-tools.fit1 :is(#cp-btn, #rs-btn) .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 :is(#cp-btn, #rs-btn) { width: 34px; padding: 0; justify-content: center; }
+  .composer-tools.fit2 :is(#cp-btn, #rs-btn) .mlabel { display: none; }
+  .composer-tools.fit5 > :is(#cp-btn, #rs-btn, #mic-btn) { width: 29px; height: 29px; }
+  .composer-tools.fit8 > :is(#cp-btn, #rs-btn, #mic-btn) { width: 26px; height: 26px; }
+  #mic-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: none; color: var(--muted); cursor: pointer;
+    display: none; align-items: center; justify-content: center; flex-shrink: 0; position: relative; transition: background .2s, color .2s, border-color .2s; }
+  #mic-btn.show { display: flex; }
+  #mic-btn svg { width: 17px; height: 17px; }
+  #mic-btn:hover { background: var(--hover); color: var(--text); }
+  #mic-btn.locked { opacity: .55; }
+  #mic-btn.live { color: #fff; border-color: transparent; background: var(--accent-grad); }
+  #mic-btn.live::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--accent); animation: v6Ring 1.2s ease-out infinite; }
+  @keyframes v6Ring { from { opacity: .9; transform: scale(.85); } to { opacity: 0; transform: scale(1.35); } }
+  @media (max-width: 720px) {
+    #cp-btn, #rs-btn { width: 32px; height: 32px; padding: 0; justify-content: center; position: relative; }
+    #cp-btn .mlabel, #rs-btn .mlabel, #cp-btn .wcost, #rs-btn .wcost { display: none; }
+    #cp-btn .wnew, #rs-btn .wnew { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; padding: 0; border-radius: 50%; font-size: 0; box-shadow: 0 0 0 2px var(--surface); }
+    #mic-btn { width: 32px; height: 32px; }
+  }
+  html.look-bubble :is(#cp-btn, #rs-btn, #mic-btn) { border-radius: 999px; color: var(--text); }
+  .composer-tools.v6-mic-mode > #send-btn { display: none !important; }
+
+  /* Modes: every mode lives in one drop-down menu. Only the modes that are on stay in the row, as chips you tap to turn off. */
+  #v6-modes-btn { height: 34px; padding: 0 9px 0 9px; border-radius: 10px; border: 1px solid var(--border); background: none; color: var(--text);
+    cursor: pointer; display: none; align-items: center; gap: 6px; font: 600 12.5px var(--sans); flex-shrink: 0; position: relative; transition: background .2s, border-color .2s; }
+  #v6-modes-btn.show { display: flex; }
+  #v6-modes-btn:hover { background: var(--hover); }
+  #v6-modes-btn svg { width: 16px; height: 16px; flex: none; }
+  #v6-modes-btn svg.chev { width: 13px; height: 13px; opacity: .7; transition: transform .2s; margin-left: -1px; }
+  #v6-modes-btn.open { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  #v6-modes-btn.open svg.chev { transform: rotate(180deg); }
+  #v6-modes-btn .dot { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent-grad); box-shadow: 0 0 0 2px var(--surface); }
+  .composer-tools.fit2 #v6-modes-btn .ml { display: none; }
+  html.look-bubble #v6-modes-btn { border-radius: 999px; }
+  .composer-tools > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn):not(.on) { display: none !important; }
+  .composer-tools > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on { display: flex !important; width: auto !important; height: 30px !important; padding: 0 8px 0 9px !important;
+    border-radius: 999px !important; gap: 5px !important; justify-content: flex-start !important; position: relative; }
+  .composer-tools > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on .mlabel { display: inline !important; font-weight: 600; }
+  .composer-tools > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on :is(.wcost, .wnew) { display: none !important; }
+  .composer-tools > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on::after { content: "×"; font-size: 16px; line-height: 1; margin-left: 1px; opacity: .7; }
+  .composer-tools > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on.auto { border-style: dashed; }
+  .composer-tools.fit3 > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on .mlabel { display: none !important; }
+  .composer-tools.fit3 > :is(#web-btn, #link-btn, #study-btn, #wx-btn, #sc-btn, #fy-btn, #img-btn, #deep-btn, #ph-btn, #build-btn, #cp-btn, #rs-btn).on { padding: 0 7px !important; }
+  #v6-modes { position: absolute; left: 10px; bottom: calc(100% + 8px); z-index: 31; width: 360px; max-width: calc(100% - 20px);
+    max-height: min(64vh, 560px); overflow-y: auto; overscroll-behavior: contain; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; box-shadow: var(--shadow); padding: 6px; font-family: var(--sans);
+    opacity: 0; transform: translateY(6px) scale(.98); transform-origin: bottom left; pointer-events: none; transition: opacity .16s, transform .2s cubic-bezier(.2,.8,.2,1); }
+  #v6-modes.show { opacity: 1; transform: none; pointer-events: auto; }
+  #v6-modes.down { bottom: auto; top: calc(100% + 8px); transform-origin: top left; }
+  #v6-modes .mh { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 10px 10px 4px; }
+  #v6-modes .mrow { display: flex; align-items: center; gap: 11px; width: 100%; border: 0; background: none; color: var(--text); font: inherit; text-align: left;
+    padding: 7px 10px; border-radius: 12px; cursor: pointer; }
+  #v6-modes .mrow:hover { background: var(--hover); }
+  #v6-modes .mrow .mi { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); color: var(--text); flex: none; transition: background .2s; }
+  #v6-modes .mrow .mi svg { width: 17px; height: 17px; }
+  #v6-modes .mrow.on .mi { background: var(--accent-grad); color: #fff; }
+  #v6-modes .mrow .mt { flex: 1; min-width: 0; }
+  #v6-modes .mrow .mt b { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+  #v6-modes .mrow .mt small { display: block; font-size: 12px; color: var(--muted); line-height: 1.35; margin-top: 1px; }
+  #v6-modes .mrow .mc { font-size: 11.5px; color: var(--muted); flex: none; font-variant-numeric: tabular-nums; }
+  #v6-modes .mrow .tg { width: 34px; height: 20px; border-radius: 999px; background: var(--border-strong); position: relative; flex: none; transition: background .2s; }
+  #v6-modes .mrow .tg::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff;
+    transition: transform .2s cubic-bezier(.2,.8,.2,1); box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+  #v6-modes .mrow.on .tg { background: var(--accent-grad); }
+  #v6-modes .mrow.on .tg::after { transform: translateX(14px); }
+  #v6-modes .mrow.blocked { opacity: .5; }
+  #v6-modes .tag { font-size: 9.5px; font-weight: 800; letter-spacing: .06em; color: var(--accent-ink); background: var(--accent-grad); border-radius: 6px; padding: 2px 5px; }
+  #v6-modes .pro { font-size: 10px; font-weight: 800; letter-spacing: .04em; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 1px 5px; }
+  #v6-modes .mfoot { font-size: 12px; color: var(--muted); padding: 8px 10px 6px; border-top: 1px solid var(--border); margin-top: 6px; line-height: 1.4; }
+
+  /* "+" menu: photo, SCODE Eyes, SCODE Canvas */
+  #v6-plus { position: absolute; left: 10px; bottom: calc(100% + 8px); z-index: 30; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow); padding: 6px; width: 268px; max-width: calc(100vw - 40px);
+    opacity: 0; transform: translateY(6px) scale(.98); pointer-events: none; transition: opacity .16s, transform .2s cubic-bezier(.2,.8,.2,1); }
+  #v6-plus.show { opacity: 1; transform: none; pointer-events: auto; }
+  #v6-plus button { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; background: none; color: var(--text); font: inherit;
+    text-align: left; padding: 9px 10px; border-radius: 11px; cursor: pointer; }
+  #v6-plus button:hover { background: var(--hover); }
+  #v6-plus .pi { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); flex: none; }
+  #v6-plus .pi svg { width: 18px; height: 18px; }
+  #v6-plus .pi.g { background: var(--accent-grad); color: #fff; }
+  #v6-plus b { display: block; font-size: 14px; font-weight: 600; }
+  #v6-plus small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; }
+  #v6-plus .tag { font-size: 9.5px; font-weight: 800; letter-spacing: .06em; color: var(--accent-ink); background: var(--accent-grad); border-radius: 6px; padding: 2px 5px; margin-left: 6px; vertical-align: 1px; }
+
+  /* Composer bar: Space, Research, Compute hints */
+  #v6-bar { display: none; align-items: center; gap: 8px; flex-wrap: wrap; padding: 2px 2px 8px; font-size: 12.5px; color: var(--muted); }
+  #v6-bar.show { display: flex; }
+  .v6-pill { display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 6px 0 10px; border-radius: 999px; border: 1px solid var(--accent);
+    background: var(--accent-soft); color: var(--text); font-size: 12.5px; font-weight: 600; max-width: 100%; }
+  .v6-pill span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6-pill svg { width: 15px; height: 15px; flex: none; color: var(--accent); }
+  .v6-pill button { width: 22px; height: 22px; border-radius: 50%; border: 0; background: none; color: var(--muted); cursor: pointer; display: grid; place-items: center; flex: none; }
+  .v6-pill button:hover { background: var(--hover); color: var(--text); }
+  .v6-pill button svg { width: 13px; height: 13px; color: inherit; }
+  .v6-hint { line-height: 1.4; }
+
+  /* Reply cards */
+  .v6-cards, .v6w, .v6-row, #v6-eyes, #v6-canvas, #v6-voice, .v6-modal, #v6-plus, #v6-bar, #v6-review { font-family: var(--sans); }
+  .v6-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 2px; align-items: center; }
+  .v6-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); font-size: 12px; text-decoration: none; max-width: 100%; }
+  .v6-chip b { color: var(--text); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6-chip svg { width: 13px; height: 13px; flex: none; }
+  a.v6-chip:hover { border-color: var(--border-strong); color: var(--text); }
+  .v6-chip.inst { border-color: transparent; background: var(--accent-grad); color: #fff; font-weight: 700; letter-spacing: .02em; }
+  .v6-chip.inst svg { color: #fff; }
+  .v6-card { margin: 12px 0 4px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); overflow: hidden; }
+  .v6-card-h { display: flex; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; user-select: none; }
+  .v6-card-h .ci { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: var(--accent-grad); color: #fff; flex: none; }
+  .v6-card-h .ci svg { width: 16px; height: 16px; }
+  .v6-card-h .ct { flex: 1; min-width: 0; }
+  .v6-card-h .ct b { display: block; font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .v6-card-h .ct small { display: block; font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6-card-h .cv { width: 18px; height: 18px; color: var(--muted); transition: transform .2s; flex: none; }
+  .v6-card.open .v6-card-h .cv { transform: rotate(90deg); }
+  .v6-card-b { display: none; border-top: 1px solid var(--border); padding: 10px 12px 12px; }
+  .v6-card.open .v6-card-b { display: block; }
+  .v6-card-b pre { margin: 0 0 10px; padding: 10px 12px; background: var(--surface-2); border-radius: 10px; font: 12.5px/1.5 var(--mono); overflow-x: auto; white-space: pre; color: var(--text); }
+  .v6-card-b .lbl { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 2px 0 6px; }
+  .v6-card-b .out { white-space: pre-wrap; }
+  .v6-card.err .ci { background: var(--warn-bg); color: var(--warn); }
+  .v6-graphs { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 4px; }
+  .v6-graphs figure { margin: 0; position: relative; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; max-width: 100%; }
+  .v6-graphs img { display: block; max-width: 100%; max-height: 420px; }
+  .v6-graphs a { position: absolute; top: 8px; right: 8px; height: 28px; padding: 0 10px; border-radius: 999px; background: rgba(20,20,20,.72); color: #fff;
+    font-size: 12px; display: inline-flex; align-items: center; gap: 5px; text-decoration: none; }
+  .v6-graphs a svg { width: 14px; height: 14px; }
+  .v6-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .v6-btn { height: 32px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    font: inherit; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .v6-btn svg { width: 15px; height: 15px; }
+  .v6-btn:hover { background: var(--hover); }
+  .v6-btn.primary { background: var(--accent-grad); border-color: transparent; color: #fff; font-weight: 600; }
+  .v6-btn.danger { color: var(--warn); }
+  .v6-srcs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .v6-srcs li { display: flex; gap: 8px; font-size: 13px; line-height: 1.4; }
+  .v6-srcs li i { font-style: normal; flex: none; width: 22px; height: 22px; border-radius: 7px; background: var(--surface-2); display: grid; place-items: center; font-size: 11.5px; font-weight: 700; color: var(--muted); }
+  .v6-srcs a { color: var(--text); text-decoration: none; }
+  .v6-srcs a:hover { text-decoration: underline; }
+  .v6-srcs small { color: var(--muted); }
+
+  /* Live widgets */
+  .v6w { margin: 12px 0 6px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); overflow: hidden; position: relative; }
+  .v6w-h { display: flex; align-items: center; gap: 9px; padding: 9px 10px 9px 12px; border-bottom: 1px solid var(--border); }
+  .v6w-h .wi { width: 26px; height: 26px; border-radius: 8px; background: var(--accent-grad); color: #fff; display: grid; place-items: center; flex: none; }
+  .v6w-h .wi svg { width: 15px; height: 15px; }
+  .v6w-h .wt { flex: 1; min-width: 0; font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6w-h .wt small { font-weight: 500; color: var(--muted); margin-left: 6px; }
+  .v6w-h button { width: 30px; height: 30px; border-radius: 9px; border: 0; background: none; color: var(--muted); cursor: pointer; display: grid; place-items: center; flex: none; }
+  .v6w-h button:hover { background: var(--hover); color: var(--text); }
+  .v6w-h button svg { width: 16px; height: 16px; }
+  .v6w-body { position: relative; }
+  .v6w canvas.v6c { display: block; width: 100%; height: 300px; touch-action: none; cursor: grab; background: var(--surface); }
+  .v6w canvas.v6c:active { cursor: grabbing; }
+  .v6w-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 8px 12px; font: 12.5px var(--mono); color: var(--text); border-top: 1px solid var(--border); }
+  .v6w-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .v6w-zoom { position: absolute; right: 10px; bottom: 10px; display: flex; gap: 6px; }
+  .v6w-zoom button { width: 30px; height: 30px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; font: 600 16px var(--sans); display: grid; place-items: center; }
+  .v6w-tip { position: absolute; left: 10px; top: 10px; font: 12px var(--mono); color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; pointer-events: none; opacity: 0; transition: opacity .15s; }
+  .v6w-tip.on { opacity: 1; }
+  .v6w-ctrl { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 16px; padding: 10px 12px 12px; border-top: 1px solid var(--border); }
+  .v6w-ctrl label { font-size: 12px; color: var(--muted); display: grid; gap: 4px; }
+  .v6w-ctrl label b { color: var(--text); font-weight: 600; font-family: var(--mono); }
+  .v6w-ctrl input[type=range] { width: 100%; accent-color: var(--accent); }
+  .v6w-ctrl select { font: inherit; font-size: 13px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+  .v6w-read { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 8px 12px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--muted); }
+  .v6w-read b { color: var(--text); font-family: var(--mono); font-weight: 600; }
+  .v6w-mol { height: 320px; position: relative; background: #0f1016; }
+  body.light .v6w-mol { background: #f6f6fa; }
+  .v6w-msg { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px; color: var(--muted); font-size: 13.5px; }
+  .v6w-msg a { color: var(--accent); }
+  .v6w-full { position: fixed !important; inset: 0; z-index: 400; margin: 0 !important; border-radius: 0; display: flex; flex-direction: column; }
+  .v6w-full .v6w-body { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .v6w-full canvas.v6c, .v6w-full .v6w-mol { flex: 1; height: auto !important; min-height: 0; }
+  body.v6-fullscreen { overflow: hidden; }
+  .v6-el { display: grid; grid-template-columns: 132px 1fr; gap: 16px; padding: 14px; align-items: start; }
+  .v6-el .tile { aspect-ratio: 1; border-radius: 14px; color: #fff; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+  .v6-el .tile .z { font: 600 13px var(--mono); opacity: .9; }
+  .v6-el .tile .s { font: 700 46px/1 var(--sans); letter-spacing: -.02em; }
+  .v6-el .tile .n { font-size: 12.5px; font-weight: 600; }
+  .v6-el .tile .m { font: 12px var(--mono); opacity: .9; }
+  .v6-el dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 13.5px; }
+  .v6-el dt { color: var(--muted); }
+  .v6-el dd { margin: 0; color: var(--text); font-weight: 500; }
+  .v6-pt { padding: 0 14px 14px; }
+  .v6-pt .grid { display: grid; grid-template-columns: repeat(18, 1fr); gap: 2px; max-width: 400px; }
+  .v6-pt .grid i { aspect-ratio: 1; border-radius: 2px; opacity: .35; }
+  .v6-pt .grid i.e { opacity: 0; }
+  .v6-pt .grid i.on { opacity: 1; outline: 2px solid var(--text); outline-offset: 1px; position: relative; z-index: 1; }
+  .v6-pt .grid .gap { grid-column: 1 / -1; height: 6px; }
+  .v6-pt small { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; }
+  @media (max-width: 520px) { .v6-el { grid-template-columns: 1fr; } .v6-el .tile { width: 132px; } }
+  .v6-tl { list-style: none; margin: 0; padding: 14px 14px 10px 14px; position: relative; }
+  .v6-tl::before { content: ""; position: absolute; left: 25px; top: 18px; bottom: 18px; width: 2px; background: var(--accent-grad); border-radius: 2px; opacity: .55; }
+  .v6-tl li { position: relative; padding: 0 0 14px 38px; cursor: pointer; }
+  .v6-tl li::before { content: ""; position: absolute; left: 6px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); transition: transform .2s; }
+  .v6-tl li.on::before { transform: scale(1.35); background: var(--accent); }
+  .v6-tl li b { font: 700 13px var(--mono); color: var(--accent); display: block; }
+  .v6-tl li span { font-size: 14px; color: var(--text); line-height: 1.45; }
+
+  /* Full-screen tools: Eyes and Canvas */
+  .v6-full { position: fixed; inset: 0; z-index: 350; background: #000; color: #fff; display: none; flex-direction: column; overscroll-behavior: contain; }
+  .v6-full.show { display: flex; }
+  body.v6-tool-open { overflow: hidden; }
+  .v6-full .tb { display: flex; align-items: center; gap: 8px; padding: calc(10px + env(safe-area-inset-top)) 12px 10px; position: relative; z-index: 3; }
+  .v6-full .tb .ttl { flex: 1; font-weight: 700; letter-spacing: .02em; display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .v6-full .tb .ttl i { width: 22px; height: 22px; border-radius: 7px; background: var(--accent-grad); display: grid; place-items: center; flex: none; }
+  .v6-full .tb .ttl i svg { width: 13px; height: 13px; }
+  .v6-full .ib { width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; display: grid; place-items: center; cursor: pointer; flex: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .v6-full .ib svg { width: 19px; height: 19px; }
+  .v6-full .ib:hover { background: rgba(255,255,255,.24); }
+  .v6-full .ib.on { background: #fff; color: #111; }
+  #v6-eyes .stage { position: absolute; inset: 0; display: grid; place-items: center; background: #000; }
+  #v6-eyes video, #v6-eyes .still { width: 100%; height: 100%; object-fit: cover; }
+  #v6-eyes .still { display: none; }
+  #v6-eyes.shot .still { display: block; }
+  #v6-eyes.shot video { display: none; }
+  #v6-eyes .modes { position: absolute; left: 0; right: 0; bottom: calc(118px + env(safe-area-inset-bottom)); z-index: 3; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; padding: 0 12px; }
+  #v6-eyes .modes button { height: 34px; padding: 0 14px; border-radius: 999px; border: 0; background: rgba(0,0,0,.45); color: #fff; font: 600 13px var(--sans); cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  #v6-eyes .modes button.on { background: #fff; color: #111; }
+  #v6-eyes .shoot { position: absolute; left: 0; right: 0; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 3; display: flex; align-items: center; justify-content: center; gap: 34px; }
+  #v6-eyes .shutter { width: 74px; height: 74px; border-radius: 50%; border: 4px solid #fff; background: rgba(255,255,255,.25); cursor: pointer; padding: 5px; }
+  #v6-eyes .shutter::before { content: ""; display: block; width: 100%; height: 100%; border-radius: 50%; background: var(--accent-grad); transition: transform .15s; }
+  #v6-eyes .shutter:active::before { transform: scale(.88); }
+  #v6-eyes.shot .modes, #v6-eyes.shot .shoot { display: none; }
+  #v6-eyes .hint { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); z-index: 2; text-align: center; color: rgba(255,255,255,.85); font-size: 14px; padding: 0 30px; display: none; }
+  #v6-eyes.nocam .hint { display: block; }
+  #v6-eyes.shot .hint { display: none; }
+  #v6-eyes .frame { position: absolute; inset: 18% 12% 30%; z-index: 2; border-radius: 28px; pointer-events: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.5); opacity: .7; }
+  #v6-eyes.shot .frame, #v6-eyes.nocam .frame { display: none; }
+  #v6-eyes .sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; max-height: 62%; display: none; flex-direction: column;
+    background: var(--surface); color: var(--text); border-radius: 22px 22px 0 0; box-shadow: 0 -10px 40px rgba(0,0,0,.4); padding: 8px 0 calc(10px + env(safe-area-inset-bottom)); }
+  #v6-eyes.shot .sheet { display: flex; animation: v6Up .32s cubic-bezier(.2,.8,.2,1); }
+  @keyframes v6Up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+  #v6-eyes .sheet .grab { width: 38px; height: 4px; border-radius: 4px; background: var(--border-strong); margin: 0 auto 6px; }
+  #v6-eyes .sheet .ans { overflow-y: auto; padding: 4px 18px 8px; font-size: 15px; line-height: 1.6; min-height: 60px; }
+  #v6-eyes .sheet .ans .wait { color: var(--muted); display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+  #v6-eyes .sheet .ans .wait i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--accent); border-top-color: transparent; animation: v6Spin .8s linear infinite; }
+  @keyframes v6Spin { to { transform: rotate(360deg); } }
+  #v6-eyes .sheet .ask { display: flex; gap: 8px; padding: 6px 14px 0; }
+  #v6-eyes .sheet .ask input { flex: 1; min-width: 0; height: 40px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); padding: 0 14px; font: inherit; font-size: 14.5px; }
+  #v6-eyes .sheet .ask button { height: 40px; border-radius: 999px; border: 0; padding: 0 14px; font: 600 13.5px var(--sans); cursor: pointer; background: var(--surface-2); color: var(--text); }
+  #v6-eyes .sheet .ask button.go { background: var(--accent-grad); color: #fff; }
+  #v6-eyes .tb { position: absolute; left: 0; right: 0; top: 0; background: linear-gradient(rgba(0,0,0,.55), transparent); }
+
+  #v6-canvas { background: #1c1c1a; }
+  #v6-canvas .tb { flex-wrap: wrap; background: #1c1c1a; border-bottom: 1px solid #333; }
+  #v6-canvas .tools { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  #v6-canvas .tools .sep { width: 1px; height: 26px; background: #444; margin: 0 2px; }
+  #v6-canvas .sw { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; flex: none; padding: 0; }
+  #v6-canvas .sw.on { border-color: #fff; box-shadow: 0 0 0 2px #1c1c1a inset; }
+  #v6-canvas .board { flex: 1; position: relative; min-height: 0; background: #fff; touch-action: none; }
+  #v6-canvas .board canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+  #v6-canvas .foot { display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: #1c1c1a; border-top: 1px solid #333; }
+  #v6-canvas .foot input { flex: 1; min-width: 0; height: 42px; border-radius: 999px; border: 1px solid #444; background: #2a2a27; color: #fff; padding: 0 16px; font: inherit; font-size: 15px; }
+  #v6-canvas .foot button { height: 42px; border-radius: 999px; border: 0; padding: 0 18px; font: 600 14px var(--sans); cursor: pointer; background: var(--accent-grad); color: #fff; }
+  #v6-canvas .tip { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); background: rgba(20,20,20,.78); color: #fff; font-size: 12.5px; border-radius: 999px; padding: 6px 12px; pointer-events: none; transition: opacity .3s; z-index: 2; white-space: nowrap; }
+
+  /* Voice: captions while SCODE talks */
+  #v6-voice { position: fixed; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom)); transform: translate(-50%, 12px); z-index: 60; width: min(560px, calc(100vw - 24px));
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); padding: 10px 10px 10px 14px;
+    display: flex; align-items: center; gap: 12px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .25s cubic-bezier(.2,.8,.2,1); }
+  #v6-voice.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+  #v6-voice .wave { display: flex; gap: 3px; align-items: center; height: 26px; flex: none; }
+  #v6-voice .wave i { width: 4px; height: 8px; border-radius: 3px; background: var(--accent-grad); }
+  #v6-voice.talking .wave i { animation: v6Wave 0.9s ease-in-out infinite; }
+  #v6-voice .wave i:nth-child(2) { animation-delay: -.2s; } #v6-voice .wave i:nth-child(3) { animation-delay: -.45s; } #v6-voice .wave i:nth-child(4) { animation-delay: -.65s; }
+  @keyframes v6Wave { 0%, 100% { height: 6px; } 50% { height: 24px; } }
+  #v6-voice .cap { flex: 1; min-width: 0; font-size: 14px; line-height: 1.45; color: var(--text); max-height: 3em; overflow: hidden; }
+  #v6-voice .cap small { display: block; font-size: 11px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
+  #v6-voice button { height: 32px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); padding: 0 11px; font: 600 12.5px var(--sans); cursor: pointer; flex: none; display: inline-flex; align-items: center; gap: 5px; }
+  #v6-voice button svg { width: 14px; height: 14px; }
+  #v6-voice .vmenu { position: absolute; right: 8px; bottom: calc(100% + 8px); background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 6px; display: none; min-width: 200px; }
+  #v6-voice .vmenu.show { display: block; }
+  #v6-voice .vmenu button { width: 100%; justify-content: flex-start; border: 0; background: none; height: 34px; border-radius: 9px; }
+  #v6-voice .vmenu button:hover { background: var(--hover); }
+  #v6-voice .vmenu button.on { color: var(--accent); }
+  #v6-voice .vmenu hr { border: 0; border-top: 1px solid var(--border); margin: 4px 0; }
+
+  /* Spaces and Progress windows */
+  .v6-modal .modal-box { width: 560px; }
+  .v6-tabs { display: flex; gap: 6px; margin: -4px 0 14px; flex-wrap: wrap; }
+  .v6-tabs button { height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--border); background: none; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; }
+  .v6-tabs button.on { background: var(--accent-grad); color: #fff; border-color: transparent; font-weight: 600; }
+  .v6-list { display: grid; gap: 8px; }
+  .v6-item { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 14px; cursor: pointer; background: var(--surface); }
+  .v6-item:hover { border-color: var(--border-strong); background: var(--hover); }
+  .v6-item .ic { width: 38px; height: 38px; border-radius: 11px; background: var(--accent-grad); color: #fff; display: grid; place-items: center; font-weight: 800; flex: none; }
+  .v6-item .tx { flex: 1; min-width: 0; }
+  .v6-item .tx b { display: block; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6-item .tx small { display: block; color: var(--muted); font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6-form { display: grid; gap: 10px; }
+  .v6-form label { font-size: 12.5px; color: var(--muted); display: grid; gap: 5px; }
+  .v6-form input, .v6-form textarea { font: inherit; font-size: 14px; color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px; padding: 10px 12px; width: 100%; }
+  .v6-form textarea { min-height: 84px; resize: vertical; }
+  .v6-empty { text-align: center; color: var(--muted); font-size: 13.5px; padding: 18px 10px; line-height: 1.55; }
+  .v6-code { font: 700 22px var(--mono); letter-spacing: .18em; padding: 10px 14px; border-radius: 12px; background: var(--surface-2); display: inline-block; }
+  .v6-sec { margin: 16px 0 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .v6-docs { display: grid; gap: 6px; }
+  .v6-doc { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 11px; background: var(--surface-2); font-size: 13.5px; }
+  .v6-doc > svg { width: 16px; height: 16px; flex: none; color: var(--muted); }
+  .v6-doc span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v6-doc small { color: var(--muted); }
+  .v6-doc button { width: 28px; height: 28px; border-radius: 8px; border: 0; background: none; color: var(--muted); cursor: pointer; display: grid; place-items: center; }
+  .v6-doc button:hover { background: var(--hover); color: var(--warn); }
+  .v6-doc button svg { width: 14px; height: 14px; }
+  .v6-ins { display: grid; gap: 4px; font-size: 13.5px; }
+  .v6-ins div { display: flex; gap: 8px; } .v6-ins b { font-family: var(--mono); color: var(--accent); flex: none; min-width: 26px; }
+  .v6-bar-meter { height: 8px; border-radius: 8px; background: var(--surface-2); overflow: hidden; }
+  .v6-bar-meter i { display: block; height: 100%; border-radius: 8px; background: var(--accent-grad); }
+  .v6-topic { display: grid; grid-template-columns: 1fr 120px 28px; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+  .v6-topic small { display: block; color: var(--muted); font-size: 12px; }
+  .v6-topic button { width: 28px; height: 28px; border-radius: 8px; border: 0; background: none; color: var(--muted); cursor: pointer; display: grid; place-items: center; }
+  .v6-topic button:hover { background: var(--hover); color: var(--warn); }
+  .v6-topic button svg { width: 13px; height: 13px; }
+  .v6-note { font-size: 13px; color: var(--muted); line-height: 1.5; background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+  #v6-review { display: none; margin: 16px auto 0; max-width: 520px; text-align: left; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); padding: 12px 14px; }
+  #v6-review.show { display: block; }
+  #v6-review .h { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  #v6-review .h svg { width: 15px; height: 15px; color: var(--accent); }
+  #v6-review .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  #v6-review .chips button { height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  #v6-review .chips button:hover { border-color: var(--accent); }
+  #v6-review .chips button i { width: 8px; height: 8px; border-radius: 50%; background: #ff8a65; }
+
 </style>
 </head>
 <body class="is-empty">
@@ -3404,12 +3754,17 @@
               <button class="sc-chip fy-ask" type="button">Nanaimo to Horseshoe Bay</button>
             </div>
           </div>
+          <div id="v6-bar"></div>
           <textarea id="prompt-input" placeholder="How can I help you today?" rows="1"></textarea>
           <div class="composer-tools">
             <button id="attach-btn" type="button" title="Add a photo" aria-label="Add a photo">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </button>
             <input type="file" id="image-input" accept="image/*" style="display:none;">
+            <button id="v6-modes-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Modes">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h9M17 7h3M4 17h3M11 17h9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="15" cy="7" r="2.2" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="17" r="2.2" stroke="currentColor" stroke-width="1.9"/></svg>
+              <span class="ml">Modes</span><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="dot" hidden></span>
+            </button>
             <button id="web-btn" type="button" aria-pressed="false" title="Search the web">
               <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
               <span class="mlabel">Search</span><span class="wcost" id="web-cost">+5</span><span class="wnew" id="web-new" hidden>NEW</span>
@@ -3450,6 +3805,14 @@
               <svg viewBox="0 0 24 24" fill="none"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.3 5.5l-2.6 13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span class="mlabel">Build</span><span class="wcost" id="build-cost" hidden>+0</span><span class="wnew" id="build-new" hidden>NEW</span>
             </button>
+            <button id="cp-btn" type="button" aria-pressed="false" title="SCODE Compute">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="3" stroke="currentColor" stroke-width="1.9"/><path d="M8 7.5h8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+              <span class="mlabel">Compute</span><span class="wcost" id="cp-cost">+5</span><span class="wnew" id="cp-new" hidden>NEW</span>
+            </button>
+            <button id="rs-btn" type="button" aria-pressed="false" title="SCODE Research">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6" stroke="currentColor" stroke-width="1.9"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8 10.5h5M10.5 8v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <span class="mlabel">Research</span><span class="wcost" id="rs-cost">+40</span><span class="wnew" id="rs-new" hidden>NEW</span>
+            </button>
             <div class="tool-spacer"></div>
             <div class="model-picker" id="model-picker">
               <button class="model-picker-btn" id="model-picker-btn" type="button" aria-haspopup="listbox">
@@ -3459,6 +3822,9 @@
               </button>
               <div class="model-picker-list" id="model-picker-list" role="listbox"></div>
             </div>
+            <button id="mic-btn" type="button" title="Talk to General Ultra" aria-label="Talk to General Ultra">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11.5" rx="3" stroke="currentColor" stroke-width="1.9"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+            </button>
             <button id="send-btn" disabled title="Send" aria-label="Send">
               <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span class="busy"></span>
@@ -3818,6 +4184,19 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">October 29, 2026</div><h3>v6.0: SCODE 6</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Instant Answers</b> <span>common questions like "density formula" are answered in under a second from a checked list, free.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Compute</b> <span>SCODE writes and runs real code for math, chem and physics, so the numbers are exact. Tap Computed to see the code. Auto turns it on for calculation questions.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Live Answers</b> <span>replies can include graphs you can drag and zoom, 3D molecules you can spin, element cards, timelines and simulations (projectiles, pendulums, waves, circuits and gases).</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Library</b> <span>SCODE looks facts up in its own offline Wikipedia before answering, and shows where they came from.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Tutor That Learns You</b> <span>SCODE notices which topics you find hard, explains them more simply, and shows "Review these" on the home screen. See it in Your progress. It's tied to your Memory setting.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Research</b> <span>(Pro) reads 10 to 20 sources for a few minutes and writes a cited report you can download for Word.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Eyes</b> <span>point your camera at a plant, bird, rock, the sky, a sign or a broken thing and find out what it is. Tap + to start.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Canvas</b> <span>draw or handwrite, circle the step you're stuck on with the yellow marker, and ask why. Tap + to start.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Ultra Voice</b> <span>(Pro) tap the mic and talk to General Ultra. It answers out loud in an expressive voice, with captions.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Modes menu</b> <span>every mode now lives in one tidy Modes menu. The ones you turn on show in the row: tap one to turn it off.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>SCODE Spaces</b> <span>make a custom tutor for your class, club or team with its own notes and rules, and share it with a 6-letter code.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">October 27, 2026</div><h3>v5.1: a second SCODE computer</h3><ul>
         <li><span class="v4-log-tag fix">FIX</span><b>Essay Coach highlights spots again</b> <span>it was finding problems but not showing them. Now every spot is highlighted, and it runs on General Ultra for sharper feedback.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>SCODE Server</b> <span>a second computer now writes replies next to the laptop. General Mini, Plus and Ultra run on it.</span></li>
@@ -4012,7 +4391,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://notify-soonest-matches-analyst.trycloudflare.com";
+  const PROXY_URL = "https://pharmacy-mechanism-sum-advancement.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -5685,6 +6064,7 @@
     const fyEl = meta && meta.ferry ? buildFerryCard(meta.ferry) : null;
     if (fyEl) row.appendChild(fyEl);
     if (meta && meta.memory) row.appendChild(buildMemoryChip(meta.memory));
+    if (meta && meta.v6) row._v6 = { meta: meta.v6, text: displayContent };
     if (!imgEl) row.appendChild(buildActions(displayContent, meta && meta.tier));
     return row;
   }
@@ -6011,6 +6391,7 @@
     function renderEnd() {
       const end = stEl("div", "st-end");
       const gotN = answers.filter((a) => a && a.right).length;
+      try { body.dispatchEvent(new CustomEvent("scode-quiz-done", { bubbles: true, detail: { right: gotN, total: qs.length, full: qs.length === allQs.length } })); } catch (e) {}
       end.appendChild(stRing(gotN, qs.length));
       end.appendChild(stEl("h4", "", stCheer(gotN / qs.length)));
       end.appendChild(stEl("p", "", `You got ${gotN} of ${qs.length} right.`));
@@ -9288,6 +9669,7 @@
       let fyData = null, fyNote = "", fyNeed = false;
       let imgGen = null, imgData = null, imgBlocked = null, imgPrompt = text;
       let plus = null, plusNote = "";
+      let v6Meta = {};
       const studyWord = o.kind === "quiz" ? "quiz" : "flashcards";
 
       while (true) {
@@ -9404,6 +9786,7 @@
             else if (s.status === "done") studySet = s.set;
             continue;
           }
+          if (chunk.v6) { if (V6) V6.onEvent(chunk.v6, v6Meta, loaderRow, revealed); continue; }
           const msg = chunk.message || {};
           if ((studySet || imgGen || plus) && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
           const stick = nearBottom();
@@ -9427,6 +9810,7 @@
             }
             if (sp.visible.trim()) finishThinking();
             typeTo(sp.visible);
+            if (o.v6 && o.v6.voice && V6) V6.voiceFeed(sp.visible);
             if (sp.visible.trim()) { orbMelt(); flowStart(liveMd); }
           }
           if (stick && (msg.thinking || msg.content)) scrollToBottom(false);
@@ -9523,6 +9907,7 @@
       // The first town someone gets a forecast for becomes their town.
       if (wxData && !wxPlace) setWxPlace({ code: wxData.code, name: wxData.place, prov: wxData.prov });
       if (memInfo) liveRow.appendChild(buildMemoryChip(memInfo));
+      if (V6) { try { V6.finish(liveRow, v6Meta, finalText, o); } catch (e) { console.warn("SCODE 6", e); } }
       if (!imgGen) liveRow.appendChild(buildActions(finalText, tierAtSend));
 
       messages.push({
@@ -9540,6 +9925,7 @@
         image: imgData || imgBlocked || undefined,
         plus: plus && plus.data() ? plus.data() : undefined,
         memory: memInfo || undefined,
+        v6: Object.keys(v6Meta).length ? v6Meta : undefined,
       });
       if (o.chat) delete o.chat.pending;
       activeLink = linkMeta ? { url: linkMeta.asked, domain: linkMeta.domain } : null;
@@ -11178,6 +11564,7 @@
             web: searchUnlocked() && webOn && WEB_TIERS.has(selectedTier), study: studyActive() && !isGuest(), studyKind,
             image: pendingImageBase64 || null, chatId: currentChatId, deep: deepActive() };
       if (v4Prep(P) === false) return;
+      if (V6 && V6.prep(P) === false) return;
       el.input.value = "";
       autoGrow();
       if (rushShouldQueue()) { clearPendingImage(); updateSendState(); rushAdd(P); return; }
@@ -11261,6 +11648,7 @@
           ferry: fyNow && !studyNow && !linkToSend ? fyBody : undefined,
           deep: (P.deep && tierAtSend === "l5" && !studyNow && !imgNow) || undefined,
           build: (P.build && !studyNow && !imgNow) || undefined,
+          ...(V6 ? V6.fields(P, { studyNow, imgNow, tierAtSend }) : {}),
           job: jobId ? { id: jobId, chat: jobChat.id } : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
@@ -11325,7 +11713,7 @@
         return;
       }
 
-      const out = await runStream(res, { text, loaderRow, tierAtSend, linkToSend, kind: kindAtSend, chat: jobChat });
+      const out = await runStream(res, { text, loaderRow, tierAtSend, linkToSend, kind: kindAtSend, chat: jobChat, v6: P.v6 });
       if (out === "error") { stopScan(); sending = false; updateSendState(); return; }
     } catch (e) {
       clearTimeout(clientTimeout);
@@ -13741,7 +14129,7 @@
     return !lang && (/<!doctype html|<html[\s>]|<body[\s>]/.test(t) || (/<(div|canvas|svg|button)[\s>]/.test(t) && /<\/(div|canvas|svg|button)>/.test(t)));
   }
   function v4Decorate() {
-    el.messages.querySelectorAll(".msg pre:not([data-v4])").forEach(pre => {
+    el.messages.querySelectorAll('.msg pre:not([data-v4]):not([data-lang="scode"])').forEach(pre => {
       pre.dataset.v4 = "1";
       const bar = document.createElement("div"); bar.className = "v4-cb";
       const lang = (pre.dataset.lang || "").toLowerCase();
@@ -13812,7 +14200,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-10-27";
+  const V4_LOG_VER = "2026-10-29";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -13887,6 +14275,1865 @@
     }));
     wn.classList.add("show");
   };
+
+  // =====================================================================
+  //  SCODE 6 (Oct 29, 2026): Instant Answers, Compute, Live Answers, the
+  //  SCODE Library, Tutor That Learns You, Research, Eyes, Canvas, Ultra
+  //  Voice and Spaces. Lives inside the main script so it can use its parts.
+  // =====================================================================
+  var V6 = (function () {
+    const I6 = {
+      compute: '<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="3" stroke="currentColor" stroke-width="1.9"/><path d="M8 7.5h8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
+      research: '<svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6" stroke="currentColor" stroke-width="1.9"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8 10.5h5M10.5 8v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+      eyes: '<svg viewBox="0 0 24 24" fill="none"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.9"/></svg>',
+      canvas: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M13.5 7l3.5 3.5" stroke="currentColor" stroke-width="1.9"/></svg>',
+      photo: '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4.5" width="18" height="15" rx="3" stroke="currentColor" stroke-width="1.9"/><circle cx="9" cy="10" r="1.8" stroke="currentColor" stroke-width="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+      mic: '<svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11.5" rx="3" stroke="currentColor" stroke-width="1.9"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      bolt: '<svg viewBox="0 0 24 24" fill="none"><path d="M13 2.8L5 13.5h6l-1 7.7 8-10.7h-6l1-7.7z" fill="currentColor"/></svg>',
+      book: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5" stroke="currentColor" stroke-width="1.9"/></svg>',
+      space: '<svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8.5" r="2.8" stroke="currentColor" stroke-width="1.8"/><circle cx="16.5" cy="8.5" r="2.4" stroke="currentColor" stroke-width="1.8"/><path d="M3 19c.5-3.2 2.5-5 5-5s4.5 1.8 5 5M13.5 15.2c.8-.8 1.8-1.2 3-1.2 2.1 0 3.7 1.6 4.2 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      progress: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      chev: '<svg class="cv" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      full: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      share: '<svg viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 10.8l7.6-4M8.2 13.2l7.6 4" stroke="currentColor" stroke-width="1.8"/></svg>',
+      graph: '<svg viewBox="0 0 24 24" fill="none"><path d="M3 20h18M4 20V4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 17c3-9 6-11 8.5-7S18 13 20 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      atom: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="1.8" fill="currentColor"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)" stroke="currentColor" stroke-width="1.6"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.9"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      play: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>',
+      stop: '<svg viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></svg>',
+      x: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+      flip: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 9a8 8 0 0 1 14-3l2 2M20 15a8 8 0 0 1-14 3l-2-2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M20 4v4h-4M4 20v-4h4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      undo: '<svg viewBox="0 0 24 24" fill="none"><path d="M9 14L4 9l5-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      trash: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      pen: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+      marker: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 19l3-1 10-10-2-2L6 16z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M3.5 21.5h17" stroke="#ffd400" stroke-width="3" stroke-linecap="round"/></svg>',
+      eraser: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 20h12M4.5 15.5l9-9a2 2 0 0 1 2.8 0l2.2 2.2a2 2 0 0 1 0 2.8L12 18H7.5z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+      upload: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4M7 9l5-5 5 5M5 20h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      link: '<svg viewBox="0 0 24 24" fill="none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      speaker: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      gear: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.9"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    };
+    const V6_LAUNCH = Date.parse("2026-10-29T18:00:00-07:00");
+    const VO = { auto: true, voice: "heart", q: [], playing: false, active: false, spokenTo: 0, tone: "", gen: 0, fallback: false, audio: null, prefix: "" };
+    try { VO.auto = localStorage.getItem("scode_voice_auto") !== "0"; VO.voice = localStorage.getItem("scode_voice") || "heart"; } catch (e) {}
+    const MIC = { live: false, rec: null, media: null, chunks: [], down: 0, cancel: false };
+    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const S = { st: null, plan: "guest", research: false, computeOn: false, computeSkipFor: null, eyesMode: null, canvasNext: false,
+                voiceNext: false, progress: null, progressAt: 0 };
+    try { S.computeOn = localStorage.getItem("scode_compute_on") === "1"; } catch (e) {}
+    const COMPUTE_TIERS = new Set(["l2_5", "l4", "l5"]);
+
+    // ---------------------------------------------------------------- server calls
+    async function api(path, opts) {
+      opts = opts || {};
+      const h = authHeaders(opts.json !== undefined ? { "Content-Type": "application/json" } : {});
+      const r = await fetch(PROXY_URL + path, { method: opts.method || (opts.json !== undefined ? "POST" : "GET"), headers: h,
+        body: opts.json !== undefined ? JSON.stringify(opts.json) : opts.body });
+      let data = {};
+      try { data = await r.json(); } catch (e) {}
+      if (!r.ok) { const err = new Error(data.message || `Something went wrong (error ${r.status}).`); err.data = data; err.status = r.status; throw err; }
+      return data;
+    }
+    function on6(part) { return !!(S.st && S.st[part] && S.st[part].on); }
+    function v6Status(data) {
+      if (!data) return;
+      S.st = data.v6 || null;
+      S.plan = !auth ? "guest" : (data.plan || "free");
+      VO.fallback = !(S.st && S.st.voice && S.st.voice.tts);
+      paint();
+      reviewRefresh();
+      joinPending();
+    }
+
+    // ---------------------------------------------------------------- toolbar: Compute, Research, mic
+    function computeAvail() { return !isGuest() && on6("compute") && (V4.auto || COMPUTE_TIERS.has(selectedTier)); }
+    function researchAvail() { return !isGuest() && on6("research"); }
+    function micAvail() { return !isGuest() && S.st && S.st.voice && S.st.voice.on && (V4.auto || selectedTier === "l5"); }
+    const CALC_RE = /\b(calculate|compute|solve|evaluate|simplify|factor|expand|derivative|differentiate|integrate|integral|limit of|how many (moles?|grams?|atoms|molecules|litres|liters|joules|newtons)|molar mass|mass percent|percent (yield|composition|error)|limiting (reagent|reactant)|molarity|concentration|ph of|half[- ]life|standard deviation|variance|median|probability|regression|convert|kinetic energy|potential energy|velocity|acceleration|momentum|net force|work done|wavelength|frequency|ohm|resistance|voltage|current|interest|graph|plot)\b/i;
+    function computeLooks(text) {
+      const t = String(text || "");
+      if (t.length < 4 || t.length > 1500) return false;
+      if (/```/.test(t)) return false;
+      const mathy = /[=√∫∑^×÷]|\d\s*[x*/+\-]\s*\d|\b(sin|cos|tan|log|ln)\s*\(/i.test(t);
+      return mathy || (CALC_RE.test(t) && /\d/.test(t)) || /\b(graph|plot)\b/i.test(t);
+    }
+    function otherModeOn() {
+      return (typeof studyActive === "function" && studyActive()) || (typeof imgState === "function" && imgState() !== "off") ||
+        (typeof scoresActive === "function" && scoresActive()) || (typeof ferryActive === "function" && ferryActive()) || webOn || linkOn;
+    }
+    function computeState() {
+      if (!computeAvail() || S.research || otherModeOn()) return "off";
+      if (S.computeOn) return "on";
+      const t = el.input.value;
+      if (V4.auto && t && S.computeSkipFor !== t.trim() && computeLooks(t)) return "auto";
+      return "off";
+    }
+    function paint() {
+      const cp = $("cp-btn"), rs = $("rs-btn"), mic = $("mic-btn");
+      if (!cp) return;
+      const cs = computeState();
+      cp.classList.toggle("show", computeAvail());
+      cp.classList.toggle("on", cs !== "off");
+      cp.classList.toggle("auto", cs === "auto");
+      cp.classList.toggle("blocked", computeAvail() && (S.research || otherModeOn()));
+      cp.setAttribute("aria-pressed", String(cs !== "off"));
+      $("cp-cost").textContent = "+" + ((S.st && S.st.compute && S.st.compute.cost) || 5);
+      $("cp-new").hidden = !(isNew() && cs === "off");
+      cp.title = cs === "auto" ? "SCODE Compute turned on by itself for this question: it runs real code for exact answers. Tap to skip."
+        : cs === "on" ? "SCODE Compute is on: SCODE writes and runs real code for exact math, chem and physics answers"
+        : "SCODE Compute: SCODE writes and runs real code so the numbers are exact";
+      const ra = researchAvail();
+      rs.classList.toggle("show", ra);
+      rs.classList.toggle("on", ra && S.research);
+      rs.classList.toggle("locked", ra && S.plan !== "pro");
+      rs.setAttribute("aria-pressed", String(ra && S.research));
+      $("rs-cost").textContent = "+" + ((S.st && S.st.research && S.st.research.cost) || 40);
+      $("rs-new").hidden = !(isNew() && !S.research);
+      rs.title = S.plan !== "pro" ? "SCODE Research (Pro): reads 10 to 20 sources and writes a cited report"
+        : S.research ? "SCODE Research is on: ask a big question and get a cited report in a few minutes"
+        : "SCODE Research: reads 10 to 20 sources and writes a cited report (General Ultra)";
+      const ma = micAvail();
+      const tools = mic.parentNode;
+      const micMode = !!ma && (MIC.live || (!el.input.value.trim() && !pendingImageBase64 && !sending));
+      tools.classList.toggle("v6-mic-mode", micMode);
+      mic.classList.toggle("show", micMode);
+      mic.classList.toggle("locked", !!ma && S.plan !== "pro");
+      mic.title = S.plan !== "pro" ? "Ultra Voice (Pro): talk to General Ultra" : (MIC.live ? "Listening… tap to send" : "Talk to General Ultra (Ultra Voice)");
+      paintBar();
+      modesSync();
+    }
+    function isNew() { return Date.now() < V6_LAUNCH + 6 * 864e5; }
+    const _v6UpdateWeb = updateWebBtn;
+    updateWebBtn = function () { _v6UpdateWeb(); paint(); };
+    el.input.addEventListener("input", () => { if (S.computeSkipFor && S.computeSkipFor !== el.input.value.trim()) S.computeSkipFor = null; paint(); updateCostInfo(); });
+    const _v6Cost = updateCostInfo;
+    updateCostInfo = function () {
+      _v6Cost();
+      if (!el.mpQuota || !TIER_INFO[selectedTier]) return;
+      let add = 0, label = "";
+      if (S.research && researchAvail() && S.plan === "pro") {
+        const total = ((TIER_INFO.l5 && TIER_INFO.l5.cost) || 30) + ((S.st && S.st.research && S.st.research.cost) || 40);
+        el.mpQuota.innerHTML = '<span class="q-word">cost </span>' + total;
+        el.mpQuota.classList.add("plus");
+        el.modelPickerBtn.title = `${total} points per report: General Ultra + Research`;
+        return;
+      }
+      if (computeState() !== "off") { add = (S.st && S.st.compute && S.st.compute.cost) || 5; label = "Compute"; }
+      if (!add) return;
+      const m = el.mpQuota.textContent.match(/\d+/);
+      el.mpQuota.innerHTML = m ? '<span class="q-word">cost </span>' + (parseInt(m[0], 10) + add) : "+" + add;
+      el.mpQuota.classList.add("plus");
+      el.modelPickerBtn.title += ` + ${label} ${add}`;
+    };
+    function toggleCompute() {
+      if (isGuest()) { openAuth("welcome", "SCODE Compute needs a free account."); return; }
+      if ($("cp-btn").classList.contains("blocked")) { showNote(S.research ? "Research is on. Turn it off to use Compute." : "Compute works on normal replies. Turn off the mode that's on to use it."); return; }
+      const cs = computeState();
+      if (cs === "auto") { S.computeSkipFor = el.input.value.trim(); showCostToast("<b>Compute skipped</b> · this one gets a normal answer"); }
+      else {
+        S.computeOn = cs === "off";
+        try { localStorage.setItem("scode_compute_on", S.computeOn ? "1" : "0"); } catch (e) {}
+        if (S.computeOn) {
+          if (!V4.auto && !COMPUTE_TIERS.has(selectedTier)) selectTier(v4Allowed("l5") ? "l5" : "l2_5");
+          showCostToast(`<b>SCODE Compute is on</b> · SCODE writes and runs real code for exact answers · +${(S.st && S.st.compute && S.st.compute.cost) || 5} points`);
+        }
+      }
+      paint(); updateCostInfo();
+      if (!touchLike) el.input.focus();
+    }
+    function toggleResearch() {
+      if (isGuest()) { openAuth("welcome", "SCODE Research needs an account."); return; }
+      if (S.plan !== "pro") { v4OpenPlan("SCODE Research is part of SCODE Pro. Pro is free until January 1, 2027 when you help train SCODE AI."); return; }
+      S.research = !S.research;
+      if (S.research) {
+        setMode(null); deepOn = false; V4.photoHelp = false; V4.build = false;
+        if (!V4.auto && selectedTier !== "l5") selectTier("l5");
+        showCostToast(`<b>SCODE Research is on</b> · ask a big question · about 2 to 6 minutes · ${((TIER_INFO.l5 && TIER_INFO.l5.cost) || 30) + ((S.st && S.st.research && S.st.research.cost) || 40)} points`);
+      }
+      updateWebBtn(); updateCostInfo();
+      if (!touchLike) el.input.focus();
+    }
+    // Other modes turn Research off (one big mode at a time)
+    const _v6SetMode = setMode;
+    setMode = function (mode) { if (mode) S.research = false; _v6SetMode(mode); };
+
+    // ---------------------------------------------------------------- composer bar (Space, Research, Compute)
+    function paintBar() {
+      const bar = $("v6-bar");
+      if (!bar) return;
+      const ch = typeof getCurrentChat === "function" ? getCurrentChat() : null;
+      const parts = [];
+      if (ch && ch.space && !isGuest()) {
+        parts.push(`<span class="v6-pill">${I6.space}<span>Space: ${esc(ch.space.name)}</span><button type="button" data-v6="leave-chat" title="Chat normally (outside the Space)" aria-label="Leave Space chat">${I6.x}</button></span>`);
+      }
+      if (S.research && researchAvail() && S.plan === "pro") {
+        parts.push(`<span class="v6-pill">${I6.research}<span>Research</span><button type="button" data-v6="research-off" aria-label="Turn Research off">${I6.x}</button></span>` +
+                   `<span class="v6-hint">Ask a big question. SCODE reads 10 to 20 sources and writes a cited report (2 to 6 min).</span>`);
+      }
+      bar.innerHTML = parts.join("");
+      bar.classList.toggle("show", parts.length > 0);
+      if (ch && ch.space && !messages.length) el.input.placeholder = `Ask ${ch.space.name}'s tutor anything`;
+      else if (S.research && researchAvail()) el.input.placeholder = "What should SCODE research? Like “Why are BC's salmon runs shrinking?”";
+      else if (computeState() === "on" && !messages.length) el.input.placeholder = "Ask a math, chem or physics question. SCODE runs real code for exact answers.";
+    }
+    document.addEventListener("click", (e) => {
+      const b = e.target.closest && e.target.closest("[data-v6]");
+      if (!b) return;
+      const k = b.dataset.v6;
+      if (k === "leave-chat") { const ch = getCurrentChat(); if (ch) { delete ch.space; saveChats(); } paint(); updateWebBtn(); }
+      if (k === "research-off") { S.research = false; updateWebBtn(); updateCostInfo(); }
+    });
+
+    // ---------------------------------------------------------------- "+" menu: photo, Eyes, Canvas
+    const plusMenu = document.createElement("div");
+    plusMenu.id = "v6-plus";
+    plusMenu.innerHTML = `
+      <button type="button" data-p="photo"><span class="pi">${I6.photo}</span><span><b>Add a photo</b><small>From your device or camera</small></span></button>
+      <button type="button" data-p="eyes"><span class="pi g">${I6.eyes}</span><span><b>SCODE Eyes<span class="tag">NEW</span></b><small>Point your camera, find out what it is</small></span></button>
+      <button type="button" data-p="canvas"><span class="pi g">${I6.canvas}</span><span><b>SCODE Canvas<span class="tag">NEW</span></b><small>Draw or handwrite, circle a step and ask</small></span></button>
+`;
+    $("composer").appendChild(plusMenu);
+    function plusClose() { plusMenu.classList.remove("show"); }
+    el.attachBtn.addEventListener("click", (e) => {
+      if (isGuest()) return;   // (guests never see the + button)
+      e.stopImmediatePropagation(); e.preventDefault();
+      if (typeof modesClose === "function") modesClose();
+      plusMenu.classList.toggle("show");
+    }, true);
+    plusMenu.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b) return;
+      plusClose();
+      if (b.dataset.p === "photo") el.imageInput.click();
+      else if (b.dataset.p === "eyes") eyesOpen();
+      else if (b.dataset.p === "canvas") canvasOpen();
+    });
+    document.addEventListener("click", (e) => { if (plusMenu.classList.contains("show") && !plusMenu.contains(e.target) && e.target !== el.attachBtn && !el.attachBtn.contains(e.target)) plusClose(); });
+    function setPhoto(dataUrl) {
+      pendingImageBase64 = dataUrl.split(",")[1];
+      el.imagePreviewThumb.src = dataUrl;
+      el.imagePreviewRow.classList.add("show");
+      updateSendState();
+    }
+    function fitImage(src, maxDim, quality) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          let w = img.naturalWidth, h = img.naturalHeight;
+          if (w > maxDim || h > maxDim) { const s = maxDim / Math.max(w, h); w = Math.round(w * s); h = Math.round(h * s); }
+          const c = document.createElement("canvas"); c.width = w; c.height = h;
+          c.getContext("2d").drawImage(img, 0, 0, w, h);
+          resolve({ url: c.toDataURL("image/jpeg", quality || 0.86), img });
+        };
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+    function fileToUrl(file) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); }); }
+
+    // ---------------------------------------------------------------- Modes: one drop-down for every mode
+    // The mode buttons keep working exactly as before. They just live in this menu now,
+    // and only the ones that are on stay in the row (as chips: tap one to turn it off).
+    const MODES = [
+      ["Answer with", [["web-btn", "Search", "Check the web before answering"], ["link-btn", "Link", "Read a page, PDF or Google Doc you paste"],
+                       ["rs-btn", "Research", "A cited report from 10 to 20 sources"], ["wx-btn", "Weather", "The Environment Canada forecast"],
+                       ["sc-btn", "Scores", "Live standings, games and schedules"], ["fy-btn", "Ferries", "BC Ferries times, live"]]],
+      ["Think and solve", [["deep-btn", "Deep Think", "General Ultra thinks it through first"], ["cp-btn", "Compute", "Exact answers from real code"],
+                           ["ph-btn", "Photo Help", "Snap a problem, get it solved step by step"]]],
+      ["Make", [["study-btn", "Study", "Flashcards, a practice quiz or a summary"], ["img-btn", "Image", "Make a picture from a description"],
+                ["build-btn", "Build", "A web page, game or tool you can run"]]],
+    ];
+    const modesBtn = $("v6-modes-btn");
+    const modesMenu = document.createElement("div");
+    modesMenu.id = "v6-modes";
+    modesMenu.setAttribute("role", "menu");
+    $("composer").appendChild(modesMenu);
+    function modeInfo(id) {
+      const b = $(id);
+      if (!b || !b.classList.contains("show")) return null;
+      const cost = b.querySelector(".wcost"), nw = b.querySelector(".wnew");
+      const c = cost && !cost.hidden ? cost.textContent.trim() : "";
+      return { b, on: b.classList.contains("on"), auto: b.classList.contains("auto"), blocked: b.classList.contains("blocked"),
+               locked: b.classList.contains("locked"), fresh: !!(nw && !nw.hidden), cost: c && c !== "+0" ? c : "" };
+    }
+    function modesSync() {
+      if (!modesBtn) return;
+      let any = false, fresh = false;
+      MODES.forEach(([, list]) => list.forEach(([id]) => { const m = modeInfo(id); if (m) { any = true; if (m.fresh && !m.on) fresh = true; } }));
+      modesBtn.classList.toggle("show", any);
+      modesBtn.querySelector(".dot").hidden = !fresh;
+      if (!any) modesClose();
+      else if (modesMenu.classList.contains("show")) modesPaint();
+    }
+    function modesPaint() {
+      const html = [];
+      MODES.forEach(([head, list]) => {
+        const rows = list.map(([id, name, desc]) => {
+          const m = modeInfo(id);
+          if (!m) return "";
+          const svg = (m.b.querySelector("svg") || {}).outerHTML || "";
+          const sub = m.on && m.auto ? "Turned on by itself for this message · tap to skip" : m.blocked ? "Off while another mode is on" : desc;
+          return `<button type="button" role="menuitemcheckbox" aria-checked="${m.on}" class="mrow${m.on ? " on" : ""}${m.blocked ? " blocked" : ""}" data-for="${id}">` +
+            `<span class="mi">${svg}</span><span class="mt"><b>${name}${m.fresh && !m.on ? '<span class="tag">NEW</span>' : ""}${m.locked ? '<span class="pro">Pro</span>' : ""}</b><small>${esc(sub)}</small></span>` +
+            `${m.cost && !m.locked ? `<span class="mc">${esc(m.cost)}</span>` : ""}<span class="tg"></span></button>`;
+        }).join("");
+        if (rows) html.push(`<div class="mh">${head}</div>` + rows);
+      });
+      modesMenu.innerHTML = html.join("") + `<div class="mfoot">Modes you turn on show up in the row. Tap one there to turn it off.</div>`;
+    }
+    function modesFit() {
+      // open up or down, whichever has more room, and never past the edge of the screen
+      const r = $("composer").getBoundingClientRect();
+      const above = r.top - 12, below = window.innerHeight - r.bottom - 12;
+      const down = above < 300 && below > above;
+      modesMenu.classList.toggle("down", down);
+      modesMenu.style.maxHeight = Math.max(180, Math.min(560, down ? below : above)) + "px";
+    }
+    function modesOpen() { plusClose(); modesPaint(); modesFit(); modesMenu.classList.add("show"); modesBtn.classList.add("open"); modesBtn.setAttribute("aria-expanded", "true"); }
+    window.addEventListener("resize", () => { if (modesMenu.classList.contains("show")) modesFit(); });
+    function modesClose() { modesMenu.classList.remove("show"); if (modesBtn) { modesBtn.classList.remove("open"); modesBtn.setAttribute("aria-expanded", "false"); } }
+    if (modesBtn) modesBtn.addEventListener("click", (e) => { e.stopPropagation(); if (modesMenu.classList.contains("show")) modesClose(); else modesOpen(); });
+    modesMenu.addEventListener("click", (e) => {
+      const r = e.target.closest("[data-for]"); if (!r) return;
+      e.stopPropagation();
+      const b = $(r.dataset.for);
+      modesClose();
+      if (b) b.click();
+      if (!touchLike) el.input.focus();
+    });
+    document.addEventListener("click", (e) => { if (modesMenu.classList.contains("show") && !modesMenu.contains(e.target) && !(modesBtn && modesBtn.contains(e.target))) modesClose(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modesMenu.classList.contains("show")) { modesClose(); if (modesBtn) modesBtn.focus(); } });
+
+    // ---------------------------------------------------------------- sending
+    function prep(P) {
+      P.v6 = {};
+      const ch = getCurrentChat();
+      if (ch && ch.space && !isGuest()) P.space = ch.space.id;
+      if (S.research && researchAvail() && !P.imgNow && !P.study) {
+        if (S.plan !== "pro") { v4OpenPlan("SCODE Research is part of SCODE Pro."); return false; }
+        if (P.image || chatHasPhoto()) { showNote("SCODE Research can't use photos. Start a new chat for your research question."); return false; }
+        if (!v4Allowed("l5")) { v4OpenPlan("SCODE Research uses General Ultra, which is part of SCODE Pro."); return false; }
+        Object.assign(P, { research: true, tier: "l5", web: false, deep: false, build: false, linkToSend: null, wxWanted: false, scNow: false, fyNow: false });
+        P.v6.research = true;
+        updateModelPickerLabel();
+      }
+      if (!P.research && !P.study && !P.imgNow && !P.scNow && !P.fyNow && computeAvail()) {
+        const cs = S.computeOn ? "on" : (V4.auto && S.computeSkipFor !== P.text.trim() && computeLooks(P.text) ? "auto" : "off");
+        if (cs !== "off") {
+          if (!COMPUTE_TIERS.has(P.tier)) { if (cs === "on") P.tier = v4Allowed("l5") ? "l5" : "l2_5"; }
+          if (COMPUTE_TIERS.has(P.tier)) P.compute = true;
+        }
+      }
+      S.computeSkipFor = null;
+      if (S.eyesMode && (P.image || chatHasPhoto())) { P.eyes = { mode: S.eyesMode }; }
+      if (S.canvasNext && P.image) { P.canvas = true; }
+      S.canvasNext = false;
+      if (S.voiceNext) {
+        S.voiceNext = false;
+        if (!v4Allowed("l5")) { v4OpenPlan("Ultra Voice is part of SCODE Pro."); return false; }
+        if (!P.study && !P.imgNow) { P.tier = "l5"; P.voice = true; P.v6.voice = true; P.deep = false; voiceStart(); }
+      }
+      if (P.tier !== selectedTier && !V4.auto) { selectedTier = P.tier; updateModelPickerLabel(); }
+      return true;
+    }
+    function fields(P, c) {
+      return {
+        compute: (P.compute && !c.studyNow && !c.imgNow) || undefined,
+        research: P.research || undefined,
+        eyes: (P.eyes && !c.studyNow && !c.imgNow) ? P.eyes : undefined,
+        canvas: (P.canvas && !c.imgNow) || undefined,
+        voice: (P.voice && c.tierAtSend === "l5" && !c.studyNow && !c.imgNow) || undefined,
+        space: (P.space && !c.imgNow) ? P.space : undefined,
+      };
+    }
+
+    // ---------------------------------------------------------------- reply stream events
+    function onEvent(ev, M, loaderRow, revealed) {
+      const stage = (s) => { if (!revealed && loaderRow && loaderRow._setStage) loaderRow._setStage(s); };
+      if (ev.instant) M.instant = true;
+      if (ev.kb) { M.kb = ev.kb.sources || []; stage("Found it in the SCODE Library"); }
+      if (ev.space) { M.space = ev.space; stage(`Checking ${ev.space.name}'s notes`); }
+      if (ev.compute) {
+        const c = ev.compute;
+        if (c.status === "writing") stage("Writing the code");
+        else if (c.status === "running") stage(c.retry ? "Fixing the code and running it again" : "Running the code");
+        else if (c.status === "done" || c.status === "error") { M.compute = c; stage(c.status === "done" ? "Computed. Writing the answer" : "Working it out"); }
+        else if (c.status === "failed") M.computeNote = c.message;
+      }
+      if (ev.research) {
+        const r = ev.research;
+        M.research = M.research || {};
+        if (r.status === "planning") stage("Planning the research");
+        else if (r.status === "searching") stage(r.done ? `Searching the web · ${r.done} of ${(r.searches || []).length} · ${r.found || 0} pages found` : "Searching the web");
+        else if (r.status === "reading") stage(r.of ? `Reading ${r.n} of ${r.of}${r.site ? " · " + r.site : ""}` : "Reading the pages");
+        else if (r.status === "writing") { M.research.sources = r.sources || []; stage(`Writing your report from ${(r.sources || []).length} sources`); }
+        else if (r.status === "done") { M.research.sources = r.sources || M.research.sources || []; M.research.took = r.took; }
+      }
+    }
+    function finish(row, M, text, o) {
+      if (o && o.v6 && o.v6.voice) { M.voice = true; voiceEnd(text); }
+      if (M && Object.keys(M).length) cards(row, M, text);
+      decorate(row, true);
+    }
+
+    // ---------------------------------------------------------------- reply cards
+    const STRIP_TAGS = /\[(excited|happy|warm|curious|calm|serious|pause)\]\s?/gi;
+    function stripTags(t) { return String(t || "").replace(STRIP_TAGS, ""); }
+    function card(icon, title, sub, body, cls) {
+      const c = document.createElement("div");
+      c.className = "v6-card" + (cls ? " " + cls : "");
+      c.innerHTML = `<div class="v6-card-h" role="button" tabindex="0"><span class="ci">${icon}</span><span class="ct"><b>${title}</b><small>${sub}</small></span>${I6.chev}</div><div class="v6-card-b"></div>`;
+      if (typeof body === "string") c.querySelector(".v6-card-b").innerHTML = body; else if (body) c.querySelector(".v6-card-b").appendChild(body);
+      const h = c.querySelector(".v6-card-h");
+      h.addEventListener("click", () => c.classList.toggle("open"));
+      h.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); c.classList.toggle("open"); } });
+      return c;
+    }
+    function download(name, data, type) {
+      const a = document.createElement("a");
+      a.href = data.startsWith && data.startsWith("data:") ? data : URL.createObjectURL(new Blob([data], { type: type || "text/plain" }));
+      a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      if (!a.href.startsWith("data:")) setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    }
+    function cards(row, M, text) {
+      if (row.querySelector(":scope > .v6-cards")) return;
+      const box = document.createElement("div");
+      box.className = "v6-cards";
+      const chips = document.createElement("div"); chips.className = "v6-row";
+      if (M.instant) chips.insertAdjacentHTML("beforeend", `<span class="v6-chip inst">${I6.bolt}Instant answer</span>`);
+      if (M.kb && M.kb.length) {
+        chips.insertAdjacentHTML("beforeend", `<span class="v6-chip">${I6.book}<span>From the SCODE Library</span></span>`);
+        M.kb.forEach(s => {
+          const inner = `<span>${esc(s.source || "Library")}</span><b>${esc(s.title)}</b>`;
+          chips.insertAdjacentHTML("beforeend", s.url && /^https?:\/\//.test(s.url) ? `<a class="v6-chip" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${inner}</a>` : `<span class="v6-chip">${inner}</span>`);
+        });
+      }
+      if (M.space) chips.insertAdjacentHTML("beforeend", `<span class="v6-chip">${I6.space}<span>Space</span><b>${esc(M.space.name)}</b></span>` +
+        (M.space.notes && M.space.notes.length ? `<span class="v6-chip">${I6.book}<span>Notes</span><b>${esc(M.space.notes.join(", "))}</b></span>` : ""));
+      if (M.voice) {
+        const b = document.createElement("button"); b.type = "button"; b.className = "v6-chip"; b.style.cursor = "pointer";
+        b.innerHTML = `${I6.speaker}<b>Listen</b>`;
+        b.addEventListener("click", () => speakAll(text));
+        chips.appendChild(b);
+      }
+      if (chips.children.length) box.appendChild(chips);
+      if (M.compute) {
+        const c = M.compute, okc = c.status === "done";
+        const body = `<div class="lbl">Code</div><pre data-v4="1">${esc(c.code || "")}</pre><div class="lbl">${okc ? "Result" : "What happened"}</div><pre data-v4="1" class="out">${esc(okc ? (c.output || "(nothing printed)") : (c.error || "It didn't run."))}</pre><div class="v6-btns"><button type="button" class="v6-btn" data-cc="1">${V4_ICONS.copy}Copy code</button></div>`;
+        box.addEventListener("click", (e) => { if (e.target.closest("[data-cc]")) { navigator.clipboard && navigator.clipboard.writeText(c.code || ""); v4Toast("<b>Code copied</b>"); } });
+        box.appendChild(card(I6.compute, okc ? "Computed ✓" : "Couldn't compute this one",
+          okc ? `SCODE ran real code${c.ms ? ` in ${(c.ms / 1000).toFixed(c.ms < 1000 ? 2 : 1)} s` : ""} · tap to see the code` : esc(c.error || "the code didn't run") + " · answered without it", body, okc ? "" : "err"));
+        if (okc && c.images && c.images.length) {
+          const g = document.createElement("div"); g.className = "v6-graphs";
+          c.images.forEach((b64, i) => {
+            const f = document.createElement("figure");
+            f.innerHTML = `<img alt="Graph made by SCODE Compute" src="data:image/png;base64,${b64}"><a href="data:image/png;base64,${b64}" download="scode-graph-${i + 1}.png">${V4_ICONS.down}Save</a>`;
+            g.appendChild(f);
+          });
+          box.appendChild(g);
+        }
+      }
+      if (M.computeNote) box.appendChild(buildSearchNote(M.computeNote));
+      if (M.research && M.research.sources && M.research.sources.length) {
+        const src = M.research.sources;
+        const list = `<ul class="v6-srcs">${src.map(s => `<li><i>${s.n}</i><span>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a>` : esc(s.title)} <small>· ${esc(s.domain || "")}</small></span></li>`).join("")}</ul>`;
+        const c = card(I6.research, "SCODE Research report", `${src.length} sources${M.research.took ? ` · ${Math.max(1, Math.round(M.research.took / 60))} min` : ""} · tap for sources`,
+          `<div class="v6-btns" style="margin-bottom:12px"><button type="button" class="v6-btn primary" data-r="doc">${V4_ICONS.down}Download for Word</button><button type="button" class="v6-btn" data-r="md">${V4_ICONS.down}Markdown</button><button type="button" class="v6-btn" data-r="copy">${V4_ICONS.copy}Copy report</button></div>` + list);
+        c.classList.add("open");
+        c.querySelector(".v6-card-b").addEventListener("click", (e) => {
+          const b = e.target.closest("[data-r]"); if (!b) return;
+          const title = (/^#\s+(.+)$/m.exec(text) || [, "SCODE Research report"])[1].trim();
+          const safe = title.replace(/[^\w\s-]+/g, "").trim().replace(/\s+/g, "-").slice(0, 60) || "scode-research";
+          const body = text.split(/\n#{1,3}\s*Sources\s*\n/)[0].trim();
+          const mdRefs = "\n\n## Sources\n" + src.map(x => `${x.n}. ${x.url ? `[${x.title}](${x.url})` : x.title} · ${x.domain || ""}`).join("\n");
+          if (b.dataset.r === "copy") { navigator.clipboard && navigator.clipboard.writeText(body + "\n\n## Sources\n" + src.map(x => `${x.n}. ${x.title} · ${x.url || x.domain}`).join("\n")); v4Toast("<b>Report copied</b>"); }
+          if (b.dataset.r === "md") download(safe + ".md", body + mdRefs + "\n", "text/markdown");
+          if (b.dataset.r === "doc") {
+            const refs = `<h2>Sources</h2><ol>${src.map(x => `<li>${x.url ? `<a href="${esc(x.url)}">${esc(x.title)}</a>` : esc(x.title)} · ${esc(x.domain || "")}</li>`).join("")}</ol>`;
+            const html = `<html><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:1.5;max-width:720px}h1{font-size:20pt}h2{font-size:14pt;margin-top:18pt}a{color:#5b3fd6}</style></head><body>${renderMarkdown(body)}${refs}<p style="color:#888;font-size:9pt;margin-top:24pt">Made with SCODE Research · SCODE AI</p></body></html>`;
+            download(safe + ".doc", html, "application/msword");
+          }
+        });
+        box.appendChild(c);
+      }
+      if (!box.children.length) return;
+      const actions = row.querySelector(":scope > .msg-actions");
+      if (actions) row.insertBefore(box, actions); else row.appendChild(box);
+    }
+    // Saved messages: buildMessageRow marks the row; draw the cards and widgets here.
+    function scanRows() {
+      el.messages.querySelectorAll(".msg.assistant").forEach(row => {
+        if (row._v6 && !row._v6done) { row._v6done = true; try { cards(row, row._v6.meta, row._v6.text); } catch (e) { console.warn(e); } }
+      });
+      if (!sending) decorate(el.messages, false);
+    }
+    let scanQ = 0;
+    new MutationObserver(() => { if (!scanQ) scanQ = setTimeout(() => { scanQ = 0; scanRows(); }, 120); })
+      .observe(el.messages, { childList: true, subtree: true });
+
+    // ---------------------------------------------------------------- Live Answers: widgets from ```scode blocks
+    function decorate(root, force) {
+      if (!root) return;
+      if (sending && !force) return;
+      root.querySelectorAll('pre[data-lang="scode"]:not([data-v6w]), pre[data-lang="SCODE"]:not([data-v6w])').forEach(pre => {
+        pre.dataset.v6w = "1";
+        const code = pre.textContent;
+        let w = null;
+        try { w = makeWidget(code); } catch (e) { console.warn("SCODE widget", e); }
+        if (!w) return;
+        const bar = pre.previousElementSibling && pre.previousElementSibling.classList.contains("v4-cb") ? pre.previousElementSibling : null;
+        if (bar) bar.style.display = "none";
+        pre.style.display = "none";
+        pre.parentNode.insertBefore(w, pre.nextSibling);
+      });
+    }
+    function parseBlock(src) {
+      src = String(src || "").replace(/\r/g, "").trim();
+      if (/^\{[\s\S]*\}$/.test(src)) { try { const j = JSON.parse(src); if (j && typeof j === "object") return { json: j, lines: [] }; } catch (e) {} }
+      const lines = src.split("\n").map(s => s.trim()).filter(Boolean);
+      return { json: null, lines };
+    }
+    function kv(line) { const m = /^([A-Za-z][A-Za-z ()]{0,24}?)\s*:\s*(.*)$/.exec(line); return m ? [m[1].toLowerCase().trim(), m[2].trim()] : [null, line]; }
+    function makeWidget(src) {
+      const b = parseBlock(src);
+      if (b.json) {
+        const j = b.json, t = String(j.type || j.widget || "").toLowerCase();
+        if (t === "graph") return graphWidget([].concat(j.functions || j.fns || j.graph || j.y || []), j.x, j.y_range || j.yrange);
+        if (t === "molecule") return molWidget(String(j.name || j.molecule || ""));
+        if (t === "element") return elementWidget(String(j.symbol || j.element || j.name || ""));
+        if (t === "timeline") return timelineWidget(String(j.title || "Timeline"), (j.events || []).map(e => [String(e.date || e.year || ""), String(e.text || e.event || "")]));
+        if (t === "sim" || t === "simulation") return simWidget(String(j.sim || j.name || ""), j);
+        return null;
+      }
+      const L = b.lines;
+      if (!L.length) return null;
+      const [k0, v0] = kv(L[0]);
+      if (k0 === "timeline") {
+        const ev = L.slice(1).map(l => { const m = /^(.{1,30}?)\s*(?::|–|—|-)\s+(.+)$/.exec(l); return m ? [m[1].trim(), m[2].trim()] : null; }).filter(Boolean);
+        return ev.length ? timelineWidget(v0 || "Timeline", ev) : null;
+      }
+      const opts = {};
+      const fns = [];
+      L.forEach(l => {
+        const [k, v] = kv(l);
+        if (k === "graph" || k === "plot" || k === "function") fns.push(v);
+        else if (k === "y" || k === "f(x)") fns.push("y = " + v);
+        else if (k) opts[k] = v;
+        else if (/^(y|f\s*\(\s*x\s*\))\s*=/.test(l)) fns.push(l);
+      });
+      if (k0 === "molecule" || k0 === "mol" || k0 === "compound") return molWidget(v0);
+      if (k0 === "element") return elementWidget(v0);
+      if (k0 === "sim" || k0 === "simulation") return simWidget(v0, opts);
+      if (fns.length) return graphWidget(fns, opts.x, opts.y);
+      return null;
+    }
+    function widgetShell(icon, title, sub) {
+      const w = document.createElement("div");
+      w.className = "v6w";
+      w.innerHTML = `<div class="v6w-h"><span class="wi">${icon}</span><span class="wt">${esc(title)}${sub ? `<small>${esc(sub)}</small>` : ""}</span>` +
+        `<button type="button" data-w="save" title="Save as a picture" aria-label="Save">${V4_ICONS.down}</button>` +
+        `<button type="button" data-w="share" title="Share" aria-label="Share">${I6.share}</button>` +
+        `<button type="button" data-w="full" title="Full screen" aria-label="Full screen">${I6.full}</button></div><div class="v6w-body"></div>`;
+      const body = w.querySelector(".v6w-body");
+      w._snap = null;      // () => data URL of a picture of the widget
+      w._text = title;
+      w.querySelector(".v6w-h").addEventListener("click", async (e) => {
+        const b = e.target.closest("button"); if (!b) return;
+        const k = b.dataset.w;
+        if (k === "full") {
+          const full = !w.classList.contains("v6w-full");
+          w.classList.toggle("v6w-full", full);
+          document.body.classList.toggle("v6-fullscreen", full);
+          b.innerHTML = full ? I6.x : I6.full;
+          if (w._resize) setTimeout(w._resize, 30);
+        } else if (k === "save") {
+          const url = w._snap && w._snap();
+          if (url) download(("scode-" + title).replace(/[^\w-]+/g, "-").toLowerCase() + ".png", url);
+          else { navigator.clipboard && navigator.clipboard.writeText(w._text); v4Toast("<b>Copied</b> · this widget's facts are on your clipboard"); }
+        } else if (k === "share") {
+          const url = w._snap && w._snap();
+          try {
+            if (url && navigator.canShare) {
+              const blob = await (await fetch(url)).blob();
+              const file = new File([blob], "scode-widget.png", { type: "image/png" });
+              if (navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title, text: "Made with SCODE AI" }); return; }
+            }
+            if (navigator.share) { await navigator.share({ title, text: w._text + "\n\nMade with SCODE AI" }); return; }
+          } catch (err) { if (err && err.name === "AbortError") return; }
+          navigator.clipboard && navigator.clipboard.writeText(w._text + "\n\nMade with SCODE AI");
+          v4Toast("<b>Copied</b> · paste it anywhere to share");
+        }
+      });
+      return { w, body };
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const f = document.querySelector(".v6w.v6w-full");
+      if (f) { const b = f.querySelector('[data-w="full"]'); if (b) b.click(); }
+    });
+    function themeColors() {
+      const cs = getComputedStyle(document.body);
+      const g = (n, d) => (cs.getPropertyValue(n) || d).trim() || d;
+      return { text: g("--text", "#edece7"), muted: g("--muted", "#a6a49c"), border: g("--border", "#3a3a35"), surface: g("--surface", "#2b2b28"),
+               surface2: g("--surface-2", "#33332f"), accent: g("--accent", "#a993ff"), light: document.body.classList.contains("light") };
+    }
+    const PAL = ["#ff5fb0", "#8b6bff", "#3fc1ff", "#3ccf91", "#ffb347", "#ff6b6b"];
+    function hiDPI(canvas, onSize) {
+      const st = { w: 0, h: 0, dpr: 1 };
+      function fit() {
+        const r = canvas.getBoundingClientRect();
+        if (!r.width) return;
+        const dpr = Math.min(2.5, window.devicePixelRatio || 1);
+        if (Math.round(r.width * dpr) !== canvas.width || Math.round(r.height * dpr) !== canvas.height) {
+          canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
+        }
+        st.w = r.width; st.h = r.height; st.dpr = dpr;
+        onSize && onSize(st);
+      }
+      if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(fit)).observe(canvas);
+      requestAnimationFrame(fit);
+      st.fit = fit;
+      return st;
+    }
+    // Only animate while the widget can be seen.
+    function whenVisible(el2, cb) {
+      if (!window.IntersectionObserver) { cb(true); return; }
+      new IntersectionObserver((ents) => ents.forEach(e => cb(e.isIntersecting))).observe(el2);
+    }
+
+    // ---- math: a small, safe expression reader (no eval)
+    const FN = { sin: Math.sin, cos: Math.cos, tan: Math.tan, asin: Math.asin, acos: Math.acos, atan: Math.atan, arcsin: Math.asin, arccos: Math.acos,
+                 arctan: Math.atan, sinh: Math.sinh, cosh: Math.cosh, tanh: Math.tanh, sqrt: Math.sqrt, cbrt: Math.cbrt, abs: Math.abs,
+                 log: Math.log10, ln: Math.log, exp: Math.exp, floor: Math.floor, ceil: Math.ceil, round: Math.round, sign: Math.sign,
+                 sec: (x) => 1 / Math.cos(x), csc: (x) => 1 / Math.sin(x), cot: (x) => 1 / Math.tan(x) };
+    const CONST = { pi: Math.PI, "π": Math.PI, e: Math.E, tau: 2 * Math.PI };
+    const NAMES = Object.keys(FN).concat(Object.keys(CONST)).sort((a, b) => b.length - a.length);
+    function compileExpr(src) {
+      let s = String(src).replace(/^\s*(y|f\s*\(\s*x\s*\))\s*=\s*/i, "").replace(/[−–]/g, "-").replace(/[×·]/g, "*").replace(/÷/g, "/")
+        .replace(/²/g, "^2").replace(/³/g, "^3").replace(/√/g, "sqrt").replace(/\*\*/g, "^").trim();
+      const toks = [];
+      for (let i = 0; i < s.length;) {
+        const c = s[i];
+        if (/\s/.test(c)) { i++; continue; }
+        const num = /^(\d+\.?\d*|\.\d+)(e[+-]?\d+)?/i.exec(s.slice(i));
+        if (num) { toks.push({ t: "n", v: parseFloat(num[0]) }); i += num[0].length; continue; }
+        if (/[a-zπ]/i.test(c)) {
+          const rest = s.slice(i).toLowerCase();
+          const nm = NAMES.find(n => rest.startsWith(n));
+          if (nm) { toks.push(FN[nm] ? { t: "f", v: nm } : { t: "n", v: CONST[nm] }); i += nm.length; continue; }
+          if (rest[0] === "x") { toks.push({ t: "x" }); i++; continue; }
+          throw new Error("unknown name");
+        }
+        if ("+-*/^(),|".includes(c)) { toks.push({ t: c }); i++; continue; }
+        if (c === "[" || c === "{") { toks.push({ t: "(" }); i++; continue; }
+        if (c === "]" || c === "}") { toks.push({ t: ")" }); i++; continue; }
+        throw new Error("bad character");
+      }
+      let p = 0;
+      const peek = () => toks[p], take = () => toks[p++];
+      const startsAtom = (k) => k && (k.t === "n" || k.t === "x" || k.t === "f" || k.t === "(");
+      function expr() { let a = term(); while (peek() && (peek().t === "+" || peek().t === "-")) { const op = take().t, b = term(), l = a; a = op === "+" ? (x) => l(x) + b(x) : (x) => l(x) - b(x); } return a; }
+      function term() {
+        let a = unary();
+        while (peek() && (peek().t === "*" || peek().t === "/" || startsAtom(peek()))) {
+          let op = "*"; if (peek().t === "*" || peek().t === "/") op = take().t;
+          const b = unary(), l = a; a = op === "*" ? (x) => l(x) * b(x) : (x) => l(x) / b(x);
+        }
+        return a;
+      }
+      function unary() { if (peek() && peek().t === "-") { take(); const a = unary(); return (x) => -a(x); } if (peek() && peek().t === "+") { take(); return unary(); } return power(); }
+      function power() { const a = atom(); if (peek() && peek().t === "^") { take(); const b = unary(); return (x) => Math.pow(a(x), b(x)); } return a; }
+      function atom() {
+        const k = take();
+        if (!k) throw new Error("ended early");
+        if (k.t === "n") { const v = k.v; return () => v; }
+        if (k.t === "x") return (x) => x;
+        if (k.t === "(") { const a = expr(); if (!peek() || take().t !== ")") throw new Error("missing )"); return a; }
+        if (k.t === "|") { const a = expr(); if (!peek() || take().t !== "|") throw new Error("missing |"); return (x) => Math.abs(a(x)); }
+        if (k.t === "f") {
+          const f = FN[k.v];
+          let pw = null;
+          if (peek() && peek().t === "^") { take(); const e = atom(); pw = e; }   // sin^2 x
+          const arg = (peek() && peek().t === "(") ? atom() : power();
+          return pw ? (x) => Math.pow(f(arg(x)), pw(x)) : (x) => f(arg(x));
+        }
+        throw new Error("unexpected " + k.t);
+      }
+      const fn = expr();
+      if (p < toks.length) throw new Error("extra text");
+      return fn;
+    }
+    function rangeOf(s, d) {
+      const m = /(-?\d*\.?\d+)\s*(?:to|\.\.|,|…|–|—)\s*(-?\d*\.?\d+)/.exec(String(s || ""));
+      if (!m) return d;
+      const a = parseFloat(m[1]), b = parseFloat(m[2]);
+      return isFinite(a) && isFinite(b) && b > a ? [a, b] : d;
+    }
+    function niceStep(span, px) { const raw = span / Math.max(2, px / 70); const p10 = Math.pow(10, Math.floor(Math.log10(raw))); const m = raw / p10; return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p10; }
+    function fmt(v) { const a = Math.abs(v); if (a !== 0 && (a < 1e-3 || a >= 1e5)) return v.toExponential(1); return String(+v.toFixed(4)); }
+
+    function graphWidget(list, xs, ys) {
+      const fns = [];
+      list.slice(0, 6).forEach((raw, i) => {
+        const label = String(raw).replace(/^\s*(f\s*\(\s*x\s*\)|y)\s*=\s*/i, "").trim();
+        try { const f = compileExpr(label); fns.push({ f, label: "y = " + label, color: PAL[i % PAL.length] }); } catch (e) { /* skip lines that aren't math */ }
+      });
+      if (!fns.length) return null;
+      const { w, body } = widgetShell(I6.graph, "Graph", fns.length > 1 ? `${fns.length} functions` : fns[0].label);
+      w._text = fns.map(f => f.label).join("\n");
+      body.innerHTML = `<canvas class="v6c" aria-label="Interactive graph"></canvas><div class="v6w-tip"></div><div class="v6w-zoom"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="reset" aria-label="Reset view" style="font-size:13px">⟲</button></div>`;
+      const leg = document.createElement("div"); leg.className = "v6w-legend";
+      leg.innerHTML = fns.map(f => `<span><i style="background:${f.color}"></i>${esc(f.label)}</span>`).join("");
+      body.appendChild(leg);
+      const cv = body.querySelector("canvas"), tip = body.querySelector(".v6w-tip");
+      const x0 = rangeOf(xs, [-10, 10]);
+      let view = null;
+      function autoY(xr) {
+        const r = rangeOf(ys, null);
+        if (r) return r;
+        let lo = Infinity, hi = -Infinity;
+        for (let i = 0; i <= 200; i++) { const x = xr[0] + (xr[1] - xr[0]) * i / 200; fns.forEach(fn => { const y = fn.f(x); if (isFinite(y) && Math.abs(y) < 1e6) { lo = Math.min(lo, y); hi = Math.max(hi, y); } }); }
+        if (!isFinite(lo)) return [-10, 10];
+        if (hi - lo < 1e-9) { lo -= 1; hi += 1; }
+        const pad = (hi - lo) * 0.12;
+        lo -= pad; hi += pad;
+        if (lo > 0 && lo < (hi - lo) * 0.6) lo = -(hi - lo) * 0.08;
+        if (hi < 0 && -hi < (hi - lo) * 0.6) hi = (hi - lo) * 0.08;
+        return [lo, hi];
+      }
+      function reset() { view = { x: x0.slice(), y: autoY(x0) }; }
+      reset();
+      let hover = null;
+      const sz = hiDPI(cv, draw);
+      w._resize = () => sz.fit();
+      function X(x) { return (x - view.x[0]) / (view.x[1] - view.x[0]) * sz.w; }
+      function Y(y) { return sz.h - (y - view.y[0]) / (view.y[1] - view.y[0]) * sz.h; }
+      function draw() {
+        if (!sz.w) return;
+        const c = cv.getContext("2d"), T = themeColors();
+        c.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        c.fillStyle = T.surface; c.fillRect(0, 0, sz.w, sz.h);
+        const sx = niceStep(view.x[1] - view.x[0], sz.w), sy = niceStep(view.y[1] - view.y[0], sz.h);
+        c.lineWidth = 1; c.font = "11px " + getComputedStyle(document.body).getPropertyValue("--mono");
+        c.strokeStyle = T.border; c.fillStyle = T.muted;
+        c.beginPath();
+        for (let x = Math.ceil(view.x[0] / sx) * sx; x <= view.x[1]; x += sx) { const px = Math.round(X(x)) + 0.5; c.moveTo(px, 0); c.lineTo(px, sz.h); }
+        for (let y = Math.ceil(view.y[0] / sy) * sy; y <= view.y[1]; y += sy) { const py = Math.round(Y(y)) + 0.5; c.moveTo(0, py); c.lineTo(sz.w, py); }
+        c.globalAlpha = 0.55; c.stroke(); c.globalAlpha = 1;
+        // axes
+        c.strokeStyle = T.muted; c.lineWidth = 1.4; c.beginPath();
+        const ax = Math.min(Math.max(Y(0), 0), sz.h), ay = Math.min(Math.max(X(0), 0), sz.w);
+        c.moveTo(0, ax); c.lineTo(sz.w, ax); c.moveTo(ay, 0); c.lineTo(ay, sz.h); c.stroke();
+        c.textAlign = "center"; c.textBaseline = "top";
+        for (let x = Math.ceil(view.x[0] / sx) * sx; x <= view.x[1]; x += sx) { if (Math.abs(x) < sx / 2) continue; c.fillText(fmt(x), X(x), Math.min(ax + 4, sz.h - 14)); }
+        c.textAlign = "left"; c.textBaseline = "middle";
+        for (let y = Math.ceil(view.y[0] / sy) * sy; y <= view.y[1]; y += sy) { if (Math.abs(y) < sy / 2) continue; c.fillText(fmt(y), Math.min(ay + 5, sz.w - 34), Y(y)); }
+        // functions
+        const N = Math.max(200, Math.round(sz.w * 1.5)), span = view.y[1] - view.y[0];
+        fns.forEach(fn => {
+          c.strokeStyle = fn.color; c.lineWidth = 2.4; c.lineJoin = "round"; c.beginPath();
+          let pen = false, prev = null;
+          for (let i = 0; i <= N; i++) {
+            const x = view.x[0] + (view.x[1] - view.x[0]) * i / N;
+            let y; try { y = fn.f(x); } catch (e) { y = NaN; }
+            if (!isFinite(y) || (prev !== null && Math.abs(y - prev) > span * 3)) { pen = false; prev = isFinite(y) ? y : null; continue; }
+            const px = X(x), py = Math.max(-5000, Math.min(5000, Y(y)));
+            if (pen) c.lineTo(px, py); else { c.moveTo(px, py); pen = true; }
+            prev = y;
+          }
+          c.stroke();
+        });
+        if (hover) {
+          const x = view.x[0] + hover / sz.w * (view.x[1] - view.x[0]);
+          c.strokeStyle = T.muted; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(hover, 0); c.lineTo(hover, sz.h); c.stroke(); c.setLineDash([]);
+          const parts = [`x = ${fmt(x)}`];
+          fns.forEach(fn => { const y = fn.f(x); if (isFinite(y)) { c.fillStyle = fn.color; c.beginPath(); c.arc(hover, Y(y), 4.5, 0, 7); c.fill(); parts.push(`<span style="color:${fn.color}">y = ${fmt(y)}</span>`); } });
+          tip.innerHTML = parts.join("  ·  "); tip.classList.add("on");
+        } else tip.classList.remove("on");
+      }
+      w._snap = () => cv.toDataURL("image/png");
+      // pan, zoom, trace
+      const ptrs = new Map();
+      let last = null, pinch = null;
+      cv.addEventListener("pointerdown", (e) => { cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, [e.offsetX, e.offsetY]); last = [e.offsetX, e.offsetY]; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a[0] - b[0], a[1] - b[1]); } });
+      cv.addEventListener("pointermove", (e) => {
+        if (!ptrs.has(e.pointerId)) { if (e.pointerType === "mouse") { hover = e.offsetX; draw(); } return; }
+        ptrs.set(e.pointerId, [e.offsetX, e.offsetY]);
+        if (ptrs.size === 2) {
+          const [a, b] = [...ptrs.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+          if (pinch) zoomAt((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, pinch / d);
+          pinch = d; return;
+        }
+        if (last) {
+          const dx = (e.offsetX - last[0]) / sz.w * (view.x[1] - view.x[0]), dy = (e.offsetY - last[1]) / sz.h * (view.y[1] - view.y[0]);
+          view.x = [view.x[0] - dx, view.x[1] - dx]; view.y = [view.y[0] + dy, view.y[1] + dy];
+          last = [e.offsetX, e.offsetY];
+          hover = e.pointerType === "mouse" ? null : e.offsetX;
+          draw();
+        }
+      });
+      const up = (e) => { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null; if (!ptrs.size) { last = null; if (e.pointerType !== "mouse") { hover = null; draw(); } } };
+      cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+      cv.addEventListener("pointerleave", () => { if (!ptrs.size) { hover = null; draw(); } });
+      cv.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(e.offsetX, e.offsetY, Math.exp(e.deltaY * 0.0015)); }, { passive: false });
+      function zoomAt(px, py, k) {
+        k = Math.max(0.2, Math.min(5, k));
+        const cx = view.x[0] + px / sz.w * (view.x[1] - view.x[0]), cy = view.y[0] + (1 - py / sz.h) * (view.y[1] - view.y[0]);
+        view.x = [cx + (view.x[0] - cx) * k, cx + (view.x[1] - cx) * k];
+        view.y = [cy + (view.y[0] - cy) * k, cy + (view.y[1] - cy) * k];
+        draw();
+      }
+      body.querySelector(".v6w-zoom").addEventListener("click", (e) => {
+        const z = e.target.closest("button"); if (!z) return;
+        if (z.dataset.z === "reset") reset(); else zoomAt(sz.w / 2, sz.h / 2, z.dataset.z === "in" ? 0.7 : 1.45);
+        draw();
+      });
+      new MutationObserver(draw).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+      return w;
+    }
+
+    // ---- 3D molecules (3Dmol.js + PubChem)
+    const scripts = {};
+    function loadScript(src) {
+      if (!scripts[src]) scripts[src] = new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.async = true; s.onload = res; s.onerror = () => { delete scripts[src]; rej(new Error("load")); }; document.head.appendChild(s); });
+      return scripts[src];
+    }
+    const MOL_LIB = "https://cdn.jsdelivr.net/npm/3dmol@2.5.3/build/3Dmol-min.js";
+    const PUBCHEM = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/";
+    function molWidget(name) {
+      name = String(name || "").replace(/[`*_]/g, "").trim().slice(0, 80);
+      if (!name) return null;
+      const { w, body } = widgetShell(I6.atom, "Molecule", name);
+      w._text = name;
+      body.innerHTML = `<div class="v6w-mol"><div class="v6w-msg">Loading the 3D model of ${esc(name)}…</div></div><div class="v6w-read"><span>Drag to spin · pinch or scroll to zoom</span></div>` +
+        `<div class="v6w-ctrl"><label>Style<select data-m="style"><option value="ball">Ball and stick</option><option value="space">Space filling</option><option value="stick">Sticks</option></select></label><label>Spin<select data-m="spin"><option value="on">On</option><option value="off">Off</option></select></label></div>`;
+      const box = body.querySelector(".v6w-mol"), read = body.querySelector(".v6w-read");
+      let viewer = null;
+      const style = (k) => k === "space" ? { sphere: { scale: 0.9 } } : k === "stick" ? { stick: { radius: 0.2 } } : { stick: { radius: 0.14 }, sphere: { scale: 0.27 } };
+      (async () => {
+        try {
+          await loadScript(MOL_LIB);
+          let sdf = null, flat = false;
+          let r = await fetch(PUBCHEM + encodeURIComponent(name) + "/SDF?record_type=3d");
+          if (!r.ok) { r = await fetch(PUBCHEM + encodeURIComponent(name) + "/SDF?record_type=2d"); flat = true; }
+          if (!r.ok) throw new Error("nf");
+          sdf = await r.text();
+          box.innerHTML = "";
+          viewer = window.$3Dmol.createViewer(box, { backgroundColor: themeColors().light ? "#f6f6fa" : "#0f1016", antialias: true });
+          viewer.addModel(sdf, "sdf");
+          viewer.setStyle({}, style("ball"));
+          viewer.zoomTo(); viewer.render(); viewer.spin("y", 0.6);
+          w._resize = () => { viewer.resize(); viewer.render(); };
+          w._snap = () => viewer.pngURI();
+          if (flat) read.insertAdjacentHTML("beforeend", "<span>· flat (2D) model: PubChem has no 3D shape for this one</span>");
+          try {
+            const p = await (await fetch(PUBCHEM + encodeURIComponent(name) + "/property/MolecularFormula,MolecularWeight,IUPACName/JSON")).json();
+            const x = p.PropertyTable.Properties[0];
+            read.innerHTML = `<span>Formula <b>${esc(x.MolecularFormula)}</b></span><span>Molar mass <b>${esc((+x.MolecularWeight).toFixed(2))} g/mol</b></span>` +
+              (x.IUPACName && x.IUPACName.length < 60 ? `<span>IUPAC <b>${esc(x.IUPACName)}</b></span>` : "") + `<span>3D data: PubChem</span>`;
+            w._text = `${name}: ${x.MolecularFormula}, ${(+x.MolecularWeight).toFixed(2)} g/mol`;
+          } catch (e) {}
+        } catch (e) {
+          box.innerHTML = `<div class="v6w-msg"><span>Couldn't load a 3D model of “${esc(name)}”. <a href="https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(name)}" target="_blank" rel="noopener">Look it up on PubChem</a></span></div>`;
+        }
+      })();
+      body.querySelector(".v6w-ctrl").addEventListener("change", (e) => {
+        if (!viewer) return;
+        const s = e.target;
+        if (s.dataset.m === "style") { viewer.setStyle({}, style(s.value)); viewer.render(); }
+        if (s.dataset.m === "spin") viewer.spin(s.value === "on" ? "y" : false, 0.6);
+      });
+      return w;
+    }
+
+    // ---- periodic table cards
+    const EL_RAW = "H,Hydrogen,1.008,n,2.20,1s1|He,Helium,4.0026,g,,1s2|Li,Lithium,6.94,a,0.98,[He] 2s1|Be,Beryllium,9.0122,e,1.57,[He] 2s2|B,Boron,10.81,m,2.04,[He] 2s2 2p1|C,Carbon,12.011,n,2.55,[He] 2s2 2p2|N,Nitrogen,14.007,n,3.04,[He] 2s2 2p3|O,Oxygen,15.999,n,3.44,[He] 2s2 2p4|F,Fluorine,18.998,h,3.98,[He] 2s2 2p5|Ne,Neon,20.180,g,,[He] 2s2 2p6|" +
+      "Na,Sodium,22.990,a,0.93,[Ne] 3s1|Mg,Magnesium,24.305,e,1.31,[Ne] 3s2|Al,Aluminum,26.982,p,1.61,[Ne] 3s2 3p1|Si,Silicon,28.085,m,1.90,[Ne] 3s2 3p2|P,Phosphorus,30.974,n,2.19,[Ne] 3s2 3p3|S,Sulfur,32.06,n,2.58,[Ne] 3s2 3p4|Cl,Chlorine,35.45,h,3.16,[Ne] 3s2 3p5|Ar,Argon,39.948,g,,[Ne] 3s2 3p6|" +
+      "K,Potassium,39.098,a,0.82,[Ar] 4s1|Ca,Calcium,40.078,e,1.00,[Ar] 4s2|Sc,Scandium,44.956,t,1.36,[Ar] 3d1 4s2|Ti,Titanium,47.867,t,1.54,[Ar] 3d2 4s2|V,Vanadium,50.942,t,1.63,[Ar] 3d3 4s2|Cr,Chromium,51.996,t,1.66,[Ar] 3d5 4s1|Mn,Manganese,54.938,t,1.55,[Ar] 3d5 4s2|Fe,Iron,55.845,t,1.83,[Ar] 3d6 4s2|Co,Cobalt,58.933,t,1.88,[Ar] 3d7 4s2|Ni,Nickel,58.693,t,1.91,[Ar] 3d8 4s2|Cu,Copper,63.546,t,1.90,[Ar] 3d10 4s1|Zn,Zinc,65.38,t,1.65,[Ar] 3d10 4s2|" +
+      "Ga,Gallium,69.723,p,1.81,[Ar] 3d10 4s2 4p1|Ge,Germanium,72.630,m,2.01,[Ar] 3d10 4s2 4p2|As,Arsenic,74.922,m,2.18,[Ar] 3d10 4s2 4p3|Se,Selenium,78.971,n,2.55,[Ar] 3d10 4s2 4p4|Br,Bromine,79.904,h,2.96,[Ar] 3d10 4s2 4p5|Kr,Krypton,83.798,g,3.00,[Ar] 3d10 4s2 4p6|" +
+      "Rb,Rubidium,85.468,a,0.82,[Kr] 5s1|Sr,Strontium,87.62,e,0.95,[Kr] 5s2|Y,Yttrium,88.906,t,1.22,[Kr] 4d1 5s2|Zr,Zirconium,91.224,t,1.33,[Kr] 4d2 5s2|Nb,Niobium,92.906,t,1.6,[Kr] 4d4 5s1|Mo,Molybdenum,95.95,t,2.16,[Kr] 4d5 5s1|Tc,Technetium,(98),t,1.9,[Kr] 4d5 5s2|Ru,Ruthenium,101.07,t,2.2,[Kr] 4d7 5s1|Rh,Rhodium,102.91,t,2.28,[Kr] 4d8 5s1|Pd,Palladium,106.42,t,2.20,[Kr] 4d10|Ag,Silver,107.87,t,1.93,[Kr] 4d10 5s1|Cd,Cadmium,112.41,t,1.69,[Kr] 4d10 5s2|" +
+      "In,Indium,114.82,p,1.78,[Kr] 4d10 5s2 5p1|Sn,Tin,118.71,p,1.96,[Kr] 4d10 5s2 5p2|Sb,Antimony,121.76,m,2.05,[Kr] 4d10 5s2 5p3|Te,Tellurium,127.60,m,2.1,[Kr] 4d10 5s2 5p4|I,Iodine,126.90,h,2.66,[Kr] 4d10 5s2 5p5|Xe,Xenon,131.29,g,2.60,[Kr] 4d10 5s2 5p6|" +
+      "Cs,Cesium,132.91,a,0.79,[Xe] 6s1|Ba,Barium,137.33,e,0.89,[Xe] 6s2|La,Lanthanum,138.91,l,1.10,[Xe] 5d1 6s2|Ce,Cerium,140.12,l,1.12,[Xe] 4f1 5d1 6s2|Pr,Praseodymium,140.91,l,1.13,[Xe] 4f3 6s2|Nd,Neodymium,144.24,l,1.14,[Xe] 4f4 6s2|Pm,Promethium,(145),l,1.13,[Xe] 4f5 6s2|Sm,Samarium,150.36,l,1.17,[Xe] 4f6 6s2|Eu,Europium,151.96,l,1.2,[Xe] 4f7 6s2|Gd,Gadolinium,157.25,l,1.20,[Xe] 4f7 5d1 6s2|Tb,Terbium,158.93,l,1.1,[Xe] 4f9 6s2|Dy,Dysprosium,162.50,l,1.22,[Xe] 4f10 6s2|Ho,Holmium,164.93,l,1.23,[Xe] 4f11 6s2|Er,Erbium,167.26,l,1.24,[Xe] 4f12 6s2|Tm,Thulium,168.93,l,1.25,[Xe] 4f13 6s2|Yb,Ytterbium,173.05,l,1.1,[Xe] 4f14 6s2|Lu,Lutetium,174.97,l,1.27,[Xe] 4f14 5d1 6s2|" +
+      "Hf,Hafnium,178.49,t,1.3,[Xe] 4f14 5d2 6s2|Ta,Tantalum,180.95,t,1.5,[Xe] 4f14 5d3 6s2|W,Tungsten,183.84,t,2.36,[Xe] 4f14 5d4 6s2|Re,Rhenium,186.21,t,1.9,[Xe] 4f14 5d5 6s2|Os,Osmium,190.23,t,2.2,[Xe] 4f14 5d6 6s2|Ir,Iridium,192.22,t,2.20,[Xe] 4f14 5d7 6s2|Pt,Platinum,195.08,t,2.28,[Xe] 4f14 5d9 6s1|Au,Gold,196.97,t,2.54,[Xe] 4f14 5d10 6s1|Hg,Mercury,200.59,t,2.00,[Xe] 4f14 5d10 6s2|" +
+      "Tl,Thallium,204.38,p,1.62,[Xe] 4f14 5d10 6s2 6p1|Pb,Lead,207.2,p,2.33,[Xe] 4f14 5d10 6s2 6p2|Bi,Bismuth,208.98,p,2.02,[Xe] 4f14 5d10 6s2 6p3|Po,Polonium,(209),p,2.0,[Xe] 4f14 5d10 6s2 6p4|At,Astatine,(210),h,2.2,[Xe] 4f14 5d10 6s2 6p5|Rn,Radon,(222),g,2.2,[Xe] 4f14 5d10 6s2 6p6|" +
+      "Fr,Francium,(223),a,0.7,[Rn] 7s1|Ra,Radium,(226),e,0.9,[Rn] 7s2|Ac,Actinium,(227),c,1.1,[Rn] 6d1 7s2|Th,Thorium,232.04,c,1.3,[Rn] 6d2 7s2|Pa,Protactinium,231.04,c,1.5,[Rn] 5f2 6d1 7s2|U,Uranium,238.03,c,1.38,[Rn] 5f3 6d1 7s2|Np,Neptunium,(237),c,1.36,[Rn] 5f4 6d1 7s2|Pu,Plutonium,(244),c,1.28,[Rn] 5f6 7s2|Am,Americium,(243),c,1.13,[Rn] 5f7 7s2|Cm,Curium,(247),c,1.28,[Rn] 5f7 6d1 7s2|Bk,Berkelium,(247),c,1.3,[Rn] 5f9 7s2|Cf,Californium,(251),c,1.3,[Rn] 5f10 7s2|Es,Einsteinium,(252),c,1.3,[Rn] 5f11 7s2|Fm,Fermium,(257),c,1.3,[Rn] 5f12 7s2|Md,Mendelevium,(258),c,1.3,[Rn] 5f13 7s2|No,Nobelium,(259),c,1.3,[Rn] 5f14 7s2|Lr,Lawrencium,(266),c,1.3,[Rn] 5f14 7s2 7p1|" +
+      "Rf,Rutherfordium,(267),t,,[Rn] 5f14 6d2 7s2|Db,Dubnium,(268),t,,[Rn] 5f14 6d3 7s2|Sg,Seaborgium,(269),t,,[Rn] 5f14 6d4 7s2|Bh,Bohrium,(270),t,,[Rn] 5f14 6d5 7s2|Hs,Hassium,(277),t,,[Rn] 5f14 6d6 7s2|Mt,Meitnerium,(278),u,,[Rn] 5f14 6d7 7s2|Ds,Darmstadtium,(281),u,,[Rn] 5f14 6d8 7s2|Rg,Roentgenium,(282),u,,[Rn] 5f14 6d9 7s2|Cn,Copernicium,(285),t,,[Rn] 5f14 6d10 7s2|Nh,Nihonium,(286),u,,[Rn] 5f14 6d10 7s2 7p1|Fl,Flerovium,(289),u,,[Rn] 5f14 6d10 7s2 7p2|Mc,Moscovium,(290),u,,[Rn] 5f14 6d10 7s2 7p3|Lv,Livermorium,(293),u,,[Rn] 5f14 6d10 7s2 7p4|Ts,Tennessine,(294),u,,[Rn] 5f14 6d10 7s2 7p5|Og,Oganesson,(294),u,,[Rn] 5f14 6d10 7s2 7p6";
+    const CAT = { a: ["Alkali metal", "#ff6b6b"], e: ["Alkaline earth metal", "#ffb347"], t: ["Transition metal", "#8b6bff"], p: ["Post-transition metal", "#3fc1ff"],
+                  m: ["Metalloid", "#3ccf91"], n: ["Nonmetal", "#2ea6a6"], h: ["Halogen", "#ff5fb0"], g: ["Noble gas", "#5b7cff"], l: ["Lanthanide", "#c77dff"],
+                  c: ["Actinide", "#e46ea8"], u: ["Unknown properties", "#8d8a83"] };
+    const ELS = EL_RAW.split("|").map((r, i) => { const [s, n, m, c, en, cfg] = r.split(","); return { z: i + 1, s, n, m, c, en, cfg }; });
+    function elPos(z) {
+      const starts = [1, 3, 11, 19, 37, 55, 87], ends = [2, 10, 18, 36, 54, 86, 118];
+      const per = starts.findIndex((s, i) => z >= s && z <= ends[i]) + 1;
+      const i = z - starts[per - 1];
+      if (per === 1) return { per, g: z === 1 ? 1 : 18 };
+      if (per <= 3) return { per, g: i < 2 ? i + 1 : i + 10 };
+      if (per <= 5) return { per, g: i + 1 };
+      if (i < 2) return { per, g: i + 1 };
+      if (i <= 16) return { per, g: 3, f: true, col: i + 1 };   // La-Lu / Ac-Lr row
+      return { per, g: i - 13 };
+    }
+    function elementWidget(q) {
+      q = String(q || "").trim().replace(/[^\w\s]/g, "");
+      const ql = q.toLowerCase();
+      const e = ELS.find(x => x.s.toLowerCase() === ql) || ELS.find(x => x.n.toLowerCase() === ql || (ql === "aluminium" && x.s === "Al") || (ql === "caesium" && x.s === "Cs")) || (/^\d+$/.test(q) ? ELS[+q - 1] : null);
+      if (!e) return null;
+      const [catName, color] = CAT[e.c];
+      const pos = elPos(e.z);
+      const { w, body } = widgetShell(I6.atom, e.n, e.s + " · element " + e.z);
+      const facts = [["Atomic number", e.z], ["Atomic mass", e.m + " u"], ["Group", pos.f ? (e.c === "l" ? "Lanthanides" : "Actinides") : pos.g], ["Period", pos.per],
+                     ["Category", catName], ["Electronegativity", e.en || "—"], ["Electrons", e.cfg]];
+      w._text = `${e.n} (${e.s}), element ${e.z}\n` + facts.map(f => `${f[0]}: ${f[1]}`).join("\n");
+      body.innerHTML = `<div class="v6-el"><div class="tile" style="background:linear-gradient(140deg, ${color}, ${color}cc)"><span class="z">${e.z}</span><span class="s">${esc(e.s)}</span><span><span class="n">${esc(e.n)}</span><br><span class="m">${esc(e.m)}</span></span></div>` +
+        `<dl>${facts.map(f => `<dt>${f[0]}</dt><dd>${esc(f[1])}</dd>`).join("")}</dl></div>`;
+      // the mini periodic table with this element lit up
+      const cells = [];
+      for (let per = 1; per <= 7; per++) for (let g = 1; g <= 18; g++) {
+        const hit = ELS.find(x => { const p = elPos(x.z); return !p.f && p.per === per && p.g === g; });
+        const f = per >= 6 && g === 3;
+        cells.push(hit ? `<i title="${hit.n}" style="background:${CAT[hit.c][1]}" class="${hit.z === e.z ? "on" : ""}"></i>` : f ? `<i title="${per === 6 ? "Lanthanides" : "Actinides"}" style="background:${CAT[per === 6 ? "l" : "c"][1]}" class="${pos.f && pos.per === per ? "on" : ""}"></i>` : `<i class="e"></i>`);
+      }
+      cells.push(`<span class="gap"></span>`);
+      for (const per of [6, 7]) {
+        for (let g = 1; g <= 18; g++) {
+          const hit = ELS.find(x => { const p = elPos(x.z); return p.f && p.per === per && p.col === g; });
+          cells.push(hit ? `<i title="${hit.n}" style="background:${CAT[hit.c][1]}" class="${hit.z === e.z ? "on" : ""}"></i>` : `<i class="e"></i>`);
+        }
+      }
+      const pt = document.createElement("div"); pt.className = "v6-pt";
+      pt.innerHTML = `<div class="grid">${cells.join("")}</div><small>Where ${esc(e.n)} sits on the periodic table · ${esc(catName)}</small>`;
+      body.appendChild(pt);
+      w._snap = null;
+      return w;
+    }
+
+    // ---- timelines
+    function timelineWidget(title, events) {
+      if (!events.length) return null;
+      const { w, body } = widgetShell(I6.clock, "Timeline", title);
+      w._text = title + "\n" + events.map(e => `${e[0]}: ${e[1]}`).join("\n");
+      const ul = document.createElement("ul"); ul.className = "v6-tl";
+      ul.innerHTML = events.slice(0, 30).map((e, i) => `<li class="${i === 0 ? "on" : ""}"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></li>`).join("");
+      ul.addEventListener("click", (e) => { const li = e.target.closest("li"); if (!li) return; ul.querySelectorAll("li").forEach(x => x.classList.toggle("on", x === li)); });
+      body.appendChild(ul);
+      return w;
+    }
+
+    // ---- simulations (ready-made templates the model only picks and fills)
+    const GRAV = [["Earth", 9.81], ["Moon", 1.62], ["Mars", 3.71], ["Jupiter", 24.79]];
+    function num(v, d, lo, hi) { const n = parseFloat(v); return isFinite(n) ? Math.max(lo, Math.min(hi, n)) : d; }
+    function simWidget(kind, o) {
+      kind = String(kind || "").toLowerCase().replace(/[^a-z]/g, "");
+      o = o || {};
+      if (/^proj|launch|throw|cannon/.test(kind)) return simProjectile(o);
+      if (/^pend/.test(kind)) return simPendulum(o);
+      if (/^wave|sound|string/.test(kind)) return simWave(o);
+      if (/^circ|ohm|resist|electric/.test(kind)) return simCircuit(o);
+      if (/^gas|ideal|kinetic|particle/.test(kind)) return simGas(o);
+      return null;
+    }
+    function simShell(title, sub, controls) {
+      const { w, body } = widgetShell(I6.play, title, sub);
+      body.innerHTML = `<canvas class="v6c" style="cursor:default"></canvas><div class="v6w-read"></div><div class="v6w-ctrl">${controls}</div>`;
+      const cv = body.querySelector("canvas");
+      w._snap = () => cv.toDataURL("image/png");
+      return { w, body, cv, read: body.querySelector(".v6w-read"), ctrl: body.querySelector(".v6w-ctrl") };
+    }
+    function slider(key, label, min, max, step, val, unit) { return `<label>${label} <b data-v="${key}">${val} ${unit}</b><input type="range" data-k="${key}" min="${min}" max="${max}" step="${step}" value="${val}"></label>`; }
+    function gravSel(g) { return `<label>Gravity<select data-k="g">${GRAV.map(([n, v]) => `<option value="${v}"${Math.abs(v - g) < 0.01 ? " selected" : ""}>${n} (${v} m/s²)</option>`).join("")}</select></label>`; }
+    function bindCtrl(ctrl, vals, units, onChange) {
+      ctrl.addEventListener("input", (e) => {
+        const k = e.target.dataset.k; if (!k) return;
+        vals[k] = e.target.tagName === "SELECT" && isNaN(+e.target.value) ? e.target.value : +e.target.value;
+        const b = ctrl.querySelector(`[data-v="${k}"]`); if (b) b.textContent = vals[k] + " " + (units[k] || "");
+        onChange();
+      });
+    }
+    function loop(w, cv, step) {
+      let raf = 0, vis = false, t0 = 0;
+      const sz = hiDPI(cv, () => { if (!vis) step(0, sz); });
+      w._resize = () => sz.fit();
+      function tick(t) { raf = 0; if (!vis) return; const dt = t0 ? Math.min(0.05, (t - t0) / 1000) : 0; t0 = t; if (sz.w) step(dt, sz); raf = requestAnimationFrame(tick); }
+      whenVisible(cv, (v) => { vis = v; t0 = 0; if (v && !raf) raf = requestAnimationFrame(tick); });
+      return sz;
+    }
+    function simProjectile(o) {
+      const v = { a: num(o.angle, 45, 5, 85), s: num(o.speed || o.velocity, 20, 5, 40), h: num(o.height, 0, 0, 30), g: num(o.gravity, 9.81, 1, 30) };
+      const u = { a: "°", s: "m/s", h: "m" };
+      const { w, cv, read, ctrl } = simShell("Simulation", "Projectile motion",
+        slider("a", "Launch angle", 5, 85, 1, v.a, "°") + slider("s", "Launch speed", 5, 40, 1, v.s, "m/s") + slider("h", "Launch height", 0, 30, 1, v.h, "m") + gravSel(v.g) +
+        `<label>&nbsp;<button type="button" class="v6-btn primary" data-launch>${I6.play}Launch</button></label>`);
+      let t = 0, flying = true, path = [];
+      function calc() {
+        const th = v.a * Math.PI / 180, vx = v.s * Math.cos(th), vy = v.s * Math.sin(th);
+        const T = (vy + Math.sqrt(vy * vy + 2 * v.g * v.h)) / v.g;
+        return { vx, vy, T, R: vx * T, H: v.h + vy * vy / (2 * v.g) };
+      }
+      function readout() { const c = calc(); read.innerHTML = `<span>Flight time <b>${c.T.toFixed(2)} s</b></span><span>Range <b>${c.R.toFixed(1)} m</b></span><span>Max height <b>${c.H.toFixed(1)} m</b></span><span>vₓ <b>${c.vx.toFixed(1)} m/s</b></span><span>vᵧ start <b>${c.vy.toFixed(1)} m/s</b></span>`; }
+      bindCtrl(ctrl, v, u, () => { t = 0; flying = true; readout(); });
+      ctrl.querySelector("[data-launch]").addEventListener("click", () => { t = 0; flying = true; });
+      readout();
+      w._text = "Projectile motion simulation (SCODE AI)";
+      loop(w, cv, (dt, sz) => {
+        const c = calc(), ctx = cv.getContext("2d"), T = themeColors();
+        if (flying) { t += dt; if (t >= c.T) { t = c.T; flying = false; } }
+        ctx.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        ctx.fillStyle = T.surface; ctx.fillRect(0, 0, sz.w, sz.h);
+        const m = 30, maxX = Math.max(c.R * 1.08, 10), maxY = Math.max(c.H * 1.18, 5);
+        const k = Math.min((sz.w - 2 * m) / maxX, (sz.h - 2 * m) / maxY);
+        const X = (x) => m + x * k, Y = (y) => sz.h - m - y * k;
+        ctx.strokeStyle = T.muted; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(0, Y(0)); ctx.lineTo(sz.w, Y(0)); ctx.stroke();
+        ctx.fillStyle = T.muted; ctx.font = "11px sans-serif";
+        const step = niceStep(maxX, sz.w - 2 * m);
+        for (let x = 0; x <= maxX; x += step) { ctx.fillRect(X(x), Y(0), 1, 5); ctx.fillText(fmt(x) + " m", X(x) - 8, Y(0) + 16); }
+        if (v.h > 0) { ctx.fillStyle = T.surface2; ctx.fillRect(X(0) - 14, Y(v.h), 14, v.h * k); }
+        ctx.setLineDash([5, 5]); ctx.strokeStyle = T.border; ctx.lineWidth = 2; ctx.beginPath();
+        for (let i = 0; i <= 80; i++) { const tt = c.T * i / 80, x = c.vx * tt, y = v.h + c.vy * tt - v.g * tt * tt / 2; i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y)); }
+        ctx.stroke(); ctx.setLineDash([]);
+        const grad = ctx.createLinearGradient(X(0), 0, X(c.R), 0); grad.addColorStop(0, PAL[0]); grad.addColorStop(0.5, PAL[1]); grad.addColorStop(1, PAL[2]);
+        ctx.strokeStyle = grad; ctx.lineWidth = 3; ctx.beginPath();
+        for (let i = 0; i <= 60; i++) { const tt = t * i / 60, x = c.vx * tt, y = v.h + c.vy * tt - v.g * tt * tt / 2; i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y)); }
+        ctx.stroke();
+        const bx = c.vx * t, by = v.h + c.vy * t - v.g * t * t / 2, vyNow = c.vy - v.g * t;
+        ctx.strokeStyle = T.accent; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(X(bx), Y(by)); ctx.lineTo(X(bx) + c.vx * 2.2, Y(by) - vyNow * 2.2); ctx.stroke();
+        ctx.fillStyle = PAL[0]; ctx.beginPath(); ctx.arc(X(bx), Y(by), 7, 0, 7); ctx.fill();
+        ctx.fillStyle = T.text; ctx.font = "12px sans-serif"; ctx.fillText(`t = ${t.toFixed(2)} s`, sz.w - 90, 20);
+      });
+      return w;
+    }
+    function simPendulum(o) {
+      const v = { L: num(o.length, 1, 0.2, 3), a: num(o.angle, 20, 5, 80), g: num(o.gravity, 9.81, 1, 30) };
+      const u = { L: "m", a: "°" };
+      const { w, cv, read, ctrl } = simShell("Simulation", "Pendulum", slider("L", "Length", 0.2, 3, 0.1, v.L, "m") + slider("a", "Start angle", 5, 80, 1, v.a, "°") + gravSel(v.g));
+      let th = v.a * Math.PI / 180, om = 0, t = 0, lastCross = null, measured = null, trail = [];
+      function reset() { th = v.a * Math.PI / 180; om = 0; t = 0; lastCross = null; measured = null; trail = []; }
+      bindCtrl(ctrl, v, u, reset);
+      w._text = "Pendulum simulation (SCODE AI)";
+      loop(w, cv, (dt, sz) => {
+        const n = 8, h = dt / n;
+        for (let i = 0; i < n; i++) {
+          const f = (a) => -(v.g / v.L) * Math.sin(a);
+          const k1a = om, k1o = f(th), k2a = om + k1o * h / 2, k2o = f(th + k1a * h / 2), k3a = om + k2o * h / 2, k3o = f(th + k2a * h / 2), k4a = om + k3o * h, k4o = f(th + k3a * h);
+          const prev = th;
+          th += h * (k1a + 2 * k2a + 2 * k3a + k4a) / 6; om += h * (k1o + 2 * k2o + 2 * k3o + k4o) / 6; t += h;
+          if (prev < 0 && th >= 0) { if (lastCross !== null) measured = t - lastCross; lastCross = t; }
+        }
+        const ctx = cv.getContext("2d"), T = themeColors();
+        ctx.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        ctx.fillStyle = T.surface; ctx.fillRect(0, 0, sz.w, sz.h);
+        const px = sz.w / 2, py = 24, scale = (sz.h - 60) / 3.1, len = v.L * scale;
+        const bx = px + len * Math.sin(th), by = py + len * Math.cos(th);
+        trail.push([bx, by]); if (trail.length > 50) trail.shift();
+        ctx.strokeStyle = T.border; ctx.setLineDash([3, 5]); ctx.beginPath(); ctx.arc(px, py, len, Math.PI / 2 - v.a * Math.PI / 180, Math.PI / 2 + v.a * Math.PI / 180); ctx.stroke(); ctx.setLineDash([]);
+        trail.forEach((p, i) => { ctx.fillStyle = PAL[1]; ctx.globalAlpha = i / trail.length * 0.35; ctx.beginPath(); ctx.arc(p[0], p[1], 6, 0, 7); ctx.fill(); });
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = T.muted; ctx.fillRect(px - 40, py - 6, 80, 6);
+        ctx.strokeStyle = T.text; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(bx, by); ctx.stroke();
+        const gr = ctx.createRadialGradient(bx - 4, by - 4, 2, bx, by, 15); gr.addColorStop(0, PAL[2]); gr.addColorStop(1, PAL[1]);
+        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(bx, by, 14, 0, 7); ctx.fill();
+        const Ts = 2 * Math.PI * Math.sqrt(v.L / v.g);
+        read.innerHTML = `<span>Period (small-angle formula) <b>${Ts.toFixed(2)} s</b></span><span>Period measured <b>${measured ? (measured).toFixed(2) + " s" : "…"}</b></span><span>Angle now <b>${(th * 180 / Math.PI).toFixed(1)}°</b></span><span>Speed <b>${Math.abs(om * v.L).toFixed(2)} m/s</b></span>`;
+      });
+      return w;
+    }
+    function simWave(o) {
+      const v = { A: num(o.amplitude, 0.5, 0.1, 1), l: num(o.wavelength, 2, 0.5, 4), f: num(o.frequency, 1, 0.2, 3) };
+      const u = { A: "m", l: "m", f: "Hz" };
+      const { w, cv, read, ctrl } = simShell("Simulation", "Waves", slider("A", "Amplitude", 0.1, 1, 0.05, v.A, "m") + slider("l", "Wavelength λ", 0.5, 4, 0.1, v.l, "m") + slider("f", "Frequency f", 0.2, 3, 0.1, v.f, "Hz"));
+      let t = 0;
+      bindCtrl(ctrl, v, u, () => {});
+      w._text = "Wave simulation (SCODE AI)";
+      loop(w, cv, (dt, sz) => {
+        t += dt;
+        const ctx = cv.getContext("2d"), T = themeColors();
+        ctx.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        ctx.fillStyle = T.surface; ctx.fillRect(0, 0, sz.w, sz.h);
+        const L = 8, X = (x) => 20 + x / L * (sz.w - 40), Y = (y) => sz.h / 2 - y * (sz.h / 2 - 30);
+        ctx.strokeStyle = T.border; ctx.beginPath(); ctx.moveTo(20, Y(0)); ctx.lineTo(sz.w - 20, Y(0)); ctx.stroke();
+        const grad = ctx.createLinearGradient(0, 0, sz.w, 0); grad.addColorStop(0, PAL[0]); grad.addColorStop(0.5, PAL[1]); grad.addColorStop(1, PAL[2]);
+        ctx.strokeStyle = grad; ctx.lineWidth = 3; ctx.beginPath();
+        for (let i = 0; i <= 400; i++) { const x = L * i / 400, y = v.A * Math.sin(2 * Math.PI * (x / v.l - v.f * t)); i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y)); }
+        ctx.stroke();
+        const xp = Math.min(L - 0.2, v.l * 1.25), yp = v.A * Math.sin(2 * Math.PI * (xp / v.l - v.f * t));
+        ctx.fillStyle = PAL[3]; ctx.beginPath(); ctx.arc(X(xp), Y(yp), 7, 0, 7); ctx.fill();
+        ctx.strokeStyle = T.muted; ctx.lineWidth = 1.5; ctx.beginPath();
+        const crest = ((v.f * t) % 1) * v.l + v.l / 4;
+        ctx.moveTo(X(crest), Y(v.A) - 14); ctx.lineTo(X(crest + v.l), Y(v.A) - 14); ctx.stroke();
+        ctx.fillStyle = T.text; ctx.font = "12px sans-serif"; ctx.fillText("λ = " + v.l + " m", X(crest + v.l / 2) - 22, Y(v.A) - 20);
+        read.innerHTML = `<span>Wave speed v = fλ <b>${(v.f * v.l).toFixed(2)} m/s</b></span><span>Period T = 1/f <b>${(1 / v.f).toFixed(2)} s</b></span><span>The green dot only moves up and down: the wave moves, the medium doesn't travel.</span>`;
+      });
+      return w;
+    }
+    function simCircuit(o) {
+      const v = { V: num(o.voltage, 9, 1, 24), R1: num(o.r1 || o.resistance, 10, 1, 100), R2: num(o.r2, 20, 1, 100), mode: /par/i.test(String(o.mode || o.type || "")) ? "parallel" : "series" };
+      const u = { V: "V", R1: "Ω", R2: "Ω" };
+      const { w, cv, read, ctrl } = simShell("Simulation", "Circuit", slider("V", "Battery", 1, 24, 0.5, v.V, "V") + slider("R1", "Resistor R₁", 1, 100, 1, v.R1, "Ω") + slider("R2", "Resistor R₂", 1, 100, 1, v.R2, "Ω") +
+        `<label>Wiring<select data-k="mode"><option value="series"${v.mode === "series" ? " selected" : ""}>Series</option><option value="parallel"${v.mode === "parallel" ? " selected" : ""}>Parallel</option></select></label>`);
+      let ph = 0;
+      bindCtrl(ctrl, v, u, () => {});
+      w._text = "Circuit simulation (SCODE AI)";
+      function solve() {
+        if (v.mode === "series") { const R = v.R1 + v.R2, I = v.V / R; return { R, I, I1: I, I2: I, V1: I * v.R1, V2: I * v.R2, P: v.V * I }; }
+        const R = v.R1 * v.R2 / (v.R1 + v.R2), I1 = v.V / v.R1, I2 = v.V / v.R2; return { R, I: I1 + I2, I1, I2, V1: v.V, V2: v.V, P: v.V * (I1 + I2) };
+      }
+      loop(w, cv, (dt, sz) => {
+        const s = solve(); ph += dt;
+        const ctx = cv.getContext("2d"), T = themeColors();
+        ctx.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        ctx.fillStyle = T.surface; ctx.fillRect(0, 0, sz.w, sz.h);
+        const L = 50, R = sz.w - 50, Tp = 50, B = sz.h - 50, mid = (Tp + B) / 2;
+        ctx.strokeStyle = T.muted; ctx.lineWidth = 3; ctx.lineJoin = "round";
+        function wire(pts) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke(); }
+        function resistor(x, y, vert, label) {
+          ctx.save(); ctx.fillStyle = T.surface; ctx.strokeStyle = PAL[1]; ctx.lineWidth = 3;
+          if (vert) { ctx.fillRect(x - 10, y - 26, 20, 52); ctx.strokeRect(x - 10, y - 26, 20, 52); } else { ctx.fillRect(x - 26, y - 10, 52, 20); ctx.strokeRect(x - 26, y - 10, 52, 20); }
+          ctx.fillStyle = T.text; ctx.font = "12px sans-serif"; ctx.fillText(label, vert ? x + 16 : x - 22, vert ? y + 4 : y - 16); ctx.restore();
+        }
+        function dots(pts, speed, color) {
+          let total = 0; const seg = []; for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); seg.push(d); total += d; }
+          ctx.fillStyle = color;
+          for (let d = (ph * speed * 60) % 24; d < total; d += 24) {
+            let acc = 0; for (let i = 0; i < seg.length; i++) { if (d <= acc + seg[i]) { const f = (d - acc) / seg[i]; ctx.beginPath(); ctx.arc(pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f, 3, 0, 7); ctx.fill(); break; } acc += seg[i]; }
+          }
+        }
+        const sp = (I) => Math.min(4, 0.25 + I * 1.4);
+        if (v.mode === "series") {
+          const loopPts = [[L, mid], [L, Tp], [R, Tp], [R, B], [L, B], [L, mid]];
+          wire(loopPts); dots(loopPts, sp(s.I), PAL[2]);
+          resistor((L + R) / 2, Tp, false, `R₁ ${v.R1} Ω`); resistor(R, mid, true, `R₂ ${v.R2} Ω`);
+        } else {
+          const x1 = L + (R - L) * 0.55, x2 = R;
+          const p1 = [[L, mid], [L, Tp], [x1, Tp], [x1, B], [L, B], [L, mid]], p2 = [[x1, Tp], [x2, Tp], [x2, B], [x1, B]];
+          wire(p1); wire(p2); dots(p1, sp(s.I1), PAL[2]); dots(p2, sp(s.I2), PAL[0]);
+          resistor(x1, mid, true, `R₁ ${v.R1} Ω`); resistor(x2, mid, true, `R₂ ${v.R2} Ω`);
+        }
+        ctx.fillStyle = T.surface; ctx.fillRect(L - 18, mid - 20, 36, 40);
+        ctx.strokeStyle = T.text; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(L - 16, mid - 6); ctx.lineTo(L + 16, mid - 6); ctx.stroke();
+        ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(L - 8, mid + 6); ctx.lineTo(L + 8, mid + 6); ctx.stroke();
+        ctx.fillStyle = T.text; ctx.font = "12px sans-serif"; ctx.fillText(`${v.V} V`, L + 22, mid + 4);
+        read.innerHTML = `<span>Total resistance <b>${s.R.toFixed(2)} Ω</b></span><span>Current from battery <b>${s.I.toFixed(3)} A</b></span>` +
+          (v.mode === "series" ? `<span>V₁ <b>${s.V1.toFixed(2)} V</b></span><span>V₂ <b>${s.V2.toFixed(2)} V</b></span>` : `<span>I₁ <b>${s.I1.toFixed(3)} A</b></span><span>I₂ <b>${s.I2.toFixed(3)} A</b></span>`) +
+          `<span>Power <b>${s.P.toFixed(2)} W</b></span>`;
+      });
+      return w;
+    }
+    function simGas(o) {
+      const v = { T: num(o.temperature, 300, 100, 600), V: num(o.volume, 24.8, 5, 50), n: num(o.moles, 1, 0.5, 3) };
+      const u = { T: "K", V: "L", n: "mol" };
+      const { w, cv, read, ctrl } = simShell("Simulation", "Ideal gas", slider("T", "Temperature", 100, 600, 5, v.T, "K") + slider("V", "Volume", 5, 50, 0.5, v.V, "L") + slider("n", "Amount", 0.5, 3, 0.1, v.n, "mol"));
+      let parts = [], hits = 0, hitT = 0, shown = 0;
+      function seed() {
+        const N = Math.round(18 + v.n * 22);
+        while (parts.length < N) parts.push({ x: Math.random(), y: Math.random(), a: Math.random() * 7 });
+        parts.length = N;
+      }
+      seed();
+      bindCtrl(ctrl, v, u, seed);
+      w._text = "Ideal gas simulation (SCODE AI)";
+      loop(w, cv, (dt, sz) => {
+        const ctx = cv.getContext("2d"), T = themeColors();
+        ctx.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        ctx.fillStyle = T.surface; ctx.fillRect(0, 0, sz.w, sz.h);
+        const maxW = sz.w - 60, bw = 60 + (maxW - 60) * (v.V - 5) / 45, bh = sz.h - 60, bx = 30, by = 30;
+        ctx.strokeStyle = T.text; ctx.lineWidth = 3; ctx.strokeRect(bx, by, bw, bh);
+        ctx.fillStyle = T.muted; ctx.fillRect(bx + bw, by - 4, 8, bh + 8);
+        const speed = Math.sqrt(v.T / 300) * 0.55;
+        parts.forEach(p => {
+          p.x += Math.cos(p.a) * speed * dt * (300 / Math.max(60, bw)); p.y += Math.sin(p.a) * speed * dt * (300 / bh);
+          if (p.x < 0 || p.x > 1) { p.a = Math.PI - p.a; p.x = Math.max(0, Math.min(1, p.x)); hits++; }
+          if (p.y < 0 || p.y > 1) { p.a = -p.a; p.y = Math.max(0, Math.min(1, p.y)); hits++; }
+          const heat = Math.min(1, (v.T - 100) / 500);
+          ctx.fillStyle = `hsl(${220 - heat * 210}, 85%, 62%)`;
+          ctx.beginPath(); ctx.arc(bx + 6 + p.x * (bw - 12), by + 6 + p.y * (bh - 12), 4.5, 0, 7); ctx.fill();
+        });
+        hitT += dt; if (hitT > 1) { shown = hits; hits = 0; hitT = 0; }
+        const P = v.n * 8.314 * v.T / v.V;
+        read.innerHTML = `<span>Pressure P = nRT/V <b>${P.toFixed(1)} kPa</b></span><span>(${(P / 101.325).toFixed(2)} atm)</span><span>Wall hits per second <b>${shown}</b></span><span>R = 8.314 L·kPa/(mol·K)</span>`;
+      });
+      return w;
+    }
+
+    // ---------------------------------------------------------------- SCODE Eyes
+    const EYES = { modes: [["anything", "Anything"], ["nature", "Nature"], ["sky", "Sky"], ["translate", "Translate"], ["fixit", "Fix-it"]],
+                   ask: { anything: "What is this?", nature: "What is this, and how can I tell?", sky: "What am I looking at in the sky?", translate: "Translate this into English.", fixit: "What is this and how do I fix it?" } };
+    const EY = { mode: "anything", stream: null, facing: "environment", base: 0, timer: 0 };
+    const eyesEl = document.createElement("div");
+    eyesEl.className = "v6-full"; eyesEl.id = "v6-eyes";
+    eyesEl.innerHTML = `<div class="stage"><video playsinline muted autoplay></video><img class="still" alt="Your photo"></div><div class="frame"></div>
+      <div class="hint">Your camera isn't available here.<br>Tap the photo button to take or pick a photo.</div>
+      <div class="tb"><div class="ttl"><i>${I6.eyes}</i>SCODE Eyes</div><button class="ib" type="button" data-e="close" aria-label="Close">${I6.x}</button></div>
+      <div class="modes">${EYES.modes.map(([k, n]) => `<button type="button" data-mode="${k}">${n}</button>`).join("")}</div>
+      <div class="shoot"><button class="ib" type="button" data-e="pick" aria-label="Pick a photo">${I6.photo}</button><button class="shutter" type="button" data-e="shoot" aria-label="Take the photo"></button><button class="ib" type="button" data-e="flip" aria-label="Switch camera">${I6.flip}</button></div>
+      <div class="sheet"><div class="grab"></div><div class="ans"></div><div class="ask"><input type="text" placeholder="Ask a follow-up" maxlength="400"><button type="button" class="go" data-e="ask">Ask</button></div>
+      <div class="ask" style="padding-top:8px"><button type="button" data-e="retake" style="flex:1">Take another</button><button type="button" data-e="chat" style="flex:1">Open in chat</button></div></div>
+      <input type="file" accept="image/*" capture="environment" hidden>`;
+    document.body.appendChild(eyesEl);
+    const eyVideo = eyesEl.querySelector("video"), eyStill = eyesEl.querySelector(".still"), eyAns = eyesEl.querySelector(".ans"), eyInput = eyesEl.querySelector(".sheet input"), eyFile = eyesEl.querySelector('input[type="file"]');
+    function eyesPaintModes() { eyesEl.querySelectorAll("[data-mode]").forEach(b => b.classList.toggle("on", b.dataset.mode === EY.mode)); }
+    function eyesOpen(mode) {
+      if (isGuest()) { openAuth("welcome", "SCODE Eyes needs a free account."); return; }
+      if (mode) EY.mode = mode;
+      eyesPaintModes();
+      eyesEl.classList.remove("shot");
+      eyesEl.classList.add("show"); document.body.classList.add("v6-tool-open");
+      camStart();
+    }
+    async function camStart() {
+      camStop();
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { eyesEl.classList.add("nocam"); return; }
+      try {
+        EY.stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: EY.facing, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
+        eyVideo.srcObject = EY.stream;
+        await eyVideo.play().catch(() => {});
+        eyesEl.classList.remove("nocam");
+      } catch (e) { eyesEl.classList.add("nocam"); }
+    }
+    function camStop() { if (EY.stream) { EY.stream.getTracks().forEach(t => t.stop()); EY.stream = null; } eyVideo.srcObject = null; }
+    function eyesClose() {
+      camStop(); clearInterval(EY.timer); EY.timer = 0;
+      eyesEl.classList.remove("show"); document.body.classList.remove("v6-tool-open");
+      S.eyesMode = null;
+      if (messages.length) scrollToBottom(false);
+    }
+    function eyesCapture() {
+      const vw = eyVideo.videoWidth, vh = eyVideo.videoHeight;
+      if (!vw || !EY.stream) { eyFile.click(); return; }
+      const c = document.createElement("canvas"); const s = Math.min(1, 1400 / Math.max(vw, vh));
+      c.width = Math.round(vw * s); c.height = Math.round(vh * s);
+      c.getContext("2d").drawImage(eyVideo, 0, 0, c.width, c.height);
+      eyesShoot(c.toDataURL("image/jpeg", 0.88));
+    }
+    function eyesShoot(dataUrl) {
+      if (sending) { showNote("Wait for the current reply to finish, then try SCODE Eyes again."); return; }
+      eyStill.src = dataUrl;
+      eyesEl.classList.add("shot");
+      camStop();
+      if (messages.length) newChat();
+      if (!V4.auto && !VISION_TIERS.has(selectedTier)) selectTier(v4Allowed("l5") ? "l5" : "l2_5");
+      setPhoto(dataUrl);
+      eyesAsk(EYES.ask[EY.mode] || "What is this?");
+    }
+    function eyesAsk(q) {
+      if (sending) return;
+      S.eyesMode = EY.mode;
+      EY.base = el.messages.querySelectorAll(".msg.assistant").length;
+      eyAns.innerHTML = `<div class="wait"><i></i><span>Looking…</span></div>`;
+      el.input.value = q; autoGrow(); updateSendState();
+      send();
+      clearInterval(EY.timer);
+      const t0 = Date.now();
+      EY.timer = setInterval(() => {
+        const rows = el.messages.querySelectorAll(".msg.assistant");
+        const last = rows.length > EY.base ? rows[rows.length - 1] : null;
+        const md = last && last.querySelector(".md");
+        if (md && md.textContent.trim()) eyAns.innerHTML = md.innerHTML;
+        else if (last) { const st = last.querySelector(".pending-text"); eyAns.innerHTML = `<div class="wait"><i></i><span>${esc(st ? st.textContent : "Looking…")} · ${Math.round((Date.now() - t0) / 1000)}s</span></div>`; }
+        if (!sending && Date.now() - t0 > 600) {
+          clearInterval(EY.timer); EY.timer = 0;
+          if (!last) eyAns.innerHTML = `<div class="wait" style="color:var(--warn)">No answer yet. If SCODE is busy, it'll show up in the chat when it's your turn. Tap Open in chat.</div>`;
+        }
+      }, 300);
+    }
+    eyesEl.addEventListener("click", (e) => {
+      const m = e.target.closest("[data-mode]");
+      if (m) { EY.mode = m.dataset.mode; eyesPaintModes(); return; }
+      const b = e.target.closest("[data-e]"); if (!b) return;
+      const k = b.dataset.e;
+      if (k === "close") eyesClose();
+      else if (k === "shoot") eyesCapture();
+      else if (k === "pick") eyFile.click();
+      else if (k === "flip") { EY.facing = EY.facing === "environment" ? "user" : "environment"; camStart(); }
+      else if (k === "retake") { if (sending) { showNote("Wait for this answer to finish first."); return; } eyesEl.classList.remove("shot"); camStart(); }
+      else if (k === "chat") eyesClose();
+      else if (k === "ask") { const q = eyInput.value.trim(); if (q && !sending) { eyInput.value = ""; eyesAsk(q); } }
+    });
+    eyInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); eyesEl.querySelector('[data-e="ask"]').click(); } });
+    eyFile.addEventListener("change", async () => {
+      const f = eyFile.files && eyFile.files[0]; eyFile.value = "";
+      if (!f) return;
+      try { const r = await fitImage(await fileToUrl(f), 1400, 0.88); eyesShoot(r.url); } catch (e) { showNote("That photo couldn't be opened."); }
+    });
+
+    // ---------------------------------------------------------------- SCODE Canvas
+    const CV = { strokes: [], cur: null, tool: "pen", color: "#1b1b1b", size: 3, bg: null, marked: false };
+    const cvEl = document.createElement("div");
+    cvEl.className = "v6-full"; cvEl.id = "v6-canvas";
+    const COLORS = ["#1b1b1b", "#2457d6", "#d62f2f", "#13894b"];
+    cvEl.innerHTML = `<div class="tb"><div class="ttl"><i>${I6.canvas}</i>SCODE Canvas</div>
+      <div class="tools"><button class="ib on" type="button" data-t="pen" aria-label="Pen" title="Pen">${I6.pen}</button><button class="ib" type="button" data-t="mark" aria-label="Circle to ask" title="Circle to ask (yellow marker)">${I6.marker}</button><button class="ib" type="button" data-t="eraser" aria-label="Eraser" title="Eraser">${I6.eraser}</button><span class="sep"></span>
+      ${COLORS.map((c, i) => `<button class="sw${i ? "" : " on"}" type="button" data-c="${c}" style="background:${c}" aria-label="Colour"></button>`).join("")}<span class="sep"></span>
+      <button class="ib" type="button" data-a="undo" aria-label="Undo" title="Undo">${I6.undo}</button><button class="ib" type="button" data-a="photo" aria-label="Draw on a photo" title="Draw on a photo">${I6.photo}</button><button class="ib" type="button" data-a="clear" aria-label="Clear" title="Clear">${I6.trash}</button><button class="ib" type="button" data-a="close" aria-label="Close" title="Close">${I6.x}</button></div></div>
+      <div class="board"><canvas class="bgc"></canvas><canvas class="ink"></canvas><div class="tip">Write or draw. Use the yellow marker to circle what you're asking about.</div></div>
+      <div class="foot"><input type="text" maxlength="500" placeholder="Ask about your drawing (optional)"><button type="button" data-a="send">Send</button></div>
+      <input type="file" accept="image/*" hidden>`;
+    document.body.appendChild(cvEl);
+    const board = cvEl.querySelector(".board"), bgc = cvEl.querySelector(".bgc"), ink = cvEl.querySelector(".ink"), cvTip = cvEl.querySelector(".tip"), cvInput = cvEl.querySelector(".foot input"), cvFile = cvEl.querySelector('input[type="file"]');
+    function cvSize() {
+      const r = board.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+      [bgc, ink].forEach(c => { c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); });
+      CV.dpr = dpr; CV.w = r.width; CV.h = r.height;
+      cvRedraw();
+    }
+    function cvBgRect(img, W, H) { const s = Math.min(W / img.naturalWidth, H / img.naturalHeight); const w = img.naturalWidth * s, h = img.naturalHeight * s; return [(W - w) / 2, (H - h) / 2, w, h]; }
+    function cvRedraw() {
+      if (!CV.w) return;
+      const b = bgc.getContext("2d"); b.setTransform(CV.dpr, 0, 0, CV.dpr, 0, 0);
+      b.fillStyle = "#ffffff"; b.fillRect(0, 0, CV.w, CV.h);
+      if (CV.bg) { const r = cvBgRect(CV.bg, CV.w, CV.h); b.drawImage(CV.bg, r[0], r[1], r[2], r[3]); }
+      const c = ink.getContext("2d"); c.setTransform(CV.dpr, 0, 0, CV.dpr, 0, 0); c.clearRect(0, 0, CV.w, CV.h);
+      CV.strokes.forEach(s => cvStroke(c, s));
+    }
+    function cvStroke(c, s) {
+      const pts = s.pts; if (!pts.length) return;
+      c.save();
+      c.lineCap = "round"; c.lineJoin = "round";
+      if (s.tool === "eraser") { c.globalCompositeOperation = "destination-out"; c.strokeStyle = "#000"; }
+      else if (s.tool === "mark") { c.globalAlpha = 0.42; c.strokeStyle = "#ffd400"; }
+      else c.strokeStyle = s.color;
+      const base = s.tool === "mark" ? 18 : s.tool === "eraser" ? 26 : s.size;
+      if (pts.length === 1) { c.fillStyle = c.strokeStyle; c.beginPath(); c.arc(pts[0][0], pts[0][1], base / 2, 0, 7); c.fill(); c.restore(); return; }
+      if (s.tool === "mark") {   // one smooth translucent path (no darker overlaps)
+        c.lineWidth = base; c.beginPath(); c.moveTo(pts[0][0], pts[0][1]);
+        for (let i = 1; i < pts.length - 1; i++) { const mx = (pts[i][0] + pts[i + 1][0]) / 2, my = (pts[i][1] + pts[i + 1][1]) / 2; c.quadraticCurveTo(pts[i][0], pts[i][1], mx, my); }
+        c.lineTo(pts[pts.length - 1][0], pts[pts.length - 1][1]); c.stroke(); c.restore(); return;
+      }
+      for (let i = 1; i < pts.length; i++) {
+        const p0 = pts[i - 1], p1 = pts[i];
+        c.lineWidth = s.pen ? base * (0.35 + 1.3 * ((p0[2] + p1[2]) / 2)) : base;
+        c.beginPath(); c.moveTo(p0[0], p0[1]); c.lineTo(p1[0], p1[1]); c.stroke();
+      }
+      c.restore();
+    }
+    function canvasOpen() {
+      if (isGuest()) { openAuth("welcome", "SCODE Canvas needs a free account."); return; }
+      cvEl.classList.add("show"); document.body.classList.add("v6-tool-open");
+      cvTip.style.opacity = "1"; setTimeout(() => { cvTip.style.opacity = "0"; }, 4200);
+      requestAnimationFrame(cvSize);
+    }
+    function canvasClose() { cvEl.classList.remove("show"); document.body.classList.remove("v6-tool-open"); }
+    window.addEventListener("resize", () => { if (cvEl.classList.contains("show")) cvSize(); });
+    ink.addEventListener("pointerdown", (e) => {
+      ink.setPointerCapture(e.pointerId);
+      const r = ink.getBoundingClientRect();
+      CV.cur = { tool: CV.tool, color: CV.color, size: CV.size, pen: e.pointerType === "pen", pts: [[e.clientX - r.left, e.clientY - r.top, e.pressure || 0.5]] };
+      if (CV.tool === "mark") CV.marked = true;
+      cvTip.style.opacity = "0";
+    });
+    ink.addEventListener("pointermove", (e) => {
+      if (!CV.cur) return;
+      const r = ink.getBoundingClientRect();
+      const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
+      (evs.length ? evs : [e]).forEach(ev => CV.cur.pts.push([ev.clientX - r.left, ev.clientY - r.top, ev.pressure || 0.5]));
+      const c = ink.getContext("2d"); c.setTransform(CV.dpr, 0, 0, CV.dpr, 0, 0);
+      if (CV.cur.tool === "mark") { cvRedraw(); cvStroke(c, CV.cur); }
+      else cvStroke(c, { ...CV.cur, pts: CV.cur.pts.slice(-evs.length - 1) });
+    });
+    const cvUp = () => { if (CV.cur) { CV.strokes.push(CV.cur); CV.cur = null; cvRedraw(); } };
+    ink.addEventListener("pointerup", cvUp); ink.addEventListener("pointercancel", cvUp);
+    cvEl.addEventListener("click", (e) => {
+      const t = e.target.closest("[data-t]"), c = e.target.closest("[data-c]"), a = e.target.closest("[data-a]");
+      if (t) { CV.tool = t.dataset.t; cvEl.querySelectorAll("[data-t]").forEach(x => x.classList.toggle("on", x === t)); }
+      if (c) { CV.color = c.dataset.c; CV.tool = "pen"; cvEl.querySelectorAll("[data-c]").forEach(x => x.classList.toggle("on", x === c)); cvEl.querySelectorAll("[data-t]").forEach(x => x.classList.toggle("on", x.dataset.t === "pen")); }
+      if (!a) return;
+      const k = a.dataset.a;
+      if (k === "undo") { CV.strokes.pop(); CV.marked = CV.strokes.some(s => s.tool === "mark"); cvRedraw(); }
+      else if (k === "clear") { if (CV.strokes.length || CV.bg) { CV.strokes = []; CV.bg = null; CV.marked = false; cvRedraw(); } }
+      else if (k === "photo") cvFile.click();
+      else if (k === "close") canvasClose();
+      else if (k === "send") canvasSend();
+    });
+    cvInput.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); canvasSend(); } });
+    cvFile.addEventListener("change", async () => {
+      const f = cvFile.files && cvFile.files[0]; cvFile.value = "";
+      if (!f) return;
+      try { const r = await fitImage(await fileToUrl(f), 1800, 0.9); CV.bg = r.img; cvRedraw(); } catch (e) { showNote("That photo couldn't be opened."); }
+    });
+    function canvasSend() {
+      if (!CV.strokes.length && !CV.bg) { cvTip.textContent = "Draw or write something first."; cvTip.style.opacity = "1"; setTimeout(() => { cvTip.style.opacity = "0"; }, 2200); return; }
+      if (sending) { showNote("Wait for the current reply to finish, then send your drawing."); return; }
+      const W = CV.w, H = CV.h, s = Math.min(2, 1400 / Math.max(W, H));
+      const out = document.createElement("canvas"); out.width = Math.round(W * s); out.height = Math.round(H * s);
+      const o = out.getContext("2d");
+      o.drawImage(bgc, 0, 0, out.width, out.height);
+      o.drawImage(ink, 0, 0, out.width, out.height);
+      const q = cvInput.value.trim();
+      cvInput.value = "";
+      if (!V4.auto && !VISION_TIERS.has(selectedTier)) selectTier(v4Allowed("l4") ? "l4" : "l2_5");
+      setPhoto(out.toDataURL("image/jpeg", 0.88));
+      S.canvasNext = true;
+      el.input.value = q || (CV.marked ? "Explain the part I marked in yellow." : "Help me with what I wrote.");
+      autoGrow(); updateSendState();
+      canvasClose();
+      CV.strokes = []; CV.bg = null; CV.marked = false;
+      send();
+    }
+
+    // ---------------------------------------------------------------- Ultra Voice
+    const VOICES = [["heart", "Heart", "warm and friendly"], ["bella", "Bella", "bright and lively"], ["michael", "Michael", "calm and clear"], ["emma", "Emma", "British, gentle"]];
+    const pill = document.createElement("div");
+    pill.id = "v6-voice";
+    pill.innerHTML = `<div class="wave"><i></i><i></i><i></i><i></i></div><div class="cap"><small>Ultra Voice</small><span></span></div>
+      <button type="button" data-vo="menu" aria-label="Voice settings">${I6.gear}</button><button type="button" data-vo="stop">${I6.stop}Stop</button><div class="vmenu"></div>`;
+    document.body.appendChild(pill);
+    const pillCap = pill.querySelector(".cap span"), vmenu = pill.querySelector(".vmenu");
+    function paintMenu() {
+      vmenu.innerHTML = VOICES.map(([k, n, d]) => `<button type="button" data-voice="${k}" class="${VO.voice === k ? "on" : ""}">${VO.voice === k ? "✓ " : ""}${n} <small style="color:var(--muted);font-weight:400">· ${d}</small></button>`).join("") +
+        `<hr><button type="button" data-vo="auto">${VO.auto ? "✓ " : ""}Read replies out loud</button>`;
+    }
+    pill.addEventListener("click", (e) => {
+      const v = e.target.closest("[data-voice]");
+      if (v) { VO.voice = v.dataset.voice; try { localStorage.setItem("scode_voice", VO.voice); } catch (er) {} paintMenu(); return; }
+      const b = e.target.closest("[data-vo]"); if (!b) return;
+      if (b.dataset.vo === "stop") voiceStop();
+      if (b.dataset.vo === "menu") { paintMenu(); vmenu.classList.toggle("show"); }
+      if (b.dataset.vo === "auto") { VO.auto = !VO.auto; try { localStorage.setItem("scode_voice_auto", VO.auto ? "1" : "0"); } catch (er) {} paintMenu(); if (!VO.auto) voiceStop(true); }
+    });
+    function pillShow(text, talking) { pill.classList.add("show"); pill.classList.toggle("talking", !!talking); if (text !== undefined) pillCap.textContent = text; }
+    function pillHide() { pill.classList.remove("show", "talking"); vmenu.classList.remove("show"); }
+    function speechText(s) {
+      return String(s).replace(/```[\s\S]*?```/g, " ").replace(/`([^`]*)`/g, "$1").replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+        .replace(/^#+\s*/gm, "").replace(/[*_~>|#]+/g, "").replace(/\s+/g, " ").trim();
+    }
+    function voiceStart(force) {
+      VO.gen++; VO.q = []; VO.spokenTo = 0; VO.tone = ""; VO.prefix = ""; VO.playing = false;
+      stopAudio();
+      VO.active = force || VO.auto;
+      VO.done = false;
+    }
+    function voiceFeed(text) {
+      if (!VO.active) return;
+      const rest = text.slice(VO.spokenTo);
+      const re = /[^.!?…\n]*?(?:[.!?…]+["')\]]*|\n+)(?=\s|$)\s*/g;
+      let m, last = 0;
+      while ((m = re.exec(rest)) && m[0]) {
+        if (m.index + m[0].length >= rest.length && !/\s$/.test(m[0])) break;   // wait until the sentence is surely over
+        enqueue(rest.slice(last, m.index + m[0].length));
+        last = m.index + m[0].length;
+      }
+      VO.spokenTo += last;
+    }
+    function voiceEnd(text) {
+      if (!VO.active) return;
+      voiceFeed(text + " ");
+      const tail = text.slice(VO.spokenTo);
+      if (tail.trim()) enqueue(tail);
+      VO.spokenTo = text.length;
+      VO.done = true;
+      if (!VO.q.length && !VO.playing) pillHide();
+    }
+    function enqueue(raw) {
+      let s = VO.prefix + raw;
+      VO.prefix = "";
+      const tags = s.match(/\[(excited|happy|warm|curious|calm|serious|pause)\]/gi) || [];
+      const words = speechText(stripTags(s));
+      if (!words) { if (tags.length) VO.prefix = s.trim() + " "; return; }
+      if (!/^\s*\[(excited|happy|warm|curious|calm|serious)\]/i.test(s) && VO.tone) s = `[${VO.tone}] ` + s;
+      const tones = tags.map(t => t.slice(1, -1).toLowerCase()).filter(t => t !== "pause");
+      if (tones.length) VO.tone = tones[tones.length - 1];
+      const item = { text: speechText(s), cap: words, gen: VO.gen, url: null, ready: null };
+      VO.q.push(item);
+      prefetch();
+      if (!VO.playing) playNext();
+    }
+    function prefetch() {
+      VO.q.slice(0, 2).forEach(it => {
+        if (it.ready || VO.fallback) return;
+        it.ready = fetch(PROXY_URL + "/voice/tts", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ text: it.text, voice: VO.voice }) })
+          .then(r => r.ok ? r.blob() : Promise.reject(new Error("off")))
+          .then(b => { it.url = URL.createObjectURL(b); return true; })
+          .catch(() => { VO.fallback = true; return false; });
+      });
+    }
+    async function playNext() {
+      const it = VO.q[0];
+      if (!it || it.gen !== VO.gen) { VO.playing = false; if (VO.done && !VO.q.length) setTimeout(() => { if (!VO.playing && !VO.q.length) pillHide(); }, 900); return; }
+      VO.playing = true;
+      pillShow(it.cap, true);
+      let ok = false;
+      if (!VO.fallback) { if (!it.ready) prefetch(); ok = await it.ready; }
+      if (it.gen !== VO.gen) return;
+      VO.q.shift(); prefetch();
+      if (ok && it.url) {
+        await new Promise((res) => {
+          const a = new Audio(it.url); VO.audio = a;
+          a.onended = a.onerror = () => { URL.revokeObjectURL(it.url); res(); };
+          a.play().catch(() => res());
+        });
+      } else await speakFallback(it.text);
+      VO.audio = null;
+      if (it.gen === VO.gen) playNext();
+    }
+    function speakFallback(text) {
+      return new Promise((res) => {
+        if (!window.speechSynthesis) return res();
+        const tone = (/^\s*\[(\w+)\]/.exec(text) || [, ""])[1].toLowerCase();
+        const u = new SpeechSynthesisUtterance(stripTags(text));
+        const map = { excited: [1.12, 1.15], happy: [1.06, 1.08], warm: [1, 1.02], curious: [1.02, 1.1], calm: [0.92, 0.96], serious: [0.95, 0.9] };
+        const [rate, pitch] = map[tone] || [1, 1];
+        u.rate = rate; u.pitch = pitch; u.lang = "en-US";
+        u.onend = u.onerror = () => res();
+        window.speechSynthesis.speak(u);
+        setTimeout(res, 20000);
+      });
+    }
+    function stopAudio() {
+      if (VO.audio) { try { VO.audio.pause(); } catch (e) {} VO.audio = null; }
+      if (window.speechSynthesis) try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+    function voiceStop(keepActive) { VO.gen++; VO.q = []; VO.playing = false; stopAudio(); if (!keepActive) VO.active = false; pillHide(); }
+    function speakAll(text) { voiceStart(true); voiceEnd(text); }
+    // the mic: tap to talk (tap again to send), or hold and let go to send
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    function micStart() {
+      if (isGuest()) { openAuth("welcome", "Ultra Voice needs an account."); return; }
+      if (S.plan !== "pro") { v4OpenPlan("Ultra Voice is part of SCODE Pro. Pro is free until January 1, 2027 when you help train SCODE AI."); return; }
+      if (sending) { showNote("Wait for this reply to finish, then talk."); return; }
+      voiceStop();
+      MIC.cancel = false;
+      const base = el.input.value.trim();
+      if (SR) {
+        const rec = new SR();
+        rec.lang = navigator.language || "en-US"; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
+        let finalText = "";
+        rec.onresult = (e) => {
+          let interim = "";
+          for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i]; if (r.isFinal) finalText += r[0].transcript; else interim += r[0].transcript; }
+          el.input.value = (base + " " + finalText + interim).trim(); autoGrow(); updateSendState();
+        };
+        rec.onerror = (e) => {
+          if (e.error === "not-allowed" || e.error === "service-not-allowed") showNote("Allow the microphone for this site to talk to SCODE.");
+          else if (e.error === "no-speech") showNote("Didn't hear anything. Tap the mic and try again.");
+          MIC.cancel = e.error !== "aborted" ? MIC.cancel : true;
+        };
+        rec.onend = () => { MIC.live = false; MIC.rec = null; paint(); if (!MIC.cancel && el.input.value.trim()) micSend(); };
+        MIC.rec = rec; MIC.live = true; paint();
+        try { rec.start(); } catch (e) { MIC.live = false; paint(); }
+        pillShow("Listening… tap the mic again when you're done", false);
+        pill.classList.remove("talking");
+        return;
+      }
+      if (!navigator.mediaDevices || !window.MediaRecorder) { showNote("This browser can't record your voice. Try Chrome or Safari, or type instead."); return; }
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        const mr = new MediaRecorder(stream);
+        MIC.media = mr; MIC.chunks = []; MIC.live = true; paint();
+        pillShow("Listening… tap the mic again when you're done", false);
+        mr.ondataavailable = (e) => { if (e.data && e.data.size) MIC.chunks.push(e.data); };
+        mr.onstop = async () => {
+          stream.getTracks().forEach(t => t.stop());
+          MIC.live = false; MIC.media = null; paint();
+          if (MIC.cancel) { pillHide(); return; }
+          pillShow("Turning your voice into text…", false);
+          try {
+            const blob = new Blob(MIC.chunks, { type: mr.mimeType || "audio/webm" });
+            const r = await fetch(PROXY_URL + "/voice/stt", { method: "POST", headers: authHeaders({ "Content-Type": blob.type }), body: blob });
+            const d = await r.json();
+            if (!r.ok) throw new Error(d.message || "off");
+            if (d.text && d.text.trim()) { el.input.value = (base + " " + d.text).trim(); autoGrow(); updateSendState(); micSend(); }
+            else { pillHide(); showNote("Didn't catch that. Tap the mic and try again."); }
+          } catch (e) { pillHide(); showNote(e.message && e.message !== "off" ? e.message : "SCODE couldn't hear that right now. Try typing instead."); }
+        };
+        mr.start();
+        setTimeout(() => { if (MIC.media === mr && mr.state === "recording") mr.stop(); }, 60000);
+      }).catch(() => showNote("Allow the microphone for this site to talk to SCODE."));
+    }
+    function micStop(cancel) {
+      MIC.cancel = !!cancel;
+      if (MIC.rec) try { MIC.rec.stop(); } catch (e) {}
+      if (MIC.media && MIC.media.state === "recording") MIC.media.stop();
+    }
+    function micSend() { S.voiceNext = true; pillHide(); send(); }
+
+    // ---------------------------------------------------------------- SCODE Spaces
+    const spEl = document.createElement("div");
+    spEl.className = "overlay v6-modal"; spEl.id = "v6-spaces";
+    spEl.innerHTML = `<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="v6-sp-title"><div class="modal-header"><h2 id="v6-sp-title">SCODE Spaces</h2><button class="icon-btn" type="button" data-s="close" aria-label="Close">${I6.x}</button></div><div class="v6-sp-body"></div></div>`;
+    document.body.appendChild(spEl);
+    const spBody = spEl.querySelector(".v6-sp-body");
+    const SP = { data: null, tab: "mine", cur: null };
+    function spOpen(view) {
+      if (isGuest()) { openAuth("welcome", "SCODE Spaces needs a free account."); return; }
+      closeMobileSidebar();
+      spEl.classList.add("show");
+      if (view && view.space) spShow(view.space); else spList();
+    }
+    function spClose() { spEl.classList.remove("show"); }
+    spEl.addEventListener("click", (e) => { if (e.target === spEl) spClose(); });
+    async function spList(note) {
+      SP.cur = null;
+      spBody.innerHTML = `<div class="v6-empty">Loading your Spaces…</div>`;
+      try { SP.data = await api("/v6/spaces"); } catch (e) { spBody.innerHTML = `<div class="v6-empty">${esc(e.message)}</div>`; return; }
+      const d = SP.data, list = SP.tab === "mine" ? d.mine : d.joined;
+      spBody.innerHTML = (note ? `<div class="v6-note" style="margin-bottom:12px">${note}</div>` : "") +
+        `<p class="modal-sub" style="margin:-8px 0 14px">A Space is a custom tutor for one class, club or team, with its own notes and rules. Share it with a 6-letter code.</p>
+        <div class="v6-tabs"><button type="button" data-tab="mine" class="${SP.tab === "mine" ? "on" : ""}">My Spaces (${d.mine.length}/${d.limit})</button><button type="button" data-tab="joined" class="${SP.tab === "joined" ? "on" : ""}">Joined (${d.joined.length})</button></div>
+        <div class="v6-list">${list.length ? list.map(s => `<div class="v6-item" data-open="${esc(s.id)}"><span class="ic">${esc((s.name[0] || "S").toUpperCase())}</span><span class="tx"><b>${esc(s.name)}</b><small>${esc(s.about || (s.docs.length + " files of notes"))} · ${s.members} member${s.members === 1 ? "" : "s"}</small></span>${I6.chev}</div>`).join("")
+          : `<div class="v6-empty">${SP.tab === "mine" ? "You haven't made a Space yet. Make one for your class, club or team." : "You haven't joined a Space yet. Ask for the 6-letter code."}</div>`}</div>
+        <div class="v6-sec">Join with a code</div><div class="v6-btns"><input class="v6-codein" maxlength="6" placeholder="ABC123" style="font:600 16px var(--mono);letter-spacing:.15em;text-transform:uppercase;width:150px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);padding:0 12px"><button type="button" class="v6-btn" data-s="join">Join</button></div>
+        <div class="v6-sec">Make a Space</div><div class="v6-btns"><button type="button" class="v6-btn primary" data-s="new"${d.mine.length >= d.limit ? " disabled" : ""}>${I6.space}New Space</button></div>`;
+    }
+    function spForm(s) {
+      return `<div class="v6-form"><label>Name<input data-f="name" maxlength="60" value="${esc(s ? s.name : "")}" placeholder="Chem 11 Block B"></label>
+        <label>About (optional)<input data-f="about" maxlength="300" value="${esc(s ? s.about : "")}" placeholder="Ms. Lee's chemistry class"></label>
+        <label>Tutor rules (optional)<textarea data-f="rules" maxlength="1500" placeholder="Give hints, never the final answer. Use the unit notes. Keep it at a grade 11 level.">${esc(s ? s.rules : "")}</textarea></label></div>`;
+    }
+    function spVals() { const g = (k) => (spBody.querySelector(`[data-f="${k}"]`) || {}).value || ""; return { name: g("name").trim(), about: g("about").trim(), rules: g("rules").trim() }; }
+    async function spShow(id) {
+      spBody.innerHTML = `<div class="v6-empty">Loading…</div>`;
+      let s;
+      try { s = (await api("/v6/spaces/" + encodeURIComponent(id))).space; } catch (e) { spList(esc(e.message)); return; }
+      SP.cur = s;
+      const link = location.origin + location.pathname + "?space=" + (s.code || "");
+      const mb = (n) => n < 1048576 ? Math.max(1, Math.round(n / 1024)) + " KB" : (n / 1048576).toFixed(1) + " MB";
+      let h = `<div class="v6-btns" style="margin:-6px 0 14px"><button type="button" class="v6-btn" data-s="back">← All Spaces</button><button type="button" class="v6-btn primary" data-s="chat">${I6.space}Chat in this Space</button></div>`;
+      if (s.owner) {
+        h += spForm(s) + `<div class="v6-btns" style="margin-top:10px"><button type="button" class="v6-btn" data-s="save">Save changes</button></div>
+          <div class="v6-sec">Notes (${s.docs.length} files · ${mb(s.bytes)} of ${mb(s.bytes_max)})</div>
+          <div class="v6-docs">${s.docs.map(d => `<div class="v6-doc">${I6.book}<span>${esc(d.name)}</span><small>${mb(d.bytes)}</small><button type="button" data-del="${d.id}" aria-label="Remove ${esc(d.name)}">${I6.trash}</button></div>`).join("") || `<div class="v6-empty" style="padding:8px">No notes yet. Add .pdf, .docx, .pptx, .txt or .md files.</div>`}</div>
+          <div class="v6-btns" style="margin-top:8px"><button type="button" class="v6-btn" data-s="upload">${I6.upload}Add notes</button><input type="file" class="v6-up" multiple accept=".pdf,.docx,.pptx,.txt,.md,.html,.htm" hidden></div>
+          <div class="v6-sec">Share</div><div class="v6-btns" style="align-items:center"><span class="v6-code">${esc(s.code)}</span><button type="button" class="v6-btn" data-s="copylink">${I6.link}Copy link</button><button type="button" class="v6-btn" data-s="newcode">New code</button></div>
+          <p class="modal-sub" style="margin-top:6px">${s.members} member${s.members === 1 ? "" : "s"}. Members pay their own normal points. A new code stops the old one from working.</p>`;
+        const ins = s.insights || {};
+        const rowsOf = (a) => a && a.length ? a.map(x => `<div><b>${x.n}×</b><span>${esc(x.q)}</span></div>`).join("") : `<div style="color:var(--muted)">Nothing yet</div>`;
+        h += `<div class="v6-sec">What members ask (last 30 days · ${ins.asks || 0} questions, no names)</div><div class="v6-ins">${rowsOf(ins.top)}</div>
+          <div class="v6-sec">What confuses people</div><div class="v6-ins">${rowsOf(ins.confusing)}</div>
+          <div class="v6-sec">Not in your notes yet</div><div class="v6-ins">${rowsOf(ins.not_in_notes)}</div>
+          <div class="v6-btns" style="margin-top:18px"><button type="button" class="v6-btn danger" data-s="delete">${I6.trash}Delete this Space</button></div>`;
+      } else {
+        h += `<h3>${esc(s.name)}</h3><p class="modal-sub">${esc(s.about || "")}</p>` + (s.rules ? `<div class="v6-sec">Tutor rules</div><div class="v6-note">${esc(s.rules)}</div>` : "") +
+          `<div class="v6-sec">Notes</div><div class="v6-docs">${s.docs.map(d => `<div class="v6-doc">${I6.book}<span>${esc(d.name)}</span></div>`).join("") || `<div class="v6-empty" style="padding:8px">No notes yet.</div>`}</div>
+          <div class="v6-btns" style="margin-top:18px"><button type="button" class="v6-btn danger" data-s="leave">Leave this Space</button></div>`;
+      }
+      spBody.innerHTML = h;
+      const up = spBody.querySelector(".v6-up");
+      if (up) up.addEventListener("change", () => spUpload([...up.files]));
+    }
+    async function spUpload(files) {
+      const s = SP.cur; if (!s || !files.length) return;
+      const max = (S.st && S.st.spaces && S.st.spaces.file_max) || 7340032;
+      let added = 0, errs = [];
+      for (const f of files) {
+        if (f.size > max) { errs.push(`${f.name} is over ${Math.round(max / 1048576)} MB`); continue; }
+        v4Toast(`<b>Adding ${esc(f.name)}</b> · reading the notes…`);
+        try {
+          const data = (await fileToUrl(f)).split(",")[1];
+          await api(`/v6/spaces/${encodeURIComponent(s.id)}/docs`, { json: { name: f.name, data } });
+          added++;
+        } catch (e) { errs.push(`${f.name}: ${e.message}`); }
+      }
+      await spShow(s.id);
+      if (added) v4Toast(`<b>${added} file${added === 1 ? "" : "s"} added</b> · the tutor can use ${added === 1 ? "it" : "them"} now`);
+      if (errs.length) showNote(errs.join(" · "));
+    }
+    function spStartChat(s) {
+      newChat();
+      const ch = getCurrentChat();
+      if (ch) { ch.space = { id: s.id, name: s.name }; ch.title = s.name; saveChats(); renderChatList(); }
+      spClose();
+      paint();
+      if (!touchLike) el.input.focus();
+    }
+    spEl.addEventListener("click", async (e) => {
+      const tab = e.target.closest("[data-tab]");
+      if (tab) { SP.tab = tab.dataset.tab; spList(); return; }
+      const op = e.target.closest("[data-open]");
+      if (op) { spShow(op.dataset.open); return; }
+      const del = e.target.closest("[data-del]");
+      if (del && SP.cur) { try { await api(`/v6/spaces/${encodeURIComponent(SP.cur.id)}/docs/${del.dataset.del}`, { method: "DELETE" }); spShow(SP.cur.id); } catch (er) { showNote(er.message); } return; }
+      const b = e.target.closest("[data-s]"); if (!b) return;
+      const k = b.dataset.s, s = SP.cur;
+      try {
+        if (k === "close") spClose();
+        else if (k === "back") spList();
+        else if (k === "new") {
+          spBody.innerHTML = `<div class="v6-btns" style="margin:-6px 0 14px"><button type="button" class="v6-btn" data-s="back">← All Spaces</button></div>` + spForm(null) +
+            `<div class="v6-btns" style="margin-top:12px"><button type="button" class="v6-btn primary" data-s="create">Make Space</button></div><p class="modal-sub" style="margin-top:10px">You can add notes after it's made. Anyone with your code can join and chat with it.</p>`;
+          const f = spBody.querySelector('[data-f="name"]'); if (f) f.focus();
+        }
+        else if (k === "create") { const v = spVals(); if (v.name.length < 2) { showNote("Give your Space a name."); return; } const r = await api("/v6/spaces", { json: v }); SP.tab = "mine"; spShow(r.space.id); }
+        else if (k === "save" && s) { await api("/v6/spaces/" + encodeURIComponent(s.id), { json: spVals() }); v4Toast("<b>Saved</b>"); spShow(s.id); }
+        else if (k === "join") { const code = (spBody.querySelector(".v6-codein") || {}).value || ""; const r = await api("/v6/spaces/join", { json: { code } }); SP.tab = "joined"; spShow(r.space.id); v4Toast(`<b>Joined ${esc(r.space.name)}</b>`); }
+        else if (k === "upload") { const up = spBody.querySelector(".v6-up"); if (up) up.click(); }
+        else if (k === "copylink" && s) { navigator.clipboard && navigator.clipboard.writeText(location.origin + location.pathname + "?space=" + s.code); v4Toast("<b>Link copied</b> · anyone with it can join"); }
+        else if (k === "newcode" && s) { await api("/v6/spaces/" + encodeURIComponent(s.id), { json: { new_code: true } }); spShow(s.id); v4Toast("<b>New code made</b> · the old one doesn't work anymore"); }
+        else if (k === "chat" && s) spStartChat(s);
+        else if (k === "delete" && s) { if (!confirm(`Delete “${s.name}” and all its notes? This can't be undone.`)) return; await api("/v6/spaces/" + encodeURIComponent(s.id), { method: "DELETE" }); spForget(s.id); spList("Space deleted."); }
+        else if (k === "leave" && s) { await api("/v6/spaces/" + encodeURIComponent(s.id), { method: "DELETE" }); spForget(s.id); SP.tab = "joined"; spList(`You left ${esc(s.name)}.`); }
+      } catch (er) { showNote(er.message); }
+    });
+    function spForget(id) { chats.forEach(c => { if (c.space && c.space.id === id) delete c.space; }); saveChats(); paint(); }
+    // ?space=CODE links
+    function joinPending() {
+      let code = null;
+      const m = /[?&]space=([A-Za-z0-9]{6})\b/.exec(location.search);
+      if (m) { code = m[1].toUpperCase(); try { sessionStorage.setItem("scode_join_space", code); history.replaceState(null, "", location.pathname); } catch (e) {} }
+      if (!code) try { code = sessionStorage.getItem("scode_join_space"); } catch (e) {}
+      if (!code) return;
+      if (isGuest()) { if (m) setTimeout(() => openAuth("welcome", "Sign in (or make a free account) to join this SCODE Space."), 900); return; }
+      try { sessionStorage.removeItem("scode_join_space"); } catch (e) {}
+      api("/v6/spaces/join", { json: { code } }).then(r => { SP.tab = r.space.owner ? "mine" : "joined"; spOpen({ space: r.space.id }); v4Toast(`<b>You're in ${esc(r.space.name)}</b> · tap Chat in this Space to start`); })
+        .catch(e => showNote(e.message));
+    }
+
+    // ---------------------------------------------------------------- Your progress (Tutor That Learns You)
+    const pgEl = document.createElement("div");
+    pgEl.className = "overlay v6-modal"; pgEl.id = "v6-progress";
+    pgEl.innerHTML = `<div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="v6-pg-title"><div class="modal-header"><h2 id="v6-pg-title">Your progress</h2><button class="icon-btn" type="button" data-g="close" aria-label="Close">${I6.x}</button></div><div class="v6-pg-body"></div></div>`;
+    document.body.appendChild(pgEl);
+    const pgBody = pgEl.querySelector(".v6-pg-body");
+    async function progressOpen() {
+      if (isGuest()) { openAuth("welcome", "Your progress map needs a free account."); return; }
+      closeMobileSidebar();
+      pgEl.classList.add("show");
+      pgBody.innerHTML = `<div class="v6-empty">Loading…</div>`;
+      try { S.progress = await api("/v6/progress"); S.progressAt = Date.now(); } catch (e) { pgBody.innerHTML = `<div class="v6-empty">${esc(e.message)}</div>`; return; }
+      progressPaint();
+    }
+    function progressPaint() {
+      const p = S.progress; if (!p) return;
+      let h = `<p class="modal-sub" style="margin:-8px 0 14px">SCODE quietly keeps track of the topics you ask about and your quiz scores, so explanations match your level and practice focuses on what's hard. Only you can see this.</p>`;
+      if (!p.on) h += `<div class="v6-note">Your progress map is off because Memory is off. Turn Memory on in your Account page to start it.</div>`;
+      if (p.review && p.review.length) h += `<div class="v6-sec">Review these</div><div class="v6-btns">${p.review.map(r => `<button type="button" class="v6-btn" data-practice="${esc(r.topic)}">${I6.play}${esc(r.topic)}</button>`).join("")}</div>`;
+      if (!p.subjects.length) h += `<div class="v6-empty">Nothing here yet. Ask SCODE about your subjects and take a few practice quizzes, and your map will fill in.</div>`;
+      p.subjects.forEach(s => {
+        h += `<div class="v6-sec">${esc(s.name)}</div>` + s.topics.map(t => {
+          const pct = Math.round(t.score * 100), lab = t.score >= 0.75 ? "Strong" : t.score >= 0.5 ? "Getting there" : "Needs practice";
+          return `<div class="v6-topic"><div><b>${esc(t.topic)}</b><small>${lab}${t.quiz && t.quiz[1] ? ` · quizzes ${t.quiz[0]}/${t.quiz[1]}` : ""} · ${t.seen} time${t.seen === 1 ? "" : "s"}</small></div><div class="v6-bar-meter" title="${pct}%"><i style="width:${Math.max(6, pct)}%"></i></div><button type="button" data-forget="${esc(t.topic)}" aria-label="Remove ${esc(t.topic)}">${I6.x}</button></div>`;
+        }).join("");
+      });
+      if (p.subjects.length) h += `<div class="v6-btns" style="margin-top:18px"><button type="button" class="v6-btn danger" data-g="wipe">${I6.trash}Delete my progress map</button></div>`;
+      pgBody.innerHTML = h;
+    }
+    pgEl.addEventListener("click", async (e) => {
+      if (e.target === pgEl) { pgEl.classList.remove("show"); return; }
+      const pr = e.target.closest("[data-practice]");
+      if (pr) { pgEl.classList.remove("show"); practice(pr.dataset.practice); return; }
+      const fg = e.target.closest("[data-forget]");
+      if (fg) { try { S.progress = await api("/v6/progress", { method: "DELETE", json: { topic: fg.dataset.forget } }); progressPaint(); reviewPaint(); } catch (er) { showNote(er.message); } return; }
+      const b = e.target.closest("[data-g]"); if (!b) return;
+      if (b.dataset.g === "close") pgEl.classList.remove("show");
+      if (b.dataset.g === "wipe") {
+        if (!confirm("Delete your whole progress map? SCODE will start learning about you again from scratch.")) return;
+        try { S.progress = await api("/v6/progress", { method: "DELETE", json: {} }); progressPaint(); reviewPaint(); } catch (er) { showNote(er.message); }
+      }
+    });
+    function practice(topic) {
+      if (sending) { showNote("Wait for this reply to finish first."); return; }
+      if (messages.length) newChat();
+      if (!V4.auto && !STUDY_TIERS.has(selectedTier)) selectTier(v4Allowed("l5") ? "l5" : "l2_5");
+      studyKind = "quiz";
+      setMode("study");
+      el.input.value = `Make me a practice quiz on ${topic}`;
+      autoGrow(); updateSendState();
+      send();
+    }
+    // "Review these" on the home screen
+    const rv = document.createElement("div");
+    rv.id = "v6-review";
+    const wel = $("welcome");
+    if (wel) { const sub = wel.querySelector(".greet-sub"); wel.insertBefore(rv, sub ? sub.nextSibling : null); }
+    function reviewPaint() {
+      const p = S.progress;
+      const list = p && p.on && p.review ? p.review.slice(0, 3) : [];
+      rv.innerHTML = list.length ? `<div class="h">${I6.progress}Review these</div><div class="chips">${list.map(r => `<button type="button" data-practice="${esc(r.topic)}"><i></i>${esc(r.topic)}</button>`).join("")}</div>` : "";
+      rv.classList.toggle("show", list.length > 0);
+    }
+    rv.addEventListener("click", (e) => { const b = e.target.closest("[data-practice]"); if (b) practice(b.dataset.practice); });
+    async function reviewRefresh() {
+      if (isGuest()) { S.progress = null; reviewPaint(); return; }
+      if (Date.now() - S.progressAt < 120000) { reviewPaint(); return; }
+      S.progressAt = Date.now();
+      try { S.progress = await api("/v6/progress"); } catch (e) { S.progress = null; }
+      reviewPaint();
+    }
+    // quiz scores count most
+    document.addEventListener("scode-quiz-done", (e) => {
+      if (isGuest() || !e.detail || !e.detail.full) return;
+      const box = e.target.closest && e.target.closest(".study");
+      if (!box || box.dataset.v6q) return;
+      box.dataset.v6q = "1";
+      const title = (box.querySelector(".st-title") || {}).textContent || "";
+      api("/v6/progress/quiz", { json: { title, right: e.detail.right, total: e.detail.total } }).then(() => { S.progressAt = 0; }).catch(() => {});
+    });
+
+    // ---------------------------------------------------------------- sidebar links + toolbar wiring
+    function addSideLinks() {
+      const st = $("v4-status-link");
+      if (!st) return;
+      const grp = document.createElement("div");
+      grp.className = "side-links";
+      st.parentNode.parentNode.insertBefore(grp, st.parentNode);
+      const mk = (id, icon, label) => { const b = document.createElement("button"); b.type = "button"; b.className = "side-link v4-side"; b.id = id; b.innerHTML = icon + label; grp.appendChild(b); return b; };
+      mk("v6-spaces-link", I6.space, "Spaces").addEventListener("click", () => spOpen());
+      mk("v6-progress-link", I6.progress, "Progress").addEventListener("click", progressOpen);
+    }
+    addSideLinks();
+    $("cp-btn").addEventListener("click", toggleCompute);
+    $("rs-btn").addEventListener("click", toggleResearch);
+    const micBtn = $("mic-btn");
+    micBtn.addEventListener("pointerdown", (e) => {
+      if (MIC.live) return;
+      MIC.down = Date.now();
+      e.preventDefault();
+      micStart();
+    });
+    micBtn.addEventListener("pointerup", () => {
+      if (!MIC.live) return;
+      if (MIC.down && Date.now() - MIC.down > 450) { MIC.down = 0; micStop(false); }   // held down: letting go sends
+      else if (!MIC.down) micStop(false);                                              // second tap sends
+      else MIC.down = 0;                                                               // a quick tap keeps listening
+    });
+    micBtn.addEventListener("click", (e) => e.preventDefault());
+    micBtn.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (MIC.live) micStop(false); else micStart(); } });
+    // A chat switch or a new chat stops the voice and repaints the Space bar
+    const _v6SendState = updateSendState;
+    updateSendState = function () { _v6SendState.apply(this, arguments); if ($("mic-btn")) paint(); };
+    const _v6Render = renderMessages;
+    renderMessages = function () { _v6Render.apply(this, arguments); paintBar(); };
+    // Markdown: hide Ultra Voice's tone cues ([excited], [pause]…)
+    const _v6Md = renderMarkdown;
+    renderMarkdown = function (t) { t = String(t || ""); return _v6Md(/\[(excited|happy|warm|curious|calm|serious|pause)\]/i.test(t) ? stripTags(t) : t); };
+    const _v6Actions = buildActions;
+    buildActions = function (text, tier) { return _v6Actions(stripTags(text), tier); };
+    const _v6St = v4Status;
+    v4Status = function (data) { _v6St(data); v6Status(data); };
+
+    // ---------------------------------------------------------------- launch popup for v6.0
+    const _v6ShowWN = maybeShowWhatsNew;
+    maybeShowWhatsNew = function () {
+      const forced = /[?&]whatsnew=v6\b/.test(location.search);
+      let seen = false;
+      try { seen = sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
+      if (/[?&](set|space)=/.test(location.search)) return;
+      if (!forced && (seen || Date.now() < V6_LAUNCH || Date.now() > V6_LAUNCH + 6 * 864e5)) { _v6ShowWN(); return; }
+      const feats = [
+        ["compute", I6.compute, "Smarter answers", "Instant Answers in under a second, SCODE Compute runs real code for exact math, and replies come with graphs, 3D molecules and simulations you can play with."],
+        ["research", I6.research, "Knows more", "The SCODE Library looks facts up in offline Wikipedia instead of guessing. SCODE Research (Pro) reads 10 to 20 sources and writes a cited report."],
+        ["eyes", I6.eyes, "Sees and speaks", "Point your camera with SCODE Eyes, draw or handwrite on SCODE Canvas, or talk to General Ultra and hear it answer with Ultra Voice (Pro)."],
+        ["spaces", I6.space, "Learns with you", "SCODE now learns which topics you find hard and helps you review them, and Spaces make a custom tutor for your class, club or team."],
+      ];
+      wn.querySelector(".wn-tag").textContent = "New · SCODE 6";
+      $("wn-title").textContent = "Meet SCODE 6";
+      wn.querySelector(".modal-sub").textContent = "Our biggest update yet: 10 new features that make SCODE smarter, more visual and more human.";
+      wn.querySelector(".wn-feats").innerHTML = feats.map(([k, ic, n, t]) => `<div class="wn-feat"><div class="wn-fi">${ic}</div><div class="wn-ft"><b>${n}</b><span>${t}</span></div><button class="wn-try v6-try" type="button" data-v6try="${k}">Try</button></div>`).join("");
+      const orbs = wn.querySelector(".wn-orbs"); orbs.classList.add("many");
+      orbs.innerHTML = feats.map(f => `<div class="wn-orb">${f[1].replace("<svg ", '<svg width="32" height="32" ')}</div>`).join("");
+      $("wn-cost-line").textContent = "Most of it is free · Compute +5 · Eyes +10 · Research and Voice are SCODE Pro";
+      wn.querySelectorAll(".v6-try").forEach(b => b.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        closeWhatsNew();
+        const k = b.dataset.v6try;
+        if (k === "compute") { if (isGuest()) { openAuth("welcome", "SCODE Compute needs a free account."); return; } if (computeState() === "off") toggleCompute(); el.input.value = el.input.value || "Graph y = x² − 4 and find where it crosses the x-axis"; autoGrow(); updateSendState(); paint(); updateCostInfo(); }
+        if (k === "research") toggleResearch();
+        if (k === "eyes") eyesOpen();
+        if (k === "spaces") spOpen();
+      }));
+      wn.classList.add("show");
+    };
+
+    paint();
+    setTimeout(scanRows, 0);
+    return { prep, fields, onEvent, finish, stripTags, voiceFeed, voiceStart, voiceStop, decorate, makeWidget, eyesOpen, canvasOpen, spOpen, progressOpen, S, compileExpr, ELS, elPos };
+  })();
+  window.scodeV6 = V6;
 
   // ---------------------------------------------------------------- start
   window.scodeV4 = V4;
