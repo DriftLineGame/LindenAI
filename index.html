@@ -3558,6 +3558,78 @@
   #v6-review .chips button:hover { border-color: var(--accent); }
   #v6-review .chips button i { width: 8px; height: 8px; border-radius: 50%; background: #ff8a65; }
 
+  /* ===== v6.1: Library pictures (General Ultra) ===== */
+  .v6-pics { display: grid; grid-template-columns: minmax(0, 340px); gap: 12px; margin: 2px 0 14px; font-family: var(--sans); }
+  .v6-pics.two { grid-template-columns: repeat(2, minmax(0, 270px)); }
+  .v6-pics figure { margin: 0; border-radius: 18px; overflow: hidden; background: var(--surface); border: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(20,16,40,.05), 0 10px 28px -14px rgba(60,40,120,.28);
+    opacity: 0; transform: translateY(8px) scale(.985); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.85,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
+  .v6-pics figure.in { opacity: 1; transform: none; }
+  .v6-pics .ph { display: block; width: 100%; padding: 0; border: 0; margin: 0; cursor: zoom-in; background: var(--surface-2); aspect-ratio: 1 / var(--r, .75); max-height: 300px; overflow: hidden; }
+  .v6-pics .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.85,.2,1); }
+  .v6-pics .ph:hover img { transform: scale(1.025); }
+  .v6-pics figcaption { padding: 10px 14px 12px; display: grid; gap: 3px; }
+  .v6-pics figcaption b { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -.005em; }
+  .v6-pics figcaption span { font-size: 12.5px; line-height: 1.4; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .v6-pics figcaption small { font-size: 11px; color: var(--faint); }
+  .v6-pics figcaption a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 2px; }
+  @media (max-width: 600px) { .v6-pics.two { grid-template-columns: 1fr 1fr; } .v6-pics { grid-template-columns: minmax(0, 1fr); } .v6-pics .ph { max-height: 240px; } }
+  #v6-picview { background: rgba(8,6,16,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: zoom-out; flex-direction: column; }
+  #v6-picview figure { margin: 0; max-width: min(92vw, 900px); display: grid; gap: 12px; justify-items: center; }
+  #v6-picview img { width: min(88vw, 760px); height: auto; max-height: 76vh; border-radius: 16px; object-fit: contain; background: rgba(255,255,255,.04); box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); }
+  #v6-picview figcaption { color: rgba(255,255,255,.82); font: 14px var(--sans); text-align: center; }
+  #v6-picview .icon-btn { position: absolute; top: calc(14px + env(safe-area-inset-top)); right: 14px; color: #fff; }
+
+  /* ===== v6.1: Voice mode (the mic turns into the orb) ===== */
+  #v6-vm { position: fixed; inset: 0; z-index: 90; display: flex; flex-direction: column; font-family: var(--sans); color: var(--text);
+    background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(28px) saturate(1.3); -webkit-backdrop-filter: blur(28px) saturate(1.3);
+    opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s .4s; }
+  #v6-vm.show { opacity: 1; visibility: visible; transition: opacity .3s ease; }
+  body.v6-vm-on #v6-voice { display: none; }
+  #v6-vm .vm-top { position: relative; display: flex; align-items: center; gap: 10px; padding: calc(14px + env(safe-area-inset-top)) 16px 6px; }
+  #v6-vm .vm-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-right: auto; }
+  #v6-vm .vm-tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--accent-grad); box-shadow: 0 0 10px rgba(139,107,255,.6); }
+  #v6-vm .vm-chip { height: 36px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); padding: 0 14px 0 11px;
+    font: 600 13px var(--sans); display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+  #v6-vm .vm-chip svg { width: 16px; height: 16px; color: var(--accent); }
+  #v6-vm .vm-x { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; }
+  #v6-vm .vm-x svg { width: 18px; height: 18px; }
+  #v6-vm .vm-chip:hover, #v6-vm .vm-x:hover { border-color: var(--border-strong); }
+  #v6-vm .vm-menu { position: absolute; right: 64px; top: calc(100% - 2px); background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow);
+    padding: 6px; min-width: 220px; display: none; z-index: 2; }
+  #v6-vm .vm-menu.show { display: block; animation: v6VmIn .18s ease; }
+  #v6-vm .vm-menu button { width: 100%; display: grid; text-align: left; gap: 1px; border: 0; background: none; color: var(--text); padding: 9px 12px; border-radius: 10px; cursor: pointer; font: inherit; }
+  #v6-vm .vm-menu button b { font-size: 14px; } #v6-vm .vm-menu button small { font-size: 12px; color: var(--muted); }
+  #v6-vm .vm-menu button:hover { background: var(--hover); } #v6-vm .vm-menu button.on { background: var(--accent-soft); }
+  @keyframes v6VmIn { from { opacity: 0; transform: translateY(-4px); } }
+  #v6-vm .vm-mid { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 0 24px; text-align: center; }
+  #v6-vm .vm-said { max-width: 560px; min-height: 2.9em; font-size: 16px; line-height: 1.45; color: var(--muted); font-weight: 500;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: opacity .3s; }
+  #v6-vm[data-state="speaking"] .vm-said, #v6-vm[data-state="idle"] .vm-said { opacity: .55; }
+  #v6-vm .vm-stage { position: relative; width: min(74vw, 46vh, 360px); aspect-ratio: 1; border-radius: 50%; touch-action: none; user-select: none; -webkit-user-select: none;
+    -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; cursor: pointer; outline: none;
+    transition: transform .6s cubic-bezier(.2,.9,.15,1); }
+  #v6-vm:not(.show) .vm-stage { transform: scale(.2) translateY(40vh); transition: transform .4s cubic-bezier(.5,0,.75,0); }
+  #v6-vm .vm-stage:focus-visible { box-shadow: 0 0 0 3px var(--accent-soft); }
+  #v6-vm .vm-orb { position: absolute; inset: 0; will-change: transform; }
+  #v6-vm .vm-orb .sc-orb { position: absolute; inset: 0; width: 100% !important; height: 100% !important; margin: 0 !important; animation: none; opacity: 1; transform: none; }
+  #v6-vm .vm-rings { position: absolute; inset: 0; pointer-events: none; }
+  #v6-vm .vm-rings i { position: absolute; inset: 21%; border-radius: 50%; border: 2px solid rgba(139,107,255,.45); opacity: 0; }
+  #v6-vm[data-state="listening"] .vm-rings i { animation: v6Ring 2.1s cubic-bezier(.2,.6,.3,1) infinite; }
+  #v6-vm[data-state="listening"] .vm-rings i:nth-child(2) { animation-delay: .7s; border-color: rgba(255,95,176,.4); }
+  #v6-vm[data-state="listening"] .vm-rings i:nth-child(3) { animation-delay: 1.4s; border-color: rgba(63,193,255,.4); }
+  @keyframes v6Ring { 0% { opacity: .75; transform: scale(1); } 100% { opacity: 0; transform: scale(calc(1.55 + var(--lv, 0) * .3)); } }
+  #v6-vm .vm-state { font-size: 21px; font-weight: 750; letter-spacing: -.01em; min-height: 1.3em; color: var(--text); }
+  #v6-vm[data-state="listening"] .vm-state, #v6-vm[data-state="thinking"] .vm-state { background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #v6-vm[data-state="thinking"] .vm-state { animation: v6VmPulse 1.4s ease-in-out infinite; }
+  #v6-vm[data-state="error"] .vm-state, #v6-vm[data-state="wait"] .vm-state { font-size: 16px; font-weight: 600; max-width: 440px; color: var(--muted); }
+  @keyframes v6VmPulse { 50% { opacity: .55; } }
+  #v6-vm .vm-cap { max-width: 640px; min-height: 2.9em; font-size: clamp(18px, 2.6vw, 23px); line-height: 1.4; font-weight: 600; letter-spacing: -.01em; color: var(--text);
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  #v6-vm .vm-hint { text-align: center; font-size: 13px; color: var(--faint); padding: 14px 20px calc(22px + env(safe-area-inset-bottom)); min-height: 1.4em; }
+  @media (max-height: 560px) { #v6-vm .vm-cap { -webkit-line-clamp: 2; min-height: 0; } #v6-vm .vm-said { -webkit-line-clamp: 1; min-height: 0; } }
+  @media (prefers-reduced-motion: reduce) { #v6-vm .vm-stage, #v6-vm:not(.show) .vm-stage { transition: none; transform: none; } #v6-vm .vm-rings i { animation: none !important; } .v6-pics figure { transition: none; opacity: 1; transform: none; } }
+
 </style>
 </head>
 <body class="is-empty">
@@ -4184,6 +4256,13 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">October 30, 2026</div><h3>v6.1</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Voice mode</b> <span>tap the mic and it turns into the SCODE orb. Hold it and talk, let go to send. The orb thinks, then moves with SCODE's voice as it answers. Close it to see the whole conversation written out.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Library pictures</b> <span>(General Ultra) when SCODE answers from the Library, it shows the article's main picture with its caption, like a photo of the bird or mountain you asked about.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Fewer made-up facts</b> <span>when SCODE can't find an exact number, date or name, it now says it isn't sure instead of guessing, and suggests SCODE Research.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>Ultra Voice sounds human again</b> <span>replies were falling back to the robot voice. Now they use SCODE's natural voices (Heart, Bella, Michael and Emma).</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>iPhone voice</b> <span>replies now play as normal, loud audio instead of quiet "phone call" audio.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">October 29, 2026</div><h3>v6.0: SCODE 6</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Instant Answers</b> <span>common questions like "density formula" are answered in under a second from a checked list, free.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>SCODE Compute</b> <span>SCODE writes and runs real code for math, chem and physics, so the numbers are exact. Tap Computed to see the code. Auto turns it on for calculation questions.</span></li>
@@ -4391,7 +4470,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://pharmacy-mechanism-sum-advancement.trycloudflare.com";
+  const PROXY_URL = "https://regression-conversion-africa-maximum.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -10129,8 +10208,8 @@
       if (w !== W || h !== H) {
         W = w; H = h;
         cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-        R = Math.max(18, Math.min(H * (o.small ? 0.36 : 0.33), W * 0.26));
-        RX = R * 1.13; RY = R * 0.93;
+        R = o.big ? Math.max(18, Math.min(W, H) * 0.3) : Math.max(18, Math.min(H * (o.small ? 0.36 : 0.33), W * 0.26));
+        RX = R * (o.round ? 1.01 : 1.13); RY = R * (o.round ? 0.99 : 0.93);
         A0 = Math.PI * RX * RY;
         hit.style.width = (RX * 2.3) + "px"; hit.style.height = (RY * 2.4) + "px";
         if (!ready) {
@@ -10142,11 +10221,13 @@
     }
     // The shape it wants to be: an oval that slowly breathes and ripples.
     function rest(t) {
-      const br = 1 + 0.022 * Math.sin(t * 1.15 + seed);
+      const lv = o.level ? Math.max(0, Math.min(1, +o.level() || 0)) : 0, think = o.mood && o.mood() === "thinking" ? 1 : 0;
+      const br = (1 + 0.022 * Math.sin(t * 1.15 + seed)) * (1 + lv * 0.05);
+      const wob = (o.round ? 0.4 : 1) + lv * (o.round ? 1.9 : 2.4) + think * 1.4;
       for (const p of P) {
         const a = p.a;
-        const f = br * (1 + 0.027 * Math.sin(2 * a + t * 0.9 + seed) + 0.02 * Math.sin(3 * a - t * 1.25 + 1 + seed)
-          + 0.011 * Math.sin(5 * a + t * 1.7 + 2));
+        const f = br * (1 + wob * (0.027 * Math.sin(2 * a + t * (0.9 + think * 2.2) + seed) + 0.02 * Math.sin(3 * a - t * (1.25 + lv * 3) + 1 + seed)
+          + 0.011 * Math.sin(5 * a + t * (1.7 + lv * 5) + 2)) + think * 0.03 * Math.sin(a - t * 3.4));
         let sx = 1, sy = 1;
         if (melted) { const m = Math.min(1, (performance.now() - meltAt) / 650); sx = 1 + 0.55 * m; sy = 1 - 0.78 * m; }
         p.tx = Math.cos(a) * RX * f * sx; p.ty = Math.sin(a) * RY * f * sy;
@@ -10334,6 +10415,7 @@
       requestAnimationFrame(() => { if (!size()) return; rest(0); for (const p of P) { p.x = p.tx; p.y = p.ty; } step(1 / 120, 0); for (const p of P) { p.x = p.tx; p.y = p.ty; } draw(0); });
       hit.style.display = "none";
     } else raf = requestAnimationFrame(frame);
+    if (o.noDrag) hit.style.display = "none";
 
     // Drag with a finger or the mouse
     const at = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
@@ -14200,7 +14282,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-10-29";
+  const V4_LOG_VER = "2026-10-30";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -14398,7 +14480,7 @@
       tools.classList.toggle("v6-mic-mode", micMode);
       mic.classList.toggle("show", micMode);
       mic.classList.toggle("locked", !!ma && S.plan !== "pro");
-      mic.title = S.plan !== "pro" ? "Ultra Voice (Pro): talk to General Ultra" : (MIC.live ? "Listening… tap to send" : "Talk to General Ultra (Ultra Voice)");
+      mic.title = S.plan !== "pro" ? "Ultra Voice (Pro): talk to General Ultra" : "Voice mode: talk to General Ultra (Ultra Voice)";
       paintBar();
       modesSync();
     }
@@ -14630,7 +14712,7 @@
       if (S.voiceNext) {
         S.voiceNext = false;
         if (!v4Allowed("l5")) { v4OpenPlan("Ultra Voice is part of SCODE Pro."); return false; }
-        if (!P.study && !P.imgNow) { P.tier = "l5"; P.voice = true; P.v6.voice = true; P.deep = false; voiceStart(); }
+        if (!P.study && !P.imgNow) { P.tier = "l5"; P.voice = true; P.v6.voice = true; P.deep = false; voiceStart(VM.open); }
       }
       if (P.tier !== selectedTier && !V4.auto) { selectedTier = P.tier; updateModelPickerLabel(); }
       return true;
@@ -14755,10 +14837,44 @@
         });
         box.appendChild(c);
       }
+      pics(row, M);
       if (!box.children.length) return;
       const actions = row.querySelector(":scope > .msg-actions");
       if (actions) row.insertBefore(box, actions); else row.appendChild(box);
     }
+    // v6.1: the Library's pictures (General Ultra), above the reply
+    function pics(row, M) {
+      const list = (M.kb || []).filter(s => s && s.pic && s.pic.src && /^\/kb\/pic\?t=/.test(s.pic.src)).slice(0, 2);
+      if (!list.length || row.querySelector(":scope > .v6-pics")) return;
+      const wrap = document.createElement("div");
+      wrap.className = "v6-pics" + (list.length > 1 ? " two" : "");
+      list.forEach((s, i) => {
+        const f = document.createElement("figure");
+        f.style.setProperty("--i", i);
+        const ratio = s.pic.w && s.pic.h ? Math.max(0.56, Math.min(1.5, s.pic.h / s.pic.w)) : 0.75;
+        f.innerHTML = `<button type="button" class="ph" aria-label="Show the picture of ${esc(s.title)} bigger" style="--r:${ratio.toFixed(3)}"><img alt="${esc(s.title)}" loading="lazy" decoding="async"></button>
+          <figcaption><b>${esc(s.title)}</b>${s.pic.cap ? `<span>${esc(s.pic.cap)}</span>` : ""}<small>${s.url && /^https?:\/\//.test(s.url) ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Image: Wikipedia</a>` : "Image: Wikipedia"}</small></figcaption>`;
+        const img = f.querySelector("img");
+        img.addEventListener("load", () => f.classList.add("in"));
+        img.addEventListener("error", () => { f.remove(); if (!wrap.children.length) wrap.remove(); else wrap.classList.remove("two"); });
+        img.src = PROXY_URL + s.pic.src;
+        f.querySelector(".ph").addEventListener("click", () => picView(img.src, s));
+        wrap.appendChild(f);
+      });
+      const md = row.querySelector(":scope > .md");
+      if (md) row.insertBefore(wrap, md); else row.appendChild(wrap);
+    }
+    const pv = document.createElement("div");
+    pv.id = "v6-picview"; pv.className = "overlay";
+    pv.innerHTML = `<figure><img alt=""><figcaption></figcaption></figure><button type="button" class="icon-btn" aria-label="Close">${I6.x}</button>`;
+    document.body.appendChild(pv);
+    function picView(src, s) {
+      pv.querySelector("img").src = src; pv.querySelector("img").alt = s.title || "";
+      pv.querySelector("figcaption").innerHTML = `<b>${esc(s.title)}</b>${s.pic && s.pic.cap ? ` · ${esc(s.pic.cap)}` : ""} · Image: Wikipedia`;
+      pv.classList.add("show");
+    }
+    pv.addEventListener("click", () => pv.classList.remove("show"));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && pv.classList.contains("show")) pv.classList.remove("show"); });
     // Saved messages: buildMessageRow marks the row; draw the cards and widgets here.
     function scanRows() {
       el.messages.querySelectorAll(".msg.assistant").forEach(row => {
@@ -15687,7 +15803,10 @@
       if (b.dataset.vo === "menu") { paintMenu(); vmenu.classList.toggle("show"); }
       if (b.dataset.vo === "auto") { VO.auto = !VO.auto; try { localStorage.setItem("scode_voice_auto", VO.auto ? "1" : "0"); } catch (er) {} paintMenu(); if (!VO.auto) voiceStop(true); }
     });
-    function pillShow(text, talking) { pill.classList.add("show"); pill.classList.toggle("talking", !!talking); if (text !== undefined) pillCap.textContent = text; }
+    function pillShow(text, talking) {
+      if (VM.open) { if (text !== undefined) vmCap(text); return; }
+      pill.classList.add("show"); pill.classList.toggle("talking", !!talking); if (text !== undefined) pillCap.textContent = text;
+    }
     function pillHide() { pill.classList.remove("show", "talking"); vmenu.classList.remove("show"); }
     function speechText(s) {
       return String(s).replace(/```[\s\S]*?```/g, " ").replace(/`([^`]*)`/g, "$1").replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
@@ -15739,14 +15858,57 @@
         if (it.ready || VO.fallback) return;
         it.ready = fetch(PROXY_URL + "/voice/tts", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ text: it.text, voice: VO.voice }) })
           .then(r => r.ok ? r.blob() : Promise.reject(new Error("off")))
-          .then(b => { it.url = URL.createObjectURL(b); return true; })
+          .then(async b => { it.url = URL.createObjectURL(b); it.env = await envelopeOf(b); return true; })
           .catch(() => { VO.fallback = true; return false; });
       });
     }
+    // How loud each 1/30 s of a reply is (from the WAV itself, no Web Audio), so the orb can move with the voice
+    async function envelopeOf(blob) {
+      try {
+        const b = new DataView(await blob.arrayBuffer());
+        let p = 12, sr = 24000, data = -1, len = 0;
+        while (p + 8 <= b.byteLength) {
+          const id = String.fromCharCode(b.getUint8(p), b.getUint8(p + 1), b.getUint8(p + 2), b.getUint8(p + 3));
+          const sz = b.getUint32(p + 4, true);
+          if (id === "fmt ") sr = b.getUint32(p + 12, true);
+          if (id === "data") { data = p + 8; len = Math.min(sz, b.byteLength - data); break; }
+          p += 8 + sz + (sz & 1);
+        }
+        if (data < 0) return null;
+        const n = len >> 1, hop = Math.max(1, Math.round(sr / 30)), out = new Float32Array(Math.ceil(n / hop));
+        let mx = 1e-4;
+        for (let i = 0; i < out.length; i++) {
+          let s2 = 0, c = 0;
+          for (let j = i * hop, e = Math.min(n, (i + 1) * hop); j < e; j += 3) { const v = b.getInt16(data + j * 2, true) / 32768; s2 += v * v; c++; }
+          out[i] = Math.sqrt(s2 / Math.max(1, c)); if (out[i] > mx) mx = out[i];
+        }
+        for (let i = 0; i < out.length; i++) out[i] = Math.min(1, Math.pow(out[i] / mx, 0.7));
+        return out;
+      } catch (e) { return null; }
+    }
+    // iPhone: one audio element, unlocked by a tap, plays every reply. Telling Safari the page is
+    // "playback" (not "play-and-record") keeps replies loud on the speaker instead of quiet "call" audio.
+    function audioSession(type) { try { if (navigator.audioSession) navigator.audioSession.type = type; } catch (e) {} }
+    const SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=";
+    function audioEl() {
+      if (!VO.el) { VO.el = new Audio(); VO.el.preload = "auto"; VO.el.setAttribute("playsinline", ""); }
+      return VO.el;
+    }
+    function unlockAudio() {
+      const a = audioEl();
+      if (VO.unlocked) return;
+      try { a.src = SILENT; const p = a.play(); if (p && p.then) p.then(() => { VO.unlocked = true; }).catch(() => {}); } catch (e) {}
+    }
     async function playNext() {
       const it = VO.q[0];
-      if (!it || it.gen !== VO.gen) { VO.playing = false; if (VO.done && !VO.q.length) setTimeout(() => { if (!VO.playing && !VO.q.length) pillHide(); }, 900); return; }
+      if (!it || it.gen !== VO.gen) {
+        VO.playing = false;
+        if (VO.done && !VO.q.length) setTimeout(() => { if (!VO.playing && !VO.q.length) { pillHide(); vmSpoken(); } }, 900);
+        return;
+      }
       VO.playing = true;
+      if (MIC.rec || MIC.media) { micStop(true); await new Promise(r => setTimeout(r, 180)); }
+      audioSession("playback");
       pillShow(it.cap, true);
       let ok = false;
       if (!VO.fallback) { if (!it.ready) prefetch(); ok = await it.ready; }
@@ -15754,11 +15916,14 @@
       VO.q.shift(); prefetch();
       if (ok && it.url) {
         await new Promise((res) => {
-          const a = new Audio(it.url); VO.audio = a;
-          a.onended = a.onerror = () => { URL.revokeObjectURL(it.url); res(); };
-          a.play().catch(() => res());
+          const a = audioEl(); VO.audio = a; VO.env = it.env || null;
+          const done = () => { a.onended = a.onerror = null; URL.revokeObjectURL(it.url); VO.env = null; res(); };
+          a.onended = a.onerror = done;
+          a.src = it.url;
+          vmState("speaking");
+          a.play().catch(done);
         });
-      } else await speakFallback(it.text);
+      } else { vmState("speaking"); VO.env = null; await speakFallback(it.text); }
       VO.audio = null;
       if (it.gen === VO.gen) playNext();
     }
@@ -15776,70 +15941,271 @@
       });
     }
     function stopAudio() {
-      if (VO.audio) { try { VO.audio.pause(); } catch (e) {} VO.audio = null; }
+      if (VO.audio) { try { VO.audio.pause(); VO.audio.removeAttribute("src"); VO.audio.load(); } catch (e) {} VO.audio = null; }
+      VO.env = null;
       if (window.speechSynthesis) try { window.speechSynthesis.cancel(); } catch (e) {}
     }
     function voiceStop(keepActive) { VO.gen++; VO.q = []; VO.playing = false; stopAudio(); if (!keepActive) VO.active = false; pillHide(); }
-    function speakAll(text) { voiceStart(true); voiceEnd(text); }
-    // the mic: tap to talk (tap again to send), or hold and let go to send
+    function speakAll(text) { unlockAudio(); voiceStart(true); voiceEnd(text); }
+
+    // ---------------------------------------------------------------- listening (used by voice mode)
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    function micStart() {
-      if (isGuest()) { openAuth("welcome", "Ultra Voice needs an account."); return; }
-      if (S.plan !== "pro") { v4OpenPlan("Ultra Voice is part of SCODE Pro. Pro is free until January 1, 2027 when you help train SCODE AI."); return; }
-      if (sending) { showNote("Wait for this reply to finish, then talk."); return; }
-      voiceStop();
+    function voiceAllowed() {
+      if (isGuest()) { openAuth("welcome", "Ultra Voice needs an account."); return false; }
+      if (S.plan !== "pro") { v4OpenPlan("Ultra Voice is part of SCODE Pro. Pro is free until January 1, 2027 when you help train SCODE AI."); return false; }
+      return true;
+    }
+    // listen({ interim(text), level(0..1), done(text), fail(message) })
+    function listen(h) {
       MIC.cancel = false;
-      const base = el.input.value.trim();
+      audioSession("play-and-record");
       if (SR) {
         const rec = new SR();
-        rec.lang = navigator.language || "en-US"; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
-        let finalText = "";
+        rec.lang = navigator.language || "en-US"; rec.interimResults = true; rec.continuous = true; rec.maxAlternatives = 1;
+        let finalText = "", interim = "";
         rec.onresult = (e) => {
-          let interim = "";
-          for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i]; if (r.isFinal) finalText += r[0].transcript; else interim += r[0].transcript; }
-          el.input.value = (base + " " + finalText + interim).trim(); autoGrow(); updateSendState();
+          interim = "";
+          for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i]; if (r.isFinal) finalText += r[0].transcript + " "; else interim += r[0].transcript; }
+          h.interim((finalText + interim).trim()); h.level(0.55 + Math.random() * 0.45);
         };
         rec.onerror = (e) => {
-          if (e.error === "not-allowed" || e.error === "service-not-allowed") showNote("Allow the microphone for this site to talk to SCODE.");
-          else if (e.error === "no-speech") showNote("Didn't hear anything. Tap the mic and try again.");
-          MIC.cancel = e.error !== "aborted" ? MIC.cancel : true;
+          if (e.error === "not-allowed" || e.error === "service-not-allowed") { MIC.cancel = true; h.fail("Allow the microphone for this site to talk to SCODE."); }
+          else if (e.error === "aborted") MIC.cancel = true;
         };
-        rec.onend = () => { MIC.live = false; MIC.rec = null; paint(); if (!MIC.cancel && el.input.value.trim()) micSend(); };
+        rec.onend = () => {
+          MIC.live = false; MIC.rec = null; paint(); audioSession("auto");
+          if (MIC.cancel) return;
+          h.done((finalText + interim).trim());
+        };
         MIC.rec = rec; MIC.live = true; paint();
-        try { rec.start(); } catch (e) { MIC.live = false; paint(); }
-        pillShow("Listening… tap the mic again when you're done", false);
-        pill.classList.remove("talking");
+        try { rec.start(); } catch (e) { MIC.live = false; MIC.rec = null; h.fail("The microphone didn't start. Try again."); }
         return;
       }
-      if (!navigator.mediaDevices || !window.MediaRecorder) { showNote("This browser can't record your voice. Try Chrome or Safari, or type instead."); return; }
+      if (!navigator.mediaDevices || !window.MediaRecorder) { h.fail("This browser can't record your voice. Try Chrome or Safari, or type instead."); return; }
       navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         const mr = new MediaRecorder(stream);
+        let ac = null, an = null, buf = null, iv = 0;
+        try {
+          ac = new (window.AudioContext || window.webkitAudioContext)();
+          an = ac.createAnalyser(); an.fftSize = 512; buf = new Uint8Array(an.fftSize);
+          ac.createMediaStreamSource(stream).connect(an);
+          iv = setInterval(() => { an.getByteTimeDomainData(buf); let s2 = 0; for (let i = 0; i < buf.length; i++) { const v = (buf[i] - 128) / 128; s2 += v * v; } h.level(Math.min(1, Math.sqrt(s2 / buf.length) * 5)); }, 50);
+        } catch (e) {}
         MIC.media = mr; MIC.chunks = []; MIC.live = true; paint();
-        pillShow("Listening… tap the mic again when you're done", false);
         mr.ondataavailable = (e) => { if (e.data && e.data.size) MIC.chunks.push(e.data); };
         mr.onstop = async () => {
+          clearInterval(iv); try { ac && ac.close(); } catch (e) {}
           stream.getTracks().forEach(t => t.stop());
-          MIC.live = false; MIC.media = null; paint();
-          if (MIC.cancel) { pillHide(); return; }
-          pillShow("Turning your voice into text…", false);
+          MIC.live = false; MIC.media = null; paint(); audioSession("auto");
+          if (MIC.cancel) return;
+          h.interim("Turning your voice into text…");
           try {
             const blob = new Blob(MIC.chunks, { type: mr.mimeType || "audio/webm" });
             const r = await fetch(PROXY_URL + "/voice/stt", { method: "POST", headers: authHeaders({ "Content-Type": blob.type }), body: blob });
             const d = await r.json();
             if (!r.ok) throw new Error(d.message || "off");
-            if (d.text && d.text.trim()) { el.input.value = (base + " " + d.text).trim(); autoGrow(); updateSendState(); micSend(); }
-            else { pillHide(); showNote("Didn't catch that. Tap the mic and try again."); }
-          } catch (e) { pillHide(); showNote(e.message && e.message !== "off" ? e.message : "SCODE couldn't hear that right now. Try typing instead."); }
+            h.done(String(d.text || "").trim());
+          } catch (e) { h.fail(e.message && e.message !== "off" ? e.message : "SCODE couldn't hear that right now. Try typing instead."); }
         };
         mr.start();
         setTimeout(() => { if (MIC.media === mr && mr.state === "recording") mr.stop(); }, 60000);
-      }).catch(() => showNote("Allow the microphone for this site to talk to SCODE."));
+      }).catch(() => h.fail("Allow the microphone for this site to talk to SCODE."));
     }
     function micStop(cancel) {
       MIC.cancel = !!cancel;
       if (MIC.rec) try { MIC.rec.stop(); } catch (e) {}
       if (MIC.media && MIC.media.state === "recording") MIC.media.stop();
     }
+
+    // ---------------------------------------------------------------- Voice mode (v6.1): the mic turns into the orb
+    const VM = { open: false, state: "idle", orb: null, level: 0, target: 0, holdAt: 0, holding: false, raf: 0, said: "", thinkSince: 0, perm: false, closing: 0 };
+    const vm = document.createElement("div");
+    vm.id = "v6-vm";
+    vm.setAttribute("role", "dialog"); vm.setAttribute("aria-modal", "true"); vm.setAttribute("aria-label", "Ultra Voice");
+    vm.innerHTML = `<div class="vm-top"><span class="vm-tag"><i></i>Ultra Voice</span>
+        <button type="button" class="vm-chip" data-vm="voices" aria-haspopup="menu">${I6.speaker}<span class="vm-vn"></span></button>
+        <button type="button" class="vm-x" data-vm="close" aria-label="Close voice mode and go back to the chat">${I6.x}</button>
+        <div class="vm-menu" role="menu"></div></div>
+      <div class="vm-mid">
+        <div class="vm-said" aria-live="polite"></div>
+        <div class="vm-stage" role="button" tabindex="0" aria-label="Hold to talk to SCODE"><div class="vm-rings"><i></i><i></i><i></i></div><div class="vm-orb"></div></div>
+        <div class="vm-state"></div>
+        <div class="vm-cap" aria-live="polite"></div>
+      </div>
+      <div class="vm-hint"></div>`;
+    document.body.appendChild(vm);
+    const vmQ = (c) => vm.querySelector(c);
+    const vmStage = vmQ(".vm-stage"), vmOrbBox = vmQ(".vm-orb");
+    const vmText = { idle: "Hold to talk", listening: "Listening…", thinking: "Thinking…", speaking: "", wait: "", error: "" };
+    function vmPaintVoice() {
+      const v = VOICES.find(x => x[0] === VO.voice) || VOICES[0];
+      vmQ(".vm-vn").textContent = v[1];
+      vmQ(".vm-menu").innerHTML = VOICES.map(([k, n, d]) => `<button type="button" role="menuitemradio" aria-checked="${VO.voice === k}" data-voice="${k}" class="${VO.voice === k ? "on" : ""}"><b>${n}</b><small>${d}</small></button>`).join("");
+    }
+    function vmState(st, msg) {
+      if (!VM.open) return;
+      VM.state = st;
+      vm.dataset.state = st;
+      vmQ(".vm-state").textContent = msg !== undefined ? msg : vmText[st];
+      if (st === "thinking") VM.thinkSince = performance.now();
+      if (st === "idle") { vmQ(".vm-cap").textContent = ""; }
+      const coarse = window.matchMedia && matchMedia("(pointer: coarse)").matches;
+      vmQ(".vm-hint").textContent = st === "listening" ? "Let go to send" : st === "speaking" ? "Hold the orb to interrupt" :
+        st === "thinking" ? "" : coarse ? "Hold the orb and talk · let go to send" : "Hold the orb (or the space bar) and talk · let go to send";
+    }
+    function vmCap(text) { if (VM.open) vmQ(".vm-cap").textContent = text || ""; }
+    function vmSpoken() { if (VM.open && !sending && !VO.playing && !VO.q.length && VM.state !== "listening") vmState("idle"); }
+    // the orb's "level": voice loudness while listening or speaking, a soft wobble while thinking
+    function vmLoop() {
+      if (!VM.open && !VM.closing) { VM.raf = 0; return; }
+      VM.raf = requestAnimationFrame(vmLoop);
+      const now = performance.now();
+      let tgt = 0;
+      if (VM.state === "listening") { VM.target *= 0.9; tgt = Math.max(0.12, VM.target); }
+      else if (VM.state === "speaking") {
+        if (VO.env && VO.audio && !VO.audio.paused) tgt = VO.env[Math.min(VO.env.length - 1, Math.floor(VO.audio.currentTime * 30))] || 0;
+        else tgt = 0.35 + 0.25 * Math.sin(now / 160) * Math.sin(now / 410);
+      } else if (VM.state === "thinking") tgt = 0.08;
+      VM.level += (tgt - VM.level) * (tgt > VM.level ? 0.45 : 0.18);
+      const base = { idle: 1, listening: 1.04, thinking: 0.9, speaking: 1.1, error: 0.94, wait: 1 }[VM.state] || 1;
+      const sc = base + VM.level * (VM.state === "speaking" ? 0.1 : 0.06);
+      VM.scale = (VM.scale || 1) + (sc - (VM.scale || 1)) * 0.12;
+      vmOrbBox.style.transform = `scale(${VM.scale.toFixed(4)})`;
+      vmStage.style.setProperty("--lv", VM.level.toFixed(3));
+      // thinking that never turned into speech (an error, or no voice): go back to "hold to talk"
+      if (VM.state === "thinking" && !sending && !VO.playing && !VO.q.length && now - VM.thinkSince > 1500) vmState("idle");
+    }
+    function vmOrb() {
+      if (VM.orb) return;
+      VM.orb = makeOrb({ round: true, big: true, noDrag: true, level: () => VM.level, mood: () => VM.state });
+      vmOrbBox.appendChild(VM.orb.el);
+    }
+    function flipFrom(btn) {
+      // the mic button grows into the orb
+      const r = btn && btn.getBoundingClientRect(), o = vmStage.getBoundingClientRect();
+      if (!r || !r.width || reduceMotion) return;
+      const dx = (r.left + r.width / 2) - (o.left + o.width / 2), dy = (r.top + r.height / 2) - (o.top + o.height / 2);
+      const s = Math.max(0.06, r.width / o.width);
+      vmStage.style.transition = "none";
+      vmStage.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+      vmStage.getBoundingClientRect();
+      vmStage.style.transition = "";
+      vmStage.style.transform = "";
+    }
+    async function vmOpen() {
+      if (VM.open || !voiceAllowed()) return;
+      if (sending) { showNote("Wait for this reply to finish, then talk."); return; }
+      voiceStop();
+      unlockAudio();
+      VM.open = true; VM.closing = 0; VM.level = 0; VM.target = 0; VM.scale = 1;
+      closeMobileSidebar && closeMobileSidebar();
+      vmQ(".vm-said").textContent = ""; vmQ(".vm-cap").textContent = "";
+      vmPaintVoice();
+      vm.classList.add("show");
+      document.body.classList.add("v6-vm-on");
+      vmOrb();
+      flipFrom($("mic-btn"));
+      vmState("idle");
+      if (!VM.raf) VM.raf = requestAnimationFrame(vmLoop);
+      setTimeout(() => { try { vmStage.focus({ preventScroll: true }); } catch (e) {} }, 60);
+      // ask for the microphone once, up front, so holding the orb starts listening right away
+      if (!VM.perm && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        vmState("wait", "Allow the microphone to talk to SCODE");
+        try {
+          const st = await navigator.mediaDevices.getUserMedia({ audio: true });
+          st.getTracks().forEach(t => t.stop());
+          VM.perm = true;
+          audioSession("auto");
+          if (VM.open) vmState("idle");
+        } catch (e) {
+          if (VM.open) vmState("error", "SCODE needs the microphone. Allow it in your browser's site settings, then try again.");
+        }
+      }
+    }
+    function vmClose() {
+      if (!VM.open) return;
+      micStop(true);
+      voiceStop();
+      audioSession("auto");
+      VM.open = false; VM.holding = false; VM.closing = 1;
+      const btn = $("mic-btn");
+      // the orb shrinks back into the mic button
+      const r = btn && btn.offsetParent && btn.getBoundingClientRect(), o = vmStage.getBoundingClientRect();
+      if (r && r.width && !reduceMotion) {
+        vmStage.style.transition = "transform .42s cubic-bezier(.5,0,.3,1)";
+        vmStage.style.transform = `translate(${(r.left + r.width / 2) - (o.left + o.width / 2)}px, ${(r.top + r.height / 2) - (o.top + o.height / 2)}px) scale(${Math.max(0.06, r.width / o.width)})`;
+      }
+      vm.classList.remove("show");
+      document.body.classList.remove("v6-vm-on");
+      setTimeout(() => {
+        VM.closing = 0;
+        if (VM.orb) { VM.orb.stop(); VM.orb = null; }
+        vmOrbBox.style.transform = "";
+        vmStage.style.transition = ""; vmStage.style.transform = "";
+        if (btn && btn.offsetParent) try { btn.focus({ preventScroll: true }); } catch (e) {}
+      }, reduceMotion ? 0 : 420);
+      try { el.messages.scrollTop = el.messages.scrollHeight; } catch (e) {}
+    }
+    function vmHoldStart(e) {
+      if (!VM.open || VM.holding || VM.state === "wait") return;
+      if (e) e.preventDefault();
+      unlockAudio();
+      if (VM.state === "error" && !VM.perm && !SR) return;
+      if (sending && !VO.playing) { vmState("thinking", "Still thinking…"); return; }
+      if (VO.playing || VO.q.length) voiceStop(true);
+      VM.holding = true; VM.holdAt = performance.now(); VM.said = "";
+      vmQ(".vm-said").textContent = ""; vmQ(".vm-cap").textContent = "";
+      vmState("listening");
+      if (navigator.vibrate) try { navigator.vibrate(12); } catch (er) {}
+      listen({
+        interim: (t) => { VM.said = t; vmQ(".vm-said").textContent = t; },
+        level: (l) => { VM.target = Math.max(VM.target, l); },
+        done: (t) => {
+          VM.holding = false;
+          if (!VM.open) return;
+          if (!t) { vmState("idle", "Didn't catch that. Hold and try again."); return; }
+          vmQ(".vm-said").textContent = t;
+          vmState("thinking");
+          el.input.value = t; autoGrow(); updateSendState();
+          S.voiceNext = true;
+          send();
+        },
+        fail: (m) => { VM.holding = false; if (VM.open) vmState("error", m); },
+      });
+    }
+    function vmHoldEnd() {
+      if (!VM.holding) return;
+      // a quick tap keeps listening until the next tap; holding and letting go sends
+      if (performance.now() - VM.holdAt < 350) { VM.tapMode = true; vmQ(".vm-hint").textContent = "Tap the orb again when you're done"; return; }
+      VM.tapMode = false;
+      micStop(false);
+    }
+    vmStage.addEventListener("pointerdown", (e) => {
+      if (VM.holding && VM.tapMode) { VM.tapMode = false; e.preventDefault(); micStop(false); return; }
+      try { vmStage.setPointerCapture(e.pointerId); } catch (er) {}
+      vmHoldStart(e);
+    });
+    vmStage.addEventListener("pointerup", vmHoldEnd);
+    vmStage.addEventListener("pointercancel", () => { if (VM.holding && !VM.tapMode) micStop(false); });
+    vmStage.addEventListener("contextmenu", (e) => e.preventDefault());
+    vmStage.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.repeat) { e.preventDefault(); if (VM.holding) { VM.tapMode = false; micStop(false); } else { vmHoldStart(); VM.tapMode = true; } } });
+    const spaceOk = (e) => e.code === "Space" && (e.target === document.body || e.target === vmStage);
+    document.addEventListener("keydown", (e) => {
+      if (!VM.open) return;
+      if (e.key === "Escape") { if (vm.querySelector(".vm-menu.show")) vm.querySelector(".vm-menu").classList.remove("show"); else vmClose(); return; }
+      if (spaceOk(e)) { e.preventDefault(); if (!e.repeat && !VM.holding) vmHoldStart(); }
+    });
+    document.addEventListener("keyup", (e) => { if (VM.open && spaceOk(e) && VM.holding) { e.preventDefault(); VM.tapMode = false; micStop(false); } });
+    vm.addEventListener("click", (e) => {
+      const v = e.target.closest("[data-voice]");
+      if (v) { VO.voice = v.dataset.voice; try { localStorage.setItem("scode_voice", VO.voice); } catch (er) {} vmPaintVoice(); vmQ(".vm-menu").classList.remove("show"); return; }
+      const b = e.target.closest("[data-vm]");
+      if (!b) { if (!e.target.closest(".vm-menu")) vmQ(".vm-menu").classList.remove("show"); return; }
+      if (b.dataset.vm === "close") vmClose();
+      if (b.dataset.vm === "voices") vmQ(".vm-menu").classList.toggle("show");
+    });
+    // a chat switch or a new chat closes voice mode
+    window.addEventListener("pagehide", () => { if (VM.open) vmClose(); });
     function micSend() { S.voiceNext = true; pillHide(); send(); }
 
     // ---------------------------------------------------------------- SCODE Spaces
@@ -16069,20 +16435,7 @@
     $("cp-btn").addEventListener("click", toggleCompute);
     $("rs-btn").addEventListener("click", toggleResearch);
     const micBtn = $("mic-btn");
-    micBtn.addEventListener("pointerdown", (e) => {
-      if (MIC.live) return;
-      MIC.down = Date.now();
-      e.preventDefault();
-      micStart();
-    });
-    micBtn.addEventListener("pointerup", () => {
-      if (!MIC.live) return;
-      if (MIC.down && Date.now() - MIC.down > 450) { MIC.down = 0; micStop(false); }   // held down: letting go sends
-      else if (!MIC.down) micStop(false);                                              // second tap sends
-      else MIC.down = 0;                                                               // a quick tap keeps listening
-    });
-    micBtn.addEventListener("click", (e) => e.preventDefault());
-    micBtn.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (MIC.live) micStop(false); else micStart(); } });
+    micBtn.addEventListener("click", (e) => { e.preventDefault(); vmOpen(); });
     // A chat switch or a new chat stops the voice and repaints the Space bar
     const _v6SendState = updateSendState;
     updateSendState = function () { _v6SendState.apply(this, arguments); if ($("mic-btn")) paint(); };
