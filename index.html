@@ -3648,8 +3648,6 @@
   :root { --me1: #ff5fb0; --me2: #8b6bff; --me3: #3fc1ff; --me4: #ffaa78; --me1-rgb: 255,95,176; --me2-rgb: 139,107,255; --me3-rgb: 63,193,255; --me4-rgb: 255,170,120; --me-ink: #5b3fd6; }
   @property --acc-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
   .acc-sky, .acc-halo, .acc-badge { display: none; }
-  #acc-screen { position: fixed; inset: 0; pointer-events: none; z-index: 400; }
-  .acc-spark { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
   /* the Apps page also has an .ap-hero (stripes, 210px tall): never on the account page */
   #account-overlay .ap-hero { height: auto; overflow: visible; background: var(--surface-2); }
@@ -3696,7 +3694,7 @@
   /* ---------- Pro: your colours ---------- */
   #account-overlay.acc-pro .modal-box { width: 560px; position: relative; }
   #account-overlay .ap-hero.acc-hero-pro { flex-direction: column; align-items: stretch; gap: 0; padding: 38px 18px 18px; margin: 0 0 24px; border: none; border-radius: 26px;
-    position: relative; overflow: hidden; isolation: isolate; background: var(--me2); box-shadow: 0 18px 50px rgba(var(--me2-rgb), .28); }
+    position: relative; overflow: hidden; isolation: isolate; background: var(--surface-2); box-shadow: 0 18px 50px rgba(var(--me2-rgb), .28); }
   .acc-hero-pro .acc-sky { display: block; position: absolute; inset: 0; z-index: -2; background: linear-gradient(140deg, var(--me1), var(--me2) 42%, var(--me3) 78%, var(--me4)); }
   .acc-sky i { position: absolute; width: 75%; aspect-ratio: 1; border-radius: 50%; filter: blur(46px); opacity: .9; will-change: transform; }
   .acc-sky i:nth-child(1) { background: var(--me1); left: -25%; top: -45%; animation: accD1 16s ease-in-out infinite alternate; }
@@ -3715,8 +3713,9 @@
   .acc-hero-pro .ap-pic::before { content: ""; position: absolute; inset: -11px; border-radius: 50%; pointer-events: none;
     background: conic-gradient(from var(--acc-a), var(--me1), var(--me2), var(--me3), var(--me4), var(--me1));
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px)); mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px));
-    animation: accTurn 5s linear infinite; filter: drop-shadow(0 0 6px rgba(255,255,255,.6)); }
+    animation: accTurn 28s linear infinite, accBreath 5s ease-in-out infinite alternate; filter: drop-shadow(0 0 6px rgba(255,255,255,.6)); }
   @keyframes accTurn { to { --acc-a: 360deg; } }
+  @keyframes accBreath { from { opacity: .55; transform: scale(.985); } to { opacity: 1; transform: scale(1.015); } }
   .acc-hero-pro .ap-cam { background: #fff; color: #111; border-color: #e5e5e5; }
   .acc-hero-pro .ap-who { background: rgba(255,255,255,.95); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); border-radius: 20px;
     padding: 66px 18px 16px; text-align: center; color: #111; box-shadow: 0 12px 34px rgba(0,0,0,.16), inset 0 1px 0 #fff; }
@@ -3732,19 +3731,18 @@
   @keyframes accHolo { to { background-position: 300% 0; } }
 
   /* the moment it opens */
-  .acc-in .acc-hero-pro { animation: accBloom .9s cubic-bezier(.2,.9,.2,1) both; }
-  .acc-in .acc-hero-pro .acc-sky { animation: accSkyIn 1.4s cubic-bezier(.2,.9,.2,1) both; }
-  .acc-in .acc-hero-pro .ap-pic { animation: accPop .9s cubic-bezier(.3,1.6,.4,1) .15s both; }
+  .acc-in .acc-hero-pro .acc-sky { animation: accPaint 1.5s cubic-bezier(.45,.05,.2,1) .1s both; }
+  .acc-in .acc-hero-pro .ap-pic { animation: accSettle .9s cubic-bezier(.2,.9,.2,1) both; }
   .acc-in .acc-hero-pro .ap-who { animation: accRise .8s cubic-bezier(.2,1,.3,1) .25s both; }
-  .acc-in .acc-hero-pro .acc-badge { animation: accHolo 6s linear infinite, accPop .7s cubic-bezier(.3,1.6,.4,1) .55s both; }
+  .acc-in .acc-hero-pro .acc-badge { animation: accHolo 6s linear infinite, accRise .7s cubic-bezier(.2,1,.3,1) .6s both; }
   .acc-in .acc-hero-pro .ap-name, .acc-in .acc-hero-pro .ap-email { animation: accRise .7s cubic-bezier(.2,1,.3,1) .45s both; }
   .acc-in .acc-hero-pro .ap-email { animation-delay: .52s; }
   .acc-in .acc-usage { animation: accRise .8s cubic-bezier(.2,1,.3,1) .4s both; }
-  .acc-in .acc-perk { animation: accRise .7s cubic-bezier(.2,1.2,.3,1) calc(.55s + var(--i) * .07s) both; }
+  .acc-in .acc-perk { animation: accRise .7s cubic-bezier(.2,1,.3,1) calc(.55s + var(--i) * .05s) both; }
+  .acc-in .acc-stats { animation: accRise .8s cubic-bezier(.2,1,.3,1) .5s both; }
   .acc-in .acc-look { animation: accRise .8s cubic-bezier(.2,1,.3,1) .9s both; }
-  @keyframes accBloom { from { opacity: 0; transform: scale(.94); filter: saturate(.3) blur(6px); } }
-  @keyframes accSkyIn { from { transform: scale(1.5) rotate(-8deg); } }
-  @keyframes accPop { from { opacity: 0; transform: scale(.3) rotate(-25deg); } }
+  @keyframes accPaint { from { clip-path: circle(0% at 50% 30%); filter: blur(16px) saturate(.5); } to { clip-path: circle(150% at 50% 30%); filter: none; } }
+  @keyframes accSettle { from { opacity: 0; transform: scale(.9); } }
   @keyframes accRise { from { opacity: 0; transform: translateY(22px) scale(.97); } }
 
   /* usage */
@@ -3788,7 +3786,7 @@
   .acc-look-t b, .acc-fx-row b { display: flex; align-items: center; gap: 6px; font-size: 14px; }
   .acc-look-t small, .acc-fx-row small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
   .acc-fx-row b svg { width: 16px; height: 16px; color: var(--me2); }
-  .acc-bgs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0 14px; }
+  .acc-bgs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 12px 0 4px; }
   .acc-bgs button { border: none; background: none; padding: 0; font: inherit; color: var(--text); cursor: pointer; display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
   .acc-bgs em { font-style: normal; font-size: 12px; color: var(--muted); text-align: center; }
   .acc-bgs button[aria-pressed="true"] em { color: var(--text); font-weight: 650; }
@@ -3802,6 +3800,10 @@
   .sw-photo { color: var(--text); background: radial-gradient(80% 70% at 0% 0%, rgba(var(--me1-rgb), .5), transparent 70%), radial-gradient(80% 70% at 100% 20%, rgba(var(--me2-rgb), .45), transparent 70%),
     radial-gradient(90% 70% at 60% 100%, rgba(var(--me3-rgb), .5), transparent 70%), var(--bg); }
   .sw-black { background: #000; color: #fff; }
+  .sw-custom { background: var(--surface) center/cover; color: var(--muted); display: grid; place-items: center; border-style: dashed; }
+  .sw-custom[style] { border-style: solid; color: #fff; }
+  .sw-custom svg { width: 22px; height: 22px; }
+  .sw-custom[style]::before, .sw-custom[style]::after { opacity: .5; }
   .sw-white { background: #fff; color: #000; }
   .acc-fx-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
   .acc-fx-row .switch:disabled { opacity: .45; cursor: default; }
@@ -3816,6 +3818,12 @@
     --user-bubble: #1c1c1e; --accent: #a993ff; --accent-soft: rgba(169,147,255,.16); --mark-fill: #f4f3ee; color-scheme: dark; background: #000; color: var(--text); }
   body.v6bg-white #main { --bg: #fff; --surface: #fff; --surface-2: #f5f5f7; --hover: rgba(0,0,0,.045); --border: #e5e5ea; --border-strong: #d1d1d6; --text: #1d1d1f; --muted: #6e6e73; --faint: #a1a1a6;
     --user-bubble: #f0f0f3; --accent: #6a46f0; --accent-soft: rgba(106,70,240,.1); --mark-fill: #fff; color-scheme: light; background: #fff; color: var(--text); }
+  body.v6-tint.v6bg-black #main { --accent: var(--me-acc-d); --accent-ink: var(--me-ink-d); --accent-soft: rgba(var(--me-acc-d-rgb), .16); }
+  body.v6-tint.v6bg-white #main { --accent: var(--me-acc-l); --accent-ink: var(--me-ink-l); --accent-soft: rgba(var(--me-acc-l-rgb), .1); }
+  body.v6bg-custom #main { background: linear-gradient(rgba(33,33,30,.72), rgba(33,33,30,.82)), var(--v6-bgimg) center / cover no-repeat; }
+  body.light.v6bg-custom #main { background: linear-gradient(rgba(250,249,246,.7), rgba(250,249,246,.8)), var(--v6-bgimg) center / cover no-repeat; }
+  body.v6bg-custom #topbar { background: transparent; }
+  body.v6bg-custom .user-bubble { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   body.v6bg-white #main #composer { box-shadow: 0 0 0 .5px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.07); }
 
   /* ---------- Pro effects ---------- */
@@ -3824,20 +3832,14 @@
   body.v6-fx #acct-btn.has-pic::before { content: ""; position: absolute; inset: -4.5px; border-radius: 50%; pointer-events: none;
     background: conic-gradient(from var(--acc-a), var(--me1), var(--me2), var(--me3), var(--me4), var(--me1));
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
-    animation: accTurn 4s linear infinite; }
+    animation: accTurn 24s linear infinite; }
   body.v6-fx #composer:focus-within { border-color: transparent;
     background: linear-gradient(var(--surface), var(--surface)) padding-box, conic-gradient(from var(--acc-a), var(--me1), var(--me2), var(--me3), var(--me4), var(--me1)) border-box;
-    box-shadow: var(--composer-shadow), 0 0 26px -4px rgba(var(--me2-rgb), .45); animation: accTurn 6s linear infinite; }
-  body.v6-fx #send-btn { position: relative; }
-  body.v6-fx #send-btn.acc-shock::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; border: 2px solid var(--me2);
-    animation: accShock .7s cubic-bezier(.2,.9,.3,1) both; }
-  @keyframes accShock { from { transform: scale(1); opacity: .9; } to { transform: scale(2.6); opacity: 0; border-width: .5px; } }
-  body.v6-fx .msg.user.acc-sent { animation: accSend .75s cubic-bezier(.25,1.5,.4,1) both; }
+    box-shadow: var(--composer-shadow), 0 0 26px -6px rgba(var(--me2-rgb), .4); animation: accTurn 14s linear infinite; }
   body.v6-fx .msg.user.acc-sent .user-bubble { position: relative; overflow: hidden; }
   body.v6-fx .msg.user.acc-sent .user-bubble::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
-    background: linear-gradient(105deg, transparent 20%, rgba(var(--me1-rgb), .45) 40%, rgba(var(--me3-rgb), .45) 60%, transparent 80%); transform: translateX(-110%);
-    animation: accBubble 1.1s cubic-bezier(.3,.8,.3,1) .15s both; }
-  @keyframes accSend { 0% { opacity: 0; transform: translate(40px, 30px) scale(.7) rotate(4deg); filter: blur(4px); } 55% { opacity: 1; transform: translate(-3px, -4px) scale(1.03); filter: none; } 100% { transform: none; } }
+    background: linear-gradient(105deg, transparent 15%, rgba(var(--me1-rgb), .32) 38%, rgba(255,255,255,.28) 50%, rgba(var(--me3-rgb), .32) 62%, transparent 85%); transform: translateX(-110%);
+    animation: accBubble 1.4s cubic-bezier(.45,.05,.25,1) .2s both; }
   @keyframes accBubble { to { transform: translateX(110%); } }
 
   @media (max-width: 520px) {
@@ -3850,8 +3852,130 @@
     .acc-bgs { gap: 6px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .acc-sky i, .acc-peek .sky i, .acc-halo, .acc-badge, .acc-hero-pro .ap-pic::before, .acc-refill u::after { animation: none !important; }
+    .acc-sky i, .acc-peek .sky i, .acc-halo, .acc-badge, .acc-hero-pro .ap-pic::before, .acc-refill u::after, .acc-bars i { animation: none !important; }
     .acc-in * { animation-duration: .01s !important; animation-delay: 0s !important; }
+  }
+
+  /* ================================================================ v6.5 Pro */
+  /* your colours across SCODE */
+  body.v6-tint { --accent: var(--me-acc-d); --accent-ink: var(--me-ink-d); --accent-soft: rgba(var(--me-acc-d-rgb), .16);
+    --accent-grad: linear-gradient(110deg, var(--me-g1), var(--me-g2) 52%, var(--me-g3)); }
+  body.light.v6-tint { --accent: var(--me-acc-l); --accent-ink: var(--me-ink-l); --accent-soft: rgba(var(--me-acc-l-rgb), .1); }
+  body.v6-tint #sc-splash { background: radial-gradient(55% 42% at 50% 46%, rgba(var(--me2-rgb), .3), transparent 70%),
+    radial-gradient(40% 32% at 28% 66%, rgba(var(--me1-rgb), .2), transparent 70%), radial-gradient(40% 32% at 72% 32%, rgba(var(--me3-rgb), .2), transparent 70%), #08090d !important; }
+  body.v6-tint #sc-splash .sp-w { background: linear-gradient(90deg, var(--me1), var(--me2), var(--me3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  body.v6-tint #sc-splash .sp-w::after { content: "PRO"; display: block; font-size: 10px; letter-spacing: .45em; margin-top: 8px; opacity: .9; }
+
+  /* reading */
+  body.v6-type .msg.assistant .md, body.v6-type .acc-sample { font-family: var(--v6-rf, var(--serif)); font-size: var(--v6-rs, 17px); line-height: var(--v6-rl, 1.7); }
+  .acc-sample { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); transition: font-size .25s, line-height .25s; }
+
+  /* make it yours */
+  .acc-look { padding: 4px 14px; }
+  .acc-blk { padding: 14px 0; border-top: 1px solid var(--border); }
+  .acc-blk:first-child { border-top: none; }
+  .acc-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .acc-row b { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+  .acc-row small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+  .acc-row b svg, .acc-look-t b svg { width: 16px; height: 16px; color: var(--me2); }
+  .acc-mini { margin-top: 8px; font-size: 12.5px; }
+  .acc-type { display: grid; gap: 8px; margin-top: 10px; }
+  .acc-type-r { display: flex; align-items: center; gap: 10px; }
+  .acc-type-r > span { width: 62px; flex: none; font-size: 12.5px; color: var(--muted); }
+  .acc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .acc-chip { height: 30px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 12.5px; cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s; }
+  .acc-chip:hover { border-color: var(--border-strong); }
+  .acc-chip[aria-pressed="true"] { background: var(--accent); border-color: transparent; color: var(--accent-ink); font-weight: 650; }
+  .acc-styles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .acc-style { text-align: left; padding: 10px 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; cursor: pointer;
+    display: flex; flex-direction: column; gap: 2px; transition: border-color .2s, box-shadow .2s; }
+  .acc-style b { font-size: 13.5px; }
+  .acc-style small { font-size: 12px; color: var(--muted); }
+  .acc-style[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 6px 18px rgba(var(--me2-rgb), .18); }
+  .acc-speed { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .acc-speed input { flex: 1; min-width: 120px; accent-color: var(--accent); }
+  .acc-speed output { font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; min-width: 40px; text-align: right; font-size: 13px; }
+  .acc-play { display: inline-flex; align-items: center; gap: 6px; height: 30px; font-size: 12.5px; }
+  .acc-play svg { width: 13px; height: 13px; }
+  .acc-play.busy { opacity: .6; pointer-events: none; }
+
+  /* your stats */
+  .acc-stats { margin-top: 12px; border: 1px solid var(--border); border-radius: 22px; padding: 16px; background: var(--surface-2); }
+  .acc-stats-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; }
+  .acc-streak { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; color: #fff; background: linear-gradient(110deg, var(--me-g1), var(--me-g2), var(--me-g3)); }
+  .acc-nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .acc-nums div { display: flex; flex-direction: column; }
+  .acc-nums b { font-size: 24px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .acc-nums span { font-size: 11.5px; color: var(--muted); }
+  .acc-bars { display: flex; align-items: flex-end; gap: 3px; height: 54px; }
+  .acc-bars i { flex: 1; height: var(--h); border-radius: 4px; background: var(--border); transform-origin: bottom; }
+  .acc-bars i.on { background: linear-gradient(var(--me1), var(--me3)); }
+  .acc-in .acc-bars i, .acc-stats .acc-bars i { animation: accBar .9s cubic-bezier(.2,.9,.2,1) calc(.6s + var(--i) * 18ms) both; }
+  @keyframes accBar { from { transform: scaleY(0); } }
+  .acc-stats-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font-size: 12.5px; color: var(--muted); flex-wrap: wrap; }
+  .acc-stats-foot b { color: var(--text); }
+  .acc-stats-foot .ap-link { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; font-size: 12.5px; }
+  .acc-stats-foot .ap-link svg { width: 14px; height: 14px; }
+  .acc-since { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+  .acc-stats.loading { padding: 4px; border: none; background: none; }
+
+  /* Priority in Rush Hour */
+  .acc-prio { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 8px; padding: 4px 10px 4px 8px; border-radius: 999px; font-size: 12px; font-weight: 700;
+    color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px rgba(var(--me2-rgb), .25); }
+  .acc-prio svg { width: 13px; height: 13px; }
+  .acc-prio small { font-weight: 500; color: var(--muted); }
+
+  /* pinned chats and folders */
+  .chat-item .acc-ci { display: flex; gap: 1px; opacity: 0; transition: opacity .15s; }
+  .chat-item:hover .acc-ci, .chat-item.active .acc-ci, .chat-item:focus-within .acc-ci { opacity: 1; }
+  @media (hover: none) { .chat-item .acc-ci { opacity: 1; } }
+  .acc-ci button { width: 22px; height: 22px; border: none; background: none; border-radius: 6px; color: var(--faint); cursor: pointer; display: grid; place-items: center; padding: 0; }
+  .acc-ci button:hover { background: var(--hover); color: var(--text); }
+  .acc-ci svg { width: 13px; height: 13px; }
+  .acc-ci .acc-pin.on { color: var(--accent); }
+  .chat-item.acc-pinned .tier-badge { display: none; }
+  .acc-sec-h { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--faint); padding: 10px 10px 6px; }
+  .acc-sec:first-child .acc-sec-h, #chat-list > .acc-fold:first-child .acc-fold-h { margin-top: 0; }
+  .acc-sec-h svg { width: 12px; height: 12px; }
+  .acc-fold-h { display: flex; align-items: center; gap: 7px; padding: 7px 10px; margin-top: 2px; border-radius: 9px; font-size: 13px; color: var(--text); cursor: pointer; user-select: none; }
+  .acc-fold-h:hover { background: var(--hover); }
+  .acc-fold-h > svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+  .acc-fold-h .chev { display: grid; color: var(--faint); transition: transform .25s cubic-bezier(.2,.9,.2,1); }
+  .acc-fold-h .chev svg { width: 12px; height: 12px; }
+  .acc-fold.open .acc-fold-h .chev { transform: rotate(90deg); }
+  .acc-fold-n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+  .acc-fold-h em { font-style: normal; font-size: 11px; color: var(--faint); }
+  .acc-fold-a { display: flex; opacity: 0; transition: opacity .15s; }
+  .acc-fold-h:hover .acc-fold-a { opacity: 1; }
+  @media (hover: none) { .acc-fold-a { opacity: 1; } }
+  .acc-fold-a button { width: 22px; height: 22px; border: none; background: none; border-radius: 6px; color: var(--faint); cursor: pointer; display: grid; place-items: center; padding: 0; }
+  .acc-fold-a button:hover { background: var(--hover); color: var(--text); }
+  .acc-fold-a svg { width: 12px; height: 12px; }
+  .acc-fold-in { flex: 1; min-width: 0; height: 24px; border: 1px solid var(--accent); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; font-size: 13px; padding: 0 6px; }
+  .acc-fold-b { padding-left: 12px; display: block; max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.2,.9,.2,1); }
+  .acc-fold.open .acc-fold-b { max-height: 2000px; }
+  .acc-fold-empty { font-size: 12px; color: var(--faint); padding: 6px 10px 8px; line-height: 1.4; }
+  .acc-menu { position: fixed; z-index: 500; width: 228px; padding: 6px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow);
+    animation: accMenu .18s cubic-bezier(.2,.9,.2,1) both; }
+  @keyframes accMenu { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
+  .acc-menu-h { font-size: 11.5px; color: var(--faint); padding: 6px 8px 4px; }
+  .acc-menu button[data-f] { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 8px; border: none; background: none; border-radius: 8px; color: var(--text);
+    font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+  .acc-menu button[data-f]:hover { background: var(--hover); }
+  .acc-menu button[data-f] span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .acc-menu button[data-f] svg { width: 15px; height: 15px; color: var(--muted); flex: none; }
+  .acc-menu button[data-f] svg:last-child:not(:first-child) { color: var(--accent); }
+  .acc-menu-new { display: flex; gap: 6px; padding: 6px 4px 2px; border-top: 1px solid var(--border); margin-top: 4px; }
+  .acc-menu-new input { flex: 1; min-width: 0; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: 13px; padding: 0 8px; }
+  .acc-menu-new input:focus { outline: none; border-color: var(--accent); }
+  .acc-menu-new button { height: 30px; padding: 0 10px; border-radius: 8px; border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-size: 12.5px; font-weight: 650; cursor: pointer; }
+
+  @media (max-width: 520px) {
+    .acc-bgs { grid-template-columns: repeat(3, 1fr); }
+    .acc-nums { grid-template-columns: 1fr 1fr; row-gap: 12px; }
+    .acc-styles { grid-template-columns: 1fr; }
+    .acc-type-r { flex-direction: column; align-items: flex-start; gap: 6px; }
   }
 
 </style>
@@ -4480,6 +4604,16 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.5</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Your colours everywhere</b> <span>(Pro) buttons, switches, highlights, the tab icon and the SCODE splash take on the colours of your profile picture.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Reading and reply style</b> <span>(Pro) pick a font, size and spacing for replies, and how SCODE answers: Standard, Concise, Detailed or Teacher.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Pinned chats and folders</b> <span>(Pro) pin up to 10 chats to the top and sort the rest into folders. They follow you to every device.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Your stats</b> <span>(Pro) your last 30 days on SCODE: questions, active days, your streak and your top subject. Save it as an image to share.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Voice speed</b> <span>(Pro) make Ultra Voice read slower or faster, with a preview.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Your photo as a chat background</b> <span>(Pro) any photo, softened so text stays easy to read.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Priority tag</b> <span>(Pro) during Rush Hour, your replies show that you went first.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Calmer Pro effects</b> <span>no more confetti: a light sweep across messages you send, your colours painting in when your account opens, and a slow, breathing ring around your picture.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.4</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>A new account page</b> <span>Pro accounts are painted with a smooth gradient made from the colours of your profile picture, with clear usage rings that show what's left and when it refills.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Chat backgrounds</b> <span>(Pro) set your chats to a soft gradient of your picture's colours, black or white. Open your account and look under Make it yours.</span></li>
@@ -4709,7 +4843,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://sandy-authorities-merchants-everybody.trycloudflare.com";
+  const PROXY_URL = "https://provided-selecting-downloads-executives.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -14521,7 +14655,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-11-01b";
+  const V4_LOG_VER = "2026-11-01c";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -16136,7 +16270,7 @@
     function prefetch() {
       VO.q.slice(0, 2).forEach(it => {
         if (it.ready || VO.fallback) return;
-        it.ready = fetch(PROXY_URL + "/voice/tts", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ text: it.text, voice: VO.voice }) })
+        it.ready = fetch(PROXY_URL + "/voice/tts", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ text: it.text, voice: VO.voice, speed: window.scodeVoiceSpeed || 1 }) })
           .then(r => r.ok ? r.blob() : Promise.reject(new Error("off")))
           .then(async b => { it.url = URL.createObjectURL(b); it.env = await envelopeOf(b); return true; })
           .catch(() => { VO.fallback = true; return false; });
@@ -16214,7 +16348,7 @@
         const u = new SpeechSynthesisUtterance(stripTags(text));
         const map = { excited: [1.12, 1.15], happy: [1.06, 1.08], warm: [1, 1.02], curious: [1.02, 1.1], calm: [0.92, 0.96], serious: [0.95, 0.9] };
         const [rate, pitch] = map[tone] || [1, 1];
-        u.rate = rate; u.pitch = pitch; u.lang = "en-US";
+        u.rate = rate * (window.scodeVoiceSpeed || 1); u.pitch = pitch; u.lang = "en-US";
         u.onend = u.onerror = () => res();
         window.speechSynthesis.speak(u);
         setTimeout(res, 20000);
@@ -16768,16 +16902,58 @@
   })();
   window.scodeV6 = V6;
 
-  // ================================================================ v6.4 account page: Free (plain) and Pro (your colours)
+  // ================================================================ v6.4/6.5 account page + SCODE Pro look
+  // Free gets a plain page. Pro gets a page painted from their profile picture, plus "Make it yours":
+  // chat backgrounds, their colours across SCODE, reply fonts, reply style, voice speed, calm Pro effects,
+  // a stats card, and pinned chats + folders. Settings follow the account (/v6/prefs).
   const ACC = (() => {
-    const LS_BG = "scode_v6_chatbg", LS_FX = "scode_v6_fx", LS_WOW = "scode_v6_pro_wow";
     const FALLBACK = [[255, 95, 176], [139, 107, 255], [63, 193, 255], [255, 170, 120]];
     const get = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } };
-    const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
-    const A = { pal: FALLBACK, palFor: null, bg: get(LS_BG, ""), fx: get(LS_FX, "1") === "1", tick: null, opened: 0 };
+    const put = (k, v) => { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return false; } return true; };
+    const who = () => (auth && auth.email ? auth.email.toLowerCase() : "guest");
+    const DEF = { bg: "", fx: true, tint: true, font: "std", size: "m", lh: "std", style: "", vspeed: 1, pins: [], folders: [] };
+    const A = { pal: FALLBACK, palFor: undefined, P: null, tick: null, wowPending: false, loadedFor: null, saveT: null, stats: null };
     const isPro = () => V4.plan === "pro";
     const rgb = (c, a) => a === undefined ? `rgb(${c[0]},${c[1]},${c[2]})` : `rgba(${c[0]},${c[1]},${c[2]},${a})`;
-    const fxOn = () => A.fx && !reduceMotion && isPro();
+    const fxOn = () => A.P.fx && !reduceMotion && isPro();
+
+    // ---------------------------------------------------------------- settings (this device + your account)
+    function loadLocal() {
+      let p = null;
+      try { p = JSON.parse(get("scode_v6_prefs_" + who(), "null")); } catch (e) {}
+      if (!p) {   // from 6.4
+        p = { bg: get("scode_v6_chatbg", ""), fx: get("scode_v6_fx", "1") === "1" };
+      }
+      A.P = Object.assign({}, DEF, p);
+      A.P.pins = Array.isArray(A.P.pins) ? A.P.pins.slice(0, 10) : [];
+      A.P.folders = Array.isArray(A.P.folders) ? A.P.folders.slice(0, 20) : [];
+      window.scodeVoiceSpeed = +A.P.vspeed || 1;
+    }
+    function save(sync = true) {
+      A.P.at = Date.now();
+      put("scode_v6_prefs_" + who(), JSON.stringify(A.P));
+      window.scodeVoiceSpeed = +A.P.vspeed || 1;
+      if (!sync || isGuest()) return;
+      clearTimeout(A.saveT);
+      A.saveT = setTimeout(() => {
+        syncFetch("/v6/prefs", { method: "POST", body: { prefs: A.P, at: A.P.at } }).catch(() => {});
+      }, 1200);
+    }
+    async function pullPrefs() {
+      if (isGuest() || A.loadedFor === who()) return;
+      A.loadedFor = who();
+      loadLocal();
+      const r = await syncFetch("/v6/prefs").catch(() => null);
+      if (!r || !r.ok) return;
+      const srv = r.data && r.data.prefs;
+      if (srv && (+r.data.at || 0) > (+A.P.at || 0)) {
+        A.P = Object.assign({}, DEF, srv); save(false);
+      } else if (A.P.at && (!srv || (+A.P.at || 0) > (+r.data.at || 0))) {
+        save(true);   // this device has newer settings: send them up
+      }
+      applyLook(); renderChatList();
+    }
+    function set(k, v) { A.P[k] = v; save(); applyLook(); }
 
     // ---------------------------------------------------------------- the main colours of a photo
     function toHsl([r, g, b]) {
@@ -16785,7 +16961,7 @@
       const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
       if (mx === mn) return [0, 0, l];
       const d = mx - mn, s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
-      let h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      const h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
       return [h * 60, s, l];
     }
     function toRgb([h, s, l]) {
@@ -16823,10 +16999,8 @@
         if (out.every(o => Math.hypot(o[0] - r.c[0], o[1] - r.c[1], o[2] - r.c[2]) > 48)) out.push(r.c);
         if (out.length === 4) break;
       }
-      // make them gradient-ready: never muddy, never blinding
       let hsl = out.map(toHsl).map(([h, s, l]) => [h, s < 0.06 ? s : Math.max(0.42, Math.min(0.92, s * 1.25)), Math.max(0.38, Math.min(0.7, l))]);
-      const grey = hsl.every(c => c[1] < 0.06);
-      if (grey) hsl = hsl.map((c, i) => [230 + i * 25, 0.18, c[2]]);   // a black-and-white photo gets a cool silver gradient
+      if (hsl.every(c => c[1] < 0.06)) hsl = hsl.map((c, i) => [230 + i * 25, 0.18, c[2]]);   // black-and-white photo: cool silver
       while (hsl.length < 4) { const b = hsl[hsl.length - 1] || [265, 0.6, 0.6]; hsl.push([b[0] + 32, b[1], Math.min(0.72, b[2] + 0.06)]); }
       hsl.sort((a, b) => a[0] - b[0]);
       return hsl.map(toRgb);
@@ -16847,31 +17021,88 @@
         };
         img.onerror = () => res(FALLBACK);
         img.src = url;
-      }).then(p => { A.pal = p; A.palFor = url; return p; });
+      }).then(p => { A.pal = p; A.palFor = url; put("scode_v6_pal", JSON.stringify(p)); return p; });
     }
+    function lum([r, g, b]) { const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); }
     function setVars(p) {
       const r = document.documentElement.style;
       p.forEach((c, i) => { r.setProperty(`--me${i + 1}`, rgb(c)); r.setProperty(`--me${i + 1}-rgb`, c.join(",")); });
-      // the softest colour a white page can carry
-      const [h, s] = toHsl(p[1]);
+      const [h, s] = toHsl(p[1]), grey = s < 0.06;
       r.setProperty("--me-ink", rgb(toRgb([h, Math.min(0.75, s), 0.36])));
+      // your colour as SCODE's accent: light on dark pages, deep on light pages
+      const d = toRgb([h, grey ? s : Math.max(0.45, Math.min(0.9, s)), 0.72]), l = toRgb([h, grey ? s : Math.max(0.5, Math.min(0.9, s)), 0.44]);
+      r.setProperty("--me-acc-d", rgb(d)); r.setProperty("--me-acc-d-rgb", d.join(","));
+      r.setProperty("--me-acc-l", rgb(l)); r.setProperty("--me-acc-l-rgb", l.join(","));
+      r.setProperty("--me-ink-d", lum(d) > 0.45 ? "#16161a" : "#ffffff");
+      r.setProperty("--me-ink-l", lum(l) > 0.45 ? "#16161a" : "#ffffff");
+      // a deeper copy of the gradient, for buttons with white text on them
+      // (darkened until white text on it stays readable, so a yellow photo still gives readable buttons)
+      p.slice(0, 3).forEach((c, i) => {
+        const [hh, ss, ll] = toHsl(c);
+        let L = Math.max(0.4, Math.min(0.56, ll)), out = toRgb([hh, ss, L]);
+        while (lum(out) > 0.3 && L > 0.24) { L -= 0.03; out = toRgb([hh, ss, L]); }
+        r.setProperty(`--me-g${i + 1}`, rgb(out));
+      });
     }
 
-    // ---------------------------------------------------------------- chat backgrounds (Pro)
+    // ---------------------------------------------------------------- applying the look
+    const FONTS = { std: null, serif: '"Charter", "Bitstream Charter", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif', sans: '"Inter", -apple-system, "Segoe UI", system-ui, sans-serif',
+      round: 'ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", system-ui, sans-serif' };
+    const SIZES = { s: "15px", m: "17px", l: "19px", xl: "21px" };
+    const LHS = { tight: "1.5", std: "1.7", airy: "1.95" };
+    let fontsAsked = {};
+    function needFont(k) {
+      const fam = { sans: "Inter:wght@400;600", round: "Nunito:wght@400;700" }[k];
+      if (!fam || fontsAsked[k]) return;
+      fontsAsked[k] = true;
+      const l = document.createElement("link"); l.rel = "stylesheet"; l.href = `https://fonts.googleapis.com/css2?family=${fam}&display=swap`;
+      document.head.appendChild(l);
+    }
+    function bgImg() { return get("scode_v6_bgimg_" + who(), ""); }
     function applyLook() {
-      const pro = isPro();
-      const b = document.body;
+      const pro = isPro(), b = document.body, P = A.P;
       b.classList.toggle("v6-pro", pro);
-      b.classList.toggle("v6-fx", pro && A.fx && !reduceMotion);
-      ["photo", "black", "white"].forEach(k => b.classList.toggle("v6bg-" + k, pro && A.bg === k));
+      b.classList.toggle("v6-fx", pro && P.fx && !reduceMotion);
+      b.classList.toggle("v6-tint", pro && P.tint);
+      const img = P.bg === "custom" ? bgImg() : "";
+      ["photo", "black", "white", "custom"].forEach(k => b.classList.toggle("v6bg-" + k, pro && P.bg === k && (k !== "custom" || !!img)));
+      const main = $("main");
+      if (main) main.style.setProperty("--v6-bgimg", pro && img ? `url("${img}")` : "none");
+      const type = pro && (P.font !== "std" || P.size !== "m" || P.lh !== "std");
+      b.classList.toggle("v6-type", type);
+      if (type) {
+        const r = b.style;
+        if (FONTS[P.font]) r.setProperty("--v6-rf", FONTS[P.font]); else r.removeProperty("--v6-rf");
+        r.setProperty("--v6-rs", SIZES[P.size] || "17px");
+        r.setProperty("--v6-rl", LHS[P.lh] || "1.7");
+        needFont(P.font);
+      }
+      put("scode_v6_pro", pro ? "1" : "0");
+      favicon(pro && P.tint);
     }
-    function setBg(k) {
-      A.bg = k; put(LS_BG, k); applyLook();
-      document.querySelectorAll(".acc-bgs button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.bg === k)));
-    }
-    function setFx(on) {
-      A.fx = on; put(LS_FX, on ? "1" : "0"); applyLook();
-      const sw = $("acc-fx"); if (sw) sw.classList.toggle("on", on);
+    // the browser tab icon gets a ring in your colours
+    let iconOrig = null, iconFor = "";
+    function favicon(on) {
+      const link = document.querySelector('link[rel="icon"]');
+      if (!link) return;
+      if (iconOrig === null) iconOrig = link.href;
+      const key = on ? A.pal.join("|") : "";
+      if (key === iconFor) return;
+      iconFor = key;
+      if (!on) { link.href = iconOrig; return; }
+      const im = new Image();
+      im.onload = () => {
+        try {
+          const c = document.createElement("canvas"); c.width = c.height = 64;
+          const x = c.getContext("2d");
+          const g = x.createLinearGradient(0, 0, 64, 64);
+          A.pal.slice(0, 3).forEach((p, i) => g.addColorStop(i / 2, rgb(p)));
+          x.beginPath(); x.arc(32, 32, 30, 0, Math.PI * 2); x.lineWidth = 4; x.strokeStyle = g; x.stroke();
+          x.save(); x.beginPath(); x.arc(32, 32, 26, 0, Math.PI * 2); x.clip(); x.drawImage(im, 6, 6, 52, 52); x.restore();
+          if (iconFor === key) link.href = c.toDataURL("image/png");
+        } catch (e) {}
+      };
+      im.src = iconOrig;
     }
     function refreshColours() {
       return palette(auth && auth.avatar).then(p => { setVars(p); applyLook(); return p; });
@@ -16880,7 +17111,7 @@
     // ---------------------------------------------------------------- little animation helpers
     function countUp(node, to, ms) {
       if (!node) return;
-      if (!fxOn()) { node.textContent = to.toLocaleString(); return; }
+      if (reduceMotion) { node.textContent = to.toLocaleString(); return; }
       const t0 = performance.now();
       const step = (t) => {
         const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 4);
@@ -16888,47 +17119,6 @@
         if (k < 1 && node.isConnected) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
-    }
-    function burst(host, x, y, opts = {}) {
-      // sparks in your colours. Pro only, skipped when motion is reduced or Pro effects are off
-      if (!fxOn() || !host) return;
-      const cv = document.createElement("canvas");
-      const W = host.clientWidth, H = host.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
-      cv.className = "acc-spark"; cv.width = W * dpr; cv.height = H * dpr;
-      host.appendChild(cv);
-      const g = cv.getContext("2d"); g.scale(dpr, dpr);
-      const n = opts.n || 46, P = [];
-      for (let i = 0; i < n; i++) {
-        const a = Math.random() * Math.PI * 2, v = (opts.speed || 5) * (0.35 + Math.random());
-        P.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - (opts.lift || 1.2), r: 1.4 + Math.random() * (opts.size || 3.2),
-          c: A.pal[i % A.pal.length], life: 1, star: Math.random() < 0.35, spin: Math.random() * 6 });
-      }
-      const t0 = performance.now();
-      const step = (t) => {
-        g.clearRect(0, 0, W, H);
-        let alive = 0;
-        for (const p of P) {
-          if (p.life <= 0) continue;
-          alive++;
-          p.x += p.vx; p.y += p.vy; p.vx *= 0.965; p.vy = p.vy * 0.965 + 0.09; p.life -= 0.012 + Math.random() * 0.006; p.spin += 0.2;
-          g.globalAlpha = Math.max(0, p.life);
-          g.fillStyle = rgb(p.c);
-          g.shadowColor = rgb(p.c); g.shadowBlur = 8;
-          if (p.star) {
-            g.save(); g.translate(p.x, p.y); g.rotate(p.spin); g.beginPath();
-            for (let k = 0; k < 4; k++) { g.rotate(Math.PI / 2); g.moveTo(0, 0); g.quadraticCurveTo(p.r * 0.5, p.r * 0.5, p.r * 2.4, 0); g.quadraticCurveTo(p.r * 0.5, -p.r * 0.5, 0, 0); }
-            g.fill(); g.restore();
-          } else { g.beginPath(); g.arc(p.x, p.y, p.r, 0, Math.PI * 2); g.fill(); }
-        }
-        if (alive && t - t0 < 4000 && cv.isConnected) requestAnimationFrame(step); else cv.remove();
-      };
-      requestAnimationFrame(step);
-    }
-
-    function screenBurst(x, y, o) {
-      let layer = $("acc-screen");
-      if (!layer) { document.body.insertAdjacentHTML("beforeend", '<div id="acc-screen" aria-hidden="true"></div>'); layer = $("acc-screen"); }
-      burst(layer, x, y, o);
     }
 
     // ---------------------------------------------------------------- the page
@@ -16941,14 +17131,26 @@
       paint: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.5 1.7-1.5H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="11" r="1.3" fill="currentColor"/><circle cx="10.5" cy="7.3" r="1.3" fill="currentColor"/><circle cx="15" cy="7.6" r="1.3" fill="currentColor"/></svg>',
       lock: '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10.5" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.9"/></svg>',
       fx: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 19L15 9M14 4v3M19 9h-3M17.5 5.5l-2 2M9 3.5l.6 1.6 1.6.6-1.6.6L9 7.9l-.6-1.6-1.6-.6 1.6-.6zM19 14l.6 1.6 1.6.6-1.6.6L19 18.4l-.6-1.6-1.6-.6 1.6-.6z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      pin: '<svg viewBox="0 0 24 24" fill="none"><path d="M9 4h6l-1 5 4 3v2H6v-2l4-3-1-5zM12 14v6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      folder: '<svg viewBox="0 0 24 24" fill="none"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5h3.6l2 2.2h7.4a2 2 0 0 1 2 2v7.8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      chev: '<svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      edit: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+      x: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+      check: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      play: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>',
+      img: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.7" fill="currentColor"/><path d="M5 17l4.5-4.5 3 3 2.5-2.5L19.5 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      share: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     };
     const PERKS = [
       ["ultra", "General Ultra + Deep Think", "Our smartest model"],
       ["pts", "3× the points", "Every 4 hours"],
-      ["rush", "First in line", "Even in Rush Hour"],
+      ["rush", "First in line", "Priority in Rush Hour"],
       ["res", "SCODE Research", "Cited reports"],
-      ["voice", "Ultra Voice", "Talk out loud"],
-      ["paint", "Your colours", "Page + chat looks"],
+      ["voice", "Ultra Voice", "Talk out loud, your speed"],
+      ["paint", "Your colours", "Across all of SCODE"],
+      ["pin", "Pins + folders", "Keep chats organized"],
+      ["edit", "Reply fonts + styles", "Read it your way"],
+      ["fx", "Your stats", "Streaks and top subjects"],
     ];
     function refillText(d) {
       if (!d.reset_at) return "soon";
@@ -16972,6 +17174,182 @@
         <div class="acc-ring-num"><b data-to="${left}">${left.toLocaleString()}</b><span>${unit} left</span></div>
         <div class="acc-ring-lbl">${label}<small>of ${limit.toLocaleString()}</small></div></div>`;
     }
+    const chip = (group, val, label, cur, extra = "") => `<button type="button" class="acc-chip" data-k="${group}" data-v="${val}" aria-pressed="${cur === val}" ${extra}>${label}</button>`;
+    function lookHtml() {
+      const P = A.P;
+      const bgs = [["", "Standard"], ["photo", "Your colours"], ["custom", "Your photo"], ["black", "Black"], ["white", "White"]];
+      const img = bgImg();
+      return `
+        <div class="acc-look">
+          <div class="acc-blk">
+            <div class="acc-look-t"><b>Chat background</b><small>Shows behind every chat. Your photo stays on this device.</small></div>
+            <div class="acc-bgs" role="group" aria-label="Chat background">
+              ${bgs.map(([k, n]) => `<button type="button" data-bg="${k}" aria-pressed="${P.bg === k && (k !== "custom" || !!img)}"><span class="sw sw-${k || "std"}"${k === "custom" && img ? ` style="background-image:url('${img}')"` : ""}>${k === "custom" && !img ? ICON.img : ""}</span><em>${n}</em></button>`).join("")}
+            </div>
+            <input type="file" id="acc-bgfile" accept="image/*" hidden>
+            ${img ? `<div class="acc-mini"><button type="button" class="ap-link" id="acc-bgnew">Choose a different photo</button></div>` : ""}
+          </div>
+          <div class="acc-blk acc-row"><div><b>${ICON.paint}Your colours everywhere</b><small>Buttons, switches, highlights, the tab icon and the SCODE splash use your picture's colours</small></div>
+            <button class="switch ${P.tint ? "on" : ""}" id="acc-tint" type="button" aria-label="Your colours everywhere"></button></div>
+          <div class="acc-blk">
+            <div class="acc-look-t"><b>Reading</b><small>How SCODE's replies look</small></div>
+            <div class="acc-type">
+              <div class="acc-type-r"><span>Font</span><div class="acc-chips">${chip("font", "std", "Standard", P.font)}${chip("font", "serif", "Book", P.font)}${chip("font", "sans", "Clean", P.font)}${chip("font", "round", "Rounded", P.font)}</div></div>
+              <div class="acc-type-r"><span>Size</span><div class="acc-chips">${chip("size", "s", "S", P.size)}${chip("size", "m", "M", P.size)}${chip("size", "l", "L", P.size)}${chip("size", "xl", "XL", P.size)}</div></div>
+              <div class="acc-type-r"><span>Spacing</span><div class="acc-chips">${chip("lh", "tight", "Compact", P.lh)}${chip("lh", "std", "Normal", P.lh)}${chip("lh", "airy", "Airy", P.lh)}</div></div>
+            </div>
+            <div class="acc-sample md">Photosynthesis turns light, water and carbon dioxide into glucose and oxygen. It happens in the chloroplasts.</div>
+          </div>
+          <div class="acc-blk">
+            <div class="acc-look-t"><b>Reply style</b><small>How SCODE answers you, in every chat</small></div>
+            <div class="acc-styles">
+              ${[["", "Standard", "Balanced, like now"], ["concise", "Concise", "Just the answer"], ["detailed", "Detailed", "The why, with examples"], ["teacher", "Teacher", "Step by step, then a check"]]
+                .map(([k, n, s]) => `<button type="button" class="acc-style" data-k="style" data-v="${k}" aria-pressed="${P.style === k}"><b>${n}</b><small>${s}</small></button>`).join("")}
+            </div>
+          </div>
+          <div class="acc-blk">
+            <div class="acc-look-t"><b>Voice speed</b><small>How fast Ultra Voice reads to you</small></div>
+            <div class="acc-speed"><span>Slower</span><input type="range" id="acc-vspeed" min="0.75" max="1.5" step="0.05" value="${P.vspeed}" aria-label="Voice speed"><span>Faster</span>
+              <output id="acc-vout">${(+P.vspeed).toFixed(2).replace(/0$/, "")}×</output>
+              <button type="button" class="set-btn acc-play" id="acc-vplay">${ICON.play}Preview</button></div>
+          </div>
+          <div class="acc-blk acc-row"><div><b>${ICON.fx}Pro effects</b><small>A light sweep across messages you send, a glowing text box and a slow colour ring around your picture${reduceMotion ? ". Off because your device asks for less motion" : ""}</small></div>
+            <button class="switch ${P.fx ? "on" : ""}" id="acc-fx" type="button" aria-label="Pro effects" ${reduceMotion ? "disabled" : ""}></button></div>
+        </div>`;
+    }
+    function wireLook(box) {
+      box.querySelectorAll(".acc-bgs button").forEach(b => b.addEventListener("click", () => {
+        const k = b.dataset.bg;
+        if (k === "custom" && !bgImg()) { $("acc-bgfile").click(); return; }
+        set("bg", k); repaintLook();
+      }));
+      const nb = $("acc-bgnew"); if (nb) nb.addEventListener("click", () => $("acc-bgfile").click());
+      $("acc-bgfile").addEventListener("change", async (e) => {
+        const f = e.target.files && e.target.files[0]; e.target.value = "";
+        if (!f) return;
+        try {
+          const url = await softenPhoto(f);
+          if (!put("scode_v6_bgimg_" + who(), url)) { apError("That photo is too big to keep on this device. Try a smaller one."); return; }
+          set("bg", "custom"); repaintLook();
+        } catch (err) { apError("That file didn't work. Try a JPG or PNG photo."); }
+      });
+      $("acc-tint").addEventListener("click", () => { set("tint", !A.P.tint); $("acc-tint").classList.toggle("on", A.P.tint); });
+      $("acc-fx").addEventListener("click", () => { set("fx", !A.P.fx); $("acc-fx").classList.toggle("on", A.P.fx); });
+      box.querySelectorAll(".acc-chip, .acc-style").forEach(b => b.addEventListener("click", () => {
+        set(b.dataset.k, b.dataset.v);
+        box.querySelectorAll(`[data-k="${b.dataset.k}"]`).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      }));
+      const sp = $("acc-vspeed"), out = $("acc-vout");
+      sp.addEventListener("input", () => { out.textContent = (+sp.value).toFixed(2).replace(/0$/, "") + "×"; });
+      sp.addEventListener("change", () => set("vspeed", +sp.value));
+      $("acc-vplay").addEventListener("click", () => previewVoice(+sp.value));
+    }
+    function repaintLook() {
+      const old = document.querySelector("#v4-plan .acc-look");
+      if (!old) return;
+      const t = document.createElement("div"); t.innerHTML = lookHtml();
+      old.replaceWith(t.firstElementChild);
+      wireLook($("v4-plan"));
+    }
+    // a soft, blurred copy of any photo for the chat background
+    function softenPhoto(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file), img = new Image();
+        img.onload = () => {
+          try {
+            const W = 1280, H = 800, c = document.createElement("canvas"); c.width = W; c.height = H;
+            const x = c.getContext("2d");
+            const k = Math.max(W / img.naturalWidth, H / img.naturalHeight), w = img.naturalWidth * k, h = img.naturalHeight * k;
+            x.filter = "blur(18px) saturate(1.15)";
+            x.drawImage(img, (W - w) / 2 - 30, (H - h) / 2 - 30, w + 60, h + 60);
+            URL.revokeObjectURL(url);
+            let q = 0.72, out = c.toDataURL("image/jpeg", q);
+            while (out.length > 260000 && q > 0.35) { q -= 0.1; out = c.toDataURL("image/jpeg", q); }
+            resolve(out);
+          } catch (e) { reject(e); }
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("bad image")); };
+        img.src = url;
+      });
+    }
+    let previewAudio = null;
+    async function previewVoice(speed) {
+      const text = "Hi! This is how fast I'll read my answers to you.";
+      const b = $("acc-vplay"); if (b) b.classList.add("busy");
+      try {
+        if (previewAudio) { previewAudio.pause(); previewAudio = null; }
+        const r = await fetch(PROXY_URL + "/voice/tts", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ text, voice: get("scode_voice", "heart"), speed }) });
+        if (!r.ok) throw new Error("off");
+        previewAudio = new Audio(URL.createObjectURL(await r.blob()));
+        await previewAudio.play();
+      } catch (e) {
+        if (window.speechSynthesis) { const u = new SpeechSynthesisUtterance(text); u.rate = speed; u.lang = "en-US"; speechSynthesis.cancel(); speechSynthesis.speak(u); }
+      } finally { if (b) b.classList.remove("busy"); }
+    }
+
+    // ---------------------------------------------------------------- your stats
+    function statsHtml(s) {
+      if (!s) return `<div class="acc-stats loading"><div class="ap-mem-empty">Loading your stats…</div></div>`;
+      const mx = Math.max(1, ...s.days);
+      const since = s.since ? new Date(s.since * 1000).toLocaleDateString(undefined, { month: "long", year: "numeric" }) : "";
+      return `<div class="acc-stats">
+          <div class="acc-stats-top"><b>Your last 30 days</b>${s.streak ? `<span class="acc-streak">${s.streak}-day streak</span>` : ""}</div>
+          <div class="acc-nums">
+            <div><b data-to="${s.asks}">${s.asks.toLocaleString()}</b><span>questions</span></div>
+            <div><b data-to="${s.active}">${s.active}</b><span>active days</span></div>
+            <div><b data-to="${s.photos}">${s.photos}</b><span>photos</span></div>
+            <div><b data-to="${s.best}">${s.best}</b><span>best streak</span></div>
+          </div>
+          <div class="acc-bars" aria-label="Questions per day, last 30 days">${s.days.map((n, i) => `<i style="--h:${n ? Math.max(14, n / mx * 100) : 8}%;--i:${i}" class="${n ? "on" : ""}" title="${n} question${n === 1 ? "" : "s"}"></i>`).join("")}</div>
+          <div class="acc-stats-foot"><span>${s.top ? `Top subject: <b>${escapeHtml(s.top)}</b>${s.topic ? ` · ${escapeHtml(s.topic)}` : ""}` : "Your top subject shows up as you ask more"}</span>
+            <button type="button" class="ap-link" id="acc-share">${ICON.share}Save as image</button></div>
+          ${since ? `<div class="acc-since">${s.chats} saved chat${s.chats === 1 ? "" : "s"} · with SCODE since ${since}</div>` : ""}
+        </div>`;
+    }
+    async function loadStats() {
+      const r = await syncFetch("/v6/stats").catch(() => null);
+      if (!r || !r.ok) { const s = $("acc-stats-slot"); if (s) s.innerHTML = ""; return; }
+      A.stats = r.data;
+      const slot = $("acc-stats-slot");
+      if (!slot) return;
+      slot.innerHTML = statsHtml(A.stats);
+      slot.querySelectorAll(".acc-nums b").forEach(b => countUp(b, +b.dataset.to, 1100));
+      const sh = $("acc-share"); if (sh) sh.addEventListener("click", shareStats);
+    }
+    function shareStats() {
+      const s = A.stats; if (!s) return;
+      const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
+      const x = c.getContext("2d"), p = A.pal;
+      const g = x.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, rgb(p[0])); g.addColorStop(0.5, rgb(p[1])); g.addColorStop(1, rgb(p[2]));
+      x.fillStyle = g; x.fillRect(0, 0, W, H);
+      [[p[3], 200, 260], [p[0], 900, 380], [p[2], 540, 1250]].forEach(([col, cx, cy]) => {
+        const r = x.createRadialGradient(cx, cy, 0, cx, cy, 620); r.addColorStop(0, rgb(col, 0.75)); r.addColorStop(1, rgb(col, 0));
+        x.fillStyle = r; x.fillRect(0, 0, W, H);
+      });
+      const card = (X, Y, w, h, rad) => { x.beginPath(); x.roundRect(X, Y, w, h, rad); };
+      x.fillStyle = "rgba(255,255,255,.95)"; card(80, 300, 920, 860, 56); x.fill();
+      x.fillStyle = "#111"; x.textAlign = "center";
+      x.font = '600 54px "Source Serif 4", Georgia, serif'; x.fillText((auth && auth.name) || "My SCODE", W / 2, 420);
+      x.fillStyle = "#666"; x.font = "500 34px -apple-system, Segoe UI, sans-serif"; x.fillText("My last 30 days on SCODE AI", W / 2, 475);
+      const nums = [[s.asks, "questions"], [s.active, "active days"], [s.streak || s.best, s.streak ? "day streak" : "best streak"], [s.photos, "photos"]];
+      nums.forEach(([n, l], i) => {
+        const cx = 290 + (i % 2) * 500, cy = 640 + Math.floor(i / 2) * 190;
+        x.fillStyle = "#111"; x.font = "800 96px -apple-system, Segoe UI, sans-serif"; x.fillText(Number(n).toLocaleString(), cx, cy);
+        x.fillStyle = "#777"; x.font = "500 32px -apple-system, Segoe UI, sans-serif"; x.fillText(l, cx, cy + 48);
+      });
+      const mx = Math.max(1, ...s.days), bw = 22, gap = 6, x0 = W / 2 - (30 * (bw + gap) - gap) / 2;
+      const bg2 = x.createLinearGradient(x0, 0, W - x0, 0); bg2.addColorStop(0, rgb(p[0])); bg2.addColorStop(1, rgb(p[2]));
+      s.days.forEach((n, i) => { const h = n ? Math.max(14, n / mx * 120) : 6; x.fillStyle = n ? bg2 : "#e6e6ea"; card(x0 + i * (bw + gap), 1080 - h, bw, h, 6); x.fill(); });
+      x.fillStyle = "#fff"; x.font = "700 40px -apple-system, Segoe UI, sans-serif";
+      if (s.top) x.fillText("Top subject: " + s.top, W / 2, 1235);
+      x.font = "800 30px -apple-system, Segoe UI, sans-serif"; x.globalAlpha = 0.9; x.fillText("S C O D E   P R O", W / 2, 200);
+      c.toBlob(b => {
+        const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "my-scode-stats.png";
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      }, "image/png");
+    }
+
     function paintPro(box, d) {
       const left = Math.max(0, d.points_limit - d.points_used), pleft = Math.max(0, d.photos_limit - d.photos_used);
       const winPct = d.reset_at ? Math.max(0, Math.min(100, 100 - ((d.reset_at - Date.now() / 1000) / 14400) * 100)) : 0;
@@ -16981,29 +17359,18 @@
           <div class="acc-refill"><div class="acc-refill-top"><span>Refills in <b id="acc-refill">${refillText(d)}</b></span><span>${d.plan_until ? "Pro until " + v4When(d.plan_until) : "SCODE Pro"}</span></div>
             <i><u style="--w:${winPct}%"></u></i></div>
         </div>
+        <div id="acc-stats-slot">${statsHtml(A.stats)}</div>
         <div class="acc-h">Included with your Pro</div>
         <div class="acc-perks">${PERKS.map(([k, t, s], i) => `<div class="acc-perk" style="--i:${i}"><span class="ic">${ICON[k]}</span><b>${t}</b><small>${s}</small></div>`).join("")}</div>
         <div class="acc-h">Make it yours</div>
-        <div class="acc-look">
-          <div class="acc-look-t"><b>Chat background</b><small>Shows behind every chat, on this device</small></div>
-          <div class="acc-bgs" role="group" aria-label="Chat background">
-            ${[["", "Standard"], ["photo", "Your colours"], ["black", "Black"], ["white", "White"]].map(([k, n]) =>
-              `<button type="button" data-bg="${k}" aria-pressed="${A.bg === k}"><span class="sw sw-${k || "std"}"></span><em>${n}</em></button>`).join("")}
-          </div>
-          <div class="acc-fx-row"><div><b>${ICON.fx}Pro effects</b><small>Sparks when you send, a glowing text box and your colours around your picture${reduceMotion ? ". Off because your device asks for less motion" : ""}</small></div>
-            <button class="switch ${A.fx ? "on" : ""}" id="acc-fx" type="button" aria-label="Pro effects" ${reduceMotion ? "disabled" : ""}></button></div>
-        </div>`;
-      box.querySelectorAll(".acc-bgs button").forEach(b => b.addEventListener("click", () => {
-        setBg(b.dataset.bg);
-        const r = b.getBoundingClientRect(); screenBurst(r.left + r.width / 2, r.top + 22, { n: 22, speed: 3.4, size: 2.4 });
-      }));
-      $("acc-fx").addEventListener("click", () => setFx(!A.fx));
-      // draw the rings and count up
+        ${lookHtml()}`;
+      wireLook(box);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         box.querySelectorAll(".acc-gauge .val").forEach(c => { c.style.strokeDashoffset = c.style.getPropertyValue("--to"); });
         box.querySelectorAll(".acc-ring-num b").forEach(b => countUp(b, +b.dataset.to, 1300));
         box.querySelectorAll(".acc-refill u").forEach(u => u.classList.add("go"));
       }));
+      loadStats();
       clearInterval(A.tick);
       A.tick = setInterval(() => { const n = $("acc-refill"); if (!n || !$("account-overlay").classList.contains("show")) { clearInterval(A.tick); return; } n.textContent = refillText(d); }, 30000);
     }
@@ -17020,13 +17387,14 @@
         <div class="acc-pitch">
           <div class="acc-peek" aria-hidden="true"><div class="sky"><i></i><i></i><i></i></div>
             <div class="pk-pic"${auth && auth.avatar ? ` style="background-image:url('${auth.avatar}')"` : ""}>${auth && auth.avatar ? "" : escapeHtml(initialOf())}</div><div class="pk-isle"><b>${nm}</b><span>SCODE Pro</span></div><div class="pk-lock">${ICON.lock}</div></div>
-          <div class="acc-pitch-t"><b>Your account, in your colours</b><span>With SCODE Pro, this page is painted from your profile picture, and you get more of everything:</span></div>
+          <div class="acc-pitch-t"><b>SCODE, in your colours</b><span>With SCODE Pro, all of SCODE is painted from your profile picture, and you get more of everything:</span></div>
           <ul class="acc-pitch-l">
             <li><b>${d.pro_points.toLocaleString()}</b> points every 4 hours, not ${d.free_points.toLocaleString()}</li>
             <li><b>${d.pro_photos}</b> photos every 4 hours, not ${d.free_photos}</li>
             <li>General Ultra, Deep Think, Research and Ultra Voice</li>
-            <li>First in line in Rush Hour</li>
-            <li>Chat backgrounds and Pro effects</li>
+            <li>Priority in Rush Hour</li>
+            <li>Chat backgrounds, reply fonts and reply styles</li>
+            <li>Pinned chats, folders and your stats</li>
           </ul>
           ${ctaFor(d)}
         </div>`;
@@ -17063,27 +17431,18 @@
       tryWow();
     };
 
+    // the moment the page opens: your colours paint outward from your picture (no confetti)
     function tryWow() {
       if (!A.wowPending || !$("account-overlay").classList.contains("acc-pro")) return;
       A.wowPending = false;
       refreshColours().then(wow);
     }
     function wow() {
-      // the moment the page opens: the sky blooms, the ring spins up and your colours burst out of your picture
       const ov = $("account-overlay");
       if (!ov.classList.contains("acc-pro")) return;
       ov.classList.remove("acc-in"); void ov.offsetWidth; ov.classList.add("acc-in");
-      if (!fxOn()) return;
-      const pic = $("ap-pic");
-      setTimeout(() => {
-        if (!pic || !ov.classList.contains("show")) return;
-        const r = pic.getBoundingClientRect();
-        const first = get(LS_WOW, "") !== "1";
-        screenBurst(r.left + r.width / 2, r.top + r.height / 2, first ? { n: 140, speed: 8, size: 4, lift: 2 } : { n: 54, speed: 5.5 });
-        if (first) { put(LS_WOW, "1"); v4Toast("<b>Welcome to Pro</b> · this page is painted from your picture"); }
-      }, 380);
+      if (get("scode_v6_pro_wow", "") !== "1") { put("scode_v6_pro_wow", "1"); setTimeout(() => v4Toast("<b>Welcome to Pro</b> · SCODE is now painted from your picture"), 900); }
     }
-    // the menu's buttons hold the original openAccount, so watch the page open instead of wrapping it
     let wasOpen = false;
     new MutationObserver(() => {
       const ov = $("account-overlay"), open = ov.classList.contains("show");
@@ -17098,31 +17457,155 @@
     const _paint = paintAvatar;
     paintAvatar = function () { _paint(); if (A.palFor !== ((auth && auth.avatar) || null)) refreshColours(); };
 
-    // ---------------------------------------------------------------- Pro effects in the chat
-    function sendFx() {
-      if (!fxOn()) return;
-      const s = $("send-btn");
-      if (!s) return;
-      s.classList.remove("acc-shock"); void s.offsetWidth; s.classList.add("acc-shock");
-      const r = s.getBoundingClientRect();
-      screenBurst(r.left + r.width / 2, r.top + r.height / 2, { n: 34, speed: 4.6, size: 2.6, lift: 2.4 });
-    }
-    new MutationObserver(muts => {
-      if (!fxOn()) return;
-      const added = [];
-      muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1 && n.matches(".msg.user")) added.push(n); }));
-      if (added.length !== 1) return;          // opening a saved chat adds many at once: no fireworks for that
-      const row = added[0];
-      if (row !== el.messages.lastElementChild && row.nextElementSibling && !row.nextElementSibling.matches(".msg.assistant")) return;
-      row.classList.add("acc-sent");
-      sendFx();
-    }).observe(el.messages, { childList: true, subtree: true });
+    // ---------------------------------------------------------------- in the chat: the send sweep, the Priority tag
+    // (sending can re-draw the whole chat, so mark the newest rows right after a send instead of watching for "new" rows)
+    let sentAt = 0, marked = { u: null, a: null };
+    el.sendBtn.addEventListener("click", () => { sentAt = Date.now(); }, true);
+    el.input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) sentAt = Date.now(); }, true);
+    new MutationObserver(() => {
+      if (!isPro() || Date.now() - sentAt > 4000) return;
+      const us = el.messages.querySelectorAll(":scope > .msg.user"), as = el.messages.querySelectorAll(":scope > .msg.assistant");
+      const u = us[us.length - 1], a = as[as.length - 1];
+      if (u && fxOn() && marked.u !== sentAt) { marked.u = sentAt; u.classList.add("acc-sent"); }
+      if (a && marked.a !== sentAt && a.compareDocumentPosition(u || a) & Node.DOCUMENT_POSITION_PRECEDING) {
+        marked.a = sentAt;
+        if (RQ.pub && RQ.pub.on && !a.querySelector(".acc-prio"))
+          a.insertAdjacentHTML("afterbegin", `<div class="acc-prio">${ICON.pts}<span>Priority</span><small>Rush Hour · Pro goes first</small></div>`);
+      }
+    }).observe(el.messages, { childList: true });
 
-    // plan changes (sign in, Pro on/off) repaint the look
+    // ---------------------------------------------------------------- reply style goes with every message
+    const _fields = V6.fields;
+    V6.fields = function (P, c) {
+      const f = _fields(P, c);
+      if (isPro() && A.P.style && !c.studyNow && !c.imgNow) f.style = A.P.style;
+      return f;
+    };
+
+    // ---------------------------------------------------------------- pinned chats and folders
+    let menuEl = null;
+    function closeMenu() { if (menuEl) { menuEl.remove(); menuEl = null; document.removeEventListener("pointerdown", outside, true); } }
+    function outside(e) { if (menuEl && !menuEl.contains(e.target)) closeMenu(); }
+    function folderOf(id) { return A.P.folders.find(f => f.chats.includes(id)); }
+    function setFolder(id, fid) {
+      A.P.folders.forEach(f => { f.chats = f.chats.filter(x => x !== id); });
+      const f = A.P.folders.find(x => x.id === fid);
+      if (f) { f.chats.push(id); f.open = true; }
+      save(); renderChatList();
+    }
+    function togglePin(id) {
+      const have = new Set(chats.map(c => c.id));
+      A.P.pins = A.P.pins.filter(x => have.has(x) || !SYNC.ready);   // tidy pins for deleted chats
+      const i = A.P.pins.indexOf(id);
+      if (i >= 0) A.P.pins.splice(i, 1);
+      else { if (A.P.pins.length >= 10) { v4Toast("You can pin up to 10 chats"); return; } A.P.pins.unshift(id); }
+      save(); renderChatList();
+    }
+    function folderMenu(anchor, id) {
+      closeMenu();
+      const cur = folderOf(id);
+      menuEl = document.createElement("div");
+      menuEl.className = "acc-menu";
+      menuEl.innerHTML = `<div class="acc-menu-h">Move to folder</div>
+        ${A.P.folders.map(f => `<button type="button" data-f="${f.id}">${ICON.folder}<span>${escapeHtml(f.name)}</span>${cur && cur.id === f.id ? ICON.check : ""}</button>`).join("")}
+        ${cur ? `<button type="button" data-f="">${ICON.x}<span>Take out of ${escapeHtml(cur.name)}</span></button>` : ""}
+        <form class="acc-menu-new"><input maxlength="28" placeholder="New folder name" aria-label="New folder name"><button type="submit">Add</button></form>`;
+      document.body.appendChild(menuEl);
+      const r = anchor.getBoundingClientRect();
+      menuEl.style.left = Math.min(window.innerWidth - 236, r.left) + "px";
+      menuEl.style.top = Math.min(window.innerHeight - menuEl.offsetHeight - 8, r.bottom + 6) + "px";
+      menuEl.querySelectorAll("button[data-f]").forEach(b => b.addEventListener("click", () => { setFolder(id, b.dataset.f); closeMenu(); }));
+      menuEl.querySelector("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = menuEl.querySelector("input").value.trim();
+        if (!name) return;
+        if (A.P.folders.length >= 20) { v4Toast("You can have up to 20 folders"); return; }
+        const f = { id: "f" + Date.now().toString(36), name, open: true, chats: [] };
+        A.P.folders.push(f);
+        setFolder(id, f.id); closeMenu();
+      });
+      setTimeout(() => document.addEventListener("pointerdown", outside, true), 0);
+      if (!matchMedia("(hover: none)").matches) menuEl.querySelector("input").focus();
+    }
+    async function folderAct(f, act, head) {
+      if (act === "del") {
+        if (!(await showConfirm(`Delete "${f.name}"?`, "The folder goes away. The chats in it stay, back in Recents."))) return;
+        A.P.folders = A.P.folders.filter(x => x !== f); save(); renderChatList(); return;
+      }
+      const nameEl = head.querySelector(".acc-fold-n");
+      const inp = document.createElement("input"); inp.className = "acc-fold-in"; inp.value = f.name; inp.maxLength = 28;
+      nameEl.replaceWith(inp); inp.focus(); inp.select();
+      const done = () => { const v = inp.value.trim(); if (v) { f.name = v; save(); } renderChatList(); };
+      inp.addEventListener("keydown", e => { if (e.key === "Enter") inp.blur(); if (e.key === "Escape") { inp.value = f.name; inp.blur(); } e.stopPropagation(); });
+      inp.addEventListener("blur", done, { once: true });
+      inp.addEventListener("click", e => e.stopPropagation());
+    }
+    const _rcl = renderChatList;
+    renderChatList = function () {
+      _rcl();
+      const list = el.chatList, label = list.previousElementSibling;
+      if (label && label.classList.contains("side-label")) label.hidden = false;
+      if (!isPro() || !historyEnabled || !A.P) return;
+      const rows = Array.from(list.children).filter(r => r.classList.contains("chat-item"));
+      if (rows.length !== chats.length) return;
+      // (ids for chats this device hasn't pulled yet stay saved: they show up once the chat syncs)
+      const byId = {};
+      rows.forEach((row, i) => {
+        const id = chats[i].id; row.dataset.id = id; byId[id] = row;
+        const pinned = A.P.pins.includes(id);
+        const box = document.createElement("span"); box.className = "acc-ci";
+        box.innerHTML = `<button type="button" class="acc-pin${pinned ? " on" : ""}" title="${pinned ? "Unpin" : "Pin to the top"}" aria-label="${pinned ? "Unpin" : "Pin"}">${ICON.pin}</button>` +
+          `<button type="button" class="acc-fb" title="Move to a folder" aria-label="Move to a folder">${ICON.folder}</button>`;
+        box.querySelector(".acc-pin").addEventListener("click", e => { e.stopPropagation(); togglePin(id); });
+        box.querySelector(".acc-fb").addEventListener("click", e => { e.stopPropagation(); folderMenu(e.currentTarget, id); });
+        const del = row.querySelector(".del"); row.insertBefore(box, del);
+        if (pinned) row.classList.add("acc-pinned");
+      });
+      if (!A.P.pins.some(id => byId[id]) && !A.P.folders.length) return;
+      const frag = document.createDocumentFragment();
+      if (A.P.pins.some(id => byId[id])) {
+        const sec = document.createElement("div"); sec.className = "acc-sec";
+        sec.innerHTML = `<div class="acc-sec-h">${ICON.pin}Pinned</div>`;
+        A.P.pins.forEach(id => byId[id] && sec.appendChild(byId[id]));
+        frag.appendChild(sec);
+      }
+      A.P.folders.forEach(f => {
+        const sec = document.createElement("div"); sec.className = "acc-fold" + (f.open ? " open" : "");
+        sec.innerHTML = `<div class="acc-fold-h" role="button" tabindex="0" aria-expanded="${!!f.open}"><span class="chev">${ICON.chev}</span>${ICON.folder}<span class="acc-fold-n"></span><em>${f.chats.filter(id => byId[id] && !A.P.pins.includes(id)).length}</em>
+          <span class="acc-fold-a"><button type="button" data-a="ren" aria-label="Rename folder">${ICON.edit}</button><button type="button" data-a="del" aria-label="Delete folder">${ICON.x}</button></span></div><div class="acc-fold-b"></div>`;
+        sec.querySelector(".acc-fold-n").textContent = f.name;
+        const head = sec.querySelector(".acc-fold-h"), body = sec.querySelector(".acc-fold-b");
+        f.chats.forEach(id => byId[id] && !A.P.pins.includes(id) && body.appendChild(byId[id]));
+        if (!body.children.length) body.innerHTML = '<div class="acc-fold-empty">Empty. Use the folder button on a chat to add it.</div>';
+        const flip = () => { f.open = !f.open; save(); sec.classList.toggle("open", f.open); head.setAttribute("aria-expanded", String(f.open)); };
+        head.addEventListener("click", flip);
+        head.addEventListener("keydown", e => { if (e.key === "Enter") flip(); });
+        head.querySelectorAll("[data-a]").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); folderAct(f, b.dataset.a, head); }));
+        frag.appendChild(sec);
+      });
+      const rest = rows.filter(r => !A.P.pins.includes(r.dataset.id) && !folderOf(r.dataset.id));
+      const h = document.createElement("div"); h.className = "acc-sec-h acc-recents"; h.textContent = "Recents";
+      frag.appendChild(h);
+      rest.forEach(r => frag.appendChild(r));
+      list.innerHTML = ""; list.appendChild(frag);
+      if (label && label.classList.contains("side-label")) label.hidden = true;
+    };
+
+    // ---------------------------------------------------------------- start
+    loadLocal();
+    try { const c = JSON.parse(get("scode_v6_pal", "null")); if (Array.isArray(c) && c.length === 4) { A.pal = c; setVars(c); } else setVars(FALLBACK); } catch (e) { setVars(FALLBACK); }
+    // the splash shows before the plan is known: use what this device saw last time
+    if (get("scode_v6_pro", "") === "1" && A.P.tint && !isGuest()) document.body.classList.add("v6-tint", "v6-pro");
     const _st = v4Status;
-    v4Status = function (data) { _st(data); applyLook(); };
+    v4Status = function (data) {
+      _st(data);
+      if (A.loadedFor !== who()) { A.loadedFor = null; loadLocal(); }
+      applyLook();
+      const now = V4.plan + "|" + who();
+      if (now !== A.lastPlan) { A.lastPlan = now; renderChatList(); if (isPro()) pullPrefs(); }
+    };
     refreshColours();
-    return { A, palette, applyLook, setBg, setFx, refreshColours, pickColours };
+    return { A, palette, applyLook, set, refreshColours, pickColours, renderChatList: () => renderChatList(), save };
   })();
   window.scodeAcc = ACC;
 
