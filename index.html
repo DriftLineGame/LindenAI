@@ -4475,7 +4475,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://minute-recognize-dawn-pal.trycloudflare.com";
+  const PROXY_URL = "https://symbols-festivals-packard-rica.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -14861,7 +14861,12 @@
           <figcaption><b>${esc(s.title)}</b>${s.pic.cap ? `<span>${esc(s.pic.cap)}</span>` : ""}<small>${s.url && /^https?:\/\//.test(s.url) ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Image: Wikipedia</a>` : "Image: Wikipedia"}</small></figcaption>`;
         const img = f.querySelector("img");
         img.addEventListener("load", () => f.classList.add("in"));
-        img.addEventListener("error", () => { f.remove(); if (!wrap.children.length) wrap.remove(); else wrap.classList.remove("two"); });
+        let tries = 0;
+        img.addEventListener("error", () => {
+          // v6.2: a busy server can be slow with the first picture; try twice more before giving up
+          if (tries++ < 2) { setTimeout(() => { img.src = PROXY_URL + s.pic.src + "&r=" + tries; }, 1500 * tries); return; }
+          f.remove(); if (!wrap.children.length) wrap.remove(); else wrap.classList.remove("two");
+        });
         img.src = PROXY_URL + s.pic.src;
         f.querySelector(".ph").addEventListener("click", () => picView(img.src, s));
         wrap.appendChild(f);
