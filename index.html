@@ -4256,6 +4256,11 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">October 31, 2026</div><h3>v6.2</h3><ul>
+        <li><span class="v4-log-tag fix">FIX</span><b>No more surprise cards</b> <span>graphs, molecules and element cards only show when they're about what you asked.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Memory feels natural</b> <span>SCODE only brings up what it remembers about you when it really changes the answer.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>The full SCODE Library</b> <span>all of English Wikipedia is now in SCODE's offline Library, with more time to look things up when SCODE is busy, and it says when it isn't sure what something looks like.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">October 30, 2026</div><h3>v6.1</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Voice mode</b> <span>tap the mic and it turns into the SCODE orb. Hold it and talk, let go to send. The orb thinks, then moves with SCODE's voice as it answers. Close it to see the whole conversation written out.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Library pictures</b> <span>(General Ultra) when SCODE answers from the Library, it shows the article's main picture with its caption, like a photo of the bird or mountain you asked about.</span></li>
@@ -4470,7 +4475,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://regression-conversion-africa-maximum.trycloudflare.com";
+  const PROXY_URL = "https://indirect-taxation-amino-discovery.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -14282,7 +14287,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-10-30";
+  const V4_LOG_VER = "2026-10-31";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -14893,14 +14898,43 @@
       root.querySelectorAll('pre[data-lang="scode"]:not([data-v6w]), pre[data-lang="SCODE"]:not([data-v6w])').forEach(pre => {
         pre.dataset.v6w = "1";
         const code = pre.textContent;
+        const bar = pre.previousElementSibling && pre.previousElementSibling.classList.contains("v4-cb") ? pre.previousElementSibling : null;
+        // v6.2: only show a widget that's about what was actually asked (no surprise element cards)
+        if (!widgetFits(code, pre)) { if (bar) bar.style.display = "none"; pre.style.display = "none"; return; }
         let w = null;
         try { w = makeWidget(code); } catch (e) { console.warn("SCODE widget", e); }
         if (!w) return;
-        const bar = pre.previousElementSibling && pre.previousElementSibling.classList.contains("v4-cb") ? pre.previousElementSibling : null;
         if (bar) bar.style.display = "none";
         pre.style.display = "none";
         pre.parentNode.insertBefore(w, pre.nextSibling);
       });
+    }
+    function widgetContext(pre, raw) {
+      const md = pre.closest(".md") || pre.parentNode;
+      let t = "";
+      if (md) { const c = md.cloneNode(true); c.querySelectorAll("pre, .v6w, .v4-cb").forEach(x => x.remove()); t = c.textContent || ""; }
+      const row = pre.closest(".msg");
+      let u = row && row.previousElementSibling;
+      while (u && !u.classList.contains("user")) u = u.previousElementSibling;
+      const all = t + " " + (u ? u.textContent : "");
+      return raw ? all : all.toLowerCase();
+    }
+    function widgetFits(code, pre) {
+      const ctx = widgetContext(pre);
+      const has = (w) => { w = String(w || "").toLowerCase().trim(); return !!w && new RegExp("(^|[^a-z])" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z]|$)").test(ctx); };
+      const b = parseBlock(code);
+      let kind = "", val = "";
+      if (b.json) { kind = String(b.json.type || b.json.kind || "").toLowerCase(); val = String(b.json.symbol || b.json.element || b.json.name || b.json.molecule || b.json.title || ""); }
+      else if (b.lines.length) { const [k, v] = kv(b.lines[0]); kind = k || ""; val = v || ""; }
+      if (kind === "element") {
+        const q = val.replace(/[^\w\s]/g, "").trim(), ql = q.toLowerCase();
+        const e = ELS.find(x => x.s.toLowerCase() === ql) || ELS.find(x => x.n.toLowerCase() === ql) || (/^\d+$/.test(q) ? ELS[+q - 1] : null);
+        return !!e && (has(e.n) || (ql === "aluminium" && has("aluminium")) || (e.s.length > 1 && new RegExp("(^|[^A-Za-z])" + e.s + "([^a-z]|$)").test(widgetContext(pre, true))));
+      }
+      if (kind === "molecule" || kind === "mol" || kind === "compound") return has(val) || /molecule|molecular|compound|chemical|bond|structure|formula/.test(ctx);
+      if (kind === "graph") return /graph|plot|function|equation|parabola|slope|curve|intercept|y\s*=|f\(x\)/.test(ctx);
+      if (kind === "sim") return /projectile|pendulum|wave|circuit|gas|launch|swing|frequency|voltage|current|pressure|physics|motion|velocity|throw/.test(ctx);
+      return true;
     }
     function parseBlock(src) {
       src = String(src || "").replace(/\r/g, "").trim();
@@ -16484,7 +16518,7 @@
 
     paint();
     setTimeout(scanRows, 0);
-    return { prep, fields, onEvent, finish, stripTags, voiceFeed, voiceStart, voiceStop, decorate, makeWidget, eyesOpen, canvasOpen, spOpen, progressOpen, S, compileExpr, ELS, elPos };
+    return { prep, fields, onEvent, finish, stripTags, voiceFeed, voiceStart, voiceStop, decorate, makeWidget, widgetFits, eyesOpen, canvasOpen, spOpen, progressOpen, S, compileExpr, ELS, elPos };
   })();
   window.scodeV6 = V6;
 
