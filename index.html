@@ -3644,6 +3644,216 @@
   @keyframes v6Shimmer { from { background-position: 120% 0, 0 0; } to { background-position: -120% 0, 0 0; } }
   @media (prefers-reduced-motion: reduce) { .v6-pics figure.wait .ph::after { animation: none; } }
 
+  /* ================================================================ v6.4 account page */
+  :root { --me1: #ff5fb0; --me2: #8b6bff; --me3: #3fc1ff; --me4: #ffaa78; --me1-rgb: 255,95,176; --me2-rgb: 139,107,255; --me3-rgb: 63,193,255; --me4-rgb: 255,170,120; --me-ink: #5b3fd6; }
+  @property --acc-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+  .acc-sky, .acc-halo, .acc-badge { display: none; }
+  #acc-screen { position: fixed; inset: 0; pointer-events: none; z-index: 400; }
+  .acc-spark { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* the Apps page also has an .ap-hero (stripes, 210px tall): never on the account page */
+  #account-overlay .ap-hero { height: auto; overflow: visible; background: var(--surface-2); }
+  #account-overlay .ap-hero::before { content: none; }
+  /* ---------- Free: plain and simple ---------- */
+  #account-overlay.acc-free .ap-hero { background: none; border: none; border-radius: 0; padding: 2px 0 18px; margin-bottom: 18px; border-bottom: 1px solid var(--border); gap: 14px; }
+  #account-overlay.acc-free .ap-pic { width: 60px; height: 60px; font-size: 24px; box-shadow: none; }
+  #account-overlay.acc-free .ap-name { font-family: var(--sans); font-size: 17px; font-weight: 650; }
+  #account-overlay.acc-free .ap-pic-actions { margin-top: 6px; }
+  #account-overlay.acc-free .ap-cam { width: 24px; height: 24px; right: -4px; bottom: -4px; }
+  #account-overlay.acc-free .ap-cam svg { width: 13px; height: 13px; }
+  #account-overlay.acc-free .ap-pic-actions .set-btn { height: 28px; font-size: 12.5px; padding: 0 10px; }
+  .acc-free-use { display: grid; gap: 6px; }
+  .acc-free-use .r { display: flex; justify-content: space-between; align-items: baseline; font-size: 13.5px; color: var(--muted); }
+  .acc-free-use .r b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .acc-free-use .r small { color: var(--faint); font-weight: 400; }
+  .acc-free-use i { display: block; height: 5px; border-radius: 5px; background: var(--hover); overflow: hidden; margin-bottom: 8px; }
+  .acc-free-use u { display: block; height: 100%; border-radius: 5px; background: var(--muted); }
+  .acc-free-note { font-size: 12.5px; color: var(--faint); }
+  .acc-pitch { margin-top: 16px; padding: 14px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+  .acc-peek { position: relative; height: 128px; border-radius: 13px; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--me1), var(--me2) 50%, var(--me3)); }
+  .acc-peek .sky { position: absolute; inset: 0; z-index: -1; }
+  .acc-peek .sky i { position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; filter: blur(30px); opacity: .9; }
+  .acc-peek .sky i:nth-child(1) { background: var(--me1); left: -18%; top: -50%; animation: accD1 9s ease-in-out infinite alternate; }
+  .acc-peek .sky i:nth-child(2) { background: var(--me3); right: -20%; bottom: -60%; animation: accD2 11s ease-in-out infinite alternate; }
+  .acc-peek .sky i:nth-child(3) { background: var(--me4); left: 30%; top: 10%; width: 45%; opacity: .6; animation: accD3 13s ease-in-out infinite alternate; }
+  .acc-peek .pk-pic { width: 44px; height: 44px; border-radius: 50%; background: var(--me2) center/cover; box-shadow: 0 0 0 3px #fff, 0 6px 16px rgba(0,0,0,.25); margin-bottom: -16px; z-index: 1;
+    display: grid; place-items: center; color: #fff; font-weight: 700; }
+  .acc-peek .pk-isle { background: rgba(255,255,255,.95); border-radius: 12px; padding: 20px 22px 8px; text-align: center; min-width: 150px; box-shadow: 0 8px 22px rgba(0,0,0,.16); }
+  .acc-peek .pk-isle b { display: block; color: #111; font-size: 13.5px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .acc-peek .pk-isle span { font-size: 9.5px; letter-spacing: .14em; font-weight: 800; background: linear-gradient(90deg, var(--me1), var(--me2), var(--me3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .acc-peek .pk-lock { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+    background: rgba(0,0,0,.28); backdrop-filter: blur(6px); }
+  .acc-peek .pk-lock svg { width: 15px; height: 15px; }
+  .acc-pitch-t { margin: 14px 2px 8px; }
+  .acc-pitch-t b { display: block; font-size: 15.5px; }
+  .acc-pitch-t span { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-top: 3px; }
+  .acc-pitch-l { list-style: none; margin: 0 2px 12px; padding: 0; display: grid; gap: 6px; font-size: 13.5px; }
+  .acc-pitch-l li { position: relative; padding-left: 16px; }
+  .acc-pitch-l li::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(135deg, var(--me1), var(--me3)); }
+  .acc-ended { font-size: 12.5px; color: var(--faint); padding: 10px 2px 0; border-top: 1px solid var(--border); line-height: 1.5; }
+
+  /* ---------- Pro: your colours ---------- */
+  #account-overlay.acc-pro .modal-box { width: 560px; position: relative; }
+  #account-overlay .ap-hero.acc-hero-pro { flex-direction: column; align-items: stretch; gap: 0; padding: 38px 18px 18px; margin: 0 0 24px; border: none; border-radius: 26px;
+    position: relative; overflow: hidden; isolation: isolate; background: var(--me2); box-shadow: 0 18px 50px rgba(var(--me2-rgb), .28); }
+  .acc-hero-pro .acc-sky { display: block; position: absolute; inset: 0; z-index: -2; background: linear-gradient(140deg, var(--me1), var(--me2) 42%, var(--me3) 78%, var(--me4)); }
+  .acc-sky i { position: absolute; width: 75%; aspect-ratio: 1; border-radius: 50%; filter: blur(46px); opacity: .9; will-change: transform; }
+  .acc-sky i:nth-child(1) { background: var(--me1); left: -25%; top: -45%; animation: accD1 16s ease-in-out infinite alternate; }
+  .acc-sky i:nth-child(2) { background: var(--me3); right: -30%; top: -20%; animation: accD2 19s ease-in-out infinite alternate; }
+  .acc-sky i:nth-child(3) { background: var(--me4); left: 5%; bottom: -55%; opacity: .75; animation: accD3 22s ease-in-out infinite alternate; }
+  .acc-sky i:nth-child(4) { background: var(--me2); right: 0; bottom: -40%; width: 60%; animation: accD1 25s ease-in-out infinite alternate-reverse; }
+  @keyframes accD1 { to { transform: translate(28%, 22%) scale(1.25); } }
+  @keyframes accD2 { to { transform: translate(-30%, 18%) scale(.85); } }
+  @keyframes accD3 { to { transform: translate(24%, -26%) scale(1.15); } }
+  .acc-hero-pro .acc-halo { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(60% 45% at 50% 0%, rgba(255,255,255,.35), transparent 70%), linear-gradient(115deg, transparent 30%, rgba(255,255,255,.22) 48%, transparent 64%) no-repeat;
+    background-size: 100% 100%, 250% 100%; background-position: 0 0, 160% 0; animation: accSweep 7s ease-in-out 1.2s infinite; }
+  @keyframes accSweep { 0%, 60% { background-position: 0 0, 160% 0; } 100% { background-position: 0 0, -60% 0; } }
+  .acc-hero-pro .ap-pic { align-self: center; width: 108px; height: 108px; margin-bottom: -54px; z-index: 2; font-size: 40px; background-color: var(--me2);
+    box-shadow: 0 0 0 4px #fff, 0 16px 36px rgba(0,0,0,.3); }
+  .acc-hero-pro .ap-pic::before { content: ""; position: absolute; inset: -11px; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from var(--acc-a), var(--me1), var(--me2), var(--me3), var(--me4), var(--me1));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px)); mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px));
+    animation: accTurn 5s linear infinite; filter: drop-shadow(0 0 6px rgba(255,255,255,.6)); }
+  @keyframes accTurn { to { --acc-a: 360deg; } }
+  .acc-hero-pro .ap-cam { background: #fff; color: #111; border-color: #e5e5e5; }
+  .acc-hero-pro .ap-who { background: rgba(255,255,255,.95); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); border-radius: 20px;
+    padding: 66px 18px 16px; text-align: center; color: #111; box-shadow: 0 12px 34px rgba(0,0,0,.16), inset 0 1px 0 #fff; }
+  .acc-hero-pro .ap-name { color: #111; font-size: 25px; font-weight: 500; }
+  .acc-hero-pro .ap-email { color: #5f5f66; font-size: 13.5px; }
+  .acc-hero-pro .ap-pic-actions { justify-content: center; margin-top: 12px; }
+  .acc-hero-pro .ap-pic-actions .set-btn { background: #f2f2f4; color: #111; border-color: #e3e3e8; }
+  .acc-hero-pro .ap-pic-actions .set-btn:hover { background: #e9e9ee; }
+  .acc-hero-pro .ap-link { color: var(--me-ink); }
+  .acc-hero-pro .acc-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; letter-spacing: .16em; font-weight: 800; padding: 5px 11px; border-radius: 999px; color: #fff;
+    margin-bottom: 9px; background: linear-gradient(100deg, var(--me1), var(--me2), var(--me3), var(--me4), var(--me1)); background-size: 300% 100%; animation: accHolo 6s linear infinite;
+    box-shadow: 0 4px 14px rgba(var(--me2-rgb), .45), inset 0 1px 0 rgba(255,255,255,.4); text-shadow: 0 1px 2px rgba(0,0,0,.18); }
+  @keyframes accHolo { to { background-position: 300% 0; } }
+
+  /* the moment it opens */
+  .acc-in .acc-hero-pro { animation: accBloom .9s cubic-bezier(.2,.9,.2,1) both; }
+  .acc-in .acc-hero-pro .acc-sky { animation: accSkyIn 1.4s cubic-bezier(.2,.9,.2,1) both; }
+  .acc-in .acc-hero-pro .ap-pic { animation: accPop .9s cubic-bezier(.3,1.6,.4,1) .15s both; }
+  .acc-in .acc-hero-pro .ap-who { animation: accRise .8s cubic-bezier(.2,1,.3,1) .25s both; }
+  .acc-in .acc-hero-pro .acc-badge { animation: accHolo 6s linear infinite, accPop .7s cubic-bezier(.3,1.6,.4,1) .55s both; }
+  .acc-in .acc-hero-pro .ap-name, .acc-in .acc-hero-pro .ap-email { animation: accRise .7s cubic-bezier(.2,1,.3,1) .45s both; }
+  .acc-in .acc-hero-pro .ap-email { animation-delay: .52s; }
+  .acc-in .acc-usage { animation: accRise .8s cubic-bezier(.2,1,.3,1) .4s both; }
+  .acc-in .acc-perk { animation: accRise .7s cubic-bezier(.2,1.2,.3,1) calc(.55s + var(--i) * .07s) both; }
+  .acc-in .acc-look { animation: accRise .8s cubic-bezier(.2,1,.3,1) .9s both; }
+  @keyframes accBloom { from { opacity: 0; transform: scale(.94); filter: saturate(.3) blur(6px); } }
+  @keyframes accSkyIn { from { transform: scale(1.5) rotate(-8deg); } }
+  @keyframes accPop { from { opacity: 0; transform: scale(.3) rotate(-25deg); } }
+  @keyframes accRise { from { opacity: 0; transform: translateY(22px) scale(.97); } }
+
+  /* usage */
+  .acc-usage { border: 1px solid var(--border); border-radius: 22px; padding: 18px 16px 16px;
+    background: radial-gradient(90% 120% at 0% 0%, rgba(var(--me1-rgb), .16), transparent 60%), radial-gradient(90% 120% at 100% 100%, rgba(var(--me3-rgb), .16), transparent 60%), var(--surface-2); }
+  .acc-rings { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .acc-ring-card { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .acc-gauge { width: 136px; height: 136px; transform: rotate(-90deg); overflow: visible; }
+  .acc-gauge circle { fill: none; stroke-width: 9; stroke-linecap: round; }
+  .acc-gauge .trk { stroke: var(--border); opacity: .8; }
+  .acc-gauge .val { transition: stroke-dashoffset 1.5s cubic-bezier(.2,.9,.2,1) .35s; filter: drop-shadow(0 0 5px rgba(var(--me2-rgb), .55)); }
+  .acc-ring-num { position: absolute; top: 0; left: 0; right: 0; height: 136px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .acc-ring-num b { font-size: 27px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .acc-ring-num span { font-size: 11.5px; color: var(--muted); }
+  .acc-ring-lbl { margin-top: 6px; font-weight: 650; font-size: 13.5px; }
+  .acc-ring-lbl small { color: var(--faint); font-weight: 400; margin-left: 5px; }
+  .acc-refill { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .acc-refill-top { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; flex-wrap: wrap; }
+  .acc-refill-top b { color: var(--text); font-weight: 650; }
+  .acc-refill i { display: block; height: 6px; border-radius: 6px; background: var(--hover); overflow: hidden; }
+  .acc-refill u { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, var(--me1), var(--me2), var(--me3)); position: relative; overflow: hidden;
+    transition: width 1.4s cubic-bezier(.2,.9,.2,1) .5s; }
+  .acc-refill u.go { width: var(--w); }
+  .acc-refill u::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transform: translateX(-100%); animation: accShine 2.6s ease-in-out 2s infinite; }
+  @keyframes accShine { 60%, 100% { transform: translateX(100%); } }
+
+  /* perks */
+  .acc-h { font-size: 13px; font-weight: 600; color: var(--muted); margin: 22px 0 10px; }
+  .acc-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .acc-perk { position: relative; padding: 12px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface-2); display: flex; flex-direction: column; gap: 2px;
+    transition: transform .35s cubic-bezier(.2,1.4,.3,1), border-color .3s, box-shadow .3s; }
+  .acc-perk:hover { transform: translateY(-3px); border-color: rgba(var(--me2-rgb), .55); box-shadow: 0 10px 26px rgba(var(--me2-rgb), .22); }
+  .acc-perk .ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; color: #fff; margin-bottom: 8px;
+    background: linear-gradient(140deg, var(--me1), var(--me2) 55%, var(--me3)); box-shadow: 0 5px 14px rgba(var(--me2-rgb), .38), inset 0 1px 0 rgba(255,255,255,.35); }
+  .acc-perk .ic svg { width: 18px; height: 18px; }
+  .acc-perk b { font-size: 13px; line-height: 1.3; }
+  .acc-perk small { font-size: 11.5px; color: var(--muted); }
+
+  /* make it yours */
+  .acc-look { border: 1px solid var(--border); border-radius: 20px; padding: 14px; background: var(--surface-2); }
+  .acc-look-t b, .acc-fx-row b { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+  .acc-look-t small, .acc-fx-row small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+  .acc-fx-row b svg { width: 16px; height: 16px; color: var(--me2); }
+  .acc-bgs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0 14px; }
+  .acc-bgs button { border: none; background: none; padding: 0; font: inherit; color: var(--text); cursor: pointer; display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+  .acc-bgs em { font-style: normal; font-size: 12px; color: var(--muted); text-align: center; }
+  .acc-bgs button[aria-pressed="true"] em { color: var(--text); font-weight: 650; }
+  .acc-bgs .sw { position: relative; aspect-ratio: 4 / 3; border-radius: 12px; border: 1px solid var(--border-strong); overflow: hidden; transition: transform .3s cubic-bezier(.2,1.4,.3,1), box-shadow .3s; }
+  .acc-bgs .sw::before, .acc-bgs .sw::after { content: ""; position: absolute; height: 7px; border-radius: 6px; }
+  .acc-bgs .sw::before { right: 10%; top: 26%; width: 42%; background: currentColor; opacity: .22; }
+  .acc-bgs .sw::after { left: 10%; top: 52%; width: 62%; background: currentColor; opacity: .14; }
+  .acc-bgs button:hover .sw { transform: translateY(-2px); }
+  .acc-bgs button[aria-pressed="true"] .sw { box-shadow: 0 0 0 2px var(--surface-2), 0 0 0 4px var(--me2); transform: translateY(-2px); }
+  .sw-std { background: var(--bg); color: var(--text); }
+  .sw-photo { color: var(--text); background: radial-gradient(80% 70% at 0% 0%, rgba(var(--me1-rgb), .5), transparent 70%), radial-gradient(80% 70% at 100% 20%, rgba(var(--me2-rgb), .45), transparent 70%),
+    radial-gradient(90% 70% at 60% 100%, rgba(var(--me3-rgb), .5), transparent 70%), var(--bg); }
+  .sw-black { background: #000; color: #fff; }
+  .sw-white { background: #fff; color: #000; }
+  .acc-fx-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .acc-fx-row .switch:disabled { opacity: .45; cursor: default; }
+
+  /* ---------- chat backgrounds (Pro) ---------- */
+  body.v6bg-photo #main { background: radial-gradient(65% 55% at 0% 0%, rgba(var(--me1-rgb), .24), transparent 70%), radial-gradient(55% 50% at 100% 12%, rgba(var(--me2-rgb), .2), transparent 70%),
+    radial-gradient(75% 55% at 55% 100%, rgba(var(--me3-rgb), .22), transparent 72%), var(--bg); }
+  body.light.v6bg-photo #main { background: radial-gradient(65% 55% at 0% 0%, rgba(var(--me1-rgb), .2), transparent 70%), radial-gradient(55% 50% at 100% 12%, rgba(var(--me2-rgb), .17), transparent 70%),
+    radial-gradient(75% 55% at 55% 100%, rgba(var(--me3-rgb), .19), transparent 72%), var(--bg); }
+  body.v6bg-photo #topbar { background: transparent; }
+  body.v6bg-black #main { --bg: #000; --surface: #121212; --surface-2: #1a1a1a; --hover: rgba(255,255,255,.07); --border: #262626; --border-strong: #363636; --text: #f2f2f2; --muted: #a3a3a3; --faint: #6e6e6e;
+    --user-bubble: #1c1c1e; --accent: #a993ff; --accent-soft: rgba(169,147,255,.16); --mark-fill: #f4f3ee; color-scheme: dark; background: #000; color: var(--text); }
+  body.v6bg-white #main { --bg: #fff; --surface: #fff; --surface-2: #f5f5f7; --hover: rgba(0,0,0,.045); --border: #e5e5ea; --border-strong: #d1d1d6; --text: #1d1d1f; --muted: #6e6e73; --faint: #a1a1a6;
+    --user-bubble: #f0f0f3; --accent: #6a46f0; --accent-soft: rgba(106,70,240,.1); --mark-fill: #fff; color-scheme: light; background: #fff; color: var(--text); }
+  body.v6bg-white #main #composer { box-shadow: 0 0 0 .5px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.07); }
+
+  /* ---------- Pro effects ---------- */
+  body.v6-pro #acct-btn.has-pic { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--me2); }
+  body.v6-fx #acct-btn.has-pic { position: relative; box-shadow: 0 0 0 2px var(--surface); }
+  body.v6-fx #acct-btn.has-pic::before { content: ""; position: absolute; inset: -4.5px; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from var(--acc-a), var(--me1), var(--me2), var(--me3), var(--me4), var(--me1));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+    animation: accTurn 4s linear infinite; }
+  body.v6-fx #composer:focus-within { border-color: transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, conic-gradient(from var(--acc-a), var(--me1), var(--me2), var(--me3), var(--me4), var(--me1)) border-box;
+    box-shadow: var(--composer-shadow), 0 0 26px -4px rgba(var(--me2-rgb), .45); animation: accTurn 6s linear infinite; }
+  body.v6-fx #send-btn { position: relative; }
+  body.v6-fx #send-btn.acc-shock::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; border: 2px solid var(--me2);
+    animation: accShock .7s cubic-bezier(.2,.9,.3,1) both; }
+  @keyframes accShock { from { transform: scale(1); opacity: .9; } to { transform: scale(2.6); opacity: 0; border-width: .5px; } }
+  body.v6-fx .msg.user.acc-sent { animation: accSend .75s cubic-bezier(.25,1.5,.4,1) both; }
+  body.v6-fx .msg.user.acc-sent .user-bubble { position: relative; overflow: hidden; }
+  body.v6-fx .msg.user.acc-sent .user-bubble::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+    background: linear-gradient(105deg, transparent 20%, rgba(var(--me1-rgb), .45) 40%, rgba(var(--me3-rgb), .45) 60%, transparent 80%); transform: translateX(-110%);
+    animation: accBubble 1.1s cubic-bezier(.3,.8,.3,1) .15s both; }
+  @keyframes accSend { 0% { opacity: 0; transform: translate(40px, 30px) scale(.7) rotate(4deg); filter: blur(4px); } 55% { opacity: 1; transform: translate(-3px, -4px) scale(1.03); filter: none; } 100% { transform: none; } }
+  @keyframes accBubble { to { transform: translateX(110%); } }
+
+  @media (max-width: 520px) {
+    #account-overlay.acc-pro .modal-box { padding-left: 16px; padding-right: 16px; }
+    .acc-perks { grid-template-columns: 1fr 1fr; }
+    .acc-gauge { width: 118px; height: 118px; }
+    .acc-ring-num { height: 118px; }
+    .acc-ring-num b { font-size: 23px; }
+    .acc-hero-pro .ap-name { font-size: 21px; }
+    .acc-bgs { gap: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .acc-sky i, .acc-peek .sky i, .acc-halo, .acc-badge, .acc-hero-pro .ap-pic::before, .acc-refill u::after { animation: none !important; }
+    .acc-in * { animation-duration: .01s !important; animation-delay: 0s !important; }
+  }
+
 </style>
 </head>
 <body class="is-empty">
@@ -4270,6 +4480,12 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.4</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>A new account page</b> <span>Pro accounts are painted with a smooth gradient made from the colours of your profile picture, with clear usage rings that show what's left and when it refills.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Chat backgrounds</b> <span>(Pro) set your chats to a soft gradient of your picture's colours, black or white. Open your account and look under Make it yours.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Pro effects</b> <span>(Pro) sparks in your colours when you send, a glowing text box and a spinning colour ring around your picture. You can turn them off.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Simpler Free page</b> <span>Free accounts get a cleaner page that shows what's left at a glance.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.3</h3><ul>
         <li><span class="v4-log-tag better">BETTER</span><b>The right Library article</b> <span>SCODE now looks up the article whose title is what you asked about (like "Victoria, British Columbia" or "American robin") before searching, so answers and photos match.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Photo on the way</b> <span>when a Library photo is coming, its card appears right away with a shimmer, and the photo fades in.</span></li>
@@ -14305,7 +14521,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-11-01";
+  const V4_LOG_VER = "2026-11-01b";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -16551,6 +16767,364 @@
     return { prep, fields, onEvent, finish, stripTags, voiceFeed, voiceStart, voiceStop, decorate, makeWidget, widgetFits, eyesOpen, canvasOpen, spOpen, progressOpen, S, compileExpr, ELS, elPos };
   })();
   window.scodeV6 = V6;
+
+  // ================================================================ v6.4 account page: Free (plain) and Pro (your colours)
+  const ACC = (() => {
+    const LS_BG = "scode_v6_chatbg", LS_FX = "scode_v6_fx", LS_WOW = "scode_v6_pro_wow";
+    const FALLBACK = [[255, 95, 176], [139, 107, 255], [63, 193, 255], [255, 170, 120]];
+    const get = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } };
+    const put = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+    const A = { pal: FALLBACK, palFor: null, bg: get(LS_BG, ""), fx: get(LS_FX, "1") === "1", tick: null, opened: 0 };
+    const isPro = () => V4.plan === "pro";
+    const rgb = (c, a) => a === undefined ? `rgb(${c[0]},${c[1]},${c[2]})` : `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+    const fxOn = () => A.fx && !reduceMotion && isPro();
+
+    // ---------------------------------------------------------------- the main colours of a photo
+    function toHsl([r, g, b]) {
+      r /= 255; g /= 255; b /= 255;
+      const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
+      if (mx === mn) return [0, 0, l];
+      const d = mx - mn, s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+      let h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      return [h * 60, s, l];
+    }
+    function toRgb([h, s, l]) {
+      h = ((h % 360) + 360) % 360 / 360;
+      if (!s) { const v = Math.round(l * 255); return [v, v, v]; }
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
+      const f = t => { t = (t + 1) % 1; return t < 1 / 6 ? p + (q - p) * 6 * t : t < 0.5 ? q : t < 2 / 3 ? p + (q - p) * (2 / 3 - t) * 6 : p; };
+      return [f(h + 1 / 3), f(h), f(h - 1 / 3)].map(v => Math.round(v * 255));
+    }
+    function pickColours(px) {
+      // weighted k-means: bright, colourful pixels count more than grey ones, so the gradient feels like the photo
+      const pts = [];
+      for (let i = 0; i < px.length; i += 4) {
+        if (px[i + 3] < 128) continue;
+        const c = [px[i], px[i + 1], px[i + 2]], [, s, l] = toHsl(c);
+        pts.push({ c, w: 0.25 + s * 2.5 * (1 - Math.abs(l - 0.5) * 1.4) });
+      }
+      if (pts.length < 20) return null;
+      const K = 6;
+      let cent = [];
+      for (let k = 0; k < K; k++) cent.push(pts[Math.floor((k + 0.5) * pts.length / K)].c.slice());
+      let sums;
+      for (let it = 0; it < 10; it++) {
+        sums = cent.map(() => [0, 0, 0, 0]);
+        for (const p of pts) {
+          let best = 0, bd = 1e9;
+          for (let k = 0; k < K; k++) { const c = cent[k], d = (c[0] - p.c[0]) ** 2 + (c[1] - p.c[1]) ** 2 + (c[2] - p.c[2]) ** 2; if (d < bd) { bd = d; best = k; } }
+          const s = sums[best]; s[0] += p.c[0] * p.w; s[1] += p.c[1] * p.w; s[2] += p.c[2] * p.w; s[3] += p.w;
+        }
+        cent = sums.map((s, k) => s[3] ? [s[0] / s[3], s[1] / s[3], s[2] / s[3]] : cent[k]);
+      }
+      const ranked = cent.map((c, k) => ({ c, w: sums[k][3] })).filter(x => x.w > 0).sort((a, b) => b.w - a.w);
+      const out = [];
+      for (const r of ranked) {
+        if (out.every(o => Math.hypot(o[0] - r.c[0], o[1] - r.c[1], o[2] - r.c[2]) > 48)) out.push(r.c);
+        if (out.length === 4) break;
+      }
+      // make them gradient-ready: never muddy, never blinding
+      let hsl = out.map(toHsl).map(([h, s, l]) => [h, s < 0.06 ? s : Math.max(0.42, Math.min(0.92, s * 1.25)), Math.max(0.38, Math.min(0.7, l))]);
+      const grey = hsl.every(c => c[1] < 0.06);
+      if (grey) hsl = hsl.map((c, i) => [230 + i * 25, 0.18, c[2]]);   // a black-and-white photo gets a cool silver gradient
+      while (hsl.length < 4) { const b = hsl[hsl.length - 1] || [265, 0.6, 0.6]; hsl.push([b[0] + 32, b[1], Math.min(0.72, b[2] + 0.06)]); }
+      hsl.sort((a, b) => a[0] - b[0]);
+      return hsl.map(toRgb);
+    }
+    function palette(url) {
+      if (!url) return Promise.resolve(FALLBACK);
+      if (A.palFor === url) return Promise.resolve(A.pal);
+      return new Promise(res => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => {
+          try {
+            const c = document.createElement("canvas"); c.width = c.height = 40;
+            const x = c.getContext("2d", { willReadFrequently: true });
+            x.drawImage(img, 0, 0, 40, 40);
+            res(pickColours(x.getImageData(0, 0, 40, 40).data) || FALLBACK);
+          } catch (e) { res(FALLBACK); }
+        };
+        img.onerror = () => res(FALLBACK);
+        img.src = url;
+      }).then(p => { A.pal = p; A.palFor = url; return p; });
+    }
+    function setVars(p) {
+      const r = document.documentElement.style;
+      p.forEach((c, i) => { r.setProperty(`--me${i + 1}`, rgb(c)); r.setProperty(`--me${i + 1}-rgb`, c.join(",")); });
+      // the softest colour a white page can carry
+      const [h, s] = toHsl(p[1]);
+      r.setProperty("--me-ink", rgb(toRgb([h, Math.min(0.75, s), 0.36])));
+    }
+
+    // ---------------------------------------------------------------- chat backgrounds (Pro)
+    function applyLook() {
+      const pro = isPro();
+      const b = document.body;
+      b.classList.toggle("v6-pro", pro);
+      b.classList.toggle("v6-fx", pro && A.fx && !reduceMotion);
+      ["photo", "black", "white"].forEach(k => b.classList.toggle("v6bg-" + k, pro && A.bg === k));
+    }
+    function setBg(k) {
+      A.bg = k; put(LS_BG, k); applyLook();
+      document.querySelectorAll(".acc-bgs button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.bg === k)));
+    }
+    function setFx(on) {
+      A.fx = on; put(LS_FX, on ? "1" : "0"); applyLook();
+      const sw = $("acc-fx"); if (sw) sw.classList.toggle("on", on);
+    }
+    function refreshColours() {
+      return palette(auth && auth.avatar).then(p => { setVars(p); applyLook(); return p; });
+    }
+
+    // ---------------------------------------------------------------- little animation helpers
+    function countUp(node, to, ms) {
+      if (!node) return;
+      if (!fxOn()) { node.textContent = to.toLocaleString(); return; }
+      const t0 = performance.now();
+      const step = (t) => {
+        const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 4);
+        node.textContent = Math.round(to * e).toLocaleString();
+        if (k < 1 && node.isConnected) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    function burst(host, x, y, opts = {}) {
+      // sparks in your colours. Pro only, skipped when motion is reduced or Pro effects are off
+      if (!fxOn() || !host) return;
+      const cv = document.createElement("canvas");
+      const W = host.clientWidth, H = host.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.className = "acc-spark"; cv.width = W * dpr; cv.height = H * dpr;
+      host.appendChild(cv);
+      const g = cv.getContext("2d"); g.scale(dpr, dpr);
+      const n = opts.n || 46, P = [];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = (opts.speed || 5) * (0.35 + Math.random());
+        P.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - (opts.lift || 1.2), r: 1.4 + Math.random() * (opts.size || 3.2),
+          c: A.pal[i % A.pal.length], life: 1, star: Math.random() < 0.35, spin: Math.random() * 6 });
+      }
+      const t0 = performance.now();
+      const step = (t) => {
+        g.clearRect(0, 0, W, H);
+        let alive = 0;
+        for (const p of P) {
+          if (p.life <= 0) continue;
+          alive++;
+          p.x += p.vx; p.y += p.vy; p.vx *= 0.965; p.vy = p.vy * 0.965 + 0.09; p.life -= 0.012 + Math.random() * 0.006; p.spin += 0.2;
+          g.globalAlpha = Math.max(0, p.life);
+          g.fillStyle = rgb(p.c);
+          g.shadowColor = rgb(p.c); g.shadowBlur = 8;
+          if (p.star) {
+            g.save(); g.translate(p.x, p.y); g.rotate(p.spin); g.beginPath();
+            for (let k = 0; k < 4; k++) { g.rotate(Math.PI / 2); g.moveTo(0, 0); g.quadraticCurveTo(p.r * 0.5, p.r * 0.5, p.r * 2.4, 0); g.quadraticCurveTo(p.r * 0.5, -p.r * 0.5, 0, 0); }
+            g.fill(); g.restore();
+          } else { g.beginPath(); g.arc(p.x, p.y, p.r, 0, Math.PI * 2); g.fill(); }
+        }
+        if (alive && t - t0 < 4000 && cv.isConnected) requestAnimationFrame(step); else cv.remove();
+      };
+      requestAnimationFrame(step);
+    }
+
+    function screenBurst(x, y, o) {
+      let layer = $("acc-screen");
+      if (!layer) { document.body.insertAdjacentHTML("beforeend", '<div id="acc-screen" aria-hidden="true"></div>'); layer = $("acc-screen"); }
+      burst(layer, x, y, o);
+    }
+
+    // ---------------------------------------------------------------- the page
+    const ICON = {
+      ultra: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/></svg>',
+      pts: '<svg viewBox="0 0 24 24" fill="none"><path d="M13 3L5 14h6l-1 7 8-11h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      rush: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 12h9M4 7h5M4 17h6M14 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      res: '<svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      voice: '<svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11.5" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      paint: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.5 1.7-1.5H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="11" r="1.3" fill="currentColor"/><circle cx="10.5" cy="7.3" r="1.3" fill="currentColor"/><circle cx="15" cy="7.6" r="1.3" fill="currentColor"/></svg>',
+      lock: '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10.5" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.9"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.9"/></svg>',
+      fx: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 19L15 9M14 4v3M19 9h-3M17.5 5.5l-2 2M9 3.5l.6 1.6 1.6.6-1.6.6L9 7.9l-.6-1.6-1.6-.6 1.6-.6zM19 14l.6 1.6 1.6.6-1.6.6L19 18.4l-.6-1.6-1.6-.6 1.6-.6z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    };
+    const PERKS = [
+      ["ultra", "General Ultra + Deep Think", "Our smartest model"],
+      ["pts", "3× the points", "Every 4 hours"],
+      ["rush", "First in line", "Even in Rush Hour"],
+      ["res", "SCODE Research", "Cited reports"],
+      ["voice", "Ultra Voice", "Talk out loud"],
+      ["paint", "Your colours", "Page + chat looks"],
+    ];
+    function refillText(d) {
+      if (!d.reset_at) return "soon";
+      const s = Math.max(0, d.reset_at - Date.now() / 1000), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+      return h ? `${h}h ${m}m` : m ? `${m} min` : "under a minute";
+    }
+    function ctaFor(d) {
+      const promo = d.promo || {};
+      if (promo.request === "pending") return `<div class="v4-plan-note wait"><span class="v4-dot"></span><span>Your Pro request is in. You'll get an email when it's approved.</span></div>`;
+      if (!promo.open) return `<div class="acc-ended">The free Pro offer ended on October 31. Watch What's new for the next way to get Pro.</div>`;
+      if (!d.train_ok) return `<div class="v4-plan-note">Free SCODE Pro is for people who help train SCODE AI. Turn on <b>Help improve SCODE AI</b> below, then ask for Pro here.</div>`;
+      return `<button class="v4-pro-btn" id="v4-pro-req" type="button"><span>Get SCODE Pro free</span><small>Until January 1, 2027 · ask by October 31</small></button>`;
+    }
+    function ring(id, left, limit, label, unit) {
+      const pct = limit ? Math.max(0, Math.min(1, left / limit)) : 0, C = 2 * Math.PI * 44;
+      return `<div class="acc-ring-card"><svg viewBox="0 0 108 108" class="acc-gauge">
+          <defs><linearGradient id="${id}-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--me1)"/><stop offset=".55" stop-color="var(--me2)"/><stop offset="1" stop-color="var(--me3)"/></linearGradient></defs>
+          <circle cx="54" cy="54" r="44" class="trk"/>
+          <circle cx="54" cy="54" r="44" class="val" stroke="url(#${id}-g)" style="stroke-dasharray:${C};stroke-dashoffset:${C};--to:${C * (1 - pct)}"/>
+        </svg>
+        <div class="acc-ring-num"><b data-to="${left}">${left.toLocaleString()}</b><span>${unit} left</span></div>
+        <div class="acc-ring-lbl">${label}<small>of ${limit.toLocaleString()}</small></div></div>`;
+    }
+    function paintPro(box, d) {
+      const left = Math.max(0, d.points_limit - d.points_used), pleft = Math.max(0, d.photos_limit - d.photos_used);
+      const winPct = d.reset_at ? Math.max(0, Math.min(100, 100 - ((d.reset_at - Date.now() / 1000) / 14400) * 100)) : 0;
+      box.innerHTML = `
+        <div class="acc-usage">
+          <div class="acc-rings">${ring("acc-p", left, d.points_limit, "Points", "points")}${ring("acc-f", pleft, d.photos_limit, "Photos", "photos")}</div>
+          <div class="acc-refill"><div class="acc-refill-top"><span>Refills in <b id="acc-refill">${refillText(d)}</b></span><span>${d.plan_until ? "Pro until " + v4When(d.plan_until) : "SCODE Pro"}</span></div>
+            <i><u style="--w:${winPct}%"></u></i></div>
+        </div>
+        <div class="acc-h">Included with your Pro</div>
+        <div class="acc-perks">${PERKS.map(([k, t, s], i) => `<div class="acc-perk" style="--i:${i}"><span class="ic">${ICON[k]}</span><b>${t}</b><small>${s}</small></div>`).join("")}</div>
+        <div class="acc-h">Make it yours</div>
+        <div class="acc-look">
+          <div class="acc-look-t"><b>Chat background</b><small>Shows behind every chat, on this device</small></div>
+          <div class="acc-bgs" role="group" aria-label="Chat background">
+            ${[["", "Standard"], ["photo", "Your colours"], ["black", "Black"], ["white", "White"]].map(([k, n]) =>
+              `<button type="button" data-bg="${k}" aria-pressed="${A.bg === k}"><span class="sw sw-${k || "std"}"></span><em>${n}</em></button>`).join("")}
+          </div>
+          <div class="acc-fx-row"><div><b>${ICON.fx}Pro effects</b><small>Sparks when you send, a glowing text box and your colours around your picture${reduceMotion ? ". Off because your device asks for less motion" : ""}</small></div>
+            <button class="switch ${A.fx ? "on" : ""}" id="acc-fx" type="button" aria-label="Pro effects" ${reduceMotion ? "disabled" : ""}></button></div>
+        </div>`;
+      box.querySelectorAll(".acc-bgs button").forEach(b => b.addEventListener("click", () => {
+        setBg(b.dataset.bg);
+        const r = b.getBoundingClientRect(); screenBurst(r.left + r.width / 2, r.top + 22, { n: 22, speed: 3.4, size: 2.4 });
+      }));
+      $("acc-fx").addEventListener("click", () => setFx(!A.fx));
+      // draw the rings and count up
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        box.querySelectorAll(".acc-gauge .val").forEach(c => { c.style.strokeDashoffset = c.style.getPropertyValue("--to"); });
+        box.querySelectorAll(".acc-ring-num b").forEach(b => countUp(b, +b.dataset.to, 1300));
+        box.querySelectorAll(".acc-refill u").forEach(u => u.classList.add("go"));
+      }));
+      clearInterval(A.tick);
+      A.tick = setInterval(() => { const n = $("acc-refill"); if (!n || !$("account-overlay").classList.contains("show")) { clearInterval(A.tick); return; } n.textContent = refillText(d); }, 30000);
+    }
+    function paintFree(box, d) {
+      const left = Math.max(0, d.points_limit - d.points_used), pleft = Math.max(0, d.photos_limit - d.photos_used);
+      const pct = (a, b) => Math.max(0, Math.min(100, b ? (a / b) * 100 : 0));
+      const nm = escapeHtml((auth && (auth.name || auth.email)) || "You");
+      box.innerHTML = `
+        <div class="acc-free-use">
+          <div class="r"><span>Points</span><b>${left.toLocaleString()} <small>of ${d.points_limit.toLocaleString()}</small></b></div><i><u style="width:${pct(left, d.points_limit)}%"></u></i>
+          <div class="r"><span>Photos</span><b>${pleft} <small>of ${d.photos_limit}</small></b></div><i><u style="width:${pct(pleft, d.photos_limit)}%"></u></i>
+          <div class="acc-free-note">Free plan · refills every 4 hours (next in ${refillText(d)})</div>
+        </div>
+        <div class="acc-pitch">
+          <div class="acc-peek" aria-hidden="true"><div class="sky"><i></i><i></i><i></i></div>
+            <div class="pk-pic"${auth && auth.avatar ? ` style="background-image:url('${auth.avatar}')"` : ""}>${auth && auth.avatar ? "" : escapeHtml(initialOf())}</div><div class="pk-isle"><b>${nm}</b><span>SCODE Pro</span></div><div class="pk-lock">${ICON.lock}</div></div>
+          <div class="acc-pitch-t"><b>Your account, in your colours</b><span>With SCODE Pro, this page is painted from your profile picture, and you get more of everything:</span></div>
+          <ul class="acc-pitch-l">
+            <li><b>${d.pro_points.toLocaleString()}</b> points every 4 hours, not ${d.free_points.toLocaleString()}</li>
+            <li><b>${d.pro_photos}</b> photos every 4 hours, not ${d.free_photos}</li>
+            <li>General Ultra, Deep Think, Research and Ultra Voice</li>
+            <li>First in line in Rush Hour</li>
+            <li>Chat backgrounds and Pro effects</li>
+          </ul>
+          ${ctaFor(d)}
+        </div>`;
+      const b = $("v4-pro-req");
+      if (b) b.addEventListener("click", async () => {
+        b.disabled = true; b.classList.add("busy");
+        const r = await syncFetch("/me/pro/request", { method: "POST" }).catch(() => null);
+        if (r && r.ok) { meData = r.data; paintAccount(); v4Toast("<b>Request sent</b> · we'll email you when Pro is on"); }
+        else { b.disabled = false; b.classList.remove("busy"); apError((r && r.data && r.data.message) || "Couldn't send that. Try again."); }
+      });
+    }
+
+    function hero(pro) {
+      const h = document.querySelector("#account-overlay .ap-hero");
+      if (!h) return;
+      if (!h.querySelector(".acc-sky")) {
+        h.insertAdjacentHTML("afterbegin", '<div class="acc-sky" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="acc-halo" aria-hidden="true"></div>');
+        h.querySelector(".ap-who").insertAdjacentHTML("afterbegin", '<span class="acc-badge">SCODE PRO</span>');
+      }
+      h.classList.toggle("acc-hero-pro", pro);
+    }
+    const _v4Plan = v4PaintPlan;
+    v4PaintPlan = function (d) {
+      const box = $("v4-plan"), ov = $("account-overlay");
+      if (!box || !d || !d.plan) return _v4Plan(d);
+      const pro = d.plan === "pro";
+      ov.classList.toggle("acc-pro", pro);
+      ov.classList.toggle("acc-free", !pro);
+      const title = document.querySelector("#v4-plan-sec .set-section-title");
+      if (title) title.textContent = pro ? "Your usage" : "Your plan";
+      hero(pro);
+      const key = JSON.stringify([d.plan, d.points_used, d.points_limit, d.photos_used, d.photos_limit, d.reset_at, d.plan_until, d.promo, d.train_ok]);
+      if (box.dataset.acc !== key || !box.firstElementChild) { box.dataset.acc = key; if (pro) paintPro(box, d); else paintFree(box, d); }
+      tryWow();
+    };
+
+    function tryWow() {
+      if (!A.wowPending || !$("account-overlay").classList.contains("acc-pro")) return;
+      A.wowPending = false;
+      refreshColours().then(wow);
+    }
+    function wow() {
+      // the moment the page opens: the sky blooms, the ring spins up and your colours burst out of your picture
+      const ov = $("account-overlay");
+      if (!ov.classList.contains("acc-pro")) return;
+      ov.classList.remove("acc-in"); void ov.offsetWidth; ov.classList.add("acc-in");
+      if (!fxOn()) return;
+      const pic = $("ap-pic");
+      setTimeout(() => {
+        if (!pic || !ov.classList.contains("show")) return;
+        const r = pic.getBoundingClientRect();
+        const first = get(LS_WOW, "") !== "1";
+        screenBurst(r.left + r.width / 2, r.top + r.height / 2, first ? { n: 140, speed: 8, size: 4, lift: 2 } : { n: 54, speed: 5.5 });
+        if (first) { put(LS_WOW, "1"); v4Toast("<b>Welcome to Pro</b> · this page is painted from your picture"); }
+      }, 380);
+    }
+    // the menu's buttons hold the original openAccount, so watch the page open instead of wrapping it
+    let wasOpen = false;
+    new MutationObserver(() => {
+      const ov = $("account-overlay"), open = ov.classList.contains("show");
+      if (open && !wasOpen) {
+        ov.querySelector(".modal-box").scrollTop = 0;
+        const pb = $("v4-plan"); if (pb && meData) { pb.dataset.acc = ""; v4PaintPlan(meData); }
+        A.wowPending = true; tryWow();
+      }
+      if (!open && wasOpen) { A.wowPending = false; if (ov.classList.contains("acc-in")) ov.classList.remove("acc-in"); }
+      wasOpen = open;
+    }).observe($("account-overlay"), { attributes: true, attributeFilter: ["class"] });
+    const _paint = paintAvatar;
+    paintAvatar = function () { _paint(); if (A.palFor !== ((auth && auth.avatar) || null)) refreshColours(); };
+
+    // ---------------------------------------------------------------- Pro effects in the chat
+    function sendFx() {
+      if (!fxOn()) return;
+      const s = $("send-btn");
+      if (!s) return;
+      s.classList.remove("acc-shock"); void s.offsetWidth; s.classList.add("acc-shock");
+      const r = s.getBoundingClientRect();
+      screenBurst(r.left + r.width / 2, r.top + r.height / 2, { n: 34, speed: 4.6, size: 2.6, lift: 2.4 });
+    }
+    new MutationObserver(muts => {
+      if (!fxOn()) return;
+      const added = [];
+      muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1 && n.matches(".msg.user")) added.push(n); }));
+      if (added.length !== 1) return;          // opening a saved chat adds many at once: no fireworks for that
+      const row = added[0];
+      if (row !== el.messages.lastElementChild && row.nextElementSibling && !row.nextElementSibling.matches(".msg.assistant")) return;
+      row.classList.add("acc-sent");
+      sendFx();
+    }).observe(el.messages, { childList: true, subtree: true });
+
+    // plan changes (sign in, Pro on/off) repaint the look
+    const _st = v4Status;
+    v4Status = function (data) { _st(data); applyLook(); };
+    refreshColours();
+    return { A, palette, applyLook, setBg, setFx, refreshColours, pickColours };
+  })();
+  window.scodeAcc = ACC;
 
   // ---------------------------------------------------------------- start
   window.scodeV4 = V4;
