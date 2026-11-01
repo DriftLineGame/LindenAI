@@ -3630,6 +3630,20 @@
   @media (max-height: 560px) { #v6-vm .vm-cap { -webkit-line-clamp: 2; min-height: 0; } #v6-vm .vm-said { -webkit-line-clamp: 1; min-height: 0; } }
   @media (prefers-reduced-motion: reduce) { #v6-vm .vm-stage, #v6-vm:not(.show) .vm-stage { transition: none; transform: none; } #v6-vm .vm-rings i { animation: none !important; } .v6-pics figure { transition: none; opacity: 1; transform: none; } }
 
+  /* v6.3: the photo card appears at once with a shimmer, and the photo fades in when it arrives */
+  .v6-pics figure.wait { opacity: 1; transform: none; }
+  .v6-pics figure .ph { position: relative; }
+  .v6-pics figure.wait .ph::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.10) 50%, transparent 80%), linear-gradient(135deg, #2a2540, #33263a 55%, #232a40);
+    background-size: 220% 100%, 100% 100%; animation: v6Shimmer 1.3s linear infinite; }
+  body.light .v6-pics figure.wait .ph::after { background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.55) 50%, transparent 80%), linear-gradient(135deg, #e9e4ff, #f6e6f7 55%, #e3ecff); background-size: 220% 100%, 100% 100%; }
+  .v6-pics figure.wait .ph::before { content: "Getting the photo…"; position: absolute; z-index: 1; left: 0; right: 0; bottom: 14px; text-align: center;
+    font: 600 12.5px var(--sans); color: var(--muted); letter-spacing: .02em; }
+  .v6-pics figure .ph img { opacity: 0; transition: opacity .45s ease; }
+  .v6-pics figure.loaded .ph img { opacity: 1; }
+  @keyframes v6Shimmer { from { background-position: 120% 0, 0 0; } to { background-position: -120% 0, 0 0; } }
+  @media (prefers-reduced-motion: reduce) { .v6-pics figure.wait .ph::after { animation: none; } }
+
 </style>
 </head>
 <body class="is-empty">
@@ -4256,6 +4270,10 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.3</h3><ul>
+        <li><span class="v4-log-tag better">BETTER</span><b>The right Library article</b> <span>SCODE now looks up the article whose title is what you asked about (like "Victoria, British Columbia" or "American robin") before searching, so answers and photos match.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Photo on the way</b> <span>when a Library photo is coming, its card appears right away with a shimmer, and the photo fades in.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">October 31, 2026</div><h3>v6.2</h3><ul>
         <li><span class="v4-log-tag fix">FIX</span><b>No more surprise cards</b> <span>graphs, molecules and element cards only show when they're about what you asked.</span></li>
         <li><span class="v4-log-tag better">BETTER</span><b>Memory feels natural</b> <span>SCODE only brings up what it remembers about you when it really changes the answer.</span></li>
@@ -4475,7 +4493,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://symbols-festivals-packard-rica.trycloudflare.com";
+  const PROXY_URL = "https://sandy-authorities-merchants-everybody.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -14287,7 +14305,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-10-31";
+  const V4_LOG_VER = "2026-11-01";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -14737,7 +14755,13 @@
     function onEvent(ev, M, loaderRow, revealed) {
       const stage = (s) => { if (!revealed && loaderRow && loaderRow._setStage) loaderRow._setStage(s); };
       if (ev.instant) M.instant = true;
-      if (ev.kb) { M.kb = ev.kb.sources || []; stage("Found it in the SCODE Library"); }
+      if (ev.kb) {
+        M.kb = ev.kb.sources || [];
+        const hasPic = M.kb.some(s => s && s.pic);
+        stage(hasPic ? "Found it in the SCODE Library · getting the photo" : "Found it in the SCODE Library");
+        // v6.3: show the photo card straight away (a shimmering placeholder), not only when the reply ends
+        if (hasPic && loaderRow) { try { pics(loaderRow, M); } catch (e) {} }
+      }
       if (ev.space) { M.space = ev.space; stage(`Checking ${ev.space.name}'s notes`); }
       if (ev.compute) {
         const c = ev.compute;
@@ -14860,7 +14884,8 @@
         f.innerHTML = `<button type="button" class="ph" aria-label="Show the picture of ${esc(s.title)} bigger" style="--r:${ratio.toFixed(3)}"><img alt="${esc(s.title)}" loading="lazy" decoding="async"></button>
           <figcaption><b>${esc(s.title)}</b>${s.pic.cap ? `<span>${esc(s.pic.cap)}</span>` : ""}<small>${s.url && /^https?:\/\//.test(s.url) ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">Image: Wikipedia</a>` : "Image: Wikipedia"}</small></figcaption>`;
         const img = f.querySelector("img");
-        img.addEventListener("load", () => f.classList.add("in"));
+        f.classList.add("wait");
+        img.addEventListener("load", () => { f.classList.remove("wait"); f.classList.add("in", "loaded"); });
         let tries = 0;
         img.addEventListener("error", () => {
           // v6.2: a busy server can be slow with the first picture; try twice more before giving up
@@ -14871,8 +14896,8 @@
         f.querySelector(".ph").addEventListener("click", () => picView(img.src, s));
         wrap.appendChild(f);
       });
-      const md = row.querySelector(":scope > .md");
-      if (md) row.insertBefore(wrap, md); else row.appendChild(wrap);
+      const at = row.querySelector(":scope > .md") || row.querySelector(":scope > .pending");
+      if (at) row.insertBefore(wrap, at); else row.appendChild(wrap);
     }
     const pv = document.createElement("div");
     pv.id = "v6-picview"; pv.className = "overlay";
