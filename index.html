@@ -3978,6 +3978,103 @@
     .acc-type-r { flex-direction: column; align-items: flex-start; gap: 6px; }
   }
 
+  /* ================================================================ v7.0 plans: Stardust (FREE), Nova, Supernova */
+  .acc-lvi { flex: none; display: inline-block; vertical-align: -3px; }
+  .acc-lvi.lv-stardust { color: #a49cc4; }
+  #acc-lv { position: absolute; right: 0; bottom: -3px; width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center; pointer-events: none;
+    background: var(--surface); box-shadow: 0 0 0 1.5px var(--surface), 0 2px 6px rgba(0,0,0,.25); }
+  #acc-lv:empty { display: none; }
+  #acc-lv.lv-supernova { animation: accLvGlow 3.5s ease-in-out infinite; }
+  @keyframes accLvGlow { 50% { box-shadow: 0 0 0 1.5px var(--surface), 0 0 10px rgba(255,140,90,.65); } }
+  #am-plan { display: flex; align-items: center; gap: 6px; margin-top: 7px; font-size: 12.5px; font-weight: 650; color: var(--muted); }
+  #am-plan:empty { display: none; }
+  #am-plan.lv-nova span { background: linear-gradient(90deg, #e0368c, #7a4dff 55%, #1690e0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #am-plan.lv-supernova span { background: linear-gradient(90deg, #ff9a3c, #e0368c 45%, #7a4dff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .acc-hero-pro .acc-badge .acc-lvi { margin-right: 2px; }
+  .acc-lvchip { display: none; }
+  #account-overlay.acc-free .acc-lvchip { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 12px; font-weight: 650; color: var(--muted);
+    padding: 3px 9px 3px 6px; border-radius: 99px; background: var(--hover); }
+  .acc-free-note .acc-lvi { vertical-align: -2px; margin-right: 2px; }
+
+  .acc-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .acc-plans.one { grid-template-columns: 1fr; }
+  .acc-plan { position: relative; border-radius: 18px; padding: 14px; border: 1px solid var(--border); background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
+  .acc-plan::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; }
+  .acc-plan-nova::before { background: linear-gradient(90deg, #ff5fb0, #8b6bff, #3fc1ff); }
+  .acc-plan-supernova::before { background: linear-gradient(90deg, #ffb35c, #e0368c, #7a4dff); }
+  .acc-plan-supernova { box-shadow: 0 10px 30px -12px rgba(224,54,140,.45); }
+  .acc-plan-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .acc-plan-top b { display: block; font-size: 17px; letter-spacing: -.01em; }
+  .acc-plan-top span { font-size: 12.5px; color: var(--muted); }
+  .acc-plan ul { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 5px; font-size: 12.5px; color: var(--muted); }
+  .acc-plan li { position: relative; padding-left: 13px; line-height: 1.4; }
+  .acc-plan li::before { content: ""; position: absolute; left: 0; top: .5em; width: 5px; height: 5px; border-radius: 50%; background: var(--muted); opacity: .6; }
+  .acc-plan li b { color: var(--text); }
+  .acc-plan-btn { margin-top: auto; height: 40px; border: none; border-radius: 12px; font: inherit; font-weight: 700; font-size: 14px; color: #fff; cursor: pointer;
+    background: linear-gradient(110deg, #e0368c, #7a4dff 55%, #1690e0); box-shadow: 0 6px 18px -6px rgba(122,77,255,.6); transition: transform .2s, filter .2s; }
+  .acc-plan-supernova .acc-plan-btn { background: linear-gradient(110deg, #f08a2c, #e0368c 45%, #7a4dff); }
+  .acc-plan-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .acc-plan-btn:disabled { opacity: .5; cursor: default; transform: none; }
+  .acc-plan-btn.busy { opacity: .7; }
+  .acc-renew { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+
+  .acc-req { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 14px; margin-bottom: 12px; font-size: 13px; line-height: 1.5;
+    background: var(--accent-soft); border: 1px solid var(--border); }
+  .acc-req .v4-dot { margin-top: 6px; flex: none; }
+  .acc-req > div { flex: 1; }
+  .acc-req.approved { background: rgba(48,170,110,.12); }
+
+  .acc-credit { margin-top: 12px; border: 1px solid var(--border); border-radius: 16px; padding: 12px 14px; background: var(--surface); }
+  .acc-credit-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .acc-credit-top b { display: block; font-size: 14px; }
+  .acc-credit-top small { font-size: 12px; color: var(--muted); }
+  .acc-bal { font-size: 22px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .acc-credit-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+  .acc-credit-btns .set-btn { height: 32px; font-size: 12.5px; }
+  .acc-credit-btns .set-btn:disabled { opacity: .45; cursor: default; }
+
+  .acc-give { display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 16px; margin-bottom: 12px; color: #fff;
+    background: linear-gradient(115deg, #e0368c, #7a4dff 55%, #1690e0); box-shadow: 0 10px 26px -12px rgba(122,77,255,.6); }
+  .acc-give svg { flex: none; }
+  .acc-give b { display: block; font-size: 14px; }
+  .acc-give span { display: block; font-size: 12.5px; opacity: .92; line-height: 1.45; }
+  .acc-give.won { background: linear-gradient(115deg, #f08a2c, #e0368c 50%, #7a4dff); }
+  .acc-photos-line { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+  .acc-photos-line b { color: var(--text); }
+  .acc-mode { margin-top: 6px; font-size: 12px; color: var(--faint); line-height: 1.45; }
+
+  .acc-sheet-ov { position: fixed; inset: 0; z-index: 600; background: rgba(10,8,20,.45); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity .25s; }
+  .acc-sheet-ov.show { opacity: 1; }
+  .acc-sheet { width: min(460px, 100%); max-height: calc(100vh - 32px); overflow: auto; background: var(--surface); color: var(--text); border-radius: 24px; padding: 18px;
+    border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,.35); transform: translateY(16px) scale(.98); transition: transform .3s cubic-bezier(.2,.9,.2,1); }
+  .acc-sheet-ov.show .acc-sheet { transform: none; }
+  .acc-sheet-h { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .acc-sheet-h b { font-size: 19px; letter-spacing: -.01em; }
+  .acc-x { width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--hover); color: var(--muted); cursor: pointer; display: grid; place-items: center; }
+  .acc-x svg { width: 14px; height: 14px; }
+  .acc-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .acc-opt { border: 1.5px solid var(--border); background: var(--surface-2); color: var(--text); border-radius: 14px; padding: 10px; font: inherit; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 3px; transition: border-color .2s, box-shadow .2s; }
+  .acc-opt b { font-size: 15px; }
+  .acc-opt small { font-size: 12px; color: var(--muted); }
+  .acc-opt[aria-pressed="true"] { border-color: #7a4dff; box-shadow: 0 0 0 3px rgba(122,77,255,.18); }
+  .acc-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .acc-fields label { font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+  .acc-fields input { height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-size: 13px; padding: 0 10px; min-width: 0; width: 100%; }
+  .acc-how { margin-top: 12px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .acc-how b { display: block; color: var(--text); font-size: 13px; margin-bottom: 2px; }
+  .acc-terms { margin: 10px 0 0; padding: 10px 12px 10px 28px; border-radius: 12px; background: var(--surface-2); font-size: 12px; color: var(--muted); line-height: 1.5; display: grid; gap: 3px; }
+  .acc-agree { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0; font-size: 13px; cursor: pointer; }
+  .acc-agree input { margin-top: 2px; accent-color: #7a4dff; }
+  .acc-sheet .acc-plan-btn { width: 100%; }
+  @media (max-width: 520px) {
+    .acc-plans { grid-template-columns: 1fr; }
+    .acc-fields { grid-template-columns: 1fr; }
+  }
+
+  .acc-give-auth { margin: 4px 0 14px; text-align: left; }
+
 </style>
 </head>
 <body class="is-empty">
@@ -4604,6 +4701,14 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 9, 2026</div><h3>v7.0</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Stardust, Nova and Supernova</b> <span>Every account now has a plan: Stardust (FREE), Nova ($5 CAD for 3 months, 5× the usage) or Supernova ($10 CAD a month, 20× the usage and always first in line). Look for your plan's icon by your picture.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Get Nova or Supernova</b> <span>Apply on your Account page. We approve it, email you how to pay (cash or e-Transfer), and it turns on the moment your payment is confirmed. No need to turn on training anymore.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>November giveaway</b> <span>Make a SCODE account by November 30 and send a message to enter. Two winners on December 1: 6 months of Nova + a Premium SCODE sticker, or 1 month of Nova.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Reset credit</b> <span>Add credit once, then refill your limit yourself whenever you need more.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>More photos</b> <span>Stardust 20, Nova 50 and Supernova 100 photos every few hours, with weekly totals of 100, 500 and 2,000.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>Coming November 16: fair usage</b> <span>Points will follow each message's real size, so a quick question costs less than a long essay. Windows become 5 hours, with a weekly limit.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.5</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Your colours everywhere</b> <span>(Pro) buttons, switches, highlights, the tab icon and the SCODE splash take on the colours of your profile picture.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Reading and reply style</b> <span>(Pro) pick a font, size and spacing for replies, and how SCODE answers: Standard, Concise, Detailed or Teacher.</span></li>
@@ -4663,7 +4768,7 @@
         <li><span class="v4-log-tag new">NEW</span><b>Build</b> <span>makes web pages, games and tools and runs them right in the chat. Every HTML code block gets a Preview button.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Study: Summary</b> <span>turns notes into a one-page study sheet with key terms and what to remember.</span></li>
         <li><span class="v4-log-tag better">BETTER</span><b>Study: up to 5 pages</b> <span>of notes in one message, and share links for any study set (no account needed to open one).</span></li>
-        <li><span class="v4-log-tag new">NEW</span><b>Your plan</b> <span>on the Account page shows your points, photos and plan, and lets you ask for free SCODE Pro.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Your plan</b> <span>on the Account page shows your points, photos and plan, and lets you ask for free SCODE Nova.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Status page</b> <span>shows if SCODE is online, busy or asleep, how many people are waiting and the wait.</span></li>
         <li><span class="v4-log-tag fix">FIX</span><b>Replies stream live again</b> <span>word by word as they're written, instead of showing up all at once at the end.</span></li>
         <li><span class="v4-log-tag fix">FIX</span><b>Server start-up</b> <span>could rarely fail on a busy laptop. Fixed.</span></li>
@@ -4843,7 +4948,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://paid-ref-meaning-medicine.trycloudflare.com";
+  const PROXY_URL = "https://metals-expires-look-eclipse.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -13876,7 +13981,7 @@
   const _v4RenderPicker = renderModelPickerList;
   renderModelPickerList = function () {
     _v4RenderPicker();
-    // Ultra and Deep Think are SCODE Pro
+    // Ultra and Deep Think are SCODE Nova
     el.modelPickerList.querySelectorAll(".model-picker-option").forEach(opt => {
       const t = opt.dataset.tier;
       if (V4.auto) opt.classList.remove("selected");
@@ -13884,10 +13989,10 @@
       const c = opt.cloneNode(true);
       c.classList.add("locked", "pro-locked"); c.classList.remove("disabled", "selected");
       const cost = c.querySelector(".mp-opt-cost");
-      if (cost) cost.innerHTML = `<span class="mp-lock v4-pro-pill">${V4_ICONS.lock}Pro</span>`;
+      if (cost) cost.innerHTML = `<span class="mp-lock v4-pro-pill">${V4_ICONS.lock}Nova</span>`;
       c.addEventListener("click", () => {
         el.modelPicker.classList.remove("open");
-        v4OpenPlan(`${TIER_INFO[t].label} and Deep Think are part of SCODE Pro.`);
+        v4OpenPlan(`${TIER_INFO[t].label} and Deep Think are part of SCODE Nova.`);
       });
       opt.replaceWith(c);
     });
@@ -13913,7 +14018,7 @@
   };
   const _v4SelectTier = selectTier;
   selectTier = function (tier) {
-    if (v4Locked(tier)) { el.modelPicker.classList.remove("open"); v4OpenPlan(`${TIER_INFO[tier].label} is part of SCODE Pro.`); return; }
+    if (v4Locked(tier)) { el.modelPicker.classList.remove("open"); v4OpenPlan(`${TIER_INFO[tier].label} is part of SCODE Nova.`); return; }
     const wasAuto = V4.auto;
     V4.auto = false; try { localStorage.setItem("scode_auto", "0"); } catch (e) {}
     if (wasAuto && tier === selectedTier) { el.modelPicker.classList.remove("open"); updateModelPickerLabel(); return; }
@@ -13968,7 +14073,7 @@
       const t = b.dataset.tier;
       if (t === "auto") return;
       if (V4.auto) { b.classList.remove("sel"); b.setAttribute("aria-checked", "false"); }
-      if (v4Locked(t)) { b.classList.add("locked"); const ic = b.querySelector(".bm-ic"); if (ic && !ic.innerHTML) ic.innerHTML = BM_LOCK; const c = b.querySelector(".bm-c"); if (c) c.textContent = "Pro"; b.title = `${TIER_INFO[t].label} is part of SCODE Pro`; }
+      if (v4Locked(t)) { b.classList.add("locked"); const ic = b.querySelector(".bm-ic"); if (ic && !ic.innerHTML) ic.innerHTML = BM_LOCK; const c = b.querySelector(".bm-c"); if (c) c.textContent = "Pro"; b.title = `${TIER_INFO[t].label} is part of SCODE Nova`; }
     });
   };
   const _v4BmPick = bmPick;
@@ -13978,7 +14083,7 @@
       selectedTier = v4AutoBase(); updateModelPickerLabel(); updateInputAvailability(); bmUpdate();
       return;
     }
-    if (v4Locked(t)) { v4OpenPlan(`${TIER_INFO[t].label} and Deep Think are part of SCODE Pro.`); return; }
+    if (v4Locked(t)) { v4OpenPlan(`${TIER_INFO[t].label} and Deep Think are part of SCODE Nova.`); return; }
     _v4BmPick(t);
   };
 
@@ -13994,14 +14099,14 @@
     const refill = d.reset_at ? new Date(d.reset_at * 1000).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "soon";
     const promo = d.promo || {};
     let cta = "";
-    if (pro) cta = `<div class="v4-plan-note ok">${V4_ICONS.check}<span>SCODE Pro is on${d.plan_until ? " until " + v4When(d.plan_until) : ""}. Thanks for helping train SCODE AI! Keep <b>Help improve SCODE AI</b> on to keep Pro.</span></div>`;
+    if (pro) cta = `<div class="v4-plan-note ok">${V4_ICONS.check}<span>SCODE Nova is on${d.plan_until ? " until " + v4When(d.plan_until) : ""}. Thanks for helping train SCODE AI! Keep <b>Help improve SCODE AI</b> on to keep Pro.</span></div>`;
     else if (promo.request === "pending") cta = `<div class="v4-plan-note wait"><span class="v4-dot"></span><span>Your Pro request is in. You'll get an email when it's approved.</span></div>`;
     else if (!promo.open) cta = `<div class="v4-plan-note">The free Pro offer ended on October 31.</div>`;
-    else if (!d.train_ok) cta = `<div class="v4-plan-note">Free SCODE Pro is for people who help train SCODE AI. Turn on <b>Help improve SCODE AI</b> below, then ask for Pro here.</div>`;
-    else cta = `<button class="v4-pro-btn" id="v4-pro-req" type="button"><span>Get SCODE Pro free</span><small>Until January 1, 2027 · ask by October 31</small></button>`;
+    else if (!d.train_ok) cta = `<div class="v4-plan-note">Free SCODE Nova is for people who help train SCODE AI. Turn on <b>Help improve SCODE AI</b> below, then ask for Pro here.</div>`;
+    else cta = `<button class="v4-pro-btn" id="v4-pro-req" type="button"><span>Get SCODE Nova free</span><small>Until January 1, 2027 · ask by October 31</small></button>`;
     box.innerHTML = `
       <div class="v4-plan-card ${pro ? "pro" : ""}">
-        <div class="v4-plan-top"><span class="v4-badge ${pro ? "pro" : ""}">${pro ? "SCODE Pro" : "Free"}</span>
+        <div class="v4-plan-top"><span class="v4-badge ${pro ? "pro" : ""}">${pro ? "SCODE Nova" : "Free"}</span>
           <span class="v4-plan-sub">${pro ? "Every model, 3× the points, first in line" : "General Mini, Plus and Pro"}</span></div>
         <div class="v4-meter"><div class="v4-meter-top"><b>${left.toLocaleString()}</b><span>of ${d.points_limit.toLocaleString()} points left</span></div><i><u style="width:${pct(left, d.points_limit)}%"></u></i></div>
         <div class="v4-meter"><div class="v4-meter-top"><b>${pleft}</b><span>of ${d.photos_limit} photos left</span></div><i><u style="width:${pct(pleft, d.photos_limit)}%"></u></i></div>
@@ -14042,11 +14147,11 @@
   document.addEventListener("click", async (e) => {
     const sw = e.target.closest && e.target.closest("#ap-train-switch");
     if (!sw || v4TrainOk || !meData || !meData.train_ok) return;
-    const pro = meData.plan === "pro", pend = meData.promo && meData.promo.request === "pending";
+    const pro = false, pend = false;
     if (!pro && !pend) return;
     e.stopPropagation(); e.preventDefault();
     const yes = await showConfirm(pro ? "Turn off training and lose Pro?" : "Turn off training?",
-      pro ? "Free SCODE Pro is for people who help train SCODE AI. If you turn this off, your account goes back to Free right away: no General Ultra or Deep Think, 1,000 points and 20 photos every 4 hours."
+      pro ? "Free SCODE Nova is for people who help train SCODE AI. If you turn this off, your account goes back to Free right away: no General Ultra or Deep Think, 1,000 points and 20 photos every 4 hours."
           : "Your free Pro request will be cancelled, because free Pro is for people who help train SCODE AI.");
     if (!yes) return;
     v4TrainOk = true; sw.click(); v4TrainOk = false;
@@ -14061,9 +14166,9 @@
     if (!b || isGuest()) return;
     let chip = b.querySelector(".v4-rh-pro");
     if (!chip) { chip = document.createElement("button"); chip.type = "button"; chip.className = "v4-rh-pro"; b.querySelector(".rh-text").appendChild(chip);
-      chip.addEventListener("click", (ev) => { ev.stopPropagation(); if (V4.plan !== "pro") v4OpenPlan("SCODE Pro goes first in Rush Hour."); }); }
+      chip.addEventListener("click", (ev) => { ev.stopPropagation(); if (V4.plan !== "pro") v4OpenPlan("SCODE Nova goes first in Rush Hour."); }); }
     chip.classList.toggle("is-pro", V4.plan === "pro");
-    chip.innerHTML = V4.plan === "pro" ? "<b>PRO</b> You go first, 2 replies a turn" : "Pro goes first · <u>see plans</u>";
+    chip.innerHTML = V4.plan === "pro" ? (document.body.dataset.plan === "supernova" ? "<b>SUPERNOVA</b> You're always first" : "<b>NOVA</b> You go ahead, 2 replies a turn") : "Nova goes ahead · <u>see plans</u>";
   };
 
   // ---------------------------------------------------------------- tool buttons: Photo Help, Build
@@ -14655,7 +14760,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-11-01c";
+  const V4_LOG_VER = "2026-11-09";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -14844,7 +14949,7 @@
       rs.setAttribute("aria-pressed", String(ra && S.research));
       $("rs-cost").textContent = "+" + ((S.st && S.st.research && S.st.research.cost) || 40);
       $("rs-new").hidden = !(isNew() && !S.research);
-      rs.title = S.plan !== "pro" ? "SCODE Research (Pro): reads 10 to 20 sources and writes a cited report"
+      rs.title = S.plan !== "pro" ? "SCODE Research (Nova): reads 10 to 20 sources and writes a cited report"
         : S.research ? "SCODE Research is on: ask a big question and get a cited report in a few minutes"
         : "SCODE Research: reads 10 to 20 sources and writes a cited report (General Ultra)";
       const ma = micAvail();
@@ -14853,7 +14958,7 @@
       tools.classList.toggle("v6-mic-mode", micMode);
       mic.classList.toggle("show", micMode);
       mic.classList.toggle("locked", !!ma && S.plan !== "pro");
-      mic.title = S.plan !== "pro" ? "Ultra Voice (Pro): talk to General Ultra" : "Voice mode: talk to General Ultra (Ultra Voice)";
+      mic.title = S.plan !== "pro" ? "Ultra Voice (Nova): talk to General Ultra" : "Voice mode: talk to General Ultra (Ultra Voice)";
       paintBar();
       modesSync();
     }
@@ -14898,7 +15003,7 @@
     }
     function toggleResearch() {
       if (isGuest()) { openAuth("welcome", "SCODE Research needs an account."); return; }
-      if (S.plan !== "pro") { v4OpenPlan("SCODE Research is part of SCODE Pro. Pro is free until January 1, 2027 when you help train SCODE AI."); return; }
+      if (S.plan !== "pro") { v4OpenPlan("SCODE Research is part of SCODE Nova."); return; }
       S.research = !S.research;
       if (S.research) {
         setMode(null); deepOn = false; V4.photoHelp = false; V4.build = false;
@@ -15028,7 +15133,7 @@
           const svg = (m.b.querySelector("svg") || {}).outerHTML || "";
           const sub = m.on && m.auto ? "Turned on by itself for this message · tap to skip" : m.blocked ? "Off while another mode is on" : desc;
           return `<button type="button" role="menuitemcheckbox" aria-checked="${m.on}" class="mrow${m.on ? " on" : ""}${m.blocked ? " blocked" : ""}" data-for="${id}">` +
-            `<span class="mi">${svg}</span><span class="mt"><b>${name}${m.fresh && !m.on ? '<span class="tag">NEW</span>' : ""}${m.locked ? '<span class="pro">Pro</span>' : ""}</b><small>${esc(sub)}</small></span>` +
+            `<span class="mi">${svg}</span><span class="mt"><b>${name}${m.fresh && !m.on ? '<span class="tag">NEW</span>' : ""}${m.locked ? '<span class="pro">Nova</span>' : ""}</b><small>${esc(sub)}</small></span>` +
             `${m.cost && !m.locked ? `<span class="mc">${esc(m.cost)}</span>` : ""}<span class="tg"></span></button>`;
         }).join("");
         if (rows) html.push(`<div class="mh">${head}</div>` + rows);
@@ -15064,9 +15169,9 @@
       const ch = getCurrentChat();
       if (ch && ch.space && !isGuest()) P.space = ch.space.id;
       if (S.research && researchAvail() && !P.imgNow && !P.study) {
-        if (S.plan !== "pro") { v4OpenPlan("SCODE Research is part of SCODE Pro."); return false; }
+        if (S.plan !== "pro") { v4OpenPlan("SCODE Research is part of SCODE Nova."); return false; }
         if (P.image || chatHasPhoto()) { showNote("SCODE Research can't use photos. Start a new chat for your research question."); return false; }
-        if (!v4Allowed("l5")) { v4OpenPlan("SCODE Research uses General Ultra, which is part of SCODE Pro."); return false; }
+        if (!v4Allowed("l5")) { v4OpenPlan("SCODE Research uses General Ultra, which is part of SCODE Nova."); return false; }
         Object.assign(P, { research: true, tier: "l5", web: false, deep: false, build: false, linkToSend: null, wxWanted: false, scNow: false, fyNow: false });
         P.v6.research = true;
         updateModelPickerLabel();
@@ -15084,7 +15189,7 @@
       S.canvasNext = false;
       if (S.voiceNext) {
         S.voiceNext = false;
-        if (!v4Allowed("l5")) { v4OpenPlan("Ultra Voice is part of SCODE Pro."); return false; }
+        if (!v4Allowed("l5")) { v4OpenPlan("Ultra Voice is part of SCODE Nova."); return false; }
         if (!P.study && !P.imgNow) { P.tier = "l5"; P.voice = true; P.v6.voice = true; P.deep = false; voiceStart(VM.open); }
       }
       if (P.tier !== selectedTier && !V4.auto) { selectedTier = P.tier; updateModelPickerLabel(); }
@@ -16366,7 +16471,7 @@
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     function voiceAllowed() {
       if (isGuest()) { openAuth("welcome", "Ultra Voice needs an account."); return false; }
-      if (S.plan !== "pro") { v4OpenPlan("Ultra Voice is part of SCODE Pro. Pro is free until January 1, 2027 when you help train SCODE AI."); return false; }
+      if (S.plan !== "pro") { v4OpenPlan("Ultra Voice is part of SCODE Nova."); return false; }
       return true;
     }
     // listen({ interim(text), level(0..1), done(text), fail(message) })
@@ -16873,8 +16978,8 @@
       if (!forced && (seen || Date.now() < V6_LAUNCH || Date.now() > V6_LAUNCH + 6 * 864e5)) { _v6ShowWN(); return; }
       const feats = [
         ["compute", I6.compute, "Smarter answers", "Instant Answers in under a second, SCODE Compute runs real code for exact math, and replies come with graphs, 3D molecules and simulations you can play with."],
-        ["research", I6.research, "Knows more", "The SCODE Library looks facts up in offline Wikipedia instead of guessing. SCODE Research (Pro) reads 10 to 20 sources and writes a cited report."],
-        ["eyes", I6.eyes, "Sees and speaks", "Point your camera with SCODE Eyes, draw or handwrite on SCODE Canvas, or talk to General Ultra and hear it answer with Ultra Voice (Pro)."],
+        ["research", I6.research, "Knows more", "The SCODE Library looks facts up in offline Wikipedia instead of guessing. SCODE Research (Nova) reads 10 to 20 sources and writes a cited report."],
+        ["eyes", I6.eyes, "Sees and speaks", "Point your camera with SCODE Eyes, draw or handwrite on SCODE Canvas, or talk to General Ultra and hear it answer with Ultra Voice (Nova)."],
         ["spaces", I6.space, "Learns with you", "SCODE now learns which topics you find hard and helps you review them, and Spaces make a custom tutor for your class, club or team."],
       ];
       wn.querySelector(".wn-tag").textContent = "New · SCODE 6";
@@ -16883,7 +16988,7 @@
       wn.querySelector(".wn-feats").innerHTML = feats.map(([k, ic, n, t]) => `<div class="wn-feat"><div class="wn-fi">${ic}</div><div class="wn-ft"><b>${n}</b><span>${t}</span></div><button class="wn-try v6-try" type="button" data-v6try="${k}">Try</button></div>`).join("");
       const orbs = wn.querySelector(".wn-orbs"); orbs.classList.add("many");
       orbs.innerHTML = feats.map(f => `<div class="wn-orb">${f[1].replace("<svg ", '<svg width="32" height="32" ')}</div>`).join("");
-      $("wn-cost-line").textContent = "Most of it is free · Compute +5 · Eyes +10 · Research and Voice are SCODE Pro";
+      $("wn-cost-line").textContent = "Most of it is free · Compute +5 · Eyes +10 · Research and Voice are SCODE Nova";
       wn.querySelectorAll(".v6-try").forEach(b => b.addEventListener("click", (ev) => {
         ev.stopPropagation();
         closeWhatsNew();
@@ -16902,7 +17007,7 @@
   })();
   window.scodeV6 = V6;
 
-  // ================================================================ v6.4/6.5 account page + SCODE Pro look
+  // ================================================================ v6.4/6.5 account page + SCODE Nova look
   // Free gets a plain page. Pro gets a page painted from their profile picture, plus "Make it yours":
   // chat backgrounds, their colours across SCODE, reply fonts, reply style, voice speed, calm Pro effects,
   // a stats card, and pinned chats + folders. Settings follow the account (/v6/prefs).
@@ -17059,7 +17164,26 @@
       document.head.appendChild(l);
     }
     function bgImg() { return get("scode_v6_bgimg_" + who(), ""); }
+    function planMarks() {
+      const wrap = $("acct-wrap");
+      if (!wrap) return;
+      const lv = isGuest() ? null : (A.level || (isPro() ? "nova" : "free"));
+      let m = $("acc-lv");
+      if (!m) { m = document.createElement("span"); m.id = "acc-lv"; wrap.appendChild(m); }
+      m.className = lv ? "lv-" + lv : "";
+      m.innerHTML = lv ? planIcon(lv, 13) : "";
+      m.title = lv ? LVNAME[lv] : "";
+      const head = document.querySelector("#acct-menu .am-head");
+      if (head) {
+        let row = $("am-plan");
+        if (!row) { row = document.createElement("div"); row.id = "am-plan"; head.appendChild(row); }
+        row.className = lv ? "lv-" + lv : "";
+        row.innerHTML = lv ? planIcon(lv, 15) + "<span>" + LVNAME[lv] + "</span>" : "";
+      }
+      document.body.dataset.plan = lv || "guest";
+    }
     function applyLook() {
+      planMarks();
       const pro = isPro(), b = document.body, P = A.P;
       b.classList.toggle("v6-pro", pro);
       b.classList.toggle("v6-fx", pro && P.fx && !reduceMotion);
@@ -17141,28 +17265,136 @@
       img: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.7" fill="currentColor"/><path d="M5 17l4.5-4.5 3 3 2.5-2.5L19.5 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
       share: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     };
-    const PERKS = [
-      ["ultra", "General Ultra + Deep Think", "Our smartest model"],
-      ["pts", "3× the points", "Every 4 hours"],
-      ["rush", "First in line", "Priority in Rush Hour"],
-      ["res", "SCODE Research", "Cited reports"],
-      ["voice", "Ultra Voice", "Talk out loud, your speed"],
-      ["paint", "Your colours", "Across all of SCODE"],
-      ["pin", "Pins + folders", "Keep chats organized"],
-      ["edit", "Reply fonts + styles", "Read it your way"],
-      ["fx", "Your stats", "Streaks and top subjects"],
-    ];
-    function refillText(d) {
-      if (!d.reset_at) return "soon";
-      const s = Math.max(0, d.reset_at - Date.now() / 1000), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
-      return h ? `${h}h ${m}m` : m ? `${m} min` : "under a minute";
+    // ---------------------------------------------------------------- SCODE 7 plans: Stardust (FREE), Nova, Supernova
+    let lvSeq = 0;
+    function planIcon(level, size = 18) {
+      const id = "lv" + (++lvSeq);
+      if (level === "supernova") return `<svg class="acc-lvi lv-supernova" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><defs>
+        <radialGradient id="${id}" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff6d8"/><stop offset=".35" stop-color="#ffb35c"/><stop offset=".7" stop-color="#e0368c"/><stop offset="1" stop-color="#7a4dff"/></radialGradient></defs>
+        <g stroke="url(#${id})" stroke-width="1.6" stroke-linecap="round"><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4M4.6 4.6l2.8 2.8M16.6 16.6l2.8 2.8M4.6 19.4l2.8-2.8M16.6 7.4l2.8-2.8"/></g>
+        <path d="M12 6.2l1.6 4.2 4.2 1.6-4.2 1.6L12 17.8l-1.6-4.2L6.2 12l4.2-1.6z" fill="url(#${id})"/></svg>`;
+      if (level === "nova") return `<svg class="acc-lvi lv-nova" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><defs>
+        <linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5fb0"/><stop offset=".55" stop-color="#8b6bff"/><stop offset="1" stop-color="#3fc1ff"/></linearGradient></defs>
+        <circle cx="12" cy="12" r="10" fill="url(#${id})" opacity=".18"/>
+        <path d="M12 2.5l2.2 7.3 7.3 2.2-7.3 2.2L12 21.5l-2.2-7.3L2.5 12l7.3-2.2z" fill="url(#${id})"/></svg>`;
+      return `<svg class="acc-lvi lv-stardust" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 4l1.3 3.7L14 9l-3.7 1.3L9 14l-1.3-3.7L4 9l3.7-1.3z" fill="currentColor" opacity=".9"/>
+        <path d="M17 12.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor" opacity=".7"/>
+        <circle cx="17.5" cy="5.5" r="1.3" fill="currentColor" opacity=".55"/><circle cx="6.5" cy="18" r="1" fill="currentColor" opacity=".45"/></svg>`;
     }
-    function ctaFor(d) {
-      const promo = d.promo || {};
-      if (promo.request === "pending") return `<div class="v4-plan-note wait"><span class="v4-dot"></span><span>Your Pro request is in. You'll get an email when it's approved.</span></div>`;
-      if (!promo.open) return `<div class="acc-ended">The free Pro offer ended on October 31. Watch What's new for the next way to get Pro.</div>`;
-      if (!d.train_ok) return `<div class="v4-plan-note">Free SCODE Pro is for people who help train SCODE AI. Turn on <b>Help improve SCODE AI</b> below, then ask for Pro here.</div>`;
-      return `<button class="v4-pro-btn" id="v4-pro-req" type="button"><span>Get SCODE Pro free</span><small>Until January 1, 2027 · ask by October 31</small></button>`;
+    const LVNAME = { free: "Stardust (FREE)", nova: "Nova", supernova: "Supernova" };
+    const lvOf = (d) => (d && d.level) || A.level || (isPro() ? "nova" : "free");
+    function perksFor(d) {
+      const sup = lvOf(d) === "supernova", hrs = (d && d.window_hours) || 4;
+      return [
+        ["ultra", "General Ultra + Deep Think", "Our smartest model"],
+        ["pts", `${sup ? 20 : 5}× the usage`, `Every ${hrs} hours`],
+        ["rush", sup ? "Always first" : "Ahead in line", sup ? "No Rush Hour waits" : "Ahead of Stardust in Rush Hour"],
+        ["res", "SCODE Research", "Cited reports"],
+        ["voice", "Ultra Voice", "Talk out loud, your speed"],
+        ["paint", "Your colours", "Across all of SCODE"],
+        ["pin", "Pins + folders", "Keep chats organized"],
+        ["edit", "Reply fonts + styles", "Read it your way"],
+        ["fx", "Your stats", "Streaks and top subjects"],
+      ];
+    }
+    function refillText(d, at) {
+      at = at || d.reset_at;
+      if (!at) return "soon";
+      const s = Math.max(0, at - Date.now() / 1000), dd = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
+      return dd ? `${dd}d ${h}h` : h ? `${h}h ${m}m` : m ? `${m} min` : "under a minute";
+    }
+    const money = (c) => "$" + (c / 100).toFixed(2).replace(".00", "");
+    function planCard(d, lv, label) {
+      const p = d.plans[lv], hrs = d.window_hours || 4;
+      return `<div class="acc-plan acc-plan-${lv}">
+          <div class="acc-plan-top">${planIcon(lv, 30)}<div><b>${p.name}</b><span>${money(p.price)} CAD for ${p.months} month${p.months > 1 ? "s" : ""}</span></div></div>
+          <ul><li><b>${p.mult}×</b> Stardust's usage</li><li><b>${p.win_photos}</b> photos every ${hrs} hours, ${p.week_photos.toLocaleString()} a week</li>
+            <li>General Ultra, Deep Think, Research and Ultra Voice</li>
+            <li>${lv === "supernova" ? "<b>Always first in line</b>, even in Rush Hour" : "Ahead of Stardust in Rush Hour"}</li>
+            <li>Your colours, chat backgrounds, fonts, pins and stats</li></ul>
+          <button type="button" class="acc-plan-btn" data-apply="${lv}">${label || "Get " + p.name}</button></div>`;
+    }
+    function requestHtml(d) {
+      const r = d.request;
+      if (!r) return "";
+      const what = r.kind === "credit" ? `${money(r.amount)} of reset credit` : `SCODE ${d.plans[r.plan] ? d.plans[r.plan].name : "Nova"}`;
+      const body = r.status === "approved"
+        ? `<b>Approved!</b> Pay <b>${money(r.amount)} CAD</b> by Interac e-Transfer to <b>${escapeHtml(d.etransfer_to)}</b> with <b>${r.code}</b> in the message, or in cash in person. It turns on the moment we confirm it.`
+        : `<b>Request sent</b> for ${what} (code <b>${r.code}</b>). We'll email you how to pay once it's approved.`;
+      return `<div class="acc-req ${r.status}"><span class="v4-dot"></span><div>${body}</div><button type="button" class="ap-link" id="acc-req-cancel">Cancel</button></div>`;
+    }
+    function creditHtml(d) {
+      const pr = d.reset_prices || { window: 100, week: 200 }, c = d.credits || 0, hrs = d.window_hours || 4;
+      return `<div class="acc-credit">
+          <div class="acc-credit-top"><div><b>Reset credit</b><small>Refill your limit yourself, any time</small></div><span class="acc-bal">${money(c)}</span></div>
+          <div class="acc-credit-btns">
+            <button type="button" class="set-btn" data-reset="window" ${c < pr.window ? "disabled" : ""}>Refill ${hrs}-hour · ${money(pr.window)}</button>
+            <button type="button" class="set-btn" data-reset="week" ${c < pr.week ? "disabled" : ""}>Refill week · ${money(pr.week)}</button>
+            <button type="button" class="ap-link" data-apply="credit">Add credit</button></div></div>`;
+    }
+    function giveHtml(d) {
+      const gv = d.give;
+      if (!gv) return "";
+      const gift = '<svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="3.5" y="9" width="17" height="11.5" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 9h19M12 9v11.5M12 9c-1.5-3.5-6-4-6-1.5S10 9 12 9zm0 0c1.5-3.5 6-4 6-1.5S14 9 12 9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+      if (gv.won) return `<div class="acc-give won">${gift}<div><b>You won the November giveaway!</b><span>${escapeHtml(gv.won)}. Check your email to claim it.</span></div></div>`;
+      if (!gv.on || gv.entered === "no") return "";
+      if (gv.entered === "send") return `<div class="acc-give">${gift}<div><b>Send your first message to enter the giveaway</b><span>New accounts made in November can win 6 months of Nova and a Premium SCODE sticker.</span></div></div>`;
+      return `<div class="acc-give">${gift}<div><b>You're in the November giveaway</b><span>Two winners on December 1: 6 months of Nova + a Premium SCODE sticker, or 1 month of Nova. Good luck!</span></div></div>`;
+    }
+    function wirePlanBits(box, d) {
+      box.querySelectorAll("[data-apply]").forEach(b => b.addEventListener("click", () => openSheet(d, b.dataset.apply)));
+      box.querySelectorAll("[data-reset]").forEach(b => b.addEventListener("click", async () => {
+        const which = b.dataset.reset, price = (d.reset_prices || {})[which] || 0;
+        if (!(await showConfirm(which === "week" ? "Refill your weekly limit?" : "Refill your limit now?",
+          `This uses ${money(price)} of your reset credit and gives you your full ${which === "week" ? "weekly limit" : (d.window_hours || 4) + "-hour limit and photos"} back right away.`))) return;
+        b.disabled = true;
+        const r = await syncFetch("/v7/reset", { method: "POST", body: { which } }).catch(() => null);
+        if (r && r.ok) { meData = r.data; paintAccount(); v4Toast("<b>Refilled</b> · you're good to go"); if (typeof checkStatus === "function") checkStatus(); }
+        else { b.disabled = false; apError((r && r.data && r.data.message) || "Couldn't do that. Try again."); }
+      }));
+      const c = $("acc-req-cancel");
+      if (c) c.addEventListener("click", async () => {
+        if (!(await showConfirm("Cancel this request?", "You can ask again any time."))) return;
+        const r = await syncFetch("/v7/request/cancel", { method: "POST" }).catch(() => null);
+        if (r && r.ok) { meData = r.data; paintAccount(); }
+      });
+    }
+    function openSheet(d, what) {
+      const credit = what === "credit";
+      let pick = credit ? (d.credit_packs || [500])[0] : what;
+      const old = $("acc-sheet"); if (old) old.remove();
+      const el2 = document.createElement("div");
+      el2.id = "acc-sheet"; el2.className = "acc-sheet-ov";
+      const opts = credit
+        ? (d.credit_packs || [500, 1000]).map(c => `<button type="button" class="acc-opt" data-v="${c}" aria-pressed="${c === pick}"><b>${money(c)}</b><small>reset credit</small></button>`).join("")
+        : ["nova", "supernova"].map(k => `<button type="button" class="acc-opt" data-v="${k}" aria-pressed="${k === pick}">${planIcon(k, 22)}<b>${d.plans[k].name}</b><small>${money(d.plans[k].price)} · ${d.plans[k].months} mo</small></button>`).join("");
+      el2.innerHTML = `<div class="acc-sheet" role="dialog" aria-modal="true" aria-label="${credit ? "Add reset credit" : "Get a plan"}">
+          <div class="acc-sheet-h"><b>${credit ? "Add reset credit" : "Get " + (d.plans[pick] ? d.plans[pick].name : "Nova")}</b><button type="button" class="acc-x" aria-label="Close">${ICON.x}</button></div>
+          <div class="acc-opts">${opts}</div>
+          <div class="acc-fields"><label>Name<input value="${escapeHtml((auth && auth.name) || "")}" readonly></label><label>Email<input value="${escapeHtml((auth && auth.email) || "")}" readonly></label></div>
+          <div class="acc-how"><b>How it works</b><span>1. Apply here. 2. We approve it and email you how to pay (cash or Interac e-Transfer, CAD). 3. It turns on the moment your payment is confirmed${credit ? "" : ", and lasts to the exact day and hour"}.</span></div>
+          ${credit ? "" : `<ul class="acc-terms">${(d.terms || []).map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>`}
+          <label class="acc-agree"><input type="checkbox" id="acc-agree"><span>${credit ? "I understand reset credit can't be refunded." : "I agree to these terms and the SCODE AI rules."}</span></label>
+          <button type="button" class="acc-plan-btn" id="acc-apply" disabled>Apply</button></div>`;
+      document.body.appendChild(el2);
+      requestAnimationFrame(() => el2.classList.add("show"));
+      const close = () => { el2.classList.remove("show"); setTimeout(() => el2.remove(), 250); };
+      el2.addEventListener("click", e => { if (e.target === el2) close(); });
+      el2.querySelector(".acc-x").addEventListener("click", close);
+      const go = $("acc-apply"), agree = $("acc-agree");
+      agree.addEventListener("change", () => { go.disabled = !agree.checked; });
+      el2.querySelectorAll(".acc-opt").forEach(b => b.addEventListener("click", () => {
+        pick = credit ? +b.dataset.v : b.dataset.v;
+        el2.querySelectorAll(".acc-opt").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+        if (!credit) el2.querySelector(".acc-sheet-h b").textContent = "Get " + d.plans[pick].name;
+      }));
+      go.addEventListener("click", async () => {
+        go.disabled = true; go.classList.add("busy");
+        const r = await syncFetch("/v7/request", { method: "POST", body: credit ? { kind: "credit", amount: pick, agree: true } : { kind: "plan", plan: pick, agree: true } }).catch(() => null);
+        if (r && r.ok) { meData = r.data; close(); paintAccount(); v4Toast("<b>Request sent</b> · check your email"); }
+        else { go.disabled = false; go.classList.remove("busy"); v4Toast((r && r.data && r.data.message) || "Couldn't send that. Try again."); }
+      });
     }
     function ring(id, left, limit, label, unit) {
       const pct = limit ? Math.max(0, Math.min(1, left / limit)) : 0, C = 2 * Math.PI * 44;
@@ -17343,28 +17575,54 @@
       s.days.forEach((n, i) => { const h = n ? Math.max(14, n / mx * 120) : 6; x.fillStyle = n ? bg2 : "#e6e6ea"; card(x0 + i * (bw + gap), 1080 - h, bw, h, 6); x.fill(); });
       x.fillStyle = "#fff"; x.font = "700 40px -apple-system, Segoe UI, sans-serif";
       if (s.top) x.fillText("Top subject: " + s.top, W / 2, 1235);
-      x.font = "800 30px -apple-system, Segoe UI, sans-serif"; x.globalAlpha = 0.9; x.fillText("S C O D E   P R O", W / 2, 200);
+      x.font = "800 30px -apple-system, Segoe UI, sans-serif"; x.globalAlpha = 0.9; x.fillText(("SCODE " + (lvOf(meData) === "supernova" ? "SUPERNOVA" : "NOVA")).split("").join(" "), W / 2, 200);
       c.toBlob(b => {
         const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "my-scode-stats.png";
         document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
       }, "image/png");
     }
 
+    function usageRings(d) {
+      const left = Math.max(0, d.points_limit - d.points_used);
+      if (d.mode === "tokens" && d.week_limit) {
+        const wl = Math.max(0, d.week_limit - d.week_used);
+        return ring("acc-p", left, d.points_limit, `${d.window_hours}-hour`, "points") + ring("acc-w", wl, d.week_limit, "This week", "points");
+      }
+      const pleft = Math.max(0, d.photos_limit - d.photos_used);
+      return ring("acc-p", left, d.points_limit, "Points", "points") + ring("acc-f", pleft, d.photos_limit, "Photos", "photos");
+    }
+    function photosLine(d) {
+      const pl = Math.max(0, d.photos_limit - d.photos_used), wl = Math.max(0, d.week_photos_limit - d.week_photos_used);
+      return d.mode === "tokens" ? `Photos: <b>${pl}</b> of ${d.photos_limit} left now · <b>${wl.toLocaleString()}</b> of ${d.week_photos_limit.toLocaleString()} this week`
+        : `Photos this week: <b>${wl.toLocaleString()}</b> of ${d.week_photos_limit.toLocaleString()} left`;
+    }
+    function modeNote(d) {
+      if (d.mode === "tokens") return "Points follow each message's real size: short messages cost less, long ones more.";
+      const days = Math.max(0, Math.ceil((d.switch_at - Date.now() / 1000) / 86400));
+      return days ? `Coming ${new Date(d.switch_at * 1000).toLocaleDateString(undefined, { month: "long", day: "numeric" })}: points that follow each message's real size, ${5}-hour windows and a weekly limit.` : "";
+    }
     function paintPro(box, d) {
-      const left = Math.max(0, d.points_limit - d.points_used), pleft = Math.max(0, d.photos_limit - d.photos_used);
-      const winPct = d.reset_at ? Math.max(0, Math.min(100, 100 - ((d.reset_at - Date.now() / 1000) / 14400) * 100)) : 0;
+      const lv = lvOf(d), win = (d.window_hours || 4) * 3600;
+      const winPct = d.reset_at ? Math.max(0, Math.min(100, 100 - ((d.reset_at - Date.now() / 1000) / win) * 100)) : 0;
+      const upsell = lv === "nova" ? `<div class="acc-h">More</div><div class="acc-plans one">${planCard(d, "supernova", "Upgrade to Supernova")}</div>
+          <div class="acc-renew"><span>Nova ends ${d.plan_until ? v4When(d.plan_until) : "soon"}. Renewing adds 3 months onto that.</span><button type="button" class="ap-link" data-apply="nova">Renew Nova</button></div>`
+        : `<div class="acc-renew"><span>Supernova ends ${d.plan_until ? v4When(d.plan_until) : "soon"}. Renewing adds a month onto that.</span><button type="button" class="ap-link" data-apply="supernova">Renew Supernova</button></div>`;
       box.innerHTML = `
+        ${giveHtml(d)}${requestHtml(d)}
         <div class="acc-usage">
-          <div class="acc-rings">${ring("acc-p", left, d.points_limit, "Points", "points")}${ring("acc-f", pleft, d.photos_limit, "Photos", "photos")}</div>
-          <div class="acc-refill"><div class="acc-refill-top"><span>Refills in <b id="acc-refill">${refillText(d)}</b></span><span>${d.plan_until ? "Pro until " + v4When(d.plan_until) : "SCODE Pro"}</span></div>
-            <i><u style="--w:${winPct}%"></u></i></div>
+          <div class="acc-rings">${usageRings(d)}</div>
+          <div class="acc-refill"><div class="acc-refill-top"><span>Refills in <b id="acc-refill">${refillText(d)}</b></span><span>${d.plan_until ? escapeHtml(d.plan_name || "Nova") + " until " + v4When(d.plan_until) : "SCODE " + escapeHtml(d.plan_name || "Nova")}</span></div>
+            <i><u style="--w:${winPct}%"></u></i><div class="acc-photos-line">${photosLine(d)}</div>${modeNote(d) ? `<div class="acc-mode">${modeNote(d)}</div>` : ""}</div>
         </div>
+        ${creditHtml(d)}
         <div id="acc-stats-slot">${statsHtml(A.stats)}</div>
-        <div class="acc-h">Included with your Pro</div>
-        <div class="acc-perks">${PERKS.map(([k, t, s], i) => `<div class="acc-perk" style="--i:${i}"><span class="ic">${ICON[k]}</span><b>${t}</b><small>${s}</small></div>`).join("")}</div>
+        <div class="acc-h">Included with ${escapeHtml(d.plan_name || "Nova")}</div>
+        <div class="acc-perks">${perksFor(d).map(([k, t, s], i) => `<div class="acc-perk" style="--i:${i}"><span class="ic">${ICON[k]}</span><b>${t}</b><small>${s}</small></div>`).join("")}</div>
+        ${d.request ? "" : upsell}
         <div class="acc-h">Make it yours</div>
         ${lookHtml()}`;
       wireLook(box);
+      wirePlanBits(box, d);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         box.querySelectorAll(".acc-gauge .val").forEach(c => { c.style.strokeDashoffset = c.style.getPropertyValue("--to"); });
         box.querySelectorAll(".acc-ring-num b").forEach(b => countUp(b, +b.dataset.to, 1300));
@@ -17377,34 +17635,21 @@
     function paintFree(box, d) {
       const left = Math.max(0, d.points_limit - d.points_used), pleft = Math.max(0, d.photos_limit - d.photos_used);
       const pct = (a, b) => Math.max(0, Math.min(100, b ? (a / b) * 100 : 0));
-      const nm = escapeHtml((auth && (auth.name || auth.email)) || "You");
+      const week = d.mode === "tokens" && d.week_limit ? Math.max(0, d.week_limit - d.week_used) : null;
       box.innerHTML = `
+        ${giveHtml(d)}${requestHtml(d)}
         <div class="acc-free-use">
           <div class="r"><span>Points</span><b>${left.toLocaleString()} <small>of ${d.points_limit.toLocaleString()}</small></b></div><i><u style="width:${pct(left, d.points_limit)}%"></u></i>
+          ${week !== null ? `<div class="r"><span>This week</span><b>${week.toLocaleString()} <small>of ${d.week_limit.toLocaleString()}</small></b></div><i><u style="width:${pct(week, d.week_limit)}%"></u></i>` : ""}
           <div class="r"><span>Photos</span><b>${pleft} <small>of ${d.photos_limit}</small></b></div><i><u style="width:${pct(pleft, d.photos_limit)}%"></u></i>
-          <div class="acc-free-note">Free plan · refills every 4 hours (next in ${refillText(d)})</div>
+          <div class="acc-free-note">${planIcon("free", 14)} Stardust (FREE) · refills every ${d.window_hours || 4} hours (next in ${refillText(d)}) · ${Math.max(0, d.week_photos_limit - d.week_photos_used)} of ${d.week_photos_limit} photos left this week</div>
         </div>
+        ${creditHtml(d)}
         <div class="acc-pitch">
-          <div class="acc-peek" aria-hidden="true"><div class="sky"><i></i><i></i><i></i></div>
-            <div class="pk-pic"${auth && auth.avatar ? ` style="background-image:url('${auth.avatar}')"` : ""}>${auth && auth.avatar ? "" : escapeHtml(initialOf())}</div><div class="pk-isle"><b>${nm}</b><span>SCODE Pro</span></div><div class="pk-lock">${ICON.lock}</div></div>
-          <div class="acc-pitch-t"><b>SCODE, in your colours</b><span>With SCODE Pro, all of SCODE is painted from your profile picture, and you get more of everything:</span></div>
-          <ul class="acc-pitch-l">
-            <li><b>${d.pro_points.toLocaleString()}</b> points every 4 hours, not ${d.free_points.toLocaleString()}</li>
-            <li><b>${d.pro_photos}</b> photos every 4 hours, not ${d.free_photos}</li>
-            <li>General Ultra, Deep Think, Research and Ultra Voice</li>
-            <li>Priority in Rush Hour</li>
-            <li>Chat backgrounds, reply fonts and reply styles</li>
-            <li>Pinned chats, folders and your stats</li>
-          </ul>
-          ${ctaFor(d)}
+          <div class="acc-pitch-t"><b>Go further with Nova or Supernova</b><span>More of everything, General Ultra, and all of SCODE painted in your colours.</span></div>
+          ${d.request ? "" : `<div class="acc-plans">${planCard(d, "nova")}${planCard(d, "supernova")}</div>`}
         </div>`;
-      const b = $("v4-pro-req");
-      if (b) b.addEventListener("click", async () => {
-        b.disabled = true; b.classList.add("busy");
-        const r = await syncFetch("/me/pro/request", { method: "POST" }).catch(() => null);
-        if (r && r.ok) { meData = r.data; paintAccount(); v4Toast("<b>Request sent</b> · we'll email you when Pro is on"); }
-        else { b.disabled = false; b.classList.remove("busy"); apError((r && r.data && r.data.message) || "Couldn't send that. Try again."); }
-      });
+      wirePlanBits(box, d);
     }
 
     function hero(pro) {
@@ -17412,9 +17657,13 @@
       if (!h) return;
       if (!h.querySelector(".acc-sky")) {
         h.insertAdjacentHTML("afterbegin", '<div class="acc-sky" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="acc-halo" aria-hidden="true"></div>');
-        h.querySelector(".ap-who").insertAdjacentHTML("afterbegin", '<span class="acc-badge">SCODE PRO</span>');
+        h.querySelector(".ap-who").insertAdjacentHTML("afterbegin", '<span class="acc-badge"></span>');
+        h.querySelector(".ap-who").insertAdjacentHTML("beforeend", '<span class="acc-lvchip"></span>');
       }
       h.classList.toggle("acc-hero-pro", pro);
+      const lv = lvOf(meData);
+      h.querySelector(".acc-badge").innerHTML = planIcon(lv, 14) + (lv === "supernova" ? "SUPERNOVA" : "NOVA");
+      h.querySelector(".acc-lvchip").innerHTML = pro ? "" : planIcon("free", 15) + "Stardust (FREE)";
     }
     const _v4Plan = v4PaintPlan;
     v4PaintPlan = function (d) {
@@ -17426,7 +17675,8 @@
       const title = document.querySelector("#v4-plan-sec .set-section-title");
       if (title) title.textContent = pro ? "Your usage" : "Your plan";
       hero(pro);
-      const key = JSON.stringify([d.plan, d.points_used, d.points_limit, d.photos_used, d.photos_limit, d.reset_at, d.plan_until, d.promo, d.train_ok]);
+      if (d.level) { A.level = d.level; applyLook(); }
+      const key = JSON.stringify([d.plan, d.level, d.points_used, d.points_limit, d.photos_used, d.photos_limit, d.reset_at, d.plan_until, d.request, d.credits, d.give, d.week_used, d.mode]);
       if (box.dataset.acc !== key || !box.firstElementChild) { box.dataset.acc = key; if (pro) paintPro(box, d); else paintFree(box, d); }
       tryWow();
     };
@@ -17470,7 +17720,7 @@
       if (a && marked.a !== sentAt && a.compareDocumentPosition(u || a) & Node.DOCUMENT_POSITION_PRECEDING) {
         marked.a = sentAt;
         if (RQ.pub && RQ.pub.on && !a.querySelector(".acc-prio"))
-          a.insertAdjacentHTML("afterbegin", `<div class="acc-prio">${ICON.pts}<span>Priority</span><small>Rush Hour · Pro goes first</small></div>`);
+          a.insertAdjacentHTML("afterbegin", `<div class="acc-prio">${ICON.pts}<span>Priority</span><small>Rush Hour · ${lvOf(meData) === "supernova" ? "Supernova is always first" : "Nova goes ahead"}</small></div>`);
       }
     }).observe(el.messages, { childList: true });
 
@@ -17591,6 +17841,15 @@
       if (label && label.classList.contains("side-label")) label.hidden = true;
     };
 
+    // the November giveaway on the "make an account" screen (gone after Nov 30, Pacific)
+    (function giveSignup() {
+      const until = Date.UTC(2026, 11, 1, 8, 0, 0);
+      const v = document.querySelector('#auth-overlay .au-view[data-view="welcome"] .au-perks');
+      if (!v || Date.now() >= until) return;
+      v.insertAdjacentHTML("afterend", `<div class="acc-give acc-give-auth"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><rect x="3.5" y="9" width="17" height="11.5" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 9h19M12 9v11.5M12 9c-1.5-3.5-6-4-6-1.5S10 9 12 9zm0 0c1.5-3.5 6-4 6-1.5S14 9 12 9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <div><b>November giveaway</b><span>Make an account by November 30 and send a message to win 6 months of SCODE Nova + a Premium sticker.</span></div></div>`);
+    })();
+
     // ---------------------------------------------------------------- start
     loadLocal();
     try { const c = JSON.parse(get("scode_v6_pal", "null")); if (Array.isArray(c) && c.length === 4) { A.pal = c; setVars(c); } else setVars(FALLBACK); } catch (e) { setVars(FALLBACK); }
@@ -17599,6 +17858,7 @@
     const _st = v4Status;
     v4Status = function (data) {
       _st(data);
+      if (data && data.level) A.level = data.level === "guest" ? null : data.level;
       if (A.loadedFor !== who()) { A.loadedFor = null; loadLocal(); }
       applyLook();
       const now = V4.plan + "|" + who();
