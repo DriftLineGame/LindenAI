@@ -4145,6 +4145,9 @@
   .v7q-more { margin-top: 8px; font-size: 12px; color: var(--faint); }
   body.v7-off #composer { border-style: dashed; }
   body.v7-off #send-btn { background: linear-gradient(135deg, #5b4bd6, #8b6bff) !important; color: #fff !important; }
+  #whatsnew .v7-orb { background: none; box-shadow: none; }
+  #whatsnew .v7-orb img { width: 100%; height: 100%; filter: drop-shadow(0 6px 14px rgba(120,60,255,.35)); }
+  #whatsnew .wn-fi .acc-lvi { width: 26px; height: 26px; }
 
 </style>
 </head>
@@ -18048,6 +18051,7 @@
     const _sw = switchChat;
     switchChat = function (id) { const r = _sw.apply(this, arguments); if (isSuper()) applyLook(); return r; };
     setInterval(() => { if (isSuper() && historyEnabled && A.bgFor !== (currentChatId || null)) applyLook(); }, 700);
+    window.scodeV7Icon = planIcon;
     return { A, palette, isSuper, chatBg, applyLook, set, refreshColours, pickColours, renderChatList: () => renderChatList(), save };
   })();
   window.scodeAcc = ACC;
@@ -18241,6 +18245,69 @@
   // read-only peek used by the SCODE test scripts
   window.scodeDbg = { get chats() { return chats; }, get cur() { return currentChatId; }, get messages() { return messages; },
     chat: () => getCurrentChat(), go: (id) => switchChat(id), st: (d) => v4Status(d) };
+
+  // ================================================================ 7.0: the launch popup and the What's new feed
+  // Replaces every older launch popup (the old "Five/Six new things" one included). Shows once per device
+  // in the first 14 days of SCODE 7; ?whatsnew=v7 opens it any time.
+  (function v7Launch() {
+    const V7_LAUNCH = Date.parse("2026-11-12T17:00:00-07:00");
+    const img = (k, s) => (window.scodeV7Icon ? window.scodeV7Icon(k, s) : "");
+    const MOON = '<svg viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M16 3.5l.6 1.4 1.4.6-1.4.6L16 7.5l-.6-1.4-1.4-.6 1.4-.6z" fill="currentColor"/></svg>';
+    const BRUSH = '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9h17M9 9v10.5" stroke="currentColor" stroke-width="1.8"/></svg>';
+    const SPARK = '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function show(forced) {
+      const feats = [
+        ["plans", img("supernova", 26), "Stardust, Nova and Supernova", "Every account has a plan. Stardust is free with 20 photos every window. Nova and Supernova give you 5× and 20× the usage."],
+        ["queue", MOON, "Line up messages overnight", "SCODE sleeps from 11 PM to 7 AM. Line up 5 messages and they send by themselves in the morning."],
+        ["studio", BRUSH, "Supernova studio", "Set how strong your background photo is, give every chat its own photo, add project photos and change the layout."],
+        ["log", SPARK, "A smoother SCODE", "Fairer points from November 16, reset credit you control, a clearer account page, new plan logos and lots of fixes."],
+      ];
+      wn.querySelector(".wn-tag").textContent = "New · SCODE 7";
+      $("wn-title").textContent = "Meet SCODE 7";
+      wn.querySelector(".modal-sub").textContent = "Three plans, more photos and a smoother SCODE for everyone.";
+      wn.querySelector(".wn-feats").innerHTML = feats.map(([k, ic, n, t]) => `<div class="wn-feat"><div class="wn-fi">${ic}</div><div class="wn-ft"><b>${n}</b><span>${t}</span></div><button class="wn-try v7-try" type="button" data-v7="${k}">${k === "queue" ? "Got it" : k === "log" ? "See all" : "Open"}</button></div>`).join("");
+      const orbs = wn.querySelector(".wn-orbs"); orbs.classList.add("many");
+      orbs.innerHTML = ["free", "nova", "supernova"].map(k => `<div class="wn-orb v7-orb">${img(k, 64)}</div>`).join("");
+      $("wn-cost-line").textContent = "Stardust is free · Nova $5 CAD for 3 months · Supernova $10 CAD a month";
+      const later = $("wn-later"); if (later) later.textContent = "Got it";
+      wn.querySelectorAll(".v7-try").forEach(b => b.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        closeWhatsNew();
+        const k = b.dataset.v7;
+        if (k === "plans" || k === "studio") { if (isGuest()) { openAuth("welcome", "Make a free account to get Stardust, or Nova and Supernova."); return; } openAccount(); return; }
+        if (k === "log") { $("v4-log-btn").click(); return; }
+        setTimeout(() => el.input.focus(), 200);
+      }));
+      try { localStorage.setItem("scode_v7_launch_seen", "1"); } catch (e) {}
+      wn.classList.add("show");
+    }
+    maybeShowWhatsNew = function () {
+      const forced = /[?&]whatsnew=v7\b/.test(location.search);
+      if (/[?&](set|space)=/.test(location.search) && !forced) return;
+      let seen = false;
+      try { seen = localStorage.getItem("scode_v7_launch_seen") === "1" || sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}
+      if (forced || (!seen && Date.now() >= V7_LAUNCH && Date.now() < V7_LAUNCH + 14 * 864e5)) show(forced);
+    };
+    // the What's new feed: SCODE 7 at the top
+    try {
+      if (typeof CHANGELOG !== "undefined" && Array.isArray(CHANGELOG) && !CHANGELOG.some(c => c.id === "f-v7-plans")) {
+        CHANGELOG.unshift(
+          { id: "f-v7-plans", type: "feature", date: "2026-11-12", title: "SCODE 7: Stardust, Nova and Supernova",
+            text: "Every account now has a plan. Stardust is free, with 20 photos every window and 100 a week. Nova ($5 CAD for 3 months) gives you 5× the usage and 50 photos a window. Supernova ($10 CAD a month) gives you 20× the usage, 100 photos a window and always puts you first in line.",
+            how: ["Open your Account page from your picture.", "Pick Get Nova or Get Supernova and apply.", "Pay by e-Transfer or cash, and it turns on when your payment is confirmed."] },
+          { id: "f-v7-queue", type: "feature", date: "2026-11-12", title: "Line up messages overnight",
+            text: "SCODE sleeps from 11 PM to 7 AM. During those hours you can line up 5 text messages. They send by themselves at 7 AM, Supernova first, and the replies wait in your chat.",
+            how: ["Sign in.", "Between 11 PM and 7 AM, type and send like normal: it gets lined up.", "Edit or take out a message in the bar above the text box before 7 AM."] },
+          { id: "f-v7-studio", type: "feature", date: "2026-11-12", title: "Supernova studio",
+            text: "Supernova can set how strong the background photo is, give every chat its own background, add round or square photos to folders, and change the layout: width, plain or bubble messages, sidebar side, gaps and text box size.",
+            how: ["Open your Account page.", "Scroll to Make it yours.", "Use the Supernova studio card at the top."] },
+          { id: "x-v7", type: "fix", date: "2026-11-12", title: "SCODE 7 fixes",
+            text: "Plan and credit request cards no longer get cut off, your plan shows neatly in the account menu, and the old launch popup is gone. Usage now survives restarts, and from November 16 points follow each message's real size." }
+        );
+        updateNewsDot();
+      }
+    } catch (e) {}
+  })();
 
   // ---------------------------------------------------------------- start
   window.scodeV4 = V4;
