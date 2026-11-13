@@ -3820,8 +3820,8 @@
     --user-bubble: #f0f0f3; --accent: #6a46f0; --accent-soft: rgba(106,70,240,.1); --mark-fill: #fff; color-scheme: light; background: #fff; color: var(--text); }
   body.v6-tint.v6bg-black #main { --accent: var(--me-acc-d); --accent-ink: var(--me-ink-d); --accent-soft: rgba(var(--me-acc-d-rgb), .16); }
   body.v6-tint.v6bg-white #main { --accent: var(--me-acc-l); --accent-ink: var(--me-ink-l); --accent-soft: rgba(var(--me-acc-l-rgb), .1); }
-  body.v6bg-custom #main { background: linear-gradient(rgba(33,33,30,.72), rgba(33,33,30,.82)), var(--v6-bgimg) center / cover no-repeat; }
-  body.light.v6bg-custom #main { background: linear-gradient(rgba(250,249,246,.7), rgba(250,249,246,.8)), var(--v6-bgimg) center / cover no-repeat; }
+  body.v6bg-custom #main { background: linear-gradient(rgba(33,33,30,var(--v7-ov,.72)), rgba(33,33,30,var(--v7-ov2,.82))), var(--v6-bgimg) center / cover no-repeat; }
+  body.light.v6bg-custom #main { background: linear-gradient(rgba(250,249,246,var(--v7-ov,.72)), rgba(250,249,246,var(--v7-ov2,.82))), var(--v6-bgimg) center / cover no-repeat; }
   body.v6bg-custom #topbar { background: transparent; }
   body.v6bg-custom .user-bubble { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   body.v6bg-white #main #composer { box-shadow: 0 0 0 .5px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.07); }
@@ -3979,14 +3979,16 @@
   }
 
   /* ================================================================ v7.0 plans: Stardust (FREE), Nova, Supernova */
-  .acc-lvi { flex: none; display: inline-block; vertical-align: -3px; }
-  .acc-lvi.lv-stardust { color: #a49cc4; }
+  .acc-lvi { flex: none; display: inline-block; vertical-align: -3px; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(40,10,80,.25)); user-select: none; }
+  .acc-lvi.lv-stardust { color: #9d8cf0; }
+  body.light .acc-lvi.lv-stardust { color: #7a62e6; }
   #acc-lv { position: absolute; right: 0; bottom: -3px; width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center; pointer-events: none;
     background: var(--surface); box-shadow: 0 0 0 1.5px var(--surface), 0 2px 6px rgba(0,0,0,.25); }
   #acc-lv:empty { display: none; }
   #acc-lv.lv-supernova { animation: accLvGlow 3.5s ease-in-out infinite; }
   @keyframes accLvGlow { 50% { box-shadow: 0 0 0 1.5px var(--surface), 0 0 10px rgba(255,140,90,.65); } }
-  #am-plan { display: flex; align-items: center; gap: 6px; margin-top: 7px; font-size: 12.5px; font-weight: 650; color: var(--muted); }
+  #am-plan { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; row-gap: 1px; margin-top: 6px; font-size: 12.5px; font-weight: 650; color: var(--muted); }
+  #am-plan em { flex-basis: 100%; font-style: normal; font-weight: 500; font-size: 12px; color: var(--faint); }
   #am-plan:empty { display: none; }
   #am-plan.lv-nova span { background: linear-gradient(90deg, #e0368c, #7a4dff 55%, #1690e0); -webkit-background-clip: text; background-clip: text; color: transparent; }
   #am-plan.lv-supernova span { background: linear-gradient(90deg, #ff9a3c, #e0368c 45%, #7a4dff); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -4014,15 +4016,19 @@
     background: linear-gradient(110deg, #e0368c, #7a4dff 55%, #1690e0); box-shadow: 0 6px 18px -6px rgba(122,77,255,.6); transition: transform .2s, filter .2s; }
   .acc-plan-supernova .acc-plan-btn { background: linear-gradient(110deg, #f08a2c, #e0368c 45%, #7a4dff); }
   .acc-plan-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
-  .acc-plan-btn:disabled { opacity: .5; cursor: default; transform: none; }
+  .acc-plan-btn:disabled { background: var(--hover); color: var(--faint); box-shadow: none; cursor: default; transform: none; filter: none; }
   .acc-plan-btn.busy { opacity: .7; }
   .acc-renew { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 10px; font-size: 12.5px; color: var(--muted); }
 
-  .acc-req { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 14px; margin-bottom: 12px; font-size: 13px; line-height: 1.5;
-    background: var(--accent-soft); border: 1px solid var(--border); }
-  .acc-req .v4-dot { margin-top: 6px; flex: none; }
-  .acc-req > div { flex: 1; }
-  .acc-req.approved { background: rgba(48,170,110,.12); }
+  .acc-req { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 16px; margin-bottom: 14px; font-size: 13px; line-height: 1.5;
+    background: var(--accent-soft); border: 1px solid var(--border); position: relative; }
+  .acc-req-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex: none; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+    animation: accReqPulse 2s ease-in-out infinite; }
+  .acc-req-ok .acc-req-dot { background: #2fa86c; box-shadow: 0 0 0 4px rgba(47,168,108,.18); }
+  @keyframes accReqPulse { 50% { opacity: .45; } }
+  .acc-req-t { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .acc-req-x { flex: none; font-size: 12.5px; margin-top: 1px; }
+  .acc-req-ok { background: rgba(47,168,108,.1); border-color: rgba(47,168,108,.3); }
 
   .acc-credit { margin-top: 12px; border: 1px solid var(--border); border-radius: 16px; padding: 12px 14px; background: var(--surface); }
   .acc-credit-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -4074,6 +4080,71 @@
   }
 
   .acc-give-auth { margin: 4px 0 14px; text-align: left; }
+
+  /* ================= 7.0 Supernova studio ================= */
+  .acc-sn { margin: 4px 0 2px; padding: 16px; border: 1.5px solid transparent; border-radius: 18px;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, #ffb35c, #e0368c 45%, #7a4dff) border-box; }
+  .acc-sn-h { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+  .acc-sn-h b { display: block; font-size: 15px; }
+  .acc-sn-h small { display: block; font-size: 12px; color: var(--muted); }
+  .acc-sn .acc-type { display: grid; gap: 10px; }
+  .acc-sn-note { display: block; font-size: 12px; color: var(--faint); line-height: 1.45; font-style: normal; }
+  .acc-sn-sl { margin-top: 0; flex: 1; flex-wrap: nowrap; }
+  .acc-sn-sl input { flex: 1; min-width: 120px; accent-color: #e0368c; }
+  .acc-sn-sl output { min-width: 38px; text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+  .acc-sn-lay { margin: 16px 0 10px; }
+  .acc-act { display: inline-flex; align-items: center; gap: 6px; }
+  .acc-act svg { width: 14px; height: 14px; }
+  .acc-sn-lock { display: flex; align-items: center; gap: 12px; }
+  .acc-sn-lock b { display: block; font-size: 14px; }
+  .acc-sn-lock small { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+  .acc-menu-sn { display: flex; align-items: center; gap: 6px; border-top: 1px solid var(--border); margin-top: 6px; padding-top: 8px; }
+  .acc-fold-ph { width: 20px; height: 20px; flex: none; object-fit: cover; border-radius: 50%; box-shadow: 0 0 0 1px var(--border); }
+  body[data-pshape="square"] .acc-fold-ph { border-radius: 6px; }
+  .acc-fold.has-ph .acc-fold-h { padding-top: 6px; padding-bottom: 6px; }
+  /* layout (Supernova) */
+  @media (min-width: 721px) {
+    body.v7-lw-narrow .col { max-width: 620px; }
+    body.v7-lw-wide .col { max-width: 1040px; }
+    body.v7-ls-right #app { flex-direction: row-reverse; }
+    body.v7-ls-right #sidebar { border-right: none; border-left: 1px solid var(--border); }
+  }
+  body.v7-lb-plain .msg.user { align-items: stretch; }
+  body.v7-lb-plain .msg.user .user-bubble { background: none !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    border-radius: 0; max-width: 100%; padding: 2px 0 2px 14px; border-left: 3px solid var(--accent); font-weight: 500; }
+  body.v7-lb-plain .msg.user .user-bubble::before, body.v7-lb-plain .msg.user .user-bubble::after { display: none !important; }
+  body.v7-ld-tight .msg { margin-bottom: 12px; }
+  body.v7-ld-roomy .msg { margin-bottom: 44px; }
+  body.v7-lx-s #prompt-input { font-size: 14px; }
+  body.v7-lx-l #prompt-input { font-size: 17.5px; min-height: 66px; }
+  /* ================= 7.0 offline hours: lined-up messages ================= */
+  .v7q { margin: 0 0 10px; padding: 12px 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface);
+    box-shadow: 0 6px 24px rgba(0,0,0,.08); animation: v7qIn .4s cubic-bezier(.2,.9,.2,1) both; }
+  @keyframes v7qIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .v7q-h { display: flex; align-items: center; gap: 11px; }
+  .v7q-h > svg { width: 24px; height: 24px; flex: none; color: #9d8cf0; }
+  .v7q-h b { display: block; font-size: 14px; }
+  .v7q-h span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+  .v7q-h em { margin-left: auto; font-style: normal; font-size: 12px; font-weight: 600; color: var(--muted); padding: 3px 9px; border-radius: 999px; background: var(--surface-2); flex: none; }
+  .v7q-spin { width: 18px; height: 18px; flex: none; border-radius: 50%; border: 2.4px solid var(--accent-soft); border-top-color: var(--accent); animation: v7qSpin .9s linear infinite; }
+  @keyframes v7qSpin { to { transform: rotate(360deg); } }
+  .v7q-list { display: grid; gap: 6px; margin-top: 10px; }
+  .v7q-it { display: flex; align-items: center; gap: 9px; padding: 7px 8px 7px 10px; border-radius: 11px; background: var(--surface-2); font-size: 13.5px; }
+  .v7q-n { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 11px; font-weight: 700; color: var(--muted); border: 1px solid var(--border-strong); }
+  .v7q-it p { flex: 1; min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v7q-st { font-size: 11px; color: var(--faint); flex: none; }
+  .v7q-st.st-sent { color: #3aa76d; } .v7q-st.st-error { color: #e0544b; } .v7q-st.st-sending { color: var(--accent); }
+  .v7q-it button { width: 26px; height: 26px; flex: none; border: none; border-radius: 8px; background: none; color: var(--faint); display: grid; place-items: center; cursor: pointer; padding: 0; }
+  .v7q-it button:hover { background: var(--hover); color: var(--text); }
+  .v7q-it button svg { width: 14px; height: 14px; }
+  .v7q-it.edit { flex-wrap: wrap; align-items: flex-start; }
+  .v7q-it.edit textarea { flex: 1; min-width: 0; min-height: 54px; resize: vertical; border: 1px solid var(--accent); border-radius: 9px; background: var(--bg); color: var(--text); font: inherit; font-size: 13.5px; padding: 7px 9px; }
+  .v7q-eb { display: flex; gap: 6px; width: 100%; justify-content: flex-end; }
+  .v7q-it.edit .v7q-eb button { width: auto; height: 28px; padding: 0 12px; border-radius: 999px; font: inherit; font-size: 12.5px; border: 1px solid var(--border); color: var(--text); }
+  .v7q-it.edit .v7q-eb button[data-q="save"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+  .v7q-more { margin-top: 8px; font-size: 12px; color: var(--faint); }
+  body.v7-off #composer { border-style: dashed; }
+  body.v7-off #send-btn { background: linear-gradient(135deg, #5b4bd6, #8b6bff) !important; color: #fff !important; }
 
 </style>
 </head>
@@ -4701,12 +4772,15 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
-      <div class="v4-log-day"><div class="v4-log-date">November 9, 2026</div><h3>v7.0</h3><ul>
+      <div class="v4-log-day"><div class="v4-log-date">November 12, 2026</div><h3>v7.0</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Stardust, Nova and Supernova</b> <span>Every account now has a plan: Stardust (FREE), Nova ($5 CAD for 3 months, 5× the usage) or Supernova ($10 CAD a month, 20× the usage and always first in line). Look for your plan's icon by your picture.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Get Nova or Supernova</b> <span>Apply on your Account page. We approve it, email you how to pay (cash or e-Transfer), and it turns on the moment your payment is confirmed. No need to turn on training anymore.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>November giveaway</b> <span>Make a SCODE account by November 30 and send a message to enter. Two winners on December 1: 6 months of Nova + a Premium SCODE sticker, or 1 month of Nova.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Reset credit</b> <span>Add credit once, then refill your limit yourself whenever you need more.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>More photos</b> <span>Stardust 20, Nova 50 and Supernova 100 photos every few hours, with weekly totals of 100, 500 and 2,000.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Supernova studio</b> <span>Supernova can set how strong the background photo is, give every chat its own photo, add round or square photos to folders, and change the layout: width, plain or bubble messages, sidebar side, gaps and text box size.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Line up messages overnight</b> <span>SCODE sleeps from 11 PM to 7 AM. Signed in, you can line up 5 messages and they send by themselves when it wakes up. Edit or take them out any time before then.</span></li>
+        <li><span class="v4-log-tag better">BETTER</span><b>New plan logos</b> <span>Stardust, Nova and Supernova each have their own glass logo, made to match the SCODE logo.</span></li>
         <li><span class="v4-log-tag better">BETTER</span><b>Coming November 16: fair usage</b> <span>Points will follow each message's real size, so a quick question costs less than a long essay. Windows become 5 hours, with a weekly limit.</span></li>
       </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 1, 2026</div><h3>v6.5</h3><ul>
@@ -4948,7 +5022,7 @@
 <script>
 (function () {
   // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://metals-expires-look-eclipse.trycloudflare.com";
+  const PROXY_URL = "https://solar-yarn-photo-alabama.trycloudflare.com";
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -13483,7 +13557,7 @@
         if (j.error && j.error !== "rate_limited" && form().elements[j.error]) { fail(""); return bad(j.error, j.message || "Check this one."); }
         fail(j.message || "That didn't go through. Try again, or email scodeai2026@gmail.com.");
       };
-      xhr.onerror = () => fail("Couldn't reach the SCODE server. It may be offline right now (it rests from 12 to 6 AM). Your answers are saved here, so try again later, or email scodeai2026@gmail.com.");
+      xhr.onerror = () => fail("Couldn't reach the SCODE server. It may be offline right now (it sleeps from 11 PM to 7 AM). Your answers are saved here, so try again later, or email scodeai2026@gmail.com.");
       xhr.ontimeout = xhr.onerror;
       xhr.timeout = 10 * 60 * 1000;
       xhr.send(fd);
@@ -14668,8 +14742,8 @@
       if (el2) body.appendChild(el2); else throw new Error("This study set can't be shown.");
       $("v4-shared-title").textContent = data.set.title || "Shared study set";
     } catch (e) {
-      const asleep = new Date().getHours() < 6;
-      body.innerHTML = `<div class="v4-shared-wait err">${v4Esc(e.message && !/fetch|network/i.test(e.message) ? e.message : (asleep ? "SCODE AI is asleep right now (12 to 6 AM). Open the link again after 6 AM." : "SCODE AI's server is offline right now. Try the link again later."))}</div>`;
+      const asleep = new Date().getHours() < 7 || new Date().getHours() >= 23;
+      body.innerHTML = `<div class="v4-shared-wait err">${v4Esc(e.message && !/fetch|network/i.test(e.message) ? e.message : (asleep ? "SCODE AI is asleep right now (11 PM to 7 AM). Open the link again after 7 AM." : "SCODE AI's server is offline right now. Try the link again later."))}</div>`;
     }
   }
   $("v4-shared-close").addEventListener("click", () => { $("v4-shared").classList.remove("show"); try { history.replaceState(null, "", location.pathname); } catch (e) {} });
@@ -14760,7 +14834,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-11-09";
+  const V4_LOG_VER = "2026-11-12";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -17016,9 +17090,11 @@
     const get = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } };
     const put = (k, v) => { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return false; } return true; };
     const who = () => (auth && auth.email ? auth.email.toLowerCase() : "guest");
-    const DEF = { bg: "", fx: true, tint: true, font: "std", size: "m", lh: "std", style: "", vspeed: 1, pins: [], folders: [] };
+    const DEF = { bg: "", fx: true, tint: true, font: "std", size: "m", lh: "std", style: "", vspeed: 1, pins: [], folders: [],
+      bgop: 0.25, pshape: "circle", lw: "normal", lb: "bubbles", ls: "left", ld: "normal", lx: "m" };   // 7.0 Supernova studio
     const A = { pal: FALLBACK, palFor: undefined, P: null, tick: null, wowPending: false, loadedFor: null, saveT: null, stats: null };
     const isPro = () => V4.plan === "pro";
+    const isSuper = () => isPro() && A.level === "supernova";
     const rgb = (c, a) => a === undefined ? `rgb(${c[0]},${c[1]},${c[2]})` : `rgba(${c[0]},${c[1]},${c[2]},${a})`;
     const fxOn = () => A.P.fx && !reduceMotion && isPro();
 
@@ -17164,6 +17240,9 @@
       document.head.appendChild(l);
     }
     function bgImg() { return get("scode_v6_bgimg_" + who(), ""); }
+    // 7.0 (Supernova): a background photo for one chat. Like the main photo, it stays on this device.
+    const cbgKey = (id) => "scode_v7_cbg_" + who() + "_" + id;
+    function chatBg(id) { return id ? get(cbgKey(id), "") : ""; }
     function planMarks() {
       const wrap = $("acct-wrap");
       if (!wrap) return;
@@ -17173,12 +17252,13 @@
       m.className = lv ? "lv-" + lv : "";
       m.innerHTML = lv ? planIcon(lv, 13) : "";
       m.title = lv ? LVNAME[lv] : "";
-      const head = document.querySelector("#acct-menu .am-head");
-      if (head) {
-        let row = $("am-plan");
-        if (!row) { row = document.createElement("div"); row.id = "am-plan"; head.appendChild(row); }
-        row.className = lv ? "lv-" + lv : "";
-        row.innerHTML = lv ? planIcon(lv, 15) + "<span>" + LVNAME[lv] + "</span>" : "";
+      const perk = document.querySelector("#acct-menu .am-perk");
+      if (perk) {
+        perk.id = "am-plan";
+        perk.className = "am-perk" + (lv ? " lv-" + lv : "");
+        const d = meData && meData.level === lv ? meData : null;
+        perk.innerHTML = lv ? planIcon(lv, 15) + "<span>" + LVNAME[lv] + "</span>" +
+          (d ? `<em>${d.points_limit.toLocaleString()} points every ${d.window_hours || 4} hours</em>` : "") : "";
       }
       document.body.dataset.plan = lv || "guest";
     }
@@ -17188,10 +17268,27 @@
       b.classList.toggle("v6-pro", pro);
       b.classList.toggle("v6-fx", pro && P.fx && !reduceMotion);
       b.classList.toggle("v6-tint", pro && P.tint);
-      const img = P.bg === "custom" ? bgImg() : "";
-      ["photo", "black", "white", "custom"].forEach(k => b.classList.toggle("v6bg-" + k, pro && P.bg === k && (k !== "custom" || !!img)));
+      const sup = isSuper();
+      const ch = sup && historyEnabled ? getCurrentChat() : null;
+      const cimg = ch ? chatBg(ch.id) : "";
+      A.bgFor = ch ? ch.id : null;
+      const img = cimg || (P.bg === "custom" ? bgImg() : "");
+      const custom = pro && !!img && (!!cimg || P.bg === "custom");
+      ["photo", "black", "white"].forEach(k => b.classList.toggle("v6bg-" + k, pro && !cimg && P.bg === k));
+      b.classList.toggle("v6bg-custom", custom);
       const main = $("main");
-      if (main) main.style.setProperty("--v6-bgimg", pro && img ? `url("${img}")` : "none");
+      if (main) {
+        main.style.setProperty("--v6-bgimg", custom ? `url("${img}")` : "none");
+        // Supernova: how much of the photo shows through (the rest is a wash of the page colour)
+        const k = sup ? Math.min(0.8, Math.max(0.1, +P.bgop || 0.25)) : 0.25;
+        main.style.setProperty("--v7-ov", (0.92 - 0.8 * k).toFixed(3));
+        main.style.setProperty("--v7-ov2", Math.min(0.96, 1.02 - 0.8 * k).toFixed(3));
+      }
+      // Supernova layout
+      Array.from(b.classList).filter(c => /^v7-l[wbsdx]-/.test(c)).forEach(c => b.classList.remove(c));
+      if (sup) [["lw", "normal"], ["lb", "bubbles"], ["ls", "left"], ["ld", "normal"], ["lx", "m"]].forEach(([k, d]) => { if (P[k] && P[k] !== d) b.classList.add(`v7-${k}-${P[k]}`); });
+      b.classList.toggle("v7-super", sup);
+      b.dataset.pshape = P.pshape === "square" ? "square" : "circle";
       const type = pro && (P.font !== "std" || P.size !== "m" || P.lh !== "std");
       b.classList.toggle("v6-type", type);
       if (type) {
@@ -17263,24 +17360,18 @@
       check: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       play: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>',
       img: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.7" fill="currentColor"/><path d="M5 17l4.5-4.5 3 3 2.5-2.5L19.5 17" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      cam: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 8.5A2 2 0 0 1 6 6.5h2l1.5-2h5L16 6.5h2a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.2" stroke="currentColor" stroke-width="1.8"/></svg>',
+      imgx: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M9 9.5l6 6M15 9.5l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
       share: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     };
     // ---------------------------------------------------------------- SCODE 7 plans: Stardust (FREE), Nova, Supernova
-    let lvSeq = 0;
+    // 7.0: rendered glass logos for each plan (same style as the SCODE logo), 128px WebP.
+    const LVIMG = { free: "data:image/webp;base64,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",
+      nova: "data:image/webp;base64,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",
+      supernova: "data:image/webp;base64,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" };
     function planIcon(level, size = 18) {
-      const id = "lv" + (++lvSeq);
-      if (level === "supernova") return `<svg class="acc-lvi lv-supernova" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><defs>
-        <radialGradient id="${id}" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff6d8"/><stop offset=".35" stop-color="#ffb35c"/><stop offset=".7" stop-color="#e0368c"/><stop offset="1" stop-color="#7a4dff"/></radialGradient></defs>
-        <g stroke="url(#${id})" stroke-width="1.6" stroke-linecap="round"><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4M4.6 4.6l2.8 2.8M16.6 16.6l2.8 2.8M4.6 19.4l2.8-2.8M16.6 7.4l2.8-2.8"/></g>
-        <path d="M12 6.2l1.6 4.2 4.2 1.6-4.2 1.6L12 17.8l-1.6-4.2L6.2 12l4.2-1.6z" fill="url(#${id})"/></svg>`;
-      if (level === "nova") return `<svg class="acc-lvi lv-nova" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><defs>
-        <linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5fb0"/><stop offset=".55" stop-color="#8b6bff"/><stop offset="1" stop-color="#3fc1ff"/></linearGradient></defs>
-        <circle cx="12" cy="12" r="10" fill="url(#${id})" opacity=".18"/>
-        <path d="M12 2.5l2.2 7.3 7.3 2.2-7.3 2.2L12 21.5l-2.2-7.3L2.5 12l7.3-2.2z" fill="url(#${id})"/></svg>`;
-      return `<svg class="acc-lvi lv-stardust" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M9 4l1.3 3.7L14 9l-3.7 1.3L9 14l-1.3-3.7L4 9l3.7-1.3z" fill="currentColor" opacity=".9"/>
-        <path d="M17 12.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor" opacity=".7"/>
-        <circle cx="17.5" cy="5.5" r="1.3" fill="currentColor" opacity=".55"/><circle cx="6.5" cy="18" r="1" fill="currentColor" opacity=".45"/></svg>`;
+      const k = LVIMG[level] ? level : "free";
+      return `<img class="acc-lvi lv-${k === "free" ? "stardust" : k}" src="${LVIMG[k]}" width="${size}" height="${size}" alt="" draggable="false">`;
     }
     const LVNAME = { free: "Stardust (FREE)", nova: "Nova", supernova: "Supernova" };
     const lvOf = (d) => (d && d.level) || A.level || (isPro() ? "nova" : "free");
@@ -17322,7 +17413,7 @@
       const body = r.status === "approved"
         ? `<b>Approved!</b> Pay <b>${money(r.amount)} CAD</b> by Interac e-Transfer to <b>${escapeHtml(d.etransfer_to)}</b> with <b>${r.code}</b> in the message, or in cash in person. It turns on the moment we confirm it.`
         : `<b>Request sent</b> for ${what} (code <b>${r.code}</b>). We'll email you how to pay once it's approved.`;
-      return `<div class="acc-req ${r.status}"><span class="v4-dot"></span><div>${body}</div><button type="button" class="ap-link" id="acc-req-cancel">Cancel</button></div>`;
+      return `<div class="acc-req acc-req-${r.status === "approved" ? "ok" : "wait"}"><span class="acc-req-dot"></span><div class="acc-req-t">${body}</div><button type="button" class="ap-link acc-req-x" id="acc-req-cancel">Cancel</button></div>`;
     }
     function creditHtml(d) {
       const pr = d.reset_prices || { window: 100, week: 200 }, c = d.credits || 0, hrs = d.window_hours || 4;
@@ -17331,7 +17422,7 @@
           <div class="acc-credit-btns">
             <button type="button" class="set-btn" data-reset="window" ${c < pr.window ? "disabled" : ""}>Refill ${hrs}-hour · ${money(pr.window)}</button>
             <button type="button" class="set-btn" data-reset="week" ${c < pr.week ? "disabled" : ""}>Refill week · ${money(pr.week)}</button>
-            <button type="button" class="ap-link" data-apply="credit">Add credit</button></div></div>`;
+            ${d.request ? "" : `<button type="button" class="ap-link" data-apply="credit">Add credit</button>`}</div></div>`;
     }
     function giveHtml(d) {
       const gv = d.give;
@@ -17413,6 +17504,7 @@
       const img = bgImg();
       return `
         <div class="acc-look">
+          ${superHtml()}
           <div class="acc-blk">
             <div class="acc-look-t"><b>Chat background</b><small>Shows behind every chat. Your photo stays on this device.</small></div>
             <div class="acc-bgs" role="group" aria-label="Chat background">
@@ -17449,7 +17541,55 @@
             <button class="switch ${P.fx ? "on" : ""}" id="acc-fx" type="button" aria-label="Pro effects" ${reduceMotion ? "disabled" : ""}></button></div>
         </div>`;
     }
+    function superHtml() {
+      const P = A.P;
+      if (!isSuper()) return `<div class="acc-blk acc-sn-lock">${planIcon("supernova", 40)}<div><b>Supernova studio</b><small>Set how strong your background photo is, give every chat its own photo, add project photos and change the layout. Part of Supernova.</small></div></div>`;
+      const ch = historyEnabled ? getCurrentChat() : null, cimg = ch ? chatBg(ch.id) : "";
+      const pct = Math.round((+P.bgop || 0.25) * 100);
+      const has = (P.bg === "custom" && bgImg()) || cimg;
+      const row = (label, html) => `<div class="acc-type-r"><span>${label}</span><div class="acc-chips">${html}</div></div>`;
+      return `<div class="acc-blk acc-sn">
+          <div class="acc-sn-h">${planIcon("supernova", 30)}<div><b>Supernova studio</b><small>Only on Supernova</small></div></div>
+          <div class="acc-type">
+            <div class="acc-type-r"><span>Photo strength</span><div class="acc-speed acc-sn-sl"><input type="range" id="acc-bgop" min="10" max="80" step="5" value="${pct}" aria-label="Photo strength" ${has ? "" : "disabled"}><output id="acc-bgop-o">${pct}%</output></div></div>
+            <div class="acc-sn-note">${has ? "How much of your background photo shows behind the chat." : "Choose Your photo below, or give this chat its own photo, to use this."}</div>
+            ${row("This chat", ch ? `<button type="button" class="acc-chip acc-act" id="acc-cbg">${ICON.img}${cimg ? "Change its photo" : "Give it a photo"}</button>${cimg ? `<button type="button" class="acc-chip acc-act" id="acc-cbg-x">Remove</button>` : ""}` : `<em class="acc-sn-note">Open a chat first</em>`)}
+            ${row("Project photos", chip("pshape", "circle", "Circle", P.pshape) + chip("pshape", "square", "Square", P.pshape))}
+            <div class="acc-sn-note">Give any folder a photo with the camera button next to its name.</div>
+          </div>
+          <div class="acc-look-t acc-sn-lay"><b>Layout</b><small>How SCODE is laid out on this account</small></div>
+          <div class="acc-type">
+            ${row("Width", chip("lw", "narrow", "Narrow", P.lw) + chip("lw", "normal", "Normal", P.lw) + chip("lw", "wide", "Wide", P.lw))}
+            ${row("Messages", chip("lb", "bubbles", "Bubbles", P.lb) + chip("lb", "plain", "Plain", P.lb))}
+            ${row("Sidebar", chip("ls", "left", "Left", P.ls) + chip("ls", "right", "Right", P.ls))}
+            ${row("Gaps", chip("ld", "tight", "Tight", P.ld) + chip("ld", "normal", "Normal", P.ld) + chip("ld", "roomy", "Roomy", P.ld))}
+            ${row("Text box", chip("lx", "s", "Small", P.lx) + chip("lx", "m", "Normal", P.lx) + chip("lx", "l", "Large", P.lx))}
+          </div>
+          <input type="file" id="acc-cbgfile" accept="image/*" hidden>
+        </div>`;
+    }
+    // pick a photo for the open chat (Supernova)
+    async function pickChatBg(file, id) {
+      if (!file || !id) return;
+      try {
+        const url = await softenPhoto(file, 170000);
+        if (!put(cbgKey(id), url)) { apError("This device is out of room for chat photos. Remove one from another chat first."); return; }
+        applyLook(); repaintLook();
+        v4Toast("This chat has its own background now");
+      } catch (err) { apError("That file didn't work. Try a JPG or PNG photo."); }
+    }
+    function wireSuper() {
+      const op = $("acc-bgop"), oo = $("acc-bgop-o");
+      if (!op) return;
+      op.addEventListener("input", () => { oo.textContent = op.value + "%"; A.P.bgop = +op.value / 100; applyLook(); });
+      op.addEventListener("change", () => set("bgop", +op.value / 100));
+      const f = $("acc-cbgfile"), ch = historyEnabled ? getCurrentChat() : null;
+      const pick = $("acc-cbg"); if (pick) pick.addEventListener("click", () => f.click());
+      f.addEventListener("change", (e) => { const file = e.target.files && e.target.files[0]; e.target.value = ""; if (ch) pickChatBg(file, ch.id); });
+      const x = $("acc-cbg-x"); if (x && ch) x.addEventListener("click", () => { put(cbgKey(ch.id), null); applyLook(); repaintLook(); });
+    }
     function wireLook(box) {
+      wireSuper();
       box.querySelectorAll(".acc-bgs button").forEach(b => b.addEventListener("click", () => {
         const k = b.dataset.bg;
         if (k === "custom" && !bgImg()) { $("acc-bgfile").click(); return; }
@@ -17467,7 +17607,7 @@
       });
       $("acc-tint").addEventListener("click", () => { set("tint", !A.P.tint); $("acc-tint").classList.toggle("on", A.P.tint); });
       $("acc-fx").addEventListener("click", () => { set("fx", !A.P.fx); $("acc-fx").classList.toggle("on", A.P.fx); });
-      box.querySelectorAll(".acc-chip, .acc-style").forEach(b => b.addEventListener("click", () => {
+      box.querySelectorAll(".acc-chip[data-k], .acc-style").forEach(b => b.addEventListener("click", () => {
         set(b.dataset.k, b.dataset.v);
         box.querySelectorAll(`[data-k="${b.dataset.k}"]`).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
       }));
@@ -17484,7 +17624,7 @@
       wireLook($("v4-plan"));
     }
     // a soft, blurred copy of any photo for the chat background
-    function softenPhoto(file) {
+    function softenPhoto(file, cap = 260000) {
       return new Promise((resolve, reject) => {
         const url = URL.createObjectURL(file), img = new Image();
         img.onload = () => {
@@ -17496,7 +17636,7 @@
             x.drawImage(img, (W - w) / 2 - 30, (H - h) / 2 - 30, w + 60, h + 60);
             URL.revokeObjectURL(url);
             let q = 0.72, out = c.toDataURL("image/jpeg", q);
-            while (out.length > 260000 && q > 0.35) { q -= 0.1; out = c.toDataURL("image/jpeg", q); }
+            while (out.length > cap && q > 0.35) { q -= 0.1; out = c.toDataURL("image/jpeg", q); }
             resolve(out);
           } catch (e) { reject(e); }
         };
@@ -17642,13 +17782,13 @@
           <div class="r"><span>Points</span><b>${left.toLocaleString()} <small>of ${d.points_limit.toLocaleString()}</small></b></div><i><u style="width:${pct(left, d.points_limit)}%"></u></i>
           ${week !== null ? `<div class="r"><span>This week</span><b>${week.toLocaleString()} <small>of ${d.week_limit.toLocaleString()}</small></b></div><i><u style="width:${pct(week, d.week_limit)}%"></u></i>` : ""}
           <div class="r"><span>Photos</span><b>${pleft} <small>of ${d.photos_limit}</small></b></div><i><u style="width:${pct(pleft, d.photos_limit)}%"></u></i>
-          <div class="acc-free-note">${planIcon("free", 14)} Stardust (FREE) · refills every ${d.window_hours || 4} hours (next in ${refillText(d)}) · ${Math.max(0, d.week_photos_limit - d.week_photos_used)} of ${d.week_photos_limit} photos left this week</div>
+          <div class="acc-free-note">${planIcon("free", 15)} Stardust (FREE) · refills every ${d.window_hours || 4} hours (next in ${refillText(d)}) · ${Math.max(0, d.week_photos_limit - d.week_photos_used)} of ${d.week_photos_limit} photos left this week</div>
         </div>
         ${creditHtml(d)}
-        <div class="acc-pitch">
+        ${d.request ? "" : `<div class="acc-pitch">
           <div class="acc-pitch-t"><b>Go further with Nova or Supernova</b><span>More of everything, General Ultra, and all of SCODE painted in your colours.</span></div>
-          ${d.request ? "" : `<div class="acc-plans">${planCard(d, "nova")}${planCard(d, "supernova")}</div>`}
-        </div>`;
+          <div class="acc-plans">${planCard(d, "nova")}${planCard(d, "supernova")}</div>
+        </div>`}`;
       wirePlanBits(box, d);
     }
 
@@ -17759,12 +17899,22 @@
       menuEl.innerHTML = `<div class="acc-menu-h">Move to folder</div>
         ${A.P.folders.map(f => `<button type="button" data-f="${f.id}">${ICON.folder}<span>${escapeHtml(f.name)}</span>${cur && cur.id === f.id ? ICON.check : ""}</button>`).join("")}
         ${cur ? `<button type="button" data-f="">${ICON.x}<span>Take out of ${escapeHtml(cur.name)}</span></button>` : ""}
-        <form class="acc-menu-new"><input maxlength="28" placeholder="New folder name" aria-label="New folder name"><button type="submit">Add</button></form>`;
+        <form class="acc-menu-new"><input maxlength="28" placeholder="New folder name" aria-label="New folder name"><button type="submit">Add</button></form>
+        ${isSuper() ? `<div class="acc-menu-h acc-menu-sn">${planIcon("supernova", 13)}Chat background</div>
+          <button type="button" data-cb="pick">${ICON.img}<span>${chatBg(id) ? "Change this chat's photo" : "Give this chat a photo"}</span></button>
+          ${chatBg(id) ? `<button type="button" data-cb="del">${ICON.x}<span>Remove this chat's photo</span></button>` : ""}` : ""}`;
       document.body.appendChild(menuEl);
       const r = anchor.getBoundingClientRect();
       menuEl.style.left = Math.min(window.innerWidth - 236, r.left) + "px";
       menuEl.style.top = Math.min(window.innerHeight - menuEl.offsetHeight - 8, r.bottom + 6) + "px";
       menuEl.querySelectorAll("button[data-f]").forEach(b => b.addEventListener("click", () => { setFolder(id, b.dataset.f); closeMenu(); }));
+      menuEl.querySelectorAll("button[data-cb]").forEach(b => b.addEventListener("click", () => {
+        closeMenu();
+        if (b.dataset.cb === "del") { put(cbgKey(id), null); applyLook(); return; }
+        const inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*";
+        inp.addEventListener("change", () => pickChatBg(inp.files && inp.files[0], id));
+        inp.click();
+      }));
       menuEl.querySelector("form").addEventListener("submit", (e) => {
         e.preventDefault();
         const name = menuEl.querySelector("input").value.trim();
@@ -17777,7 +17927,34 @@
       setTimeout(() => document.addEventListener("pointerdown", outside, true), 0);
       if (!matchMedia("(hover: none)").matches) menuEl.querySelector("input").focus();
     }
+    // a small square photo for a folder (synced with your settings)
+    function projectPhoto(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file), img = new Image();
+        img.onload = () => {
+          try {
+            const N = 96, c = document.createElement("canvas"); c.width = c.height = N;
+            const x = c.getContext("2d"), m = Math.min(img.naturalWidth, img.naturalHeight);
+            x.drawImage(img, (img.naturalWidth - m) / 2, (img.naturalHeight - m) / 2, m, m, 0, 0, N, N);
+            URL.revokeObjectURL(url);
+            resolve(c.toDataURL("image/jpeg", 0.8));
+          } catch (e) { reject(e); }
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("bad image")); };
+        img.src = url;
+      });
+    }
     async function folderAct(f, act, head) {
+      if (act === "ph") {
+        const inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*";
+        inp.addEventListener("change", async () => {
+          const file = inp.files && inp.files[0]; if (!file) return;
+          try { f.photo = await projectPhoto(file); save(); renderChatList(); }
+          catch (e) { v4Toast("That file didn't work. Try a JPG or PNG photo."); }
+        });
+        inp.click(); return;
+      }
+      if (act === "phx") { delete f.photo; save(); renderChatList(); return; }
       if (act === "del") {
         if (!(await showConfirm(`Delete "${f.name}"?`, "The folder goes away. The chats in it stay, back in Recents."))) return;
         A.P.folders = A.P.folders.filter(x => x !== f); save(); renderChatList(); return;
@@ -17821,8 +17998,10 @@
       }
       A.P.folders.forEach(f => {
         const sec = document.createElement("div"); sec.className = "acc-fold" + (f.open ? " open" : "");
-        sec.innerHTML = `<div class="acc-fold-h" role="button" tabindex="0" aria-expanded="${!!f.open}"><span class="chev">${ICON.chev}</span>${ICON.folder}<span class="acc-fold-n"></span><em>${f.chats.filter(id => byId[id] && !A.P.pins.includes(id)).length}</em>
-          <span class="acc-fold-a"><button type="button" data-a="ren" aria-label="Rename folder">${ICON.edit}</button><button type="button" data-a="del" aria-label="Delete folder">${ICON.x}</button></span></div><div class="acc-fold-b"></div>`;
+        const sup = isSuper(), ph = sup && f.photo && /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(f.photo) ? f.photo : "";
+        sec.innerHTML = `<div class="acc-fold-h" role="button" tabindex="0" aria-expanded="${!!f.open}"><span class="chev">${ICON.chev}</span>${ph ? `<img class="acc-fold-ph" src="${ph}" alt="">` : ICON.folder}<span class="acc-fold-n"></span><em>${f.chats.filter(id => byId[id] && !A.P.pins.includes(id)).length}</em>
+          <span class="acc-fold-a">${sup ? `<button type="button" data-a="ph" aria-label="${ph ? "Change project photo" : "Add a project photo"}" title="${ph ? "Change project photo" : "Add a project photo"}">${ICON.cam}</button>${ph ? `<button type="button" data-a="phx" aria-label="Remove project photo" title="Remove project photo">${ICON.imgx}</button>` : ""}` : ""}<button type="button" data-a="ren" aria-label="Rename folder">${ICON.edit}</button><button type="button" data-a="del" aria-label="Delete folder">${ICON.x}</button></span></div><div class="acc-fold-b"></div>`;
+        if (ph) sec.classList.add("has-ph");
         sec.querySelector(".acc-fold-n").textContent = f.name;
         const head = sec.querySelector(".acc-fold-h"), body = sec.querySelector(".acc-fold-b");
         f.chats.forEach(id => byId[id] && !A.P.pins.includes(id) && body.appendChild(byId[id]));
@@ -17865,9 +18044,203 @@
       if (now !== A.lastPlan) { A.lastPlan = now; renderChatList(); if (isPro()) pullPrefs(); }
     };
     refreshColours();
-    return { A, palette, applyLook, set, refreshColours, pickColours, renderChatList: () => renderChatList(), save };
+    // 7.0: a chat with its own photo shows it as soon as you open it
+    const _sw = switchChat;
+    switchChat = function (id) { const r = _sw.apply(this, arguments); if (isSuper()) applyLook(); return r; };
+    setInterval(() => { if (isSuper() && historyEnabled && A.bgFor !== (currentChatId || null)) applyLook(); }, 700);
+    return { A, palette, isSuper, chatBg, applyLook, set, refreshColours, pickColours, renderChatList: () => renderChatList(), save };
   })();
   window.scodeAcc = ACC;
+
+  // ================================================================ 7.0: offline hours + lined-up messages
+  // From 11 PM to 7 AM the SCODE Server is off. Sending is paused, but a signed-in account can line up
+  // 5 text messages. SCODE sends them by itself when it wakes up; the replies wait here as normal replies.
+  const V7Q = (() => {
+    const Q = { off: null, items: [], max: 5, busy: false, ph: null, wasOn: null, lastPoll: 0, editing: null };
+    const MOON = '<svg viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M16 3.5l.6 1.4 1.4.6-1.4.6L16 7.5l-.6-1.4-1.4-.6 1.4-.6zM20.5 8l.4.9.9.4-.9.4-.4.9-.4-.9-.9-.4.9-.4z" fill="currentColor"/></svg>';
+    const PEN = '<svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.2-4.6L15.6 5a2.1 2.1 0 0 1 3 0l.4.4a2.1 2.1 0 0 1 0 3L8.6 18.8 4 20z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+    const XX = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+    const hour = (h) => h === 0 ? "midnight" : h === 12 ? "noon" : (h % 12) + (h < 12 ? " AM" : " PM");
+    const wake = () => hour(Q.off && Q.off.until_h != null ? Q.off.until_h : 7);
+    function isOn() {
+      const o = Q.off;
+      if (!o || !o.enabled) return false;
+      const t = Date.now() / 1000;
+      if (o.on) return !o.until || t < o.until;
+      return !!o.next && t >= o.next;
+    }
+    async function api(method, path, body) {
+      try {
+        const r = await fetch(PROXY_URL + path, { method, headers: authHeaders({ "Content-Type": "application/json" }), body: body ? JSON.stringify(body) : undefined });
+        const d = await r.json().catch(() => ({}));
+        return { ok: r.ok && d.ok !== false, status: r.status, data: d, message: d.message || "Couldn't reach SCODE. Try again." };
+      } catch (e) { return { ok: false, status: 0, data: {}, message: "Couldn't reach SCODE. Check your connection." }; }
+    }
+    function take(d) {
+      if (!d) return;
+      if (d.offline) Q.off = d.offline;
+      if (Array.isArray(d.items)) Q.items = d.items;
+      if (d.max) Q.max = d.max;
+    }
+    const waiting = () => Q.items.filter(i => i.status === "queued" || i.status === "sending");
+    const anyLocal = () => historyEnabled && chats.some(c => c.v7q && c.v7q.length);
+
+    // ---------------- lining one up (instead of sending)
+    async function line(P) {
+      if (isGuest()) { openAuth("welcome", `SCODE is asleep until ${wake()}. Make a free account to line up messages that send when it wakes up.`); return; }
+      const ch = historyEnabled ? getCurrentChat() : null;
+      if (!ch || !serverSync) { showNote(`SCODE is asleep until ${wake()}. Turn on chat history to line up messages.`); return; }
+      if (P.image || P.imgNow || P.study || P.research || messages.some(m => m.images && m.images.length)) {
+        showNote(`Only text messages can be lined up. Photos, pictures, study tools and Research come back at ${wake()}.`); return;
+      }
+      if (waiting().length >= Q.max) { showNote(`You already have ${Q.max} messages lined up. They send at ${wake()}.`); return; }
+      const id = "q" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7), text = P.text;
+      let extra = {};
+      try { extra = (V6 && V6.fields(P, { studyNow: false, imgNow: false, tierAtSend: P.tier })) || {}; } catch (e) {}
+      const body = Object.assign({ tier: P.tier, web: !!P.web || undefined, deep: (P.deep && P.tier === "l5") || undefined }, extra,
+        { messages: messages.map(m => ({ role: m.role, content: m.content })).concat([{ role: "user", content: text }]) });
+      el.input.value = ""; autoGrow(); updateSendState();
+      const r = await api("POST", "/v7/queue", { id, chat: ch.id, text, body });
+      if (!r.ok) {
+        if (!el.input.value.trim()) { el.input.value = text; autoGrow(); updateSendState(); }
+        if (r.data && r.data.error === "awake") { Q.off = null; refresh(); }
+        showNote(r.message); return;
+      }
+      take(r.data);
+      ch.v7q = (ch.v7q || []).concat([{ id, text, tier: P.tier, at: Date.now() }]);
+      if (ch.title === "New chat") ch.title = text.length > 38 ? text.slice(0, 38) + "…" : text;
+      saveChats(); renderChatList(); paint();
+      v4Toast(`Lined up. It sends at ${wake()}.`);
+    }
+    if (typeof V6 !== "undefined" && V6) {
+      const _prep = V6.prep;
+      V6.prep = function (P) {
+        if (!isOn()) return _prep.apply(this, arguments);
+        if (_prep.apply(this, arguments) === false) return false;
+        line(P);
+        return false;
+      };
+    }
+
+    // ---------------- the bar above the text box
+    let barEl = null;
+    function ensureBar() {
+      if (barEl && barEl.isConnected) return barEl;
+      const comp = $("composer");
+      if (!comp || !comp.parentNode) return null;
+      barEl = document.createElement("div"); barEl.id = "v7q"; barEl.className = "v7q"; barEl.hidden = true;
+      comp.parentNode.insertBefore(barEl, comp);
+      barEl.addEventListener("click", onBar);
+      return barEl;
+    }
+    function paint() {
+      const on = isOn();
+      document.body.classList.toggle("v7-off", on);
+      if (on) {
+        if (Q.ph === null) Q.ph = el.input.placeholder;
+        el.input.placeholder = isGuest() ? `SCODE is asleep until ${wake()}` : `Line up a message for ${wake()}`;
+      } else if (Q.ph !== null) { el.input.placeholder = Q.ph; Q.ph = null; }
+      const b = ensureBar();
+      if (!b) return;
+      const ch = historyEnabled ? getCurrentChat() : null;
+      const mine = ch && ch.v7q ? ch.v7q : [];
+      const byId = Object.fromEntries(Q.items.map(i => [i.id, i]));
+      const elsewhere = waiting().filter(i => !mine.some(m => m.id === i.id)).length;
+      if (!on && !mine.length) { b.hidden = true; b.innerHTML = ""; return; }
+      const n = waiting().length;
+      const head = on
+        ? `<div class="v7q-h">${MOON}<div><b>SCODE is asleep until ${wake()}</b><span>${isGuest() ? "Sign in to line up messages that send when it wakes up." : `Line up to ${Q.max} messages. They send by themselves at ${wake()} and the replies wait here for you.`}</span></div>${isGuest() ? "" : `<em>${n}/${Q.max}</em>`}</div>`
+        : `<div class="v7q-h awake"><span class="v7q-spin"></span><div><b>SCODE is awake</b><span>Sending your lined-up messages. Replies show up here.</span></div></div>`;
+      const rows = mine.map((m, i) => {
+        const s = byId[m.id], st = s ? s.status : "gone";
+        const tag = st === "sending" ? "Sending…" : st === "sent" ? "Reply ready" : st === "error" ? "Didn't send" : "Waiting";
+        if (Q.editing === m.id) return `<div class="v7q-it edit" data-id="${m.id}"><span class="v7q-n">${i + 1}</span><textarea maxlength="12000" aria-label="Edit lined-up message">${escapeHtml(m.text)}</textarea><div class="v7q-eb"><button type="button" data-q="save">Save</button><button type="button" data-q="cancel">Cancel</button></div></div>`;
+        return `<div class="v7q-it" data-id="${m.id}"><span class="v7q-n">${i + 1}</span><p>${escapeHtml(m.text)}</p><span class="v7q-st st-${st}">${tag}</span>` +
+          (st === "queued" && on ? `<button type="button" data-q="edit" title="Edit" aria-label="Edit">${PEN}</button><button type="button" data-q="del" title="Take it out" aria-label="Take it out">${XX}</button>` : "") + `</div>`;
+      }).join("");
+      b.innerHTML = head + (rows ? `<div class="v7q-list">${rows}</div>` : "") + (elsewhere ? `<div class="v7q-more">+${elsewhere} lined up in other chats</div>` : "");
+      b.hidden = false;
+    }
+    async function onBar(e) {
+      const btn = e.target.closest("[data-q]"); if (!btn) return;
+      const row = btn.closest(".v7q-it"), id = row && row.dataset.id, ch = getCurrentChat();
+      if (!id || !ch || !ch.v7q) return;
+      const m = ch.v7q.find(x => x.id === id); if (!m) return;
+      const act = btn.dataset.q;
+      if (act === "edit") { Q.editing = id; paint(); const t = barEl.querySelector("textarea"); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } return; }
+      if (act === "cancel") { Q.editing = null; paint(); return; }
+      if (act === "save") {
+        const text = (row.querySelector("textarea").value || "").trim(); if (!text) return;
+        const r = await api("POST", "/v7/queue/" + encodeURIComponent(id), { text });
+        if (!r.ok) { showNote(r.message); return; }
+        take(r.data); m.text = text; Q.editing = null; saveChats(); paint(); return;
+      }
+      if (act === "del") {
+        const r = await api("DELETE", "/v7/queue/" + encodeURIComponent(id));
+        if (!r.ok && r.status !== 404) { showNote(r.message); return; }
+        take(r.data); ch.v7q = ch.v7q.filter(x => x.id !== id); if (!ch.v7q.length) delete ch.v7q;
+        saveChats(); paint();
+      }
+    }
+
+    // ---------------- after wake-up: pick each reply up, in order
+    async function catchUp() {
+      if (Q.busy || sending || isGuest() || !historyEnabled) return;
+      const ch = getCurrentChat();
+      if (!ch || !ch.v7q || !ch.v7q.length) return;
+      Q.busy = true;
+      try {
+        const byId = Object.fromEntries(Q.items.map(i => [i.id, i]));
+        for (const it of ch.v7q.slice()) {
+          if (getCurrentChat() !== ch) break;
+          const s = byId[it.id];
+          const drop = () => { ch.v7q = (ch.v7q || []).filter(x => x.id !== it.id); if (!ch.v7q.length) delete ch.v7q; saveChats(); };
+          if (!s) { drop(); continue; }                     // another device picked it up, or it was taken out
+          if (s.status === "queued" || s.status === "sending") break;   // keep the order
+          const c = await api("POST", "/v7/queue/" + encodeURIComponent(it.id), { claim: true });
+          drop();
+          if (!c.ok) continue;
+          if (s.status === "error") {
+            if (!el.input.value.trim()) { el.input.value = it.text; autoGrow(); updateSendState(); }
+            showNote(`A lined-up message didn't send${s.error ? ": " + s.error.replace(/\.$/, "") : ""}. It's back in the box.`);
+            continue;
+          }
+          ch.messages.push({ role: "user", content: it.text });
+          ch.pending = { job: it.id, text: it.text, tier: it.tier, at: Date.now() };
+          saveChats(); renderMessages(); paint();
+          await resumePending();
+        }
+      } finally { Q.busy = false; paint(); }
+    }
+    async function refresh() {
+      if (isGuest()) { paint(); return; }
+      Q.lastPoll = Date.now();
+      const r = await api("GET", "/v7/queue");
+      if (r.ok) take(r.data);
+      paint();
+      if (!isOn()) catchUp();
+    }
+    // the clock: flip at the hour, and keep checking while anything is lined up
+    setInterval(() => {
+      const on = isOn();
+      if (on !== Q.wasOn) { Q.wasOn = on; paint(); if (!isGuest()) refresh(); return; }
+      if (isGuest()) return;
+      const due = (anyLocal() || waiting().length) && Date.now() - Q.lastPoll > (on ? 60000 : 15000);
+      if (due) refresh();
+    }, 5000);
+    const _st = v4Status;
+    v4Status = function (data) {
+      _st.apply(this, arguments);
+      if (data && data.offline) { Q.off = data.offline; paint(); if (!isGuest() && (isOn() || anyLocal()) && Date.now() - Q.lastPoll > 10000) refresh(); }
+    };
+    const _sw = switchChat;
+    switchChat = function () { const r = _sw.apply(this, arguments); Q.editing = null; paint(); if (!isOn()) catchUp(); return r; };
+    return { Q, isOn, refresh, paint, catchUp };
+  })();
+  window.scodeQueue = V7Q;
+  // read-only peek used by the SCODE test scripts
+  window.scodeDbg = { get chats() { return chats; }, get cur() { return currentChatId; }, get messages() { return messages; },
+    chat: () => getCurrentChat(), go: (id) => switchChat(id), st: (d) => v4Status(d) };
 
   // ---------------------------------------------------------------- start
   window.scodeV4 = V4;
