@@ -156,7 +156,7 @@
   </section>
 
   <section class="card wide">
-    <div class="row-h"><h2>Hours</h2><span id="hours-s">Pacific time · rests from 12 to 6 AM</span></div>
+    <div class="row-h"><h2>Hours</h2><span id="hours-s">Pacific time · sleeps from 11 PM to 7 AM</span></div>
     <div class="day" id="day"></div>
     <div class="dayk"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>11 PM</span></div>
   </section>
@@ -179,7 +179,7 @@
     online: { c: "var(--ok)", pill: "Online", head: "SCODE AI is <em>online</em>", sub: "Everything's running. Replies start right away." },
     busy: { c: "var(--busy)", pill: "Busy", head: "SCODE AI is <em>busy</em>", sub: "Both SCODE computers are writing replies right now. Yours starts as soon as one is free." },
     rush: { c: "var(--rush)", pill: "Rush Hour", head: "It's <em>Rush Hour</em>", sub: "Lots of people at once, so messages wait in a fair line. Accounts go first, and SCODE Pro goes first of all." },
-    sleep: { c: "var(--sleep)", pill: "Asleep", head: "SCODE AI is <em>asleep</em>", sub: "The SCODE laptop rests from 12 to 6 AM Pacific. It'll be back at 6." },
+    sleep: { c: "var(--sleep)", pill: "Asleep", head: "SCODE AI is <em>asleep</em>", sub: "SCODE sleeps from 11 PM to 7 AM Pacific. Signed in, you can line up 5 messages that send at 7." },
     off: { c: "var(--off)", pill: "Offline", head: "SCODE AI is <em>offline</em>", sub: "The SCODE laptop isn't reachable right now. It's usually back soon." },
   };
   const ORDER = ["l1", "l2_5", "l4", "l5", "deep"];
@@ -217,7 +217,7 @@
   }
   function paintDay() {
     const h = pacificHour();
-    $("day").innerHTML = Array.from({ length: 24 }, (_, i) => `<b class="${i < 6 ? "z" : ""}${i === h ? " now" : ""}" title="${(i % 12) || 12} ${i < 12 ? "AM" : "PM"}${i < 6 ? " · asleep" : ""}"></b>`).join("");
+    $("day").innerHTML = Array.from({ length: 24 }, (_, i) => `<b class="${i < 7 || i >= 23 ? "z" : ""}${i === h ? " now" : ""}" title="${(i % 12) || 12} ${i < 12 ? "AM" : "PM"}${i < 7 || i >= 23 ? " · asleep" : ""}"></b>`).join("");
   }
   const PC_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   const SRV_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 7h6M9 10.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="currentColor"/></svg>';
@@ -253,9 +253,9 @@
   }
   function paintDown() {
     const h = pacificHour();
-    paintState(h < 6 ? "sleep" : "off");
-    $("now-v").textContent = h < 6 ? "Resting" : "Offline";
-    $("now-s").textContent = h < 6 ? "Back at 6 AM Pacific" : "Try again in a bit";
+    paintState(h < 7 || h >= 23 ? "sleep" : "off");
+    $("now-v").textContent = h < 7 || h >= 23 ? "Resting" : "Offline";
+    $("now-s").textContent = h < 7 || h >= 23 ? "Back at 7 AM Pacific" : "Try again in a bit";
     $("wait-n").textContent = "–"; $("people").innerHTML = ""; $("wait-t").textContent = "–"; $("wait-s").textContent = "";
     $("bars").innerHTML = '<div class="bar"><span class="n"><i></i>Reply times</span><span class="t"><u></u></span><span class="x">–</span></div>';
     $("comp").innerHTML = "";
