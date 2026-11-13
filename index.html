@@ -4148,6 +4148,22 @@
   #whatsnew .v7-orb { background: none; box-shadow: none; }
   #whatsnew .v7-orb img { width: 100%; height: 100%; filter: drop-shadow(0 6px 14px rgba(120,60,255,.35)); }
   #whatsnew .wn-fi .acc-lvi { width: 26px; height: 26px; }
+  /* 7.0 fix: on phones the sign-in window got taller than the screen (the giveaway card pushed the
+     buttons out of sight). The window now scrolls inside itself, the buttons stay pinned at the bottom,
+     and the welcome screen is more compact on small screens. */
+  #auth-overlay .modal-box { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  #auth-overlay .au-view[data-view="welcome"] .au-btns { position: sticky; bottom: 0; z-index: 1; background: var(--surface); padding: 10px 0 2px; box-shadow: 0 -14px 14px -4px var(--surface); }
+  @media (max-width: 720px), (max-height: 820px) {
+    #auth-overlay .au-view[data-view="welcome"] { padding: 20px 20px 16px; }
+    #auth-overlay .au-view[data-view="welcome"] .au-mark { width: 38px; height: 38px; margin-bottom: 10px; }
+    #auth-overlay .au-view[data-view="welcome"] h2 { font-size: 21px; }
+    #auth-overlay .au-view[data-view="welcome"] .au-perks { gap: 6px; margin: 12px 0 12px; }
+    #auth-overlay .au-view[data-view="welcome"] .au-perks small { display: none; }
+    #auth-overlay .au-view[data-view="welcome"] .au-perks .pi { width: 26px; height: 26px; }
+    .acc-give-auth { padding: 9px 12px; margin: 2px 0 8px; }
+    .acc-give-auth span { font-size: 11.5px; line-height: 1.35; }
+    #auth-overlay .au-alt { margin-top: 6px; }
+  }
 
 </style>
 </head>
