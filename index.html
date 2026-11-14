@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>/* SCODE: paste your Cloudflare Tunnel link here (the S-CUBE reads it from this line too) */ const PROXY_URL = "https://processors-offset-known-warming.trycloudflare.com";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#21211e">
 <title>SCODE AI</title>
@@ -4164,6 +4165,34 @@
     .acc-give-auth span { font-size: 11.5px; line-height: 1.35; }
     #auth-overlay .au-alt { margin-top: 6px; }
   }
+  /* ================= 7.1 S-CUBE linking ================= */
+  .sq-card { border: 1px solid var(--border); border-radius: 18px; padding: 16px; background: var(--surface); display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
+  .sq-top > div { min-width: 0; }
+  .sq-top { display: flex; gap: 12px; align-items: center; }
+  .sq-top b { display: block; font-size: 14.5px; }
+  .sq-top small { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+  .sq-ic { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 11px; background: var(--surface-2); color: var(--accent); }
+  .sq-ic.big { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, #ff6bb5, #8b5cf6 55%, #5b8cff); color: #fff; }
+  .sq-ic svg { width: 20px; height: 20px; } .sq-ic.big svg { width: 26px; height: 26px; }
+  .sq-code { display: grid; justify-items: center; gap: 6px; padding: 18px 12px; border-radius: 16px; background: var(--surface-2); text-align: center; animation: v7qIn .35s ease both; }
+  .sq-code > span { font-size: 13px; color: var(--muted); }
+  .sq-code > b { font-size: 34px; font-weight: 700; letter-spacing: .06em; font-variant-numeric: tabular-nums; background: linear-gradient(100deg, #ff6bb5, #b56cff 45%, #5b8cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sq-code small { font-size: 12px; color: var(--faint); }
+  .sq-code small em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--text); }
+  .sq-code.done b { font-size: 22px; color: var(--text); background: none; -webkit-text-fill-color: currentColor; }
+  .sq-code.done > span { color: var(--muted); }
+  .sq-ok { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: #3aa76d; color: #fff; animation: sqPop .5s cubic-bezier(.2,1.4,.4,1) both; }
+  .sq-ok svg { width: 26px; height: 26px; }
+  @keyframes sqPop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+  .sq-new { height: 42px; border: none; border-radius: 999px; font: inherit; font-weight: 600; font-size: 14px; cursor: pointer; color: #fff; background: linear-gradient(100deg, #e0368c, #8b5cf6 55%, #3b82f6); }
+  .sq-new:disabled { opacity: .6; }
+  .sq-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .sq-dev { display: flex; align-items: center; gap: 11px; padding: 9px 10px; border-radius: 13px; background: var(--surface-2); }
+  .sq-dev > div { flex: 1; min-width: 0; }
+  .sq-dev b { display: block; font-size: 13.5px; }
+  .sq-dev small { display: block; font-size: 11.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sq-un { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12.5px; cursor: pointer; flex: none; }
+  .sq-un:hover { border-color: #e0544b; color: #e0544b; }
 
 </style>
 </head>
@@ -4791,6 +4820,10 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 14, 2026</div><h3>v7.1</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>S-CUBE 1</b> <span>Link your S-CUBE from your Account page with a 10-digit code. It uses General Ultra, your chats and your plan, and you can talk to it and hear it answer.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>Sign in on phones</b> <span>The sign-in window fits on small screens again, with its buttons always in view.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 12, 2026</div><h3>v7.0</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Stardust, Nova and Supernova</b> <span>Every account now has a plan: Stardust (FREE), Nova ($5 CAD for 3 months, 5× the usage) or Supernova ($10 CAD a month, 20× the usage and always first in line). Look for your plan's icon by your picture.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Get Nova or Supernova</b> <span>Apply on your Account page. We approve it, email you how to pay (cash or e-Transfer), and it turns on the moment your payment is confirmed. No need to turn on training anymore.</span></li>
@@ -5040,8 +5073,7 @@
 
 <script>
 (function () {
-  // ⚠️ Set this to your Cloudflare Tunnel URL once it's running, e.g. "https://your-name.trycloudflare.com"
-  const PROXY_URL = "https://solar-yarn-photo-alabama.trycloudflare.com";
+  // The tunnel link (PROXY_URL) is set at the very top of this file.
 
   // ---------- Account state (filled in by the sign-in window) ----------
   var auth = null;   // { token, name, email } when signed in
@@ -14853,7 +14885,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-11-12";
+  const V4_LOG_VER = "2026-11-14";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -17778,9 +17810,11 @@
         <div class="acc-h">Included with ${escapeHtml(d.plan_name || "Nova")}</div>
         <div class="acc-perks">${perksFor(d).map(([k, t, s], i) => `<div class="acc-perk" style="--i:${i}"><span class="ic">${ICON[k]}</span><b>${t}</b><small>${s}</small></div>`).join("")}</div>
         ${d.request ? "" : upsell}
+        <div id="acc-scube-slot"></div>
         <div class="acc-h">Make it yours</div>
         ${lookHtml()}`;
       wireLook(box);
+      if (window.scodeScube) window.scodeScube.paint();
       wirePlanBits(box, d);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         box.querySelectorAll(".acc-gauge .val").forEach(c => { c.style.strokeDashoffset = c.style.getPropertyValue("--to"); });
@@ -17807,8 +17841,10 @@
         ${d.request ? "" : `<div class="acc-pitch">
           <div class="acc-pitch-t"><b>Go further with Nova or Supernova</b><span>More of everything, General Ultra, and all of SCODE painted in your colours.</span></div>
           <div class="acc-plans">${planCard(d, "nova")}${planCard(d, "supernova")}</div>
-        </div>`}`;
+        </div>`}
+        <div id="acc-scube-slot"></div>`;
       wirePlanBits(box, d);
+      if (window.scodeScube) window.scodeScube.paint();
     }
 
     function hero(pro) {
@@ -18323,6 +18359,93 @@
         updateNewsDot();
       }
     } catch (e) {}
+  })();
+
+  // ================================================================ 7.1: S-CUBE 1 linking (Account page)
+  window.scodeScube = (() => {
+    const S = { code: null, exp: 0, timer: null, poll: null, devices: [], linked: false };
+    const CUBE = '<svg viewBox="0 0 24 24" fill="none"><rect x="4.5" y="4.5" width="15" height="15" rx="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>';
+    async function api(method, path) {
+      try {
+        const r = await fetch(PROXY_URL + path, { method, headers: authHeaders({ "Content-Type": "application/json" }), body: method === "POST" ? "{}" : undefined });
+        const d = await r.json().catch(() => ({}));
+        return { ok: r.ok && d.ok !== false, data: d, message: d.message || "Couldn't reach SCODE. Try again." };
+      } catch (e) { return { ok: false, data: {}, message: "Couldn't reach SCODE. Check your connection." }; }
+    }
+    const fmt = (c) => c.slice(0, 3) + " " + c.slice(3, 6) + " " + c.slice(6);
+    const ago = (t) => {
+      if (!t) return "never";
+      const s = Date.now() / 1000 - t;
+      if (s < 90) return "just now";
+      if (s < 3600) return Math.round(s / 60) + " min ago";
+      if (s < 86400) return Math.round(s / 3600) + " h ago";
+      return new Date(t * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    };
+    function slot() { return document.getElementById("acc-scube-slot"); }
+    function html() {
+      const left = Math.max(0, Math.round(S.exp - Date.now() / 1000));
+      const mm = Math.floor(left / 60), ss = String(left % 60).padStart(2, "0");
+      const codeBox = S.linked
+        ? `<div class="sq-code done"><div class="sq-ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><b>Linked!</b><span>Your S-CUBE is signed in to this account.</span></div>`
+        : S.code && left > 0
+          ? `<div class="sq-code"><span>Enter this code on your S-CUBE</span><b id="sq-num">${fmt(S.code)}</b><small>Works once · ends in <em id="sq-left">${mm}:${ss}</em></small><button type="button" class="ap-link" data-sq="cancel">Cancel</button></div>`
+          : "";
+      const list = S.devices.map(d => `<div class="sq-dev"><span class="sq-ic">${CUBE}</span><div><b>${escapeHtml(d.name || "S-CUBE")}</b><small>Linked ${new Date(d.linked * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" })} · seen ${ago(d.last_seen)}${d.firmware ? " · " + escapeHtml(d.firmware) : ""}</small></div><button type="button" class="sq-un" data-sq="unlink" data-id="${d.id}">Unlink</button></div>`).join("");
+      return `<div class="acc-h">S-CUBE</div>
+        <div class="sq-card">
+          <div class="sq-top"><span class="sq-ic big">${CUBE}</span><div><b>Use SCODE on your S-CUBE 1</b><small>Link it with a code, so you never type your password on the device. It uses General Ultra and your plan's points.</small></div></div>
+          ${codeBox}
+          ${S.code && !S.linked && Math.round(S.exp - Date.now() / 1000) > 0 ? "" : `<button type="button" class="sq-new" data-sq="new">${S.devices.length ? "Link another S-CUBE" : "Link a new S-CUBE"}</button>`}
+          ${list ? `<div class="sq-list">${list}</div>` : ""}
+        </div>`;
+    }
+    function paint() {
+      const el = slot();
+      if (!el || isGuest()) return;
+      el.innerHTML = html();
+      if (!el.dataset.wired) { el.dataset.wired = "1"; el.addEventListener("click", onClick); }
+      if (!S.loaded) { S.loaded = true; refresh(); }
+    }
+    async function refresh() {
+      const r = await api("GET", "/v7/scube/devices");
+      if (!r.ok) return;
+      const before = S.devices.length;
+      S.devices = r.data.devices || [];
+      if (S.code && r.data.code && r.data.code.used && !S.linked) {
+        S.linked = true; stopTimers();
+        setTimeout(() => { S.linked = false; S.code = null; paint(); }, 6000);
+      }
+      paint();
+    }
+    function stopTimers() { clearInterval(S.timer); clearInterval(S.poll); S.timer = S.poll = null; }
+    async function onClick(e) {
+      const b = e.target.closest("[data-sq]"); if (!b) return;
+      const act = b.dataset.sq;
+      if (act === "new") {
+        b.disabled = true;
+        const r = await api("POST", "/v7/scube/code");
+        if (!r.ok) { b.disabled = false; v4Toast(r.message); return; }
+        S.code = r.data.code; S.exp = Date.now() / 1000 + (r.data.ttl || 600); S.linked = false;
+        stopTimers();
+        S.timer = setInterval(() => {
+          const n = document.getElementById("sq-left");
+          const left = Math.max(0, Math.round(S.exp - Date.now() / 1000));
+          if (!n || !$("account-overlay").classList.contains("show")) { stopTimers(); return; }
+          if (!left) { S.code = null; stopTimers(); paint(); return; }
+          n.textContent = Math.floor(left / 60) + ":" + String(left % 60).padStart(2, "0");
+        }, 1000);
+        S.poll = setInterval(refresh, 3000);
+        paint();
+      } else if (act === "cancel") {
+        S.code = null; stopTimers(); paint();
+      } else if (act === "unlink") {
+        if (!confirm("Unlink this S-CUBE? It will sign out right away.")) return;
+        const r = await api("DELETE", "/v7/scube/devices/" + encodeURIComponent(b.dataset.id));
+        if (!r.ok) { v4Toast(r.message); return; }
+        S.devices = r.data.devices || []; paint(); v4Toast("S-CUBE unlinked");
+      }
+    }
+    return { S, paint, refresh };
   })();
 
   // ---------------------------------------------------------------- start
