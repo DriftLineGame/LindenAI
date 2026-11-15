@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>/* SCODE: paste your Cloudflare Tunnel link here (the S-CUBE reads it from this line too) */ const PROXY_URL = "https://deeper-diy-trial-eventually.trycloudflare.com";</script>
+<script>/* SCODE: paste your Cloudflare Tunnel link here (the S-CUBE reads it from this line too) */ const PROXY_URL = "https://packages-weights-nations-stamps.trycloudflare.com";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#21211e">
 <title>SCODE AI</title>
@@ -4193,6 +4193,25 @@
   .sq-dev small { display: block; font-size: 11.5px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sq-un { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12.5px; cursor: pointer; flex: none; }
   .sq-un:hover { border-color: #e0544b; color: #e0544b; }
+  /* 7.6: S-CUBE colours */
+  .sq-theme { display: grid; grid-template-columns: minmax(0, 1fr); gap: 11px; padding-top: 14px; border-top: 1px solid var(--border); min-width: 0; }
+  .sq-tt b { display: block; font-size: 14px; }
+  .sq-tt small { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+  .sq-seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; padding: 3px; border-radius: 999px; background: var(--surface-2); }
+  .sq-seg button { height: 34px; border: none; border-radius: 999px; background: none; color: var(--muted); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sq-seg button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.14); }
+  .sq-prev { position: relative; height: 92px; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 12px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.35); transition: background .25s; }
+  .sq-prev span { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sq-prev i { font-style: normal; font-size: 11px; opacity: .9; letter-spacing: .03em; font-variant-numeric: tabular-nums; }
+  .sq-pick { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .sq-sw { position: relative; width: 40px; height: 40px; border-radius: 12px; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--border); cursor: pointer; flex: none; }
+  .sq-sw input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: none; padding: 0; }
+  .sq-arrow { color: var(--faint); font-size: 13px; }
+  .sq-mini { margin-left: auto; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12.5px; cursor: pointer; }
+  .sq-presets { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 7px; }
+  .sq-pre { aspect-ratio: 1; min-width: 0; border-radius: 10px; border: 2px solid transparent; cursor: pointer; padding: 0; box-shadow: 0 0 0 1px var(--border); }
+  .sq-pre.on { border-color: var(--surface); box-shadow: 0 0 0 2px var(--text); }
+  @media (max-width: 420px) { .sq-presets { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sq-pre { aspect-ratio: 2 / 1; } }
 
 </style>
 </head>
@@ -4820,6 +4839,9 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 14, 2026</div><h3>v7.6</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Your colours on the S-CUBE</b> <span>Give your S-CUBE the same colours as your SCODE account, or pick your own 2 or 3 colour gradient. Find it on your Account page under S-CUBE.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 14, 2026</div><h3>v7.5</h3><ul>
         <li><span class="v4-log-tag fix">FIX</span><b>Talking to SCODE again and again</b> <span>Holding the orb now listens every time, with no refresh needed. If your browser's own listening stops working, SCODE switches to its own and keeps going.</span></li>
         <li><span class="v4-log-tag fix">FIX</span><b>Faster voice</b> <span>SCODE's voice stays ready between chats, so it answers sooner.</span></li>
@@ -17476,7 +17498,12 @@
       im.src = iconOrig;
     }
     function refreshColours() {
-      return palette(auth && auth.avatar).then(p => { setVars(p); applyLook(); return p; });
+      return palette(auth && auth.avatar).then(p => {
+        setVars(p); applyLook();
+        if (!(auth && auth.avatar)) put("scode_v6_pal", JSON.stringify(p));
+        try { window.dispatchEvent(new Event("scode-colours")); } catch (e) {}   // 7.6: the S-CUBE follows these
+        return p;
+      });
     }
 
     // ---------------------------------------------------------------- little animation helpers
@@ -18462,7 +18489,58 @@
 
   // ================================================================ 7.1: S-CUBE 1 linking (Account page)
   window.scodeScube = (() => {
-    const S = { code: null, exp: 0, timer: null, poll: null, devices: [], linked: false };
+    const S = { code: null, exp: 0, timer: null, poll: null, devices: [], linked: false,
+      theme: { mode: "off", colors: [] }, draft: null, saveT: null };
+    // 7.6: colours on the S-CUBE
+    const PRESETS = [["SCODE", ["#FF4FB3", "#8B5CF6", "#3B82F6"]], ["Sunset", ["#FF5F6D", "#FF9A44", "#FFD86F"]], ["Ocean", ["#00C6FB", "#005BEA"]],
+      ["Aurora", ["#00F5A0", "#00D9F5", "#7B5CFF"]], ["Forest", ["#A8E063", "#2E8B57"]], ["Berry", ["#F857A6", "#7F00FF"]],
+      ["Fire", ["#F9D423", "#FF4E50", "#B31217"]], ["Night", ["#434343", "#0F2027", "#000000"]]];
+    const hex2 = (c) => "#" + c.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0")).join("").toUpperCase();
+    function myColours() {
+      try { const p = JSON.parse(localStorage.getItem("scode_v6_pal") || "null"); if (Array.isArray(p) && p.length >= 3) return p.slice(0, 3).map(hex2); } catch (e) {}
+      return ["#FF5FB0", "#8B6BFF", "#3FC1FF"];
+    }
+    const grad = (cols) => cols.length === 2 ? `linear-gradient(135deg, ${cols[0]}, ${cols[1]})` : `linear-gradient(135deg, ${cols[0]}, ${cols[1]} 50%, ${cols[2]})`;
+    function shown() {
+      const t = S.theme;
+      if (t.mode === "auto") return myColours();
+      if (t.mode === "custom") return (S.draft || t.colors || []).length >= 2 ? (S.draft || t.colors) : PRESETS[0][1];
+      return null;
+    }
+    function themeHtml() {
+      if (!S.devices.length) return "";
+      const t = S.theme, cols = shown(), custom = t.mode === "custom";
+      const cur = S.draft || (t.colors && t.colors.length >= 2 ? t.colors : PRESETS[0][1]);
+      const seg = (m, label) => `<button type="button" role="radio" aria-checked="${t.mode === m}" class="${t.mode === m ? "on" : ""}" data-sq="tmode" data-mode="${m}">${label}</button>`;
+      const pickers = custom ? `<div class="sq-pick">
+          ${cur.map((c, i) => `<label class="sq-sw" style="background:${c}"><input type="color" value="${c.toLowerCase()}" data-sq-i="${i}" aria-label="Colour ${i + 1}"></label>`).join('<span class="sq-arrow">→</span>')}
+          ${cur.length === 2 ? `<button type="button" class="sq-mini" data-sq="tadd" aria-label="Add a third colour">+ colour</button>` : `<button type="button" class="sq-mini" data-sq="tdel" aria-label="Use 2 colours">2 colours</button>`}
+        </div>
+        <div class="sq-presets">${PRESETS.map(([n, c]) => `<button type="button" class="sq-pre${c.join() === cur.join() ? " on" : ""}" data-sq="tpre" data-cols="${c.join(",")}" title="${n}" aria-label="${n}" style="background:${grad(c)}"></button>`).join("")}</div>` : "";
+      return `<div class="sq-theme">
+          <div class="sq-tt"><b>Colours on your S-CUBE</b><small>${t.mode === "off" ? "Your S-CUBE uses SCODE's own look." : t.mode === "auto" ? "Your S-CUBE uses the same colours as your SCODE account, and follows them when they change." : "Pick 2 or 3 colours, start to end."}</small></div>
+          <div class="sq-seg" role="radiogroup" aria-label="Colours on your S-CUBE">${seg("off", "SCODE")}${seg("auto", "My colours")}${seg("custom", "Custom")}</div>
+          ${cols ? `<div class="sq-prev" style="background:${grad(cols)}"><span>${escapeHtml((auth && auth.name) || "")}</span><i>${cols.join("  →  ")}</i></div>` : ""}
+          ${pickers}
+        </div>`;
+    }
+    async function saveTheme(mode, colors, quiet) {
+      try {
+        const r = await fetch(PROXY_URL + "/v7/scube/theme", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ mode, colors }) });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || !d.ok) { if (!quiet) v4Toast(d.message || "Couldn't save the colours. Try again."); return false; }
+        S.theme = d.theme || S.theme;
+        if (!quiet) v4Toast(mode === "off" ? "Your S-CUBE is back to SCODE's look" : "Sent to your S-CUBE. It updates next time it checks in.");
+        return true;
+      } catch (e) { if (!quiet) v4Toast("Couldn't reach SCODE. Check your connection."); return false; }
+    }
+    // "My colours": keep the S-CUBE in step when the account colours change (new profile picture)
+    function syncAuto() {
+      if (S.theme.mode !== "auto" || isGuest()) return;
+      const mine = myColours();
+      if (mine.join() !== (S.theme.colors || []).join()) saveTheme("auto", mine, true);
+    }
+    window.addEventListener("scode-colours", syncAuto);
     const CUBE = '<svg viewBox="0 0 24 24" fill="none"><rect x="4.5" y="4.5" width="15" height="15" rx="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>';
     async function api(method, path) {
       try {
@@ -18496,13 +18574,25 @@
           ${codeBox}
           ${S.code && !S.linked && Math.round(S.exp - Date.now() / 1000) > 0 ? "" : `<button type="button" class="sq-new" data-sq="new">${S.devices.length ? "Link another S-CUBE" : "Link a new S-CUBE"}</button>`}
           ${list ? `<div class="sq-list">${list}</div>` : ""}
+          ${themeHtml()}
         </div>`;
     }
     function paint() {
       const el = slot();
       if (!el || isGuest()) return;
       el.innerHTML = html();
-      if (!el.dataset.wired) { el.dataset.wired = "1"; el.addEventListener("click", onClick); }
+      if (!el.dataset.wired) {
+        el.dataset.wired = "1"; el.addEventListener("click", onClick);
+        // colour pickers: preview while dragging, save a moment after the last change
+        el.addEventListener("input", (e) => {
+          const i = e.target.dataset && e.target.dataset.sqI; if (i === undefined) return;
+          const cols = (S.draft || S.theme.colors).slice(); cols[+i] = e.target.value.toUpperCase(); S.draft = cols;
+          e.target.parentNode.style.background = e.target.value;
+          const pv = el.querySelector(".sq-prev"); if (pv) { pv.style.background = grad(cols); pv.querySelector("i").textContent = cols.join("  →  "); }
+          clearTimeout(S.saveT);
+          S.saveT = setTimeout(async () => { const c = S.draft; if (c && await saveTheme("custom", c, true)) { if (S.draft === c) S.draft = null; } }, 700);
+        });
+      }
       if (!S.loaded) { S.loaded = true; refresh(); }
     }
     async function refresh() {
@@ -18510,6 +18600,7 @@
       if (!r.ok) return;
       const before = S.devices.length;
       S.devices = r.data.devices || [];
+      if (r.data.theme && !S.draft) { S.theme = r.data.theme; syncAuto(); }
       if (S.code && r.data.code && r.data.code.used && !S.linked) {
         S.linked = true; stopTimers();
         setTimeout(() => { S.linked = false; S.code = null; paint(); }, 6000);
@@ -18535,6 +18626,20 @@
         }, 1000);
         S.poll = setInterval(refresh, 3000);
         paint();
+      } else if (act === "tmode") {
+        const m = b.dataset.mode; if (m === S.theme.mode) return;
+        const cols = m === "auto" ? myColours() : m === "custom" ? (S.theme.colors && S.theme.colors.length >= 2 && S.theme.mode !== "auto" ? S.theme.colors : PRESETS[0][1]) : S.theme.colors;
+        const prev = S.theme;
+        S.theme = { mode: m, colors: cols }; S.draft = null; paint();
+        if (!(await saveTheme(m, cols))) { S.theme = prev; paint(); }
+      } else if (act === "tpre") {
+        const cols = b.dataset.cols.split(","); S.draft = null; S.theme = { mode: "custom", colors: cols }; paint();
+        saveTheme("custom", cols);
+      } else if (act === "tadd" || act === "tdel") {
+        const c = (S.draft || S.theme.colors).slice();
+        const cols = act === "tadd" ? [c[0], "#8B5CF6", c[1]] : [c[0], c[c.length - 1]];
+        S.draft = null; S.theme = { mode: "custom", colors: cols }; paint();
+        saveTheme("custom", cols, true);
       } else if (act === "cancel") {
         S.code = null; stopTimers(); paint();
       } else if (act === "unlink") {
