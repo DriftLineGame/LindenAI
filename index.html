@@ -4820,6 +4820,10 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 14, 2026</div><h3>v7.5</h3><ul>
+        <li><span class="v4-log-tag fix">FIX</span><b>Talking to SCODE again and again</b> <span>Holding the orb now listens every time, with no refresh needed. If your browser's own listening stops working, SCODE switches to its own and keeps going.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>Faster voice</b> <span>SCODE's voice stays ready between chats, so it answers sooner.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 14, 2026</div><h3>v7.2</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Modes on the S-CUBE</b> <span>The S-CUBE can now use SCODE Search, Weather, Ferries, Scores and Deep Think, with small cards for the forecast, sailings and scores.</span></li>
       </ul></div>
@@ -16602,35 +16606,104 @@
       if (S.plan !== "pro") { v4OpenPlan("Ultra Voice is part of SCODE Nova."); return false; }
       return true;
     }
-    // listen({ interim(text), level(0..1), done(text), fail(message) })
+    // listen({ interim(text), level(0..1), done(text), fail(message), cancel() })
+    // 7.5: every hold ends in exactly one of done / fail / cancel, whatever the browser does, so the orb can
+    // never get stuck "listening". If the browser's own speech recognition stops working (it often does on
+    // iPhone after a reply was spoken, and Chrome sometimes aborts it), SCODE switches to recording the voice
+    // and turning it into text on the SCODE server instead.
+    function micRelease() {
+      if (MIC.stream) { try { MIC.stream.getTracks().forEach(t => t.stop()); } catch (e) {} MIC.stream = null; }
+    }
+    function micStream() {
+      // a fresh microphone stream for every hold (an old one can go silent after a reply plays on iPhone)
+      micRelease();
+      return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
+        .then(st => { MIC.stream = st; return st; });
+    }
+    function micReset() {
+      // stop anything left over from the last hold before starting a new one
+      const r = MIC.rec, m = MIC.media;
+      MIC.rec = null; MIC.media = null; MIC.live = false; MIC.end = null;
+      if (r) { try { r.onresult = r.onerror = r.onend = r.onstart = r.onaudiostart = null; r.abort(); } catch (e) {} }
+      if (m && m.state === "recording") { try { m.onstop = null; m.stop(); } catch (e) {} }
+      micRelease(); MIC.uploading = false;
+      clearTimeout(MIC.dog);
+    }
     function listen(h) {
-      MIC.cancel = false;
+      micReset();
+      MIC.cancel = false; MIC.stopping = false;
+      const tok = MIC.tok = (MIC.tok || 0) + 1;
+      let over = false;
+      const end = (kind, v) => {
+        if (over || MIC.tok !== tok) return;
+        over = true; clearTimeout(MIC.dog);
+        MIC.live = false; MIC.rec = null; MIC.media = null; MIC.end = null; paint(); audioSession("auto");
+        if (kind === "done") h.done(v); else if (kind === "fail") h.fail(v); else if (h.cancel) h.cancel();
+      };
+      MIC.end = end;
       audioSession("play-and-record");
-      if (SR) {
-        const rec = new SR();
-        rec.lang = navigator.language || "en-US"; rec.interimResults = true; rec.continuous = true; rec.maxAlternatives = 1;
-        let finalText = "", interim = "";
-        rec.onresult = (e) => {
-          interim = "";
-          for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i]; if (r.isFinal) finalText += r[0].transcript + " "; else interim += r[0].transcript; }
-          h.interim((finalText + interim).trim()); h.level(0.55 + Math.random() * 0.45);
-        };
-        rec.onerror = (e) => {
-          if (e.error === "not-allowed" || e.error === "service-not-allowed") { MIC.cancel = true; h.fail("Allow the microphone for this site to talk to SCODE."); }
-          else if (e.error === "aborted") MIC.cancel = true;
-        };
-        rec.onend = () => {
-          MIC.live = false; MIC.rec = null; paint(); audioSession("auto");
-          if (MIC.cancel) return;
-          h.done((finalText + interim).trim());
-        };
-        MIC.rec = rec; MIC.live = true; paint();
-        try { rec.start(); } catch (e) { MIC.live = false; MIC.rec = null; h.fail("The microphone didn't start. Try again."); }
-        return;
-      }
-      if (!navigator.mediaDevices || !window.MediaRecorder) { h.fail("This browser can't record your voice. Try Chrome or Safari, or type instead."); return; }
-      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-        const mr = new MediaRecorder(stream);
+      if (SR && !MIC.srOff) { listenSR(h, tok, end); return; }
+      listenRec(h, tok, end);
+    }
+    function listenSR(h, tok, end) {
+      const rec = new SR();
+      rec.lang = navigator.language || "en-US"; rec.interimResults = true; rec.continuous = true; rec.maxAlternatives = 1;
+      let finalText = "", interim = "", heard = false, err = "", restarts = 0;
+      const t0 = performance.now();
+      const switchToRec = (why) => {
+        // the browser's recognition isn't working: use the recorder from now on (this page visit)
+        MIC.srOff = true;
+        try { rec.onresult = rec.onerror = rec.onend = rec.onstart = rec.onaudiostart = null; rec.abort(); } catch (e) {}
+        if (MIC.tok !== tok) return;
+        MIC.rec = null;
+        if (MIC.stopping) { end("done", ""); return; }
+        listenRec(h, tok, end);
+      };
+      rec.onstart = rec.onaudiostart = () => { heard = true; };
+      rec.onresult = (e) => {
+        heard = true; interim = "";
+        for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i]; if (r.isFinal) finalText += r[0].transcript + " "; else interim += r[0].transcript; }
+        h.interim((finalText + interim).trim()); h.level(0.55 + Math.random() * 0.45);
+      };
+      rec.onerror = (e) => { err = e.error || "error"; };
+      rec.onend = () => {
+        if (MIC.tok !== tok) return;
+        const text = (finalText + interim).trim();
+        if (MIC.cancel) { end("cancel"); return; }
+        if (err === "not-allowed" || err === "service-not-allowed") {
+          // Safari can block its own recognition while still allowing the microphone: try recording instead
+          if (navigator.mediaDevices && window.MediaRecorder) { switchToRec(err); return; }
+          end("fail", "Allow the microphone for this site to talk to SCODE."); return;
+        }
+        if (!MIC.stopping && !text) {
+          // ended by itself while the orb is still held (silence timeout, "aborted", "audio-capture", "network")
+          if (err && err !== "no-speech" && navigator.mediaDevices && window.MediaRecorder) { switchToRec(err); return; }
+          if (restarts < 3) { restarts++; err = ""; try { rec.start(); return; } catch (x) {} }
+        } else if (!MIC.stopping && text && restarts < 3) {
+          // ended by itself mid-hold with some words: keep listening for the rest
+          restarts++; err = ""; finalText = text + " "; interim = "";
+          try { rec.start(); return; } catch (x) {}
+        }
+        if (!text) {
+          MIC.srMiss = (MIC.srMiss || 0) + 1;
+          // two silent holds in a row that were long enough to say something: the recognition is deaf
+          if (MIC.srMiss >= 2 && performance.now() - t0 > 1200 && navigator.mediaDevices && window.MediaRecorder) MIC.srOff = true;
+        } else MIC.srMiss = 0;
+        end("done", text);
+      };
+      MIC.rec = rec; MIC.live = true; MIC.stopping = false; paint();
+      try { rec.start(); }
+      catch (e) { if (navigator.mediaDevices && window.MediaRecorder) switchToRec("start"); else end("fail", "The microphone didn't start. Try again."); return; }
+      // nothing at all from the browser after 3 s: it's stuck, so record instead
+      MIC.dog = setTimeout(() => { if (MIC.tok === tok && MIC.rec === rec && !heard) { if (navigator.mediaDevices && window.MediaRecorder) switchToRec("timeout"); else end("fail", "The microphone didn't start. Try again."); } }, 3000);
+    }
+    function listenRec(h, tok, end) {
+      if (!navigator.mediaDevices || !window.MediaRecorder) { end("fail", "This browser can't record your voice. Try Chrome or Safari, or type instead."); return; }
+      MIC.live = true; paint();
+      micStream().then(stream => {
+        if (MIC.tok !== tok) return;
+        let mr;
+        try { mr = new MediaRecorder(stream); } catch (e) { micRelease(); end("fail", "The microphone didn't start. Try again."); return; }
         let ac = null, an = null, buf = null, iv = 0;
         try {
           ac = new (window.AudioContext || window.webkitAudioContext)();
@@ -16638,30 +16711,50 @@
           ac.createMediaStreamSource(stream).connect(an);
           iv = setInterval(() => { an.getByteTimeDomainData(buf); let s2 = 0; for (let i = 0; i < buf.length; i++) { const v = (buf[i] - 128) / 128; s2 += v * v; } h.level(Math.min(1, Math.sqrt(s2 / buf.length) * 5)); }, 50);
         } catch (e) {}
-        MIC.media = mr; MIC.chunks = []; MIC.live = true; paint();
-        mr.ondataavailable = (e) => { if (e.data && e.data.size) MIC.chunks.push(e.data); };
+        const chunks = [];
+        MIC.media = mr;
+        mr.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+        mr.onerror = () => { clearInterval(iv); try { ac && ac.close(); } catch (e) {} micRelease(); end("fail", "The microphone stopped. Hold the orb to try again."); };
         mr.onstop = async () => {
           clearInterval(iv); try { ac && ac.close(); } catch (e) {}
-          stream.getTracks().forEach(t => t.stop());
-          MIC.live = false; MIC.media = null; paint(); audioSession("auto");
-          if (MIC.cancel) return;
+          if (MIC.stream === stream) micRelease();
+          if (MIC.tok !== tok) return;
+          MIC.media = null;
+          if (MIC.cancel) { end("cancel"); return; }
+          if (!chunks.length) { end("done", ""); return; }
           h.interim("Turning your voice into text…");
+          MIC.uploading = true;
           try {
-            const blob = new Blob(MIC.chunks, { type: mr.mimeType || "audio/webm" });
+            const blob = new Blob(chunks, { type: mr.mimeType || "audio/webm" });
             const r = await fetch(PROXY_URL + "/voice/stt", { method: "POST", headers: authHeaders({ "Content-Type": blob.type }), body: blob });
-            const d = await r.json();
+            const d = await r.json().catch(() => ({}));
             if (!r.ok) throw new Error(d.message || "off");
-            h.done(String(d.text || "").trim());
-          } catch (e) { h.fail(e.message && e.message !== "off" ? e.message : "SCODE couldn't hear that right now. Try typing instead."); }
+            end("done", String(d.text || "").trim());
+          } catch (e) { end("fail", e.message && e.message !== "off" ? e.message : "SCODE couldn't hear that right now. Try typing instead."); }
+          finally { MIC.uploading = false; }
         };
-        mr.start();
+        // the hold already ended while the microphone was starting
+        if (MIC.stopping) { micRelease(); if (MIC.cancel) end("cancel"); else end("done", ""); return; }
+        mr.start(250);
         setTimeout(() => { if (MIC.media === mr && mr.state === "recording") mr.stop(); }, 60000);
-      }).catch(() => h.fail("Allow the microphone for this site to talk to SCODE."));
+      }).catch(() => { if (MIC.tok === tok) end("fail", "Allow the microphone for this site to talk to SCODE. If you said no before, allow it in your browser's site settings."); });
     }
     function micStop(cancel) {
-      MIC.cancel = !!cancel;
-      if (MIC.rec) try { MIC.rec.stop(); } catch (e) {}
-      if (MIC.media && MIC.media.state === "recording") MIC.media.stop();
+      MIC.cancel = !!cancel; MIC.stopping = true;
+      const end = MIC.end;
+      if (MIC.rec) { try { MIC.rec.stop(); } catch (e) {} }
+      else if (MIC.media && MIC.media.state === "recording") { try { MIC.media.stop(); } catch (e) {} }
+      // if the browser never reports back after letting go, finish anyway
+      if (end) {
+        const tok = MIC.tok;
+        setTimeout(() => {
+          if (MIC.tok !== tok || MIC.end !== end) return;
+          if (MIC.media && MIC.media.state !== "inactive") { try { MIC.media.stop(); } catch (e) {} }
+          if (MIC.rec) { MIC.srMiss = (MIC.srMiss || 0) + 1; if (MIC.srMiss >= 2) MIC.srOff = true; try { MIC.rec.abort(); } catch (e) {} }
+          // give the browser a moment to hand over what it heard, then finish regardless
+          setTimeout(() => { if (MIC.tok === tok && MIC.end === end && !MIC.uploading) end(cancel ? "cancel" : "done", ""); }, 600);
+        }, 2500);
+      }
     }
 
     // ---------------------------------------------------------------- Voice mode (v6.1): the mic turns into the orb
@@ -16772,6 +16865,7 @@
     function vmClose() {
       if (!VM.open) return;
       micStop(true);
+      micRelease();
       voiceStop();
       audioSession("auto");
       VM.open = false; VM.holding = false; VM.closing = 1;
@@ -16794,10 +16888,11 @@
       try { el.messages.scrollTop = el.messages.scrollHeight; } catch (e) {}
     }
     function vmHoldStart(e) {
-      if (!VM.open || VM.holding || VM.state === "wait") return;
+      if (!VM.open || VM.state === "wait") return;
+      // a hold left over from before (the browser never reported back): clear it so this one starts
+      if (VM.holding) { if (MIC.live && performance.now() - VM.holdAt < 65000) return; micReset(); VM.holding = false; }
       if (e) e.preventDefault();
       unlockAudio();
-      if (VM.state === "error" && !VM.perm && !SR) return;
       if (sending && !VO.playing) { vmState("thinking", "Still thinking…"); return; }
       if (VO.playing || VO.q.length) voiceStop(true);
       VM.holding = true; VM.holdAt = performance.now(); VM.said = "";
@@ -16818,6 +16913,7 @@
           send();
         },
         fail: (m) => { VM.holding = false; if (VM.open) vmState("error", m); },
+        cancel: () => { VM.holding = false; if (VM.open && VM.state === "listening") vmState("idle"); },
       });
     }
     function vmHoldEnd() {
