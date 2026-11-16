@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>/* SCODE: paste your Cloudflare Tunnel link here (the S-CUBE reads it from this line too) */ const PROXY_URL = "https://packages-weights-nations-stamps.trycloudflare.com";</script>
+<script>/* SCODE: paste your Cloudflare Tunnel link here (the S-CUBE reads it from this line too) */ const PROXY_URL = "https://matthew-literally-glass-nokia.trycloudflare.com";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#21211e">
 <title>SCODE AI</title>
@@ -4213,6 +4213,352 @@
   .sq-pre.on { border-color: var(--surface); box-shadow: 0 0 0 2px var(--text); }
   @media (max-width: 420px) { .sq-presets { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sq-pre { aspect-ratio: 2 / 1; } }
 
+  /* ================================================================ SCODE 8 */
+  :root { --v8-g: linear-gradient(120deg, #FF4FB3, #8B5CF6 52%, #3B82F6); --v8-pink: #FF4FB3; --v8-vio: #8B5CF6; --v8-blue: #3B82F6;
+          --v8-ease: cubic-bezier(.2,.9,.25,1.15); }
+  .v8-newtag { display: inline-flex; align-items: center; height: 18px; padding: 0 7px; border-radius: 999px; background: var(--v8-g);
+    color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .08em; box-shadow: 0 2px 10px rgba(139,92,246,.35); flex: none; }
+  .v8-newtag.big { height: 20px; font-size: 10.5px; }
+
+  /* ---------------------------------------------------------------- Bit */
+  .v8-bit { position: absolute; right: 74px; bottom: calc(100% - 5px + var(--v8-up, 0px)); z-index: 7; pointer-events: none;
+    transform: translateX(var(--v8x, 0px)); transition: transform .12s linear, bottom .35s cubic-bezier(.2,.9,.25,1.15); }
+  .v8-bit[hidden] { display: none; }
+  .v8-bit-btn { pointer-events: auto; display: block; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; line-height: 0;
+    filter: drop-shadow(0 3px 0 rgba(43,23,71,.12)); -webkit-tap-highlight-color: transparent; animation: v8-in .7s var(--v8-ease) both; }
+  .v8-bit-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+  .v8-bit canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+  @keyframes v8-in { from { transform: translateY(26px) scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+  .v8-bit-fx { position: absolute; left: 50%; bottom: 100%; width: 0; height: 0; }
+  .v8-prop { position: absolute; left: 0; bottom: -10px; image-rendering: pixelated; transform-origin: 50% 100%; }
+  .v8-prop.pop { animation: v8-pop .55s var(--v8-ease) both, v8-float 1.8s ease-in-out .55s infinite; }
+  .v8-prop.peek { animation: v8-peek .35s var(--v8-ease) both; opacity: .92; }
+  .v8-prop.float { animation: v8-pop .5s var(--v8-ease) both, v8-float 1.4s ease-in-out .5s infinite; }
+  .v8-prop.out { animation: v8-out .35s ease both !important; }
+  .v8-prop { margin-left: -14px; }
+  .v8-prop-zzz { margin-left: 8px; }
+  @keyframes v8-pop { 0% { transform: translateY(14px) scale(.2) rotate(-25deg); opacity: 0; } 70% { transform: translateY(-4px) scale(1.15) rotate(6deg); opacity: 1; } 100% { transform: translateY(-2px) scale(1); } }
+  @keyframes v8-float { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(-7px); } }
+  @keyframes v8-peek { from { transform: translateY(10px) scale(.5); opacity: 0; } to { transform: translateY(-2px) scale(.9); } }
+  @keyframes v8-out { to { transform: translateY(-16px) scale(.6); opacity: 0; } }
+  .v8-spark { position: absolute; left: 0; bottom: -20px; width: 5px; height: 5px; background: var(--c); box-shadow: 0 0 6px var(--c);
+    animation: v8-spark .8s ease-out both; }
+  @keyframes v8-spark { from { transform: rotate(var(--a)) translateY(0) scale(1); opacity: 1; } to { transform: rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(.3); opacity: 0; } }
+  .v8-bit-bubble { position: absolute; bottom: calc(100% + 8px); right: 50%; transform: translateX(50%) translateY(6px) scale(.8); opacity: 0;
+    background: var(--surface); color: var(--text); border: 2px solid #2B1747; border-radius: 10px; padding: 5px 10px; font-size: 12.5px;
+    font-weight: 600; white-space: nowrap; pointer-events: none; transition: opacity .2s, transform .25s var(--v8-ease); box-shadow: 3px 3px 0 rgba(43,23,71,.18); }
+  .v8-bit-bubble::after { content: ""; position: absolute; left: 50%; top: 100%; width: 8px; height: 8px; background: var(--surface);
+    border-right: 2px solid #2B1747; border-bottom: 2px solid #2B1747; transform: translate(-50%, -4px) rotate(45deg); }
+  .v8-bit-bubble.show { opacity: 1; transform: translateX(50%) translateY(0) scale(1); }
+  .v8-bit-bubble.warn { border-color: #e0544b; }
+  .v8-bit-bubble.think { padding: 6px 10px; }
+  .v8-dots { display: inline-flex; gap: 4px; }
+  .v8-dots i { width: 5px; height: 5px; background: var(--v8-vio); animation: v8-dot 1s steps(2) infinite; }
+  .v8-dots i:nth-child(2) { animation-delay: .2s; background: var(--v8-pink); }
+  .v8-dots i:nth-child(3) { animation-delay: .4s; background: var(--v8-blue); }
+  @keyframes v8-dot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .v8-bit-menu { position: fixed; z-index: 450; width: 270px; max-width: calc(100vw - 32px); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 18px 50px rgba(20,10,40,.22); padding: 8px; pointer-events: auto;
+    opacity: 0; transform: translateY(8px) scale(.96); transform-origin: 80% 100%; transition: opacity .18s, transform .22s var(--v8-ease); }
+  .v8-bit-menu.show { opacity: 1; transform: none; }
+  .v8-bm-head { padding: 6px 10px 8px; display: flex; align-items: baseline; gap: 8px; }
+  .v8-bm-head b { font-size: 15px; background: var(--v8-g); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .v8-bm-head span { font-size: 12px; color: var(--muted); }
+  .v8-bit-menu button { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; border: 0; background: none; color: var(--text);
+    font: inherit; padding: 9px 10px; border-radius: 10px; cursor: pointer; }
+  .v8-bit-menu button:hover { background: var(--hover); }
+  .v8-bit-menu button b { display: block; font-size: 13.5px; }
+  .v8-bit-menu button small { display: block; font-size: 12px; color: var(--muted); line-height: 1.35; }
+  .v8-bm-ic { width: 34px; height: 22px; display: grid; place-items: center; color: var(--muted); flex: none; }
+  .v8-bm-ic svg { width: 19px; height: 19px; }
+
+  /* ---------------------------------------------------------------- switches + buttons */
+  .v8-sw { position: relative; width: 38px; height: 22px; border-radius: 999px; background: var(--border-strong); flex: none; border: 0; padding: 0;
+    transition: background .25s; cursor: pointer; display: inline-block; }
+  .v8-sw i { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    transition: transform .3s var(--v8-ease); }
+  .v8-sw.on { background: var(--v8-g); }
+  .v8-sw.on i { transform: translateX(16px); }
+  .v8-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 38px; padding: 0 16px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: transform .15s, box-shadow .2s, filter .2s; white-space: nowrap; }
+  .v8-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(20,10,40,.1); }
+  .v8-btn:active { transform: translateY(0) scale(.97); }
+  .v8-btn.primary { border: 0; color: #fff; background: var(--v8-g); background-size: 160% 100%; box-shadow: 0 6px 18px rgba(139,92,246,.35);
+    animation: v8-shine 6s ease-in-out infinite; }
+  .v8-btn.primary:disabled { opacity: .5; cursor: not-allowed; }
+  .v8-btn.sm { height: 32px; padding: 0 12px; font-size: 13px; }
+  .v8-btn svg { width: 16px; height: 16px; }
+  .v8-btn.busy { pointer-events: none; opacity: .75; }
+  @keyframes v8-shine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .v8-link { border: 0; background: none; color: var(--accent); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; padding: 4px 2px; }
+  .v8-link.danger { color: #d9534f; }
+  .v8-icon { width: 36px; height: 36px; border-radius: 10px; border: 0; background: none; color: var(--muted); cursor: pointer; display: grid; place-items: center; flex: none; }
+  .v8-icon:hover { background: var(--hover); color: var(--text); }
+  .v8-icon svg { width: 19px; height: 19px; }
+  .v8-icon.sm { width: 30px; height: 30px; border-radius: 8px; }
+  .v8-icon.sm svg { width: 16px; height: 16px; }
+  .v8-icon.spin svg { animation: v8-spin .9s linear; }
+  @keyframes v8-spin { to { transform: rotate(360deg); } }
+
+  /* ---------------------------------------------------------------- Auto button + chips + points */
+  .v8-autobtn { position: relative; display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 11px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--muted); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: color .2s, border-color .2s, background .2s, transform .15s; }
+  .v8-autobtn svg { width: 15px; height: 15px; }
+  .v8-autobtn.on { color: #fff; border-color: transparent; background: var(--v8-g); background-size: 180% 100%; animation: v8-shine 5s ease-in-out infinite; }
+  .v8-autobtn:active { transform: scale(.95); }
+  .v8-autobtn .v8-new-dot { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; border-radius: 50%; background: #FFD84D;
+    box-shadow: 0 0 0 2px var(--surface); animation: v8-blip 1.6s ease-in-out infinite; }
+  @keyframes v8-blip { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+  @media (max-width: 720px) { .v8-autobtn { width: 32px; padding: 0; justify-content: center; } .v8-autobtn .mlabel { display: none; } }
+  .v8-chip { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; margin: 0 0 8px; padding: 4px 6px 4px 4px; border-radius: 999px;
+    background: color-mix(in srgb, var(--v8-vio) 9%, var(--surface)); border: 1px solid color-mix(in srgb, var(--v8-vio) 25%, var(--border));
+    font-size: 12.5px; color: var(--text); animation: v8-chip .5s var(--v8-ease) both; flex-wrap: wrap; }
+  .v8-chip-ic { width: 22px; height: 22px; border-radius: 50%; background: var(--v8-g); color: #fff; display: grid; place-items: center; flex: none; }
+  .v8-chip-ic svg { width: 13px; height: 13px; }
+  .v8-chip-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v8-chip-redo { border: 0; background: none; color: var(--accent); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; padding: 2px 6px; border-radius: 999px; }
+  .v8-chip-redo:hover { background: var(--hover); }
+  .v8-chip-live { position: relative; overflow: hidden; }
+  .v8-chip-live::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.55), transparent 70%);
+    transform: translateX(-100%); animation: v8-sweep 1.4s ease-in-out infinite; }
+  @keyframes v8-sweep { to { transform: translateX(100%); } }
+  @keyframes v8-chip { from { opacity: 0; transform: translateY(6px) scale(.9); } to { opacity: 1; transform: none; } }
+  .v8-spent { margin-left: auto; align-self: center; font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; padding: 2px 8px;
+    border-radius: 999px; border: 1px dashed var(--border); white-space: nowrap; animation: v8-chip .5s var(--v8-ease) both; }
+
+  /* ---------------------------------------------------------------- task offer card */
+  .v8-offer { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; margin: 0 0 10px; padding: 12px 14px;
+    border-radius: 18px; background: var(--surface); border: 1px solid transparent; position: relative; box-shadow: 0 12px 34px rgba(60,30,120,.14);
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--v8-g) border-box; opacity: 0; transform: translateY(12px) scale(.98);
+    transition: opacity .25s, transform .35s var(--v8-ease); }
+  .v8-offer.show { opacity: 1; transform: none; }
+  .v8-of-ic { width: 40px; height: 40px; border-radius: 12px; background: var(--v8-g); color: #fff; display: grid; place-items: center; grid-row: span 2; }
+  .v8-of-ic svg { width: 22px; height: 22px; }
+  .v8-of-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .v8-of-t .v8-newtag { align-self: flex-start; margin-bottom: 3px; }
+  .v8-of-t b { font-size: 14.5px; }
+  .v8-of-t span { font-size: 13px; color: var(--muted); }
+  .v8-of-t em { font-size: 13px; font-style: normal; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .v8-of-b { grid-column: 2; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  @media (max-width: 520px) { .v8-of-b { grid-column: 1 / -1; } .v8-of-b .v8-btn { flex: 1; } }
+
+  /* ---------------------------------------------------------------- bell */
+  .v8-bell { position: relative; }
+  .v8-bell svg { width: 20px; height: 20px; }
+  .v8-bell[hidden] { display: none; }
+  .v8-badge { position: absolute; top: 3px; right: 2px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 999px; background: var(--v8-g);
+    color: #fff; font-size: 10.5px; font-weight: 800; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--bg); animation: v8-pop .45s var(--v8-ease) both; }
+  .v8-badge[hidden] { display: none; }
+  .v8-bell-new { position: absolute; top: -4px; left: 50%; transform: translateX(-50%); font-size: 8.5px; font-weight: 800; letter-spacing: .06em; color: #fff;
+    background: var(--v8-g); border-radius: 999px; padding: 1px 5px; pointer-events: none; animation: v8-blip 2s ease-in-out infinite; }
+  .v8-bell-new[hidden] { display: none; }
+  .v8-bell.ring svg { animation: v8-ring .9s ease; transform-origin: 50% 10%; }
+  @keyframes v8-ring { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(18deg); } 30% { transform: rotate(-15deg); } 45% { transform: rotate(10deg); } 60% { transform: rotate(-6deg); } 75% { transform: rotate(3deg); } }
+
+  /* ---------------------------------------------------------------- panel */
+  .v8-panel { position: fixed; inset: 0; z-index: 400; pointer-events: none; }
+  .v8-scrim { position: absolute; inset: 0; background: rgba(12,6,28,.38); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); opacity: 0; transition: opacity .3s; }
+  .v8-sheet { position: absolute; top: 10px; right: 10px; bottom: 10px; width: min(440px, calc(100vw - 20px)); background: var(--surface); border-radius: 22px;
+    border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(20,10,40,.3); display: flex; flex-direction: column; overflow: hidden;
+    transform: translateX(calc(100% + 30px)) scale(.98); transition: transform .45s var(--v8-ease); }
+  .v8-sheet::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--v8-g); background-size: 200% 100%; animation: v8-shine 4s linear infinite; }
+  .v8-panel.show { pointer-events: auto; }
+  .v8-panel.show .v8-scrim { opacity: 1; }
+  .v8-panel.show .v8-sheet { transform: none; }
+  @media (max-width: 640px) {
+    .v8-sheet { top: auto; left: 0; right: 0; bottom: 0; width: 100%; height: min(88vh, 100%); border-radius: 24px 24px 0 0; transform: translateY(100%); }
+    .v8-sheet::after { content: ""; position: absolute; top: 8px; left: 50%; width: 40px; height: 4px; border-radius: 4px; background: var(--border-strong); transform: translateX(-50%); }
+  }
+  .v8-ph { display: flex; align-items: center; gap: 4px; padding: 18px 12px 8px 20px; }
+  .v8-ph-t { flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .v8-ph h2 { margin: 0; font-size: 21px; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .v8-tabs { position: relative; display: flex; gap: 2px; margin: 4px 14px 6px; padding: 4px; background: var(--surface-2); border-radius: 14px; }
+  .v8-tabs button { position: relative; z-index: 1; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; height: 36px; border: 0;
+    background: none; color: var(--muted); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; border-radius: 10px; transition: color .2s; min-width: 0; }
+  .v8-tabs button svg { width: 17px; height: 17px; flex: none; }
+  .v8-tabs button.on { color: var(--text); }
+  .v8-tab-n { font-style: normal; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--v8-g); color: #fff; font-size: 10.5px; display: grid; place-items: center; }
+  .v8-tab-n[hidden] { display: none; }
+  .v8-tab-ink { position: absolute; top: 4px; left: 0; height: 36px; border-radius: 10px; background: var(--surface); box-shadow: 0 2px 8px rgba(20,10,40,.1);
+    transition: transform .4s var(--v8-ease), width .4s var(--v8-ease); }
+  .v8-body { flex: 1; overflow-y: auto; padding: 8px 16px 24px; overscroll-behavior: contain; }
+  .v8-body.in > * { animation: v8-rise .4s var(--v8-ease) both; }
+  @keyframes v8-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .v8-row-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 6px 2px 10px; font-size: 13px; color: var(--muted); }
+  .v8-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .v8-list > li { animation: v8-rise .45s var(--v8-ease) both; animation-delay: calc(var(--i, 0) * 45ms); }
+  .v8-list > li.gone { animation: v8-gone .26s ease both; }
+  .v8-list > li.flash { animation: v8-flash 1.2s ease; }
+  @keyframes v8-gone { to { opacity: 0; transform: translateX(30px); height: 0; } }
+  @keyframes v8-flash { 0% { box-shadow: 0 0 0 0 rgba(139,92,246,.6); } 100% { box-shadow: 0 0 0 14px rgba(139,92,246,0); } }
+  .v8-item { border: 1px solid var(--border); border-radius: 16px; background: var(--surface); overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+  .v8-item.unread { border-color: color-mix(in srgb, var(--v8-vio) 40%, var(--border)); box-shadow: 0 4px 16px rgba(139,92,246,.1); }
+  .v8-item-h { width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 0; background: none; font: inherit; color: var(--text); text-align: left; cursor: pointer; }
+  .v8-item-ic { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: var(--surface-2); color: var(--v8-vio); flex: none; }
+  .v8-item.k-alert .v8-item-ic { color: #e0763b; }
+  .v8-item.k-reminder .v8-item-ic { color: var(--v8-pink); }
+  .v8-item-ic svg { width: 18px; height: 18px; }
+  .v8-item-t { flex: 1; min-width: 0; }
+  .v8-item-t b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .v8-item-t small { font-size: 12px; color: var(--muted); }
+  .v8-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--v8-g); flex: none; opacity: 0; transform: scale(.4); transition: .25s; }
+  .v8-item.unread .v8-dot { opacity: 1; transform: none; }
+  .v8-item-b { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--v8-ease); }
+  .v8-item-b > * { overflow: hidden; }
+  .v8-item.open .v8-item-b { grid-template-rows: 1fr; }
+  .v8-item-b .v8-md { padding: 0 16px; font-size: 14px; line-height: 1.55; overflow-wrap: anywhere; }
+  .v8-item-b .v8-md :first-child { margin-top: 0; }
+  .v8-item-acts { display: flex; gap: 10px; justify-content: space-between; padding: 6px 12px 12px; }
+  .v8-task { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); transition: opacity .2s; }
+  .v8-task.paused { opacity: .6; }
+  .v8-task-ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: #fff; background: var(--v8-g); flex: none; }
+  .v8-task-ic svg { width: 20px; height: 20px; }
+  .v8-task-ic.k-ferry { background: linear-gradient(135deg, #1fa2c4, #0d5f8a); }
+  .v8-task-ic.k-weather { background: linear-gradient(135deg, #5aa8ff, #3a5bd9); }
+  .v8-task-ic.k-game { background: linear-gradient(135deg, #f5b921, #e0763b); }
+  .v8-task-ic.k-news { background: linear-gradient(135deg, #ff6f91, #c43b74); }
+  .v8-task-ic.k-page { background: linear-gradient(135deg, #2bc48a, #148a6a); }
+  .v8-task-ic.k-reminder { background: linear-gradient(135deg, #FF4FB3, #c040c8); }
+  .v8-task-t { flex: 1; min-width: 0; }
+  .v8-task-t b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .v8-task-t small { display: block; font-size: 12px; color: var(--muted); line-height: 1.35; }
+  .v8-task-t em { display: block; font-style: normal; font-size: 11.5px; color: #d9534f; margin-top: 2px; }
+  .v8-task-t em.st-missed, .v8-task-t em.st-skipped { color: #c98a14; }
+  .v8-task-a { display: flex; align-items: center; gap: 2px; flex: none; }
+  .v8-task-a .v8-sw { margin-right: 4px; }
+  @media (max-width: 420px) { .v8-task { flex-wrap: wrap; } .v8-task-t { flex-basis: calc(100% - 52px); } .v8-task-a { margin-left: 50px; } }
+  .v8-note { font-size: 12.5px; color: var(--muted); background: var(--surface-2); border-radius: 12px; padding: 8px 12px; margin: 0 0 10px; }
+  .v8-empty, .v8-lock { text-align: center; padding: 30px 12px 10px; }
+  .v8-empty h3, .v8-lock h3 { margin: 14px 0 6px; font-size: 17px; }
+  .v8-empty p, .v8-lock p { margin: 0 auto 16px; color: var(--muted); font-size: 14px; line-height: 1.5; max-width: 330px; }
+  .v8-empty-art, .v8-lock-orb { width: 74px; height: 74px; margin: 0 auto; border-radius: 24px; display: grid; place-items: center; color: #fff; background: var(--v8-g);
+    box-shadow: 0 14px 36px rgba(139,92,246,.35); animation: v8-bob 3s ease-in-out infinite; }
+  .v8-empty-art svg, .v8-lock-orb svg { width: 36px; height: 36px; }
+  @keyframes v8-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-6px) rotate(2deg); } }
+  .v8-lock ul { list-style: none; padding: 0; margin: 0 auto 18px; max-width: 320px; text-align: left; display: grid; gap: 8px; }
+  .v8-lock li { padding: 10px 12px; border-radius: 12px; background: var(--surface-2); font-size: 13.5px; }
+  .v8-ideas h3 { font-size: 15px; margin: 6px 2px 10px; }
+  .v8-idea { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; padding: 12px; margin: 0 0 8px; border-radius: 14px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font: inherit; cursor: pointer; transition: transform .2s var(--v8-ease), border-color .2s, box-shadow .2s;
+    animation: v8-rise .45s var(--v8-ease) both; animation-delay: calc(var(--i) * 60ms); }
+  .v8-idea:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--v8-vio) 45%, var(--border)); box-shadow: 0 8px 20px rgba(139,92,246,.14); }
+  .v8-idea-e { font-size: 22px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: var(--surface-2); flex: none; }
+  .v8-idea b { display: block; font-size: 14px; }
+  .v8-idea small { font-size: 12px; color: var(--muted); }
+  .v8-tip { font-size: 12.5px; color: var(--muted); margin: 10px 4px 0; line-height: 1.5; }
+  .v8-skel { display: grid; gap: 8px; padding-top: 8px; }
+  .v8-skel i { height: 62px; border-radius: 16px; background: linear-gradient(90deg, var(--surface-2), var(--hover), var(--surface-2)); background-size: 200% 100%; animation: v8-shine 1.2s linear infinite; }
+
+  /* ---------------------------------------------------------------- forms */
+  .v8-form { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+  .v8-f { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .v8-f small { font-weight: 400; }
+  .v8-f.inline { flex-direction: row; align-items: center; gap: 10px; }
+  .v8-f textarea, .v8-f input, .v8-f select { font: inherit; font-size: 15px; font-weight: 400; color: var(--text); background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 12px; width: 100%; box-sizing: border-box; transition: border-color .2s, box-shadow .2s; min-width: 0; }
+  .v8-f.inline input, .v8-f.inline select { width: auto; flex: 1; }
+  .v8-f textarea { resize: vertical; min-height: 74px; }
+  .v8-f textarea:focus, .v8-f input:focus, .v8-f select:focus { outline: none; border-color: var(--v8-vio); box-shadow: 0 0 0 4px rgba(139,92,246,.15); }
+  .v8-seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 3px; padding: 3px; border-radius: 14px; background: var(--surface-2); }
+  .v8-seg button { display: flex; align-items: center; justify-content: center; gap: 6px; height: 38px; border: 0; border-radius: 11px; background: none; color: var(--muted);
+    font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background .2s, color .2s, box-shadow .2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .v8-seg button svg { width: 16px; height: 16px; flex: none; }
+  .v8-seg button.on { background: var(--surface); color: var(--text); box-shadow: 0 2px 8px rgba(20,10,40,.1); }
+  .v8-seg.sm button { height: 34px; font-size: 12.5px; }
+  .v8-when { display: flex; flex-direction: column; gap: 10px; animation: v8-rise .35s var(--v8-ease) both; }
+  .v8-when[hidden] { display: none; }
+  .v8-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
+  .v8-day { height: 42px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font: inherit; font-weight: 700; font-size: 14px;
+    cursor: pointer; transition: transform .2s var(--v8-ease), background .2s, color .2s; }
+  .v8-day span { display: none; }
+  .v8-day.on { background: var(--v8-g); color: #fff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 6px 14px rgba(139,92,246,.3); }
+  @media (min-width: 400px) { .v8-day span { display: inline; font-weight: 500; font-size: 11px; } .v8-day { font-size: 13px; } }
+  .v8-quick { display: flex; gap: 6px; flex-wrap: wrap; }
+  .v8-quick button { border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 12.5px; padding: 5px 11px; border-radius: 999px; cursor: pointer; }
+  .v8-quick button:hover { border-color: var(--v8-vio); }
+  .v8-check { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; background: var(--surface-2); cursor: pointer; }
+  .v8-check input { position: absolute; opacity: 0; pointer-events: none; }
+  .v8-check b { display: block; font-size: 14px; color: var(--text); }
+  .v8-check small { display: block; font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .v8-check.big { margin-bottom: 10px; }
+  .v8-check input:focus-visible + .v8-sw { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .v8-hint { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5; }
+  .v8-form-b { display: flex; justify-content: flex-end; gap: 8px; position: sticky; bottom: -24px; padding: 12px 0 4px; background: linear-gradient(transparent, var(--surface) 30%); }
+  .v8-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .v8-type { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 12px; border-radius: 16px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); font: inherit; cursor: pointer; transition: transform .2s var(--v8-ease), border-color .2s, box-shadow .2s;
+    animation: v8-rise .45s var(--v8-ease) both; animation-delay: calc(var(--i) * 50ms); }
+  .v8-type:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(20,10,40,.1); }
+  .v8-type.on { border-color: var(--v8-vio); box-shadow: 0 0 0 3px rgba(139,92,246,.18); }
+  .v8-type b { font-size: 14px; }
+  .v8-type small { font-size: 12px; color: var(--muted); line-height: 1.35; }
+  .v8-type-ic { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; color: #fff; margin-bottom: 4px; }
+  .v8-type-ic svg { width: 19px; height: 19px; }
+  .v8-type-ic.k-ferry { background: linear-gradient(135deg, #1fa2c4, #0d5f8a); }
+  .v8-type-ic.k-weather { background: linear-gradient(135deg, #5aa8ff, #3a5bd9); }
+  .v8-type-ic.k-game { background: linear-gradient(135deg, #f5b921, #e0763b); }
+  .v8-type-ic.k-news { background: linear-gradient(135deg, #ff6f91, #c43b74); }
+  .v8-type-ic.k-page { background: linear-gradient(135deg, #2bc48a, #148a6a); }
+  .v8-alert-f { display: flex; flex-direction: column; gap: 14px; animation: v8-rise .35s var(--v8-ease) both; }
+  .v8-ac { position: relative; }
+  .v8-ac-list { position: absolute; top: 100%; left: 0; right: 0; z-index: 3; margin-top: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 14px 30px rgba(20,10,40,.16); overflow: hidden; }
+  .v8-ac-list[hidden] { display: none; }
+  .v8-ac-list button { display: flex; justify-content: space-between; width: 100%; padding: 10px 12px; border: 0; background: none; color: var(--text); font: inherit; font-size: 14px; cursor: pointer; text-align: left; }
+  .v8-ac-list button:hover { background: var(--hover); }
+  .v8-ac-list small { color: var(--muted); }
+  .v8-settings { padding-top: 6px; }
+
+  /* ---------------------------------------------------------------- welcome pill */
+  .v8-pill { margin-bottom: 8px; }
+  .v8-pill b { background: var(--v8-g) !important; color: #fff !important; }
+
+  /* ---------------------------------------------------------------- SCODE 8 launch popup */
+  .v8-launch { position: fixed; inset: 0; z-index: 500; display: grid; place-items: center; padding: 16px; pointer-events: none; }
+  .v8-l-scrim { position: absolute; inset: 0; background: rgba(10,4,26,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; transition: opacity .35s; }
+  .v8-launch.show { pointer-events: auto; }
+  .v8-launch.show .v8-l-scrim { opacity: 1; }
+  .v8-l-card { position: relative; width: min(560px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; border-radius: 28px;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--v8-g) border-box; border: 2px solid transparent;
+    box-shadow: 0 40px 120px rgba(60,20,140,.45); padding: 0 24px 20px; text-align: center; opacity: 0; transform: translateY(40px) scale(.94);
+    transition: opacity .35s, transform .6s var(--v8-ease); }
+  .v8-launch.show .v8-l-card { opacity: 1; transform: none; }
+  .v8-l-stars { position: absolute; left: 0; right: 0; top: 0; height: 190px; overflow: hidden; pointer-events: none;
+    background: radial-gradient(120% 90% at 50% 0%, rgba(139,92,246,.35), transparent 70%); }
+  .v8-l-stars i { position: absolute; left: var(--x); top: var(--y); width: 3px; height: 3px; background: #fff; box-shadow: 0 0 6px #fff; opacity: .2;
+    animation: v8-twinkle 2.4s ease-in-out infinite; animation-delay: var(--d); }
+  @keyframes v8-twinkle { 0%, 100% { opacity: .15; transform: scale(.8); } 50% { opacity: .9; transform: scale(1.3); } }
+  .v8-l-hero { position: relative; height: 178px; display: grid; place-items: end center; padding-bottom: 6px; }
+  .v8-l-bit { image-rendering: pixelated; width: 156px; height: 132px; animation: v8-in .9s var(--v8-ease) .2s both; filter: drop-shadow(0 10px 18px rgba(139,92,246,.45)); }
+  .v8-l-badge { position: absolute; top: 18px; right: 22px; padding: 5px 12px; border-radius: 999px; background: var(--v8-g); color: #fff; font-weight: 800; font-size: 12px;
+    letter-spacing: .08em; transform: rotate(6deg); animation: v8-pop .6s var(--v8-ease) .5s both; box-shadow: 0 8px 20px rgba(139,92,246,.4); }
+  .v8-l-card h2 { font-size: clamp(26px, 6vw, 34px); margin: 4px 0 6px; letter-spacing: -.02em; }
+  .v8-l-card h2 span { background: var(--v8-g); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .v8-l-sub { color: var(--muted); margin: 0 auto 16px; max-width: 420px; font-size: 14.5px; line-height: 1.5; }
+  .v8-l-feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; text-align: left; }
+  @media (max-width: 520px) { .v8-l-feats { grid-template-columns: minmax(0, 1fr); } .v8-l-card { padding: 0 16px 16px; } .v8-l-hero { height: 150px; } }
+  .v8-l-feat { display: flex; gap: 11px; padding: 11px; border-radius: 16px; background: var(--surface-2); opacity: 0; transform: translateY(14px);
+    animation: v8-rise .5s var(--v8-ease) both; animation-delay: calc(.45s + var(--i) * 80ms); }
+  .v8-l-feat b { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 14px; }
+  .v8-l-feat b em { font-style: normal; font-size: 10px; font-weight: 700; color: var(--v8-vio); background: color-mix(in srgb, var(--v8-vio) 13%, transparent); padding: 1px 6px; border-radius: 999px; }
+  .v8-l-feat span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+  .v8-l-ic { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; color: #fff; background: var(--v8-g); flex: none; }
+  .v8-l-ic svg { width: 18px; height: 18px; }
+  .v8-l-ic.k-alerts { background: linear-gradient(135deg, #f5b921, #e0763b); }
+  .v8-l-ic.k-tasks { background: linear-gradient(135deg, #5aa8ff, #3a5bd9); }
+  .v8-l-ic.k-fair { background: linear-gradient(135deg, #2bc48a, #148a6a); }
+  .v8-l-b { display: flex; gap: 10px; justify-content: center; margin: 18px 0 10px; }
+  .v8-l-b .v8-btn { min-width: 130px; height: 44px; font-size: 15px; }
+  .v8-l-foot { font-size: 11.5px; color: var(--faint); }
+
+  @media (max-width: 560px) { .v8-bit { right: 62px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .v8-bit, .v8-bit *, .v8-panel *, .v8-launch *, .v8-chip, .v8-spent, .v8-autobtn, .v8-btn.primary, .v8-bell-new, .v8-badge, .v8-empty-art, .v8-lock-orb { animation: none !important; transition-duration: .01s !important; }
+    .v8-l-feat { opacity: 1; transform: none; }
+  }
+
 </style>
 </head>
 <body class="is-empty">
@@ -4839,6 +5185,13 @@
     <div class="modal-header"><h2 id="v4-log-title">Updates &amp; fixes</h2>
       <button class="icon-btn" id="v4-log-close" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
     <div class="v4-log-list">
+      <div class="v4-log-day"><div class="v4-log-date">November 15, 2026</div><h3>v8.0</h3><ul>
+        <li><span class="v4-log-tag new">NEW</span><b>Say hi to Bit</b> <span>An 8-bit buddy on your text box. Bit watches you type, thinks with SCODE and points at the answer, with special moves for weather, ferries, scores, search, maths and tasks.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Auto tools</b> <span>SCODE picks Search, Weather, Ferries, Scores or Compute by itself. It never costs extra.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Scheduled tasks and alerts</b> <span>Nova and Supernova can schedule tasks, set reminders and watch ferries, weather warnings, games, news and web pages. Results land in the new Inbox (the bell).</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Pay for what you use</b> <span>Modes add no extra points. Every reply costs what it uses, shown under the answer. Supernova is now $10 CAD for 3 months.</span></li>
+        <li><span class="v4-log-tag fix">FIX</span><b>A smarter General Pro</b> <span>General Pro moves to a newer model that reads photos and documents better, and SCODE tunes itself to its computers.</span></li>
+      </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 14, 2026</div><h3>v7.6</h3><ul>
         <li><span class="v4-log-tag new">NEW</span><b>Your colours on the S-CUBE</b> <span>Give your S-CUBE the same colours as your SCODE account, or pick your own 2 or 3 colour gradient. Find it on your Account page under S-CUBE.</span></li>
       </ul></div>
@@ -4854,7 +5207,7 @@
         <li><span class="v4-log-tag fix">FIX</span><b>Sign in on phones</b> <span>The sign-in window fits on small screens again, with its buttons always in view.</span></li>
       </ul></div>
       <div class="v4-log-day"><div class="v4-log-date">November 12, 2026</div><h3>v7.0</h3><ul>
-        <li><span class="v4-log-tag new">NEW</span><b>Stardust, Nova and Supernova</b> <span>Every account now has a plan: Stardust (FREE), Nova ($5 CAD for 3 months, 5× the usage) or Supernova ($10 CAD a month, 20× the usage and always first in line). Look for your plan's icon by your picture.</span></li>
+        <li><span class="v4-log-tag new">NEW</span><b>Stardust, Nova and Supernova</b> <span>Every account now has a plan: Stardust (FREE), Nova ($5 CAD for 3 months, 5× the usage) or Supernova ($10 CAD for 3 months, 20× the usage and always first in line). Look for your plan's icon by your picture.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Get Nova or Supernova</b> <span>Apply on your Account page. We approve it, email you how to pay (cash or e-Transfer), and it turns on the moment your payment is confirmed. No need to turn on training anymore.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>November giveaway</b> <span>Make a SCODE account by November 30 and send a message to enter. Two winners on December 1: 6 months of Nova + a Premium SCODE sticker, or 1 month of Nova.</span></li>
         <li><span class="v4-log-tag new">NEW</span><b>Reset credit</b> <span>Add credit once, then refill your limit yourself whenever you need more.</span></li>
@@ -5892,7 +6245,7 @@
     btn.classList.toggle("on", on);
     btn.classList.toggle("blocked", blocked);
     btn.setAttribute("aria-pressed", String(on));
-    costEl.textContent = "+" + cost;
+    costEl.textContent = cost ? "+" + cost : ""; costEl.hidden = !cost;
     newEl.hidden = !(isNew && !on);
   }
   function studyActive() { return studyUnlocked() && studyOn && STUDY_TIERS.has(selectedTier); }
@@ -5908,10 +6261,10 @@
     paintModeBtn($("link-btn"), $("link-new"), $("link-cost"), lAvail, lAvail && photo, lOn, cost, searchIsNew());
     paintModeBtn($("study-btn"), $("study-new"), $("study-cost"), sAvail, false, sOn, studyCost, studyIsNew());
     el.webBtn.title = photo ? "SCODE Search can't be used in a chat with a photo. Start a new chat to search."
-      : (wOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + ` (+${searchCost} per message)`;
+      : (wOn ? "SCODE Search is on" : "SCODE Search: check the web before answering") + `${searchCost ? " (+" + searchCost + " per message)" : ""}`;
     $("link-btn").title = photo ? "SCODE Link can't be used in a chat with a photo. Start a new chat."
-      : (lOn ? "SCODE Link is on" : "SCODE Link: read a web page, PDF or Google Doc you paste") + ` (+${cost} per message)`;
-    $("study-btn").title = (sOn ? "Study Mode is on" : "Study Mode: make flashcards or a practice quiz") + ` (+${studyCost} per set)`;
+      : (lOn ? "SCODE Link is on" : "SCODE Link: read a web page, PDF or Google Doc you paste") + `${cost ? " (+" + cost + " per message)" : ""}`;
+    $("study-btn").title = (sOn ? "Study Mode is on" : "Study Mode: make flashcards or a practice quiz") + `${studyCost ? " (+" + studyCost + " per set)" : ""}`;
     // Study bar: pick flashcards or a quiz
     const bar = $("study-bar");
     bar.classList.toggle("show", sOn);
@@ -5935,7 +6288,7 @@
     $("wx-new").hidden = !(xAvail && xState === "off" && typeof weatherIsNew === "function" && weatherIsNew());
     xb.title = xState === "on" ? "Weather is on: every message gets the Environment Canada forecast"
       : xState === "auto" ? "Weather turned on by itself for this question. Tap to skip the forecast."
-      : `Weather: answer from the Environment Canada forecast (+${weatherCost} per message)`;
+      : `Weather: answer from the Environment Canada forecast${weatherCost ? " (+" + weatherCost + " per message)" : ""}`;
     $("wx-cost").textContent = "+" + weatherCost;
     // Image Gen: same idea as Weather (on by hand, or lit up by itself for "draw me…").
     const iAvail = typeof imageUnlocked === "function" && imageUnlocked();
@@ -5955,13 +6308,13 @@
     const cAvail = typeof scoresUnlocked === "function" && scoresUnlocked();
     const cOn = cAvail && scoresOn && iState === "off";
     paintModeBtn($("sc-btn"), $("sc-new"), $("sc-cost"), !!cAvail, false, cOn, scoresCost, typeof scoresIsNew === "function" && scoresIsNew());
-    $("sc-btn").title = (cOn ? "SCODE Scores is on" : "SCODE Scores: live standings, games and schedules") + ` (+${scoresCost} per message)`;
+    $("sc-btn").title = (cOn ? "SCODE Scores is on" : "SCODE Scores: live standings, games and schedules") + `${scoresCost ? " (+" + scoresCost + " per message)" : ""}`;
     $("sc-bar").classList.toggle("show", cOn);
     // SCODE Ferries: on or off by hand.
     const fAvail = typeof ferryUnlocked === "function" && ferryUnlocked();
     const fOn = fAvail && ferryOn && iState === "off";
     paintModeBtn($("fy-btn"), $("fy-new"), $("fy-cost"), !!fAvail, false, fOn, ferryCost, typeof ferryIsNew === "function" && ferryIsNew());
-    $("fy-btn").title = (fOn ? "SCODE Ferries is on" : "SCODE Ferries: BC Ferries times, live") + ` (+${ferryCost} per message)`;
+    $("fy-btn").title = (fOn ? "SCODE Ferries is on" : "SCODE Ferries: BC Ferries times, live") + `${ferryCost ? " (+" + ferryCost + " per message)" : ""}`;
     $("fy-bar").classList.toggle("show", fOn);
     if (fOn && typeof fyWarmLocation === "function") fyWarmLocation();
     // Deep Think: General Ultra only, for normal replies (not study sets or pictures).
@@ -5971,7 +6324,7 @@
     paintModeBtn($("deep-btn"), $("deep-new"), $("deep-cost"), dAvail, dBlocked, dOn, deepCost, ultraIsNew());
     $("deep-btn").title = dBlocked ? "Deep Think works on normal replies, so it's off while this mode is on"
       : (dOn ? "Deep Think is on: General Ultra thinks it through before answering. Slower, but more careful."
-             : "Deep Think: General Ultra thinks it through before answering (slower, more careful)") + ` (+${deepCost} per message)`;
+             : "Deep Think: General Ultra thinks it through before answering (slower, more careful)") + `${deepCost ? " (+" + deepCost + " per message)" : ""}`;
     el.input.placeholder = fOn ? "Ask about a ferry, like “I can be there in 45 min, ferry to Quadra?”" : cOn ? "Ask about any team or league" : iState === "on" ? "Describe the picture you want…" : wOn ? "Ask anything. I'll check the web." : lOn ? "Paste a link and ask about it."
       : sOn ? (studyKind === "plus" ? "What should your trainer teach? Notes, a link or a topic" : studyKind === "quiz" ? "What should I quiz you on?" : "What should I make flashcards from?")
       : xState === "on" ? "Ask about the weather, like “Will it rain tomorrow?”" : DEFAULT_PLACEHOLDER;
@@ -6003,7 +6356,7 @@
     const info = TIER_INFO[selectedTier];
     const m = activeCostMode();
     const base = (m && m.key === "image") ? info.cost : info.cost * (chatHasPhoto() ? 2 : 1);
-    const charged = m && !m.idle;
+    const charged = m && !m.idle && m.extra > 0;
     const dx = (typeof deepActive === "function" && deepActive()) ? deepCost : 0;
     const total = base + (charged ? m.extra : 0) + dx;
     el.mpQuota.innerHTML = '<span class="q-word">cost </span>' + total;
@@ -6014,7 +6367,8 @@
     const key = m ? m.key + ":" + selectedTier : null;
     if (key !== lastCostKey) {
       lastCostKey = key;
-      if (m) showCostToast(m.idle
+      if (m && !m.extra) showCostToast(`<b>${m.name} is on</b> · no extra points. Every reply costs what it uses.`);
+      else if (m) showCostToast(m.idle
         ? `<b>Link is on</b> · paste a link: +${m.extra} when it reads the page (${base + m.extra} total)`
         : `<b>${m.name} is on</b> · ${info.label} ${base} + ${m.name} ${m.extra} = <b>${total} points</b> per ${m.unit}`);
       else hideCostToast();
@@ -6094,7 +6448,7 @@
     deepOn = !deepOn;
     try { localStorage.setItem("scode_deep_on", deepOn ? "1" : "0"); } catch (e) {}
     updateWebBtn();
-    if (deepOn) showCostToast(`<b>Deep Think is on</b> · General Ultra thinks it through first. Slower, more careful · +${deepCost} points`);
+    if (deepOn) showCostToast(`<b>Deep Think is on</b> · General Ultra thinks it through first. Slower, more careful · ${deepCost ? '+' + deepCost + ' points' : 'priced by what it uses'}`);
     if (!touchLike) el.input.focus();
   });
   function deepActive() {
@@ -6134,11 +6488,11 @@
     ultra: { icon: WN_ULTRA_ICON, tag: "New model", title: "Meet General Ultra 1.0",
       sub: "SCODE AI's biggest upgrade yet: a brand-new, smarter top model that starts replying faster.",
       name: "General Ultra 1.0", text: "Starts answering quicker, reads photos and worksheets better than ever, and works with every mode: Search, Link, Study and more. Turn on <b>Deep Think</b> for tough problems. General Pro 1.5 now reads documents, and General Plus is the everyday pick.",
-      cost: () => `Free account · ${TIER_INFO.l5.cost} points per message · Deep Think +${deepCost}` },
+      cost: () => `Free account · ${TIER_INFO.l5.cost} points per message · ${deepCost ? 'Deep Think +' + deepCost : 'Deep Think included'}` },
     ferry: { get icon() { return FY_ICON; }, tag: "New", title: "Introducing SCODE Ferries",
       sub: "Live BC Ferries times, with a map and a countdown. Quadra, Cortes, Victoria, Nanaimo and more.",
       name: "SCODE Ferries", text: "Turn on Ferries and ask &ldquo;I can be there in 45 min, which ferry to Quadra can I catch?&rdquo; You get the answer, a live timetable, cancellations and a map from where you are.",
-      cost: () => `Every model, even without an account · +${ferryCost} point per message` },
+      cost: () => `Every model, even without an account${ferryCost ? " · +" + ferryCost + " point per message" : " · no extra points"}` },
     plus: { get icon() { return SP_ICON; }, tag: "New", title: "Introducing SCODE Study Plus",
       sub: "Not just flashcards. A full trainer that teaches you a topic level by level, then tests you.",
       name: "SCODE Study Plus", text: "Give it your notes, a photo, a link or a topic. You get levels with rule cards, 11 kinds of practice questions, hints and a final test. Start level 1 while the rest is made.",
@@ -6146,11 +6500,11 @@
     scores: { icon: WN_SCORES_ICON, tag: "New", title: "Introducing SCODE Scores",
       sub: "Live standings, scores and schedules for the NHL, NBA, NFL, MLB, CFL, soccer and F1.",
       name: "SCODE Scores", text: "Turn on Scores and ask &ldquo;NHL standings&rdquo;, &ldquo;When do the Canucks play next?&rdquo; or &ldquo;F1 standings&rdquo;. A neat card shows the real numbers.",
-      cost: () => `Every model, even without an account · +${scoresCost} point per message` },
+      cost: () => `Every model, even without an account${scoresCost ? " · +" + scoresCost + " point per message" : " · no extra points"}` },
     weather: { icon: WN_WEATHER_ICON, tag: "New", title: "Introducing Local weather",
       sub: "Ask about the weather and get the real Environment Canada forecast for your town, not a guess.",
       name: "Local weather", text: "Ask &ldquo;Do I need a jacket tomorrow?&rdquo; and get a straight answer, plus the next hours, the week and any warnings.",
-      cost: () => `Every model, even without an account · +${weatherCost} point per message` },
+      cost: () => `Every model, even without an account${weatherCost ? " · +" + weatherCost + " point per message" : " · no extra points"}` },
     image: { icon: WN_IMAGE_ICON, tag: "New · Beta", title: "Introducing SCODE Image Gen",
       sub: "Describe a picture and SCODE AI paints it for you, right on the SCODE server.",
       name: "SCODE Image Gen", text: "Type something like &ldquo;a cozy cabin in a snowy forest at night&rdquo; and watch it appear. Download it when it's done.",
@@ -6291,10 +6645,10 @@
       if (!LINK_TIERS.has(selectedTier)) return { kind: "info", html: "Switch to General Plus or General Ultra to use SCODE Link on this page." };
       if (photo) return { kind: "info", html: "SCODE Link can't be used in a chat with a photo. Start a new chat." };
       if (!linkOn) return { kind: "suggest", url: typed, html: `Turn on <b>SCODE Link</b> to read ${escapeHtml(hostOf(typed))} &middot; tap here` };
-      return { kind: "read", url: typed, html: `<b>SCODE Link</b> will read ${escapeHtml(hostOf(typed))} before answering &middot; +${linkCost}` };
+      return { kind: "read", url: typed, html: `<b>SCODE Link</b> will read ${escapeHtml(hostOf(typed))} before answering${linkCost ? " &middot; +" + linkCost : ""}` };
     }
     if (linkOn && activeLink && LINK_TIERS.has(selectedTier) && !photo) {
-      return { kind: "follow", url: activeLink.url, html: `<b>SCODE Link</b> &middot; asking about ${escapeHtml(activeLink.domain)} &middot; +${linkCost}` };
+      return { kind: "follow", url: activeLink.url, html: `<b>SCODE Link</b> &middot; asking about ${escapeHtml(activeLink.domain)}${linkCost ? " &middot; +" + linkCost : ""}` };
     }
     return null;
   }
@@ -6777,6 +7131,7 @@
     if (meta && meta.memory) row.appendChild(buildMemoryChip(meta.memory));
     if (meta && meta.v6) row._v6 = { meta: meta.v6, text: displayContent };
     if (!imgEl) row.appendChild(buildActions(displayContent, meta && meta.tier));
+    if (meta && meta.v6 && meta.v6.v8 && window.scodeV8) { try { scodeV8.restore(row, meta.v6.v8); } catch (e) {} }
     return row;
   }
 
@@ -10497,6 +10852,7 @@
             else if (s.status === "done") studySet = s.set;
             continue;
           }
+          if (chunk.v8) { if (window.scodeV8) { try { scodeV8.onEvent(chunk.v8, v6Meta, loaderRow); } catch (e) {} } continue; }
           if (chunk.v6) { if (V6) V6.onEvent(chunk.v6, v6Meta, loaderRow, revealed); continue; }
           const msg = chunk.message || {};
           if ((studySet || imgGen || plus) && msg.content) { rawContent += msg.content; continue; }   // plain-text copy, kept for history
@@ -10521,6 +10877,7 @@
             }
             if (sp.visible.trim()) finishThinking();
             typeTo(sp.visible);
+            if (window.scodeV8) scodeV8.talk();
             if (o.v6 && o.v6.voice && V6) V6.voiceFeed(sp.visible);
             if (sp.visible.trim()) { orbMelt(); flowStart(liveMd); }
           }
@@ -10620,6 +10977,7 @@
       if (memInfo) liveRow.appendChild(buildMemoryChip(memInfo));
       if (V6) { try { V6.finish(liveRow, v6Meta, finalText, o); } catch (e) { console.warn("SCODE 6", e); } }
       if (!imgGen) liveRow.appendChild(buildActions(finalText, tierAtSend));
+      if (window.scodeV8) { try { scodeV8.finish(liveRow, v6Meta, finalText); } catch (e) { console.warn("SCODE 8", e); } }
 
       messages.push({
         role: "assistant",
@@ -12279,6 +12637,7 @@
             image: pendingImageBase64 || null, chatId: currentChatId, deep: deepActive() };
       if (v4Prep(P) === false) return;
       if (V6 && V6.prep(P) === false) return;
+      if (window.scodeV8 && scodeV8.prep(P) === false) return;
       el.input.value = "";
       autoGrow();
       if (rushShouldQueue()) { clearPendingImage(); updateSendState(); rushAdd(P); return; }
@@ -12363,6 +12722,7 @@
           deep: (P.deep && tierAtSend === "l5" && !studyNow && !imgNow) || undefined,
           build: (P.build && !studyNow && !imgNow) || undefined,
           ...(V6 ? V6.fields(P, { studyNow, imgNow, tierAtSend }) : {}),
+          ...(window.scodeV8 ? scodeV8.fields(P) : {}),
           job: jobId ? { id: jobId, chat: jobChat.id } : undefined,
           messages: messages.map(m => {
             const o = { role: m.role, content: m.content };
@@ -14914,7 +15274,7 @@
   $("v4-log-close").addEventListener("click", () => $("v4-log").classList.remove("show"));
   $("v4-log").addEventListener("click", (e) => { if (e.target === $("v4-log")) $("v4-log").classList.remove("show"); });
   $("v4-shared").addEventListener("click", (e) => { if (e.target === $("v4-shared")) $("v4-shared-close").click(); });
-  const V4_LOG_VER = "2026-11-14";
+  const V4_LOG_VER = "2026-11-15";
   try { if (localStorage.getItem("scode_log_seen") !== V4_LOG_VER) $("v4-log-btn").classList.add("unseen"); } catch (e) {}
 
   // ---------------------------------------------------------------- launch popup for v4
@@ -17923,7 +18283,7 @@
       const winPct = d.reset_at ? Math.max(0, Math.min(100, 100 - ((d.reset_at - Date.now() / 1000) / win) * 100)) : 0;
       const upsell = lv === "nova" ? `<div class="acc-h">More</div><div class="acc-plans one">${planCard(d, "supernova", "Upgrade to Supernova")}</div>
           <div class="acc-renew"><span>Nova ends ${d.plan_until ? v4When(d.plan_until) : "soon"}. Renewing adds 3 months onto that.</span><button type="button" class="ap-link" data-apply="nova">Renew Nova</button></div>`
-        : `<div class="acc-renew"><span>Supernova ends ${d.plan_until ? v4When(d.plan_until) : "soon"}. Renewing adds a month onto that.</span><button type="button" class="ap-link" data-apply="supernova">Renew Supernova</button></div>`;
+        : `<div class="acc-renew"><span>Supernova ends ${d.plan_until ? v4When(d.plan_until) : "soon"}. Renewing adds 3 months onto that.</span><button type="button" class="ap-link" data-apply="supernova">Renew Supernova</button></div>`;
       box.innerHTML = `
         ${giveHtml(d)}${requestHtml(d)}
         <div class="acc-usage">
@@ -18446,7 +18806,7 @@
       wn.querySelector(".wn-feats").innerHTML = feats.map(([k, ic, n, t]) => `<div class="wn-feat"><div class="wn-fi">${ic}</div><div class="wn-ft"><b>${n}</b><span>${t}</span></div><button class="wn-try v7-try" type="button" data-v7="${k}">${k === "queue" ? "Got it" : k === "log" ? "See all" : "Open"}</button></div>`).join("");
       const orbs = wn.querySelector(".wn-orbs"); orbs.classList.add("many");
       orbs.innerHTML = ["free", "nova", "supernova"].map(k => `<div class="wn-orb v7-orb">${img(k, 64)}</div>`).join("");
-      $("wn-cost-line").textContent = "Stardust is free · Nova $5 CAD for 3 months · Supernova $10 CAD a month";
+      $("wn-cost-line").textContent = "Stardust is free · Nova $5 CAD for 3 months · Supernova $10 CAD for 3 months";
       const later = $("wn-later"); if (later) later.textContent = "Got it";
       wn.querySelectorAll(".v7-try").forEach(b => b.addEventListener("click", (ev) => {
         ev.stopPropagation();
@@ -18471,7 +18831,7 @@
       if (typeof CHANGELOG !== "undefined" && Array.isArray(CHANGELOG) && !CHANGELOG.some(c => c.id === "f-v7-plans")) {
         CHANGELOG.unshift(
           { id: "f-v7-plans", type: "feature", date: "2026-11-12", title: "SCODE 7: Stardust, Nova and Supernova",
-            text: "Every account now has a plan. Stardust is free, with 20 photos every window and 100 a week. Nova ($5 CAD for 3 months) gives you 5× the usage and 50 photos a window. Supernova ($10 CAD a month) gives you 20× the usage, 100 photos a window and always puts you first in line.",
+            text: "Every account now has a plan. Stardust is free, with 20 photos every window and 100 a week. Nova ($5 CAD for 3 months) gives you 5× the usage and 50 photos a window. Supernova ($10 CAD for 3 months) gives you 20× the usage, 100 photos a window and always puts you first in line.",
             how: ["Open your Account page from your picture.", "Pick Get Nova or Get Supernova and apply.", "Pay by e-Transfer or cash, and it turns on when your payment is confirmed."] },
           { id: "f-v7-queue", type: "feature", date: "2026-11-12", title: "Line up messages overnight",
             text: "SCODE sleeps from 11 PM to 7 AM. During those hours you can line up 5 text messages. They send by themselves at 7 AM, Supernova first, and the replies wait in your chat.",
@@ -18651,6 +19011,883 @@
     }
     return { S, paint, refresh };
   })();
+
+  // ================================================================ SCODE 8 (v8.0)
+  // Bit (the 8-bit SCODE buddy on the text box), Auto tools, the Inbox, Scheduled tasks and Watch alerts.
+  var scodeV8 = (function () {
+    const V8_LAUNCH = new Date(2026, 10, 15).getTime();
+    const ls = {
+      get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
+      set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    };
+    const S = {
+      auto: ls.get("scode_v8_auto", "1") === "1",
+      buddy: ls.get("scode_v8_bit", "1") === "1",
+      unread: 0, items: [], seenTop: ls.get("scode_v8_top", ""), tasks: null, tab: "inbox", skipAuto: false,
+      polling: 0,
+    };
+    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const reduce = () => (typeof reduceMotion !== "undefined" && reduceMotion) || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const api = async (path, opt) => {
+      const o = Object.assign({ headers: authHeaders(opt && opt.body ? { "Content-Type": "application/json" } : {}) }, opt || {});
+      if (o.body && typeof o.body !== "string") o.body = JSON.stringify(o.body);
+      const r = await fetch(PROXY_URL + path, o);
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) { const e = new Error(d.message || "Something went wrong. Try again."); e.code = d.error; e.status = r.status; throw e; }
+      return d;
+    };
+    const ago = (t) => {
+      const s = Math.max(0, Date.now() / 1000 - t);
+      if (s < 60) return "just now";
+      if (s < 3600) return Math.floor(s / 60) + " min ago";
+      if (s < 86400) return Math.floor(s / 3600) + " h ago";
+      const d = new Date(t * 1000);
+      return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) + " · " + d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    };
+
+    // ============================================================ Bit: palette + pixel drawing
+    const PAL = {
+      k: "#2B1747", p: "#FF4FB3", m: "#D04BDB", v: "#8B5CF6", b: "#3B82F6", w: "#FFFFFF", e: "#1B0F33", y: "#FFD84D",
+      Y: "#FFF3B0", c: "#FF9BD2", o: "#5B1238", t: "#FF6F91", s: "#E9E4FF", g: "#7CF2C8", r: "#FF5A5F", n: "#9AA3B5",
+      B: "#2563EB", L: "#93C5FD", G: "#F5B921", d: "#6B4BCB", h: "#FFB8E0",
+    };
+    const PROPS = {
+      umbrella: ["....kk....", "..kppvvk..", ".kppvvbbk.", "kppvvbbbbk", "kkkkkkkkkk", "....k.....", "....k.....", "....k.....", "....k.k...", ".....k...."],
+      sun: ["....y.....", ".y..y..y..", "..yYYYy...", "..YyyyY...", "yyYyyyYyy.", "..YyyyY...", "..yYYYy...", ".y..y..y..", "....y....."],
+      boat: ["....k.....", "....kp....", "....kpp...", "....kppp..", "....kpppp.", "....k.....", "kkkkkkkkkk", "kBBwBBwBBk", ".kBBBBBBk.", "..kkkkkk..", "L.LL.LL.LL"],
+      trophy: [".GGGGGGG..", "GyyyyyyyG.", "G.yyyyy.G.", ".GyyyyyG..", "..GyyyG...", "...GyG....", "....y.....", "...GGG....", "..kkkkk..."],
+      magnifier: ["..kkkk....", ".kLLLLk...", "kLwLLLLk..", "kLLLLLLk..", "kLLLLLLk..", ".kLLLLk...", "..kkkkkk..", "......kk..", ".......kk.", "........kk"],
+      calculator: ["kkkkkkkk", "kggggggk", "kggggggk", "kkkkkkkk", "kwkwkwkk", "kkkkkkkk", "kwkwkpkk", "kkkkkkkk", "kwkwkpkk", "kkkkkkkk"],
+      clipboard: ["...kkk....", ".kkwwwkk..", ".kssssskk.", ".ksgskssk.", ".ksssgsks.", ".kssssssk.", ".ksgsksk..", ".ksssgssk.", ".kssssssk.", ".kkkkkkkk."],
+      envelope: ["kkkkkkkkkk", "kwkwwwwkwk", "kwwkwwkwwk", "kwwwkkwwwk", "kwwwwwwwwk", "kwwwwwwwwk", "kkkkkkkkkk"],
+      bulb: ["..kkkk..", ".kYYYYk.", "kYyyyyYk", "kYyyyyYk", "kYyyyyYk", ".kYyyYk.", "..kyyk..", "..kkkk..", "..knnk..", "...kk..."],
+      heart: [".pp..pp.", "phppppp.", "ppppppp.", "ppppppp.", ".ppppp..", "..ppp...", "...p...."],
+      brush: [".......kk", "......kyk", ".....kyk.", "....kyk..", "...kGk...", "..kpk....", ".kppk....", "kppk.....", "kpk......"],
+      bell: ["...yy...", "..yYYy..", ".yYyyYy.", ".yyyyyy.", ".yyyyyy.", "yyyyyyyy", "kkkkkkkk", "...kk..."],
+      star: ["...y...", "...y...", "yyyYyyy", ".yYYYy.", "..yyy..", ".yy.yy.", "y.....y"],
+      puck: [".kkkkkk.", "kneeeenk", "kkkkkkkk", ".kkkkkk."],
+      zzz: ["kkkk....", "...k....", "..k.....", ".k......", "kkkk.kkk", "......k.", ".....k..", "....kkk."],
+    };
+    function propCanvas(name, px) {
+      const m = PROPS[name]; if (!m) return null;
+      const c = document.createElement("canvas"); const w = Math.max(...m.map(r => r.length)), h = m.length;
+      c.width = w * px; c.height = h * px; c.className = "v8-prop v8-prop-" + name; c.setAttribute("aria-hidden", "true");
+      const x = c.getContext("2d");
+      m.forEach((row, j) => [...row].forEach((ch, i) => { if (PAL[ch]) { x.fillStyle = PAL[ch]; x.fillRect(i * px, j * px, px, px); } }));
+      return c;
+    }
+    // Bit itself is drawn every frame from a few numbers, so it can squash, look, talk and point.
+    function drawBit(ctx, P, f) {
+      const W = 26, H = 22;
+      ctx.clearRect(0, 0, W * P, H * P);
+      const px = (x, y, col) => { if (x < 0 || y < 0 || x >= W || y >= H || !col) return; ctx.fillStyle = PAL[col] || col; ctx.fillRect(Math.round(x) * P, Math.round(y) * P, P, P); };
+      const cx = 13 + (f.dx || 0), base = 19 + (f.dy || 0);
+      const rx = 6.3 * (f.sx || 1), ry = 6.4 * (f.sy || 1);
+      const cy = base - ry - 0.4;
+      const inside = (x, y) => (((x + 0.5 - cx) / rx) ** 2 + ((y + 0.5 - cy) / ry) ** 2) <= 1;
+      const top = Math.floor(cy - ry), bot = Math.ceil(cy + ry) - 1;
+      // feet
+      const lift = f.step || 0;
+      [[-3, lift > 0 ? 1 : 0], [2, lift < 0 ? 1 : 0]].forEach(([o, up]) => { for (let i = 0; i < 2; i++) { px(Math.round(cx) + o + i, bot + 1 - up, "k"); } });
+      // body: outline, SCODE colour bands with a little 8-bit dithering between them
+      for (let y = top - 1; y <= bot + 1; y++) for (let x = Math.floor(cx - rx) - 1; x <= Math.ceil(cx + rx) + 1; x++) {
+        if (!inside(x, y)) continue;
+        const edge = !inside(x - 1, y) || !inside(x + 1, y) || !inside(x, y - 1) || !inside(x, y + 1);
+        const t = (y - top) / Math.max(1, bot - top) + (((x + y) & 1) ? 0.025 : -0.025);
+        px(x, y, edge ? "k" : t < 0.3 ? "p" : t < 0.52 ? "m" : t < 0.76 ? "v" : "b");
+      }
+      // shine
+      px(Math.round(cx - rx * 0.5), Math.round(cy - ry * 0.6), "h"); px(Math.round(cx - rx * 0.5) + 1, Math.round(cy - ry * 0.72), "h"); px(Math.round(cx - rx * 0.5) - 1, Math.round(cy - ry * 0.45), "h");
+      // antenna + star
+      const ax = Math.round(cx + (f.lean || 0)), ay = top;
+      px(Math.round(cx), ay - 1, "k"); px(ax, ay - 2, "k");
+      const sc = f.glow ? "Y" : "y";
+      px(ax, ay - 3, sc); px(ax - 1, ay - 4, f.glow ? "y" : sc); px(ax, ay - 4, "Y"); px(ax + 1, ay - 4, f.glow ? "y" : sc); px(ax, ay - 5, sc);
+      if (f.glow) { px(ax - 2, ay - 4, "Y"); px(ax + 2, ay - 4, "Y"); px(ax, ay - 6, "Y"); }
+      // eyes: big and shiny
+      const ex = Math.round(cx) + (f.look || 0), ey = Math.round(cy) - 1 + (f.lookY || 0);
+      const L = ex - 4, R = ex + 2;
+      const eye = (x) => {
+        switch (f.eyes) {
+          case "blink": case "closed": px(x, ey + 1, "e"); px(x + 1, ey + 1, "e"); break;
+          case "happy": px(x - 1, ey + 1, "e"); px(x, ey, "e"); px(x + 1, ey, "e"); px(x + 2, ey + 1, "e"); break;
+          case "squint": px(x, ey, "e"); px(x + 1, ey, "e"); px(x - 1, ey - 1, "e"); break;
+          case "wide": for (let j = -1; j < 3; j++) { px(x, ey + j, "e"); px(x + 1, ey + j, "e"); } px(x, ey - 1, "w"); px(x + 1, ey, "w"); break;
+          case "dizzy": px(x - 1, ey - 1, "e"); px(x + 1, ey - 1, "e"); px(x, ey, "e"); px(x - 1, ey + 1, "e"); px(x + 1, ey + 1, "e"); break;
+          case "heart": px(x, ey, "r"); px(x + 1, ey, "r"); px(x, ey + 1, "r"); px(x + 1, ey + 1, "r"); break;
+          default: for (let j = 0; j < 3; j++) { px(x, ey + j, "e"); px(x + 1, ey + j, "e"); } px(x, ey, "w");
+        }
+      };
+      eye(L); eye(R);
+      if (f.blush !== false) { px(L - 1, ey + 3, "c"); px(R + 2, ey + 3, "c"); }
+      // mouth
+      const mx = Math.round(cx) + (f.look || 0) - 2, my = ey + 4;
+      switch (f.mouth) {
+        case "open": px(mx, my, "o"); px(mx + 1, my, "o"); px(mx + 2, my, "o"); px(mx, my + 1, "o"); px(mx + 1, my + 1, "t"); px(mx + 2, my + 1, "o"); break;
+        case "o": px(mx + 1, my, "o"); px(mx, my + 1, "o"); px(mx + 2, my + 1, "o"); px(mx + 1, my + 2, "o"); break;
+        case "flat": px(mx, my, "o"); px(mx + 1, my, "o"); px(mx + 2, my, "o"); break;
+        case "grin": px(mx - 1, my, "o"); px(mx, my + 1, "o"); px(mx + 1, my + 1, "t"); px(mx + 2, my + 1, "o"); px(mx + 3, my, "o"); break;
+        default: px(mx, my, "o"); px(mx + 1, my + 1, "o"); px(mx + 2, my, "o");
+      }
+      // arms: little nubs on the sides
+      const ly = Math.round(cy) + 2, lx = Math.round(cx - rx) - 1, rxp = Math.round(cx + rx);
+      const arm = (side, pose) => {
+        const s = side < 0 ? -1 : 1, x0 = side < 0 ? lx : rxp;
+        if (pose === "up") { px(x0, ly - 1, "k"); px(x0 + s, ly - 2, "k"); px(x0 + s, ly - 3, "v"); }
+        else if (pose === "point") { px(x0, ly - 1, "k"); px(x0 + s, ly - 2, "k"); px(x0 + 2 * s, ly - 3, "k"); px(x0 + 2 * s, ly - 4, "y"); }
+        else if (pose === "wave") { px(x0, ly - 1, "k"); px(x0 + s, ly - 2, "k"); px(x0 + s * (f.t % 2 ? 2 : 1), ly - 3, "v"); }
+        else if (pose === "hold") { px(x0, ly, "k"); px(x0, ly - 1, "k"); px(x0, ly - 2, "v"); }
+        else { px(x0, ly, "k"); px(x0, ly + 1, "v"); }
+      };
+      arm(-1, f.armL); arm(1, f.armR);
+    }
+
+    // ============================================================ Bit: brain
+    const Bit = (() => {
+      const B = { el: null, cv: null, ctx: null, P: 3, state: "idle", since: Date.now(), t: 0, x: 0, tx: 0, raf: 0, last: 0,
+                  blinkAt: Date.now() + 2500, lookAt: Date.now() + 4000, look: 0, lookY: 0, bubble: null, prop: null, propTimer: 0,
+                  typingAt: 0, special: null, specialUntil: 0, talkAt: 0, walkAt: Date.now() + 9000, mood: null, moodUntil: 0, menu: null };
+      function mount() {
+        const comp = $("composer");
+        if (!comp || B.el) return;
+        const wrap = document.createElement("div");
+        wrap.id = "v8-bit"; wrap.className = "v8-bit";
+        wrap.innerHTML = `<button type="button" class="v8-bit-btn" aria-label="Bit, your SCODE buddy. Tap for options."><canvas width="78" height="66"></canvas></button><div class="v8-bit-fx" aria-hidden="true"></div><div class="v8-bit-bubble" aria-hidden="true"></div>`;
+        comp.appendChild(wrap);
+        B.el = wrap; B.cv = wrap.querySelector("canvas"); B.ctx = B.cv.getContext("2d"); B.fx = wrap.querySelector(".v8-bit-fx"); B.bub = wrap.querySelector(".v8-bit-bubble");
+        size();
+        wrap.querySelector(".v8-bit-btn").addEventListener("click", (e) => { e.stopPropagation(); poke(); });
+        window.addEventListener("resize", size);
+        el.input.addEventListener("input", typed);
+        el.input.addEventListener("focus", () => mood("wide", 900));
+        show(S.buddy);
+        setTimeout(() => { if (!document.body.classList.contains("is-empty") || true) wave(); }, 900);
+        loop();
+      }
+      function size() {
+        const small = window.innerWidth < 560;
+        B.P = window.innerWidth >= 900 ? 4 : 3;
+        B.cv.width = 26 * B.P; B.cv.height = 22 * B.P;
+        B.cv.style.width = B.cv.width + "px"; B.cv.style.height = B.cv.height + "px";
+        const comp = $("composer");
+        B.range = Math.max(40, (comp ? comp.clientWidth : 300) - (small ? 120 : 190));
+        if (B.x > B.range) B.x = B.tx = B.range;
+      }
+      function show(on) {
+        if (!B.el) return;
+        B.el.hidden = !on;
+        document.body.classList.toggle("v8-has-bit", !!on);
+      }
+      function bubble(html, ms, cls) {
+        if (!B.bub) return;
+        B.bub.className = "v8-bit-bubble show " + (cls || "");
+        B.bub.innerHTML = html;
+        clearTimeout(B.bubT);
+        if (ms) B.bubT = setTimeout(() => { B.bub.className = "v8-bit-bubble"; }, ms);
+      }
+      function hideBubble() { if (B.bub) B.bub.className = "v8-bit-bubble"; }
+      function prop(name, ms, cls) {
+        if (!B.fx) return;
+        const c = propCanvas(name, B.P === 2 ? 2 : 3);
+        if (!c) return;
+        B.fx.innerHTML = "";
+        c.classList.add(cls || "pop");
+        B.fx.appendChild(c);
+        if (name === "umbrella" || name === "boat" || name === "magnifier" || name === "trophy" || name === "calculator") sparkles(5);
+        clearTimeout(B.propTimer);
+        B.propTimer = setTimeout(() => { c.classList.add("out"); setTimeout(() => { if (c.parentNode) c.remove(); }, 400); }, ms || 3200);
+      }
+      function sparkles(n) {
+        if (reduce() || !B.fx) return;
+        for (let i = 0; i < n; i++) {
+          const s = document.createElement("i"); s.className = "v8-spark";
+          s.style.setProperty("--a", (Math.random() * 360) + "deg"); s.style.setProperty("--d", (22 + Math.random() * 26) + "px");
+          s.style.setProperty("--c", ["#FF4FB3", "#8B5CF6", "#3B82F6", "#FFD84D"][i % 4]); s.style.animationDelay = (i * 40) + "ms";
+          B.fx.appendChild(s); setTimeout(() => s.remove(), 900);
+        }
+      }
+      function mood(m, ms) { B.mood = m; B.moodUntil = Date.now() + ms; }
+      function set(st) { if (B.state !== st) { B.state = st; B.since = Date.now(); } }
+      function wave() { B.special = "wave"; B.specialUntil = Date.now() + 1800; bubble("Hi! I'm <b>Bit</b> 👋", 2600); }
+      function typed() {
+        if (B.state === "thinking" || B.state === "talking") return;
+        B.typingAt = Date.now();
+        set("typing");
+        const v = el.input.value;
+        // eyes follow the text as it grows
+        B.look = Math.max(-1, Math.min(1, Math.round((Math.min(v.length, 60) / 60) * 2 - 1)));
+        if (/\s$/.test(v) && !reduce()) B.hop = Date.now();
+        // peek at what they're asking (just for fun: the server decides the real tool)
+        const t = v.toLowerCase();
+        let p = null;
+        if (/\b(rain|umbrella|snow|storm)/.test(t)) p = "umbrella";
+        else if (/\b(weather|sunny|forecast|hot outside)/.test(t)) p = "sun";
+        else if (/\b(ferr(y|ies)|sailing|quadra)/.test(t)) p = "boat";
+        else if (/\b(score|won|win|game|nhl|canucks|standings)/.test(t)) p = "trophy";
+        else if (/\b(latest|news|search|look up)/.test(t)) p = "magnifier";
+        else if (/(\d\s*[-+*/x×÷^]\s*\d|\b(solve|calculate)\b)/.test(t)) p = "calculator";
+        else if (/\b(every (day|morning|week)|remind me|weekdays?)\b/.test(t)) p = "clipboard";
+        else if (/\b(draw|picture|image of|paint)\b/.test(t)) p = "brush";
+        if (p && p !== B.peek) { B.peek = p; prop(p, 2200, "peek"); }
+        if (!p) B.peek = null;
+        if (v.trim().endsWith("?")) mood("wide", 600);
+      }
+      function poke() {
+        B.special = "jump"; B.specialUntil = Date.now() + 700;
+        prop("heart", 1400, "pop"); sparkles(6);
+        toggleMenu();
+      }
+      function toggleMenu() {
+        if (B.menu) { closeMenu(); return; }
+        const m = document.createElement("div");
+        m.className = "v8-bit-menu"; m.setAttribute("role", "menu");
+        m.innerHTML = `<div class="v8-bm-head"><b>Bit</b><span>Your SCODE buddy</span></div>
+          <button type="button" role="menuitemcheckbox" aria-checked="${S.auto}" data-bm="auto"><span class="v8-sw ${S.auto ? "on" : ""}"><i></i></span><span><b>Auto tools</b><small>SCODE picks Search, Weather and more by itself</small></span></button>
+          <button type="button" role="menuitem" data-bm="inbox"><span class="v8-bm-ic">${ICON.inbox}</span><span><b>Inbox &amp; tasks</b><small>${S.unread ? S.unread + " new" : "Scheduled tasks and alerts"}</small></span></button>
+          <button type="button" role="menuitem" data-bm="hide"><span class="v8-bm-ic">${ICON.hide}</span><span><b>Hide Bit</b><small>Bring me back from the Inbox settings</small></span></button>`;
+        document.body.appendChild(m); B.menu = m;
+        const r = B.el.querySelector(".v8-bit-btn").getBoundingClientRect();
+        const w = Math.min(270, window.innerWidth - 32);
+        m.style.left = Math.max(16, Math.min(window.innerWidth - w - 16, r.left + r.width / 2 - w + 40)) + "px";
+        m.style.bottom = Math.max(16, window.innerHeight - r.top + 8) + "px";
+        requestAnimationFrame(() => m.classList.add("show"));
+        m.addEventListener("click", (e) => {
+          const b = e.target.closest("[data-bm]"); if (!b) return;
+          e.stopPropagation();
+          const k = b.dataset.bm;
+          if (k === "auto") { setAuto(!S.auto); b.setAttribute("aria-checked", S.auto); b.querySelector(".v8-sw").classList.toggle("on", S.auto); return; }
+          closeMenu();
+          if (k === "inbox") Panel.open("inbox");
+          if (k === "hide") { setBuddy(false); v4Toast("Bit is hiding. Turn Bit back on in <b>Inbox &rarr; Settings</b>."); }
+        });
+        setTimeout(() => document.addEventListener("click", closeMenu, { once: true }), 0);
+      }
+      function closeMenu() { if (!B.menu) return; const m = B.menu; B.menu = null; m.classList.remove("show"); setTimeout(() => m.remove(), 200); }
+      // ---- states the app tells Bit about
+      function think(deep) {
+        set("thinking"); B.deep = !!deep; B.peek = null;
+        bubble('<span class="v8-dots"><i></i><i></i><i></i></span>', 0, "think");
+        if (deep) prop("bulb", 4000, "float");
+      }
+      function talk() { if (B.state !== "talking") { set("talking"); hideBubble(); } B.talkAt = Date.now(); }
+      function done(ok) {
+        hideBubble();
+        set("idle");
+        if (ok === false) { mood("dizzy", 1600); bubble("Oops!", 1600, "warn"); return; }
+        B.special = "hop"; B.specialUntil = Date.now() + 650; mood("happy", 1400);
+      }
+      function special(kind, detail) {
+        const map = { weather: /rain|shower|snow|storm/i.test(detail || "") ? "umbrella" : "sun", ferries: "boat", scores: "trophy",
+                      search: "magnifier", compute: "calculator", task: "clipboard", inbox: "envelope", alert: "bell", image: "brush", deep: "bulb", star: "star" };
+        const p = map[kind] || kind;
+        prop(p, 3400, "pop");
+        B.special = kind === "ferries" ? "bob" : kind === "search" ? "scan" : kind === "task" || kind === "inbox" ? "jump" : "hop";
+        B.specialUntil = Date.now() + (kind === "ferries" ? 2600 : 900);
+        if (kind === "task") { mood("happy", 1600); sparkles(10); }
+        if (kind === "inbox" || kind === "alert") bubble(kind === "alert" ? "Heads up!" : "You've got mail!", 2200, kind === "alert" ? "warn" : "");
+      }
+      // ---- animation loop (8 frames a second, like an old game)
+      function loop() {
+        B.raf = requestAnimationFrame(loop);
+        const now = Date.now();
+        if (now - B.last < (reduce() ? 250 : 120)) return;
+        B.last = now; B.t++;
+        if (!B.el || B.el.hidden || document.hidden) return;
+        // the app finished: settle back down
+        if ((B.state === "thinking" || B.state === "talking") && typeof sending !== "undefined" && !sending && now - B.since > 800) done();
+        if (B.state === "talking" && now - B.talkAt > 2500) set("thinking");
+        if (B.state === "typing" && now - B.typingAt > 1600) set("idle");
+        const f = { t: B.t, eyes: "open", mouth: "smile", armL: "down", armR: "down", sx: 1, sy: 1, dx: 0, dy: 0, look: B.look, lookY: 0, step: 0, lean: 0 };
+        const breathe = reduce() ? 0 : Math.sin(B.t / 3) * 0.035;
+        f.sy = 1 + breathe; f.sx = 1 - breathe;
+        if (B.state === "idle") {
+          if (now > B.lookAt) { B.look = [-1, 0, 1, 0][Math.floor(Math.random() * 4)]; B.lookAt = now + 2000 + Math.random() * 3500; }
+          if (!reduce() && now > B.walkAt) { B.tx = Math.round(Math.random() * B.range); B.walkAt = now + 8000 + Math.random() * 9000; }
+          const h = new Date().getHours();
+          if (h >= 23 || h < 7) { f.eyes = "closed"; f.mouth = "flat"; if (B.t % 40 === 0) prop("zzz", 2000, "float"); }
+        }
+        if (B.state === "typing") {
+          f.lean = B.look; f.lookY = 1; f.mouth = "o";
+          if (B.hop && now - B.hop < 240) { f.dy = -1; f.sy = 1.06; }
+          f.step = B.t % 4 < 2 ? 1 : -1;
+          f.armR = "hold";
+        }
+        if (B.state === "thinking") {
+          f.eyes = "squint"; f.lookY = -1; f.look = Math.sin(B.t / 4) > 0 ? 1 : -1; f.mouth = "flat"; f.glow = B.t % 4 < 2;
+          f.armL = "up"; f.lean = Math.sin(B.t / 4) > 0 ? 1 : -1;
+          if (!reduce()) f.dx = Math.sin(B.t / 4) * 0.6;
+        }
+        if (B.state === "talking") {
+          f.mouth = B.t % 3 === 0 ? "smile" : B.t % 3 === 1 ? "open" : "o";
+          const side = Math.floor(B.t / 10) % 2 === 0 ? 1 : -1;
+          f.look = side; f.lookY = -1; f.lean = side;
+          if (side > 0) f.armR = "point"; else f.armL = "point";
+          if (!reduce()) f.dy = B.t % 6 === 0 ? -1 : 0;
+          f.glow = B.t % 8 < 2;
+        }
+        // walking
+        if (Math.abs(B.tx - B.x) > 1 && B.state === "idle") {
+          B.x += Math.sign(B.tx - B.x) * Math.min(4, Math.abs(B.tx - B.x));
+          f.step = B.t % 2 ? 1 : -1; f.look = Math.sign(B.tx - B.x); f.dy = B.t % 2 ? -0.5 : 0;
+        }
+        // specials
+        if (B.special && now < B.specialUntil) {
+          const k = (B.specialUntil - now);
+          if (B.special === "wave") { f.armR = "wave"; f.eyes = "happy"; f.mouth = "grin"; }
+          if (B.special === "hop" || B.special === "jump") {
+            const ph = Math.floor((now % 650) / 130);
+            f.dy = [0, -2, -3, -2, 0][ph] * (B.special === "jump" ? 1.4 : 1); f.sy = ph === 0 ? 0.88 : 1.06; f.sx = ph === 0 ? 1.1 : 0.96;
+            f.armL = f.armR = "up"; f.eyes = "happy"; f.mouth = "grin";
+          }
+          if (B.special === "bob") { f.dy = Math.sin(now / 160) * 1.2; f.eyes = "happy"; f.armR = "wave"; }
+          if (B.special === "scan") { f.look = Math.floor(now / 200) % 2 ? 1 : -1; f.eyes = "wide"; }
+          if (k < 0) B.special = null;
+        } else B.special = null;
+        if (B.mood && now < B.moodUntil) { f.eyes = B.mood; if (B.mood === "happy") f.mouth = "grin"; if (B.mood === "dizzy") f.mouth = "o"; }
+        // blinking
+        if (now > B.blinkAt) { if (now - B.blinkAt < 140) { if (f.eyes === "open") f.eyes = "blink"; } else B.blinkAt = now + 2200 + Math.random() * 4200; }
+        B.el.style.setProperty("--v8x", (-B.x) + "px");
+        drawBit(B.ctx, B.P, f);
+      }
+      return { mount, show, think, talk, done, special, wave, bubble, prop, sparkles, get el() { return B.el; } };
+    })();
+
+    // ============================================================ icons
+    const ICON = {
+      bell: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 16.5V11a6 6 0 1 1 12 0v5.5l1.6 2H4.4z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      inbox: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 13l2.4-7.2A2 2 0 0 1 8.3 4.5h7.4a2 2 0 0 1 1.9 1.3L20 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 13h4.5l1.5 2.5h4l1.5-2.5H20" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      radar: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8" opacity=".6"/><path d="M12 12l6-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16.5" cy="9" r="1.3" fill="currentColor"/></svg>',
+      hide: '<svg viewBox="0 0 24 24" fill="none"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.8"/><path d="M4 20L20 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      x: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+      plus: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+      play: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l10-6.5z" fill="currentColor"/></svg>',
+      trash: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      edit: '<svg viewBox="0 0 24 24" fill="none"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      gear: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="16" cy="7" r="2.2" stroke="currentColor" stroke-width="1.9"/><circle cx="10" cy="17" r="2.2" stroke="currentColor" stroke-width="1.9"/></svg>',
+      spark: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="currentColor"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" fill="currentColor" opacity=".7"/></svg>',
+      check: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      mail: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5.5" width="17" height="13" rx="2.2" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 7l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+      ferry: '<svg viewBox="0 0 24 24" fill="none"><path d="M3.5 15l1.7-4.5h13.6l1.7 4.5" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M7.5 10.5V7.2h6.8l2.2 3.3" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M2.5 19c1.6 0 1.6-1.1 3.2-1.1s1.6 1.1 3.2 1.1 1.6-1.1 3.1-1.1 1.6 1.1 3.2 1.1 1.6-1.1 3.2-1.1 1.6 1.1 3.1 1.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      weather: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 17.5h10a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.8 10 3.8 3.8 0 0 0 7 17.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 13.5l-1.5 3h3L12 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      game: '<svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8v4a4 4 0 0 1-8 0z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 5H5v1.5A3 3 0 0 0 8 9.5M16 5h3v1.5a3 3 0 0 1-3 3M12 12v4M8.5 20h7M10 16h4v4h-4z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      news: '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="13" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 9H20v8a2 2 0 0 1-2 2h-1.5M7 9h6M7 12.5h6M7 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      page: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z" stroke="currentColor" stroke-width="1.6"/></svg>',
+      search: '<svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.9"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      calc: '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 7.5h8M8.5 12h1M12 12h1M15 12h1M8.5 16h1M12 16h1M15 16h1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+      lock: '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="1.8"/></svg>',
+    };
+    const MODE_ICON = { search: ICON.search, weather: ICON.weather, ferries: ICON.ferry, scores: ICON.game, compute: ICON.calc };
+
+    // ============================================================ Auto tools + points per reply
+    function setAuto(on) {
+      S.auto = !!on; ls.set("scode_v8_auto", on ? "1" : "0");
+      const b = $("v8-auto-btn"); if (b) { b.classList.toggle("on", S.auto); b.setAttribute("aria-pressed", String(S.auto)); }
+      v4Toast(S.auto ? "<b>Auto tools is on</b> · SCODE picks Search, Weather, Ferries, Scores or Compute when it helps. No extra points." : "<b>Auto tools is off</b> · SCODE only uses the modes you turn on.");
+    }
+    function setBuddy(on) { S.buddy = !!on; ls.set("scode_v8_bit", on ? "1" : "0"); Bit.show(S.buddy); }
+    function autoBtn() {
+      const tools = document.querySelector(".composer-tools");
+      if (!tools || $("v8-auto-btn")) return;
+      const b = document.createElement("button");
+      b.type = "button"; b.id = "v8-auto-btn"; b.className = "v8-autobtn" + (S.auto ? " on" : "");
+      b.setAttribute("aria-pressed", String(S.auto));
+      b.title = "Auto tools: SCODE picks Search, Weather, Ferries, Scores or Compute by itself (no extra points)";
+      b.innerHTML = `${ICON.spark}<span class="mlabel">Auto tools</span><span class="v8-new-dot" aria-hidden="true"></span>`;
+      b.addEventListener("click", () => { setAuto(!S.auto); if (S.auto) Bit.special("star"); });
+      const attach = $("attach-btn");
+      if (attach && attach.nextSibling) tools.insertBefore(b, attach.nextSibling.nextSibling || null); else tools.prepend(b);
+    }
+    function fields(P) {
+      const out = {};
+      if (S.auto && !S.skipAuto) out.auto = true;
+      S.skipAuto = false;
+      Bit.think(P && P.deep);
+      return out;
+    }
+    function chipHtml(a) {
+      return `<span class="v8-chip-ic">${MODE_ICON[a.mode] || ICON.spark}</span><span class="v8-chip-t"><b>Auto tools</b> · ${esc(a.label)}${a.detail ? " · " + esc(a.detail) : ""}</span>`;
+    }
+    function onEvent(ev, meta, loaderRow) {
+      if (!ev) return;
+      meta.v8 = Object.assign(meta.v8 || {}, ev.auto ? { auto: ev.auto } : {}, ev.spent != null ? { spent: ev.spent } : {});
+      if (ev.auto) {
+        Bit.special(ev.auto.mode, ev.auto.detail);
+        if (loaderRow && !loaderRow.querySelector(".v8-chip")) {
+          const c = document.createElement("div"); c.className = "v8-chip v8-chip-live"; c.innerHTML = chipHtml(ev.auto);
+          loaderRow.prepend(c);
+        }
+      }
+    }
+    function decorate(row, v8, text) {
+      if (!row || !v8) return;
+      if (v8.auto && !row.querySelector(".v8-chip")) {
+        const c = document.createElement("div"); c.className = "v8-chip"; c.innerHTML = chipHtml(v8.auto) +
+          `<button type="button" class="v8-chip-redo" title="Ask again without ${esc(v8.auto.label)}">Answer without it</button>`;
+        c.querySelector(".v8-chip-redo").addEventListener("click", () => redoPlain(row));
+        row.prepend(c);
+      }
+      if (v8.spent != null) {
+        const acts = row.querySelector(".msg-actions, .actions, .msg-acts") || row.lastElementChild;
+        if (acts && !row.querySelector(".v8-spent")) {
+          const s = document.createElement("span"); s.className = "v8-spent";
+          s.title = "Points this reply used (it depends on how much SCODE read and wrote)";
+          s.textContent = v8.spent + (v8.spent === 1 ? " point" : " points");
+          acts.appendChild(s);
+        }
+      }
+    }
+    function redoPlain(row) {
+      // find the question this reply answered and ask it again with Auto off just this once
+      let prev = row.previousElementSibling;
+      while (prev && !prev.classList.contains("user")) prev = prev.previousElementSibling;
+      const q = prev ? (prev.querySelector(".user-bubble") || prev).innerText.trim() : "";
+      if (!q || (typeof sending !== "undefined" && sending)) return;
+      S.skipAuto = true;
+      el.input.value = q;
+      if (typeof autoGrow === "function") autoGrow();
+      if (typeof updateSendState === "function") updateSendState();
+      send();
+    }
+    function finish(row, meta, text) {
+      if (meta && meta.v8) decorate(row, meta.v8, text);
+      Bit.done();
+    }
+    function talk() { Bit.talk(); }
+
+    // ============================================================ chat-made tasks ("every weekday at 7 ...")
+    const TRIGGER = /\b(every|each|daily|weekdays?|weekends?|remind me|reminder|tomorrow at|tonight at|in \d+ (minutes?|mins?|hours?|hrs?)|(on|this|next) (mon|tues|wednes|thurs|fri|satur|sun)day)\b/i;
+    function prep(P) {
+      if (!P || P.v8ok || isGuest() || !P.text || P.image || P.study || P.imgNow || !TRIGGER.test(P.text)) return true;
+      api("/v8/tasks/parse", { method: "POST", body: { text: P.text } }).then(d => {
+        if (!d.draft) { P.v8ok = true; go(P); return; }
+        offer(P, d);
+      }).catch(() => { P.v8ok = true; go(P); });
+      return false;
+    }
+    function go(P) { el.input.value = ""; if (typeof autoGrow === "function") autoGrow(); send(P); }
+    function offer(P, d) {
+      document.querySelectorAll(".v8-offer").forEach(x => x.remove());
+      const box = document.createElement("div");
+      box.className = "v8-offer";
+      const dr = d.draft;
+      box.innerHTML = d.allowed ? `
+        <div class="v8-of-ic">${dr.kind === "reminder" ? ICON.clock : ICON.spark}</div>
+        <div class="v8-of-t"><span class="v8-newtag">NEW</span><b>Make this a ${dr.kind === "reminder" ? "reminder" : "scheduled task"}?</b>
+          <span>${esc(dr.sched_text)}${d.when ? " · first one " + esc(d.when) : ""}</span><em>“${esc(dr.prompt)}”</em></div>
+        <div class="v8-of-b"><button type="button" class="v8-btn primary" data-of="make">${dr.kind === "reminder" ? "Set reminder" : "Create task"}</button><button type="button" class="v8-btn" data-of="send">Just answer now</button></div>` : `
+        <div class="v8-of-ic">${ICON.lock}</div>
+        <div class="v8-of-t"><span class="v8-newtag">NEW</span><b>Scheduled tasks come with Nova and Supernova</b>
+          <span>SCODE can do this ${esc(dr.sched_text.toLowerCase())}, by itself, and drop the answer in your Inbox.</span></div>
+        <div class="v8-of-b"><button type="button" class="v8-btn primary" data-of="plans">See plans</button><button type="button" class="v8-btn" data-of="send">Just answer now</button></div>`;
+      const comp = $("composer");
+      comp.parentNode.insertBefore(box, comp);
+      requestAnimationFrame(() => { box.classList.add("show"); if (Bit.el) Bit.el.style.setProperty("--v8-up", (box.offsetHeight + 10) + "px"); });
+      Bit.special("task");
+      box.addEventListener("click", async (e) => {
+        const b = e.target.closest("[data-of]"); if (!b) return;
+        const k = b.dataset.of;
+        if (k === "send") { close(); P.v8ok = true; go(P); return; }
+        if (k === "plans") { close(); openAccount(); return; }
+        b.disabled = true;
+        try {
+          await api("/v8/tasks", { method: "POST", body: { kind: dr.kind, name: dr.name, prompt: dr.prompt, sched: dr.sched } });
+          close(); el.input.value = ""; if (typeof autoGrow === "function") autoGrow(); if (typeof updateSendState === "function") updateSendState();
+          Bit.special("task"); Bit.bubble("Got it! I'll handle that ✓", 2600);
+          v4Toast(`<b>${dr.kind === "reminder" ? "Reminder set" : "Task created"}</b> · ${esc(dr.sched_text)}. Results land in your <u>Inbox</u>.`);
+          S.tasks = null;
+        } catch (err) { b.disabled = false; v4Toast(esc(err.message)); }
+      });
+      function close() { box.classList.remove("show"); if (Bit.el) Bit.el.style.setProperty("--v8-up", "0px"); setTimeout(() => box.remove(), 250); }
+    }
+
+    // ============================================================ Inbox polling + bell
+    function bell() {
+      const top = document.querySelector("#topbar .top-right");
+      if (!top || $("v8-bell")) return;
+      const b = document.createElement("button");
+      b.className = "icon-btn v8-bell"; b.id = "v8-bell"; b.type = "button";
+      b.title = "Inbox, tasks and alerts"; b.setAttribute("aria-label", "Inbox, tasks and alerts");
+      b.innerHTML = ICON.bell + '<span class="v8-badge" hidden></span><span class="v8-bell-new">NEW</span>';
+      b.addEventListener("click", () => Panel.open());
+      const ref = $("top-new-btn");
+      top.insertBefore(b, ref || top.firstChild);
+      paintBell();
+    }
+    function paintBell() {
+      const b = $("v8-bell"); if (!b) return;
+      b.hidden = isGuest();
+      const badge = b.querySelector(".v8-badge");
+      badge.hidden = !S.unread; badge.textContent = S.unread > 9 ? "9+" : String(S.unread);
+      b.classList.toggle("has", !!S.unread);
+      b.querySelector(".v8-bell-new").hidden = ls.get("scode_v8_bell_seen", "") === "1";
+    }
+    async function poll(force) {
+      if (isGuest() || (!force && document.hidden)) return;
+      try {
+        const d = await api("/v8/inbox");
+        const top = d.items[0] ? d.items[0].id : "";
+        const fresh = top && S.seenTop && top !== S.seenTop && d.unread > S.unread;
+        S.items = d.items; S.unread = d.unread;
+        if (top) { S.seenTop = top; ls.set("scode_v8_top", top); }
+        paintBell();
+        if (fresh) {
+          const it = d.items[0];
+          Bit.special(it.kind === "alert" ? "alert" : "inbox");
+          const b = $("v8-bell"); if (b) { b.classList.remove("ring"); void b.offsetWidth; b.classList.add("ring"); }
+          v4Toast(`<b>New in your Inbox</b> · ${esc(it.title)}`);
+        }
+        if (Panel.isOpen() && S.tab === "inbox") Panel.render();
+      } catch (e) {}
+    }
+
+    // ============================================================ the panel: Inbox · Tasks · Alerts
+    const Panel = (() => {
+      let root = null, editing = null;
+      const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      const IDEAS = [["☀️", "Morning weather", "the weather today in Campbell River", { every: "days", days: [0, 1, 2, 3, 4], time: "07:15" }],
+        ["🚀", "Daily space fact", "one amazing space fact, short and fun", { every: "days", days: [0, 1, 2, 3, 4, 5, 6], time: "08:00" }],
+        ["🏒", "Canucks news", "the latest Vancouver Canucks news in 3 bullet points", { every: "days", days: [0, 1, 2, 3, 4, 5, 6], time: "17:00" }],
+        ["📰", "Weekend news recap", "the biggest news stories in BC this week, in 5 bullet points", { every: "days", days: [5], time: "09:00" }]];
+      function isOpen() { return !!(root && root.classList.contains("show")); }
+      function build() {
+        root = document.createElement("div");
+        root.id = "v8-panel"; root.className = "v8-panel"; root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "Inbox, tasks and alerts");
+        root.innerHTML = `<div class="v8-scrim" data-p="close"></div><section class="v8-sheet">
+          <header class="v8-ph"><div class="v8-ph-t"><span class="v8-newtag big">NEW</span><h2>Inbox</h2></div>
+            <button type="button" class="v8-icon" data-p="settings" title="Settings" aria-label="Settings">${ICON.gear}</button>
+            <button type="button" class="v8-icon" data-p="close" title="Close" aria-label="Close">${ICON.x}</button></header>
+          <nav class="v8-tabs" role="tablist"><button role="tab" data-tab="inbox">${ICON.inbox}<span>Inbox</span><i class="v8-tab-n"></i></button><button role="tab" data-tab="tasks">${ICON.clock}<span>Tasks</span></button><button role="tab" data-tab="alerts">${ICON.radar}<span>Alerts</span></button><span class="v8-tab-ink"></span></nav>
+          <div class="v8-body"></div></section>`;
+        document.body.appendChild(root);
+        root.addEventListener("click", onClick);
+        root.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+      }
+      function open(tab) {
+        if (isGuest()) { openAuth("welcome", "Sign in to get your SCODE Inbox, scheduled tasks and alerts."); return; }
+        if (!root) build();
+        ls.set("scode_v8_bell_seen", "1"); paintBell();
+        S.tab = tab || S.tab || "inbox"; editing = null;
+        root.classList.add("show"); document.body.classList.add("v8-panel-open");
+        render();
+        loadTasks();
+        poll(true);
+        setTimeout(() => { const b = root.querySelector(`[data-tab="${S.tab}"]`); if (b) b.focus(); }, 60);
+      }
+      function close() { if (!root) return; root.classList.remove("show"); document.body.classList.remove("v8-panel-open"); }
+      async function loadTasks() {
+        try { S.tasks = await api("/v8/tasks"); if (isOpen() && S.tab !== "inbox") render(); } catch (e) {}
+      }
+      function render() {
+        if (!root) return;
+        root.querySelectorAll("[data-tab]").forEach(b => { const on = b.dataset.tab === S.tab; b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); });
+        const tabs = root.querySelector(".v8-tabs"), ink = root.querySelector(".v8-tab-ink"), act = root.querySelector(`[data-tab="${S.tab}"]`);
+        if (act && ink) { ink.style.width = act.offsetWidth + "px"; ink.style.transform = `translateX(${act.offsetLeft - tabs.scrollLeft}px)`; }
+        const n = root.querySelector(".v8-tab-n"); n.textContent = S.unread ? String(S.unread) : ""; n.hidden = !S.unread;
+        root.querySelector(".v8-ph h2").textContent = { inbox: "Inbox", tasks: "Scheduled tasks", alerts: "Watch alerts", settings: "Settings" }[S.tab];
+        const body = root.querySelector(".v8-body");
+        body.classList.remove("in"); void body.offsetWidth; body.classList.add("in");
+        if (S.tab === "settings") body.innerHTML = settingsHtml();
+        else if (editing) body.innerHTML = editing.kind === "alert" ? alertForm(editing) : taskForm(editing);
+        else if (S.tab === "inbox") body.innerHTML = inboxHtml();
+        else body.innerHTML = listHtml(S.tab);
+        body.querySelectorAll(".v8-md").forEach(x => { try { x.innerHTML = renderMarkdown(x.dataset.src ? decodeURIComponent(x.dataset.src) : x.textContent); } catch (e) {} });
+        wireForm(body);
+      }
+      function locked() {
+        return `<div class="v8-lock"><div class="v8-lock-art"><div class="v8-lock-orb">${S.tab === "alerts" ? ICON.radar : ICON.clock}</div></div>
+          <h3>${S.tab === "alerts" ? "Watch alerts" : "Scheduled tasks"} come with Nova and Supernova</h3>
+          <p>${S.tab === "alerts" ? "SCODE keeps an eye on ferries, weather warnings, your team's games, news topics and web pages, and tells you the moment something happens." : "Tell SCODE what to do and when: “every weekday at 7, give me the weather”. The answer waits in your Inbox, and in your email if you like."}</p>
+          <ul><li><b>Nova</b> · 10 tasks + 10 alerts · $5 CAD for 3 months</li><li><b>Supernova</b> · 25 tasks + 25 alerts, hourly · $10 CAD for 3 months</li></ul>
+          <button type="button" class="v8-btn primary" data-p="plans">See plans</button></div>`;
+      }
+      function inboxHtml() {
+        if (!S.items.length) return `<div class="v8-empty"><div class="v8-empty-art">${ICON.inbox}</div><h3>Nothing here yet</h3><p>Results from your scheduled tasks and alerts show up here.</p><button type="button" class="v8-btn primary" data-p="tab" data-v="tasks">Make a task</button></div>`;
+        return `<div class="v8-row-head"><span>${S.unread ? S.unread + " new" : "All caught up"}</span>${S.unread ? '<button type="button" class="v8-link" data-p="readall">Mark all read</button>' : ""}</div>
+          <ul class="v8-list">${S.items.map((it, i) => `<li class="v8-item ${it.read ? "" : "unread"} k-${esc(it.kind)}" style="--i:${Math.min(i, 12)}" data-id="${esc(it.id)}">
+            <button type="button" class="v8-item-h" data-p="openitem" aria-expanded="false"><span class="v8-item-ic">${it.kind === "alert" ? ICON.radar : it.kind === "reminder" ? ICON.clock : it.extra && it.extra.error ? ICON.x : ICON.check}</span>
+            <span class="v8-item-t"><b>${esc(it.title)}</b><small>${ago(it.created)}${it.extra && it.extra.mode ? " · Auto: " + esc(it.extra.mode) : ""}</small></span><i class="v8-dot"></i></button>
+            <div class="v8-item-b"><div class="v8-md" data-src="${encodeURIComponent(it.text)}"></div>
+              <div class="v8-item-acts"><button type="button" class="v8-link" data-p="ask" data-id="${esc(it.id)}">Ask SCODE about this</button><button type="button" class="v8-link danger" data-p="delitem" data-id="${esc(it.id)}">Delete</button></div></div></li>`).join("")}</ul>`;
+      }
+      function listHtml(tab) {
+        const d = S.tasks;
+        if (!d) return `<div class="v8-skel"><i></i><i></i><i></i></div>`;
+        if (!d.limits) return locked();
+        const alerts = tab === "alerts";
+        const rows = d.tasks.filter(t => alerts ? t.kind === "alert" : t.kind !== "alert");
+        const lim = alerts ? d.limits.alerts : d.limits.tasks;
+        const head = `<div class="v8-row-head"><span>${rows.length} of ${lim} ${alerts ? "alerts" : "tasks"}</span><button type="button" class="v8-btn primary sm" data-p="new" ${rows.length >= lim ? "disabled" : ""}>${ICON.plus}New ${alerts ? "alert" : "task"}</button></div>`;
+        const off = d.offline && d.offline.on ? `<div class="v8-note">SCODE is asleep until 7 AM. Tasks due before then run when it wakes up.</div>` : "";
+        if (!rows.length) {
+          return head + off + (alerts ? `<div class="v8-empty"><div class="v8-empty-art">${ICON.radar}</div><h3>Watch something</h3><p>Get told when a ferry is delayed, a weather warning hits, your team's game ends, a news topic has a new story, or a web page changes.</p></div>`
+            : `<div class="v8-ideas"><h3>Try one of these</h3>${IDEAS.map((x, i) => `<button type="button" class="v8-idea" style="--i:${i}" data-p="idea" data-i="${i}"><span class="v8-idea-e">${x[0]}</span><span><b>${x[1]}</b><small>${esc(scheduleText(x[3]))}</small></span></button>`).join("")}<p class="v8-tip">Tip: you can also just type it in chat, like <i>“every weekday at 7 give me the weather”</i>.</p></div>`);
+        }
+        return head + off + `<ul class="v8-list">${rows.map((t, i) => `<li class="v8-task ${t.on ? "" : "paused"}" style="--i:${Math.min(i, 12)}" data-id="${esc(t.id)}">
+          <span class="v8-task-ic k-${esc(t.kind === "alert" ? (t.watch.type || "alert") : t.kind)}">${t.kind === "alert" ? ({ ferry: ICON.ferry, weather: ICON.weather, game: ICON.game, news: ICON.news, page: ICON.page }[t.watch.type] || ICON.radar) : t.kind === "reminder" ? ICON.clock : ICON.spark}</span>
+          <span class="v8-task-t"><b>${esc(t.name)}</b><small>${esc(t.sched_text)}${t.next_text ? " · next " + esc(t.next_text) : ""}${t.email ? " · " + "email" : ""}</small>${t.last_status && t.last_status !== "ok" ? `<em class="st-${esc(t.last_status)}">${{ error: "Last run had a problem", skipped: "Skipped last time (out of points)", missed: "Missed while SCODE was off", plan: "Paused: needs Nova or Supernova" }[t.last_status] || ""}</em>` : ""}</span>
+          <span class="v8-task-a"><button type="button" class="v8-sw ${t.on ? "on" : ""}" data-p="toggle" role="switch" aria-checked="${t.on}" aria-label="On or off"><i></i></button>
+          <button type="button" class="v8-icon sm" data-p="run" title="${t.kind === "alert" ? "Check now" : "Run now"}" aria-label="Run now">${ICON.play}</button>
+          <button type="button" class="v8-icon sm" data-p="edit" title="Edit" aria-label="Edit">${ICON.edit}</button>
+          <button type="button" class="v8-icon sm" data-p="del" title="Delete" aria-label="Delete">${ICON.trash}</button></span></li>`).join("")}</ul>`;
+      }
+      function scheduleText(s) {
+        if (s.every === "once") return "Once, " + new Date(s.at * 1000).toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" });
+        if (s.every === "hours") return s.hours === 1 ? "Every hour" : `Every ${s.hours} hours`;
+        const [h, m] = (s.time || "07:00").split(":").map(Number);
+        const t = new Date(2000, 0, 1, h, m).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+        const d = (s.days || []).slice().sort().join();
+        const days = d === "0,1,2,3,4,5,6" ? "Every day" : d === "0,1,2,3,4" ? "Weekdays" : d === "5,6" ? "Weekends" : (s.days || []).map(i => DAYS[i]).join(", ");
+        return `${days} at ${t}`;
+      }
+      function taskForm(t) {
+        const lim = (S.tasks && S.tasks.limits) || { min_hours: 3 };
+        const s = t.sched || { every: "days", days: [0, 1, 2, 3, 4], time: "07:00" };
+        const kind = t.kind || "task";
+        const at = s.every === "once" && s.at ? new Date(s.at * 1000) : new Date(Date.now() + 3600e3);
+        const local = new Date(at.getTime() - at.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        const hours = []; for (let h = lim.min_hours; h <= 24; h++) if ([1, 2, 3, 4, 6, 8, 12, 24].includes(h)) hours.push(h);
+        return `<form class="v8-form" data-form="task">
+          <div class="v8-seg" role="radiogroup"><button type="button" role="radio" data-kind="task" class="${kind === "task" ? "on" : ""}">${ICON.spark}SCODE does it</button><button type="button" role="radio" data-kind="reminder" class="${kind === "reminder" ? "on" : ""}">${ICON.clock}Just remind me</button></div>
+          <label class="v8-f"><span>${kind === "reminder" ? "Remind me to…" : "What should SCODE do?"}</span><textarea name="prompt" rows="3" maxlength="1000" placeholder="${kind === "reminder" ? "hand in my form" : "Give me the weather in Campbell River and what to wear"}">${esc(t.prompt || "")}</textarea></label>
+          <label class="v8-f"><span>Name <small>(optional)</small></span><input name="name" maxlength="80" value="${esc(t.name || "")}" placeholder="Morning weather"></label>
+          <div class="v8-f"><span>When</span><div class="v8-seg sm" role="radiogroup" data-every>${[["days", "On days"], ["once", "Once"], ["hours", "Every few hours"]].map(([k, n]) => `<button type="button" role="radio" data-every="${k}" class="${s.every === k ? "on" : ""}">${n}</button>`).join("")}</div></div>
+          <div class="v8-when" data-show="days" ${s.every === "days" ? "" : "hidden"}>
+            <div class="v8-days">${DAYS.map((d, i) => `<button type="button" class="v8-day ${(s.days || []).includes(i) ? "on" : ""}" data-day="${i}" aria-pressed="${(s.days || []).includes(i)}">${d[0]}<span>${d.slice(1)}</span></button>`).join("")}</div>
+            <div class="v8-quick"><button type="button" data-q="all">Every day</button><button type="button" data-q="wk">Weekdays</button><button type="button" data-q="we">Weekends</button></div>
+            <label class="v8-f inline"><span>at</span><input type="time" name="time" value="${esc(s.time || "07:00")}"></label></div>
+          <div class="v8-when" data-show="once" ${s.every === "once" ? "" : "hidden"}><label class="v8-f inline"><span>on</span><input type="datetime-local" name="at" value="${local}"></label></div>
+          <div class="v8-when" data-show="hours" ${s.every === "hours" ? "" : "hidden"}><label class="v8-f inline"><span>every</span><select name="hours">${hours.map(h => `<option value="${h}" ${s.hours === h ? "selected" : ""}>${h === 1 ? "hour" : h + " hours"}</option>`).join("")}</select></label>${lim.min_hours > 1 ? `<small class="v8-hint">Supernova can repeat every hour.</small>` : ""}</div>
+          <label class="v8-check"><input type="checkbox" name="email" ${t.email ? "checked" : ""} ${S.tasks && !S.tasks.email ? "disabled" : ""}><span class="v8-sw ${t.email ? "on" : ""}"><i></i></span><span><b>Email me too</b><small>Up to 10 emails a day. Everything also goes to your Inbox.</small></span></label>
+          <p class="v8-hint">Times are SCODE time (Pacific). SCODE sleeps 11 PM to 7 AM, so night tasks run at 7. Each run uses points like a normal message.</p>
+          <div class="v8-form-b"><button type="button" class="v8-btn" data-p="cancel">Cancel</button><button type="submit" class="v8-btn primary">${t.id ? "Save" : kind === "reminder" ? "Set reminder" : "Create task"}</button></div></form>`;
+      }
+      function alertForm(t) {
+        const w = t.watch || {};
+        const typ = w.type || "";
+        const d = S.tasks || { routes: [], leagues: [] };
+        const types = [["ferry", ICON.ferry, "Ferry", "Delays, cancellations, full sailings"], ["weather", ICON.weather, "Weather warning", "Warnings for your town"],
+          ["game", ICON.game, "Game", "When your team plays and wins"], ["news", ICON.news, "News topic", "New stories about anything"], ["page", ICON.page, "Web page", "When a page changes"]];
+        let fieldsH = "";
+        if (typ === "ferry") {
+          const r = d.routes.find(x => x.key === w.route) || d.routes[0] || {};
+          fieldsH = `<label class="v8-f"><span>Route</span><select name="route">${d.routes.map(x => `<option value="${esc(x.key)}" ${x.key === r.key ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></label>
+            <label class="v8-f"><span>Leaving from</span><select name="from">${r.a ? `<option value="${esc(r.a)}" ${w.from === r.a ? "selected" : ""}>${esc(r.a_name)}</option><option value="${esc(r.b)}" ${w.from === r.b ? "selected" : ""}>${esc(r.b_name)}</option>` : ""}</select></label>
+            <label class="v8-f"><span>Watch the next</span><select name="hours">${[2, 4, 6, 8, 12].map(h => `<option value="${h}" ${(w.hours || 4) === h ? "selected" : ""}>${h} hours of sailings</option>`).join("")}</select></label>`;
+        } else if (typ === "weather") {
+          fieldsH = `<label class="v8-f v8-ac"><span>Town</span><input name="place" autocomplete="off" value="${esc(w.place || "")}" placeholder="Campbell River"><input type="hidden" name="code" value="${esc(w.code || "")}"><div class="v8-ac-list" hidden></div></label>`;
+        } else if (typ === "game") {
+          fieldsH = `<label class="v8-f"><span>League</span><select name="league">${d.leagues.map(x => `<option value="${esc(x.key)}" ${x.key === (w.league || "nhl") ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></label>
+            <label class="v8-f"><span>Team</span><input name="team" maxlength="40" value="${esc(w.team || "")}" placeholder="Canucks"></label>
+            <label class="v8-check"><input type="checkbox" name="start" ${w.start ? "checked" : ""}><span class="v8-sw ${w.start ? "on" : ""}"><i></i></span><span><b>Tell me when it starts too</b><small>Otherwise just the final score</small></span></label>`;
+        } else if (typ === "news") {
+          fieldsH = `<label class="v8-f"><span>Topic</span><input name="topic" maxlength="80" value="${esc(w.topic || "")}" placeholder="James Webb telescope"></label><p class="v8-hint">Checked every ${(S.tasks && S.tasks.limits && S.tasks.limits.min_hours) || 3} hour(s).</p>`;
+        } else if (typ === "page") {
+          fieldsH = `<label class="v8-f"><span>Web address</span><input name="url" inputmode="url" value="${esc(w.url || "")}" placeholder="https://"></label><p class="v8-hint">Great for club pages, sign-up lists and “sold out” pages.</p>`;
+        }
+        return `<form class="v8-form" data-form="alert">
+          ${t.id ? "" : `<div class="v8-types">${types.map(([k, ic, n, s], i) => `<button type="button" class="v8-type ${typ === k ? "on" : ""}" style="--i:${i}" data-type="${k}"><span class="v8-type-ic k-${k}">${ic}</span><b>${n}</b><small>${s}</small></button>`).join("")}</div>`}
+          ${typ ? `<div class="v8-alert-f">${fieldsH}
+          <label class="v8-check"><input type="checkbox" name="email" ${t.email ? "checked" : ""} ${S.tasks && !S.tasks.email ? "disabled" : ""}><span class="v8-sw ${t.email ? "on" : ""}"><i></i></span><span><b>Email me too</b><small>Up to 10 emails a day</small></span></label>
+          <div class="v8-form-b"><button type="button" class="v8-btn" data-p="cancel">Cancel</button><button type="submit" class="v8-btn primary">${t.id ? "Save" : "Start watching"}</button></div></div>` : `<div class="v8-form-b"><button type="button" class="v8-btn" data-p="cancel">Cancel</button></div>`}</form>`;
+      }
+      function settingsHtml() {
+        return `<div class="v8-settings">
+          <label class="v8-check big"><input type="checkbox" data-set="auto" ${S.auto ? "checked" : ""}><span class="v8-sw ${S.auto ? "on" : ""}"><i></i></span><span><b>Auto tools</b><small>SCODE picks Search, Weather, Ferries, Scores or Compute by itself when it helps. It never costs extra.</small></span></label>
+          <label class="v8-check big"><input type="checkbox" data-set="bit" ${S.buddy ? "checked" : ""}><span class="v8-sw ${S.buddy ? "on" : ""}"><i></i></span><span><b>Show Bit</b><small>Your 8-bit buddy on the text box.</small></span></label>
+          <p class="v8-hint">Every reply now costs what it uses: short answers cost less, long ones and searches cost more. You'll see the points under each reply.</p>
+          <button type="button" class="v8-btn" data-p="tab" data-v="inbox">Back to Inbox</button></div>`;
+      }
+      function wireForm(body) {
+        const f = body.querySelector("form.v8-form");
+        body.querySelectorAll(".v8-check input").forEach(i => i.addEventListener("change", () => {
+          const sw = i.parentNode.querySelector(".v8-sw"); if (sw) sw.classList.toggle("on", i.checked);
+          if (i.dataset.set === "auto") setAuto(i.checked);
+          if (i.dataset.set === "bit") setBuddy(i.checked);
+        }));
+        if (!f) return;
+        f.addEventListener("submit", (e) => { e.preventDefault(); save(f); });
+        const sel = f.querySelector('select[name="route"]');
+        if (sel) sel.addEventListener("change", () => { editing.watch = Object.assign({}, editing.watch, { route: sel.value, from: null }); render(); });
+        const place = f.querySelector('input[name="place"]');
+        if (place) {
+          const list = f.querySelector(".v8-ac-list"); let tm = 0;
+          place.addEventListener("input", () => {
+            f.querySelector('input[name="code"]').value = "";
+            clearTimeout(tm); tm = setTimeout(async () => {
+              const q = place.value.trim(); if (q.length < 2) { list.hidden = true; return; }
+              try {
+                const d = await fetch(PROXY_URL + "/v8/towns?q=" + encodeURIComponent(q)).then(r => r.json());
+                list.innerHTML = d.towns.map(t => `<button type="button" data-code="${esc(t.code)}" data-name="${esc(t.name)}">${esc(t.name)}<small>${esc(t.prov)}</small></button>`).join("");
+                list.hidden = !d.towns.length;
+              } catch (e) {}
+            }, 220);
+          });
+          list.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; place.value = b.dataset.name; f.querySelector('input[name="code"]').value = b.dataset.code; list.hidden = true; });
+        }
+      }
+      function readForm(f) {
+        const g = (n) => { const x = f.querySelector(`[name="${n}"]`); return x ? (x.type === "checkbox" ? x.checked : x.value) : undefined; };
+        if (f.dataset.form === "alert") {
+          const w = { type: editing.watch.type };
+          ["route", "from", "hours", "place", "code", "league", "team", "topic", "url"].forEach(k => { const v = g(k); if (v !== undefined && v !== "") w[k] = k === "hours" ? Number(v) : v; });
+          if (w.type === "game") w.start = !!g("start");
+          return { kind: "alert", watch: w, email: !!g("email") };
+        }
+        const every = f.querySelector("[data-every] .on").dataset.every;
+        const sched = { every };
+        if (every === "days") { sched.days = [...f.querySelectorAll(".v8-day.on")].map(b => Number(b.dataset.day)); sched.time = g("time"); }
+        if (every === "once") sched.at = new Date(g("at")).getTime() / 1000;
+        if (every === "hours") sched.hours = Number(g("hours"));
+        const kind = f.querySelector(".v8-seg [data-kind].on").dataset.kind;
+        const prompt = g("prompt").trim();
+        return { kind, prompt, name: g("name").trim() || (kind === "reminder" ? "Reminder: " + prompt : ""), sched, email: !!g("email") };
+      }
+      async function save(f) {
+        const btn = f.querySelector('[type="submit"]'); btn.disabled = true; btn.classList.add("busy");
+        try {
+          const body = readForm(f);
+          const d = editing.id ? await api("/v8/tasks/" + editing.id, { method: "PUT", body }) : await api("/v8/tasks", { method: "POST", body });
+          const was = editing; editing = null;
+          await loadTasks(); render();
+          Bit.special("task"); Bit.bubble(was.id ? "Saved ✓" : body.kind === "alert" ? "I'm watching it 👀" : "On it! ✓", 2400);
+          const li = root.querySelector(`[data-id="${d.task.id}"]`); if (li) li.classList.add("flash");
+        } catch (e) { v4Toast(esc(e.message)); btn.disabled = false; btn.classList.remove("busy"); }
+      }
+      async function onClick(e) {
+        const t = e.target;
+        const tab = t.closest("[data-tab]");
+        if (tab && tab.closest(".v8-tabs")) { S.tab = tab.dataset.tab; editing = null; render(); if (S.tab !== "inbox" && !S.tasks) loadTasks(); return; }
+        const day = t.closest(".v8-day"); if (day) { day.classList.toggle("on"); day.setAttribute("aria-pressed", day.classList.contains("on")); return; }
+        const q = t.closest("[data-q]");
+        if (q) { const want = { all: [0, 1, 2, 3, 4, 5, 6], wk: [0, 1, 2, 3, 4], we: [5, 6] }[q.dataset.q]; root.querySelectorAll(".v8-day").forEach(b => { const on = want.includes(Number(b.dataset.day)); b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); return; }
+        const ev = t.closest("[data-every]");
+        if (ev && ev.dataset.every && ev.tagName === "BUTTON") { ev.parentNode.querySelectorAll("button").forEach(b => b.classList.toggle("on", b === ev)); root.querySelectorAll(".v8-when").forEach(w => { w.hidden = w.dataset.show !== ev.dataset.every; }); return; }
+        const kd = t.closest("[data-kind]");
+        if (kd) { const f = kd.closest("form"); editing = Object.assign({}, editing, readFormSafe(f), { kind: kd.dataset.kind }); render(); return; }
+        const ty = t.closest("[data-type]");
+        if (ty) { editing = { kind: "alert", watch: { type: ty.dataset.type }, email: false }; render(); return; }
+        const b = t.closest("[data-p]"); if (!b) return;
+        const p = b.dataset.p, li = b.closest("[data-id]"), id = li && li.dataset.id;
+        if (p === "close") return close();
+        if (p === "settings") { S.tab = S.tab === "settings" ? "inbox" : "settings"; editing = null; return render(); }
+        if (p === "plans") { close(); return openAccount(); }
+        if (p === "tab") { S.tab = b.dataset.v; editing = null; return render(); }
+        if (p === "cancel") { editing = null; return render(); }
+        if (p === "new") { editing = S.tab === "alerts" ? { kind: "alert", watch: {}, email: false } : { kind: "task", email: false }; return render(); }
+        if (p === "idea") { const x = IDEAS[Number(b.dataset.i)]; editing = { kind: "task", name: x[1], prompt: x[2], sched: x[3], email: false }; return render(); }
+        if (p === "openitem") {
+          const open = li.classList.toggle("open"); b.setAttribute("aria-expanded", String(open));
+          const it = S.items.find(x => x.id === id);
+          if (open && it && !it.read) { it.read = true; li.classList.remove("unread"); S.unread = Math.max(0, S.unread - 1); paintBell(); api("/v8/inbox/read", { method: "POST", body: { ids: [id] } }).catch(() => {}); const n = root.querySelector(".v8-tab-n"); n.textContent = S.unread || ""; n.hidden = !S.unread; }
+          return;
+        }
+        if (p === "readall") { S.items.forEach(x => { x.read = true; }); S.unread = 0; paintBell(); render(); api("/v8/inbox/read", { method: "POST", body: { all: true } }).catch(() => {}); return; }
+        if (p === "delitem") { li.classList.add("gone"); setTimeout(() => { S.items = S.items.filter(x => x.id !== id); render(); }, 260); api("/v8/inbox/" + id, { method: "DELETE" }).catch(() => {}); return; }
+        if (p === "ask") { const it = S.items.find(x => x.id === id); if (!it) return; close(); if (typeof newChat === "function") newChat(); el.input.value = `About this from my SCODE Inbox (“${it.title}”):\n\n${it.text.slice(0, 1500)}\n\n`; if (typeof autoGrow === "function") autoGrow(); if (typeof updateSendState === "function") updateSendState(); el.input.focus(); return; }
+        const task = S.tasks && S.tasks.tasks.find(x => x.id === id);
+        if (p === "toggle" && task) { const on = !task.on; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); li.classList.toggle("paused", !on); try { await api("/v8/tasks/" + id, { method: "PUT", body: { on } }); await loadTasks(); } catch (err) { v4Toast(esc(err.message)); render(); } return; }
+        if (p === "run" && task) { b.classList.add("spin"); try { await api(`/v8/tasks/${id}/run`, { method: "POST" }); v4Toast(task.kind === "alert" ? "Checking now…" : "Running now. The result lands in your Inbox in a moment."); Bit.special(task.kind === "alert" ? "search" : "task"); setTimeout(() => poll(true), 4000); setTimeout(() => poll(true), 12000); } catch (err) { v4Toast(esc(err.message)); } setTimeout(() => b.classList.remove("spin"), 900); return; }
+        if (p === "edit" && task) { editing = JSON.parse(JSON.stringify(task)); return render(); }
+        if (p === "del" && task) { if (!confirm(`Delete “${task.name}”?`)) return; li.classList.add("gone"); try { await api("/v8/tasks/" + id, { method: "DELETE" }); } catch (err) {} setTimeout(() => loadTasks().then(render), 260); return; }
+      }
+      function readFormSafe(f) { try { const r = readForm(f); delete r.kind; return r; } catch (e) { return {}; } }
+      return { open, close, render, isOpen };
+    })();
+
+    // ============================================================ SCODE 8 launch popup
+    function launch(forced) {
+      const m = document.createElement("div");
+      m.className = "v8-launch"; m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true"); m.setAttribute("aria-label", "Meet SCODE 8");
+      const feats = [["bit", ICON.spark, "Say hi to Bit", "Your 8-bit buddy lives on the text box. Bit watches you type, thinks with you and points at the answer."],
+        ["auto", ICON.spark, "Auto tools", "SCODE picks Search, Weather, Ferries, Scores or Compute by itself. Free, always."],
+        ["tasks", ICON.clock, "Scheduled tasks", "“Every weekday at 7, give me the weather.” Answers wait in your new Inbox.", "Nova & Supernova"],
+        ["alerts", ICON.radar, "Watch alerts", "Ferry delays, weather warnings, final scores, news and web pages: know the moment it happens.", "Nova & Supernova"],
+        ["pro", ICON.spark, "A smarter General Pro", "A newer model that reads photos and documents much better."],
+        ["fair", ICON.check, "Pay for what you use", "Modes cost nothing extra. Every reply costs what it uses, shown under the answer."]];
+      m.innerHTML = `<div class="v8-l-scrim"></div><div class="v8-l-card">
+        <div class="v8-l-stars" aria-hidden="true">${Array.from({ length: 18 }, (_, i) => `<i style="--x:${(i * 53) % 100}%;--y:${(i * 37) % 100}%;--d:${(i % 5) * 0.4}s"></i>`).join("")}</div>
+        <div class="v8-l-hero"><canvas class="v8-l-bit" width="156" height="132"></canvas><div class="v8-l-badge">SCODE 8</div></div>
+        <h2>Meet <span>SCODE 8</span></h2><p class="v8-l-sub">The biggest SCODE update yet: a new buddy, tasks that run by themselves, alerts and fairer pricing.</p>
+        <div class="v8-l-feats">${feats.map(([k, ic, n, t, tag], i) => `<div class="v8-l-feat" style="--i:${i}"><div class="v8-l-ic k-${k}">${ic}</div><div><b>${n}${tag ? `<em>${tag}</em>` : ""}</b><span>${t}</span></div></div>`).join("")}</div>
+        <div class="v8-l-b"><button type="button" class="v8-btn" data-l="tasks">Try tasks</button><button type="button" class="v8-btn primary" data-l="go">Let's go</button></div>
+        <div class="v8-l-foot">Supernova is now $10 CAD for 3 months · Powered by SCODE</div></div>`;
+      document.body.appendChild(m);
+      requestAnimationFrame(() => m.classList.add("show"));
+      // a big Bit waving in the popup
+      const cv = m.querySelector(".v8-l-bit"), ctx = cv.getContext("2d"); let t = 0, raf = 0, lastT = 0;
+      (function frame(ts) {
+        raf = requestAnimationFrame(frame);
+        if (ts - lastT < 120) return; lastT = ts; t++;
+        const ph = t % 24;
+        drawBit(ctx, 6, { t, eyes: ph > 20 ? "blink" : t < 14 ? "happy" : "open", mouth: ph % 3 === 0 && t > 14 ? "open" : "grin", armL: "down", armR: t < 30 || ph < 10 ? "wave" : "point",
+          sx: 1 - Math.sin(t / 3) * 0.03, sy: 1 + Math.sin(t / 3) * 0.03, dy: t % 12 < 2 ? -1 : 0, glow: t % 6 < 3, look: ph < 12 ? 1 : 0, lookY: ph < 12 ? -1 : 0 });
+      })(0);
+      function close(go) {
+        cancelAnimationFrame(raf);
+        m.classList.remove("show"); setTimeout(() => m.remove(), 380);
+        if (go === "tasks") Panel.open("tasks");
+        else setTimeout(() => { Bit.wave(); el.input && el.input.focus(); }, 300);
+      }
+      m.addEventListener("click", (e) => { const b = e.target.closest("[data-l]"); if (b) close(b.dataset.l); else if (e.target.classList.contains("v8-l-scrim")) close(); });
+      m.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+      ls.set("scode_v8_launch_seen", "1");
+      setTimeout(() => { const b = m.querySelector('[data-l="go"]'); if (b) b.focus(); }, 300);
+    }
+    maybeShowWhatsNew = function () {
+      const forced = /[?&]whatsnew=v8\b/.test(location.search);
+      if (/[?&](set|space)=/.test(location.search) && !forced) return;
+      let seen = ls.get("scode_v8_launch_seen", "") === "1";
+      try { seen = seen || sessionStorage.getItem("scode_launch_popup") === "1"; } catch (e) {}   // one launch popup per visit
+      if (forced || (!seen && Date.now() >= V8_LAUNCH && Date.now() < V8_LAUNCH + 21 * 864e5)) launch(forced);
+    };
+    try {
+      if (typeof CHANGELOG !== "undefined" && Array.isArray(CHANGELOG) && !CHANGELOG.some(c => c.id === "f-v8-bit")) {
+        CHANGELOG.unshift(
+          { id: "f-v8-bit", type: "feature", date: "2026-11-15", title: "SCODE 8: say hi to Bit",
+            text: "Bit is your 8-bit SCODE buddy. It sits on the text box, watches you type, thinks while SCODE thinks, and points at the answer while it's written. It also does special moves for weather, ferries, scores, search, maths and tasks.",
+            how: ["Tap Bit for options.", "Hide Bit from Inbox → Settings if you'd like a calmer screen."] },
+          { id: "f-v8-auto", type: "feature", date: "2026-11-15", title: "Auto tools",
+            text: "SCODE now picks Search, Weather, Ferries, Scores or Compute by itself when your question needs it. A small Auto chip shows what it used, with a button to answer without it. Auto never costs extra.",
+            how: ["It's on for everyone.", "Turn it off with the Auto tools button by the text box."] },
+          { id: "f-v8-tasks", type: "feature", date: "2026-11-15", title: "Scheduled tasks, alerts and the Inbox",
+            text: "Nova and Supernova can schedule tasks (“every weekday at 7, give me the weather”), set reminders, and watch ferries, weather warnings, games, news topics and web pages. Everything lands in the new Inbox, and in your email if you like.",
+            how: ["Tap the bell at the top.", "Pick Tasks or Alerts, then New.", "Or just type it in chat: “remind me Friday at 4 to…”."] },
+          { id: "f-v8-fair", type: "feature", date: "2026-11-15", title: "Pay for what you use",
+            text: "Modes like Search, Deep Think and Research no longer add extra points. Every reply costs what its tokens cost, and the points show under each answer. Supernova is now $10 CAD for 3 months.",
+            how: [] },
+          { id: "x-v8", type: "fix", date: "2026-11-15", title: "SCODE 8 improvements",
+            text: "General Pro moves to a newer, sharper model. SCODE also tunes itself to the server's CPU and adjusts how careful or creative it is for each kind of question." }
+        );
+        if (typeof updateNewsDot === "function") updateNewsDot();
+      }
+    } catch (e) {}
+
+    // ============================================================ welcome pill + start
+    function welcomePill() {
+      const w = $("welcome"); if (!w || $("v8-pill")) return;
+      const p = document.createElement("button");
+      p.type = "button"; p.id = "v8-pill"; p.className = "ec-pill v8-pill";
+      p.innerHTML = `<b>NEW</b>SCODE 8 · Tasks, alerts &amp; Bit<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      p.addEventListener("click", () => launch(true));
+      const ec = $("ec-open-pill");
+      if (ec) ec.parentNode.insertBefore(p, ec); else w.appendChild(p);
+    }
+    function start() {
+      try { Bit.mount(); } catch (e) { console.warn("Bit", e); }
+      autoBtn(); bell(); welcomePill();
+      poll(true);
+      clearInterval(S.polling);
+      S.polling = setInterval(() => poll(false), 60000);
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); });
+      // sign in / out changes the bell
+      setInterval(paintBell, 4000);
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else setTimeout(start, 0);
+
+    return { fields, onEvent, finish, decorate, restore: decorate, talk, prep, Bit, Panel, poll, setAuto, launch, state: S };
+  })();
+  window.scodeV8 = scodeV8;
 
   // ---------------------------------------------------------------- start
   window.scodeV4 = V4;
